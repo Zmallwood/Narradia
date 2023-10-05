@@ -4,7 +4,8 @@
 namespace Narradia
 {
     class Color
-    /*///////*/ {
+    /*///////*/
+    {
       public:
         SDL_Color ToSdlColor() const;
         float r = 0.0f;

@@ -4,7 +4,8 @@
 namespace Narradia
 {
     class Camera : public Singleton<Camera>
-    /*///////////////////////////////////*/ {
+    /*///////////////////////////////////*/
+    {
       public:
         Camera();
         void Update();

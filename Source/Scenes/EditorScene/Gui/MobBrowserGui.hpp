@@ -7,7 +7,8 @@ namespace Narradia
     class GuiWindowObjectSlot;
     
     class MobBrowserGui : public GuiWindow, public Singleton<MobBrowserGui>
-    /*///////////////////////////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////////////////////////*/
+    {
       public:
         MobBrowserGui();
 

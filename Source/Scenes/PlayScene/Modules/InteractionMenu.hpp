@@ -6,7 +6,8 @@ namespace Narradia
     class Object;
 
     class InteractionMenuEntry
-    /*///////////////////*/ {
+    /*///////////////////*/
+    {
       private:
         InteractionMenuEntry(std::string_view, std::function<void(Object *&)>);
         void Render();

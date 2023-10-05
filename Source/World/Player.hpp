@@ -5,7 +5,8 @@
 namespace Narradia
 {
     class Player : public Singleton<Player>
-    /*///////////////////////////////////*/ {
+    /*///////////////////////////////////*/
+    {
       public:
         Point2F GetPosition();
         void MoveForward();

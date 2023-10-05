@@ -4,14 +4,16 @@
 namespace Narradia
 {
     class PlaySceneHotkeys
-    /*/////////////////*/ {
+    /*/////////////////*/
+    {
       private:
         static void Update();
         friend class PlayScene;
     };
 
     class ActionRepeat : public Singleton<ActionRepeat>
-    /*///////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////*/
+    {
       public:
         ActionRepeat();
         void RepeatLastAction();
@@ -27,7 +29,8 @@ namespace Narradia
     };
     
     class ActiveGameRound : public Singleton<ActiveGameRound>
-    /*/////////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////////*/
+    {
       public:
         ActiveGameRound();
 

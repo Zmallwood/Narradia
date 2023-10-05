@@ -4,7 +4,8 @@
 namespace Narradia
 {
     class IntroScene : public SceneBase
-    /*/////////////////////////////*/ {
+    /*/////////////////////////////*/
+    {
       public:
         IntroScene();
 
@@ -16,7 +17,8 @@ namespace Narradia
     };
 
     class MainMenuScene : public SceneBase
-    /*////////////////////////////////*/ {
+    /*////////////////////////////////*/
+    {
       public:
         MainMenuScene();
 
@@ -28,7 +30,8 @@ namespace Narradia
     };
 
     class MapTypeSelectionScene : public SceneBase
-    /*////////////////////////////////////////*/ {
+    /*////////////////////////////////////////*/
+    {
       public:
         MapTypeSelectionScene();
 
@@ -40,7 +43,8 @@ namespace Narradia
     };
 
     class UserMapSelectionScene : public SceneBase
-    /*////////////////////////////////////////*/ {
+    /*////////////////////////////////////////*/
+    {
       public:
         UserMapSelectionScene();
         void UpdateDerived() override;

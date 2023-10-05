@@ -6,7 +6,8 @@ namespace Narradia
     class Color;
     
     namespace Colors
-    /*////////////*/ {
+    /*////////////*/
+    {
         const extern Color alphaYellow;
         const extern Color black;
         const extern Color white;

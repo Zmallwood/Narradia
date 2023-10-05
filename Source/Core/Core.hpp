@@ -14,7 +14,8 @@ namespace Narradia
     class SceneGui;
 
     template <class T> class Singleton
-    /*//////////////////////////////*/ {
+    /*//////////////////////////////*/
+    {
       public:
         static void Create()
         /*////////////////*/ {
@@ -41,7 +42,8 @@ namespace Narradia
     };
 
     class GameEngine : public Singleton<GameEngine>
-    /*///////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////*/
+    {
       public:
         GameEngine();
         void Run() const;
@@ -54,19 +56,22 @@ namespace Narradia
     };
 
     class GameLoop
-    /*//////////*/ {
+    /*//////////*/
+    {
       public:
         void Run() const;
     };
 
     class EventPoller
-    /*/////////////*/ {
+    /*/////////////*/
+    {
       public:
         void PollEvents() const;
     };
 
     class SceneBase
-    /*//////////*/ {
+    /*//////////*/
+    {
       public:
         SceneBase();
         virtual void Enter();
@@ -88,7 +93,8 @@ namespace Narradia
     };
 
     enum class Scenes
-    /*////////////*/ {
+    /*////////////*/
+    {
         None,
         Intro,
         MainMenu,
@@ -104,7 +110,8 @@ namespace Narradia
     };
 
     class SceneManager : public Singleton<SceneManager>
-    /*/////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////*/
+    {
       public:
         SceneManager();
         void InitializeScenes();
@@ -120,7 +127,8 @@ namespace Narradia
     };
 
     enum class CursorTypes
-    /*//////////////////*/ {
+    /*//////////////////*/
+    {
         Normal,
         Hovering,
         Rotating,
@@ -128,7 +136,8 @@ namespace Narradia
     };
 
     class Cursor : public Singleton<Cursor>
-    /*///////////////////////////////////*/ {
+    /*///////////////////////////////////*/
+    {
       public:
         Cursor();
         void Render() const;
@@ -147,7 +156,8 @@ namespace Narradia
     };
 
     class Logger : public Singleton<Logger>
-    /*///////////////////////////////////*/ {
+    /*///////////////////////////////////*/
+    {
       public:
         Logger();
         ~Logger();
@@ -163,13 +173,15 @@ namespace Narradia
     void Log(const std::source_location location = std::source_location::current());
 
     struct TextLine
-    /*///////////*/ {
+    /*///////////*/
+    {
         std::string text;
         Color color;
     };
 
     class TextOutBox : public Singleton<TextOutBox>
-    /*///////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////*/
+    {
       public:
         TextOutBox();
         void Update();
@@ -183,7 +195,8 @@ namespace Narradia
     };
 
     class Graphics : public Singleton<Graphics>
-    /*///////////////////////////////////////*/ {
+    /*///////////////////////////////////////*/
+    {
       public:
         Graphics();
         SDL_Window *GetWindow() const;
@@ -197,7 +210,8 @@ namespace Narradia
     };
 
     class GraphicsGl : public Singleton<GraphicsGl>
-    /*///////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////*/
+    {
       public:
         GraphicsGl();
         void Cleanup();
@@ -210,7 +224,8 @@ namespace Narradia
     };
 
     class Audio : public Singleton<Audio>
-    /*/////////////////////////////////*/ {
+    /*/////////////////////////////////*/
+    {
       public:
         Audio();
         void Cleanup();
@@ -225,31 +240,36 @@ namespace Narradia
     };
 
     struct ModelPartKeyframe
-    /*////////////////////*/ {
+    /*////////////////////*/
+    {
         std::vector<Vertex3F> vertices;
     };
 
     struct ModelPartTimeline
-    /*////////////////////*/ {
+    /*////////////////////*/
+    {
         std::map<float, std::shared_ptr<const ModelPartKeyframe>> keyframes;
     };
 
     struct ModelPart
-    /*////////////*/ {
+    /*////////////*/
+    {
         ModelPart();
         int texNameHash = 0;
         std::unique_ptr<ModelPartTimeline> timeline;
     };
 
     struct Model
-    /*////////*/ {
+    /*////////*/
+    {
         Model(int);
         const int animDuration = 0;
         std::vector<std::shared_ptr<const ModelPart>> modelParts;
     };
 
     enum class Directions
-    /*/////////////////*/ {
+    /*/////////////////*/
+    {
         Clockwise = 1,
         CounterClockwise = -1
     };
@@ -264,7 +284,8 @@ namespace Narradia
     Point2F GetMousePositionF();
 
     class KeyboardInput : public Singleton<KeyboardInput>
-    /*/////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////*/
+    {
       public:
         KeyboardInput();
         void KeyDown(SDL_Keycode);
@@ -282,7 +303,8 @@ namespace Narradia
     };
 
     class MouseButton
-    /*/////////////*/ {
+    /*/////////////*/
+    {
       public:
         MouseButton();
         void Reset();
@@ -305,7 +327,8 @@ namespace Narradia
     };
 
     class MouseInput : public Singleton<MouseInput>
-    /*///////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////*/
+    {
       public:
         MouseInput();
         void Reset();
@@ -327,7 +350,8 @@ namespace Narradia
     };
 
     struct MouseAction
-    /*//////////////*/ {
+    /*//////////////*/
+    {
         std::function<void()> action;
         float priority = 0;
         Uint64 delay = 0;
@@ -335,7 +359,8 @@ namespace Narradia
     };
     
     class MouseActionManager
-    /*////////////////////*/ {
+    /*////////////////////*/
+    {
       public:
         MouseActionManager();
         void PerformFiredActions(int, bool, bool &);

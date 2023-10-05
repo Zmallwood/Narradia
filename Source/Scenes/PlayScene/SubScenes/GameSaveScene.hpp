@@ -4,7 +4,8 @@
 namespace Narradia
 {
     class GameSaveScene : public SceneBase
-    /*////////////////////////////////*/ {
+    /*////////////////////////////////*/
+    {
       public:
         GameSaveScene();
         void UpdateDerived() override;

@@ -7,7 +7,8 @@ namespace Narradia
     class Tile;
 
     struct ModelRenderParameters
-    /*////////////////////////*/ {
+    /*////////////////////////*/
+    {
         std::vector<Point3F> positions;
         std::vector<float> rotations;
         std::vector<float> scalings;
@@ -16,7 +17,8 @@ namespace Narradia
     };
     
     class RenderLoop
-    /*////////////*/ {
+    /*////////////*/
+    {
       public:
         RenderLoop(std::function<void()>);
         void operator()();

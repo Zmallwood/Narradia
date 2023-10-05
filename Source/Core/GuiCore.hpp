@@ -4,14 +4,16 @@
 namespace Narradia
 {
     class GuiComponent
-    /*//////////////*/ {
+    /*//////////////*/
+    {
       public:
         virtual void Update() = 0;
         virtual void Render() const = 0;
     };
 
     class GuiContainer : public GuiComponent
-    /*////////////////////////////////////*/ {
+    /*////////////////////////////////////*/
+    {
       public:
         GuiContainer(Point2F, SizeF);
         RectangleF GetBounds() const;
@@ -33,7 +35,8 @@ namespace Narradia
     };
 
     class GuiMovableContainer : public GuiContainer
-    /*///////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////*/
+    {
       public:
         GuiMovableContainer(RectangleF, Point2F, SizeF);
 
@@ -47,7 +50,8 @@ namespace Narradia
     };
 
     class GuiButton
-    /*///////////*/ {
+    /*///////////*/
+    {
       public:
         GuiButton(
             const std::string_view &, RectangleF, std::function<void()>, GuiContainer * = nullptr,
@@ -62,7 +66,8 @@ namespace Narradia
     };
 
     class GuiTextBox : public GuiComponent
-    /*//////////////////////////////////*/ {
+    /*//////////////////////////////////*/
+    {
       public:
         GuiTextBox(
             RectangleF, GuiContainer *, std::string = "",
@@ -79,7 +84,8 @@ namespace Narradia
     };
 
     class SceneGui
-    /*/////////*/ {
+    /*/////////*/
+    {
       public:
         SceneGui();
         void AddGuiButton(
@@ -99,7 +105,8 @@ namespace Narradia
     class GuiWindow;
 
     class GuiWindowCloseButton
-    /*//////////////////////*/ {
+    /*//////////////////////*/
+    {
       public:
         GuiWindowCloseButton() = default;
         GuiWindowCloseButton(GuiWindow *);
@@ -112,7 +119,8 @@ namespace Narradia
     };
 
     class GuiWindow : public GuiMovableContainer
-    /*////////////////////////////////////////*/ {
+    /*////////////////////////////////////////*/
+    {
       public:
         GuiWindow(
             std::string_view title_, RectangleF bounds_, bool destroyOnClose_ = false,
@@ -140,7 +148,8 @@ namespace Narradia
     class Object;
     
     class GuiWindowObjectSlot
-    /*/////////////////////*/ {
+    /*/////////////////////*/
+    {
       public:
         GuiWindowObjectSlot(
             GuiWindow *, int, int, int, float, const std::map<int, std::shared_ptr<Object>> &);

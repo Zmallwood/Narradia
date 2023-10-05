@@ -4,7 +4,8 @@
 namespace Narradia
 {
     class VertexTile
-    /*////////////*/ {
+    /*////////////*/
+    {
       public:
         VertexTile();
         Vertex3F v0;

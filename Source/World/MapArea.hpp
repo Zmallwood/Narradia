@@ -9,7 +9,8 @@ namespace Narradia
     class Object;
 
     class MapArea
-    /*/////////*/ {
+    /*/////////*/
+    {
       public:
         MapArea();
         void Create();

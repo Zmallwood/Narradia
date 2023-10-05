@@ -4,14 +4,16 @@
 namespace Narradia
 {
     enum class RotationTypes
-    /*////////////////////*/ {
+    /*////////////////////*/
+    {
         None,
         CameraAndPlayer,
         OnlyCamera
     };
     
     class MouseRotation : public Singleton<MouseRotation>
-    /*/////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////*/
+    {
       private:
         void Update();
         void UpdateRotationInProgress();

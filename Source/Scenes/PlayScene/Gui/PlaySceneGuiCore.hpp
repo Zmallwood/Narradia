@@ -5,7 +5,8 @@
 namespace Narradia
 {
     class FpsPanel : public GuiMovableContainer, public Singleton<FpsPanel>
-    /*///////////////////////////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////////////////////////*/
+    {
       public:
         FpsPanel();
 
@@ -17,7 +18,8 @@ namespace Narradia
     };
     class Object;
     class MessageBox : public GuiWindow
-    /*///////////////////////////////*/ {
+    /*///////////////////////////////*/
+    {
       public:
         MessageBox(std::string_view, std::string_view);
 
@@ -28,7 +30,8 @@ namespace Narradia
         RenderId glIdMessageText;
     };
     class ExperienceBar : public GuiComponent, public Singleton<ExperienceBar>
-    /*//////////////////////////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////////////////////////*/
+    {
       public:
         ExperienceBar();
         static constexpr float kBarHeight = 0.025f;

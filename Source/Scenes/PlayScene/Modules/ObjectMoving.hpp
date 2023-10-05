@@ -6,7 +6,8 @@ namespace Narradia
     class Object;
     
     class ObjectMoving : public Singleton<ObjectMoving>
-    /*///////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////*/
+    {
       public:
         ObjectMoving();
         std::shared_ptr<Object> objectInAir = nullptr;

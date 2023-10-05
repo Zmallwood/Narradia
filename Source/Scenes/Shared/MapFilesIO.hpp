@@ -4,7 +4,8 @@
 namespace Narradia
 {
     class MapFilesIO : public Singleton<MapFilesIO>
-    /*///////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////*/
+    {
       public:
         /**
          * \brief Constructor.

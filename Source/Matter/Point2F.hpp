@@ -4,7 +4,8 @@
 namespace Narradia
 {
     class Point2F
-    /*/////////*/ {
+    /*/////////*/
+    {
       public:
         Point2F Copy();
         Point2F Translate(float, float) const;

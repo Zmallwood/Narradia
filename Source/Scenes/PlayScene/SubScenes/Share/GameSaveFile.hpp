@@ -4,7 +4,8 @@
 namespace Narradia
 {
     class GameSaveFile
-    /*//////////////*/ {
+    /*//////////////*/
+    {
       public:
         void CreateRawData();
         void SaveCryptated();

@@ -6,7 +6,8 @@ namespace Narradia
     class SizeF;
     
     class RectangleF
-    /*////////////*/ {
+    /*////////////*/
+    {
       public:
         RectangleF();
         RectangleF(float, float, float, float);

@@ -8,7 +8,8 @@ namespace Narradia
     class ModelPartKeyframe;
 
     class ModelCreator : public Singleton<ModelCreator>
-    /*///////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////*/
+    {
       public:
         auto CreateModel(const aiScene *) -> std::shared_ptr<Model>;
 
@@ -20,7 +21,8 @@ namespace Narradia
     };
 
     class ModelPartCreator : public Singleton<ModelPartCreator>
-    /*///////////////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////////////*/
+    {
       public:
         auto CreateModelPartFromMesh(const aiScene *, std::string, aiMesh *) const
             -> std::shared_ptr<ModelPart>;
@@ -39,7 +41,8 @@ namespace Narradia
     };
     
     class ModelPartKeyframeCreator : public Singleton<ModelPartKeyframeCreator>
-    /*///////////////////////////////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////////////////////////////*/
+    {
       public:
         aiVectorKey GetPositionKeyframe(const aiScene *, std::string, int) const;
         aiQuatKey GetRotationKeyframe(const aiScene *, std::string, int) const;

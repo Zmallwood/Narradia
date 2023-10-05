@@ -4,7 +4,8 @@
 namespace Narradia
 {
     class TileHovering : public Singleton<TileHovering>
-    /*///////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////*/
+    {
       public:
         TileHovering();
         Point2 hoveredTile = {-1, -1};

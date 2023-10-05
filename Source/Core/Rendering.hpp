@@ -4,7 +4,8 @@
 namespace Narradia
 {
     enum class BufferTypes
-    /*//////////////////*/ {
+    /*//////////////////*/
+    {
         Indices,
         Positions,
         Colors,
@@ -13,7 +14,8 @@ namespace Narradia
     };
 
     class SdlDeleter
-    /*////////////*/ {
+    /*////////////*/
+    {
       public:
         void operator()(SDL_Window *) const;
         void operator()(SDL_Renderer *) const;
@@ -23,7 +25,8 @@ namespace Narradia
     };
 
     class ShaderProgram
-    /*///////////////*/ {
+    /*///////////////*/
+    {
       public:
         ShaderProgram();
         bool Create(const GLchar *, const GLchar *);
@@ -36,7 +39,8 @@ namespace Narradia
     };
 
     class RndrBase
-    /*//////////*/ {
+    /*//////////*/
+    {
       public:
         RndrBase();
 
@@ -72,7 +76,8 @@ namespace Narradia
     };
 
     class CameraGl : public Singleton<CameraGl>
-    /*///////////////////////////////////////*/ {
+    /*///////////////////////////////////////*/
+    {
       public:
         CameraGl();
         const glm::mat4 &GetPerspectiveMatrix();
@@ -86,7 +91,8 @@ namespace Narradia
     };
 
     class Renderer2DImages : RndrBase, public Singleton<Renderer2DImages>
-    /*/////////////////////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////////////////////*/
+    {
       public:
         Renderer2DImages();
         RenderId NewImage();
@@ -108,7 +114,8 @@ namespace Narradia
     };
 
     class Renderer2DSolidColors : public RndrBase, public Singleton<Renderer2DSolidColors>
-    /*//////////////////////////////////////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////////////////////////////////////*/
+    {
       public:
         Renderer2DSolidColors();
         RenderId NewRectangle();
@@ -128,7 +135,8 @@ namespace Narradia
     };
 
     class RendererBillboardImages : public RndrBase, public Singleton<RendererBillboardImages>
-    /*//////////////////////////////////////////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////////////////////////////////////////*/
+    {
       public:
         RendererBillboardImages();
         RenderId NewBillboardImage();
@@ -141,7 +149,8 @@ namespace Narradia
     };
 
     class RendererModels : public RndrBase, public Singleton<RendererModels>
-    /*////////////////////////////////////////////////////////////////////*/ {
+    /*////////////////////////////////////////////////////////////////////*/
+    {
       public:
         RendererModels();
         void NewModel(int);
@@ -165,7 +174,8 @@ namespace Narradia
     };
 
     class RendererTiles : public RndrBase, public Singleton<RendererTiles>
-    /*//////////////////////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////////////////////*/
+    {
       public:
         RendererTiles();
         RenderId NewTile();
@@ -190,13 +200,15 @@ namespace Narradia
     };
 
     enum class TextSizes
-    /*////////////////*/ {
+    /*////////////////*/
+    {
         _20,
         _26
     };
 
     class Font
-    /*//////*/ {
+    /*//////*/
+    {
       public:
         Font(std::string_view fontFileName, int fontSize);
         TTF_Font *GetSdlFont() const;
@@ -209,13 +221,15 @@ namespace Narradia
     };
 
     struct MultiLineText
-    /*////////////////*/ {
+    /*////////////////*/
+    {
         std::vector<RenderId> renderIds;
         float width;
     };
     
     class TextRenderer : public Singleton<TextRenderer>
-    /*///////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////*/
+    {
       public:
         TextRenderer();
         RenderId NewString();

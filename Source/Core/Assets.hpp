@@ -4,13 +4,15 @@
 namespace Narradia
 {
     struct ImageEntry
-    /*/////////////*/ {
+    /*/////////////*/
+    {
         std::string fileName;
         GLuint textureId;
     };
 
     class ImageBank : public Singleton<ImageBank>
-    /*/////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////*/
+    {
       public:
         ImageBank();
         GLuint GetImage(int) const;
@@ -26,7 +28,8 @@ namespace Narradia
     };
 
     class ModelBank : public Singleton<ModelBank>
-    /*/////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////*/
+    {
       public:
         ModelBank();
         auto GetModel(int) const -> const Model *;
@@ -39,7 +42,8 @@ namespace Narradia
     };
 
     class AudioBank : public Singleton<AudioBank>
-    /*/////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////*/
+    {
       public:
         AudioBank();
         void LoadAudioFiles();
@@ -53,7 +57,8 @@ namespace Narradia
     };
 
     namespace FileUtilities
-    /*///////////////////*/ {
+    /*///////////////////*/
+    {
         const std::string_view GetFileExtension(const std::string_view &absFilePath);
         const std::string_view GetFileNameNoExt(const std::string_view &absFilePath);
         const int GetFileNameHash(const std::string_view &absFilePath);

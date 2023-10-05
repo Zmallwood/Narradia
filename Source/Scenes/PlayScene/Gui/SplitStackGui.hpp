@@ -7,7 +7,8 @@ namespace Narradia
     class Object;
     
     class SplitStackGui : public GuiWindow
-    /*/////////////////////////////*/ {
+    /*/////////////////////////////*/
+    {
       public:
         SplitStackGui(Object *);
 

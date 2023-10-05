@@ -4,7 +4,8 @@
 namespace Narradia
 {
     class GlRectangleF
-    /*//////////////*/ {
+    /*//////////////*/
+    {
       public:
         float x = .0f;
         float y = .0f;

@@ -5,7 +5,8 @@
 namespace Narradia
 {
     class PlaySceneGuiMenu : public GuiContainer, public Singleton<PlaySceneGuiMenu>
-    /*//////////////////////////////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////////////////////////////*/
+    {
       public:
         PlaySceneGuiMenu();
         void Update() override;

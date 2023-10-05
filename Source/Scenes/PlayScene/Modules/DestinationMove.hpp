@@ -4,7 +4,8 @@
 namespace Narradia
 {
     class DestinationMove : public Singleton<DestinationMove>
-    /*/////////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////////*/
+    {
       public:
         void ResetDestination();
         const Point2 &GetDestination();

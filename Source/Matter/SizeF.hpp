@@ -4,7 +4,8 @@
 namespace Narradia
 {
     class SizeF
-    /*///////*/ {
+    /*///////*/
+    {
       public:
         RectangleF ToRectangle() const;
         float width = 0.0f;

@@ -4,7 +4,8 @@
 namespace Narradia
 {
     class SettlementCreator
-    /*///////////////////*/ {
+    /*///////////////////*/
+    {
       public:
         void CreateSettlement();
     };

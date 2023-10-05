@@ -4,7 +4,8 @@
 namespace Narradia
 {
     class MapLoadScene : public SceneBase
-    /*///////////////////////////////*/ {
+    /*///////////////////////////////*/
+    {
       public:
         MapLoadScene();
         void UpdateDerived() override;

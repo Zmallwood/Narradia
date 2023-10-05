@@ -7,7 +7,8 @@ namespace Narradia
     class GuiWindowObjectSlot;
     
     class InventoryGui : public GuiWindow, public Singleton<InventoryGui>
-    /*/////////////////////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////////////////////*/
+    {
       public:
         InventoryGui();
 

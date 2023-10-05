@@ -6,7 +6,8 @@
 namespace Narradia
 {
     class Vertex3F
-    /*//////////*/ {
+    /*//////////*/
+    {
       public:
         Point3F position;
         Color color;

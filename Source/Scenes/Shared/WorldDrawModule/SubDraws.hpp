@@ -4,7 +4,8 @@
 namespace Narradia
 {
     class SubDrawCompanion : public Singleton<SubDrawCompanion>
-    /*///////////////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////////////*/
+    {
       public:
         SubDrawCompanion();
         void Create();
@@ -16,7 +17,8 @@ namespace Narradia
     };
 
     class SubDrawGround : public Singleton<SubDrawGround>
-    /*/////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////*/
+    {
       public:
         SubDrawGround();
         void Create();
@@ -28,7 +30,8 @@ namespace Narradia
     };
 
     class SubDrawMob : public Singleton<SubDrawMob>
-    /*///////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////*/
+    {
       public:
         SubDrawMob();
         void Create();
@@ -40,7 +43,8 @@ namespace Narradia
     };
 
     class SubDrawPlayer : public Singleton<SubDrawPlayer>
-    /*/////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////*/
+    {
       public:
         SubDrawPlayer();
         void Create();
@@ -52,7 +56,8 @@ namespace Narradia
     };
     
     class SubDrawSky : public Singleton<SubDrawSky>
-    /*///////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////*/
+    {
       public:
         void DrawSky();
     };

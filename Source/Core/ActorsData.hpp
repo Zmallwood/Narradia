@@ -6,7 +6,8 @@ namespace Narradia
     class Object;
 
     class Inventory
-    /*///////////*/ {
+    /*///////////*/
+    {
       public:
         void Add(std::string_view, int = 1);
         void Add(std::shared_ptr<Object>);
@@ -19,7 +20,8 @@ namespace Narradia
     };
 
     class MovementData
-    /*//////////////*/ {
+    /*//////////////*/
+    {
       public:
         Point2F position = {0.0f, 0.0f};
         Point3 worldAreaPos = {0, 0, 0};
@@ -31,7 +33,8 @@ namespace Narradia
     };
 
     class StatsData
-    /*///////////*/ {
+    /*///////////*/
+    {
       public:
         int hp = 10;
         int maxHp = 10;
@@ -40,7 +43,8 @@ namespace Narradia
     };
 
     class ActorData
-    /*///////////*/ {
+    /*///////////*/
+    {
       public:
         void Update();
         int ticksLastUpdate = 0;
@@ -52,13 +56,15 @@ namespace Narradia
     };
 
     struct Skill
-    /*////////*/ {
+    /*////////*/
+    {
         std::string_view label;
         float level = 1.0f;
     };
     
     class SkillSet
-    /*//////////*/ {
+    /*//////////*/
+    {
       public:
         SkillSet();
         std::map<std::string_view, Skill> skills;

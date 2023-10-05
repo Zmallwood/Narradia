@@ -4,7 +4,8 @@
 namespace Narradia
 {
     enum class ObjectBehaviourFlags : int
-    /*/////////////////////////////////*/ {
+    /*/////////////////////////////////*/
+    {
         MovementBlock = 1 << 0,
         Unmovable = 1 << 1,
         NoShadow = 1 << 2,

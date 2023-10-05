@@ -4,7 +4,8 @@
 namespace Narradia
 {
     class Mob
-    /*/////*/ {
+    /*/////*/
+    {
       public:
         Mob(int, int, int);
         int GetTicksLastMovement();

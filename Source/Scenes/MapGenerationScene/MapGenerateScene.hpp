@@ -5,7 +5,8 @@
 namespace Narradia
 {
     class MapGenerateScene : public SceneBase
-    /*///////////////////////////////////*/ {
+    /*///////////////////////////////////*/
+    {
       public:
         MapGenerateScene();
         void Finalize() override;

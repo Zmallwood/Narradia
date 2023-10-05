@@ -6,7 +6,8 @@ namespace Narradia
     class MapArea;
     
     enum class GenerateSteps
-    /************************/ {
+    /************************/
+    {
         CreateBlank = 0,
         GenWater,
         GenElev,
@@ -20,7 +21,8 @@ namespace Narradia
     };
 
     class WorldMapGenerate
-    /*********************/ {
+    /*********************/
+    {
       public:
         void DoGenerationStep(GenerateSteps);
 

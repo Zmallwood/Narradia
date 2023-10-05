@@ -4,7 +4,8 @@
 namespace Narradia
 {
     class KeyboardMove
-    /*//////////////*/ {
+    /*//////////////*/
+    {
       private:
         void Update();
         friend class PlayScene;

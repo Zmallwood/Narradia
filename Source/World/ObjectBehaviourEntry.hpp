@@ -4,7 +4,8 @@
 namespace Narradia
 {
     class ObjectBehaviourEntry
-    /*//////////////////////*/ {
+    /*//////////////////////*/
+    {
       public:
         std::string_view label;
         int flags = 0;

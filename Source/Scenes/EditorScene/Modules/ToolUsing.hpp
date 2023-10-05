@@ -4,7 +4,8 @@
 namespace Narradia
 {
     enum class Tools
-    /*////////////*/ {
+    /*////////////*/
+    {
         None,
         SetRoof,
         AddObject,
@@ -14,7 +15,8 @@ namespace Narradia
     };
     
     class ToolUsing : public Singleton<ToolUsing>
-    /*/////////////////////////////////////*/ {
+    /*/////////////////////////////////////*/
+    {
       public:
         void Update();
         void ChangeTool(Tools newTool);
