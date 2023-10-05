@@ -1,10 +1,10 @@
 //////////////////////////////////////////////////////////////////////
 #include "MobMovement.hpp"
-#include "Universe/Player.hpp"
-#include "Universe/World.hpp"
-#include "Universe/MapArea.hpp"
-#include "Universe/Mob.hpp"
-#include "Universe/Tile.hpp"
+#include "World/Player.hpp"
+#include "World/World.hpp"
+#include "World/MapArea.hpp"
+#include "World/Mob.hpp"
+#include "World/Tile.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

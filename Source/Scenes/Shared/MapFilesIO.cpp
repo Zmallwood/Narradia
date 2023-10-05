@@ -1,11 +1,11 @@
 //////////////////////////////////////////////////////////////////////
 #include "MapFilesIO.hpp"
-#include "Universe/World.hpp"
-#include "Universe/MapArea.hpp"
-#include "Universe/Tile.hpp"
-#include "Universe/Mob.hpp"
-#include "Universe/ObjectsCollection.hpp"
-#include "Universe/Object.hpp"
+#include "World/World.hpp"
+#include "World/MapArea.hpp"
+#include "World/Tile.hpp"
+#include "World/Mob.hpp"
+#include "World/ObjectsCollection.hpp"
+#include "World/Object.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

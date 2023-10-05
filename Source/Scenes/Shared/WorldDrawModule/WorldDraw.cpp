@@ -6,8 +6,8 @@
 #include "RenderLoop.hpp"
 #include "Core/Rendering.hpp"
 #include "SubDraws.hpp"
-#include "Universe/Tile.hpp"
-#include "Universe/Mob.hpp"
+#include "World/Tile.hpp"
+#include "World/Mob.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

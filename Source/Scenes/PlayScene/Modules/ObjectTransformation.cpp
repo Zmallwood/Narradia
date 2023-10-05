@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////
 #include "ObjectTransformation.hpp"
-#include "Universe/World.hpp"
-#include "Universe/MapArea.hpp"
-#include "Universe/Object.hpp"
+#include "World/World.hpp"
+#include "World/MapArea.hpp"
+#include "World/Object.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

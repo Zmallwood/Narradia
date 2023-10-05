@@ -4,12 +4,12 @@
 #include "Scenes/Shared/WorldDrawModule/Configuration.hpp"
 #include "Core/Rendering.hpp"
 #include "WorldDrawModule/WorldDraw.hpp"
-#include "Universe/Player.hpp"
-#include "Universe/World.hpp"
-#include "Universe/MapArea.hpp"
-#include "Universe/Tile.hpp"
-#include "Universe/Object.hpp"
-#include "Universe/ObjectBehaviourList.hpp"
+#include "World/Player.hpp"
+#include "World/World.hpp"
+#include "World/MapArea.hpp"
+#include "World/Tile.hpp"
+#include "World/Object.hpp"
+#include "World/ObjectBehaviourList.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

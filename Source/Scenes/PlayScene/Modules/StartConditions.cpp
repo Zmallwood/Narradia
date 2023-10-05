@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////
 #include "StartConditions.hpp"
-#include "Universe/MapArea.hpp"
-#include "Universe/Player.hpp"
-#include "Universe/ObjectBehaviourList.hpp"
+#include "World/MapArea.hpp"
+#include "World/Player.hpp"
+#include "World/ObjectBehaviourList.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

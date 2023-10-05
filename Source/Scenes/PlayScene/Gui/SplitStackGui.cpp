@@ -2,8 +2,8 @@
 #include "SplitStackGui.hpp"
 #include "Scenes/PlayScene/PlayScene.hpp"
 #include "Scenes/PlayScene/Modules/PlaySceneModulesCore.hpp"
-#include "Universe/Object.hpp"
-#include "Universe/Player.hpp"
+#include "World/Object.hpp"
+#include "World/Player.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

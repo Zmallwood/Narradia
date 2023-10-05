@@ -4,9 +4,9 @@
 #include "InteractionMenu.hpp"
 #include "ObjectMoving.hpp"
 #include "Scenes/Shared/TileHovering.hpp"
-#include "Universe/Player.hpp"
-#include "Universe/World.hpp"
-#include "Universe/MapArea.hpp"
+#include "World/Player.hpp"
+#include "World/World.hpp"
+#include "World/MapArea.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

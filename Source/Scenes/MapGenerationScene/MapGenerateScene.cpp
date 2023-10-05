@@ -2,7 +2,7 @@
 #include "MapGenerateScene.hpp"
 #include "Core/Rendering.hpp"
 #include "Scenes/Shared/WorldDrawModule/WorldDraw.hpp"
-#include "Universe/World.hpp"
+#include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

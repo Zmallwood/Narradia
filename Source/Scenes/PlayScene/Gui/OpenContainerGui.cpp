@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 #include "OpenContainerGui.hpp"
-#include "Universe/ObjectBehaviourList.hpp"
-#include "Universe/Object.hpp"
+#include "World/ObjectBehaviourList.hpp"
+#include "World/Object.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

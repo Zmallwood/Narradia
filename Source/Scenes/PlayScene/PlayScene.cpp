@@ -18,7 +18,7 @@
 #include "Modules/StartConditions.hpp"
 #include "Scenes/Shared/TileHovering.hpp"
 #include "Scenes/Shared/WorldDrawModule/WorldDraw.hpp"
-#include "Universe/Player.hpp"
+#include "World/Player.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

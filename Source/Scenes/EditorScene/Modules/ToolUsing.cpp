@@ -1,11 +1,11 @@
 //////////////////////////////////////////////////////////////////////
 #include "ToolUsing.hpp"
-#include "Universe/MapArea.hpp"
-#include "Universe/Object.hpp"
-#include "Universe/Tile.hpp"
+#include "World/MapArea.hpp"
+#include "World/Object.hpp"
+#include "World/Tile.hpp"
 #include "Scenes/Shared/TileHovering.hpp"
-#include "Universe/World.hpp"
-#include "Universe/Mob.hpp"
+#include "World/World.hpp"
+#include "World/Mob.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

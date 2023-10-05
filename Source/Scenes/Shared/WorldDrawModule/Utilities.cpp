@@ -1,10 +1,10 @@
 //////////////////////////////////////////////////////////////////////
 #include "Utilities.hpp"
 #include "Camera.hpp"
-#include "Universe/World.hpp"
-#include "Universe/MapArea.hpp"
-#include "Universe/Mob.hpp"
-#include "Universe/Companion.hpp"
+#include "World/World.hpp"
+#include "World/MapArea.hpp"
+#include "World/Mob.hpp"
+#include "World/Companion.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

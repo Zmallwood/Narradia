@@ -1,10 +1,10 @@
 //////////////////////////////////////////////////////////////////////
 #include "SettlementCreator.hpp"
-#include "Universe/Player.hpp"
-#include "Universe/World.hpp"
-#include "Universe/MapArea.hpp"
-#include "Universe/Tile.hpp"
-#include "Universe/Companion.hpp"
+#include "World/Player.hpp"
+#include "World/World.hpp"
+#include "World/MapArea.hpp"
+#include "World/Tile.hpp"
+#include "World/Companion.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

@@ -2,7 +2,7 @@
 #include "PlaySceneGuiCore.hpp"
 #include "Scenes/PlayScene/PlayScene.hpp"
 #include "Core/Rendering.hpp"
-#include "Universe/Player.hpp"
+#include "World/Player.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

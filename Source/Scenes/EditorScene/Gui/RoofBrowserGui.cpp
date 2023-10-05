@@ -3,7 +3,7 @@
 #include "Core/Assets.hpp"
 #include "Core/Rendering.hpp"
 #include "Scenes/EditorScene/Modules/ToolUsing.hpp"
-#include "Universe/Object.hpp"
+#include "World/Object.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

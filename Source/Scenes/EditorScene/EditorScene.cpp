@@ -10,11 +10,11 @@
 #include "Scenes/Shared/TileHovering.hpp"
 #include "Modules/ToolUsing.hpp"
 #include "Scenes/Shared/WorldDrawModule/WorldDraw.hpp"
-#include "Universe/ObjectBehaviourList.hpp"
-#include "Universe/World.hpp"
-#include "Universe/MapArea.hpp"
-#include "Universe/Tile.hpp"
-#include "Universe/Player.hpp"
+#include "World/ObjectBehaviourList.hpp"
+#include "World/World.hpp"
+#include "World/MapArea.hpp"
+#include "World/Tile.hpp"
+#include "World/Player.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

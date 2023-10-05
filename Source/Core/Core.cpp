@@ -11,7 +11,7 @@
 #include "Scenes/PlayScene/PlayScene.hpp"
 #include "Scenes/PlayScene/Gui/PlaySceneGuiCore.hpp"
 #include "Rendering.hpp"
-#include "Universe/World.hpp"
+#include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
 int main(int argc, char *argv[])
 /*////////////////////////////*/ {

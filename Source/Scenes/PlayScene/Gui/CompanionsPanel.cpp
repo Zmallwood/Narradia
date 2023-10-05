@@ -1,10 +1,10 @@
 //////////////////////////////////////////////////////////////////////
 #include "CompanionsPanel.hpp"
 #include "Core/Rendering.hpp"
-#include "Universe/Player.hpp"
-#include "Universe/World.hpp"
-#include "Universe/MapArea.hpp"
-#include "Universe/Companion.hpp"
+#include "World/Player.hpp"
+#include "World/World.hpp"
+#include "World/MapArea.hpp"
+#include "World/Companion.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

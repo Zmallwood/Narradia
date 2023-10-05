@@ -9,13 +9,13 @@
 #include "Core/Rendering.hpp"
 #include "Scenes/PlayScene/Gui/SplitStackGui.hpp"
 #include "Scenes/Shared/TileHovering.hpp"
-#include "Universe/Object.hpp"
-#include "Universe/Player.hpp"
-#include "Universe/ObjectsCollection.hpp"
-#include "Universe/World.hpp"
-#include "Universe/MapArea.hpp"
-#include "Universe/Tile.hpp"
-#include "Universe/ObjectBehaviourList.hpp"
+#include "World/Object.hpp"
+#include "World/Player.hpp"
+#include "World/ObjectsCollection.hpp"
+#include "World/World.hpp"
+#include "World/MapArea.hpp"
+#include "World/Tile.hpp"
+#include "World/ObjectBehaviourList.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

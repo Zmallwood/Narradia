@@ -6,11 +6,11 @@
 #include "Core/Rendering.hpp"
 #include "Scenes/Shared/TileHovering.hpp"
 #include "Utilities.hpp"
-#include "Universe/Tile.hpp"
-#include "Universe/Companion.hpp"
-#include "Universe/MapArea.hpp"
-#include "Universe/Mob.hpp"
-#include "Universe/Player.hpp"
+#include "World/Tile.hpp"
+#include "World/Companion.hpp"
+#include "World/MapArea.hpp"
+#include "World/Mob.hpp"
+#include "World/Player.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

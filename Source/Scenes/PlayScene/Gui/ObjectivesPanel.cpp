@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////
 #include "ObjectivesPanel.hpp"
 #include "Core/Rendering.hpp"
-#include "Universe/Player.hpp"
-#include "Universe/MapArea.hpp"
+#include "World/Player.hpp"
+#include "World/MapArea.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

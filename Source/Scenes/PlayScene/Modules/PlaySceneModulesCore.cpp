@@ -5,8 +5,8 @@
 #include "Scenes/PlayScene/Gui/PlaySceneGuiMenu.hpp"
 #include "Core/Rendering.hpp"
 #include "Scenes/PlayScene/Gui/SkillsGui.hpp"
-#include "Universe/Player.hpp"
-#include "Universe/MapArea.hpp"
+#include "World/Player.hpp"
+#include "World/MapArea.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

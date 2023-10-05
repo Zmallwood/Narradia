@@ -3,7 +3,7 @@
 #include "WorldDrawModule/Camera.hpp"
 #include "Scenes/PlayScene/Modules/InteractionMenu.hpp"
 #include "WorldDrawModule/WorldDraw.hpp"
-#include "Universe/Player.hpp"
+#include "World/Player.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 /****************/ {
