@@ -13,6 +13,8 @@ Wilderness simulation game developed in C++ using:
 
 ![alt text](https://github.com/Zmallwood/Narradia/blob/6b05d9c222abc17aba4283e17fe4d17d231cdec5/Media/Screenshot1.png)
 
+![alt text](https://github.com/Zmallwood/Narradia/blob/6b05d9c222abc17aba4283e17fe4d17d231cdec5/Media/Screenshot2.png)
+
 
 ## Getting Started
 
