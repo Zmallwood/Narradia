@@ -12,11 +12,12 @@ namespace Narradia
         std::map<Object *, Point2> objectsMirror;
         std::map<Companion *, Point2> companionsMirror;
         std::vector<std::vector<std::shared_ptr<Tile>>> tiles;
-    }; // Class
+    };
 
     MapArea::MapArea()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////////*/ {} // Function
+    /*//////////////////////////////////*/ {
+    }
 
     void MapArea::Create()
     /*//////////////////*/ {
@@ -29,75 +30,85 @@ namespace Narradia
                 p->tiles.at(x).push_back(newTile);
             }
         }
-    } // Function
+    }
 
     Tile *MapArea::GetTile(Point2 coordinate)
     /*/////////////////////////////////////*/ {
-        if (IsInsideMap(coordinate)) return p->tiles.at(coordinate.x).at(coordinate.y).get();
+        if (IsInsideMap(coordinate))
+            return p->tiles.at(coordinate.x).at(coordinate.y).get();
         return nullptr;
-    } // Function
+    }
 
     Tile *MapArea::GetTile(int x, int y)
     /*////////////////////////////////*/ {
-        if (IsInsideMap(x, y)) return p->tiles.at(x).at(y).get();
+        if (IsInsideMap(x, y))
+            return p->tiles.at(x).at(y).get();
         return nullptr;
-    } // Function
+    }
 
     Size MapArea::GetMapSize()
-    /*//////////////////////*/ { return Pimpl::mapSize; } // Function
+    /*//////////////////////*/ {
+        return Pimpl::mapSize;
+    }
 
     const std::map<Mob *, Point2> &MapArea::GetMobsMirror()
-    /*///////////////////////////////////////////////////*/ { return p->mobsMirror; } // Function
+    /*///////////////////////////////////////////////////*/ {
+        return p->mobsMirror;
+    }
 
     const std::map<Object *, Point2> &MapArea::GetObjectsMirror()
     /*/////////////////////////////////////////////////////////*/ {
         return p->objectsMirror;
-    } // Function
+    }
 
     const std::map<Companion *, Point2> &MapArea::GetCompanionsMirror()
     /*///////////////////////////////////////////////////////////////*/ {
         return p->companionsMirror;
-    } // Function
+    }
 
     void MapArea::RemoveMobMirror(std::map<Mob *, Point2>::const_iterator entry)
     /*////////////////////////////////////////////////////////////////////////*/ {
         p->mobsMirror.erase(entry);
-    } // Function
+    }
 
     void MapArea::RemoveMobMirror(Mob *mob)
-    /*///////////////////////////////////*/ { p->mobsMirror.erase(mob); } // Function
+    /*///////////////////////////////////*/ {
+        p->mobsMirror.erase(mob);
+    }
 
     void MapArea::RemoveCompanionMirror(std::map<Companion *, Point2>::const_iterator entry)
     /*////////////////////////////////////////////////////////////////////////////////////*/ {
         p->companionsMirror.erase(entry);
-    } // Function
+    }
 
     void MapArea::RemoveObjectMirror(Object *object)
-    /*////////////////////////////////////////////*/ { p->objectsMirror.erase(object); } // Function
+    /*////////////////////////////////////////////*/ {
+        p->objectsMirror.erase(object);
+    }
 
     void MapArea::AddMobMirror(Mob *mob, Point2 coordinate)
     /*///////////////////////////////////////////////////*/ {
         p->mobsMirror.insert({mob, coordinate});
-    } // Function
+    }
 
     void MapArea::AddCompanionMirror(Companion *companion, Point2 coordinate)
     /*/////////////////////////////////////////////////////////////////////*/ {
         p->companionsMirror.insert({companion, coordinate});
-    } // Function
+    }
 
     void MapArea::AddObjectMirror(Object *object, Point2 coordinate)
     /*////////////////////////////////////////////////////////////*/ {
         p->objectsMirror.insert({object, coordinate});
-    } // Function
+    }
 
     bool MapArea::IsInsideMap(Point2 coordinate)
     /*////////////////////////////////////////*/ {
         return IsInsideMap(coordinate.x, coordinate.y);
-    } // Function
+    }
 
     bool MapArea::IsInsideMap(int x, int y)
     /*///////////////////////////////////*/ {
         return x >= 0 && y >= 0 && x < Pimpl::mapSize.width && y < Pimpl::mapSize.height;
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

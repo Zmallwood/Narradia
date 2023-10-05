@@ -1,14 +1,15 @@
 //////////////////////////////////////////////////////////////////////
 #include "ObjectsCollection.hpp"
+#include "MapArea.hpp"
 #include "Object.hpp"
 #include "Tile.hpp"
-#include "MapArea.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
     ObjectsCollection::ObjectsCollection(Tile *parentTile_)
         : parentTile(parentTile_)
-    /*///////////////////////////////////////////////////*/ {} // Function
+    /*///////////////////////////////////////////////////*/ {
+    }
 
     void ObjectsCollection::CreateAdd(std::string_view objectType, int quantity)
     /*////////////////////////////////////////////////////////////////////////*/ {
@@ -16,7 +17,7 @@ namespace Narradia
         trueList.push_back(newObject);
         parentTile->GetParentMapArea()->AddObjectMirror(
             newObject.get(), parentTile->GetCoordinate());
-    } // Function
+    }
 
     void ObjectsCollection::CreateAdd(int objectTypeHash, int quantity)
     /*///////////////////////////////////////////////////////////////*/ {
@@ -24,24 +25,27 @@ namespace Narradia
         trueList.push_back(newObject);
         parentTile->GetParentMapArea()->AddObjectMirror(
             newObject.get(), parentTile->GetCoordinate());
-    } // Function
+    }
 
     void ObjectsCollection::Add(std::shared_ptr<Object> object)
     /*///////////////////////////////////////////////////////*/ {
         object->SetParentObjectsCollection(this);
         trueList.push_back(object);
         parentTile->GetParentMapArea()->AddObjectMirror(object.get(), parentTile->GetCoordinate());
-    } // Function
+    }
 
     void ObjectsCollection::Clear()
-    /*///////////////////////////*/ { trueList.clear(); } // Function
+    /*///////////////////////////*/ {
+        trueList.clear();
+    }
 
     bool ObjectsCollection::Contains(int objectNameHash) const
     /*//////////////////////////////////////////////////////*/ {
         for (auto objectEntry : list)
-            if (objectEntry->GetObjectType() == objectNameHash) return true;
+            if (objectEntry->GetObjectType() == objectNameHash)
+                return true;
         return false;
-    } // Function
+    }
 
     void ObjectsCollection::Replace(
         std::shared_ptr<Object> origObject, std::shared_ptr<Object> newObject)
@@ -59,7 +63,7 @@ namespace Narradia
         }
         parentTile->GetParentMapArea()->AddObjectMirror(
             newObject.get(), parentTile->GetCoordinate());
-    } // Function
+    }
 
     void ObjectsCollection::Remove(Object *object)
     /*//////////////////////////////////////////*/ {
@@ -74,13 +78,14 @@ namespace Narradia
             }
             i++;
         }
-    } // Function
+    }
 
     std::shared_ptr<Object> ObjectsCollection::GetObjectFromRawPtr(Object *object)
     /*//////////////////////////////////////////////////////////////////////////*/ {
         for (auto &objectEntry : list)
-            if (objectEntry.get() == object) return objectEntry;
+            if (objectEntry.get() == object)
+                return objectEntry;
         return nullptr;
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////
 #include "StartConditions.hpp"
 #include "World/MapArea.hpp"
-#include "World/Player.hpp"
 #include "World/ObjectBehaviourList.hpp"
+#include "World/Player.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -16,6 +16,6 @@ namespace Narradia
             MapArea::GetMapSize().width / 2.0f, MapArea::GetMapSize().height / 2.0f};
         ObjectBehaviourList::Get().Clear();
         ObjectBehaviourList::Get().Initialize();
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

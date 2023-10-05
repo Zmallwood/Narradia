@@ -20,6 +20,6 @@ namespace Narradia
             MobBrowserGui::Get().ToggleVisibility();
         if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_ESCAPE))
             EditorSceneGuiMenu::Get().visible = !EditorSceneGuiMenu::Get().visible;
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

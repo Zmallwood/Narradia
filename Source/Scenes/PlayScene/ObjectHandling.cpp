@@ -1,11 +1,11 @@
 //////////////////////////////////////////////////////////////////////
 #include "ObjectHandling.hpp"
 #include "Modules/ObjectMoving.hpp"
-#include "World/Player.hpp"
-#include "World/Object.hpp"
-#include "World/World.hpp"
 #include "World/MapArea.hpp"
+#include "World/Object.hpp"
+#include "World/Player.hpp"
 #include "World/Tile.hpp"
+#include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -52,7 +52,7 @@ namespace Narradia
                 }
             }
         }
-    } // Function
+    }
 
     std::shared_ptr<Object> MoveObject(Object *object)
     /*//////////////////////////////////////////////*/ {
@@ -102,6 +102,6 @@ namespace Narradia
             }
         }
         return nullptr;
-    } // Function
+    }
 };
 //////////////////////////////////////////////////////////////////////

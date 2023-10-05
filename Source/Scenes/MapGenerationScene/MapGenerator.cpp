@@ -1,11 +1,11 @@
 //////////////////////////////////////////////////////////////////////
 #include "MapGenerator.hpp"
 #include "World/MapArea.hpp"
-#include "World/World.hpp"
-#include "World/Tile.hpp"
 #include "World/Mob.hpp"
-#include "World/ObjectsCollection.hpp"
 #include "World/Object.hpp"
+#include "World/ObjectsCollection.hpp"
+#include "World/Tile.hpp"
+#include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -74,7 +74,7 @@ namespace Narradia
                 break;
             }
         }
-    } // Function
+    }
 
     void WorldMapGenerate::AddElevation()
     /*/////////////////////////////////*/ {
@@ -101,9 +101,11 @@ namespace Narradia
                     /***********************************************/ {
                         for (auto x = xCenter - r; x <= xCenter + r; x++)
                         /***********************************************/ {
-                            if (!MapArea::IsInsideMap({x, y})) continue;
+                            if (!MapArea::IsInsideMap({x, y}))
+                                continue;
                             auto tile = mapArea->GetTile({x, y});
-                            if (rand() % 4 == 0 && tile->GetElevation() > 15 && !hill) rock = true;
+                            if (rand() % 4 == 0 && tile->GetElevation() > 15 && !hill)
+                                rock = true;
                             auto dx = x - xCenter;
                             auto dy = y - yCenter;
                             if (elevValue == -1.0f ||
@@ -141,7 +143,8 @@ namespace Narradia
                                     !northwestTileIsWater)
                                 /**********************************************************/ {
                                     tile->SetElevation((tile->GetElevation() + elevValue) / 2);
-                                    if (rock) tile->SetGroundType(Hash("GroundRock"));
+                                    if (rock)
+                                        tile->SetGroundType(Hash("GroundRock"));
                                 }
                             }
                         }
@@ -184,7 +187,7 @@ namespace Narradia
                 }
             }
         }
-    } // Function
+    }
 
     void WorldMapGenerate::AddMobs()
     /*////////////////////////////*/ {
@@ -218,7 +221,7 @@ namespace Narradia
                 mapArea->AddMobMirror(tile->GetMob().get(), {x, y});
             }
         }
-    } // Function
+    }
 
     void WorldMapGenerate::AddObjects()
     /*///////////////////////////////*/ {
@@ -290,7 +293,7 @@ namespace Narradia
                 }
             }
         }
-    } // Function
+    }
 
     void WorldMapGenerate::AddWater()
     /*/////////////////////////////*/ {
@@ -318,7 +321,8 @@ namespace Narradia
             /*********************************************************/ {
                 for (auto x = xCenter - maxDim; x <= xCenter + maxDim; x++)
                 /*********************************************************/ {
-                    if (!MapArea::IsInsideMap({x, y})) continue;
+                    if (!MapArea::IsInsideMap({x, y}))
+                        continue;
                     auto dx = x - xCenter;
                     auto dy = y - yCenter;
                     if (dx * dx * dim1 / maxDim + dy * dy * dim2 / maxDim <= dim1 * dim2)
@@ -329,7 +333,7 @@ namespace Narradia
                 }
             }
         }
-    } // Function
+    }
 
     void WorldMapGenerate::AddWaterRivers()
     /*///////////////////////////////////*/ {
@@ -367,7 +371,8 @@ namespace Narradia
                 loc = predefinedSpawnLocs.at((rand() % 25) * 4);
                 locAlreadyTaken = false;
                 for (auto &entry : usedLocs)
-                    if (entry.x == loc.x && entry.y == loc.y) locAlreadyTaken = true;
+                    if (entry.x == loc.x && entry.y == loc.y)
+                        locAlreadyTaken = true;
             } while (locAlreadyTaken);
             usedLocs.push_back(loc);
             float xF = loc.x * MapArea::GetMapSize().width;
@@ -428,8 +433,10 @@ namespace Narradia
                 auto newDy = std::sin(newAngle);
                 auto normX = 0;
                 auto normY = 0;
-                if (newDx) normX = newDx / std::abs(newDx);
-                if (newDy) normX = newDy / std::abs(newDy);
+                if (newDx)
+                    normX = newDx / std::abs(newDx);
+                if (newDy)
+                    normX = newDy / std::abs(newDy);
                 auto nextX = (int)(xF + normX);
                 auto nextY = (int)(yF + normY);
                 auto currX = (int)xF;
@@ -448,7 +455,7 @@ namespace Narradia
                 dy = newDy;
             }
         }
-    } // Function
+    }
 
     void WorldMapGenerate::AddObjects(
         std::string_view objectName, int amount, std::string_view groundType)
@@ -467,13 +474,13 @@ namespace Narradia
                 tile->AddObject(newObject);
             }
         }
-    } // Function
+    }
 
     void WorldMapGenerate::GenerateColorVariations()
     /*////////////////////////////////////////////*/ {
         World::Get().ResetColorVariations();
         World::Get().GenerateRandomColorVariations();
         World::Get().ApplyDefaultColorVariations();
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

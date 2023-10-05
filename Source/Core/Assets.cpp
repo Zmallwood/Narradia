@@ -11,32 +11,35 @@ namespace Narradia
 
         const std::string_view relImagesPath = "Resources/Images/";
         std::map<const int, ImageEntry> images;
-    }; // Class
+    };
 
     std::map<const int, ImageEntry> &ImageBank::GetImages()
-    /*///////////////////////////////////////////////////*/ { return p->images; } // Function
+    /*///////////////////////////////////////////////////*/ {
+        return p->images;
+    }
 
     ImageBank::ImageBank()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/ {} // Class
+    /*//////////////////////////////*/ {
+    }
 
     GLuint ImageBank::GetImage(int imageNameHash) const
     /*///////////////////////////////////////////////*/ {
         if (p->images.count(imageNameHash)) return p->images.at(imageNameHash).textureId;
         return 0;
-    } // Function
+    }
 
     GLuint ImageBank::GetImage(const std::string_view &imageName) const
     /*///////////////////////////////////////////////////////////////*/ {
         return GetImage(Hash(imageName));
-    } // Function
+    }
 
     void ImageBank::GetBlankTextImage(const std::string_view &uniqueNameId)
     /*///////////////////////////////////////////////////////////////////*/ {
         ImageEntry imageEntry;
         glGenTextures(1, &imageEntry.textureId);
         p->images.insert({Hash(uniqueNameId), imageEntry});
-    } // Function
+    }
 
     void ImageBank::LoadImages()
     /*////////////////////////*/ {
@@ -51,13 +54,13 @@ namespace Narradia
             imageEntry.fileName = FileUtilities::GetFileNameNoExt(absFilePath);
             p->images.insert({FileUtilities::GetFileNameHash(absFilePath), imageEntry});
         }
-    } // Function
+    }
 
     void ImageBank::Cleanup() const
     /*///////////////////////////*/ {
         for (const auto &image : p->images)
             glDeleteTextures(1, &image.second.textureId);
-    } // Function
+    }
 
     GLuint ImageBank::Pimpl::LoadSingleImage(const std::string_view &absFilePath) const
     /*///////////////////////////////////////////////////////////////////////////////*/ {
@@ -78,7 +81,7 @@ namespace Narradia
                 surface->pixels);
         SDL_FreeSurface(surface);
         return textureId;
-    } // Function
+    }
 
     class ModelBank::Pimpl
     /*//////////////////*/ {
@@ -87,21 +90,22 @@ namespace Narradia
 
         const std::string_view relModelsPath = "Resources/Models/";
         std::map<int, std::shared_ptr<const Model>> models;
-    }; // Class
+    };
 
     ModelBank::ModelBank()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/ {} // Function
+    /*//////////////////////////////*/ {
+    }
 
     auto ModelBank::GetModel(int modelNameHash) const -> const Model *
     /*//////////////////////////////////////////////////////////////*/ {
         return p->models.at(modelNameHash).get();
-    } // Function
+    }
 
     auto ModelBank::GetAllModels() const -> std::map<int, std::shared_ptr<const Model>>
     /*///////////////////////////////////////////////////////////////////////////////*/ {
         return p->models;
-    } // Function
+    }
 
     void ModelBank::LoadModels()
     /*////////////////////////*/ {
@@ -121,14 +125,14 @@ namespace Narradia
             auto imageNameHash = Hash(fileNameNoExt);
             p->models.insert({imageNameHash, loadedModel});
         }
-    } // Function
+    }
 
     std::shared_ptr<Model> ModelBank::Pimpl::LoadSingleModel(const std::string_view &pathStr)
     /*/////////////////////////////////////////////////////////////////////////////////////*/ {
         Assimp::Importer importer;
         const aiScene *scene = importer.ReadFile(pathStr.data(), 0);
         return ModelCreator::Get().CreateModel(scene);
-    } // Function
+    }
 
     class AudioBank::Pimpl
     /*//////////////////*/ {
@@ -137,11 +141,12 @@ namespace Narradia
         const std::string_view relSoundsAudioPath = "Resources/Audio/Sounds/";
         std::map<int, Mix_Chunk *> soundFiles;
         std::map<int, Mix_Music *> musicFiles;
-    }; // Class
+    };
 
     AudioBank::AudioBank()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/ {} // Function
+    /*//////////////////////////////*/ {
+    }
 
     void AudioBank::LoadAudioFiles()
     /*////////////////////////////*/ {
@@ -177,7 +182,7 @@ namespace Narradia
             }
             p->musicFiles.insert({FileUtilities::GetFileNameHash(absFilePath), music});
         }
-    } // Function
+    }
 
     void AudioBank::Cleanup()
     /*/////////////////////*/ {
@@ -186,24 +191,24 @@ namespace Narradia
         for (auto entry : p->musicFiles)
             Mix_FreeMusic(entry.second);
         Mix_CloseAudio();
-    } // Function
+    }
 
     Mix_Chunk *AudioBank::GetSound(int soundNameHash)
     /*/////////////////////////////////////////////*/ {
         return p->soundFiles.at(soundNameHash);
-    } // Function
+    }
 
     Mix_Music *AudioBank::GetMusic(int musicNameHash)
     /*/////////////////////////////////////////////*/ {
         return p->musicFiles.at(musicNameHash);
-    } // Function
+    }
 
     const std::string_view FileUtilities::GetFileExtension(const std::string_view &absFilePath)
     /*///////////////////////////////////////////////////////////////////////////////////////*/ {
         auto extPos = absFilePath.find_last_of('.') + 1;
         auto fileExt = absFilePath.substr(extPos);
         return fileExt;
-    } // Function
+    }
 
     const std::string_view FileUtilities::GetFileNameNoExt(const std::string_view &absFilePath)
     /*///////////////////////////////////////////////////////////////////////////////////////*/ {
@@ -212,13 +217,13 @@ namespace Narradia
         auto imgNameExtPos = imgNameWithExt.find_last_of('.');
         auto fileNameNoExt = imgNameWithExt.substr(0, imgNameExtPos);
         return fileNameNoExt;
-    } // Function
+    }
 
     const int FileUtilities::GetFileNameHash(const std::string_view &absFilePath)
     /*/////////////////////////////////////////////////////////////////////////*/ {
         auto fileNameNoExt = GetFileNameNoExt(absFilePath);
         auto imgNameHash = Hash(fileNameNoExt);
         return imgNameHash;
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

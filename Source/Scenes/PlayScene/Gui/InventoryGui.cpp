@@ -20,7 +20,7 @@ namespace Narradia
             }
         }
         bottomBarRendId = Renderer2DImages::Get().NewImage();
-    } // Function
+    }
 
     void InventoryGui::UpdateDerived()
     /*//////////////////////////////*/ {
@@ -38,7 +38,7 @@ namespace Narradia
         for (auto y = 0; y < numRows; y++)
             for (auto x = 0; x < numCols; x++)
                 slots[x][y]->Update();
-    } // Function
+    }
 
     void InventoryGui::RenderDerived() const
     /*////////////////////////////////////*/ {
@@ -55,6 +55,6 @@ namespace Narradia
         Log();
         Renderer2DImages::Get().DrawImage(
             "GuiWindowInvBottomBarBg", bottomBarRendId, bottomBarBounds);
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

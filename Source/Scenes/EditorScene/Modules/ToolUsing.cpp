@@ -1,11 +1,11 @@
 //////////////////////////////////////////////////////////////////////
 #include "ToolUsing.hpp"
+#include "Scenes/Shared/TileHovering.hpp"
 #include "World/MapArea.hpp"
+#include "World/Mob.hpp"
 #include "World/Object.hpp"
 #include "World/Tile.hpp"
-#include "Scenes/Shared/TileHovering.hpp"
 #include "World/World.hpp"
-#include "World/Mob.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -103,32 +103,40 @@ namespace Narradia
                 }
             },
             0);
-    } // Function
+    }
 
     void ToolUsing::IncreaseToolRadius()
-    /*//////////////////////////////*/ { toolRadius++; } // Function
+    /*//////////////////////////////*/ {
+        toolRadius++;
+    }
 
     void ToolUsing::DecreaseToolRadius()
-    /*//////////////////////////////*/ { toolRadius--; } // Function
+    /*//////////////////////////////*/ {
+        toolRadius--;
+    }
 
     void ToolUsing::IncreaseElevationChange()
     /*///////////////////////////////////*/ {
         elevationChange++;
-        if (elevationChange == 0) elevationChange = 1;
-    } // Function
+        if (elevationChange == 0)
+            elevationChange = 1;
+    }
 
     void ToolUsing::DecreaseElevationChange()
     /*///////////////////////////////////*/ {
         elevationChange--;
-        if (elevationChange == 0) elevationChange = -1;
-    } // Function
+        if (elevationChange == 0)
+            elevationChange = -1;
+    }
 
     void ToolUsing::ChangeTool(Tools newTool)
-    /*///////////////////////////////////*/ { currentTool = newTool; } // Function
+    /*///////////////////////////////////*/ {
+        currentTool = newTool;
+    }
 
     void ToolUsing::SelectType(int newSelectedObjectType)
     /*///////////////////////////////////////////////*/ {
         selectedType = newSelectedObjectType;
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

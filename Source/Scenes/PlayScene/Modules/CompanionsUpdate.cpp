@@ -1,10 +1,10 @@
 //////////////////////////////////////////////////////////////////////
 #include "CompanionsUpdate.hpp"
-#include "World/World.hpp"
-#include "World/MapArea.hpp"
 #include "World/Companion.hpp"
-#include "World/Tile.hpp"
+#include "World/MapArea.hpp"
 #include "World/Player.hpp"
+#include "World/Tile.hpp"
+#include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -27,7 +27,8 @@ namespace Narradia
                 auto old_angle = angle;
                 auto new_angle = angle + 2.0f * M_PI / (companion->GetRadius() * 20) *
                                              static_cast<int>(companion->GetDirection());
-                if (new_angle >= 2 * M_PI || new_angle < 0) companion->IncreaseRadius();
+                if (new_angle >= 2 * M_PI || new_angle < 0)
+                    companion->IncreaseRadius();
                 new_angle = (((int)(new_angle * 180 / (M_PI)) + 360) % 360) * M_PI / 180.0f;
                 auto new_dx = std::round(std::cos(new_angle)) * companion->GetRadius();
                 auto new_dy = std::round(std::sin(new_angle)) * companion->GetRadius();
@@ -77,6 +78,6 @@ namespace Narradia
             }
             ++it;
         }
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

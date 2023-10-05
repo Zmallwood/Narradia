@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 #include "SplitStackGui.hpp"
-#include "Scenes/PlayScene/PlayScene.hpp"
 #include "Scenes/PlayScene/Modules/PlaySceneModulesCore.hpp"
+#include "Scenes/PlayScene/PlayScene.hpp"
 #include "World/Object.hpp"
 #include "World/Player.hpp"
 //////////////////////////////////////////////////////////////////////
@@ -70,12 +70,14 @@ namespace Narradia
             sceneGui->RemoveGuiComponent(this);
         };
         AddGuiButton("Ok", {0.12f, 0.11f, 0.035f, ConvertWidthToHeight(0.015f)}, confirmAction);
-    } // Function
+    }
 
     void SplitStackGui::UpdateDerived()
-    /*//////////////////////////*/ {} // Function
+    /*//////////////////////////*/ {
+    }
 
     void SplitStackGui::RenderDerived() const
-    /*////////////////////////////////*/ {} // Function
+    /*////////////////////////////////*/ {
+    }
 }
 //////////////////////////////////////////////////////////////////////

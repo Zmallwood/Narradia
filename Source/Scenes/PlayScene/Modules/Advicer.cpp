@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 #include "Advicer.hpp"
-#include "Scenes/PlayScene/PlayScene.hpp"
 #include "Scenes/PlayScene/Gui/PlaySceneGuiCore.hpp"
+#include "Scenes/PlayScene/PlayScene.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -29,6 +29,6 @@ namespace Narradia
             has_given_create_stone_axe_advice = true;
             ready_for_next_advie = false;
         }
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

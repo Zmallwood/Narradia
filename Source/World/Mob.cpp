@@ -19,80 +19,118 @@ namespace Narradia
         bool aggroingPlayer = false;
         int ticksLastAttack = 0;
         int attackSpeed = 700;
-    }; // Class
+    };
 
     Mob::Mob(int mobType_, int spawnX_, int spawnY_)
         : p(std::make_shared<Pimpl>())
     /*////////////////////////////////////////////*/ {
         p->mobType = mobType_;
         p->spawnLocation = {spawnX_, spawnY_};
-    } // Function
+    }
 
     int Mob::GetTicksLastMovement()
-    /*///////////////////////////*/ { return p->ticksLastMovement; } // Function
+    /*///////////////////////////*/ {
+        return p->ticksLastMovement;
+    }
 
     int Mob::GetMoveSpeed()
-    /*///////////////////*/ { return p->moveSpeed; } // Function
+    /*///////////////////*/ {
+        return p->moveSpeed;
+    }
 
     void Mob::ClearDestination()
-    /*////////////////////////*/ { p->destination = {-1, -1}; } // Function
+    /*////////////////////////*/ {
+        p->destination = {-1, -1};
+    }
 
     bool Mob::HasNoDestination()
-    /*////////////////////////*/ { return p->destination == Point2{-1, -1}; } // Function
+    /*////////////////////////*/ {
+        return p->destination == Point2{-1, -1};
+    }
 
     void Mob::SetDestination(Point2 newDestination)
-    /*///////////////////////////////////////////*/ { p->destination = newDestination; } // Function
+    /*///////////////////////////////////////////*/ {
+        p->destination = newDestination;
+    }
 
     Point2 Mob::GetDestination()
-    /*////////////////////////*/ { return p->destination; } // Function
+    /*////////////////////////*/ {
+        return p->destination;
+    }
 
     Point2 Mob::GetPreviousCoordinate()
-    /*///////////////////////////////*/ { return p->previousCoordinate; } // Function
+    /*///////////////////////////////*/ {
+        return p->previousCoordinate;
+    }
 
     int Mob::GetMobType()
-    /*/////////////////*/ { return p->mobType; } // Function
+    /*/////////////////*/ {
+        return p->mobType;
+    }
 
     void Mob::UpdateTicksLastMovement()
-    /*///////////////////////////////*/ { p->ticksLastMovement = SDL_GetTicks(); } // Function
+    /*///////////////////////////////*/ {
+        p->ticksLastMovement = SDL_GetTicks();
+    }
 
     void Mob::SetPreviousCoordinate(Point2 newPreviousCoordinate)
     /*/////////////////////////////////////////////////////////*/ {
         p->previousCoordinate = newPreviousCoordinate;
-    } // Function
+    }
 
     float Mob::GetDistanceAboveGround()
-    /*///////////////////////////////*/ { return p->distanceAboveGround; } // Function
+    /*///////////////////////////////*/ {
+        return p->distanceAboveGround;
+    }
 
     void Mob::SetDistanceAboveGround(float newDistanceAboveGround)
     /*//////////////////////////////////////////////////////////*/ {
         p->distanceAboveGround = newDistanceAboveGround;
-    } // Function
+    }
 
     void Mob::SetMoveSpeed(int newMoveSpeed)
-    /*////////////////////////////////////*/ { p->moveSpeed = newMoveSpeed; } // Function
+    /*////////////////////////////////////*/ {
+        p->moveSpeed = newMoveSpeed;
+    }
 
     int Mob::GetSpawnX()
-    /*////////////////*/ { return p->spawnLocation.x; } // Function
+    /*////////////////*/ {
+        return p->spawnLocation.x;
+    }
 
     int Mob::GetSpawnY()
-    /*////////////////*/ { return p->spawnLocation.y; } // Function
+    /*////////////////*/ {
+        return p->spawnLocation.y;
+    }
 
     int Mob::GetTicksLastHitRecieved()
-    /*//////////////////////////////*/ { return p->ticksLastHitRecieved; } // Function
+    /*//////////////////////////////*/ {
+        return p->ticksLastHitRecieved;
+    }
 
     void Mob::StartAggroPlayer()
-    /*////////////////////////*/ { p->aggroingPlayer = true; } // Function
+    /*////////////////////////*/ {
+        p->aggroingPlayer = true;
+    }
 
     bool Mob::IsAggroingPlayer()
-    /*////////////////////////*/ { return p->aggroingPlayer; } // Function
+    /*////////////////////////*/ {
+        return p->aggroingPlayer;
+    }
 
     int Mob::GetTicksLastAttack()
-    /*/////////////////////////*/ { return p->ticksLastAttack; } // Function
+    /*/////////////////////////*/ {
+        return p->ticksLastAttack;
+    }
 
     int Mob::GetAttackSpeed()
-    /*/////////////////////*/ { return p->attackSpeed; } // Function
+    /*/////////////////////*/ {
+        return p->attackSpeed;
+    }
 
     void Mob::UpdateTicksLastAttack()
-    /*/////////////////////////////*/ { p->ticksLastAttack = SDL_GetTicks(); } // Function
+    /*/////////////////////////////*/ {
+        p->ticksLastAttack = SDL_GetTicks();
+    }
 }
 //////////////////////////////////////////////////////////////////////

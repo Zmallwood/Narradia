@@ -20,7 +20,7 @@ namespace Narradia
         auto minorX = -(1.0f - movementProgress) * dx;
         auto minorY = -(1.0f - movementProgress) * dy;
         return {minorX, minorY};
-    } // Function
+    }
 
     Point2F GetMinorMovementOffsetForCompanion(Companion *companion)
     /*////////////////////////////////////////////////////////////*/ {
@@ -35,6 +35,6 @@ namespace Narradia
         auto minorX = -(1.0f - movementProgress) * dx;
         auto minorY = -(1.0f - movementProgress) * dy;
         return {minorX, minorY};
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

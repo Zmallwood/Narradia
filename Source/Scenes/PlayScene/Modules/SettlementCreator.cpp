@@ -1,10 +1,10 @@
 //////////////////////////////////////////////////////////////////////
 #include "SettlementCreator.hpp"
-#include "World/Player.hpp"
-#include "World/World.hpp"
-#include "World/MapArea.hpp"
-#include "World/Tile.hpp"
 #include "World/Companion.hpp"
+#include "World/MapArea.hpp"
+#include "World/Player.hpp"
+#include "World/Tile.hpp"
+#include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -45,6 +45,6 @@ namespace Narradia
         map_area->AddCompanionMirror(companion3.get(), companion_3_coordinate);
         map_area->AddCompanionMirror(companion4.get(), companion_4_coordinate);
         TextOutBox::Get().Print("You have created a settlement.");
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

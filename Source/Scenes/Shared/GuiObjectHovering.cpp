@@ -3,8 +3,8 @@
 #include "Core/Assets.hpp"
 #include "Core/GuiCore.hpp"
 #include "Core/Rendering.hpp"
-#include "World/ObjectBehaviourList.hpp"
 #include "World/Object.hpp"
+#include "World/ObjectBehaviourList.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -12,7 +12,7 @@ namespace Narradia
     /*//////////////////////////////////*/ {
         idLabelBox = Renderer2DSolidColors::Get().NewRectangle();
         idLabelText = TextRenderer::Get().NewString();
-    } // Function
+    }
 
     void GuiObjectHovering::Render()
     /*////////////////////////////*/ {
@@ -42,6 +42,6 @@ namespace Narradia
             TextRenderer::Get().DrawString(
                 idLabelText, labelText, boxPos.Translate(0.004f, 0.012f), Colors::wheat);
         }
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

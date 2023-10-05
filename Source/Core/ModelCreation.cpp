@@ -16,7 +16,7 @@ namespace Narradia
         for (auto &modelPart : GetModelParts(scene))
             newModel->modelParts.push_back(modelPart);
         return newModel;
-    } // Function
+    }
 
     auto ModelCreator::GetModelParts(const aiScene *scene) const -> vector<shared_ptr<ModelPart>>
     /*/////////////////////////////////////////////////////////////////////////////////////////*/ {
@@ -33,7 +33,7 @@ namespace Narradia
             }
         }
         return allModelparts;
-    } // Function
+    }
 
     auto ModelCreator::GetModelMeshIds(const aiScene *scene) const
         -> map<shared_ptr<string>, vector<int>>
@@ -53,7 +53,7 @@ namespace Narradia
             nodeNameToMeshes.insert({make_shared<string>(subNodeName.C_Str()), meshes});
         }
         return nodeNameToMeshes;
-    } // Function
+    }
 
     vector<aiMesh *>
     ModelCreator::GetNodeMeshes(const aiScene *scene, vector<int> nodeMeshIds) const
@@ -67,7 +67,7 @@ namespace Narradia
             nodeMeshes.push_back(mesh);
         }
         return nodeMeshes;
-    } // Function
+    }
 
     auto ModelPartCreator::CreateModelPartFromMesh(
         const aiScene *scene, string nodeName, aiMesh *mesh) const -> shared_ptr<ModelPart>
@@ -96,7 +96,7 @@ namespace Narradia
                 newModelPart->timeline->keyframes.insert({0.0f, newModelPartKeyframe});
         }
         return newModelPart;
-    } // Function
+    }
 
     int ModelPartCreator::GetTexNameHashForMesh(const aiScene *scene, aiMesh *mesh) const
     /*/////////////////////////////////////////////////////////////////////////////////*/ {
@@ -104,7 +104,7 @@ namespace Narradia
         auto material = mesh->mMaterialIndex;
         auto textureNameHash = textureNameHashcodes.at(material);
         return textureNameHash;
-    } // Function
+    }
 
     auto ModelPartCreator::GetNewModelPartKeyframe(
         const aiScene *scene, string nodeName, aiMesh *mesh, aiVectorKey positionKeyFrame,
@@ -136,7 +136,7 @@ namespace Narradia
             newModelPartKeyframe->vertices.push_back(animVertex);
         }
         return newModelPartKeyframe;
-    } // Function
+    }
 
     vector<int> ModelPartCreator::GetTexNameHashcodes(const aiScene *scene) const
     /*/////////////////////////////////////////////////////////////////////////*/ {
@@ -153,7 +153,7 @@ namespace Narradia
             textureNameHashcodes.push_back(textureNameHash);
         }
         return textureNameHashcodes;
-    } // Function
+    }
 
     aiMatrix4x4 ModelPartCreator::GetNodeTransformation(const aiScene *scene, string nodeName) const
     /*////////////////////////////////////////////////////////////////////////////////////////////*/
@@ -164,7 +164,7 @@ namespace Narradia
             if (*alpha.first == nodeName.data()) return alpha.second;
         }
         return aiMatrix4x4();
-    } // Function
+    }
 
     Point3F ModelPartCreator::GetPosition(
         aiVector3D vertex, aiMatrix4x4 node_transformation, aiVectorKey positionKeyFrame,
@@ -186,7 +186,7 @@ namespace Narradia
         position.y = position.z;
         position.z = temp;
         return position;
-    } // Function
+    }
 
     auto ModelPartCreator::GetTransformations(const aiScene *scene) const
         -> map<shared_ptr<string>, aiMatrix4x4>
@@ -204,7 +204,7 @@ namespace Narradia
                 {make_shared<string>(nodeName.C_Str()), nodeTransformation});
         }
         return nodeNameToTransformations;
-    } // Function
+    }
 
     void ModelPartCreator::Translate(Point3F *position, aiVectorKey positionKeyFrame) const
     /*///////////////////////////////////////////////////////////////////////////////////*/ {
@@ -219,7 +219,7 @@ namespace Narradia
         auto aiPosition = aiVector3D{position->x, position->y, position->z};
         aiPosition = translationMatrix * aiPosition;
         *position = {-aiPosition.x, aiPosition.y, aiPosition.z};
-    } // Function
+    }
 
     aiVectorKey ModelPartKeyframeCreator::GetPositionKeyframe(
         const aiScene *scene, string nodeName, int keyFrameIndex) const
@@ -232,7 +232,7 @@ namespace Narradia
         else
             positionKeyframe = *(nodePositionKeyframes.end() - 1);
         return positionKeyframe;
-    } // Function
+    }
 
     aiQuatKey ModelPartKeyframeCreator::GetRotationKeyframe(
         const aiScene *scene, string nodeName, int keyFrameIndex) const
@@ -245,7 +245,7 @@ namespace Narradia
         else
             rotationKeyframe = *(nodeRotationKeyframes.end() - 1);
         return rotationKeyframe;
-    } // Function
+    }
 
     aiVectorKey ModelPartKeyframeCreator::GetScalingKeyframe(
         const aiScene *scene, string nodeName, int keyFrameIndex) const
@@ -258,7 +258,7 @@ namespace Narradia
         else
             scalingKeyframe = *(nodeScalingKeyframes.end() - 1);
         return scalingKeyframe;
-    } // Function
+    }
 
     auto
     ModelPartKeyframeCreator::GetNodePositionKeyframes(const aiScene *scene, string nodeName) const
@@ -277,7 +277,7 @@ namespace Narradia
             nodePositionKeyframes.push_back(aiVectorKey(0.0, aiVector3D()));
         }
         return nodePositionKeyframes;
-    } // Function
+    }
 
     auto
     ModelPartKeyframeCreator::GetNodeRotationKeyframes(const aiScene *scene, string nodeName) const
@@ -296,7 +296,7 @@ namespace Narradia
             nodeRotationKeyframes.push_back(aiQuatKey(0.0, aiQuaternion()));
         }
         return nodeRotationKeyframes;
-    } // Function
+    }
 
     auto
     ModelPartKeyframeCreator::GetNodeScalingKeyframes(const aiScene *scene, string nodeName) const
@@ -315,7 +315,7 @@ namespace Narradia
             nodeScalingKeyframes.push_back(aiVectorKey(0.0, aiVector3D(1.0)));
         }
         return nodeScalingKeyframes;
-    } // Function
+    }
 
     map<string, vector<aiVectorKey>>
     ModelPartKeyframeCreator::GetAnimPositionKeyframes(const aiScene *scene) const
@@ -360,7 +360,7 @@ namespace Narradia
             }
         }
         return nodeNameToPositionKeyframes;
-    } // Function
+    }
 
     map<string, vector<aiQuatKey>>
     ModelPartKeyframeCreator::GetAnimRotationKeyframes(const aiScene *scene) const
@@ -406,7 +406,7 @@ namespace Narradia
             }
         }
         return nodeNameToRotationKeyframes;
-    } // Function
+    }
 
     map<string, vector<aiVectorKey>>
     ModelPartKeyframeCreator::GetAnimScalingKeyframes(const aiScene *scene) const
@@ -452,6 +452,6 @@ namespace Narradia
             }
         }
         return nodeNameToScalingKeyframes;
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

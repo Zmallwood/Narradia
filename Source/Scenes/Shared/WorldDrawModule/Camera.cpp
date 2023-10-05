@@ -2,11 +2,11 @@
 #include "Camera.hpp"
 #include "Configuration.hpp"
 #include "Core/Rendering.hpp"
-#include "WorldDraw.hpp"
-#include "World/Player.hpp"
-#include "World/World.hpp"
 #include "World/MapArea.hpp"
+#include "World/Player.hpp"
 #include "World/Tile.hpp"
+#include "World/World.hpp"
+#include "WorldDraw.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -14,7 +14,7 @@ namespace Narradia
     /*////////////*/ {
         Log();
         CalculateCameraPosition();
-    } // Function
+    }
 
     void Camera::Update()
     /*/////////////////*/ {
@@ -38,11 +38,14 @@ namespace Narradia
         CameraGl::Get().SetPerspectiveMatrix(newPerspectiveMat);
         Log();
         CameraGl::Get().SetViewMatrix(newViewMat);
-        if (cameraDistance == 2.0f) Cursor::Get().HideThisFrame();
-    } // Function
+        if (cameraDistance == 2.0f)
+            Cursor::Get().HideThisFrame();
+    }
 
     float Camera::GetZoomAmount()
-    /*/////////////////////////*/ { return cameraDistance; } // Function
+    /*/////////////////////////*/ {
+        return cameraDistance;
+    }
 
     void Camera::UpdateZooming()
     /*////////////////////////*/ {
@@ -50,14 +53,15 @@ namespace Narradia
         if (mouseWheelDelta != 0)
         /***********************/ {
             auto distanceChange = mouseWheelDelta / zoomSens;
-            if (SceneManager::Get().GetCurrentView() == Scenes::Editor) distanceChange *= 2;
+            if (SceneManager::Get().GetCurrentView() == Scenes::Editor)
+                distanceChange *= 2;
             cameraDistance += distanceChange;
         }
         if (SceneManager::Get().GetCurrentView() == Scenes::Play)
             cameraDistance = std::max(std::min(cameraDistance, 250.0f), 2.0f);
         else if (SceneManager::Get().GetCurrentView() == Scenes::Editor)
             cameraDistance = std::max(std::min(cameraDistance, 800.0f), 2.0f);
-    } // Function
+    }
 
     void Camera::CalculateCameraPosition()
     /*//////////////////////////////////*/ {
@@ -111,7 +115,7 @@ namespace Narradia
                 cameraPosition = playerPosNoElev.Translate(dx, dy + playerElev * elevAmount, dz);
             }
         }
-    } // Function
+    }
 
     Point3F Camera::MoveCloserToCamera(Point3F original_point, float amount)
     /*////////////////////////////////////////////////////////////////////*/ {
@@ -121,6 +125,6 @@ namespace Narradia
         return {
             original_point.x + camDx / radius * amount, original_point.y,
             original_point.z + camDz / radius * amount};
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

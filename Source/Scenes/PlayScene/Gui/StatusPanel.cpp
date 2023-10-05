@@ -12,10 +12,11 @@ namespace Narradia
         std::tie(rendIdPlHpBar, rendIdPlStamBar) = Renderer2DSolidColors::Get().NewRectangles<2>();
         rendIdPlHpBarFilled = Renderer2DImages::Get().NewImage();
         rendIdPlStamBarFilled = Renderer2DImages::Get().NewImage();
-    } // Function
+    }
 
     void StatusPanel::Update()
-    /*//////////////////////*/ {} // Function
+    /*//////////////////////*/ {
+    }
 
     void StatusPanel::Render() const
     /*////////////////////////////*/ {
@@ -33,6 +34,6 @@ namespace Narradia
         Renderer2DImages::Get().DrawImage("Red", rendIdPlHpBarFilled, hpBarFilledBounds);
         rCol2D->FillRectangle(rendIdPlStamBar, stamBarBounds, Colors::black);
         Renderer2DImages::Get().DrawImage("Yellow", rendIdPlStamBarFilled, stamBarFilledBounds);
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

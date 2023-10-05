@@ -52,7 +52,7 @@ namespace Narradia
             },
             5);
         UpdateRotationInProgress();
-    } // Function
+    }
 
     void MouseRotation::UpdateRotationInProgress()
     /*//////////////////////////////////////////*/ {
@@ -70,6 +70,6 @@ namespace Narradia
                 Player::Get().SetFacingAngle(Camera::Get().horizontalAngle);
             Cursor::Get().RestoreSavedPosition();
         }
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

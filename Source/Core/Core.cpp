@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 /*////////////////////////////*/ {
     Narradia::GameEngine::Get().Run();
     return 0;
-} // Function
+}
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -25,11 +25,12 @@ namespace Narradia
     /*///////////////////*/ {
       public:
         bool running = true;
-    }; // Class
+    };
 
     GameEngine::GameEngine()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/ {} // Function
+    /*//////////////////////////////*/ {
+    }
 
     void GameEngine::Run() const
     /*////////////////////////*/ {
@@ -52,13 +53,17 @@ namespace Narradia
         Log();
         GameLoop().Run();
         SDL_Quit();
-    } // Function
+    }
 
     void GameEngine::StopGame()
-    /*///////////////////////*/ { p->running = false; } // Function
+    /*///////////////////////*/ {
+        p->running = false;
+    }
 
     const bool GameEngine::IsRunning() const
-    /*////////////////////////////////////*/ { return p->running; } // Function
+    /*////////////////////////////////////*/ {
+        return p->running;
+    }
 
     void GameLoop::Run() const
     /*//////////////////////*/ {
@@ -96,7 +101,7 @@ namespace Narradia
         Graphics::Get().Cleanup();
         Log();
         Audio::Get().Cleanup();
-    } // Function
+    }
 
     void EventPoller::PollEvents() const
     /*////////////////////////////////*/ {
@@ -131,26 +136,28 @@ namespace Narradia
                 break;
             }
         }
-    } // Function
+    }
 
     class SceneBase::Pimpl
     /*/////////////////*/ {
       public:
         std::shared_ptr<SceneGui> sceneGui;
-    }; // Class
+    };
 
     SceneBase::SceneBase()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/ {} // Function
+    /*//////////////////////////////*/ {
+    }
 
     void SceneBase::Enter()
-    /*//////////////////*/ {} // Function
+    /*//////////////////*/ {
+    }
 
     void SceneBase::Update()
     /*///////////////////*/ {
         p->sceneGui->Update();
         UpdateDerived();
-    } // Function
+    }
 
     void SceneBase::Render()
     /*///////////////////*/ {
@@ -160,35 +167,42 @@ namespace Narradia
         p->sceneGui->Render();
         Log();
         RenderAfterGuiDerived();
-    } // Function
+    }
 
     void SceneBase::Finalize()
-    /*/////////////////////*/ {} // Function
+    /*/////////////////////*/ {
+    }
 
     SceneGui *SceneBase::GetSceneGui()
-    /*///////////////////////////*/ { return p->sceneGui.get(); } // Function
+    /*///////////////////////////*/ {
+        return p->sceneGui.get();
+    }
 
     void SceneBase::CreateGui()
-    /*//////////////////////*/ { SetSceneGui(std::make_shared<SceneGui>()); } // Function
+    /*//////////////////////*/ {
+        SetSceneGui(std::make_shared<SceneGui>());
+    }
 
     void SceneBase::RenderAfterGuiDerived()
-    /*//////////////////////////////////*/ {} // Function
+    /*//////////////////////////////////*/ {
+    }
 
     void SceneBase::SetSceneGui(std::shared_ptr<SceneGui> newSceneGui)
     /*///////////////////////////////////////////////////////////*/ {
         p->sceneGui = newSceneGui;
-    } // Function
+    }
 
     class SceneManager::Pimpl
     /*////////////////////*/ {
       public:
         std::map<Scenes, std::shared_ptr<SceneBase>> scenes;
         Scenes currentView = Scenes::None;
-    }; // Class
+    };
 
     SceneManager::SceneManager()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/ {} // Function
+    /*//////////////////////////////*/ {
+    }
 
     void SceneManager::InitializeScenes()
     /*///////////////////////////////*/ {
@@ -213,7 +227,7 @@ namespace Narradia
         Log();
         p->scenes[Scenes::MapLoad] = std::make_shared<MapLoadScene>();
         p->currentView = Scenes::Intro;
-    } // Function
+    }
 
     void SceneManager::UpdateCurrentView()
     /*/////////////////////////////////*/ {
@@ -223,7 +237,7 @@ namespace Narradia
             Log();
             p->scenes.at(p->currentView)->Update();
         };
-    } // Function
+    }
 
     void SceneManager::RenderCurrentView() const
     /*///////////////////////////////////////*/ {
@@ -234,7 +248,7 @@ namespace Narradia
             p->scenes.at(p->currentView)->Render();
         };
         Log();
-    } // Function
+    }
 
     void SceneManager::FinalizeCurrentView()
     /*///////////////////////////////////*/ {
@@ -243,7 +257,7 @@ namespace Narradia
             Log();
             p->scenes.at(p->currentView)->Finalize();
         };
-    } // Function
+    }
 
     void SceneManager::ChangeView(Scenes newScene)
     /*////////////////////////////////////////*/ {
@@ -251,10 +265,12 @@ namespace Narradia
         MouseInput::Get().Reset();
         MouseInput::Get().ResetMouseActions();
         p->scenes.at(p->currentView)->Enter();
-    } // Function
+    }
 
     Scenes SceneManager::GetCurrentView()
-    /*///////////////////////////////*/ { return p->currentView; } // Function
+    /*///////////////////////////////*/ {
+        return p->currentView;
+    }
 
     class Cursor::Pimpl
     /*///////////////*/ {
@@ -268,18 +284,19 @@ namespace Narradia
         Point2 savedMousePosPx;
         CursorTypes currCursorType = CursorTypes::Normal;
         bool visibleThisFrame = true;
-    }; // Class
+    };
 
     Cursor::Cursor()
         : p(std::make_shared<Pimpl>())
     /*//////////////////////////////*/ {
         SDL_ShowCursor(0);
         p->idxCursorImage = Renderer2DImages::Get().NewImage();
-    } // Function
+    }
 
     void Cursor::Render() const
     /*///////////////////////*/ {
-        if (!p->visibleThisFrame) return;
+        if (!p->visibleThisFrame)
+            return;
         const auto mousePos = GetMousePositionF();
         const auto usedCursorSize =
             SizeF{Pimpl::kCursorSize, ConvertWidthToHeight(Pimpl::kCursorSize)};
@@ -303,39 +320,49 @@ namespace Narradia
             imageNameHash = p->hashCursorDefault;
         }
         Renderer2DImages::Get().DrawImage(imageNameHash, p->idxCursorImage, bounds);
-    } // Function
+    }
 
     void Cursor::Reset()
     /*////////////////*/ {
         p->currCursorType = CursorTypes::Normal;
         p->visibleThisFrame = true;
-    } // Function
+    }
 
     void Cursor::SavePosition()
-    /*///////////////////////*/ { p->savedMousePosPx = GetMousePositionPx(); } // Function
+    /*///////////////////////*/ {
+        p->savedMousePosPx = GetMousePositionPx();
+    }
 
     void Cursor::RestoreSavedPosition() const
     /*/////////////////////////////////////*/ {
         SDL_WarpMouseInWindow(
             Graphics::Get().GetWindow(), p->savedMousePosPx.x, p->savedMousePosPx.y);
-    } // Function
+    }
 
     Point2 Cursor::GetSavedPosition() const
-    /*///////////////////////////////////*/ { return p->savedMousePosPx; } // Function
+    /*///////////////////////////////////*/ {
+        return p->savedMousePosPx;
+    }
 
     void Cursor::SetCursorType(CursorTypes newCursorType)
     /*/////////////////////////////////////////////////*/ {
         p->currCursorType = newCursorType;
-    } // Function
+    }
 
     void Cursor::LockMousePos() const
-    /*/////////////////////////////*/ { SDL_SetRelativeMouseMode(SDL_TRUE); } // Function
+    /*/////////////////////////////*/ {
+        SDL_SetRelativeMouseMode(SDL_TRUE);
+    }
 
     void Cursor::UnlockMousePos() const
-    /*///////////////////////////////*/ { SDL_SetRelativeMouseMode(SDL_FALSE); } // Function
+    /*///////////////////////////////*/ {
+        SDL_SetRelativeMouseMode(SDL_FALSE);
+    }
 
     void Cursor::HideThisFrame()
-    /*////////////////////////*/ { p->visibleThisFrame = false; } // Function
+    /*////////////////////////*/ {
+        p->visibleThisFrame = false;
+    }
 
     class Logger::Pimpl
     /*///////////////*/ {
@@ -343,7 +370,7 @@ namespace Narradia
         static constexpr std::string_view logDirPath = "Logs";
         std::ofstream logFile;
         bool enabled = true;
-    }; // Class
+    };
 
     Logger::Logger()
         : p(std::make_shared<Pimpl>())
@@ -355,14 +382,17 @@ namespace Narradia
         p->logFile.open(
             std::string(SDL_GetBasePath()) + Pimpl::logDirPath.data() + "/" + logFileName,
             std::ofstream::out | std::ofstream::trunc);
-    } // Function
+    }
 
     Logger::~Logger()
-    /*/////////////*/ { p->logFile.close(); } // Function
+    /*/////////////*/ {
+        p->logFile.close();
+    }
 
     void Logger::Log(std::string_view message, const std::source_location location)
     /*///////////////////////////////////////////////////////////////////////////*/ {
-        if (!p->enabled) return;
+        if (!p->enabled)
+            return;
         auto stdstr = std::string(location.file_name());
         auto fileNameStart = stdstr.find("Source/") + 7;
         auto fileName = stdstr.substr(fileNameStart);
@@ -372,10 +402,12 @@ namespace Narradia
                               "                                ";
         p->logFile.seekp(0);
         p->logFile << logText << std::flush;
-    } // Function
+    }
 
     void Log(const std::source_location location)
-    /*//////*/ { Logger::Get().Log("", location); } // Function
+    /*//////*/ {
+        Logger::Get().Log("", location);
+    }
 
     class TextOutBox::Pimpl
     /*///////////////////*/ {
@@ -393,7 +425,7 @@ namespace Narradia
         bool inputActive = false;
         int cursorPosition = 0;
         std::string inputText;
-    }; // Class
+    };
 
     TextOutBox::TextOutBox()
         : p(std::make_shared<Pimpl>())
@@ -405,7 +437,7 @@ namespace Narradia
         auto maxNumLines = GetMaxNumLines();
         for (auto i = 0; i < maxNumLines; i++)
             p->glIdTextLines.push_back(TextRenderer::Get().NewString());
-    } // Function
+    }
 
     void TextOutBox::Update()
     /*/////////////////////*/ {
@@ -417,11 +449,12 @@ namespace Narradia
             p->inputText.insert(p->cursorPosition, newTextInput);
             p->cursorPosition += newTextInput.length();
         }
-    } // Function
+    }
 
     void TextOutBox::Render() const
     /*///////////////////////////*/ {
-        if (!p->enabled) return;
+        if (!p->enabled)
+            return;
         auto usedBounds = p->bounds;
         if (SceneManager::Get().GetCurrentView() == Scenes::Play)
             usedBounds = usedBounds.Translate(0.0f, -ExperienceBar::kBarHeight);
@@ -458,20 +491,21 @@ namespace Narradia
                 usedText.insert(p->cursorPosition, " ");
             TextRenderer::Get().DrawString(p->idInputText, usedText, posText);
         }
-    } // Function
+    }
 
     void TextOutBox::Print(std::string_view text, Color textColor)
     /*//////////////////////////////////////////////////////////*/ {
-        if (!p->enabled) return;
+        if (!p->enabled)
+            return;
         std::string printedText = std::string(GetCurrentTime().data()) + "." +
                                   std::to_string(SDL_GetTicks() % 1000) + ") " + text.data();
         p->textLines.push_back({printedText, textColor});
-    } // Function
+    }
 
     int TextOutBox::GetMaxNumLines() const
     /*//////////////////////////////////*/ {
         return static_cast<int>(p->bounds.height / p->textLineHeight) - 2;
-    } // Function
+    }
 
     class Graphics::Pimpl
     /*/////////////////*/ {
@@ -485,7 +519,7 @@ namespace Narradia
         const Uint32 windowFlags =
             SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN_DESKTOP;
 #endif
-    }; // Class
+    };
 
     Graphics::Graphics()
         : p(std::make_shared<Pimpl>())
@@ -511,21 +545,27 @@ namespace Narradia
         }
         GraphicsGl::GetPointer();
         TextRenderer::Create();
-    } // Function
+    }
 
     SDL_Window *Graphics::GetWindow() const
-    /*************************************/ { return p->window.get(); } // Function
+    /*************************************/ {
+        return p->window.get();
+    }
 
     void Graphics::ClearCanvas() const
     /********************************/ {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    } // Function
+    }
 
     void Graphics::PresentCanvas() const
-    /**********************************/ { SDL_GL_SwapWindow(p->window.get()); } // Function
+    /**********************************/ {
+        SDL_GL_SwapWindow(p->window.get());
+    }
 
     void Graphics::Cleanup()
-    /**********************/ { GraphicsGl::Get().Cleanup(); } // Function
+    /**********************/ {
+        GraphicsGl::Get().Cleanup();
+    }
 
     class GraphicsGl::Pimpl
     /*********************/ {
@@ -534,7 +574,7 @@ namespace Narradia
         const Color fogColorGround = Colors::mildBlue;
         const Color fogColorObjects = Colors::mildBlue;
         const Color clearColor = Colors::black;
-    }; // Class
+    };
 
     GraphicsGl::GraphicsGl()
         : p(std::make_shared<Pimpl>())
@@ -560,7 +600,7 @@ namespace Narradia
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         ImageBank::Get().LoadImages();
         ModelBank::Get().LoadModels();
-    } // Function
+    }
 
     void GraphicsGl::Cleanup()
     /*//////////////////////*/ {
@@ -570,61 +610,73 @@ namespace Narradia
         RendererModels::Get().Cleanup();
         RendererBillboardImages::Get().Cleanup();
         ImageBank::Get().Cleanup();
-    } // Function
+    }
 
     Color GraphicsGl::GetFogColorGround()
-    /*/////////////////////////////////*/ { return p->fogColorGround; } // Function
+    /*/////////////////////////////////*/ {
+        return p->fogColorGround;
+    }
 
     Color GraphicsGl::GetFogColorObjects()
-    /*//////////////////////////////////*/ { return p->fogColorObjects; } // Function
+    /*//////////////////////////////////*/ {
+        return p->fogColorObjects;
+    }
 
     Audio::Audio()
     /*//////////*/ {
-        if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1) return;
+        if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
+            return;
         AudioBank::Get().LoadAudioFiles();
-    } // Function
+    }
 
     void Audio::Cleanup()
-    /*/////////////////*/ { AudioBank::Get().Cleanup(); } // Function
+    /*/////////////////*/ {
+        AudioBank::Get().Cleanup();
+    }
 
     void Audio::PlaySound(std::string_view soundNameHash, int channel)
     /*//////////////////////////////////////////////////////////////*/ {
-        if (muted) return;
+        if (muted)
+            return;
         if (Mix_Playing(0) == 0 || channel != 0)
             Mix_PlayChannel(channel, AudioBank::Get().GetSound(Hash(soundNameHash)), 0);
         Mix_Volume(channel, MIX_MAX_VOLUME / 4);
-    } // Function
+    }
 
     void Audio::PlayMusic(std::string_view musicNameHash)
     /*/////////////////////////////////////////////////*/ {
         if (Mix_PlayingMusic() == 0)
             Mix_PlayMusic(AudioBank::Get().GetMusic(Hash(musicNameHash)), -1);
-    } // Function
+    }
 
     void Audio::StopPlaySound()
-    /*///////////////////////*/ { Mix_HaltChannel(0); } // Function
+    /*///////////////////////*/ {
+        Mix_HaltChannel(0);
+    }
 
     void Audio::Mute()
     /*//////////////*/ {
         Mix_PauseMusic();
         Mix_Volume(-1, 0);
         muted = true;
-    } // Function
+    }
 
     void Audio::Unmute()
     /*////////////////*/ {
         Mix_ResumeMusic();
         Mix_Volume(-1, MIX_MAX_VOLUME / 4);
         muted = false;
-    } // Function
+    }
 
     ModelPart::ModelPart()
         : timeline(std::make_unique<ModelPartTimeline>())
-    /*/////////////////////////////////////////////////*/ {} // Function
+    /*/////////////////////////////////////////////////*/ {
+    }
 
     Model::Model(int animDuration_)
         : animDuration(animDuration_)
-    /*/////////////////////////////*/ {} // Function
+    /*/////////////////////////////*/ {
+    }
 
     Size GetCanvasSize()
     /*////////////////*/ {
@@ -632,16 +684,18 @@ namespace Narradia
         int height;
         SDL_GetWindowSize(Graphics::Get().GetWindow(), &width, &height);
         return {width, height};
-    } // Function
+    }
 
     float GetAspectRatio()
     /*//////////////////*/ {
         auto canvasSize = GetCanvasSize();
         return static_cast<float>(canvasSize.width) / canvasSize.height;
-    } // Function
+    }
 
     float ConvertWidthToHeight(float width)
-    /*///////////////////////////////////*/ { return width * GetAspectRatio(); } // Function
+    /*///////////////////////////////////*/ {
+        return width * GetAspectRatio();
+    }
 
     std::string_view GetCurrentTime()
     /*/////////////////////////////*/ {
@@ -650,7 +704,7 @@ namespace Narradia
         auto pTstruct = localtime(&now);
         strftime(buffer, sizeof(buffer), "%X", pTstruct);
         return buffer;
-    } // Function
+    }
 
     std::string_view GetCurrentDateTime()
     /*/////////////////////////////////*/ {
@@ -659,12 +713,12 @@ namespace Narradia
         auto pTstruct = localtime(&now);
         strftime(buffer, sizeof(buffer), "%Y.%m.%d.%H.%M.%S", pTstruct);
         return buffer;
-    } // Function
+    }
 
     const int Hash(const std::string_view &text)
     /*////////////////////////////////////////*/ {
         return std::hash<std::string_view>{}(text);
-    } // Function
+    }
 
     Point2 GetMousePositionPx()
     /*///////////////////////*/ {
@@ -672,7 +726,7 @@ namespace Narradia
         int y;
         SDL_GetMouseState(&x, &y);
         return {x, y};
-    } // Function
+    }
 
     Point2F GetMousePositionF()
     /*///////////////////////*/ {
@@ -681,7 +735,7 @@ namespace Narradia
         auto x = static_cast<float>(mousePosPx.x) / canvasSize.width;
         auto y = static_cast<float>(mousePosPx.y) / canvasSize.height;
         return {x, y};
-    } // Function
+    }
 
     class KeyboardInput::Pimpl
     /*//////////////////////*/ {
@@ -689,50 +743,58 @@ namespace Narradia
         std::string textInput;
         std::set<SDL_Keycode> pressedKeys;
         std::set<SDL_Keycode> firedKeys;
-    }; // Class
+    };
 
     KeyboardInput::KeyboardInput()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/ {} // Function
+    /*//////////////////////////////*/ {
+    }
 
     void KeyboardInput::KeyDown(SDL_Keycode key)
     /*////////////////////////////////////////*/ {
-        if (p->pressedKeys.count(key) == 0) p->firedKeys.insert(key);
+        if (p->pressedKeys.count(key) == 0)
+            p->firedKeys.insert(key);
         p->pressedKeys.insert(key);
-    } // Function
+    }
 
     void KeyboardInput::KeyUp(SDL_Keycode key)
-    /*//////////////////////////////////////*/ { p->pressedKeys.erase(key); } // Function
+    /*//////////////////////////////////////*/ {
+        p->pressedKeys.erase(key);
+    }
 
     bool KeyboardInput::AnyKeyHasBeenFired() const
-    /*//////////////////////////////////////////*/ { return p->firedKeys.size() > 0; } // Function
+    /*//////////////////////////////////////////*/ {
+        return p->firedKeys.size() > 0;
+    }
 
     bool KeyboardInput::KeyIsPressed(SDL_Keycode key) const
     /*///////////////////////////////////////////////////*/ {
         return p->pressedKeys.count(key) > 0;
-    } // Function
+    }
 
     bool KeyboardInput::KeyHasBeenFiredPickResult(SDL_Keycode key)
     /*//////////////////////////////////////////////////////////*/ {
         auto result = p->firedKeys.count(key) > 0;
         p->firedKeys.erase(key);
         return result;
-    } // Function
+    }
 
     std::string_view KeyboardInput::PickTextInput()
     /*///////////////////////////////////////////*/ {
         auto result = p->textInput;
         p->textInput = "";
         return result;
-    } // Function
+    }
 
     void KeyboardInput::ResetTextInput()
-    /*////////////////////////////////*/ { p->textInput = ""; } // Function
+    /*////////////////////////////////*/ {
+        p->textInput = "";
+    }
 
     void KeyboardInput::AppendTextInput(std::string_view toAppend)
     /*//////////////////////////////////////////////////////////*/ {
         p->textInput.append(toAppend);
-    } // Function
+    }
 
     class MouseButton::Pimpl
     /*////////////////////*/ {
@@ -744,14 +806,17 @@ namespace Narradia
         bool hasBeenFired = false;
         bool hasBeenReleased = false;
         MouseActionManager actionMngr;
-    }; // Class
+    };
 
     MouseButton::MouseButton()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/ {} // Function
+    /*//////////////////////////////*/ {
+    }
 
     void MouseButton::Reset()
-    /*/////////////////////*/ { p->isPressed = false; } // Function
+    /*/////////////////////*/ {
+        p->isPressed = false;
+    }
 
     void MouseButton::PressDown()
     /*/////////////////////////*/ {
@@ -760,29 +825,31 @@ namespace Narradia
         p->hasBeenReleased = false;
         p->clickDuration = 0;
         p->ticksButtonDown = SDL_GetTicks();
-    } // Function
+    }
 
     void MouseButton::Release()
     /*///////////////////////*/ {
         p->isPressed = false;
         p->hasBeenReleased = true;
         p->clickDuration = SDL_GetTicks() - p->ticksButtonDown;
-    } // Function
+    }
 
     int MouseButton::GetPressDuration() const
     /*/////////////////////////////////////*/ {
         return SDL_GetTicks() - p->ticksButtonDown;
-    } // Function
+    }
 
     int MouseButton::ClickDurationPickResult()
     /*//////////////////////////////////////*/ {
         auto result = p->clickDuration;
         p->clickDuration = Pimpl::defaultClickSpeed;
         return result;
-    } // Function
+    }
 
     int MouseButton::ClickDurationPeekResult() const
-    /*////////////////////////////////////////////*/ { return p->clickDuration; } // Function
+    /*////////////////////////////////////////////*/ {
+        return p->clickDuration;
+    }
 
     void MouseButton::PerformMouseAction()
     /*//////////////////////////////////*/ {
@@ -796,29 +863,33 @@ namespace Narradia
             p->actionMngr.PerformReleasedActions(p->ticksButtonDown);
         else
             p->actionMngr.ClearReleasedActions();
-    } // Function
+    }
 
     void MouseButton::AddFiredAction(
         std::string_view uniqueName, std::function<void()> action, float priority, int delay,
         bool ensureIsExec)
     /*/////////////////////////////////////////////////////////////////////////////////////*/ {
-        if (p->hasBeenFired == true) return;
+        if (p->hasBeenFired == true)
+            return;
         auto id = Hash(uniqueName);
-        if (p->actionMngr.FiredActionsContains(id)) return;
+        if (p->actionMngr.FiredActionsContains(id))
+            return;
         p->actionMngr.AddFiredAction(
             id, {action, priority, static_cast<Uint64>(delay), ensureIsExec});
-    } // Function
+    }
 
     void MouseButton::AddReleasedAction(
         std::string_view uniqueName, std::function<void()> action, float priority, int delay,
         bool ensureIsExec)
     /*/////////////////////////////////////////////////////////////////////////////////////*/ {
-        if (p->hasBeenReleased == true) return;
+        if (p->hasBeenReleased == true)
+            return;
         auto id = Hash(uniqueName);
-        if (p->actionMngr.ReleasedActionsContains(id)) return;
+        if (p->actionMngr.ReleasedActionsContains(id))
+            return;
         p->actionMngr.AddReleasedAction(
             id, {action, priority, static_cast<Uint64>(delay), ensureIsExec});
-    } // Function
+    }
 
     void MouseButton::ResetActions()
     /*////////////////////////////*/ {
@@ -826,10 +897,12 @@ namespace Narradia
         p->hasBeenFired = false;
         p->actionMngr.ClearReleasedActions();
         p->hasBeenReleased = false;
-    } // Function
+    }
 
     const int MouseButton::GetDefaultClickSpeed()
-    /*/////////////////////////////////////////*/ { return Pimpl::defaultClickSpeed; } // Function
+    /*/////////////////////////////////////////*/ {
+        return Pimpl::defaultClickSpeed;
+    }
 
     class MouseInput::Pimpl
     /*///////////////////*/ {
@@ -839,11 +912,12 @@ namespace Narradia
         MouseButton leftButton;
         MouseButton middleButton;
         MouseButton rightButton;
-    }; // Class
+    };
 
     MouseInput::MouseInput()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/ {} // Function
+    /*//////////////////////////////*/ {
+    }
 
     void MouseInput::Reset()
     /*////////////////////*/ {
@@ -853,7 +927,7 @@ namespace Narradia
         p->mouseWheelDelta = 0;
         p->motionDelta = {0, 0};
         ResetMouseActions();
-    } // Function
+    }
 
     void MouseInput::MouseDown(Uint8 mouseButton)
     /*/////////////////////////////////////////*/ {
@@ -869,7 +943,7 @@ namespace Narradia
             p->rightButton.PressDown();
             break;
         }
-    } // Function
+    }
 
     void MouseInput::MouseUp(Uint8 mouseButton)
     /*///////////////////////////////////////*/ {
@@ -885,20 +959,24 @@ namespace Narradia
             p->rightButton.Release();
             break;
         }
-    } // Function
+    }
 
     void MouseInput::MouseWheel(int deltaScroll)
-    /*////////////////////////////////////////*/ { p->mouseWheelDelta += deltaScroll; } // Function
+    /*////////////////////////////////////////*/ {
+        p->mouseWheelDelta += deltaScroll;
+    }
 
     void MouseInput::MouseMove(Point2 motionDelta_)
-    /*///////////////////////////////////////////*/ { p->motionDelta = motionDelta_; } // Function
+    /*///////////////////////////////////////////*/ {
+        p->motionDelta = motionDelta_;
+    }
 
     int MouseInput::MouseWheelDeltaPickResult()
     /*///////////////////////////////////////*/ {
         auto resultMouseWheelDelta = p->mouseWheelDelta;
         p->mouseWheelDelta = 0;
         return resultMouseWheelDelta;
-    } // Function
+    }
 
     void MouseInput::PerformMouseActions()
     /*//////////////////////////////////*/ {
@@ -908,41 +986,48 @@ namespace Narradia
         p->middleButton.PerformMouseAction();
         Log();
         p->rightButton.PerformMouseAction();
-    } // Function
+    }
 
     void MouseInput::ResetMouseActions()
     /*////////////////////////////////*/ {
         p->leftButton.ResetActions();
         p->middleButton.ResetActions();
         p->rightButton.ResetActions();
-    } // Function
+    }
 
     Point2 MouseInput::GetMotionDeltaPickResults()
     /*//////////////////////////////////////////*/ {
         auto result = p->motionDelta;
         p->motionDelta = {0, 0};
         return result;
-    } // Function
+    }
 
     MouseButton &MouseInput::GetLeftButton()
-    /*////////////////////////////////////*/ { return p->leftButton; } // Function
+    /*////////////////////////////////////*/ {
+        return p->leftButton;
+    }
 
     MouseButton &MouseInput::GetMiddleButton()
-    /*//////////////////////////////////////*/ { return p->middleButton; } // Function
+    /*//////////////////////////////////////*/ {
+        return p->middleButton;
+    }
 
     MouseButton &MouseInput::GetRightButton()
-    /*/////////////////////////////////////*/ { return p->rightButton; } // Function
+    /*/////////////////////////////////////*/ {
+        return p->rightButton;
+    }
 
     class MouseActionManager::Pimpl
     /*///////////////////////////*/ {
       public:
         std::map<int, MouseAction> firedActions;
         std::map<int, MouseAction> releasedActions;
-    }; // Class
+    };
 
     MouseActionManager::MouseActionManager()
         : p(std::make_shared<Pimpl>())
-    /*////////////////////////////////////*/ {} // Function
+    /*////////////////////////////////////*/ {
+    }
 
     void
     MouseActionManager::PerformFiredActions(int ticksButtonDown, bool isPressed, bool &hasBeenFired)
@@ -971,7 +1056,8 @@ namespace Narradia
                     continue;
                 }
             }
-            if (false == it->second.ensureIsExec) firedToDelete.insert(it->first);
+            if (false == it->second.ensureIsExec)
+                firedToDelete.insert(it->first);
             it++;
         }
         Log();
@@ -996,7 +1082,8 @@ namespace Narradia
         /*********************************/ {
             if (firedAction)
             /**************/ {
-                if (isPressed) firedAction();
+                if (isPressed)
+                    firedAction();
                 p->firedActions.erase(key);
             }
         }
@@ -1004,8 +1091,9 @@ namespace Narradia
         for (auto key : firedToDelete)
             p->firedActions.erase(key);
         Log();
-        if (p->firedActions.size() == 0 && isPressed == false) hasBeenFired = false;
-    } // Function
+        if (p->firedActions.size() == 0 && isPressed == false)
+            hasBeenFired = false;
+    }
 
     void MouseActionManager::PerformReleasedActions(int ticksButtonDown)
     /*////////////////////////////////////////////////////////////////*/ {
@@ -1035,7 +1123,8 @@ namespace Narradia
                 }
             }
             Log();
-            if (false == it->second.ensureIsExec) releasedToDelete.insert(it->first);
+            if (false == it->second.ensureIsExec)
+                releasedToDelete.insert(it->first);
             it++;
         }
         Log();
@@ -1070,32 +1159,36 @@ namespace Narradia
         Log();
         for (auto key : releasedToDelete)
             p->releasedActions.erase(key);
-    } // Function
+    }
 
     void MouseActionManager::ClearFiredActions()
-    /*////////////////////////////////////////*/ { p->firedActions.clear(); } // Function
+    /*////////////////////////////////////////*/ {
+        p->firedActions.clear();
+    }
 
     void MouseActionManager::ClearReleasedActions()
-    /*///////////////////////////////////////////*/ { p->releasedActions.clear(); } // Function
+    /*///////////////////////////////////////////*/ {
+        p->releasedActions.clear();
+    }
 
     bool MouseActionManager::FiredActionsContains(int actionId)
     /*///////////////////////////////////////////////////////*/ {
         return p->firedActions.count(actionId);
-    } // Function
+    }
 
     bool MouseActionManager::ReleasedActionsContains(int actionId)
     /*//////////////////////////////////////////////////////////*/ {
         return p->releasedActions.count(actionId);
-    } // Function
+    }
 
     void MouseActionManager::AddFiredAction(int actionId, MouseAction action)
     /*/////////////////////////////////////////////////////////////////////*/ {
         p->firedActions.insert({actionId, action});
-    } // Function
+    }
 
     void MouseActionManager::AddReleasedAction(int actionId, MouseAction action)
     /*////////////////////////////////////////////////////////////////////////*/ {
         p->releasedActions.insert({actionId, action});
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

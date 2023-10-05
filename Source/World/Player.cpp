@@ -1,61 +1,65 @@
 //////////////////////////////////////////////////////////////////////
 #include "Player.hpp"
+#include "MapArea.hpp"
+#include "Object.hpp"
+#include "ObjectBehaviourList.hpp"
+#include "ObjectsCollection.hpp"
 #include "Scenes/Shared/WorldDrawModule/Camera.hpp"
 #include "Scenes/Shared/WorldDrawModule/Configuration.hpp"
-#include "World.hpp"
-#include "MapArea.hpp"
 #include "Tile.hpp"
-#include "ObjectsCollection.hpp"
-#include "ObjectBehaviourList.hpp"
-#include "Object.hpp"
+#include "World.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
     Point2F Player::GetPosition()
-    /*/////////////////////////*/ { return data.movement.position; } // Function
+    /*/////////////////////////*/ {
+        return data.movement.position;
+    }
 
     void Player::MoveForward()
-    /*//////////////////////*/ { MoveAtAngle(0); } // Function
+    /*//////////////////////*/ {
+        MoveAtAngle(0);
+    }
 
     void Player::TurnForward()
     /*//////////////////////*/ {
         data.movement.facingAngle = Camera::Get().horizontalAngle;
-    } // Function
+    }
 
     void Player::TurnRight()
     /*////////////////////*/ {
         data.movement.facingAngle = Camera::Get().horizontalAngle - 90.0f;
-    } // Function
+    }
 
     void Player::TurnLeft()
     /*///////////////////*/ {
         data.movement.facingAngle = Camera::Get().horizontalAngle + 90.0f;
-    } // Function
+    }
 
     void Player::TurnBack()
     /*///////////////////*/ {
         data.movement.facingAngle = Camera::Get().horizontalAngle + 180.0f;
-    } // Function
+    }
 
     void Player::TurnRightForward()
     /*///////////////////////////*/ {
         data.movement.facingAngle = Camera::Get().horizontalAngle - 45.0f;
-    } // Function
+    }
 
     void Player::TurnLeftForward()
     /*//////////////////////////*/ {
         data.movement.facingAngle = Camera::Get().horizontalAngle + 45.0f;
-    } // Function
+    }
 
     void Player::TurnRightBack()
     /*////////////////////////*/ {
         data.movement.facingAngle = Camera::Get().horizontalAngle + 225.0f;
-    } // Function
+    }
 
     void Player::TurnLeftBack()
     /*///////////////////////*/ {
         data.movement.facingAngle = Camera::Get().horizontalAngle + 135.0f;
-    } // Function
+    }
 
     Point3F Player::GetSpaceCoord()
     /*///////////////////////////*/ {
@@ -63,38 +67,48 @@ namespace Narradia
         Point3F spaceCoord = {position.x * kTileSize, 0.0f, position.y * kTileSize};
         spaceCoord.y -= Player::Get().data.movement.jumpHeight;
         return spaceCoord;
-    } // Function
+    }
 
     Point3 Player::GetWorldAreaPos()
-    /*////////////////////////////*/ { return data.movement.worldAreaPos; } // Function
+    /*////////////////////////////*/ {
+        return data.movement.worldAreaPos;
+    }
 
     float Player::GetFacingAngle()
-    /*//////////////////////////*/ { return data.movement.facingAngle; } // Function
+    /*//////////////////////////*/ {
+        return data.movement.facingAngle;
+    }
 
     void Player::SetFacingAngle(float newFacingAngle)
     /*/////////////////////////////////////////////*/ {
         data.movement.facingAngle = newFacingAngle;
-    } // Function
+    }
 
     void Player::ClaimTile(Point2 Tile)
-    /*///////////////////////////////*/ { claimedTiles.push_back(Tile); } // Function
+    /*///////////////////////////////*/ {
+        claimedTiles.push_back(Tile);
+    }
 
     bool Player::HasClaimedTile(Point2 Tile)
     /*////////////////////////////////////*/ {
         return std::count(claimedTiles.begin(), claimedTiles.end(), Tile) != 0;
-    } // Function
+    }
 
     void Player::ClearClaimedTiles()
-    /*////////////////////////////*/ { claimedTiles.clear(); } // Function
+    /*////////////////////////////*/ {
+        claimedTiles.clear();
+    }
 
     void Player::Jump()
     /*///////////////*/ {
-        if (SDL_GetTicks() > ticksStartJumping + jumpDuration) ticksStartJumping = SDL_GetTicks();
-    } // Function
+        if (SDL_GetTicks() > ticksStartJumping + jumpDuration)
+            ticksStartJumping = SDL_GetTicks();
+    }
 
     void Player::MoveAtAngle(float angleOffset)
     /*///////////////////////////////////////*/ {
-        if (!data.movement.isMoving) data.ticksLastUpdate = SDL_GetTicks();
+        if (!data.movement.isMoving)
+            data.ticksLastUpdate = SDL_GetTicks();
         auto usedAngle = data.movement.facingAngle + angleOffset - 90;
         auto dx = CosDegrees(usedAngle) * data.movement.stepSize * data.deltaT /
                   data.movement.moveSpeed * skillSet.skills.at("MovementSpeed").level;
@@ -240,12 +254,13 @@ namespace Narradia
                 }
             }
         }
-    } // Function
+    }
 
     void Player::Update()
     /*/////////////////*/ {
         data.Update();
-        if (!data.movement.isMoving) Audio::Get().StopPlaySound();
+        if (!data.movement.isMoving)
+            Audio::Get().StopPlaySound();
 
         if (SDL_GetTicks() < ticksStartJumping + jumpDuration)
         /****************************************************/ {
@@ -257,6 +272,6 @@ namespace Narradia
         /****/ {
             data.movement.jumpHeight = 0.0f;
         }
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

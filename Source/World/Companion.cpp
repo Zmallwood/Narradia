@@ -16,11 +16,13 @@ namespace Narradia
         Directions direction = Directions::Clockwise;
         float angle = 0.0f;
         Point2 previousCoordinate = {-1, -1};
-    }; // Class
+    };
 
     Companion::Companion(Point2 spawnLocation_)
         : p(std::make_shared<Pimpl>())
-    /*///////////////////////////////////////*/ { p->spawnLocation = spawnLocation_; } // Function
+    /*///////////////////////////////////////*/ {
+        p->spawnLocation = spawnLocation_;
+    }
 
     void Companion::GiveObject(std::shared_ptr<Object> object)
     /*//////////////////////////////////////////////////////*/ {
@@ -34,46 +36,72 @@ namespace Narradia
         /****/ {
             TextOutBox::Get().Print("Companion: Thanks for the gift.");
         }
-    } // Function
+    }
 
     int Companion::GetStamina()
-    /*///////////////////////*/ { return p->stamina; } // Function
+    /*///////////////////////*/ {
+        return p->stamina;
+    }
 
     int Companion::GetMaxStamina()
-    /*//////////////////////////*/ { return p->maxStamina; } // Function
+    /*//////////////////////////*/ {
+        return p->maxStamina;
+    }
 
     int Companion::GetTicksLastMovement()
-    /*/////////////////////////////////*/ { return p->ticksLastMovement; } // Function
+    /*/////////////////////////////////*/ {
+        return p->ticksLastMovement;
+    }
 
     int Companion::GetMoveSpeed()
-    /*/////////////////////////*/ { return p->moveSpeed; } // Function
+    /*/////////////////////////*/ {
+        return p->moveSpeed;
+    }
 
     float Companion::GetAngle()
-    /*///////////////////////*/ { return p->angle; } // Function
+    /*///////////////////////*/ {
+        return p->angle;
+    }
 
     int Companion::GetRadius()
-    /*//////////////////////*/ { return p->radius; } // Function
+    /*//////////////////////*/ {
+        return p->radius;
+    }
 
     Directions Companion::GetDirection()
-    /*////////////////////////////////*/ { return p->direction; } // Function
+    /*////////////////////////////////*/ {
+        return p->direction;
+    }
 
     void Companion::IncreaseRadius()
-    /*////////////////////////////*/ { p->radius++; } // Function
+    /*////////////////////////////*/ {
+        p->radius++;
+    }
 
     Point2 Companion::GetSpawnLocation()
-    /*////////////////////////////////*/ { return p->spawnLocation; } // Function
+    /*////////////////////////////////*/ {
+        return p->spawnLocation;
+    }
 
     void Companion::SetAngle(float newAngle)
-    /*////////////////////////////////////*/ { p->angle = newAngle; } // Function
+    /*////////////////////////////////////*/ {
+        p->angle = newAngle;
+    }
 
     void Companion::UpdateTicksLastMovement()
-    /*/////////////////////////////////////*/ { p->ticksLastMovement = SDL_GetTicks(); } // Function
+    /*/////////////////////////////////////*/ {
+        p->ticksLastMovement = SDL_GetTicks();
+    }
 
     void Companion::ConsumeStamina(int amountStamina)
-    /*/////////////////////////////////////////////*/ { p->stamina -= amountStamina; } // Function
+    /*/////////////////////////////////////////////*/ {
+        p->stamina -= amountStamina;
+    }
 
     bool Companion::OutOfStamina()
-    /*//////////////////////////*/ { return p->stamina <= 0; } // Function
+    /*//////////////////////////*/ {
+        return p->stamina <= 0;
+    }
 
     void Companion::ReverseDirection()
     /*//////////////////////////////*/ {
@@ -81,17 +109,21 @@ namespace Narradia
             p->direction = Directions::CounterClockwise;
         else
             p->direction = Directions::Clockwise;
-    } // Function
+    }
 
     void Companion::DecreaseRadius()
-    /*////////////////////////////*/ { p->radius--; } // Function
+    /*////////////////////////////*/ {
+        p->radius--;
+    }
 
     void Companion::SetPreviousCoordinate(Point2 newPreviousCoordinate)
     /*///////////////////////////////////////////////////////////////*/ {
         p->previousCoordinate = newPreviousCoordinate;
-    } // Function
+    }
 
     Point2 Companion::GetPreviousCoordinate()
-    /*/////////////////////////////////////*/ { return p->previousCoordinate; } // Function
+    /*/////////////////////////////////////*/ {
+        return p->previousCoordinate;
+    }
 }
 //////////////////////////////////////////////////////////////////////

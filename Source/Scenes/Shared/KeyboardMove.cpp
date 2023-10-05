@@ -38,6 +38,6 @@ namespace Narradia
             player->MoveForward();
             player->data.movement.isMoving = true;
         }
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

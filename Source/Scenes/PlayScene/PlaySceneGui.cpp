@@ -5,9 +5,9 @@
 #include "Gui/InventoryGui.hpp"
 #include "Gui/ObjectivesPanel.hpp"
 #include "Gui/PlaySceneGuiMenu.hpp"
-#include "Modules/PlaySceneModulesCore.hpp"
 #include "Gui/SkillsGui.hpp"
 #include "Gui/StatusPanel.hpp"
+#include "Modules/PlaySceneModulesCore.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -62,6 +62,6 @@ namespace Narradia
         AddGuiComponent(std::shared_ptr<CompanionsPanel>(CompanionsPanel::GetPointer()));
         Log();
         AddGuiComponent(std::shared_ptr<ExperienceBar>(ExperienceBar::GetPointer()));
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

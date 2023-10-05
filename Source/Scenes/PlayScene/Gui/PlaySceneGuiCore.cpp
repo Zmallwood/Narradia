@@ -17,7 +17,7 @@ namespace Narradia
         RenderId idBackgroundImage;
         RenderId idFpsText;
         bool visible = false;
-    }; // Class
+    };
 
     FpsPanel::FpsPanel()
         : p(std::make_shared<Pimpl>()),
@@ -25,7 +25,7 @@ namespace Narradia
     /*//////////////////////////////////////////////////////////////////////////////////////*/ {
         p->idBackgroundImage = Renderer2DImages::Get().NewImage();
         p->idFpsText = TextRenderer::Get().NewString();
-    } // Function
+    }
 
     void FpsPanel::Update()
     /*///////////////////*/ {
@@ -37,17 +37,18 @@ namespace Narradia
         }
         p->framesCount++;
         GuiMovableContainer::Update();
-    } // Function
+    }
 
     void FpsPanel::Render() const
     /*/////////////////////////*/ {
-        if (!p->visible) return;
+        if (!p->visible)
+            return;
         Renderer2DImages::Get().DrawImage(Hash("PanelBg"), p->idBackgroundImage, GetBounds());
         std::string_view fpsText = "Fps: " + std::to_string(p->fps);
         TextRenderer::Get().DrawString(
             p->idFpsText, fpsText, GetPosition().Translate(0.014f, 0.018f));
         GuiMovableContainer::Render();
-    } // Function
+    }
 
     MessageBox::MessageBox(std::string_view title_, std::string_view messageText_)
         : GuiWindow(title_, {0.25f, 0.35f, 0.5f, 0.1f}, true, "PanelBgBlue"),
@@ -60,25 +61,27 @@ namespace Narradia
         auto sceneGui = mainScene->GetSceneGui();
         std::function<void()> confirmAction = [=, this] { sceneGui->RemoveGuiComponent(this); };
         AddGuiButton("Ok", {0.45f, 0.06f, 0.035f, ConvertWidthToHeight(0.015f)}, confirmAction);
-    } // Function
+    }
 
     void MessageBox::UpdateDerived()
-    /*////////////////////////////*/ {} // Function
+    /*////////////////////////////*/ {
+    }
 
     void MessageBox::RenderDerived() const
     /*//////////////////////////////////*/ {
         TextRenderer::Get().DrawString(
             glIdMessageText, messageText, GetPosition().Translate(0.01f, 0.05f), Colors::yellow);
-    } // Function
+    }
 
     ExperienceBar::ExperienceBar()
     /*//////////////////////////*/ {
         glIdUnfilledArea = Renderer2DSolidColors::Get().NewRectangle();
         glIdFilledArea = Renderer2DImages::Get().NewImage();
-    } // Function
+    }
 
     void ExperienceBar::Update()
-    /*////////////////////////*/ {} // Function
+    /*////////////////////////*/ {
+    }
 
     void ExperienceBar::Render() const
     /*//////////////////////////////*/ {
@@ -87,6 +90,6 @@ namespace Narradia
         auto expProgress = GetFractionalExpProgress(Player::Get().data.exp);
         auto filledArea = RectangleF{0.0f, 1.0f - kBarHeight, expProgress, kBarHeight};
         Renderer2DImages::Get().DrawImage("Green", glIdFilledArea, filledArea);
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

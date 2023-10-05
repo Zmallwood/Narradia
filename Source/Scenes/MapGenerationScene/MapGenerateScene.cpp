@@ -11,10 +11,12 @@ namespace Narradia
         CreateGui();
         glIdBackgroundImage = Renderer2DImages::Get().NewImage();
         glIdGenerationText = TextRenderer::Get().NewString();
-    } // Function
+    }
 
     void MapGenerateScene::Enter()
-    /*/////////////////////////*/ { currGenerationStep = GenerateSteps::CreateBlank; } // Function
+    /*/////////////////////////*/ {
+        currGenerationStep = GenerateSteps::CreateBlank;
+    }
 
     void MapGenerateScene::UpdateDerived()
     /*/////////////////////////////////*/ {
@@ -24,7 +26,7 @@ namespace Narradia
         else
             worldMapGenerator.DoGenerationStep(currGenerationStep);
         currGenerationStep = (GenerateSteps)((int)currGenerationStep + 1);
-    } // Function
+    }
 
     void MapGenerateScene::RenderDerived()
     /*/////////////////////////////////*/ {
@@ -33,13 +35,13 @@ namespace Narradia
         Renderer2DImages::Get().DrawImage("DefaultSceneBackground", glIdBackgroundImage, rectBack);
         TextRenderer::Get().DrawString(
             glIdGenerationText, "Generating terrain...", {0.5f, 0.5f}, Colors::wheat, true);
-    } // Function
+    }
 
     void MapGenerateScene::Finalize()
     /*////////////////////////////*/ {
         Log();
         if (currGenerationStep == GenerateSteps::Completed)
             SceneManager::Get().ChangeView(Scenes::Play);
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

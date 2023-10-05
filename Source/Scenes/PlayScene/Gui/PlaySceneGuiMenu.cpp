@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////
 #include "PlaySceneGuiMenu.hpp"
 #include "Core/GuiCore.hpp"
-#include "Scenes/PlayScene/Modules/PlaySceneModulesCore.hpp"
 #include "Core/Rendering.hpp"
+#include "Scenes/PlayScene/Modules/PlaySceneModulesCore.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -34,20 +34,22 @@ namespace Narradia
             /*************************************************************************/ {
                 GameEngine::Get().StopGame();
             });
-    } // Function
+    }
 
     void PlaySceneGuiMenu::Update()
     /*//////////////////////////*/ {
-        if (visible) GuiContainer::Update();
-    } // Function
+        if (visible)
+            GuiContainer::Update();
+    }
 
     void PlaySceneGuiMenu::Render() const
     /*////////////////////////////////*/ {
-        if (!visible) return;
+        if (!visible)
+            return;
         auto rect = RectangleF{0.0f, 0.0f, 1.0f, 1.0f};
         auto color = Color{0.3f, 0.6f, 1.0f, 0.5f};
         Renderer2DSolidColors::Get().FillRectangle(glIdCanvasCover, rect, color);
         GuiContainer::Render();
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

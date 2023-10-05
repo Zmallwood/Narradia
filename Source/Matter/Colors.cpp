@@ -19,7 +19,7 @@ namespace Narradia
         constexpr auto _80 = .8f;
         constexpr auto _90 = .9f;
         constexpr auto _100 = 1.f;
-    } // Namespace
+    }
 
     namespace Colors
     /*////////////*/ {
@@ -44,6 +44,6 @@ namespace Narradia
         const Color darkGray = {_25, _25, _25, _100};
         const Color alphaWhite = {_100, _100, _100, _70};
         const Color alphaBlack = {_0, _0, _0, _70};
-    } // Namespace
+    }
 }
 //////////////////////////////////////////////////////////////////////

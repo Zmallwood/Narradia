@@ -9,10 +9,11 @@ namespace Narradia
         : GuiWindow("Character", {0.15f, 0.2f, 0.17f, 0.35f})
     /*/////////////////////////////////////////////////////*/ {
         glIdExpText = TextRenderer::Get().NewString();
-    } // Function
+    }
 
     void CharacterGui::UpdateDerived()
-    /*//////////////////////////////*/ {} // Function
+    /*//////////////////////////////*/ {
+    }
 
     void CharacterGui::RenderDerived() const
     /*////////////////////////////////////*/ {
@@ -23,6 +24,6 @@ namespace Narradia
         TextRenderer::Get().DrawString(
             glIdExpText, "Experience: " + expProgress,
             GetBounds().GetPosition().Translate(0.02f, 0.05f));
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

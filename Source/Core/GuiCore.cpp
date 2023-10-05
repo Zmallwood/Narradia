@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////
 #include "GuiCore.hpp"
+#include "Rendering.hpp"
 #include "Scenes/EditorScene/EditorScene.hpp"
 #include "Scenes/PlayScene/PlayScene.hpp"
-#include "Rendering.hpp"
 #include "World/Object.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
@@ -14,14 +14,14 @@ namespace Narradia
         SizeF size;
         std::vector<std::shared_ptr<GuiButton>> guiButtons;
         std::vector<std::shared_ptr<GuiComponent>> guiComponents;
-    }; // Class
+    };
 
     GuiContainer::GuiContainer(Point2F position_, SizeF size_)
         : p(std::make_shared<Pimpl>())
     /*//////////////////////////////////////////////////////*/ {
         p->position = position_;
         p->size = size_;
-    } // Function
+    }
 
     RectangleF GuiContainer::GetBounds() const
     /*//////////////////////////////////////*/ {
@@ -29,13 +29,19 @@ namespace Narradia
     }
 
     const SizeF &GuiContainer::GetSize() const
-    /*//////////////////////////////////////*/ { return p->size; } // Function
+    /*//////////////////////////////////////*/ {
+        return p->size;
+    }
 
     const Point2F &GuiContainer::GetPosition() const
-    /*////////////////////////////////////////////*/ { return p->position; } // Function
+    /*////////////////////////////////////////////*/ {
+        return p->position;
+    }
 
     void GuiContainer::SetPosition(Point2F newPosition)
-    /*///////////////////////////////////////////////*/ { p->position = newPosition; } // Function
+    /*///////////////////////////////////////////////*/ {
+        p->position = newPosition;
+    }
 
     void GuiContainer::Update()
     /*///////////////////////*/ {
@@ -43,7 +49,7 @@ namespace Narradia
             guiButton->Update();
         for (auto &guiComponent : p->guiComponents)
             guiComponent->Update();
-    } // Function
+    }
 
     void GuiContainer::Render() const
     /*/////////////////////////////*/ {
@@ -51,7 +57,7 @@ namespace Narradia
             guiButton->Render();
         for (auto &guiComponent : p->guiComponents)
             guiComponent->Render();
-    } // Function
+    }
 
     void GuiContainer::AddGuiButton(
         const std::string_view &text, RectangleF bounds, std::function<void()> action,
@@ -64,12 +70,12 @@ namespace Narradia
         else
             newGuiButton = std::make_shared<GuiButton>(text, bounds, action, this);
         p->guiButtons.push_back(newGuiButton);
-    } // Function
+    }
 
     void GuiContainer::AddGuiComponent(std::shared_ptr<GuiComponent> newComponent)
     /*//////////////////////////////////////////////////////////////////////////*/ {
         p->guiComponents.push_back(newComponent);
-    } // Function
+    }
 
     class GuiMovableContainer::Pimpl
     /*////////////////////////////*/ {
@@ -80,7 +86,7 @@ namespace Narradia
         bool isMoving = false;
         Point2F mousePosStartMoving;
         Point2F posStartMoving;
-    }; // Function
+    };
 
     GuiMovableContainer::GuiMovableContainer(
         RectangleF relDragableArea_, Point2F position_, SizeF size_)
@@ -88,7 +94,7 @@ namespace Narradia
           p(std::make_shared<Pimpl>())
     /*////////////////////////////////////////////////////////////*/ {
         p->relDragableArea = relDragableArea_;
-    } // Function
+    }
 
     void GuiMovableContainer::Update()
     /*//////////////////////////////*/ {
@@ -125,10 +131,12 @@ namespace Narradia
                 SDL_GetTicks());
         }
         GuiContainer::Update();
-    } // Function
+    }
 
     void GuiMovableContainer::Render() const
-    /*////////////////////////////////////*/ { GuiContainer::Render(); } // Function
+    /*////////////////////////////////////*/ {
+        GuiContainer::Render();
+    }
 
     class GuiButton::Pimpl
     /*//////////////////*/ {
@@ -142,7 +150,7 @@ namespace Narradia
         RenderId rendIdLabelText;
         bool hovered;
         GuiContainer *parentContainer = nullptr;
-    }; // Class
+    };
 
     GuiButton::GuiButton(
         const std::string_view &text_, RectangleF bounds_, std::function<void()> action_,
@@ -158,7 +166,7 @@ namespace Narradia
         p->imageNameHovered = imageNameHovered_;
         p->rendIdImage = Renderer2DImages::Get().NewImage();
         p->rendIdLabelText = TextRenderer::Get().NewString();
-    } // Function
+    }
 
     void GuiButton::Update()
     /*////////////////////*/ {
@@ -180,7 +188,7 @@ namespace Narradia
                 { p->action(); },
                 1);
         }
-    } // Function
+    }
 
     void GuiButton::Render() const
     /*//////////////////////////*/ {
@@ -198,7 +206,7 @@ namespace Narradia
         Renderer2DImages::Get().DrawImage(*usedImageName, p->rendIdImage, usedBounds);
         TextRenderer::Get().DrawString(
             p->rendIdLabelText, p->text, usedBounds.Center(), Colors::wheat, true);
-    } // Function
+    }
 
     class GuiTextBox::Pimpl
     /*///////////////////*/ {
@@ -211,7 +219,7 @@ namespace Narradia
         GuiContainer *parentContainer = nullptr;
         int cursorPosition = 0;
         std::string text;
-    }; // Class
+    };
 
     GuiTextBox::GuiTextBox(
         RectangleF bounds_, GuiContainer *parentContainer_, std::string text_,
@@ -225,7 +233,7 @@ namespace Narradia
         p->glIdText = TextRenderer::Get().NewString();
         p->cursorPosition = text_.length();
         p->text = text_;
-    } // Function
+    }
 
     void GuiTextBox::Update()
     /*/////////////////////*/ {
@@ -253,7 +261,8 @@ namespace Narradia
             p->text += newTextInput;
             p->cursorPosition += newTextInput.length();
             if (newTextInput != "")
-                if (p->textChangeEvent) (*p->textChangeEvent)();
+                if (p->textChangeEvent)
+                    (*p->textChangeEvent)();
             if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_RIGHT))
             /***********************************************************/ {
                 p->cursorPosition =
@@ -267,18 +276,20 @@ namespace Narradia
                 /************************/ {
                     p->text.erase(p->cursorPosition - 1, 1);
                     p->cursorPosition--;
-                    if (p->textChangeEvent) (*p->textChangeEvent)();
+                    if (p->textChangeEvent)
+                        (*p->textChangeEvent)();
                 }
             } else if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_DELETE))
             /*******************************************************************/ {
                 if (p->cursorPosition < p->text.length())
                 /***************************************/ {
                     p->text.erase(p->cursorPosition, 1);
-                    if (p->textChangeEvent) (*p->textChangeEvent)();
+                    if (p->textChangeEvent)
+                        (*p->textChangeEvent)();
                 }
             }
         }
-    } // Function
+    }
 
     void GuiTextBox::Render() const
     /*///////////////////////////*/ {
@@ -304,24 +315,29 @@ namespace Narradia
         }
         TextRenderer::Get().DrawString(
             p->glIdText, usedText, usedBounds.GetPosition().Translate(0.005f, 0.015f));
-    } // Function
+    }
 
     std::string_view GuiTextBox::GetText()
-    /*//////////////////////////////////*/ { return p->text; } // Function
+    /*//////////////////////////////////*/ {
+        return p->text;
+    }
 
     void GuiTextBox::SetText(const std::string &newText)
-    /*////////////////////////////////////////////////*/ { p->text = newText; } // Function
+    /*////////////////////////////////////////////////*/ {
+        p->text = newText;
+    }
 
     class SceneGui::Pimpl
     /*////////////////*/ {
       public:
         std::vector<std::shared_ptr<GuiComponent>> guiComponents;
         std::vector<std::shared_ptr<GuiButton>> guiButtons;
-    }; // Class
+    };
 
     SceneGui::SceneGui()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/ {} // Function
+    /*//////////////////////////////*/ {
+    }
 
     void SceneGui::AddGuiButton(
         std::string_view text, RectangleF bounds, std::function<void()> action,
@@ -334,7 +350,7 @@ namespace Narradia
         else
             newGuiButton = std::make_shared<GuiButton>(text, bounds, action);
         p->guiButtons.push_back(newGuiButton);
-    } // Function
+    }
 
     void SceneGui::Update()
     /*//////////////////*/ {
@@ -342,7 +358,7 @@ namespace Narradia
             guiButton->Update();
         for (auto &guiComponent : p->guiComponents)
             guiComponent->Update();
-    } // Function
+    }
 
     void SceneGui::Render() const
     /*////////////////////////*/ {
@@ -356,12 +372,12 @@ namespace Narradia
         /***************************************************************/ {
             guiComponent->Render();
         }
-    } // Function
+    }
 
     void SceneGui::AddGuiComponent(std::shared_ptr<GuiComponent> newComponent)
     /*/////////////////////////////////////////////////////////////////////*/ {
         p->guiComponents.push_back(newComponent);
-    } // Function
+    }
 
     void SceneGui::RemoveGuiComponent(GuiComponent *component)
     /*/////////////////////////////////////////////////////*/ {
@@ -375,12 +391,12 @@ namespace Narradia
             }
             i++;
         }
-    } // Function
+    }
 
     auto SceneGui::GetGuiComponents() const -> const std::vector<std::shared_ptr<GuiComponent>> &
     /*////////////////////////////////////////////////////////////////////////////////////////*/ {
         return p->guiComponents;
-    } // Function
+    }
 
     class GuiWindowCloseButton::Pimpl
     /*/////////////////////////////*/ {
@@ -390,14 +406,14 @@ namespace Narradia
         GuiWindow *parentWindow;
         bool hovered = false;
         RenderId rendIdCloseButtonImg;
-    }; // Class
+    };
 
     GuiWindowCloseButton::GuiWindowCloseButton(GuiWindow *parentWindow_)
         : p(std::make_shared<Pimpl>())
     /*////////////////////////////////////////////////////////////////*/ {
         p->rendIdCloseButtonImg = Renderer2DImages::Get().NewImage();
         p->parentWindow = parentWindow_;
-    } // Function
+    }
 
     void GuiWindowCloseButton::Update()
     /*///////////////////////////////*/ {
@@ -429,7 +445,7 @@ namespace Narradia
                 },
                 SDL_GetTicks() + 100);
         }
-    } // Function
+    }
 
     void GuiWindowCloseButton::Render() const
     /*/////////////////////////////////////*/ {
@@ -439,7 +455,7 @@ namespace Narradia
         else
             Renderer2DImages::Get().DrawImage(
                 "GuiWindowCloseButton", p->rendIdCloseButtonImg, p->GetBounds());
-    } // Function
+    }
 
     RectangleF GuiWindowCloseButton::Pimpl::GetBounds() const
     /*/////////////////////////////////////////////////////*/ {
@@ -448,7 +464,7 @@ namespace Narradia
         return RectangleF{
             parentWindow->GetBounds().x + parentWindow->GetBounds().width - width - 0.005f,
             parentWindow->GetBounds().y + 0.03f / 2 - height / 2, width, height};
-    } // Function
+    }
 
     class GuiWindow::Pimpl
     /*//////////////////*/ {
@@ -463,7 +479,7 @@ namespace Narradia
         RenderId titleBarRendId;
         RenderId titleTextId;
         std::string_view backgroundImageName;
-    }; // Class
+    };
 
     GuiWindow::GuiWindow(
         std::string_view title_, RectangleF bounds_, bool destroyOnClose_,
@@ -479,41 +495,57 @@ namespace Narradia
         p->backgroundImageName = backgroundImageName_;
         p->title = title_;
         p->destroyOnClose = destroyOnClose_;
-    } // Function
+    }
 
     void GuiWindow::ToggleVisibility()
-    /*//////////////////////////////*/ { p->visible = !p->visible; } // Function
+    /*//////////////////////////////*/ {
+        p->visible = !p->visible;
+    }
 
     std::string_view GuiWindow::GetTitle()
-    /*//////////////////////////////////*/ { return p->title; } // Function
+    /*//////////////////////////////////*/ {
+        return p->title;
+    }
 
     bool GuiWindow::DestroyOnClose()
-    /*////////////////////////////*/ { return p->destroyOnClose; } // Function
+    /*////////////////////////////*/ {
+        return p->destroyOnClose;
+    }
 
     void GuiWindow::Show()
-    /*//////////////////*/ { p->visible = true; } // Function
+    /*//////////////////*/ {
+        p->visible = true;
+    }
 
     void GuiWindow::Hide()
-    /*//////////////////*/ { p->visible = false; } // Function
+    /*//////////////////*/ {
+        p->visible = false;
+    }
 
     float GuiWindow::GetMargin()
-    /*////////////////////////*/ { return Pimpl::kMargin; } // Function
+    /*////////////////////////*/ {
+        return Pimpl::kMargin;
+    }
 
     float GuiWindow::GetTitleBarHeight()
-    /*////////////////////////////////*/ { return Pimpl::kTitleBarHeight; } // Function
+    /*////////////////////////////////*/ {
+        return Pimpl::kTitleBarHeight;
+    }
 
     void GuiWindow::Update()
     /*////////////////////*/ {
-        if (!p->visible) return;
+        if (!p->visible)
+            return;
         p->closeButton.Update();
         UpdateDerived();
         GuiMovableContainer::Update();
-    } // Function
+    }
 
     void GuiWindow::Render() const
     /*//////////////////////////*/ {
         Log();
-        if (!p->visible) return;
+        if (!p->visible)
+            return;
         Log();
         Renderer2DImages::Get().DrawImage(p->backgroundImageName, p->backRendId, GetBounds());
         Log();
@@ -526,12 +558,12 @@ namespace Narradia
         Log();
         RenderDerived();
         GuiMovableContainer::Render();
-    } // Function
+    }
 
     RectangleF GuiWindow::GetAbsoluteTitleBarBounds() const
     /*///////////////////////////////////////////////////*/ {
         return {GetPosition().x, GetPosition().y, GetSize().width, Pimpl::kTitleBarHeight};
-    } // Function
+    }
 
     GuiWindowObjectSlot::GuiWindowObjectSlot(
         GuiWindow *parentWindow_, int x_, int y_, int i_, float slotWidth_,
@@ -548,7 +580,7 @@ namespace Narradia
         rendIdQtyText = TextRenderer::Get().NewString();
         rendIdTransformProgressBack = Renderer2DImages::Get().NewImage();
         rendIdTransformProgressFilled = Renderer2DImages::Get().NewImage();
-    } // Function
+    }
 
     void GuiWindowObjectSlot::Update(int offset) const
     /*//////////////////////////////////////////////*/ {
@@ -563,7 +595,7 @@ namespace Narradia
                 return;
             }
         }
-    } // Function
+    }
 
     void GuiWindowObjectSlot::Render(int offset) const
     /*//////////////////////////////////////////////*/ {
@@ -607,7 +639,7 @@ namespace Narradia
                     "Yellow", rendIdTransformProgressFilled, rectFilled);
             }
         }
-    } // Function
+    }
 
     RectangleF GuiWindowObjectSlot::GetBounds() const
     /*/////////////////////////////////////////////*/ {
@@ -625,6 +657,6 @@ namespace Narradia
     float GuiWindowObjectSlot::GetSlotHeight() const
     /*////////////////////////////////////////////*/ {
         return ConvertWidthToHeight(slotWidth);
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

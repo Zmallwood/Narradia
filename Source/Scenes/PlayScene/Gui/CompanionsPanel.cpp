@@ -1,10 +1,10 @@
 //////////////////////////////////////////////////////////////////////
 #include "CompanionsPanel.hpp"
 #include "Core/Rendering.hpp"
+#include "World/Companion.hpp"
+#include "World/MapArea.hpp"
 #include "World/Player.hpp"
 #include "World/World.hpp"
-#include "World/MapArea.hpp"
-#include "World/Companion.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -27,10 +27,12 @@ namespace Narradia
         ids_companions_stamina_filled[1] = Renderer2DImages::Get().NewImage();
         ids_companions_stamina_filled[2] = Renderer2DImages::Get().NewImage();
         ids_companions_stamina_filled[3] = Renderer2DImages::Get().NewImage();
-    } // Function
+    }
 
     void CompanionsPanel::Update()
-    /*//////////////////////////*/ { GuiMovableContainer::Update(); } // Function
+    /*//////////////////////////*/ {
+        GuiMovableContainer::Update();
+    }
 
     void CompanionsPanel::Render() const
     /*////////////////////////////////*/ {
@@ -67,6 +69,6 @@ namespace Narradia
             ++it;
         }
         GuiMovableContainer::Render();
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

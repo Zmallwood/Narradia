@@ -1,21 +1,21 @@
 //////////////////////////////////////////////////////////////////////
 #include "InteractionMenu.hpp"
-#include "Scenes/PlayScene/Gui/InventoryGui.hpp"
-#include "Scenes/Shared/MouseRotation.hpp"
-#include "Scenes/PlayScene/ObjectHandling.hpp"
-#include "Scenes/PlayScene/Gui/OpenContainerGui.hpp"
-#include "Scenes/PlayScene/PlayScene.hpp"
-#include "PlaySceneModulesCore.hpp"
 #include "Core/Rendering.hpp"
+#include "PlaySceneModulesCore.hpp"
+#include "Scenes/PlayScene/Gui/InventoryGui.hpp"
+#include "Scenes/PlayScene/Gui/OpenContainerGui.hpp"
 #include "Scenes/PlayScene/Gui/SplitStackGui.hpp"
+#include "Scenes/PlayScene/ObjectHandling.hpp"
+#include "Scenes/PlayScene/PlayScene.hpp"
+#include "Scenes/Shared/MouseRotation.hpp"
 #include "Scenes/Shared/TileHovering.hpp"
-#include "World/Object.hpp"
-#include "World/Player.hpp"
-#include "World/ObjectsCollection.hpp"
-#include "World/World.hpp"
 #include "World/MapArea.hpp"
-#include "World/Tile.hpp"
+#include "World/Object.hpp"
 #include "World/ObjectBehaviourList.hpp"
+#include "World/ObjectsCollection.hpp"
+#include "World/Player.hpp"
+#include "World/Tile.hpp"
+#include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -29,7 +29,7 @@ namespace Narradia
         RectangleF bounds;
         bool hovered = false;
         Object *targeted_object = nullptr;
-    }; // Class
+    };
 
     InteractionMenuEntry::InteractionMenuEntry(
         std::string_view init_label, std::function<void(Object *&)> init_action)
@@ -38,60 +38,76 @@ namespace Narradia
         p->label = init_label;
         p->action = init_action;
         p->id_label = TextRenderer::Get().NewString();
-    } // Function
+    }
 
     void InteractionMenuEntry::Render()
     /*////////////////////////////*/ {
         TextRenderer::Get().DrawString(
             p->id_label, p->label, p->bounds.GetPosition().Translate(GetMarginX(), GetMarginY()));
         ResetHovering();
-    } // Function
+    }
 
     auto InteractionMenuEntry::Copy() -> InteractionMenuEntry
-    /*///////////////////////////////////////////////*/ { return *this; } // Function
+    /*///////////////////////////////////////////////*/ {
+        return *this;
+    }
 
     RectangleF &InteractionMenuEntry::GetBounds()
-    /*//////////////////////////////////////*/ { return p->bounds; } // Function
+    /*//////////////////////////////////////*/ {
+        return p->bounds;
+    }
 
     auto InteractionMenuEntry::SetBounds(RectangleF new_bounds) -> InteractionMenuEntry
     /*/////////////////////////////////////////////////////////////////////////*/ {
         p->bounds = new_bounds;
         return *this;
-    } // Function
+    }
 
     auto InteractionMenuEntry::SetTargetObject(Object *object) -> InteractionMenuEntry
     /*////////////////////////////////////////////////////////////////////////*/ {
         p->targeted_object = object;
         return *this;
-    } // Function
+    }
 
     void InteractionMenuEntry::MakeHovered()
-    /*/////////////////////////////////*/ { p->hovered = true; } // Function
+    /*/////////////////////////////////*/ {
+        p->hovered = true;
+    }
 
     bool InteractionMenuEntry::IsHovered()
-    /*///////////////////////////////*/ { return p->hovered; } // Function
+    /*///////////////////////////////*/ {
+        return p->hovered;
+    }
 
     void InteractionMenuEntry::ResetHovering()
-    /*///////////////////////////////////*/ { p->hovered = false; } // Function
+    /*///////////////////////////////////*/ {
+        p->hovered = false;
+    }
 
     Object *&InteractionMenuEntry::GetTargetObject()
-    /*/////////////////////////////////////////*/ { return p->targeted_object; } // Function
+    /*/////////////////////////////////////////*/ {
+        return p->targeted_object;
+    }
 
     float InteractionMenuEntry::GetMarginX()
-    /*/////////////////////////////////*/ { return Pimpl::k_margin_x; } // Function
+    /*/////////////////////////////////*/ {
+        return Pimpl::k_margin_x;
+    }
 
     float InteractionMenuEntry::GetMarginY()
     /*/////////////////////////////////*/ {
         return ConvertWidthToHeight(Pimpl::k_margin_x);
-    } // Function
+    }
 
     const std::string_view &InteractionMenuEntry::GetLabel()
-    /*/////////////////////////////////////////////////*/ { return p->label; } // Function
+    /*/////////////////////////////////////////////////*/ {
+        return p->label;
+    }
 
     const std::function<void(Object *&)> &InteractionMenuEntry::GetAction()
     /*////////////////////////////////////////////////////////////////*/ {
         return p->action;
-    } // Function
+    }
 
     class InteractionMenu::Pimpl
     /*/////////////////////*/ {
@@ -108,7 +124,7 @@ namespace Narradia
         RenderId id_hovered_entry_back;
         Point2 clicked_tile = {-1, -1};
         int ticks_closed = SDL_GetTicks();
-    }; // Class
+    };
 
     InteractionMenu::InteractionMenu()
         : p(std::make_shared<Pimpl>())
@@ -117,10 +133,12 @@ namespace Narradia
         p->id_hovered_entry_back = Renderer2DSolidColors::Get().NewRectangle();
         p->id_menu_title = TextRenderer::Get().NewString();
         CreateAvailableActions();
-    } // Function
+    }
 
     float InteractionMenu::GetMarginY()
-    /*////////////////////////////*/ { return ConvertWidthToHeight(Pimpl::k_margin_x); } // Function
+    /*////////////////////////////*/ {
+        return ConvertWidthToHeight(Pimpl::k_margin_x);
+    }
 
     void InteractionMenu::CreateAvailableActions()
     /*///////////////////////////////////////*/ {
@@ -129,7 +147,7 @@ namespace Narradia
 #include "MenuActions/ObjectActions.inc.cpp"
 #include "MenuActions/TileActions.inc.cpp"
         };
-    } // Function
+    }
 
     void InteractionMenu::Update()
     /*///////////////////////*/ {
@@ -177,13 +195,13 @@ namespace Narradia
                 },
                 3, 0, true);
         }
-    } // Function
+    }
 
     void InteractionMenu::CloseMenu()
     /*//////////////////////////*/ {
         p->ticks_closed = SDL_GetTicks();
         p->shown = false;
-    } // Function
+    }
 
     void InteractionMenu::AddEntryToMenu(std::string_view actionName, Object *object)
     /*//////////////////////////////////////////////////////////////////////////*/ {
@@ -197,7 +215,7 @@ namespace Narradia
                                               .Copy()
                                               .SetBounds(entry_bounds)
                                               .SetTargetObject(object));
-    } // Function
+    }
 
     void InteractionMenu::ConstructMenu()
     /*//////////////////////////////*/ {
@@ -208,7 +226,8 @@ namespace Narradia
         auto map_area = World::Get().GetMapAreaAtZLevel(player_world_area_position.z);
         auto tile = map_area->GetTile(block_tile_hovering->hoveredTile);
         auto gui_window_inventory = InventoryGui::GetPointer();
-        if (tile == nullptr && GuiWindowObjectSlot::hoveredObject == nullptr) return;
+        if (tile == nullptr && GuiWindowObjectSlot::hoveredObject == nullptr)
+            return;
         if (tile->GetMob() == nullptr || GuiWindowObjectSlot::hoveredObject)
         /******************************************************************/ {
             p->shown = true;
@@ -219,7 +238,8 @@ namespace Narradia
             AddEntryToMenu("MineCaveEntrance");
             auto fn_create_entries_for_object = [&](Object *object)
             /*****************************************************/ {
-                if (!object) return;
+                if (!object)
+                    return;
                 if (object->GetObjectType() == Hash("ObjectRedApple") ||
                     object->GetObjectType() == Hash("ObjectCookedFi.hpp"))
                 /********************************************************/ {
@@ -256,7 +276,8 @@ namespace Narradia
                 /***********************************************************************/ {
                     AddEntryToMenu("OpenContainer", object);
                 }
-                if (object->GetQuantity() > 1) AddEntryToMenu("SplitStack", object);
+                if (object->GetQuantity() > 1)
+                    AddEntryToMenu("SplitStack", object);
             };
             if (GuiWindowObjectSlot::hoveredObject)
             /*************************************/ {
@@ -280,18 +301,21 @@ namespace Narradia
                 AddEntryToMenu("CreateWoodWallS");
                 AddEntryToMenu("CreateWoodWallW");
             }
-            if (tile->GetGroundType() != Hash("GroundWater")) AddEntryToMenu("SetWoodRoof");
-            if (tile->GetGroundType() == Hash("GroundWater")) AddEntryToMenu("Fish");
+            if (tile->GetGroundType() != Hash("GroundWater"))
+                AddEntryToMenu("SetWoodRoof");
+            if (tile->GetGroundType() == Hash("GroundWater"))
+                AddEntryToMenu("Fish");
             p->clicked_tile = block_tile_hovering->hoveredTile;
         } else
         /****/ {
             CloseMenu();
         }
-    } // Function
+    }
 
     void InteractionMenu::Render()
     /*///////////////////////*/ {
-        if (!p->shown) return;
+        if (!p->shown)
+            return;
         auto rectangle = RectangleF{
             p->position.x, p->position.y, Pimpl::k_menu_width,
             (p->current_menu_entries.size() + 1) * (Pimpl::k_line_height + GetMarginY())};
@@ -310,9 +334,11 @@ namespace Narradia
             }
             entry.Render();
         }
-    } // Function
+    }
 
     int InteractionMenu::GetTicksClosed()
-    /*//////////////////////////////*/ { return p->ticks_closed; } // Function
+    /*//////////////////////////////*/ {
+        return p->ticks_closed;
+    }
 }
 //////////////////////////////////////////////////////////////////////

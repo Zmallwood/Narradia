@@ -1,10 +1,10 @@
 //////////////////////////////////////////////////////////////////////
 #include "MobMovement.hpp"
-#include "World/Player.hpp"
-#include "World/World.hpp"
 #include "World/MapArea.hpp"
 #include "World/Mob.hpp"
+#include "World/Player.hpp"
 #include "World/Tile.hpp"
+#include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -12,10 +12,12 @@ namespace Narradia
     /*//////////////////////*/ {
         Log();
         auto player_world_area_position = Player::Get().GetWorldAreaPos();
-        if (nullptr == World::GetPointer()) return;
+        if (nullptr == World::GetPointer())
+            return;
         Log();
         auto map_area = World::Get().GetMapAreaAtZLevel(player_world_area_position.z);
-        if (nullptr == map_area) return;
+        if (nullptr == map_area)
+            return;
         for (auto it = map_area->GetMobsMirror().cbegin(); it != map_area->GetMobsMirror().cend();)
         /*****************************************************************************************/
         {
@@ -52,13 +54,16 @@ namespace Narradia
                 auto abs_delta_y = std::abs(delta_y);
                 auto norm_x = 0;
                 auto norm_y = 0;
-                if (delta_x) norm_x = delta_x / abs_delta_x;
-                if (delta_y) norm_y = delta_y / abs_delta_y;
+                if (delta_x)
+                    norm_x = delta_x / abs_delta_x;
+                if (delta_y)
+                    norm_y = delta_y / abs_delta_y;
                 auto dx = norm_x;
                 auto dy = norm_y;
                 auto new_x = coordinate.x + dx;
                 auto new_y = coordinate.y + dy;
-                if (Point2{new_x, new_y} == mob->GetDestination()) mob->ClearDestination();
+                if (Point2{new_x, new_y} == mob->GetDestination())
+                    mob->ClearDestination();
                 if (new_x != coordinate.x || new_y != coordinate.y)
                 /*************************************************/ {
                     if (MapArea::IsInsideMap({new_x, new_y}))
@@ -96,6 +101,6 @@ namespace Narradia
             }
             ++it;
         }
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

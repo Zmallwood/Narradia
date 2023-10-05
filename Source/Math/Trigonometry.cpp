@@ -6,11 +6,11 @@ namespace Narradia
     float SinDegrees(float angleDeg)
     /*////////////////////////////*/ {
         return sinf(angleDeg * static_cast<float>(M_PI) / 180.0f);
-    } // Function
+    }
 
     float CosDegrees(float angleDeg)
     /*////////////////////////////*/ {
         return cosf(angleDeg * static_cast<float>(M_PI) / 180.0f);
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

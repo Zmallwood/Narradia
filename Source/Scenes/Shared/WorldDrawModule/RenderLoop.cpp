@@ -3,19 +3,20 @@
 #include "Camera.hpp"
 #include "Configuration.hpp"
 #include "Core/Rendering.hpp"
-#include "World/Player.hpp"
-#include "World/World.hpp"
 #include "World/MapArea.hpp"
-#include "World/Tile.hpp"
-#include "World/ObjectsCollection.hpp"
 #include "World/Object.hpp"
 #include "World/ObjectBehaviourList.hpp"
+#include "World/ObjectsCollection.hpp"
+#include "World/Player.hpp"
+#include "World/Tile.hpp"
+#include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
     RenderLoop::RenderLoop(std::function<void()> action_)
         : action(action_)
-    /*/////////////////////////////////////////////////*/ {} // Function
+    /*/////////////////////////////////////////////////*/ {
+    }
 
     void RenderLoop::operator()()
     /*/////////////////////////*/ {
@@ -55,9 +56,11 @@ namespace Narradia
                 currY = y;
                 Point2 tileCoord = {playerTileCoord.x + x, playerTileCoord.y + y};
                 currTileCoord = tileCoord;
-                if (!MapArea::IsInsideMap(tileCoord.x, tileCoord.y)) continue;
+                if (!MapArea::IsInsideMap(tileCoord.x, tileCoord.y))
+                    continue;
                 const auto distSquared = x * x + y * y;
-                if (distSquared > renderRadius * renderRadius) continue;
+                if (distSquared > renderRadius * renderRadius)
+                    continue;
                 currDistSquared = distSquared;
                 const auto tile = mapArea->GetTile(tileCoord.x, tileCoord.y);
                 currTile = tile;
@@ -214,6 +217,6 @@ namespace Narradia
                 action();
             }
         }
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

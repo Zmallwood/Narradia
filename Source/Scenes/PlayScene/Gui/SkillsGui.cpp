@@ -15,7 +15,7 @@ namespace Narradia
             glIdsSkillAddPointButton.push_back(Renderer2DImages::Get().NewImage());
         }
         glIdAvailablePoints = TextRenderer::Get().NewString();
-    } // Function
+    }
 
     void SkillsGui::UpdateDerived()
     /*///////////////////////////*/ {
@@ -41,7 +41,7 @@ namespace Narradia
             }
             i++;
         }
-    } // Function
+    }
 
     void SkillsGui::RenderDerived() const
     /*/////////////////////////////////*/ {
@@ -81,6 +81,6 @@ namespace Narradia
         TextRenderer::Get().DrawString(
             glIdAvailablePoints, availPointsText,
             GetPosition().Translate(0.01f, 0.07f + i * 0.03f));
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

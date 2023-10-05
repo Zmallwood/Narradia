@@ -2,15 +2,15 @@
 #include "SubDraws.hpp"
 #include "Camera.hpp"
 #include "Configuration.hpp"
-#include "RenderLoop.hpp"
 #include "Core/Rendering.hpp"
+#include "RenderLoop.hpp"
 #include "Scenes/Shared/TileHovering.hpp"
 #include "Utilities.hpp"
-#include "World/Tile.hpp"
 #include "World/Companion.hpp"
 #include "World/MapArea.hpp"
 #include "World/Mob.hpp"
 #include "World/Player.hpp"
+#include "World/Tile.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -19,11 +19,12 @@ namespace Narradia
       public:
         void DrawExclamationMark();
         std::map<int, std::map<int, RenderId>> idsCompanionBboardExlamationMarks;
-    }; // Class
+    };
 
     SubDrawCompanion::SubDrawCompanion()
         : p(std::make_shared<Pimpl>())
-    /*////////////////////////////////*/ {} // Function
+    /*////////////////////////////////*/ {
+    }
 
     void SubDrawCompanion::Create()
     /*///////////////////////////*/ {
@@ -35,7 +36,7 @@ namespace Narradia
                     RendererBillboardImages::Get().NewBillboardImage();
             }
         }
-    } // Function
+    }
 
     void SubDrawCompanion::DrawCompanion()
     /*//////////////////////////////////*/ {
@@ -71,8 +72,10 @@ namespace Narradia
             auto absDeltaY = std::abs(deltaY);
             auto normX = 0;
             auto normY = 0;
-            if (deltaX) normX = deltaX / absDeltaX;
-            if (deltaY) normY = deltaY / absDeltaY;
+            if (deltaX)
+                normX = deltaX / absDeltaX;
+            if (deltaY)
+                normY = deltaY / absDeltaY;
             auto facingAngle = -90.0f - std::atan2(normY, deltaX) * 180.0f / M_PI;
             RendererModels::Get().DrawModel(
                 Hash("Shadow"), 0,
@@ -88,13 +91,14 @@ namespace Narradia
                 facingAngle, 0.6f, 1.0f);
             p->DrawExclamationMark();
         }
-    } // Function
+    }
 
     void SubDrawCompanion::Pimpl::DrawExclamationMark()
     /*///////////////////////////////////////////////*/ {
         auto tile = RenderLoop::currTile;
         auto companion = tile->GetCompanion();
-        if (companion->GetStamina() > 0) return;
+        if (companion->GetStamina() > 0)
+            return;
         auto x = RenderLoop::currX;
         auto y = RenderLoop::currY;
         auto v0 = RenderLoop::currVertTile.v0;
@@ -115,24 +119,25 @@ namespace Narradia
         RendererBillboardImages::Get().DrawBillboardImage(
             Hash("ExclamationMark"), idsCompanionBboardExlamationMarks[x][y], exlamationMarkPos,
             exlamationMarkBounds, exlamationMarkSize);
-    } // Function
+    }
 
     class SubDrawGround::Pimpl
     /*//////////////////////*/ {
       public:
         std::map<int, std::map<int, RenderId>> idsTileLayers;
-    }; // Class
+    };
 
     SubDrawGround::SubDrawGround()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/ {} // Function
+    /*//////////////////////////////*/ {
+    }
 
     void SubDrawGround::Create()
     /*////////////////////////*/ {
         for (auto y = 0; y < MapArea::GetMapSize().height; y++)
             for (auto x = 0; x < MapArea::GetMapSize().width; x++)
                 p->idsTileLayers[x][y] = RendererTiles::Get().NewTile();
-    } // Function
+    }
 
     void SubDrawGround::DrawGround(bool doDrawTerritoryBorders)
     /*///////////////////////////////////////////////////////*/ {
@@ -216,7 +221,7 @@ namespace Narradia
                     v0, v1, v2, v3, normal00, normal10, normal11, normal01);
             }
         }
-    } // Function
+    }
 
     class SubDrawMob::Pimpl
     /*///////////////////*/ {
@@ -228,37 +233,41 @@ namespace Narradia
         void IfCaseDrawMobLabel();
         std::map<int, std::map<int, RenderId>> idsBillboardTexts;
         const int kShowHitEffectDuration = 600;
-    }; // Class
+    };
 
     SubDrawMob::SubDrawMob()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/ {} // Function
+    /*//////////////////////////////*/ {
+    }
 
     void SubDrawMob::Create()
-    /*/////////////////////*/ { p->InitializeIds(); } // Function
+    /*/////////////////////*/ {
+        p->InitializeIds();
+    }
 
     void SubDrawMob::DrawMob()
     /*//////////////////////*/ {
         auto tile = RenderLoop::currTile;
         auto mob = tile->GetMob();
-        if (nullptr == mob) return;
+        if (nullptr == mob)
+            return;
         p->DrawShadow();
         p->DrawMobModel();
         p->IfCaseDrawMobLabel();
-    } // Function
+    }
 
     void SubDrawMob::Pimpl::InitializeIds()
     /*///////////////////////////////////*/ {
         for (auto x = -kMaxRenderRadius; x < kMaxRenderRadius; x++)
             for (auto y = -kMaxRenderRadius; y < kMaxRenderRadius; y++)
                 idsBillboardTexts[x][y] = TextRenderer::Get().NewBillboardString();
-    } // Function
+    }
 
     int SubDrawMob::Pimpl::GetAnimationValue()
     /*//////////////////////////////////////*/ {
         auto tileCoord = RenderLoop::currTileCoord;
         return tileCoord.x * tileCoord.y * 10 + SDL_GetTicks();
-    } // Function
+    }
 
     void SubDrawMob::Pimpl::DrawShadow()
     /*////////////////////////////////*/ {
@@ -281,7 +290,7 @@ namespace Narradia
             {x0 + kTileSize / 2 + minorMovementOffset.x * kTileSize, mobElev + 0.05f * kTileSize,
              z0 + kTileSize / 2 + minorMovementOffset.y * kTileSize},
             0.0f, 0.6f);
-    } // Function
+    }
 
     void SubDrawMob::Pimpl::DrawMobModel()
     /*//////////////////////////////////*/ {
@@ -297,8 +306,10 @@ namespace Narradia
         auto absDeltaY = std::abs(deltaY);
         auto normX = 0;
         auto normY = 0;
-        if (deltaX) normX = deltaX / absDeltaX;
-        if (deltaY) normY = deltaY / absDeltaY;
+        if (deltaX)
+            normX = deltaX / absDeltaX;
+        if (deltaY)
+            normY = deltaY / absDeltaY;
         auto facingAngle = -90.0f - std::atan2(normY, deltaX) * 180.0f / M_PI;
         auto elev00 = RenderLoop::currElev00;
         auto elev10 = RenderLoop::currElev10;
@@ -324,7 +335,7 @@ namespace Narradia
                  z0 + kTileSize / 2 + minorMovementOffset.y * kTileSize},
                 facingAngle, 0.5f, 1.0f);
         }
-    } // Function
+    }
 
     void SubDrawMob::Pimpl::IfCaseDrawMobLabel()
     /*////////////////////////////////////////*/ {
@@ -347,7 +358,7 @@ namespace Narradia
                 idsBillboardTexts[RenderLoop::currX][RenderLoop::currY], "Mob Lvl. 1",
                 billboardTextPos, billboardSize);
         }
-    } // Function
+    }
 
     class SubDrawPlayer::Pimpl
     /*//////////////////////*/ {
@@ -355,16 +366,17 @@ namespace Narradia
         void DrawLabel();
         float GetPlayerElevation();
         RenderId idBillboardTextPlayerName;
-    }; // Class
+    };
 
     SubDrawPlayer::SubDrawPlayer()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/ {} // Function
+    /*//////////////////////////////*/ {
+    }
 
     void SubDrawPlayer::Create()
     /*////////////////////////*/ {
         p->idBillboardTextPlayerName = TextRenderer::Get().NewBillboardString();
-    } // Function
+    }
 
     void SubDrawPlayer::DrawPlayer()
     /*////////////////////////////*/ {
@@ -402,7 +414,7 @@ namespace Narradia
                 0.6f);
         }
         p->DrawLabel();
-    } // Function
+    }
 
     void SubDrawPlayer::Pimpl::DrawLabel()
     /*//////////////////////////////////*/ {
@@ -411,11 +423,10 @@ namespace Narradia
         auto billboardPos = pos.Translate(0.0f, billboardYPos, 0.0f);
         auto billboardTextPos = Camera::Get().MoveCloserToCamera(billboardPos, 0.01f);
         auto billboardSize = SizeF{0.9f, 0.03f};
-        auto playerText =
-            "Player";
+        auto playerText = "Player";
         TextRenderer::Get().DrawBillboardString(
             idBillboardTextPlayerName, playerText, billboardTextPos, billboardSize);
-    } // Function
+    }
 
     float SubDrawPlayer::Pimpl::GetPlayerElevation()
     /*////////////////////////////////////////////*/ {
@@ -432,7 +443,7 @@ namespace Narradia
         auto playerElev = tileAvgElev * kElevAmount + playerTileDx * elevDx * kElevAmount +
                           playerTileDy * elevDy * kElevAmount;
         return playerElev;
-    } // Function
+    }
 
     void SubDrawSky::DrawSky()
     /*//////////////////////*/ {
@@ -442,6 +453,6 @@ namespace Narradia
         else
             glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

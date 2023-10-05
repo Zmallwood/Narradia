@@ -1,22 +1,22 @@
 //////////////////////////////////////////////////////////////////////
 #include "TileHovering.hpp"
-#include "WorldDrawModule/Camera.hpp"
-#include "Scenes/Shared/WorldDrawModule/Configuration.hpp"
 #include "Core/Rendering.hpp"
-#include "WorldDrawModule/WorldDraw.hpp"
-#include "World/Player.hpp"
-#include "World/World.hpp"
+#include "Scenes/Shared/WorldDrawModule/Configuration.hpp"
 #include "World/MapArea.hpp"
-#include "World/Tile.hpp"
 #include "World/Object.hpp"
 #include "World/ObjectBehaviourList.hpp"
+#include "World/Player.hpp"
+#include "World/Tile.hpp"
+#include "World/World.hpp"
+#include "WorldDrawModule/Camera.hpp"
+#include "WorldDrawModule/WorldDraw.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
     TileHovering::TileHovering()
     /*////////////////////////*/ {
         glIdTextHoveredObject = TextRenderer::Get().NewString();
-    } // Function
+    }
 
     void TileHovering::Update()
     /*///////////////////////*/ {
@@ -51,7 +51,8 @@ namespace Narradia
         /********************************************/ {
             auto mapX = playerXMajor + x;
             auto mapY = playerYMajor + y;
-            if (!MapArea::IsInsideMap({mapX, mapY})) return false;
+            if (!MapArea::IsInsideMap({mapX, mapY}))
+                return false;
             auto tileCoord = Point2{mapX, mapY};
             auto tile = mapArea->GetTile(tileCoord);
             auto elev00 = static_cast<float>(tile->GetElevation());
@@ -62,9 +63,12 @@ namespace Narradia
             auto coord10 = tileCoord.Translate(1, 0);
             auto coord11 = tileCoord.Translate(1, 1);
             auto coord01 = tileCoord.Translate(0, 1);
-            if (MapArea::IsInsideMap(coord10)) elev10 = mapArea->GetTile(coord10)->GetElevation();
-            if (MapArea::IsInsideMap(coord11)) elev11 = mapArea->GetTile(coord11)->GetElevation();
-            if (MapArea::IsInsideMap(coord01)) elev01 = mapArea->GetTile(coord01)->GetElevation();
+            if (MapArea::IsInsideMap(coord10))
+                elev10 = mapArea->GetTile(coord10)->GetElevation();
+            if (MapArea::IsInsideMap(coord11))
+                elev11 = mapArea->GetTile(coord11)->GetElevation();
+            if (MapArea::IsInsideMap(coord01))
+                elev01 = mapArea->GetTile(coord01)->GetElevation();
             auto x0 = tileCoord.x * tileSize;
             auto y0 = elev00 * elevAmount;
             auto z0 = tileCoord.y * tileSize;
@@ -88,18 +92,21 @@ namespace Narradia
         /*****************************************************************************/ {
             for (int x = -(columnsCount - 1) / 2; x < (columnsCount - 1) / 2 && !tileFound; x++)
             /******************************************************************************/ {
-                if (iterationFunc(x, y)) return;
+                if (iterationFunc(x, y))
+                    return;
             }
         }
-    } // Function
+    }
 
     void TileHovering::Render()
     /*///////////////////////*/ {
-        if (hoveredObjectHash == 0) return;
-        if (false == ObjectBehaviourList::Get().HasBehaviourData(hoveredObjectHash)) return;
+        if (hoveredObjectHash == 0)
+            return;
+        if (false == ObjectBehaviourList::Get().HasBehaviourData(hoveredObjectHash))
+            return;
         TextRenderer::Get().DrawString(
             glIdTextHoveredObject, ObjectBehaviourList::Get().GetLabel(hoveredObjectHash).data(),
             GetMousePositionF().Translate(0.02f, 0.01f));
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

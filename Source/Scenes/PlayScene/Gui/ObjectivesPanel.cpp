@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////
 #include "ObjectivesPanel.hpp"
 #include "Core/Rendering.hpp"
-#include "World/Player.hpp"
 #include "World/MapArea.hpp"
+#include "World/Player.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -16,10 +16,12 @@ namespace Narradia
         glIdProgressText = TextRenderer::Get().NewString();
         glIdFinalObjectiveText =
             TextRenderer::Get().NewMultiLineString(5, kSize.width - 2 * 0.014f);
-    } // Function
+    }
 
     void ObjectivesPanel::Update()
-    /*//////////////////////////*/ { GuiMovableContainer::Update(); } // Function
+    /*//////////////////////////*/ {
+        GuiMovableContainer::Update();
+    }
 
     void ObjectivesPanel::Render() const
     /*////////////////////////////////*/ {
@@ -43,6 +45,6 @@ namespace Narradia
             "it.",
             GetPosition().Translate(0.014f, 0.12f));
         GuiMovableContainer::Render();
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

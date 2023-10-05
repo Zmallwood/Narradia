@@ -39,7 +39,7 @@ namespace Narradia
             "", {0.15f, 0.42f, 0.015f, ConvertWidthToHeight(0.015f)}, [&] { page++; },
             "GuiRightArrow", "GuiRightArrow");
         idSelectedSlotFrame = Renderer2DImages::Get().NewImage();
-    } // Function
+    }
 
     void RoofBrowserGui::UpdateDerived()
     /*////////////////////////////////*/ {
@@ -75,7 +75,7 @@ namespace Narradia
                 }
             }
         }
-    } // Function
+    }
 
     void RoofBrowserGui::RenderDerived() const
     /*//////////////////////////////////////*/ {
@@ -99,6 +99,6 @@ namespace Narradia
             bottomBarHeight};
         Renderer2DImages::Get().DrawImage(
             "GuiWindowInvBottomBarBg", bottomBarRendId, bottomBarBounds);
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

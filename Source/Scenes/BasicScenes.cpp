@@ -12,7 +12,7 @@ namespace Narradia
         RenderId rendIdBackImage;
         RenderId rendIdLogoImage;
         RenderId rendIdStartText;
-    }; // Class
+    };
 
     IntroScene::IntroScene()
         : p(std::make_shared<Pimpl>())
@@ -22,7 +22,7 @@ namespace Narradia
         p->rendIdLogoImage = Renderer2DImages::Get().NewImage();
         p->rendIdStartText = TextRenderer::Get().NewString();
         Audio::Get().PlayMusic("ForestSounds");
-    } // Function
+    }
 
     void IntroScene::UpdateDerived()
     /*///////////////////////////*/ {
@@ -38,7 +38,7 @@ namespace Narradia
             0);
         if (KeyboardInput::Get().AnyKeyHasBeenFired())
             SceneManager::Get().ChangeView(Scenes::MainMenu);
-    } // Function
+    }
 
     void IntroScene::RenderDerived()
     /*///////////////////////////*/ {
@@ -54,7 +54,7 @@ namespace Narradia
             TextRenderer::Get().DrawString(
                 p->rendIdStartText, "Press to Start", {0.5f, 0.5f}, Colors::wheat, true);
         Log();
-    } // Function
+    }
 
     class MainMenuScene::Pimpl
     /*/////////////////////*/ {
@@ -63,7 +63,7 @@ namespace Narradia
         const RectangleF rectLogo = {0.4f, 0.1f, 0.2f, 0.05f};
         RenderId glIdBackImage;
         RenderId glIdLogoImage;
-    }; // Class
+    };
 
     MainMenuScene::MainMenuScene()
         : p(std::make_shared<Pimpl>())
@@ -81,17 +81,19 @@ namespace Narradia
             "Exit", {0.45f, 0.54f, 0.1f, 0.05f}, [=]() { GameEngine::Get().StopGame(); });
         p->glIdBackImage = Renderer2DImages::Get().NewImage();
         p->glIdLogoImage = Renderer2DImages::Get().NewImage();
-    } // Function
+    }
 
     void MainMenuScene::UpdateDerived()
-    /*//////////////////////////////*/ { Log(); } // Function
+    /*//////////////////////////////*/ {
+        Log();
+    }
 
     void MainMenuScene::RenderDerived()
     /*//////////////////////////////*/ {
         Log();
         Renderer2DImages::Get().DrawImage("DefaultSceneBackground", p->glIdBackImage, p->rectBack);
         Renderer2DImages::Get().DrawImage("NarradiaLogo", p->glIdLogoImage, p->rectLogo);
-    } // Function
+    }
 
     class MapTypeSelectionScene::Pimpl
     /*/////////////////////////////*/ {
@@ -100,7 +102,7 @@ namespace Narradia
         const RectangleF rectLogo = {0.4f, 0.1f, 0.2f, 0.05f};
         RenderId glIdBackImage;
         RenderId glIdLogoImage;
-    }; // Class
+    };
 
     MapTypeSelectionScene::MapTypeSelectionScene()
         : p(std::make_shared<Pimpl>())
@@ -118,17 +120,19 @@ namespace Narradia
         });
         p->glIdBackImage = Renderer2DImages::Get().NewImage();
         p->glIdLogoImage = Renderer2DImages::Get().NewImage();
-    } // Function
+    }
 
     void MapTypeSelectionScene::UpdateDerived()
-    /*//////////////////////////////////////*/ { Log(); } // Function
+    /*//////////////////////////////////////*/ {
+        Log();
+    }
 
     void MapTypeSelectionScene::RenderDerived()
     /*//////////////////////////////////////*/ {
         Log();
         Renderer2DImages::Get().DrawImage("DefaultSceneBackground", p->glIdBackImage, p->rectBack);
         Renderer2DImages::Get().DrawImage("NarradiaLogo", p->glIdLogoImage, p->rectLogo);
-    } // Function
+    }
 
     UserMapSelectionScene::UserMapSelectionScene()
     /*////////////////////////////////////////*/ {
@@ -144,15 +148,16 @@ namespace Narradia
         GetSceneGui()->AddGuiButton("Return", {0.02f, 0.02f, 0.04f, 0.04f}, [] {
             SceneManager::Get().ChangeView(Scenes::MapTypeSelection);
         });
-    } // Function
+    }
 
     void UserMapSelectionScene::UpdateDerived()
-    /*//////////////////////////////////////*/ {} // Function
+    /*//////////////////////////////////////*/ {
+    }
 
     void UserMapSelectionScene::RenderDerived()
     /*//////////////////////////////////////*/ {
         auto rectBack = RectangleF{0.0f, 0.0f, 1.0f, 1.0f};
         Renderer2DImages::Get().DrawImage("DefaultSceneBackground", glIdBackgroundImage, rectBack);
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

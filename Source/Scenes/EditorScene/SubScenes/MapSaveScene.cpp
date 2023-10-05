@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////
 #include "MapSaveScene.hpp"
 #include "Core/GuiCore.hpp"
-#include "Scenes/Shared/MapFilesIO.hpp"
 #include "Core/Rendering.hpp"
+#include "Scenes/Shared/MapFilesIO.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -19,15 +19,16 @@ namespace Narradia
         GetSceneGui()->AddGuiButton("Return", {0.02f, 0.02f, 0.04f, 0.04f}, [] {
             SceneManager::Get().ChangeView(Scenes::Editor);
         });
-    } // Function
+    }
 
     void MapSaveScene::UpdateDerived()
-    /*/////////////////////////////*/ {} // Function
+    /*/////////////////////////////*/ {
+    }
 
     void MapSaveScene::RenderDerived()
     /*/////////////////////////////*/ {
         auto rectBack = RectangleF{0.0f, 0.0f, 1.0f, 1.0f};
         Renderer2DImages::Get().DrawImage("DefaultSceneBackground", glIdBackgroundImage, rectBack);
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

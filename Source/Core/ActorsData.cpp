@@ -15,7 +15,7 @@ namespace Narradia
                 return;
             }
         }
-    } // Function
+    }
 
     void Inventory::Add(std::shared_ptr<Object> object)
     /*///////////////////////////////////////////////*/ {
@@ -27,14 +27,14 @@ namespace Narradia
                 return;
             }
         }
-    } // Function
+    }
 
     bool Inventory::ContainsObjectOfType(std::string_view objectType)
     /*/////////////////////////////////////////////////////////////*/ {
         for (auto &entry : objects)
             if (entry.second->GetObjectType() == Hash(objectType)) return true;
         return false;
-    } // Function
+    }
 
     void Inventory::RemoveObjectOfType(std::string_view objectType)
     /*///////////////////////////////////////////////////////////*/ {
@@ -46,7 +46,7 @@ namespace Narradia
                 return;
             }
         }
-    } // Function
+    }
 
     void ActorData::Update()
     /*////////////////////*/ {
@@ -65,6 +65,6 @@ namespace Narradia
         skills["CriticalDamage"] = Skill{"Critical Damage"};
         skills["CriticalRate"] = Skill{"Critical Rate"};
         skills["MovementSpeed"] = Skill{"Movement Speed"};
-    } // Function
+    }
 };
 //////////////////////////////////////////////////////////////////////

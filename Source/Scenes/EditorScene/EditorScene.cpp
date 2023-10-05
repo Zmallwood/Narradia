@@ -1,20 +1,20 @@
 //////////////////////////////////////////////////////////////////////
 #include "EditorScene.hpp"
-#include "Scenes/Shared/WorldDrawModule/Camera.hpp"
 #include "EditorSceneGui.hpp"
 #include "Gui/EditorSceneGuiMenu.hpp"
 #include "Modules/EditorSceneModulesCore.hpp"
+#include "Modules/ToolUsing.hpp"
 #include "Scenes/Shared/GuiObjectHovering.hpp"
 #include "Scenes/Shared/KeyboardMove.hpp"
 #include "Scenes/Shared/MouseRotation.hpp"
 #include "Scenes/Shared/TileHovering.hpp"
-#include "Modules/ToolUsing.hpp"
+#include "Scenes/Shared/WorldDrawModule/Camera.hpp"
 #include "Scenes/Shared/WorldDrawModule/WorldDraw.hpp"
-#include "World/ObjectBehaviourList.hpp"
-#include "World/World.hpp"
 #include "World/MapArea.hpp"
-#include "World/Tile.hpp"
+#include "World/ObjectBehaviourList.hpp"
 #include "World/Player.hpp"
+#include "World/Tile.hpp"
+#include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -25,7 +25,7 @@ namespace Narradia
         WorldDraw::Create();
         ObjectBehaviourList::Get().Clear();
         ObjectBehaviourList::Get().Initialize();
-    } // Function
+    }
 
     void EditorScene::Enter()
     /*////////////////////*/ {
@@ -45,7 +45,7 @@ namespace Narradia
         WorldDraw::Get().EnableMapEditorMode();
         Audio::Get().Mute();
         Camera::Get().cameraDistance = 800.0f;
-    } // Function
+    }
 
     void EditorScene::UpdateDerived()
     /*////////////////////////////*/ {
@@ -57,15 +57,17 @@ namespace Narradia
         MouseRotation::Get().Update();
         WorldDraw::Get().Update();
         ToolUsing::Get().Update();
-    } // Function
+    }
 
     void EditorScene::RenderDerived()
     /*////////////////////////////*/ {
         WorldDraw::Get().Render();
         TileHovering::Get().Render();
-    } // Function
+    }
 
     void EditorScene::RenderAfterGuiDerived()
-    /*////////////////////////////////////*/ { GuiObjectHovering::Get().Render(); } // Function
+    /*////////////////////////////////////*/ {
+        GuiObjectHovering::Get().Render();
+    }
 }
 //////////////////////////////////////////////////////////////////////

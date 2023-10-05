@@ -10,48 +10,60 @@ namespace Narradia
           y(y_),
           width(width_),
           height(height_)
-    /*///////////////////////////////////////////////////////////////////*/ {} // Function
+    /*///////////////////////////////////////////////////////////////////*/ {
+    }
 
     RectangleF::RectangleF(Point2F position, SizeF size)
         : x(position.x),
           y(position.y),
           width(size.width),
           height(size.height)
-    /*////////////////////////////////////////////////*/ {} // Function
+    /*////////////////////////////////////////////////*/ {
+    }
 
     GlRectangleF RectangleF::ToGlRect() const
     /*/////////////////////////////////////*/ {
         return {x * 2 - 1.0f, 1.0f - y * 2, width * 2, height * 2};
-    } // Function
+    }
 
     RectangleF RectangleF::InvertVertically()
-    /*/////////////////////////////////////*/ { return {x, -y, width, -height}; } // Function
+    /*/////////////////////////////////////*/ {
+        return {x, -y, width, -height};
+    }
 
     Point2F RectangleF::Center() const
-    /*//////////////////////////////*/ { return {x + width / 2, y + height / 2}; } // Function
+    /*//////////////////////////////*/ {
+        return {x + width / 2, y + height / 2};
+    }
 
     Point2F RectangleF::GetPosition() const
-    /*///////////////////////////////////*/ { return {x, y}; } // Function
+    /*///////////////////////////////////*/ {
+        return {x, y};
+    }
 
     SizeF RectangleF::GetSize() const
-    /*/////////////////////////////*/ { return {width, height}; } // Function
+    /*/////////////////////////////*/ {
+        return {width, height};
+    }
 
     bool RectangleF::Contains(Point2F point) const
     /*//////////////////////////////////////////*/ {
         return point.x >= x && point.y >= y && point.x < x + width && point.y < y + height;
-    } // Function
+    }
 
     RectangleF RectangleF::WithWidth(float otherWidth) const
     /*////////////////////////////////////////////////////*/ {
         return {x, y, otherWidth, height};
-    } // Function
+    }
 
     RectangleF RectangleF::Translate(float dx, float dy) const
     /*//////////////////////////////////////////////////////*/ {
         return {x + dx, y + dy, width, height};
-    } // Function
+    }
 
     RectangleF RectangleF::MoveToOrigo()
-    /*////////////////////////////////*/ { return {0.0f, 0.0f, width, height}; } // Function
+    /*////////////////////////////////*/ {
+        return {0.0f, 0.0f, width, height};
+    }
 }
 //////////////////////////////////////////////////////////////////////

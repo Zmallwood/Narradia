@@ -8,14 +8,14 @@ namespace Narradia
         auto value = std::trunc(log2f(pow(exp + 70, 2) / 5000)) + 1;
         auto lvl = static_cast<int>(value);
         return lvl;
-    } // Function
+    }
 
     int GetExpForLevel(int lvl)
     /*///////////////////////*/ {
         auto value = std::max(sqrt(powf(2, lvl - 1) * 5000) - 70, 0.0f);
         auto exp = static_cast<int>(value);
         return exp;
-    } // Function
+    }
 
     int GetExpDiffToNextLevel(int exp)
     /*//////////////////////////////*/ {
@@ -25,20 +25,20 @@ namespace Narradia
         auto totExpNextLvl = GetExpForLevel(nextLvl);
         auto expDifference = totExpNextLvl - totExpCurrLvl;
         return expDifference;
-    } // Function
+    }
 
     int GetExpReqForCurrLevelStart(int exp)
     /*///////////////////////////////////*/ {
         auto currLvl = GetCurrentLevel(exp);
         auto totExpCurrLvlStart = GetExpForLevel(currLvl);
         return totExpCurrLvlStart;
-    } // Function
+    }
 
     int GetExpGainedSinceLevelStart(int exp)
     /*////////////////////////////////////*/ {
         auto expSinceStart = exp - GetExpReqForCurrLevelStart(exp);
         return expSinceStart;
-    } // Function
+    }
 
     float GetFractionalExpProgress(int exp)
     /*///////////////////////////////////*/ {
@@ -46,6 +46,6 @@ namespace Narradia
         auto expDifference = GetExpDiffToNextLevel(exp);
         auto progressFrac = static_cast<float>(expGain) / expDifference;
         return progressFrac;
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

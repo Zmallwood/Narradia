@@ -1,11 +1,11 @@
 //////////////////////////////////////////////////////////////////////
 #include "MapFilesIO.hpp"
-#include "World/World.hpp"
 #include "World/MapArea.hpp"
-#include "World/Tile.hpp"
 #include "World/Mob.hpp"
-#include "World/ObjectsCollection.hpp"
 #include "World/Object.hpp"
+#include "World/ObjectsCollection.hpp"
+#include "World/Tile.hpp"
+#include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -13,11 +13,12 @@ namespace Narradia
     /*///////////////////*/ {
       public:
         static constexpr std::string_view relMapsPath = "Maps";
-    }; // Class
+    };
 
     MapFilesIO::MapFilesIO()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/ {} // Function
+    /*//////////////////////////////*/ {
+    }
 
     void MapFilesIO::SaveCurrentMapArea(std::string_view mapName)
     /*/////////////////////////////////////////////////////////*/ {
@@ -179,6 +180,6 @@ namespace Narradia
         World::Get().CalculateNormals();
         mapFile.close();
         TextOutBox::Get().Print("World loaded with name " + std::string(mapName.data()) + ".");
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

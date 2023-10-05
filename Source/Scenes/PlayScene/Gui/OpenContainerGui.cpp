@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 #include "OpenContainerGui.hpp"
-#include "World/ObjectBehaviourList.hpp"
 #include "World/Object.hpp"
+#include "World/ObjectBehaviourList.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -17,13 +17,14 @@ namespace Narradia
         /***********************************/ {
             for (auto x = 0; x < maxNumCols; x++)
             /***********************************/ {
-                if (i >= numSlots) break;
+                if (i >= numSlots)
+                    break;
                 slots[x][y] = std::make_shared<GuiWindowObjectSlot>(
                     this, x, y, i, slotWidth, object_->GetContainedObjects());
                 i++;
             }
         }
-    } // Function
+    }
 
     void OpenContainerGui::UpdateDerived()
     /*//////////////////////////////////*/ {
@@ -43,12 +44,13 @@ namespace Narradia
         /***********************************/ {
             for (auto x = 0; x < maxNumCols; x++)
             /***********************************/ {
-                if (i >= numSlots) break;
+                if (i >= numSlots)
+                    break;
                 slots[x][y]->Update();
                 i++;
             }
         }
-    } // Function
+    }
 
     void OpenContainerGui::RenderDerived() const
     /*////////////////////////////////////////*/ {
@@ -57,11 +59,12 @@ namespace Narradia
         /***********************************/ {
             for (auto x = 0; x < maxNumCols; x++)
             /***********************************/ {
-                if (i >= numSlots) break;
+                if (i >= numSlots)
+                    break;
                 slots[x][y]->Render();
                 i++;
             }
         }
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

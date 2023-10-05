@@ -1,33 +1,33 @@
 //////////////////////////////////////////////////////////////////////
 #include "ObjectMoving.hpp"
 #include "Core/GuiCore.hpp"
-#include "Scenes/PlayScene/Gui/InventoryGui.hpp"
-#include "Scenes/PlayScene/ObjectHandling.hpp"
-#include "Scenes/PlayScene/Gui/OpenContainerGui.hpp"
-#include "Scenes/PlayScene/PlayScene.hpp"
 #include "Core/Rendering.hpp"
+#include "Scenes/PlayScene/Gui/InventoryGui.hpp"
+#include "Scenes/PlayScene/Gui/OpenContainerGui.hpp"
+#include "Scenes/PlayScene/ObjectHandling.hpp"
+#include "Scenes/PlayScene/PlayScene.hpp"
 #include "Scenes/Shared/TileHovering.hpp"
-#include "World/MapArea.hpp"
-#include "World/Player.hpp"
-#include "World/World.hpp"
-#include "World/Tile.hpp"
-#include "World/ObjectBehaviourList.hpp"
-#include "World/Object.hpp"
 #include "World/Companion.hpp"
+#include "World/MapArea.hpp"
+#include "World/Object.hpp"
+#include "World/ObjectBehaviourList.hpp"
+#include "World/Player.hpp"
+#include "World/Tile.hpp"
+#include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
     ObjectMoving::ObjectMoving()
     /*////////////////////////*/ {
         id_moving_object_image = Renderer2DImages::Get().NewImage();
-    } // Function
+    }
 
     void ObjectMoving::Update()
     /*///////////////////////*/ {
         PickupObjectFromGuiIfIsTheCase();
         PickupObjectFromGroundIfIsTheCase();
         ReleaseObjectIfIsTheCase();
-    } // Function
+    }
 
     void ObjectMoving::PickupObjectFromGuiIfIsTheCase()
     /*///////////////////////////////////////////////*/ {
@@ -39,7 +39,7 @@ namespace Narradia
                     objectInAir = MoveObject(GuiWindowObjectSlot::hoveredObject);
                 });
         }
-    } // Function
+    }
 
     void ObjectMoving::PickupObjectFromGroundIfIsTheCase()
     /*//////////////////////////////////////////////////*/ {
@@ -70,7 +70,7 @@ namespace Narradia
                 }
             }
         }
-    } // Function
+    }
 
     void ObjectMoving::ReleaseObjectIfIsTheCase()
     /*/////////////////////////////////////////*/ {
@@ -120,17 +120,18 @@ namespace Narradia
                 }
             },
             0);
-    } // Function
+    }
 
     void ObjectMoving::Render()
     /*///////////////////////*/ {
-        if (!objectInAir) return;
+        if (!objectInAir)
+            return;
         auto mouse_position = GetMousePositionF();
         auto rectangle = RectangleF{
             mouse_position.x, mouse_position.y, k_object_image_size,
             ConvertWidthToHeight(k_object_image_size)};
         Renderer2DImages::Get().DrawImage(
             objectInAir->GetObjectType(), id_moving_object_image, rectangle);
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

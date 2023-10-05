@@ -95,6 +95,6 @@ namespace Narradia
         AddGuiComponent(std::shared_ptr<RoofBrowserGui>(RoofBrowserGui::GetPointer()));
         Log();
         AddGuiComponent(std::shared_ptr<MobBrowserGui>(MobBrowserGui::GetPointer()));
-    } // Function
+    }
 }
 //////////////////////////////////////////////////////////////////////

@@ -1,18 +1,19 @@
 //////////////////////////////////////////////////////////////////////
 #include "DestinationMove.hpp"
-#include "Scenes/Shared/WorldDrawModule/Camera.hpp"
 #include "InteractionMenu.hpp"
 #include "ObjectMoving.hpp"
 #include "Scenes/Shared/TileHovering.hpp"
+#include "Scenes/Shared/WorldDrawModule/Camera.hpp"
+#include "World/MapArea.hpp"
 #include "World/Player.hpp"
 #include "World/World.hpp"
-#include "World/MapArea.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
     void DestinationMove::Update()
     /*//////////////////////////*/ {
-        if (Camera::Get().cameraDistance == 2.0f) return;
+        if (Camera::Get().cameraDistance == 2.0f)
+            return;
         auto player_world_area_position = Player::Get().GetWorldAreaPos();
         auto map_area = World::Get().GetMapAreaAtZLevel(player_world_area_position.z);
         if (MapArea::IsInsideMap(TileHovering::Get().hoveredTile))
@@ -50,12 +51,16 @@ namespace Narradia
                 }
             }
         }
-    } // Function
+    }
 
     void DestinationMove::ResetDestination()
-    /*////////////////////////////////////*/ { destination = {-1, -1}; } // Function
+    /*////////////////////////////////////*/ {
+        destination = {-1, -1};
+    }
 
     const Point2 &DestinationMove::GetDestination()
-    /*///////////////////////////////////////////*/ { return destination; } // Function
+    /*///////////////////////////////////////////*/ {
+        return destination;
+    }
 }
 //////////////////////////////////////////////////////////////////////
