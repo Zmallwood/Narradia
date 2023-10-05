@@ -1,12 +1,23 @@
 cmake_minimum_required (VERSION 3.0.0)
+set(CMAKE_C_COMPILER_WORKS 1)
 set(CMAKE_CXX_COMPILER_WORKS 1)
+if (WIN32)
+  set(CMAKE_C_COMPILER "g++.exe")
+  set(CMAKE_CXX_COMPILER "g++.exe")
+endif (WIN32)
 project (Narradia)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-set(CMAKE_CXX_FLAGS "-Wfatal-errors -std=c++20")
+if (WIN32)
+  set(CMAKE_CXX_FLAGS "-Wfatal-errors -std=c++20")
+endif (WIN32)
+
+if (UNIX)
+  set(CMAKE_CXX_FLAGS "-Wfatal-errors -std=c++20")
+endif (UNIX)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../Bin)
 
@@ -20,7 +31,15 @@ ADD_CUSTOM_TARGET(release
   COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --parallel 4 --target all
   COMMENT "Creating the executable in the release mode.")
 
-include_directories("Source")
+
+
+if (WIN32)
+  include_directories("Source" "C:/Dependencies")
+endif (WIN32)
+
+if (UNIX)
+  include_directories("Source" "C:/Dependencies")
+endif (UNIX)
 
 file(GLOB_RECURSE SOURCE_FILES Source/**.cpp)
 
@@ -47,7 +66,6 @@ set(PCH_FILES
 <SDL2/SDL_image.h>
 <SDL2/SDL_ttf.h>
 <SDL2/SDL_mixer.h>
-<SDL2/SDL_net.h>
 <GL/glew.h>
 <glm/glm.hpp>
 <glm/gtc/matrix_transform.hpp>
@@ -84,6 +102,12 @@ set_target_properties(Narradia PROPERTIES
     CXX_STANDARD_REQUIRED ON
 )
 
-target_link_libraries(Narradia PUBLIC SDL2 SDL2_image SDL2_ttf SDL2_mixer SDL2_net GL GLEW assimp)
+if (WIN32)
+  target_link_libraries(Narradia PUBLIC mingw32 SDL2main SDL2 SDL2_image SDL2_ttf SDL2_mixer opengl32 glew32 assimp)
+endif (WIN32)
+
+if (UNIX)
+  target_link_libraries(Narradia PUBLIC SDL2 SDL2_image SDL2_ttf SDL2_mixer GL GLEW assimp)
+endif (UNIX)
 
 target_precompile_headers(Narradia PRIVATE ${PCH_FILES})

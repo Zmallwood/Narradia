@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////
 #include "BasicScenes.hpp"
 #include "Core/GuiCore.hpp"
-#include "Scenes/Shared/MapFilesIO.hpp"
 #include "Core/Rendering.hpp"
+#include "Scenes/Shared/MapFilesIO.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -44,13 +44,16 @@ namespace Narradia
     /*///////////////////////////*/ {
         Log();
         RectangleF rectBack = {0.0f, 0.0f, 1.0f, 1.0f};
+        Log();
         Renderer2DImages::Get().DrawImage("DefaultSceneBackground", p->rendIdBackImage, rectBack);
+        Log();
         RectangleF rectLogo = {0.3f, 0.1f, 0.4f, 0.1f};
         Renderer2DImages::Get().DrawImage("NarradiaLogo", p->rendIdLogoImage, rectLogo);
-
+        Log();
         if (SDL_GetTicks() % 1000 < 500)
             TextRenderer::Get().DrawString(
                 p->rendIdStartText, "Press to Start", {0.5f, 0.5f}, Colors::wheat, true);
+        Log();
     } // Function
 
     class MainMenuScene::Pimpl

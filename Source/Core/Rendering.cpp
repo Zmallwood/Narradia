@@ -431,7 +431,7 @@ namespace Narradia
     /*//////////////////////////////////////////////////////////////////////////////////*/
     {
         auto glRect = rectangle.ToGlRect();
-        Vertex2F vertices[RndrBase::GetNumVerticlesInRectangle()];
+        Vertex2F vertices[RndrBase::kNumVerticesInRectangle];
         vertices[0].position = {glRect.x, glRect.y - glRect.height};
         vertices[1].position = {glRect.x, glRect.y};
         vertices[2].position = {glRect.x + glRect.width, glRect.y};
@@ -540,7 +540,7 @@ namespace Narradia
     /*///////////////////////////////////////////////////////////////////////////////////////////*/
     {
         auto glRect = rect.ToGlRect();
-        Vertex2F vertices[RndrBase::GetNumVerticlesInRectangle()];
+        Vertex2F vertices[RndrBase::kNumVerticesInRectangle];
         vertices[0].position = {glRect.x, glRect.y - glRect.height};
         vertices[1].position = {glRect.x, glRect.y};
         vertices[2].position = {glRect.x + glRect.width, glRect.y};
@@ -649,7 +649,7 @@ namespace Narradia
         SizeF billboardSize) const
     /*////////////////////////////////////////////////////////////////////////*/
     {
-        Vertex3F vertices[RndrBase::GetNumVerticlesInRectangle()];
+        Vertex3F vertices[RndrBase::kNumVerticesInRectangle];
         vertices[0].uv = {0, 0};
         vertices[1].uv = {1, 0};
         vertices[2].uv = {1, 1};

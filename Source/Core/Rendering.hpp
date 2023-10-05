@@ -64,6 +64,7 @@ namespace Narradia
         GLuint GetUniformLocation(std::string_view);
         ShaderProgram *GetShaderProgram() const;
         static const int GetNumVerticlesInRectangle();
+        static constexpr int kNumVerticesInRectangle = 4;
 
       private:
         class Pimpl;

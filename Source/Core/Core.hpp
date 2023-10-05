@@ -160,7 +160,7 @@ namespace Narradia
         std::shared_ptr<Pimpl> p;
     };
 
-    void Log();
+    void Log(const std::source_location location = std::source_location::current());
 
     struct TextLine
     /*///////////*/ {

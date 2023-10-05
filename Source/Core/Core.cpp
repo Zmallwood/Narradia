@@ -1,16 +1,16 @@
 //////////////////////////////////////////////////////////////////////
 #include "Core.hpp"
 #include "Assets.hpp"
+#include "GuiCore.hpp"
+#include "Rendering.hpp"
 #include "Scenes/BasicScenes.hpp"
 #include "Scenes/EditorScene/EditorScene.hpp"
-#include "Scenes/PlayScene/SubScenes/GameSaveScene.hpp"
-#include "GuiCore.hpp"
-#include "Scenes/MapGenerationScene/MapGenerateScene.hpp"
 #include "Scenes/EditorScene/SubScenes/MapLoadScene.hpp"
 #include "Scenes/EditorScene/SubScenes/MapSaveScene.hpp"
-#include "Scenes/PlayScene/PlayScene.hpp"
+#include "Scenes/MapGenerationScene/MapGenerateScene.hpp"
 #include "Scenes/PlayScene/Gui/PlaySceneGuiCore.hpp"
-#include "Rendering.hpp"
+#include "Scenes/PlayScene/PlayScene.hpp"
+#include "Scenes/PlayScene/SubScenes/GameSaveScene.hpp"
 #include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
 int main(int argc, char *argv[])
@@ -374,8 +374,8 @@ namespace Narradia
         p->logFile << logText << std::flush;
     } // Function
 
-    void Log()
-    /*//////*/ { Logger::Get().Log(); } // Function
+    void Log(const std::source_location location)
+    /*//////*/ { Logger::Get().Log("", location); } // Function
 
     class TextOutBox::Pimpl
     /*///////////////////*/ {
@@ -501,6 +501,8 @@ namespace Narradia
                       << std::endl;
             return;
         }
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
         if (SDL_GL_CreateContext(p->window.get()) == nullptr)
         /***************************************************/ {
             std::cout << "OpenGL context could not be created! SDL Error: "
