@@ -1,0 +1,5 @@
+Run.sh
+Build/
+Bin/
+.cache/
+compile_commands.json

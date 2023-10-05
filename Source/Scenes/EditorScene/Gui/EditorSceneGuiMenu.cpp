@@ -1,0 +1,57 @@
+//////////////////////////////////////////////////////////////////////
+#include "EditorSceneGuiMenu.hpp"
+#include "Core/Rendering.hpp"
+//////////////////////////////////////////////////////////////////////
+namespace Narradia
+{
+    EditorSceneGuiMenu::EditorSceneGuiMenu()
+        : GuiContainer({0.0f, 0.0f}, {1.0f, 1.0f})
+    /*//////////////////////////////////////////*/ {
+        glIdCanvasCover = Renderer2DSolidColors::Get().NewRectangle();
+        AddGuiButton(
+            "Resume", {0.45f, 0.3f, 0.1f, 0.03f},
+            []
+            /************************************************************/ {
+                EditorSceneGuiMenu::Get().visible = false;
+            });
+        AddGuiButton(
+            "Save map", {0.45f, 0.35f, 0.1f, 0.03f},
+            []
+            /************************************************************/ {
+                SceneManager::Get().ChangeView(Scenes::MapSave);
+            });
+        AddGuiButton(
+            "Load map", {0.45f, 0.40f, 0.1f, 0.03f},
+            []
+            /************************************************************/ {
+                SceneManager::Get().ChangeView(Scenes::MapLoad);
+            });
+        AddGuiButton(
+            "Go to main menu", {0.45f, 0.45f, 0.1f, 0.03f},
+            []
+            /************************************************************/ {
+                SceneManager::Get().ChangeView(Scenes::MainMenu);
+            });
+        AddGuiButton(
+            "Exit game", {0.45f, 0.50f, 0.1f, 0.03f},
+            []
+            /************************************************************/ {
+                GameEngine::Get().StopGame();
+            });
+    } // Function
+
+    void EditorSceneGuiMenu::Update()
+    /*////////////////////////////*/ {
+        if (visible) GuiContainer::Update();
+    } // Function
+
+    void EditorSceneGuiMenu::Render() const
+    /*//////////////////////////////////*/ {
+        if (!visible) return;
+        auto rect = RectangleF{0.0f, 0.0f, 1.0f, 1.0f};
+        auto color = Color{0.3f, 0.6f, 1.0f, 0.5f};
+        Renderer2DSolidColors::Get().FillRectangle(glIdCanvasCover, rect, color);
+        GuiContainer::Render();
+    } // Function
+}
+//////////////////////////////////////////////////////////////////////
