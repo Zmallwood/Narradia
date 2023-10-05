@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 #include "PlaySceneGuiCore.hpp"
-#include "Scenes/PlayScene/PlayScene.hpp"
 #include "Core/Rendering.hpp"
+#include "Scenes/PlayScene/PlayScene.hpp"
 #include "World/Player.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
@@ -16,6 +16,7 @@ namespace Narradia
         int ticksLastUpdate = 0;
         RenderId idBackgroundImage;
         RenderId idFpsText;
+        bool visible = false;
     }; // Class
 
     FpsPanel::FpsPanel()
@@ -40,6 +41,7 @@ namespace Narradia
 
     void FpsPanel::Render() const
     /*/////////////////////////*/ {
+        if (!p->visible) return;
         Renderer2DImages::Get().DrawImage(Hash("PanelBg"), p->idBackgroundImage, GetBounds());
         std::string_view fpsText = "Fps: " + std::to_string(p->fps);
         TextRenderer::Get().DrawString(
