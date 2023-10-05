@@ -9,7 +9,8 @@ namespace Narradia
 {
     ObjectBrowserGui::ObjectBrowserGui()
         : GuiWindow("Objects browser", {0.3f, 0.2f, 0.2f, 0.45f})
-    /*/////////////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////////////*/
+    {
         auto slotWidth = (GetBounds().width - 2 * GetMargin()) / numCols - GetMargin();
         auto images = ImageBank::Get().GetImages();
         int j = 0;
@@ -42,7 +43,8 @@ namespace Narradia
     }
 
     void ObjectBrowserGui::UpdateDerived()
-    /*//////////////////////////////////*/ {
+    /*//////////////////////////////////*/
+    {
         if (GetBounds().Contains(GetMousePositionF()))
         /********************************************/ {
             GuiWindowObjectSlot::hoveredObject = nullptr;
@@ -78,7 +80,8 @@ namespace Narradia
     }
 
     void ObjectBrowserGui::RenderDerived() const
-    /*////////////////////////////////////////*/ {
+    /*////////////////////////////////////////*/
+    {
         auto i = 0;
         for (auto y = 0; y < numRows; y++)
         /********************************/ {

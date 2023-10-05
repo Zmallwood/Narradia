@@ -9,7 +9,8 @@
 namespace Narradia
 {
     void CompanionsUpdate::Update()
-    /*///////////////////////////*/ {
+    /*///////////////////////////*/
+    {
         auto mapArea = World::Get().GetCurrentMapArea();
         for (auto it = mapArea->GetCompanionsMirror().cbegin();
              it != mapArea->GetCompanionsMirror().cend();)

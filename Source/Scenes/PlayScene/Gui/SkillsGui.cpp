@@ -7,7 +7,8 @@ namespace Narradia
 {
     SkillsGui::SkillsGui()
         : GuiWindow("Skills", {0.55f, 0.2f, 0.17f, 0.35f})
-    /*//////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////*/
+    {
         for (auto i = 0; i < Player::Get().skillSet.skills.size(); i++)
         /***********************************************************/ {
             glIdsSkillLabels.push_back(TextRenderer::Get().NewString());
@@ -18,7 +19,8 @@ namespace Narradia
     }
 
     void SkillsGui::UpdateDerived()
-    /*///////////////////////////*/ {
+    /*///////////////////////////*/
+    {
         auto mousePos = GetMousePositionF();
         auto i = 0;
         for (auto &skill : Player::Get().skillSet.skills)
@@ -44,7 +46,8 @@ namespace Narradia
     }
 
     void SkillsGui::RenderDerived() const
-    /*/////////////////////////////////*/ {
+    /*/////////////////////////////////*/
+    {
         auto mousePos = GetMousePositionF();
         auto i = 0;
         for (auto &skill : Player::Get().skillSet.skills)

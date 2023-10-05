@@ -4,7 +4,8 @@
 namespace Narradia
 {
     VertexTile::VertexTile()
-    /*////////////////////*/ {
+    /*////////////////////*/
+    {
         v0.uv = {0.0f, 0.0f};
         v1.uv = {1.0f, 0.0f};
         v2.uv = {1.0f, 1.0f};

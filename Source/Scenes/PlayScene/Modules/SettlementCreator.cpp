@@ -9,7 +9,8 @@
 namespace Narradia
 {
     void SettlementCreator::CreateSettlement()
-    /*//////////////////////////////////////*/ {
+    /*//////////////////////////////////////*/
+    {
         auto settlement_center = Player::Get().GetPosition().ToIntPoint();
         auto map_area = World::Get().GetMapAreaAtZLevel(Player::Get().GetWorldAreaPos().z);
         auto settlement_radius = 3;

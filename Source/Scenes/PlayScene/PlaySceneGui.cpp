@@ -12,7 +12,8 @@
 namespace Narradia
 {
     PlaySceneGui::PlaySceneGui()
-    /*////////////////////////*/ {
+    /*////////////////////////*/
+    {
         Log();
         auto rectGButtonSys = RectangleF{0.95f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
         Log();

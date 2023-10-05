@@ -10,7 +10,8 @@
 namespace Narradia
 {
     void ToolUsing::Update()
-    /*//////////////////*/ {
+    /*//////////////////*/
+    {
         MouseInput::Get().GetLeftButton().AddFiredAction(
             "SelectObject",
             [&]
@@ -106,36 +107,42 @@ namespace Narradia
     }
 
     void ToolUsing::IncreaseToolRadius()
-    /*//////////////////////////////*/ {
+    /*//////////////////////////////*/
+    {
         toolRadius++;
     }
 
     void ToolUsing::DecreaseToolRadius()
-    /*//////////////////////////////*/ {
+    /*//////////////////////////////*/
+    {
         toolRadius--;
     }
 
     void ToolUsing::IncreaseElevationChange()
-    /*///////////////////////////////////*/ {
+    /*///////////////////////////////////*/
+    {
         elevationChange++;
         if (elevationChange == 0)
             elevationChange = 1;
     }
 
     void ToolUsing::DecreaseElevationChange()
-    /*///////////////////////////////////*/ {
+    /*///////////////////////////////////*/
+    {
         elevationChange--;
         if (elevationChange == 0)
             elevationChange = -1;
     }
 
     void ToolUsing::ChangeTool(Tools newTool)
-    /*///////////////////////////////////*/ {
+    /*///////////////////////////////////*/
+    {
         currentTool = newTool;
     }
 
     void ToolUsing::SelectType(int newSelectedObjectType)
-    /*///////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////*/
+    {
         selectedType = newSelectedObjectType;
     }
 }

@@ -11,7 +11,8 @@
 namespace Narradia
 {
     void DestinationMove::Update()
-    /*//////////////////////////*/ {
+    /*//////////////////////////*/
+    {
         if (Camera::Get().cameraDistance == 2.0f)
             return;
         auto player_world_area_position = Player::Get().GetWorldAreaPos();
@@ -54,12 +55,14 @@ namespace Narradia
     }
 
     void DestinationMove::ResetDestination()
-    /*////////////////////////////////////*/ {
+    /*////////////////////////////////////*/
+    {
         destination = {-1, -1};
     }
 
     const Point2 &DestinationMove::GetDestination()
-    /*///////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////*/
+    {
         return destination;
     }
 }

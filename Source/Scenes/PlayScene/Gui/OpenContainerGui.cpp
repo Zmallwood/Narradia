@@ -8,7 +8,8 @@ namespace Narradia
     OpenContainerGui::OpenContainerGui(Object *object_)
         : GuiWindow("Container", {0.15f, 0.3f, 0.17f, 0.35f}, true),
           object(object_)
-    /*////////////////////////////////////////////////////////////*/ {
+    /*////////////////////////////////////////////////////////////*/
+    {
         Show();
         auto slotWidth = (GetBounds().width - 2 * GetMargin()) / maxNumCols - GetMargin();
         numSlots = ObjectBehaviourList::Get().GetContainerSlots(object_->GetObjectType());
@@ -27,7 +28,8 @@ namespace Narradia
     }
 
     void OpenContainerGui::UpdateDerived()
-    /*//////////////////////////////////*/ {
+    /*//////////////////////////////////*/
+    {
         if (GetBounds().Contains(GetMousePositionF()))
         /********************************************/ {
             GuiWindowObjectSlot::hoveredObject = nullptr;
@@ -53,7 +55,8 @@ namespace Narradia
     }
 
     void OpenContainerGui::RenderDerived() const
-    /*////////////////////////////////////////*/ {
+    /*////////////////////////////////////////*/
+    {
         auto i = 0;
         for (auto y = 0; y < maxNumRows; y++)
         /***********************************/ {

@@ -19,7 +19,8 @@
 namespace Narradia
 {
     EditorScene::EditorScene()
-    /*////////////////////*/ {
+    /*////////////////////*/
+    {
         Log();
         SetSceneGui(std::make_shared<EditorSceneGui>());
         WorldDraw::Create();
@@ -28,7 +29,8 @@ namespace Narradia
     }
 
     void EditorScene::Enter()
-    /*////////////////////*/ {
+    /*////////////////////*/
+    {
         EditorSceneGuiMenu::Get().visible = false;
         if (nullptr == World::Get().GetMapAreaAtZLevel(0))
         /**********************************************/ {
@@ -48,7 +50,8 @@ namespace Narradia
     }
 
     void EditorScene::UpdateDerived()
-    /*////////////////////////////*/ {
+    /*////////////////////////////*/
+    {
         TileHovering::Get().Update();
         EditorSceneHotkeys().Update();
         Log();
@@ -60,13 +63,15 @@ namespace Narradia
     }
 
     void EditorScene::RenderDerived()
-    /*////////////////////////////*/ {
+    /*////////////////////////////*/
+    {
         WorldDraw::Get().Render();
         TileHovering::Get().Render();
     }
 
     void EditorScene::RenderAfterGuiDerived()
-    /*////////////////////////////////////*/ {
+    /*////////////////////////////////////*/
+    {
         GuiObjectHovering::Get().Render();
     }
 }

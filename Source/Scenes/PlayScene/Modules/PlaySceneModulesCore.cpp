@@ -11,7 +11,8 @@
 namespace Narradia
 {
     void PlaySceneHotkeys::Update()
-    /*//////////////////////////*/ {
+    /*//////////////////////////*/
+    {
         if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_c))
             CharacterGui::Get().ToggleVisibility();
         if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_b))
@@ -27,24 +28,28 @@ namespace Narradia
     }
 
     class ActionRepeat::Pimpl
-    /*/////////////////////*/ {
+    /*/////////////////////*/
+    {
       public:
         std::function<void()> repeatingAction = nullptr;
     };
 
     ActionRepeat::ActionRepeat()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/ {
+    /*//////////////////////////////*/
+    {
     }
 
     void ActionRepeat::Update()
-    /*///////////////////////*/ {
+    /*///////////////////////*/
+    {
         if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_r))
             RepeatLastAction();
     }
 
     void ActionRepeat::RepeatLastAction()
-    /*/////////////////////////////////*/ {
+    /*/////////////////////////////////*/
+    {
         if (p->repeatingAction == nullptr)
         /********************************/ {
             TextOutBox::Get().Print("There is no previous action to repeat.");
@@ -57,12 +62,14 @@ namespace Narradia
     }
 
     void ActionRepeat::SetRepeatingAction(std::function<void()> action)
-    /*///////////////////////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////////////////////*/
+    {
         p->repeatingAction = action;
     }
 
     class ActiveGameRound::Pimpl
-    /*////////////////////////*/ {
+    /*////////////////////////*/
+    {
       public:
         bool game_completed = false;
         RenderId id_canvas_layer;
@@ -71,13 +78,15 @@ namespace Narradia
 
     ActiveGameRound::ActiveGameRound()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/ {
+    /*//////////////////////////////*/
+    {
         p->id_canvas_layer = Renderer2DSolidColors::Get().NewRectangle();
         p->id_game_result_text = TextRenderer::Get().NewString();
     }
 
     void ActiveGameRound::Update()
-    /*//////////////////////////*/ {
+    /*//////////////////////////*/
+    {
         auto num_claimed_tiles = Player::Get().claimedTiles.size();
         auto tot_number_of_tiles = MapArea::GetMapSize().width * MapArea::GetMapSize().height;
         auto progress = (int)(((float)num_claimed_tiles) / tot_number_of_tiles * 100);
@@ -86,7 +95,8 @@ namespace Narradia
     }
 
     void ActiveGameRound::Render()
-    /*//////////////////////////*/ {
+    /*//////////////////////////*/
+    {
         if (!p->game_completed)
             return;
         RectangleF rect = {0.0f, 0.0f, 1.0f, 1.0f};
@@ -98,7 +108,8 @@ namespace Narradia
     }
 
     bool ActiveGameRound::GameIsCompleted()
-    /*///////////////////////////////////*/ {
+    /*///////////////////////////////////*/
+    {
         return p->game_completed;
     }
 }

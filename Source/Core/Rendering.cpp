@@ -6,32 +6,38 @@
 namespace Narradia
 {
     void SdlDeleter::operator()(SDL_Window *window) const
-    /*/////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////*/
+    {
         SDL_DestroyWindow(window);
     }
 
     void SdlDeleter::operator()(SDL_Renderer *renderer) const
-    /*/////////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////////*/
+    {
         SDL_DestroyRenderer(renderer);
     }
 
     void SdlDeleter::operator()(SDL_Surface *surface) const
-    /*///////////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////////*/
+    {
         SDL_FreeSurface(surface);
     }
 
     void SdlDeleter::operator()(SDL_Texture *texture) const
-    /*///////////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////////*/
+    {
         SDL_DestroyTexture(texture);
     }
 
     void SdlDeleter::operator()(TTF_Font *font) const
-    /*/////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////*/
+    {
         TTF_CloseFont(font);
     }
 
     class ShaderProgram::Pimpl
-    /*//////////////////////*/ {
+    /*//////////////////////*/
+    {
       public:
         GLuint InitVertexShader(const GLchar *);
         GLuint InitFragShader(const GLchar *);
@@ -43,11 +49,13 @@ namespace Narradia
 
     ShaderProgram::ShaderProgram()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/ {
+    /*//////////////////////////////*/
+    {
     }
 
     bool ShaderProgram::Create(const GLchar *vertexShaderSrc, const GLchar *fragShaderSrc)
-    /*//////////////////////////////////////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////////////////////////////////////*/
+    {
         auto success = true;
         p->programId = glCreateProgram();
         auto vertexShaderCompiled = p->InitVertexShader(vertexShaderSrc);
@@ -90,17 +98,20 @@ namespace Narradia
     }
 
     void ShaderProgram::Cleanup() const
-    /*///////////////////////////////*/ {
+    /*///////////////////////////////*/
+    {
         glDeleteProgram(p->programId);
     }
 
     GLuint ShaderProgram::GetProgramId()
-    /*////////////////////////////////*/ {
+    /*////////////////////////////////*/
+    {
         return p->programId;
     }
 
     GLuint ShaderProgram::Pimpl::InitVertexShader(const GLchar *vertexShaderSource)
-    /*///////////////////////////////////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////////////////////////////////*/
+    {
         vertexShader = glCreateShader(GL_VERTEX_SHADER);
         glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
         glCompileShader(vertexShader);
@@ -110,7 +121,8 @@ namespace Narradia
     }
 
     GLuint ShaderProgram::Pimpl::InitFragShader(const GLchar *fragmentShaderSource)
-    /*///////////////////////////////////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////////////////////////////////*/
+    {
         fragShader = glCreateShader(GL_FRAGMENT_SHADER);
         glShaderSource(fragShader, 1, &fragmentShaderSource, NULL);
         glCompileShader(fragShader);
@@ -120,7 +132,8 @@ namespace Narradia
     }
 
     class RndrBase::Pimpl
-    /*/////////////////*/ {
+    /*/////////////////*/
+    {
       public:
         constexpr static int kNumVerticesInRectangle = 4;
         constexpr static int kNumFloatsPerIndex = 1;
@@ -136,12 +149,14 @@ namespace Narradia
 
     RndrBase::RndrBase()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/ {
+    /*//////////////////////////////*/
+    {
         p->shaderProgram = std::make_shared<ShaderProgram>();
     }
 
     GLuint RndrBase::GenerateNewVertexArrayId()
-    /*///////////////////////////////////////*/ {
+    /*///////////////////////////////////////*/
+    {
         GLuint newVaoId;
         glGenVertexArrays(1, &newVaoId);
         p->vaoIds.push_back(newVaoId);
@@ -149,7 +164,8 @@ namespace Narradia
     }
 
     GLuint RndrBase::GenerateNewBufferId(BufferTypes bufferType, GLuint vaoId)
-    /*//////////////////////////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////////////////////////*/
+    {
         GLuint newBufferId;
         glGenBuffers(1, &newBufferId);
         p->vboIds[bufferType][vaoId] = newBufferId;
@@ -157,12 +173,14 @@ namespace Narradia
     }
 
     GLuint RndrBase::GetBufferId(BufferTypes bufferType, GLuint vaoId) const
-    /*////////////////////////////////////////////////////////////////////*/ {
+    /*////////////////////////////////////////////////////////////////////*/
+    {
         return p->vboIds.at(bufferType).at(vaoId);
     }
 
     void RndrBase::SetIndicesData(GLuint indicesVboId, int numVertices, const void *data) const
-    /*///////////////////////////////////////////////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////////////////////////////////////////////*/
+    {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indicesVboId);
         glBufferData(
             GL_ELEMENT_ARRAY_BUFFER, numVertices * Pimpl::kNumFloatsPerIndex * sizeof(float), data,
@@ -254,14 +272,16 @@ namespace Narradia
     }
 
     void RndrBase::UpdateIndicesData(GLuint indicesVboId, std::vector<int> &indices) const
-    /*//////////////////////////////////////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////////////////////////////////////*/
+    {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indicesVboId);
         glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, sizeof(float) * indices.size(), indices.data());
     }
 
     void RndrBase::UpdatePositions2DData(
         GLuint positionsVboId, std::vector<float> &positions, int layoutLocation) const
-    /*///////////////////////////////////////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////////////////////////////////////*/
+    {
         glBindBuffer(GL_ARRAY_BUFFER, positionsVboId);
         glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float) * positions.size(), positions.data());
         glVertexAttribPointer(
@@ -272,7 +292,8 @@ namespace Narradia
 
     void RndrBase::UpdatePositions3DData(
         GLuint positionsVboId, std::vector<float> &positions, int layoutLocation) const
-    /*///////////////////////////////////////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////////////////////////////////////*/
+    {
         glBindBuffer(GL_ARRAY_BUFFER, positionsVboId);
         glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float) * positions.size(), positions.data());
         glVertexAttribPointer(
@@ -282,7 +303,8 @@ namespace Narradia
     }
 
     void RndrBase::UpdateUvsData(GLuint uvsVboId, std::vector<float> &uvs, int layoutLocation) const
-    /*////////////////////////////////////////////////////////////////////////////////////////*/ {
+    /*////////////////////////////////////////////////////////////////////////////////////////*/
+    {
         glBindBuffer(GL_ARRAY_BUFFER, uvsVboId);
         glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float) * uvs.size(), uvs.data());
         glVertexAttribPointer(
@@ -292,7 +314,8 @@ namespace Narradia
 
     void RndrBase::UpdateColorsData(
         GLuint colorsVboId, std::vector<float> &colors, int layoutLocation) const
-    /*/////////////////////////////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////////////////////////////*/
+    {
         glBindBuffer(GL_ARRAY_BUFFER, colorsVboId);
         glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float) * colors.size(), colors.data());
         glVertexAttribPointer(
@@ -302,7 +325,8 @@ namespace Narradia
 
     void RndrBase::UpdateNormalsData(
         GLuint normalsVboId, std::vector<float> &normals, int layoutLocation) const
-    /*///////////////////////////////////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////////////////////////////////*/
+    {
         glBindBuffer(GL_ARRAY_BUFFER, normalsVboId);
         glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float) * normals.size(), normals.data());
         glVertexAttribPointer(
@@ -311,7 +335,8 @@ namespace Narradia
     }
 
     void RndrBase::CleanupBase() const
-    /*//////////////////////////////*/ {
+    /*//////////////////////////////*/
+    {
         for (auto &bufferType : p->vboIds)
         /********************************/ {
             for (auto &bufferEntry : bufferType.second)
@@ -327,34 +352,40 @@ namespace Narradia
     }
 
     void RndrBase::UseVaoBegin(int vaoId) const
-    /*///////////////////////////////////////*/ {
+    /*///////////////////////////////////////*/
+    {
         glUseProgram(p->shaderProgram->GetProgramId());
         glBindVertexArray(vaoId);
     }
 
     void RndrBase::UseVaoEnd() const
-    /*////////////////////////////*/ {
+    /*////////////////////////////*/
+    {
         glBindVertexArray(0);
         glUseProgram(0);
     }
 
     GLuint RndrBase::GetUniformLocation(std::string_view varName)
-    /*/////////////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////////////*/
+    {
         return glGetUniformLocation(p->shaderProgram->GetProgramId(), varName.data());
     }
 
     ShaderProgram *RndrBase::GetShaderProgram() const
-    /*/////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////*/
+    {
         return p->shaderProgram.get();
     }
 
     const int RndrBase::GetNumVerticlesInRectangle()
-    /*////////////////////////////////////////////*/ {
+    /*////////////////////////////////////////////*/
+    {
         return Pimpl::kNumVerticesInRectangle;
     }
 
     class CameraGl::Pimpl
-    /*/////////////////*/ {
+    /*/////////////////*/
+    {
       public:
         glm::mat4 perspectiveMatrix;
         glm::mat4 viewMatrix;
@@ -362,31 +393,37 @@ namespace Narradia
 
     CameraGl::CameraGl()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/ {
+    /*//////////////////////////////*/
+    {
     }
 
     const glm::mat4 &CameraGl::GetPerspectiveMatrix()
-    /*/////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////*/
+    {
         return p->perspectiveMatrix;
     }
 
     const glm::mat4 &CameraGl::GetViewMatrix()
-    /*//////////////////////////////////////*/ {
+    /*//////////////////////////////////////*/
+    {
         return p->viewMatrix;
     }
 
     void CameraGl::SetPerspectiveMatrix(glm::mat4 newPerspectiveMatrix)
-    /*///////////////////////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////////////////////*/
+    {
         p->perspectiveMatrix = newPerspectiveMatrix;
     }
 
     void CameraGl::SetViewMatrix(glm::mat4 newViewMatrix)
-    /*/////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////*/
+    {
         p->viewMatrix = newViewMatrix;
     }
 
     class Renderer2DImages::Pimpl
-    /*/////////////////////////*/ {
+    /*/////////////////////////*/
+    {
       public:
         const int locationPosition = 0;
         const int locationColor = 1;
@@ -395,7 +432,8 @@ namespace Narradia
 
     Renderer2DImages::Renderer2DImages()
         : p(std::make_shared<Pimpl>())
-    /*////////////////////////////////*/ {
+    /*////////////////////////////////*/
+    {
         const GLchar *vertexShaderSource =
             R"(
             #version 330 core
@@ -427,7 +465,8 @@ namespace Narradia
     }
 
     RenderId Renderer2DImages::NewImage()
-    /*/////////////////////////////////*/ {
+    /*/////////////////////////////////*/
+    {
         auto vaoId = GenerateNewVertexArrayId();
         UseVaoBegin(vaoId);
         auto indexBufferId = GenerateNewBufferId(BufferTypes::Indices, vaoId);
@@ -496,17 +535,20 @@ namespace Narradia
     void Renderer2DImages::DrawImage(
         const std::string_view &imageName, RenderId vaoId, const RectangleF &rectangle,
         Color color) const
-    /*///////////////////////////////////////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////////////////////////////////////*/
+    {
         DrawImage(Hash(imageName), vaoId, rectangle, color);
     }
 
     void Renderer2DImages::Cleanup()
-    /*////////////////////////////*/ {
+    /*////////////////////////////*/
+    {
         CleanupBase();
     }
 
     class Renderer2DSolidColors::Pimpl
-    /*//////////////////////////////*/ {
+    /*//////////////////////////////*/
+    {
       public:
         const int locationPosition = 0;
         const int locationColor = 1;
@@ -514,7 +556,8 @@ namespace Narradia
 
     Renderer2DSolidColors::Renderer2DSolidColors()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////*/
+    {
         const GLchar *vertexShaderSource =
             R"(
             #version 330 core
@@ -540,7 +583,8 @@ namespace Narradia
     }
 
     RenderId Renderer2DSolidColors::NewRectangle()
-    /*//////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////*/
+    {
         auto vaoId = GenerateNewVertexArrayId();
         UseVaoBegin(vaoId);
         auto indexBufferId = GenerateNewBufferId(BufferTypes::Indices, vaoId);
@@ -594,12 +638,14 @@ namespace Narradia
     }
 
     void Renderer2DSolidColors::Cleanup()
-    /*/////////////////////////////////*/ {
+    /*/////////////////////////////////*/
+    {
         CleanupBase();
     }
 
     class RendererBillboardImages::Pimpl
-    /*////////////////////////////////*/ {
+    /*////////////////////////////////*/
+    {
       public:
         const int locationPosition = 0;
         const int locationUv = 1;
@@ -611,7 +657,8 @@ namespace Narradia
 
     RendererBillboardImages::RendererBillboardImages()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////*/
+    {
         const GLchar *vertexShaderSource =
             R"(
             #version 330 core
@@ -650,7 +697,8 @@ namespace Narradia
     }
 
     RenderId RendererBillboardImages::NewBillboardImage()
-    /*/////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////*/
+    {
         auto vaoId = GenerateNewVertexArrayId();
         UseVaoBegin(vaoId);
         auto indexBufferId = GenerateNewBufferId(BufferTypes::Indices, vaoId);
@@ -715,12 +763,14 @@ namespace Narradia
     }
 
     void RendererBillboardImages::Cleanup()
-    /*///////////////////////////////////*/ {
+    /*///////////////////////////////////*/
+    {
         CleanupBase();
     }
 
     class RendererModels::Pimpl
-    /*///////////////////////*/ {
+    /*///////////////////////*/
+    {
       public:
         struct BodyData
         /*///////////*/ {
@@ -751,7 +801,8 @@ namespace Narradia
 
     RendererModels::RendererModels()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/ {
+    /*//////////////////////////////*/
+    {
         const GLchar *vertexShaderSource =
             R"(
             #version 330 core
@@ -866,7 +917,8 @@ namespace Narradia
     }
 
     void RendererModels::NewModel(int modelNameHash)
-    /*////////////////////////////////////////////*/ {
+    /*////////////////////////////////////////////*/
+    {
         auto model = ModelBank::Get().GetModel(modelNameHash);
         p->modelIds.insert(
             {modelNameHash, std::map<int, std::map<float, const Pimpl::BodyData>>()});
@@ -913,7 +965,8 @@ namespace Narradia
     }
 
     RenderId RendererModels::NewBodyKeyframe(int modelNameHash, float msTime, int numVertices)
-    /*//////////////////////////////////////////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////////////////////////////////////////*/
+    {
         auto vaoId = GenerateNewVertexArrayId();
         if (p->timelines.count(modelNameHash) == 0)
             p->timelines.insert({modelNameHash, std::map<float, RenderId>()});
@@ -924,7 +977,8 @@ namespace Narradia
     void RendererModels::NewBodyKeyframeGeometry(
         int imageNamehash, float msTime, RenderId vaoId, std::vector<Vertex3F> vertices,
         std::vector<Point3F> vertexNormals)
-    /*////////////////////////////////////////////////////////////////////////////////*/ {
+    /*////////////////////////////////////////////////////////////////////////////////*/
+    {
         glEnable(GL_DEPTH_TEST);
         UseVaoBegin(vaoId);
         glUniformMatrix4fv(
@@ -976,7 +1030,8 @@ namespace Narradia
     }
 
     void RendererModels::StartBatchDrawing()
-    /*////////////////////////////////////*/ {
+    /*////////////////////////////////////*/
+    {
         p->isBatchDrawing = true;
         glEnable(GL_DEPTH_TEST);
         glUseProgram(GetShaderProgram()->GetProgramId());
@@ -987,7 +1042,8 @@ namespace Narradia
     }
 
     void RendererModels::StopBatchDrawing()
-    /*///////////////////////////////////*/ {
+    /*///////////////////////////////////*/
+    {
         p->isBatchDrawing = false;
     }
 
@@ -1142,12 +1198,14 @@ namespace Narradia
     }
 
     void RendererModels::Cleanup()
-    /*//////////////////////////*/ {
+    /*//////////////////////////*/
+    {
         CleanupBase();
     }
 
     class RendererTiles::Pimpl
-    /*//////////////////////*/ {
+    /*//////////////////////*/
+    {
       public:
         const int locationPosition = 0;
         const int locationColor = 1;
@@ -1164,7 +1222,8 @@ namespace Narradia
 
     RendererTiles::RendererTiles()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/ {
+    /*//////////////////////////////*/
+    {
         const GLchar *vertexShaderSource =
             R"(
             #version 330 core
@@ -1250,7 +1309,8 @@ namespace Narradia
     }
 
     RenderId RendererTiles::NewImagePolygon(int numVertices)
-    /*////////////////////////////////////////////////////*/ {
+    /*////////////////////////////////////////////////////*/
+    {
         auto vertexArrayId = GenerateNewVertexArrayId();
         auto indexBufferId = GenerateNewBufferId(BufferTypes::Indices, vertexArrayId);
         auto positionBufferId = GenerateNewBufferId(BufferTypes::Positions, vertexArrayId);
@@ -1269,7 +1329,8 @@ namespace Narradia
     }
 
     RenderId RendererTiles::NewTile()
-    /*/////////////////////////////*/ {
+    /*/////////////////////////////*/
+    {
         return NewImagePolygon(4);
     }
 
@@ -1291,7 +1352,8 @@ namespace Narradia
     }
 
     void RendererTiles::DrawTile(int imageNameHash, RenderId vaoId, bool depthTestOff) const
-    /*////////////////////////////////////////////////////////////////////////////////////*/ {
+    /*////////////////////////////////////////////////////////////////////////////////////*/
+    {
         DrawImagePolygon(imageNameHash, vaoId, 4, depthTestOff);
     }
 
@@ -1357,7 +1419,8 @@ namespace Narradia
     }
 
     void RendererTiles::StartBatchDrawing()
-    /*///////////////////////////////////*/ {
+    /*///////////////////////////////////*/
+    {
         p->isBatchDrawing = true;
         glUseProgram(GetShaderProgram()->GetProgramId());
         glUniformMatrix4fv(
@@ -1382,7 +1445,8 @@ namespace Narradia
     }
 
     void RendererTiles::StopBatchDrawing()
-    /*//////////////////////////////////*/ {
+    /*//////////////////////////////////*/
+    {
         p->isBatchDrawing = false;
         glUseProgram(0);
         glDisable(GL_CULL_FACE);
@@ -1426,12 +1490,14 @@ namespace Narradia
     }
 
     void RendererTiles::Cleanup()
-    /*/////////////////////////*/ {
+    /*/////////////////////////*/
+    {
         CleanupBase();
     }
 
     class Font::Pimpl
-    /*/////////////*/ {
+    /*/////////////*/
+    {
       public:
         std::shared_ptr<TTF_Font> sdlFont = nullptr;
         std::shared_ptr<TTF_Font> sdlFontOutline = nullptr;
@@ -1440,7 +1506,8 @@ namespace Narradia
 
     Font::Font(std::string_view fontFileName, int fontSize)
         : p(std::make_shared<Pimpl>())
-    /*///////////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////////*/
+    {
         p->sdlFont =
             std::shared_ptr<TTF_Font>(TTF_OpenFont(fontFileName.data(), fontSize), SdlDeleter());
         p->sdlFontOutline =
@@ -1449,22 +1516,26 @@ namespace Narradia
     }
 
     TTF_Font *Font::GetSdlFont() const
-    /*//////////////////////////////*/ {
+    /*//////////////////////////////*/
+    {
         return p->sdlFont.get();
     }
 
     TTF_Font *Font::GetSdlFontOutline() const
-    /*/////////////////////////////////////*/ {
+    /*/////////////////////////////////////*/
+    {
         return p->sdlFontOutline.get();
     }
 
     constexpr int Font::GetFontOutlineWidth()
-    /*/////////////////////////////////////*/ {
+    /*/////////////////////////////////////*/
+    {
         return Pimpl::kFontOutlineWidth;
     }
 
     class TextRenderer::Pimpl
-    /*/////////////////////*/ {
+    /*/////////////////////*/
+    {
       public:
         void RenderText(
             RenderId, std::string_view, Color, bool, TextSizes, std::string &, SizeF &) const;
@@ -1480,7 +1551,8 @@ namespace Narradia
 
     TextRenderer::TextRenderer()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/ {
+    /*//////////////////////////////*/
+    {
         TTF_Init();
         auto fontPath =
             std::string(SDL_GetBasePath()) + p->relFontsPath + "PartyConfettiRegular-eZOn3.ttf";
@@ -1489,7 +1561,8 @@ namespace Narradia
     }
 
     RenderId TextRenderer::NewString()
-    /*//////////////////////////////*/ {
+    /*//////////////////////////////*/
+    {
         auto uniqueName = p->CreateBlankTexGetName();
         auto rendIdImageRect = Renderer2DImages::Get().NewImage();
         p->uniqueNameIds.insert({rendIdImageRect, uniqueName});
@@ -1497,7 +1570,8 @@ namespace Narradia
     }
 
     RenderId TextRenderer::NewBillboardString()
-    /*///////////////////////////////////////*/ {
+    /*///////////////////////////////////////*/
+    {
         auto uniqueName = p->CreateBlankTexGetName();
         auto rendIdBboardTexRect = RendererBillboardImages::Get().NewBillboardImage();
         p->uniqueNameIds.insert({rendIdBboardTexRect, uniqueName});
@@ -1505,7 +1579,8 @@ namespace Narradia
     }
 
     RenderId TextRenderer::NewMultiLineString(int numLines, float width)
-    /*////////////////////////////////////////////////////////////////*/ {
+    /*////////////////////////////////////////////////////////////////*/
+    {
         MultiLineText multiLineText;
         multiLineText.width = width;
         for (auto i = 0; i < numLines; i++)
@@ -1517,7 +1592,8 @@ namespace Narradia
     void TextRenderer::Pimpl::RenderText(
         RenderId vaoId, std::string_view text, Color color, bool centerAlign, TextSizes textSize,
         std::string &outUniqueNameId, SizeF &outSize) const
-    /*/////////////////////////////////////////////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////////////////////////////////////////////*/
+    {
         auto font = fonts.at(textSize)->GetSdlFont();
         if (!font) return;
         auto sdlColor = color.ToSdlColor();
@@ -1641,7 +1717,8 @@ namespace Narradia
     }
 
     const std::string TextRenderer::Pimpl::CreateBlankTexGetName()
-    /*//////////////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////////////*/
+    {
         auto id = idCounter++;
         auto uniqueName = "RenderedImage" + std::to_string(id);
         ImageBank::Get().GetBlankTextImage(uniqueName);

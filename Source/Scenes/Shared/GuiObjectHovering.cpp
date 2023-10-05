@@ -9,13 +9,15 @@
 namespace Narradia
 {
     GuiObjectHovering::GuiObjectHovering()
-    /*//////////////////////////////////*/ {
+    /*//////////////////////////////////*/
+    {
         idLabelBox = Renderer2DSolidColors::Get().NewRectangle();
         idLabelText = TextRenderer::Get().NewString();
     }
 
     void GuiObjectHovering::Render()
-    /*////////////////////////////*/ {
+    /*////////////////////////////*/
+    {
         if (GuiWindowObjectSlot::hoveredObject)
         /*************************************/ {
             auto boxPos = GetMousePositionF().Translate(0.003f, 0.01f);

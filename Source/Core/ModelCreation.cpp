@@ -10,7 +10,8 @@ using std::vector;
 namespace Narradia
 {
     shared_ptr<Model> ModelCreator::CreateModel(const aiScene *scene)
-    /*////////////////////////////////////////////////////////////*/ {
+    /*////////////////////////////////////////////////////////////*/
+    {
         auto animDuration = scene->mNumAnimations > 0 ? scene->mAnimations[0]->mDuration : 0;
         auto newModel = make_shared<Model>(animDuration);
         for (auto &modelPart : GetModelParts(scene))
@@ -19,7 +20,8 @@ namespace Narradia
     }
 
     auto ModelCreator::GetModelParts(const aiScene *scene) const -> vector<shared_ptr<ModelPart>>
-    /*/////////////////////////////////////////////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////////////////////////////////////////////*/
+    {
         vector<shared_ptr<ModelPart>> allModelparts;
         for (auto &entry : GetModelMeshIds(scene))
         /****************************************/ {
@@ -99,7 +101,8 @@ namespace Narradia
     }
 
     int ModelPartCreator::GetTexNameHashForMesh(const aiScene *scene, aiMesh *mesh) const
-    /*/////////////////////////////////////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////////////////////////////////////*/
+    {
         auto textureNameHashcodes = GetTexNameHashcodes(scene);
         auto material = mesh->mMaterialIndex;
         auto textureNameHash = textureNameHashcodes.at(material);
@@ -139,7 +142,8 @@ namespace Narradia
     }
 
     vector<int> ModelPartCreator::GetTexNameHashcodes(const aiScene *scene) const
-    /*/////////////////////////////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////////////////////////////*/
+    {
         vector<int> textureNameHashcodes;
         auto numMaterials = scene->mNumMaterials;
         for (auto i = 0; i < numMaterials; i++)
@@ -207,7 +211,8 @@ namespace Narradia
     }
 
     void ModelPartCreator::Translate(Point3F *position, aiVectorKey positionKeyFrame) const
-    /*///////////////////////////////////////////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////////////////////////////////////////*/
+    {
         auto translationMatrix = aiMatrix4x4();
         translationMatrix[0][3] = positionKeyFrame.mValue.x;
         translationMatrix[1][3] = positionKeyFrame.mValue.y;
@@ -319,7 +324,8 @@ namespace Narradia
 
     map<string, vector<aiVectorKey>>
     ModelPartKeyframeCreator::GetAnimPositionKeyframes(const aiScene *scene) const
-    /*//////////////////////////////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////////////////////////////*/
+    {
         auto nodeNameToPositionKeyframes = map<string, vector<aiVectorKey>>();
         if (scene->mNumAnimations == 0)
         /*****************************/ {
@@ -364,7 +370,8 @@ namespace Narradia
 
     map<string, vector<aiQuatKey>>
     ModelPartKeyframeCreator::GetAnimRotationKeyframes(const aiScene *scene) const
-    /*//////////////////////////////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////////////////////////////*/
+    {
         auto nodeNameToRotationKeyframes = map<string, vector<aiQuatKey>>();
         if (scene->mNumAnimations == 0)
         /*****************************/ {
@@ -410,7 +417,8 @@ namespace Narradia
 
     map<string, vector<aiVectorKey>>
     ModelPartKeyframeCreator::GetAnimScalingKeyframes(const aiScene *scene) const
-    /*/////////////////////////////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////////////////////////////*/
+    {
         auto nodeNameToScalingKeyframes = map<string, vector<aiVectorKey>>();
         if (scene->mNumAnimations == 0)
         /*****************************/ {

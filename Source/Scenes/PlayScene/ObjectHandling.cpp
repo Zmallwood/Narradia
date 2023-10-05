@@ -10,7 +10,8 @@
 namespace Narradia
 {
     void RemoveObjectMirror(Object *&object)
-    /*////////////////////////////////////*/ {
+    /*////////////////////////////////////*/
+    {
         if (ObjectMoving::Get().objectInAir.get() == object)
             ObjectMoving::Get().objectInAir = nullptr;
         for (auto &inventoryObject : Player::Get().data.inventory.objects)
@@ -55,7 +56,8 @@ namespace Narradia
     }
 
     std::shared_ptr<Object> MoveObject(Object *object)
-    /*//////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////*/
+    {
         if (ObjectMoving::Get().objectInAir.get() == object)
         /**************************************************/ {
             auto result = ObjectMoving::Get().objectInAir;

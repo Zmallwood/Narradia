@@ -9,7 +9,8 @@
 namespace Narradia
 {
     void MobMovement::Update()
-    /*//////////////////////*/ {
+    /*//////////////////////*/
+    {
         Log();
         auto player_world_area_position = Player::Get().GetWorldAreaPos();
         if (nullptr == World::GetPointer())

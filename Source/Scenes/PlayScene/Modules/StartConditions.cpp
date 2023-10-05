@@ -7,7 +7,8 @@
 namespace Narradia
 {
     void StartConditions::CreateStartConditions()
-    /*/////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////*/
+    {
         auto &inventory = Player::Get().data.inventory;
         inventory.Add("ObjectKindling");
         inventory.Add("ObjectFishingNet");

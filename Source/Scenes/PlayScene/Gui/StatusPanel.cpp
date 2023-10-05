@@ -6,7 +6,8 @@
 namespace Narradia
 {
     StatusPanel::StatusPanel()
-    /*//////////////////////*/ {
+    /*//////////////////////*/
+    {
         rendIdBgImage = Renderer2DImages::Get().NewImage();
         std::tie(rendIdPlHpText, rendIdPlStamText) = TextRenderer::Get().NewStrings<2>();
         std::tie(rendIdPlHpBar, rendIdPlStamBar) = Renderer2DSolidColors::Get().NewRectangles<2>();
@@ -15,11 +16,13 @@ namespace Narradia
     }
 
     void StatusPanel::Update()
-    /*//////////////////////*/ {
+    /*//////////////////////*/
+    {
     }
 
     void StatusPanel::Render() const
-    /*////////////////////////////*/ {
+    /*////////////////////////////*/
+    {
         auto player = Player::GetPointer();
         Renderer2DImages::Get().DrawImage(hashPanelBg, rendIdBgImage, boundsPanel);
         auto tGfx = TextRenderer::GetPointer();

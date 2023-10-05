@@ -14,12 +14,14 @@
 namespace Narradia
 {
     TileHovering::TileHovering()
-    /*////////////////////////*/ {
+    /*////////////////////////*/
+    {
         glIdTextHoveredObject = TextRenderer::Get().NewString();
     }
 
     void TileHovering::Update()
-    /*///////////////////////*/ {
+    /*///////////////////////*/
+    {
         if (Camera::Get().cameraDistance == 2.0f)
         /*************************************/ {
             hoveredTile = {-1, -1};
@@ -99,7 +101,8 @@ namespace Narradia
     }
 
     void TileHovering::Render()
-    /*///////////////////////*/ {
+    /*///////////////////////*/
+    {
         if (hoveredObjectHash == 0)
             return;
         if (false == ObjectBehaviourList::Get().HasBehaviourData(hoveredObjectHash))

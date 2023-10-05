@@ -18,19 +18,22 @@
 namespace Narradia
 {
     ObjectMoving::ObjectMoving()
-    /*////////////////////////*/ {
+    /*////////////////////////*/
+    {
         id_moving_object_image = Renderer2DImages::Get().NewImage();
     }
 
     void ObjectMoving::Update()
-    /*///////////////////////*/ {
+    /*///////////////////////*/
+    {
         PickupObjectFromGuiIfIsTheCase();
         PickupObjectFromGroundIfIsTheCase();
         ReleaseObjectIfIsTheCase();
     }
 
     void ObjectMoving::PickupObjectFromGuiIfIsTheCase()
-    /*///////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////*/
+    {
         if (GuiWindowObjectSlot::hoveredObject)
         /*************************************/ {
             MouseInput::Get().GetLeftButton().AddFiredAction(
@@ -42,7 +45,8 @@ namespace Narradia
     }
 
     void ObjectMoving::PickupObjectFromGroundIfIsTheCase()
-    /*//////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////*/
+    {
         if (MapArea::IsInsideMap(TileHovering::Get().hoveredTile))
         /******************************************************/ {
             auto player = Player::GetPointer();
@@ -73,7 +77,8 @@ namespace Narradia
     }
 
     void ObjectMoving::ReleaseObjectIfIsTheCase()
-    /*/////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////*/
+    {
         MouseInput::Get().GetLeftButton().AddReleasedAction(
             "ObjectMovingReleaseObject",
             [&]
@@ -123,7 +128,8 @@ namespace Narradia
     }
 
     void ObjectMoving::Render()
-    /*///////////////////////*/ {
+    /*///////////////////////*/
+    {
         if (!objectInAir)
             return;
         auto mouse_position = GetMousePositionF();

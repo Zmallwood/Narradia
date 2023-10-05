@@ -7,7 +7,8 @@ namespace Narradia
 {
     InventoryGui::InventoryGui()
         : GuiWindow("Inventory", {0.3f, 0.2f, 0.2f, 0.45f})
-    /*///////////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////////*/
+    {
         auto slotWidth = (GetBounds().width - 2 * GetMargin()) / numCols - GetMargin();
         auto i = 0;
         for (auto y = 0; y < numRows; y++)
@@ -23,7 +24,8 @@ namespace Narradia
     }
 
     void InventoryGui::UpdateDerived()
-    /*//////////////////////////////*/ {
+    /*//////////////////////////////*/
+    {
         if (GetBounds().Contains(GetMousePositionF()))
         /********************************************/ {
             GuiWindowObjectSlot::hoveredObject = nullptr;
@@ -41,7 +43,8 @@ namespace Narradia
     }
 
     void InventoryGui::RenderDerived() const
-    /*////////////////////////////////////*/ {
+    /*////////////////////////////////////*/
+    {
         Log();
         for (auto y = 0; y < numRows; y++)
             for (auto x = 0; x < numCols; x++)

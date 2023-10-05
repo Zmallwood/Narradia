@@ -10,7 +10,8 @@
 namespace Narradia
 {
     void WorldMapGenerate::DoGenerationStep(GenerateSteps generationStep)
-    /*/////////////////////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////////////////////*/
+    {
         switch (generationStep)
         /*********************/ {
         case GenerateSteps::CreateBlank:
@@ -77,7 +78,8 @@ namespace Narradia
     }
 
     void WorldMapGenerate::AddElevation()
-    /*/////////////////////////////////*/ {
+    /*/////////////////////////////////*/
+    {
         auto mapArea = World::Get().GetMapAreaAtZLevel(0);
         auto areaCount = 8;
         for (auto i = 0; i < areaCount; i++)
@@ -190,7 +192,8 @@ namespace Narradia
     }
 
     void WorldMapGenerate::AddMobs()
-    /*////////////////////////////*/ {
+    /*////////////////////////////*/
+    {
         auto mapArea = World::Get().GetMapAreaAtZLevel(0);
         auto numBoars = 60;
         for (auto i = 0; i < numBoars; i++)
@@ -224,7 +227,8 @@ namespace Narradia
     }
 
     void WorldMapGenerate::AddObjects()
-    /*///////////////////////////////*/ {
+    /*///////////////////////////////*/
+    {
         auto mapArea = World::Get().GetMapAreaAtZLevel(0);
         auto forestsCount = 70;
         for (auto i = 0; i < forestsCount; i++)
@@ -296,7 +300,8 @@ namespace Narradia
     }
 
     void WorldMapGenerate::AddWater()
-    /*/////////////////////////////*/ {
+    /*/////////////////////////////*/
+    {
         auto mapArea = World::Get().GetMapAreaAtZLevel(0);
         auto areaCount = 30;
         for (auto i = 0; i < areaCount; i++)
@@ -336,7 +341,8 @@ namespace Narradia
     }
 
     void WorldMapGenerate::AddWaterRivers()
-    /*///////////////////////////////////*/ {
+    /*///////////////////////////////////*/
+    {
         auto mapArea = World::Get().GetMapAreaAtZLevel(0);
         std::vector<Point2F> predefinedSpawnLocs = {
             {0.05f, 0.05f}, {0.15f, 0.05f}, {0.25f, 0.05f}, {0.35f, 0.05f}, {0.45f, 0.05f},
@@ -459,7 +465,8 @@ namespace Narradia
 
     void WorldMapGenerate::AddObjects(
         std::string_view objectName, int amount, std::string_view groundType)
-    /*/////////////////////////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////////////////////////*/
+    {
         auto mapArea = World::Get().GetMapAreaAtZLevel(0);
         for (auto i = 0; i < amount; i++)
         /*******************************/ {
@@ -477,7 +484,8 @@ namespace Narradia
     }
 
     void WorldMapGenerate::GenerateColorVariations()
-    /*////////////////////////////////////////////*/ {
+    /*////////////////////////////////////////////*/
+    {
         World::Get().ResetColorVariations();
         World::Get().GenerateRandomColorVariations();
         World::Get().ApplyDefaultColorVariations();

@@ -15,11 +15,13 @@ namespace Narradia
 {
     RenderLoop::RenderLoop(std::function<void()> action_)
         : action(action_)
-    /*/////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////*/
+    {
     }
 
     void RenderLoop::operator()()
-    /*/////////////////////////*/ {
+    /*/////////////////////////*/
+    {
         const auto &playerWorldAreaPos = Player::Get().GetWorldAreaPos();
         const auto &playerPos = Player::Get().GetPosition();
         const auto &playerTileCoord = playerPos.ToIntPoint();

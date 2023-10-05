@@ -9,7 +9,8 @@ namespace Narradia
 {
     RoofBrowserGui::RoofBrowserGui()
         : GuiWindow("Roof browser", {0.7f, 0.2f, 0.2f, 0.45f})
-    /*//////////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////////*/
+    {
         auto slotWidth = (GetBounds().width - 2 * GetMargin()) / numCols - GetMargin();
         auto images = ImageBank::Get().GetImages();
         int j = 0;
@@ -42,7 +43,8 @@ namespace Narradia
     }
 
     void RoofBrowserGui::UpdateDerived()
-    /*////////////////////////////////*/ {
+    /*////////////////////////////////*/
+    {
         if (GetBounds().Contains(GetMousePositionF()))
         /********************************************/ {
             GuiWindowObjectSlot::hoveredObject = nullptr;
@@ -78,7 +80,8 @@ namespace Narradia
     }
 
     void RoofBrowserGui::RenderDerived() const
-    /*//////////////////////////////////////*/ {
+    /*//////////////////////////////////////*/
+    {
         auto i = 0;
         for (auto y = 0; y < numRows; y++)
         /********************************/ {

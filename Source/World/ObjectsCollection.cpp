@@ -8,11 +8,13 @@ namespace Narradia
 {
     ObjectsCollection::ObjectsCollection(Tile *parentTile_)
         : parentTile(parentTile_)
-    /*///////////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////////*/
+    {
     }
 
     void ObjectsCollection::CreateAdd(std::string_view objectType, int quantity)
-    /*////////////////////////////////////////////////////////////////////////*/ {
+    /*////////////////////////////////////////////////////////////////////////*/
+    {
         auto newObject = std::make_shared<Object>(objectType, quantity, this);
         trueList.push_back(newObject);
         parentTile->GetParentMapArea()->AddObjectMirror(
@@ -20,7 +22,8 @@ namespace Narradia
     }
 
     void ObjectsCollection::CreateAdd(int objectTypeHash, int quantity)
-    /*///////////////////////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////////////////////*/
+    {
         auto newObject = std::make_shared<Object>(objectTypeHash, quantity, this);
         trueList.push_back(newObject);
         parentTile->GetParentMapArea()->AddObjectMirror(
@@ -28,19 +31,22 @@ namespace Narradia
     }
 
     void ObjectsCollection::Add(std::shared_ptr<Object> object)
-    /*///////////////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////////////*/
+    {
         object->SetParentObjectsCollection(this);
         trueList.push_back(object);
         parentTile->GetParentMapArea()->AddObjectMirror(object.get(), parentTile->GetCoordinate());
     }
 
     void ObjectsCollection::Clear()
-    /*///////////////////////////*/ {
+    /*///////////////////////////*/
+    {
         trueList.clear();
     }
 
     bool ObjectsCollection::Contains(int objectNameHash) const
-    /*//////////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////////*/
+    {
         for (auto objectEntry : list)
             if (objectEntry->GetObjectType() == objectNameHash)
                 return true;
@@ -66,7 +72,8 @@ namespace Narradia
     }
 
     void ObjectsCollection::Remove(Object *object)
-    /*//////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////*/
+    {
         auto i = 0;
         for (auto &objectEntry : trueList)
         /********************************/ {
@@ -81,7 +88,8 @@ namespace Narradia
     }
 
     std::shared_ptr<Object> ObjectsCollection::GetObjectFromRawPtr(Object *object)
-    /*//////////////////////////////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////////////////////////////*/
+    {
         for (auto &objectEntry : list)
             if (objectEntry.get() == object)
                 return objectEntry;

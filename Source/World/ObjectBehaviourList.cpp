@@ -5,7 +5,8 @@
 namespace Narradia
 {
     class ObjectBehaviourList::Pimpl
-    /*////////////////////////////*/ {
+    /*////////////////////////////*/
+    {
       public:
         void CreateEntryIfDoesntExist(std::string_view);
 
@@ -14,11 +15,13 @@ namespace Narradia
 
     ObjectBehaviourList::ObjectBehaviourList()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////////////*/ {
+    /*//////////////////////////////////////*/
+    {
     }
 
     void ObjectBehaviourList::Initialize()
-    /*//////////////////////////////////*/ {
+    /*//////////////////////////////////*/
+    {
         AddLabel("ObjectKindling", "Kindling");
         AddLabel("ObjectFishingNet", "Fishing net");
         AddLabel("ObjectFish", "Fish");
@@ -57,63 +60,73 @@ namespace Narradia
     }
 
     void ObjectBehaviourList::AddLabel(std::string_view objectName, std::string_view label)
-    /*///////////////////////////////////////////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////////////////////////////////////////*/
+    {
         p->CreateEntryIfDoesntExist(objectName);
         p->list.at(Hash(objectName.data())).label = label;
     }
 
     void ObjectBehaviourList::AddFlag(std::string_view objectName, ObjectBehaviourFlags flag)
-    /*/////////////////////////////////////////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////////////////////////////////////////*/
+    {
         p->CreateEntryIfDoesntExist(objectName);
         p->list.at(Hash(objectName.data())).flags |= static_cast<int>(flag);
     }
 
     void ObjectBehaviourList::SetContainerSlots(std::string_view objectName, int containerSlots)
-    /*////////////////////////////////////////////////////////////////////////////////////////*/ {
+    /*////////////////////////////////////////////////////////////////////////////////////////*/
+    {
         p->CreateEntryIfDoesntExist(objectName);
         p->list.at(Hash(objectName.data())).containerSlots = containerSlots;
     }
 
     bool ObjectBehaviourList::IsContainer(int objectTypeHash)
-    /*/////////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////////*/
+    {
         if (p->list.count(objectTypeHash))
             return p->list.at(objectTypeHash).containerSlots > 0;
         return false;
     }
 
     bool ObjectBehaviourList::HasBehaviourData(int objectTypeHash)
-    /*//////////////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////////////*/
+    {
         return p->list.count(objectTypeHash) != 0;
     }
 
     int ObjectBehaviourList::GetFlags(int objectTypeHash)
-    /*/////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////*/
+    {
         if (p->list.count(objectTypeHash))
             return p->list.at(objectTypeHash).flags;
         return 0;
     }
 
     std::string_view ObjectBehaviourList::GetLabel(int objectTypeHash)
-    /*//////////////////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////////////////*/
+    {
         if (p->list.count(objectTypeHash))
             return p->list.at(objectTypeHash).label;
         return "";
     }
 
     int ObjectBehaviourList::GetContainerSlots(int objectTypeHash)
-    /*//////////////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////////////*/
+    {
         if (p->list.count(objectTypeHash))
             return p->list.at(objectTypeHash).containerSlots;
         return 0;
     }
 
     void ObjectBehaviourList::Clear()
-    /*/////////////////////////////*/ {
+    /*/////////////////////////////*/
+    {
         p->list.clear();
     }
 
     void ObjectBehaviourList::Pimpl::CreateEntryIfDoesntExist(std::string_view objectName)
-    /*//////////////////////////////////////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////////////////////////////////////*/
+    {
         auto objectNameHash = Hash(objectName.data());
         if (list.count(objectNameHash) == 0)
             list.insert({objectNameHash, ObjectBehaviourEntry()});

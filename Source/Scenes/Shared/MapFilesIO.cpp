@@ -10,18 +10,21 @@
 namespace Narradia
 {
     class MapFilesIO::Pimpl
-    /*///////////////////*/ {
+    /*///////////////////*/
+    {
       public:
         static constexpr std::string_view relMapsPath = "Maps";
     };
 
     MapFilesIO::MapFilesIO()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/ {
+    /*//////////////////////////////*/
+    {
     }
 
     void MapFilesIO::SaveCurrentMapArea(std::string_view mapName)
-    /*/////////////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////////////*/
+    {
         std::filesystem::create_directory(
             std::string(SDL_GetBasePath()) + Pimpl::relMapsPath.data());
         std::filesystem::remove(
@@ -74,7 +77,8 @@ namespace Narradia
     }
 
     void MapFilesIO::LoadMapArea(std::string_view mapName)
-    /*//////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////*/
+    {
         std::ifstream mapFile;
         mapFile.open(
             std::string(SDL_GetBasePath()) + Pimpl::relMapsPath.data() + "/" + mapName.data() +

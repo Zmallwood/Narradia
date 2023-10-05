@@ -7,7 +7,8 @@
 namespace Narradia
 {
     class IntroScene::Pimpl
-    /*//////////////////*/ {
+    /*//////////////////*/
+    {
       public:
         RenderId rendIdBackImage;
         RenderId rendIdLogoImage;
@@ -16,7 +17,8 @@ namespace Narradia
 
     IntroScene::IntroScene()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/ {
+    /*//////////////////////////////*/
+    {
         CreateGui();
         p->rendIdBackImage = Renderer2DImages::Get().NewImage();
         p->rendIdLogoImage = Renderer2DImages::Get().NewImage();
@@ -25,7 +27,8 @@ namespace Narradia
     }
 
     void IntroScene::UpdateDerived()
-    /*///////////////////////////*/ {
+    /*///////////////////////////*/
+    {
         Log();
         MouseInput::Get().GetLeftButton().AddFiredAction(
             "IntroSceneGoToMainMenu", [&]() { SceneManager::Get().ChangeView(Scenes::MainMenu); },
@@ -41,7 +44,8 @@ namespace Narradia
     }
 
     void IntroScene::RenderDerived()
-    /*///////////////////////////*/ {
+    /*///////////////////////////*/
+    {
         Log();
         RectangleF rectBack = {0.0f, 0.0f, 1.0f, 1.0f};
         Log();
@@ -57,7 +61,8 @@ namespace Narradia
     }
 
     class MainMenuScene::Pimpl
-    /*/////////////////////*/ {
+    /*/////////////////////*/
+    {
       public:
         const RectangleF rectBack = {0.0f, 0.0f, 1.0f, 1.0f};
         const RectangleF rectLogo = {0.4f, 0.1f, 0.2f, 0.05f};
@@ -67,7 +72,8 @@ namespace Narradia
 
     MainMenuScene::MainMenuScene()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/ {
+    /*//////////////////////////////*/
+    {
         CreateGui();
         auto sceneGui = GetSceneGui();
         sceneGui->AddGuiButton("New game", {0.45f, 0.3f, 0.1f, 0.05f}, [=]() {
@@ -84,19 +90,22 @@ namespace Narradia
     }
 
     void MainMenuScene::UpdateDerived()
-    /*//////////////////////////////*/ {
+    /*//////////////////////////////*/
+    {
         Log();
     }
 
     void MainMenuScene::RenderDerived()
-    /*//////////////////////////////*/ {
+    /*//////////////////////////////*/
+    {
         Log();
         Renderer2DImages::Get().DrawImage("DefaultSceneBackground", p->glIdBackImage, p->rectBack);
         Renderer2DImages::Get().DrawImage("NarradiaLogo", p->glIdLogoImage, p->rectLogo);
     }
 
     class MapTypeSelectionScene::Pimpl
-    /*/////////////////////////////*/ {
+    /*/////////////////////////////*/
+    {
       public:
         const RectangleF rectBack = {0.0f, 0.0f, 1.0f, 1.0f};
         const RectangleF rectLogo = {0.4f, 0.1f, 0.2f, 0.05f};
@@ -106,7 +115,8 @@ namespace Narradia
 
     MapTypeSelectionScene::MapTypeSelectionScene()
         : p(std::make_shared<Pimpl>())
-    /*////////////////////////////////////////*/ {
+    /*////////////////////////////////////////*/
+    {
         CreateGui();
         auto sceneGui = GetSceneGui();
         sceneGui->AddGuiButton("Random wilderness map", {0.45f, 0.3f, 0.1f, 0.05f}, [=]() {
@@ -123,19 +133,22 @@ namespace Narradia
     }
 
     void MapTypeSelectionScene::UpdateDerived()
-    /*//////////////////////////////////////*/ {
+    /*//////////////////////////////////////*/
+    {
         Log();
     }
 
     void MapTypeSelectionScene::RenderDerived()
-    /*//////////////////////////////////////*/ {
+    /*//////////////////////////////////////*/
+    {
         Log();
         Renderer2DImages::Get().DrawImage("DefaultSceneBackground", p->glIdBackImage, p->rectBack);
         Renderer2DImages::Get().DrawImage("NarradiaLogo", p->glIdLogoImage, p->rectLogo);
     }
 
     UserMapSelectionScene::UserMapSelectionScene()
-    /*////////////////////////////////////////*/ {
+    /*////////////////////////////////////////*/
+    {
         CreateGui();
         glIdBackgroundImage = Renderer2DImages::Get().NewImage();
         auto bounds = RectangleF{0.45f, 0.4f, 0.1f, 0.035f};
@@ -151,11 +164,13 @@ namespace Narradia
     }
 
     void UserMapSelectionScene::UpdateDerived()
-    /*//////////////////////////////////////*/ {
+    /*//////////////////////////////////////*/
+    {
     }
 
     void UserMapSelectionScene::RenderDerived()
-    /*//////////////////////////////////////*/ {
+    /*//////////////////////////////////////*/
+    {
         auto rectBack = RectangleF{0.0f, 0.0f, 1.0f, 1.0f};
         Renderer2DImages::Get().DrawImage("DefaultSceneBackground", glIdBackgroundImage, rectBack);
     }

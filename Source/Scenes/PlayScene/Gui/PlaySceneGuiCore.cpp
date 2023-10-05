@@ -7,7 +7,8 @@
 namespace Narradia
 {
     class FpsPanel::Pimpl
-    /*/////////////////*/ {
+    /*/////////////////*/
+    {
       public:
         static constexpr Point2F kStartPosition = {0.9f, 0.01f};
         static constexpr SizeF kSize = {0.08f, 0.04f};
@@ -22,13 +23,15 @@ namespace Narradia
     FpsPanel::FpsPanel()
         : p(std::make_shared<Pimpl>()),
           GuiMovableContainer(Pimpl::kSize.ToRectangle(), Pimpl::kStartPosition, Pimpl::kSize)
-    /*//////////////////////////////////////////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////////////////////////////////////////*/
+    {
         p->idBackgroundImage = Renderer2DImages::Get().NewImage();
         p->idFpsText = TextRenderer::Get().NewString();
     }
 
     void FpsPanel::Update()
-    /*///////////////////*/ {
+    /*///////////////////*/
+    {
         if (SDL_GetTicks() > p->ticksLastUpdate + 1000)
         /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/ {
             p->fps = p->framesCount++;
@@ -40,7 +43,8 @@ namespace Narradia
     }
 
     void FpsPanel::Render() const
-    /*/////////////////////////*/ {
+    /*/////////////////////////*/
+    {
         if (!p->visible)
             return;
         Renderer2DImages::Get().DrawImage(Hash("PanelBg"), p->idBackgroundImage, GetBounds());
@@ -64,27 +68,32 @@ namespace Narradia
     }
 
     void MessageBox::UpdateDerived()
-    /*////////////////////////////*/ {
+    /*////////////////////////////*/
+    {
     }
 
     void MessageBox::RenderDerived() const
-    /*//////////////////////////////////*/ {
+    /*//////////////////////////////////*/
+    {
         TextRenderer::Get().DrawString(
             glIdMessageText, messageText, GetPosition().Translate(0.01f, 0.05f), Colors::yellow);
     }
 
     ExperienceBar::ExperienceBar()
-    /*//////////////////////////*/ {
+    /*//////////////////////////*/
+    {
         glIdUnfilledArea = Renderer2DSolidColors::Get().NewRectangle();
         glIdFilledArea = Renderer2DImages::Get().NewImage();
     }
 
     void ExperienceBar::Update()
-    /*////////////////////////*/ {
+    /*////////////////////////*/
+    {
     }
 
     void ExperienceBar::Render() const
-    /*//////////////////////////////*/ {
+    /*//////////////////////////////*/
+    {
         auto unfilledArea = RectangleF{0.0f, 1.0f - kBarHeight, 1.0f, kBarHeight};
         Renderer2DSolidColors::Get().FillRectangle(glIdUnfilledArea, unfilledArea, Colors::black);
         auto expProgress = GetFractionalExpProgress(Player::Get().data.exp);

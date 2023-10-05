@@ -12,57 +12,68 @@
 namespace Narradia
 {
     Point2F Player::GetPosition()
-    /*/////////////////////////*/ {
+    /*/////////////////////////*/
+    {
         return data.movement.position;
     }
 
     void Player::MoveForward()
-    /*//////////////////////*/ {
+    /*//////////////////////*/
+    {
         MoveAtAngle(0);
     }
 
     void Player::TurnForward()
-    /*//////////////////////*/ {
+    /*//////////////////////*/
+    {
         data.movement.facingAngle = Camera::Get().horizontalAngle;
     }
 
     void Player::TurnRight()
-    /*////////////////////*/ {
+    /*////////////////////*/
+    {
         data.movement.facingAngle = Camera::Get().horizontalAngle - 90.0f;
     }
 
     void Player::TurnLeft()
-    /*///////////////////*/ {
+    /*///////////////////*/
+    {
         data.movement.facingAngle = Camera::Get().horizontalAngle + 90.0f;
     }
 
     void Player::TurnBack()
-    /*///////////////////*/ {
+    /*///////////////////*/
+    {
         data.movement.facingAngle = Camera::Get().horizontalAngle + 180.0f;
     }
 
     void Player::TurnRightForward()
-    /*///////////////////////////*/ {
+    /*///////////////////////////*/
+    {
         data.movement.facingAngle = Camera::Get().horizontalAngle - 45.0f;
     }
 
     void Player::TurnLeftForward()
-    /*//////////////////////////*/ {
+    /*//////////////////////////*/
+    {
         data.movement.facingAngle = Camera::Get().horizontalAngle + 45.0f;
     }
 
     void Player::TurnRightBack()
-    /*////////////////////////*/ {
+    /*////////////////////////*/
+    {
         data.movement.facingAngle = Camera::Get().horizontalAngle + 225.0f;
     }
 
     void Player::TurnLeftBack()
-    /*///////////////////////*/ {
+    /*///////////////////////*/
+    {
         data.movement.facingAngle = Camera::Get().horizontalAngle + 135.0f;
     }
 
     Point3F Player::GetSpaceCoord()
-    /*///////////////////////////*/ {
+    /*///////////////////////////*/
+    {
         auto position = GetPosition();
         Point3F spaceCoord = {position.x * kTileSize, 0.0f, position.y * kTileSize};
         spaceCoord.y -= Player::Get().data.movement.jumpHeight;
@@ -70,43 +81,51 @@ namespace Narradia
     }
 
     Point3 Player::GetWorldAreaPos()
-    /*////////////////////////////*/ {
+    /*////////////////////////////*/
+    {
         return data.movement.worldAreaPos;
     }
 
     float Player::GetFacingAngle()
-    /*//////////////////////////*/ {
+    /*//////////////////////////*/
+    {
         return data.movement.facingAngle;
     }
 
     void Player::SetFacingAngle(float newFacingAngle)
-    /*/////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////*/
+    {
         data.movement.facingAngle = newFacingAngle;
     }
 
     void Player::ClaimTile(Point2 Tile)
-    /*///////////////////////////////*/ {
+    /*///////////////////////////////*/
+    {
         claimedTiles.push_back(Tile);
     }
 
     bool Player::HasClaimedTile(Point2 Tile)
-    /*////////////////////////////////////*/ {
+    /*////////////////////////////////////*/
+    {
         return std::count(claimedTiles.begin(), claimedTiles.end(), Tile) != 0;
     }
 
     void Player::ClearClaimedTiles()
-    /*////////////////////////////*/ {
+    /*////////////////////////////*/
+    {
         claimedTiles.clear();
     }
 
     void Player::Jump()
-    /*///////////////*/ {
+    /*///////////////*/
+    {
         if (SDL_GetTicks() > ticksStartJumping + jumpDuration)
             ticksStartJumping = SDL_GetTicks();
     }
 
     void Player::MoveAtAngle(float angleOffset)
-    /*///////////////////////////////////////*/ {
+    /*///////////////////////////////////////*/
+    {
         if (!data.movement.isMoving)
             data.ticksLastUpdate = SDL_GetTicks();
         auto usedAngle = data.movement.facingAngle + angleOffset - 90;
@@ -257,7 +276,8 @@ namespace Narradia
     }
 
     void Player::Update()
-    /*/////////////////*/ {
+    /*/////////////////*/
+    {
         data.Update();
         if (!data.movement.isMoving)
             Audio::Get().StopPlaySound();

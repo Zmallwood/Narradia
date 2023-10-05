@@ -10,7 +10,8 @@ namespace Narradia
     SplitStackGui::SplitStackGui(Object *object_)
         : GuiWindow("Split", {0.15f, 0.2f, 0.17f, 0.15f}),
           object(object_)
-    /*//////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////*/
+    {
         Show();
         auto quantity = object_->GetQuantity();
         auto text = std::to_string(quantity / 2);
@@ -73,11 +74,13 @@ namespace Narradia
     }
 
     void SplitStackGui::UpdateDerived()
-    /*//////////////////////////*/ {
+    /*//////////////////////////*/
+    {
     }
 
     void SplitStackGui::RenderDerived() const
-    /*////////////////////////////////*/ {
+    /*////////////////////////////////*/
+    {
     }
 }
 //////////////////////////////////////////////////////////////////////

@@ -11,13 +11,15 @@
 namespace Narradia
 {
     Camera::Camera()
-    /*////////////*/ {
+    /*////////////*/
+    {
         Log();
         CalculateCameraPosition();
     }
 
     void Camera::Update()
-    /*/////////////////*/ {
+    /*/////////////////*/
+    {
         Log();
         UpdateZooming();
         Log();
@@ -43,12 +45,14 @@ namespace Narradia
     }
 
     float Camera::GetZoomAmount()
-    /*/////////////////////////*/ {
+    /*/////////////////////////*/
+    {
         return cameraDistance;
     }
 
     void Camera::UpdateZooming()
-    /*////////////////////////*/ {
+    /*////////////////////////*/
+    {
         auto mouseWheelDelta = MouseInput::Get().MouseWheelDeltaPickResult();
         if (mouseWheelDelta != 0)
         /***********************/ {
@@ -64,7 +68,8 @@ namespace Narradia
     }
 
     void Camera::CalculateCameraPosition()
-    /*//////////////////////////////////*/ {
+    /*//////////////////////////////////*/
+    {
         auto modulePlayer = Player::GetPointer();
         auto worldMap = World::GetPointer();
         auto usedCameraDistance = cameraDistance;
@@ -118,7 +123,8 @@ namespace Narradia
     }
 
     Point3F Camera::MoveCloserToCamera(Point3F original_point, float amount)
-    /*////////////////////////////////////////////////////////////////////*/ {
+    /*////////////////////////////////////////////////////////////////////*/
+    {
         auto camDx = (float)cameraPosition.x - original_point.x;
         auto camDz = (float)cameraPosition.z - original_point.z;
         auto radius = std::sqrt(camDx * camDx + camDz * camDz);

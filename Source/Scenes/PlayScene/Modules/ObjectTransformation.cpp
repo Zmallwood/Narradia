@@ -7,7 +7,8 @@
 namespace Narradia
 {
     void ObjectTransformation::Update()
-    /*///////////////////////////////*/ {
+    /*///////////////////////////////*/
+    {
         if (SDL_GetTicks() > ticks_last_update + k_update_speed)
         /******************************************************/ {
             ticks_last_update = SDL_GetTicks();

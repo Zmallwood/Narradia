@@ -8,7 +8,8 @@
 namespace Narradia
 /****************/ {
     void MouseRotation::Update()
-    /*////////////////////////*/ {
+    /*////////////////////////*/
+    {
         if (Camera::Get().cameraDistance == 2.0f) {
             Cursor::Get().SavePosition();
             Cursor::Get().LockMousePos();
@@ -55,7 +56,8 @@ namespace Narradia
     }
 
     void MouseRotation::UpdateRotationInProgress()
-    /*//////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////*/
+    {
         if (rotationType != RotationTypes::None || Camera::Get().cameraDistance == 2.0f)
         /****************************************************************************/ {
             auto canvasSize = GetCanvasSize();

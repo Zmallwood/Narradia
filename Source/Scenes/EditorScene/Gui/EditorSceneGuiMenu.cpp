@@ -6,7 +6,8 @@ namespace Narradia
 {
     EditorSceneGuiMenu::EditorSceneGuiMenu()
         : GuiContainer({0.0f, 0.0f}, {1.0f, 1.0f})
-    /*//////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////*/
+    {
         glIdCanvasCover = Renderer2DSolidColors::Get().NewRectangle();
         AddGuiButton(
             "Resume", {0.45f, 0.3f, 0.1f, 0.03f},
@@ -41,13 +42,15 @@ namespace Narradia
     }
 
     void EditorSceneGuiMenu::Update()
-    /*////////////////////////////*/ {
+    /*////////////////////////////*/
+    {
         if (visible)
             GuiContainer::Update();
     }
 
     void EditorSceneGuiMenu::Render() const
-    /*//////////////////////////////////*/ {
+    /*//////////////////////////////////*/
+    {
         if (!visible)
             return;
         auto rect = RectangleF{0.0f, 0.0f, 1.0f, 1.0f};

@@ -5,7 +5,8 @@
 namespace Narradia
 {
     void Inventory::Add(std::string_view objectName, int quantity)
-    /*//////////////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////////////*/
+    {
         for (auto i = 0; i < kMaxNumberInventoryObjects; i++)
         /***************************************************/ {
             if (objects.count(i) == 0)
@@ -18,7 +19,8 @@ namespace Narradia
     }
 
     void Inventory::Add(std::shared_ptr<Object> object)
-    /*///////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////*/
+    {
         for (auto i = 0; i < kMaxNumberInventoryObjects; i++)
         /***************************************************/ {
             if (objects.count(i) == 0)
@@ -30,14 +32,17 @@ namespace Narradia
     }
 
     bool Inventory::ContainsObjectOfType(std::string_view objectType)
-    /*/////////////////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////////////////*/
+    {
         for (auto &entry : objects)
-            if (entry.second->GetObjectType() == Hash(objectType)) return true;
+            if (entry.second->GetObjectType() == Hash(objectType))
+                return true;
         return false;
     }
 
     void Inventory::RemoveObjectOfType(std::string_view objectType)
-    /*///////////////////////////////////////////////////////////*/ {
+    /*///////////////////////////////////////////////////////////*/
+    {
         for (auto &entry : objects)
         /*************************/ {
             if (entry.second->GetObjectType() == Hash(objectType))
@@ -49,14 +54,17 @@ namespace Narradia
     }
 
     void ActorData::Update()
-    /*////////////////////*/ {
+    /*////////////////////*/
+    {
         if (movement.isMoving)
-            if (ticksLastUpdate != 0) deltaT += (SDL_GetTicks() - ticksLastUpdate);
+            if (ticksLastUpdate != 0)
+                deltaT += (SDL_GetTicks() - ticksLastUpdate);
         ticksLastUpdate = SDL_GetTicks();
     }
 
     SkillSet::SkillSet()
-    /*////////////////*/ {
+    /*////////////////*/
+    {
         skills["NormalMeleeDamage"] = Skill{"Normal Melee Damage"};
         skills["MeleeDefense"] = Skill{"Melee Defense"};
         skills["Evasion"] = Skill{"Evasion"};

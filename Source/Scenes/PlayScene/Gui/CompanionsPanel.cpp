@@ -11,7 +11,8 @@ namespace Narradia
     CompanionsPanel::CompanionsPanel()
         : GuiMovableContainer(k_size.ToRectangle(), k_start_position, k_size),
           rel_bounds_horizontal_splitter({0.005f, 0.035f, k_size.width - 2 * 0.005f, 0.002f})
-    /*/////////////////////////////////////////////////////////////////////////////////////*/ {
+    /*/////////////////////////////////////////////////////////////////////////////////////*/
+    {
         id_background_image = Renderer2DImages::Get().NewImage();
         id_horizntal_splitter = Renderer2DImages::Get().NewImage();
         id_title_text = TextRenderer::Get().NewString();
@@ -30,12 +31,14 @@ namespace Narradia
     }
 
     void CompanionsPanel::Update()
-    /*//////////////////////////*/ {
+    /*//////////////////////////*/
+    {
         GuiMovableContainer::Update();
     }
 
     void CompanionsPanel::Render() const
-    /*////////////////////////////////*/ {
+    /*////////////////////////////////*/
+    {
         Renderer2DImages::Get().DrawImage(Hash("PanelBg"), id_background_image, GetBounds());
         TextRenderer::Get().DrawString(
             id_title_text, k_title_text.data(), GetPosition().Translate(0.014f, 0.018f));

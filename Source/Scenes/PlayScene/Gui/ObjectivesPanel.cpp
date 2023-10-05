@@ -9,7 +9,8 @@ namespace Narradia
     ObjectivesPanel::ObjectivesPanel()
         : GuiMovableContainer(kSize.ToRectangle(), kStartPosition, kSize),
           relBoundsHorizontalSplitter({0.005f, 0.035f, kSize.width - 2 * 0.005f, 0.0015f})
-    /*//////////////////////////////////////////////////////////////////////////////////*/ {
+    /*//////////////////////////////////////////////////////////////////////////////////*/
+    {
         glIdBackgroundImage = Renderer2DImages::Get().NewImage();
         glIdHorizontalSplitter = Renderer2DImages::Get().NewImage();
         glIdTitleText = TextRenderer::Get().NewString();
@@ -19,12 +20,14 @@ namespace Narradia
     }
 
     void ObjectivesPanel::Update()
-    /*//////////////////////////*/ {
+    /*//////////////////////////*/
+    {
         GuiMovableContainer::Update();
     }
 
     void ObjectivesPanel::Render() const
-    /*////////////////////////////////*/ {
+    /*////////////////////////////////*/
+    {
         Renderer2DImages::Get().DrawImage(Hash("PanelBg"), glIdBackgroundImage, GetBounds());
         TextRenderer::Get().DrawString(
             glIdTitleText, kTitleText.data(), GetPosition().Translate(0.014f, 0.018f));
