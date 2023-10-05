@@ -17,6 +17,4 @@ Wilderness simulation game developed in C++ using:
 
 ### Install release
 
-Further instructions for your OS is described below.
-
 All available releases are found [here](https://github.com/Zmallwood/Narradia/releases).
