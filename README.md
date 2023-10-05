@@ -9,9 +9,9 @@ Wilderness simulation game developed in C++ using:
 * GLEW
 * assimp
 
-![alt text](https://github.com/Zmallwood/Narradia/blob/master/Media/Screenshot0.png)
+![alt text](https://github.com/Zmallwood/Narradia/blob/6b05d9c222abc17aba4283e17fe4d17d231cdec5/Media/Screenshot0.png)
 
-![alt text](https://github.com/Zmallwood/Narradia/blob/master/Media/Screenshot1.png)
+![alt text](https://github.com/Zmallwood/Narradia/blob/6b05d9c222abc17aba4283e17fe4d17d231cdec5/Media/Screenshot1.png)
 
 
 ## Getting Started
