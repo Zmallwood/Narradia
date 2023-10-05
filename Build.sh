@@ -1,3 +1,3 @@
 #!/bin/sh
-./StopServer.sh; cmake -B Build/ . && cmake --build Build --target release
+cmake -B Build/ . && cmake --build Build --target release
 
