@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////
 #include "GameEngine.hpp"
-#include "GameLoop.hpp"
-#include "TextOutBox.hpp"
-#include "Graphics/Graphics.hpp"
 #include "Audio.hpp"
+#include "GameLoop.hpp"
+#include "Graphics/Graphics.hpp"
+#include "TextOutBox.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -13,12 +13,15 @@ namespace Narradia
       public:
         bool running = true;
     };
+
     GameEngine::GameEngine()
         : p(std::make_shared<Pimpl>())
     /*//////////////////////////////*/
     {
     }
-    void GameEngine::Run() const
+
+    void
+    GameEngine::Run() const
     /*////////////////////////*/
     {
         Logger::Create();
@@ -42,12 +45,16 @@ namespace Narradia
         GameLoop().Run();
         SDL_Quit();
     }
-    void GameEngine::StopGame()
+
+    void
+    GameEngine::StopGame()
     /*///////////////////////*/
     {
         p->running = false;
     }
-    const bool GameEngine::IsRunning() const
+
+    const bool
+    GameEngine::IsRunning() const
     /*////////////////////////////////////*/
     {
         return p->running;
