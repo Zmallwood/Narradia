@@ -2,7 +2,6 @@
 #include "SubDraws.hpp"
 #include "Camera.hpp"
 #include "Configuration.hpp"
-#include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "RenderLoop.hpp"
 #include "Scenes/Shared/TileHovering.hpp"
 #include "Utilities.hpp"
@@ -14,6 +13,8 @@
 #include "Engine/Core/Graphics/Rendering/CameraGl.hpp"
 #include "Engine/Core/Graphics/Rendering/RendererBillboardImages.hpp"
 #include "Engine/Core/Graphics/Rendering/RendererModels.hpp"
+#include "Engine/Core/Graphics/Rendering/RendererTiles.hpp"
+#include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

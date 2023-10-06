@@ -1,11 +1,11 @@
 //////////////////////////////////////////////////////////////////////
 #include "TextOutBox.hpp"
 #include "TextLine.hpp"
-#include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "SceneManager.hpp"
 #include "Scenes/PlayScene/Gui/PlaySceneGuiCore.hpp"
 #include "Input/KeyboardInput.hpp"
 #include "Graphics/Rendering/Renderer2DImages.hpp"
+#include "Graphics/Rendering/Text/TextRenderer.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

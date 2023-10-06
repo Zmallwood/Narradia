@@ -1,6 +1,5 @@
 //////////////////////////////////////////////////////////////////////
 #include "PlaySceneModulesCore.hpp"
-#include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "Scenes/PlayScene/Gui/CharacterGui.hpp"
 #include "Scenes/PlayScene/Gui/InventoryGui.hpp"
 #include "Scenes/PlayScene/Gui/PlaySceneGuiMenu.hpp"
@@ -10,6 +9,7 @@
 #include "Engine/Core/TextOutBox.hpp"
 #include "Engine/Core/Input/KeyboardInput.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DSolidColors.hpp"
+#include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -110,7 +110,7 @@ namespace Narradia
             p->id_canvas_layer, rect, Colors::alphaElegantBlue);
         TextRenderer::Get().DrawString(
             p->id_game_result_text, "Congratulations! You have won the game", {0.5f, 0.3f},
-            Colors::green, true, TextSizes::_26);
+            Colors::green, true, FontSizes::_26);
     }
 
     bool ActiveGameRound::GameIsCompleted()

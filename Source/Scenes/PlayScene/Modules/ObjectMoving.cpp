@@ -1,7 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 #include "ObjectMoving.hpp"
 #include "Engine/GuiCore.hpp"
-#include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "Scenes/PlayScene/Gui/InventoryGui.hpp"
 #include "Scenes/PlayScene/Gui/OpenContainerGui.hpp"
 #include "Scenes/PlayScene/ObjectHandling.hpp"

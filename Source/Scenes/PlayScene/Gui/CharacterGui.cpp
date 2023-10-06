@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 #include "CharacterGui.hpp"
-#include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "World/Player.hpp"
+#include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

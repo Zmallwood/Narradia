@@ -1,7 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 #include "Camera.hpp"
 #include "Configuration.hpp"
-#include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "World/MapArea.hpp"
 #include "World/Player.hpp"
 #include "World/Tile.hpp"

@@ -1,6 +1,5 @@
 //////////////////////////////////////////////////////////////////////
 #include "GuiCore.hpp"
-#include "Core/Graphics/Rendering/Rendering.hpp"
 #include "Scenes/EditorScene/EditorScene.hpp"
 #include "Scenes/PlayScene/PlayScene.hpp"
 #include "World/Object.hpp"
@@ -9,6 +8,7 @@
 #include "Core/Input/KeyboardInput.hpp"
 #include "Core/Input/MouseInput.hpp"
 #include "Core/Graphics/Rendering/Renderer2DImages.hpp"
+#include "Core/Graphics/Rendering/Text/TextRenderer.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

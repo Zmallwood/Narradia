@@ -2,7 +2,6 @@
 #include "RenderLoop.hpp"
 #include "Camera.hpp"
 #include "Configuration.hpp"
-#include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "World/MapArea.hpp"
 #include "World/Object.hpp"
 #include "World/ObjectBehaviourList.hpp"

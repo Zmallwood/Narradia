@@ -1,6 +1,5 @@
 //////////////////////////////////////////////////////////////////////
 #include "TileHovering.hpp"
-#include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "Scenes/Shared/WorldDrawModule/Configuration.hpp"
 #include "World/MapArea.hpp"
 #include "World/Object.hpp"
@@ -11,6 +10,7 @@
 #include "WorldDrawModule/Camera.hpp"
 #include "WorldDrawModule/WorldDraw.hpp"
 #include "Engine/Core/Graphics/Rendering/CameraGl.hpp"
+#include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

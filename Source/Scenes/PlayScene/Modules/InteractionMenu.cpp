@@ -1,6 +1,5 @@
 //////////////////////////////////////////////////////////////////////
 #include "InteractionMenu.hpp"
-#include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "PlaySceneModulesCore.hpp"
 #include "Scenes/PlayScene/Gui/InventoryGui.hpp"
 #include "Scenes/PlayScene/Gui/OpenContainerGui.hpp"
@@ -19,6 +18,7 @@
 #include "Engine/Core/TextOutBox.hpp"
 #include "Engine/Core/Input/MouseInput.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DSolidColors.hpp"
+#include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
