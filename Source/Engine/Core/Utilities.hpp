@@ -1,11 +1,12 @@
 //////////////////////////////////////////////////////////////////////
 #pragma once
-#include "Matter/Size.hpp"
-#include "Matter/Point2.hpp"
-#include "Matter/Point2F.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
+    class Size;
+    class Point2;
+    class Point2F;
+
     Size GetCanvasSize();
     float GetAspectRatio();
     float ConvertWidthToHeight(float);
