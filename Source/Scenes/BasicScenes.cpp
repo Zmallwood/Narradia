@@ -5,6 +5,7 @@
 #include "Scenes/Shared/MapFilesIO.hpp"
 #include "Engine/Core/GameEngine.hpp"
 #include "Engine/Core/SceneManager.hpp"
+#include "Engine/Core/Audio.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

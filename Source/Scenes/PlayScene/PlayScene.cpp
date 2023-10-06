@@ -19,6 +19,7 @@
 #include "Scenes/Shared/TileHovering.hpp"
 #include "Scenes/Shared/WorldDrawModule/WorldDraw.hpp"
 #include "World/Player.hpp"
+#include "Engine/Core/Audio.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

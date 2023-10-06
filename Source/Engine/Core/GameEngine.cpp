@@ -3,6 +3,7 @@
 #include "GameLoop.hpp"
 #include "TextOutBox.hpp"
 #include "Graphics/Graphics.hpp"
+#include "Audio.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

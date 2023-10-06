@@ -7,50 +7,6 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class Audio : public Singleton<Audio>
-    /*/////////////////////////////////*/
-    {
-      public:
-        Audio();
-        void Cleanup();
-        void PlaySound(std::string_view soundNameHash, int = 0);
-        void PlayMusic(std::string_view musicNameHash);
-        void StopPlaySound();
-        void Mute();
-        void Unmute();
-
-      private:
-        bool muted = false;
-    };
-
-    struct ModelPartKeyframe
-    /*////////////////////*/
-    {
-        std::vector<Vertex3F> vertices;
-    };
-
-    struct ModelPartTimeline
-    /*////////////////////*/
-    {
-        std::map<float, std::shared_ptr<const ModelPartKeyframe>> keyframes;
-    };
-
-    struct ModelPart
-    /*////////////*/
-    {
-        ModelPart();
-        int texNameHash = 0;
-        std::unique_ptr<ModelPartTimeline> timeline;
-    };
-
-    struct Model
-    /*////////*/
-    {
-        Model(int);
-        const int animDuration = 0;
-        std::vector<std::shared_ptr<const ModelPart>> modelParts;
-    };
-
     enum class Directions
     /*/////////////////*/
     {

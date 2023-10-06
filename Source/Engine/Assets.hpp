@@ -27,6 +27,8 @@ namespace Narradia
         std::shared_ptr<Pimpl> p;
     };
 
+    class Model;
+
     class ModelBank : public Singleton<ModelBank>
     /*/////////////////////////////////////////*/
     {

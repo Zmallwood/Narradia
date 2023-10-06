@@ -4,6 +4,8 @@
 #include "World/Player.hpp"
 #include "Engine/SdlDeleter.hpp"
 #include "Engine/Core/Graphics/GraphicsGl.hpp"
+#include "Engine/Core/ModelStructure/Model.hpp"
+#include "Engine/Core/ModelStructure/ModelPart.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

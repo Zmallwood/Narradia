@@ -9,6 +9,7 @@
 #include "Tile.hpp"
 #include "World.hpp"
 #include "Engine/Core/SceneManager.hpp"
+#include "Engine/Core/Audio.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
