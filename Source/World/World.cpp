@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 #include "World.hpp"
-#include "Core/Rendering.hpp"
+#include "Engine/Rendering.hpp"
 #include "MapArea.hpp"
 #include "Object.hpp"
 #include "ObjectsCollection.hpp"

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 #include "InteractionMenu.hpp"
-#include "Core/Rendering.hpp"
+#include "Engine/Rendering.hpp"
 #include "PlaySceneModulesCore.hpp"
 #include "Scenes/PlayScene/Gui/InventoryGui.hpp"
 #include "Scenes/PlayScene/Gui/OpenContainerGui.hpp"

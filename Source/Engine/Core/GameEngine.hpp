@@ -1,19 +1,20 @@
 //////////////////////////////////////////////////////////////////////
 #pragma once
-#include "Engine/Core/SceneBase.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class MapLoadScene : public SceneBase
-    /*///////////////////////////////*/
+    class GameEngine : public Singleton<GameEngine>
+    /*///////////////////////////////////////////*/
     {
       public:
-        MapLoadScene();
-        void UpdateDerived() override;
-        void RenderDerived() override;
+        GameEngine();
+        void Run() const;
+        void StopGame();
+        const bool IsRunning() const;
 
       private:
-        RenderId glIdBackgroundImage;
+        class Pimpl;
+        std::shared_ptr<Pimpl> p;
     };
 }
 //////////////////////////////////////////////////////////////////////

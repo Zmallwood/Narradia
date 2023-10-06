@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 #include "PlaySceneModulesCore.hpp"
-#include "Core/Rendering.hpp"
+#include "Engine/Rendering.hpp"
 #include "Scenes/PlayScene/Gui/CharacterGui.hpp"
 #include "Scenes/PlayScene/Gui/InventoryGui.hpp"
 #include "Scenes/PlayScene/Gui/PlaySceneGuiMenu.hpp"

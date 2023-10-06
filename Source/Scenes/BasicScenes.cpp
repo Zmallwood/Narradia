@@ -1,8 +1,9 @@
 //////////////////////////////////////////////////////////////////////
 #include "BasicScenes.hpp"
-#include "Core/GuiCore.hpp"
-#include "Core/Rendering.hpp"
+#include "Engine/GuiCore.hpp"
+#include "Engine/Rendering.hpp"
 #include "Scenes/Shared/MapFilesIO.hpp"
+#include "Engine/Core/GameEngine.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////
 #include "GuiObjectHovering.hpp"
-#include "Core/Assets.hpp"
-#include "Core/GuiCore.hpp"
-#include "Core/Rendering.hpp"
+#include "Engine/Assets.hpp"
+#include "Engine/GuiCore.hpp"
+#include "Engine/Rendering.hpp"
 #include "World/Object.hpp"
 #include "World/ObjectBehaviourList.hpp"
 //////////////////////////////////////////////////////////////////////

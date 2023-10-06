@@ -76,7 +76,9 @@ set(PCH_FILES
 <assimp/scene.h>
 <assimp/postprocess.h>
 
-"Source/Core/Core.hpp"
+"Source/Common/Singleton.hpp"
+"Source/Common/Typedefs.hpp"
+"Source/Engine/Core/Core.hpp"
 "Source/Matter/Color.hpp"
 "Source/Matter/Colors.hpp"
 "Source/Matter/GlRectangleF.hpp"
