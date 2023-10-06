@@ -3,108 +3,11 @@
 #include "Engine/Assets.hpp"
 #include "Engine/GuiCore.hpp"
 #include "Engine/Rendering.hpp"
-#include "Scenes/BasicScenes.hpp"
-#include "Scenes/EditorScene/EditorScene.hpp"
-#include "Scenes/EditorScene/SubScenes/MapLoadScene.hpp"
-#include "Scenes/EditorScene/SubScenes/MapSaveScene.hpp"
-#include "Scenes/MapGenerationScene/MapGenerateScene.hpp"
 #include "Scenes/PlayScene/Gui/PlaySceneGuiCore.hpp"
-#include "Scenes/PlayScene/PlayScene.hpp"
-#include "Scenes/PlayScene/SubScenes/GameSaveScene.hpp"
+#include "SceneManager.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class SceneManager::Pimpl
-    /*////////////////////*/
-    {
-      public:
-        std::map<Scenes, std::shared_ptr<SceneBase>> scenes;
-        Scenes currentView = Scenes::None;
-    };
-
-    SceneManager::SceneManager()
-        : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/
-    {
-    }
-
-    void SceneManager::InitializeScenes()
-    /*///////////////////////////////*/
-    {
-        Log();
-        p->scenes[Scenes::Intro] = std::make_shared<IntroScene>();
-        Log();
-        p->scenes[Scenes::MainMenu] = std::make_shared<MainMenuScene>();
-        Log();
-        p->scenes[Scenes::MapTypeSelection] = std::make_shared<MapTypeSelectionScene>();
-        Log();
-        p->scenes[Scenes::UserMapSelection] = std::make_shared<UserMapSelectionScene>();
-        Log();
-        p->scenes[Scenes::MapGeneration] = std::make_shared<MapGenerateScene>();
-        Log();
-        p->scenes[Scenes::GameSave] = std::make_shared<GameSaveScene>();
-        Log();
-        p->scenes[Scenes::Play] = PlayScene::GetPointer();
-        Log();
-        p->scenes[Scenes::Editor] = std::make_shared<EditorScene>();
-        Log();
-        p->scenes[Scenes::MapSave] = std::make_shared<MapSaveScene>();
-        Log();
-        p->scenes[Scenes::MapLoad] = std::make_shared<MapLoadScene>();
-        p->currentView = Scenes::Intro;
-    }
-
-    void SceneManager::UpdateCurrentView()
-    /*/////////////////////////////////*/
-    {
-        Log();
-        if (p->scenes.count(p->currentView))
-        /**********************************/
-        {
-            Log();
-            p->scenes.at(p->currentView)->Update();
-        };
-    }
-
-    void SceneManager::RenderCurrentView() const
-    /*///////////////////////////////////////*/
-    {
-        Log();
-        if (p->scenes.count(p->currentView))
-        /**********************************/
-        {
-            Log();
-            p->scenes.at(p->currentView)->Render();
-        };
-        Log();
-    }
-
-    void SceneManager::FinalizeCurrentView()
-    /*///////////////////////////////////*/
-    {
-        if (p->scenes.count(p->currentView))
-        /**********************************/
-        {
-            Log();
-            p->scenes.at(p->currentView)->Finalize();
-        };
-    }
-
-    void SceneManager::ChangeView(Scenes newScene)
-    /*////////////////////////////////////////*/
-    {
-        p->currentView = newScene;
-        MouseInput::Get().Reset();
-        MouseInput::Get().ResetMouseActions();
-        p->scenes.at(p->currentView)->Enter();
-    }
-
-    Scenes SceneManager::GetCurrentView()
-    /*///////////////////////////////*/
-    {
-        return p->currentView;
-    }
-
     class Cursor::Pimpl
     /*///////////////*/
     {
@@ -318,7 +221,7 @@ namespace Narradia
         if (!p->enabled)
             return;
         auto usedBounds = p->bounds;
-        if (SceneManager::Get().GetCurrentView() == Scenes::Play)
+        if (SceneManager::Get().GetCurrentScene() == SceneNames::Play)
             usedBounds = usedBounds.Translate(0.0f, -ExperienceBar::kBarHeight);
         Renderer2DImages::Get().DrawImage("TextOutBoxBack", p->glIdImage, usedBounds);
         auto maxNumLines = GetMaxNumLines();

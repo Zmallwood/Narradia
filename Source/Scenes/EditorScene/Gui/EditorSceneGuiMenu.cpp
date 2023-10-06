@@ -2,6 +2,7 @@
 #include "EditorSceneGuiMenu.hpp"
 #include "Engine/Rendering.hpp"
 #include "Engine/Core/GameEngine.hpp"
+#include "Engine/Core/SceneManager.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -19,17 +20,17 @@ namespace Narradia
             "Save map", {0.45f, 0.35f, 0.1f, 0.03f},
             []
             /************************************************************/
-            { SceneManager::Get().ChangeView(Scenes::MapSave); });
+            { SceneManager::Get().ChangeScene(SceneNames::MapSave); });
         AddGuiButton(
             "Load map", {0.45f, 0.40f, 0.1f, 0.03f},
             []
             /************************************************************/
-            { SceneManager::Get().ChangeView(Scenes::MapLoad); });
+            { SceneManager::Get().ChangeScene(SceneNames::MapLoad); });
         AddGuiButton(
             "Go to main menu", {0.45f, 0.45f, 0.1f, 0.03f},
             []
             /************************************************************/
-            { SceneManager::Get().ChangeView(Scenes::MainMenu); });
+            { SceneManager::Get().ChangeScene(SceneNames::MainMenu); });
         AddGuiButton(
             "Exit game", {0.45f, 0.50f, 0.1f, 0.03f},
             []

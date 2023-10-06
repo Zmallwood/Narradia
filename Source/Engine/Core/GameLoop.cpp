@@ -3,6 +3,7 @@
 #include "World/World.hpp"
 #include "GameEngine.hpp"
 #include "EventPoller.hpp"
+#include "SceneManager.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -24,15 +25,15 @@ namespace Narradia
             Log();
             Graphics::Get().ClearCanvas();
             Log();
-            SceneManager::Get().UpdateCurrentView();
+            SceneManager::Get().UpdateCurrentScene();
             Log();
             eventPoller.PollEvents();
             Log();
             MouseInput::Get().PerformMouseActions();
             Log();
-            SceneManager::Get().RenderCurrentView();
+            SceneManager::Get().RenderCurrentScene();
             Log();
-            SceneManager::Get().FinalizeCurrentView();
+            SceneManager::Get().FinalizeCurrentScene();
             Log();
             TextOutBox::Get().Render();
             Log();

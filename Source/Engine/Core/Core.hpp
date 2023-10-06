@@ -8,40 +8,6 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    enum class Scenes
-    /*////////////*/
-    {
-        None,
-        Intro,
-        MainMenu,
-        MapTypeSelection,
-        UserMapSelection,
-        MapGeneration,
-        GameSave,
-        GameLoad,
-        Play,
-        Editor,
-        MapSave,
-        MapLoad
-    };
-
-    class SceneManager : public Singleton<SceneManager>
-    /*/////////////////////////////////////////////*/
-    {
-      public:
-        SceneManager();
-        void InitializeScenes();
-        void UpdateCurrentView();
-        void RenderCurrentView() const;
-        void FinalizeCurrentView();
-        void ChangeView(Scenes);
-        Scenes GetCurrentView();
-
-      private:
-        class Pimpl;
-        std::shared_ptr<Pimpl> p;
-    };
-
     enum class CursorTypes
     /*//////////////////*/
     {

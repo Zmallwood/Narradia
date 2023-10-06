@@ -8,6 +8,7 @@
 #include "Scenes/Shared/WorldDrawModule/Configuration.hpp"
 #include "Tile.hpp"
 #include "World.hpp"
+#include "Engine/Core/SceneManager.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -133,7 +134,7 @@ namespace Narradia
                   data.movement.moveSpeed * skillSet.skills.at("MovementSpeed").level;
         auto dy = SinDegrees(usedAngle) * data.movement.stepSize * data.deltaT /
                   data.movement.moveSpeed * skillSet.skills.at("MovementSpeed").level;
-        if (SceneManager::Get().GetCurrentView() == Scenes::Editor)
+        if (SceneManager::Get().GetCurrentScene() == SceneNames::Editor)
         /*******************************************************/
         {
             dx *= 2;
@@ -144,7 +145,7 @@ namespace Narradia
         auto newX = data.movement.position.x - dx;
         auto newY = data.movement.position.y + dy;
         auto tileNew = mapArea->GetTile({static_cast<int>(newX), static_cast<int>(newY)});
-        if (SceneManager::Get().GetCurrentView() != Scenes::Editor)
+        if (SceneManager::Get().GetCurrentScene() != SceneNames::Editor)
         /*******************************************************/
         {
             for (auto objectEntry : tileBeforeMove->GetObjects().list)

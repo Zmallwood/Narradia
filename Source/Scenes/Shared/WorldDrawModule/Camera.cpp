@@ -7,6 +7,7 @@
 #include "World/Tile.hpp"
 #include "World/World.hpp"
 #include "WorldDraw.hpp"
+#include "Engine/Core/SceneManager.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -58,13 +59,13 @@ namespace Narradia
         /***********************/
         {
             auto distanceChange = mouseWheelDelta / zoomSens;
-            if (SceneManager::Get().GetCurrentView() == Scenes::Editor)
+            if (SceneManager::Get().GetCurrentScene() == SceneNames::Editor)
                 distanceChange *= 2;
             cameraDistance += distanceChange;
         }
-        if (SceneManager::Get().GetCurrentView() == Scenes::Play)
+        if (SceneManager::Get().GetCurrentScene() == SceneNames::Play)
             cameraDistance = std::max(std::min(cameraDistance, 250.0f), 2.0f);
-        else if (SceneManager::Get().GetCurrentView() == Scenes::Editor)
+        else if (SceneManager::Get().GetCurrentScene() == SceneNames::Editor)
             cameraDistance = std::max(std::min(cameraDistance, 800.0f), 2.0f);
     }
 

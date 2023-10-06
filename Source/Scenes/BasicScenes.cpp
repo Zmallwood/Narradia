@@ -4,6 +4,7 @@
 #include "Engine/Rendering.hpp"
 #include "Scenes/Shared/MapFilesIO.hpp"
 #include "Engine/Core/GameEngine.hpp"
+#include "Engine/Core/SceneManager.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -32,16 +33,16 @@ namespace Narradia
     {
         Log();
         MouseInput::Get().GetLeftButton().AddFiredAction(
-            "IntroSceneGoToMainMenu", [&]() { SceneManager::Get().ChangeView(Scenes::MainMenu); },
+            "IntroSceneGoToMainMenu", [&]() { SceneManager::Get().ChangeScene(SceneNames::MainMenu); },
             0);
         MouseInput::Get().GetMiddleButton().AddFiredAction(
-            "IntroSceneGoToMainMenu", [&]() { SceneManager::Get().ChangeView(Scenes::MainMenu); },
+            "IntroSceneGoToMainMenu", [&]() { SceneManager::Get().ChangeScene(SceneNames::MainMenu); },
             0);
         MouseInput::Get().GetRightButton().AddFiredAction(
-            "IntroSceneGoToMainMenu", [&]() { SceneManager::Get().ChangeView(Scenes::MainMenu); },
+            "IntroSceneGoToMainMenu", [&]() { SceneManager::Get().ChangeScene(SceneNames::MainMenu); },
             0);
         if (KeyboardInput::Get().AnyKeyHasBeenFired())
-            SceneManager::Get().ChangeView(Scenes::MainMenu);
+            SceneManager::Get().ChangeScene(SceneNames::MainMenu);
     }
 
     void IntroScene::RenderDerived()
@@ -78,11 +79,11 @@ namespace Narradia
         CreateGui();
         auto sceneGui = GetSceneGui();
         sceneGui->AddGuiButton("New game", {0.45f, 0.3f, 0.1f, 0.05f}, [=]() {
-            SceneManager::Get().ChangeView(Scenes::MapTypeSelection);
+            SceneManager::Get().ChangeScene(SceneNames::MapTypeSelection);
         });
         sceneGui->AddGuiButton("Load game", {0.45f, 0.38f, 0.1f, 0.05f}, [=]() {});
         sceneGui->AddGuiButton("Map editor", {0.45f, 0.46f, 0.1f, 0.05f}, [=]() {
-            SceneManager::Get().ChangeView(Scenes::Editor);
+            SceneManager::Get().ChangeScene(SceneNames::Editor);
         });
         sceneGui->AddGuiButton(
             "Exit", {0.45f, 0.54f, 0.1f, 0.05f}, [=]() { GameEngine::Get().StopGame(); });
@@ -121,13 +122,13 @@ namespace Narradia
         CreateGui();
         auto sceneGui = GetSceneGui();
         sceneGui->AddGuiButton("Random wilderness map", {0.45f, 0.3f, 0.1f, 0.05f}, [=]() {
-            SceneManager::Get().ChangeView(Scenes::MapGeneration);
+            SceneManager::Get().ChangeScene(SceneNames::MapGeneration);
         });
         sceneGui->AddGuiButton("User created map", {0.45f, 0.38f, 0.1f, 0.05f}, [=]() {
-            SceneManager::Get().ChangeView(Scenes::UserMapSelection);
+            SceneManager::Get().ChangeScene(SceneNames::UserMapSelection);
         });
         sceneGui->AddGuiButton("Back", {0.45f, 0.46f, 0.1f, 0.05f}, [=]() {
-            SceneManager::Get().ChangeView(Scenes::MainMenu);
+            SceneManager::Get().ChangeScene(SceneNames::MainMenu);
         });
         p->glIdBackImage = Renderer2DImages::Get().NewImage();
         p->glIdLogoImage = Renderer2DImages::Get().NewImage();
@@ -157,10 +158,10 @@ namespace Narradia
         GetSceneGui()->AddGuiComponent(textBox);
         GetSceneGui()->AddGuiButton("Load", {0.56f, 0.4f, 0.04f, 0.04f}, [=] {
             MapFilesIO::Get().LoadMapArea(textBox->GetText());
-            SceneManager::Get().ChangeView(Scenes::Play);
+            SceneManager::Get().ChangeScene(SceneNames::Play);
         });
         GetSceneGui()->AddGuiButton("Return", {0.02f, 0.02f, 0.04f, 0.04f}, [] {
-            SceneManager::Get().ChangeView(Scenes::MapTypeSelection);
+            SceneManager::Get().ChangeScene(SceneNames::MapTypeSelection);
         });
     }
 

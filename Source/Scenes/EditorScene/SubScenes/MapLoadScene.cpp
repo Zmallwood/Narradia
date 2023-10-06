@@ -3,6 +3,7 @@
 #include "Engine/GuiCore.hpp"
 #include "Engine/Rendering.hpp"
 #include "Scenes/Shared/MapFilesIO.hpp"
+#include "Engine/Core/SceneManager.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -18,7 +19,7 @@ namespace Narradia
             MapFilesIO::Get().LoadMapArea(textBox->GetText());
         });
         GetSceneGui()->AddGuiButton("Return", {0.02f, 0.02f, 0.04f, 0.04f}, [] {
-            SceneManager::Get().ChangeView(Scenes::Editor);
+            SceneManager::Get().ChangeScene(SceneNames::Editor);
         });
     }
 

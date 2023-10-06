@@ -4,6 +4,7 @@
 #include "Engine/Rendering.hpp"
 #include "Scenes/PlayScene/Modules/PlaySceneModulesCore.hpp"
 #include "Engine/Core/GameEngine.hpp"
+#include "Engine/Core/SceneManager.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -21,12 +22,12 @@ namespace Narradia
             "Save game", {0.45f, 0.35f, 0.1f, 0.03f},
             []
             /**************************************************/
-            { SceneManager::Get().ChangeView(Scenes::GameSave); });
+            { SceneManager::Get().ChangeScene(SceneNames::GameSave); });
         AddGuiButton(
             "Go to main menu", {0.45f, 0.4f, 0.1f, 0.03f},
             []
             /**************************************************/
-            { SceneManager::Get().ChangeView(Scenes::MainMenu); });
+            { SceneManager::Get().ChangeScene(SceneNames::MainMenu); });
         AddGuiButton(
             "Exit game", {0.45f, 0.45f, 0.1f, 0.03f},
             []

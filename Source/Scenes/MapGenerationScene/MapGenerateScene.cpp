@@ -3,6 +3,7 @@
 #include "Engine/Rendering.hpp"
 #include "Scenes/Shared/WorldDrawModule/WorldDraw.hpp"
 #include "World/World.hpp"
+#include "Engine/Core/SceneManager.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -46,7 +47,7 @@ namespace Narradia
     {
         Log();
         if (currGenerationStep == GenerateSteps::Completed)
-            SceneManager::Get().ChangeView(Scenes::Play);
+            SceneManager::Get().ChangeScene(SceneNames::Play);
     }
 }
 //////////////////////////////////////////////////////////////////////

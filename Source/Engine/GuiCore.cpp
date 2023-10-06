@@ -4,6 +4,7 @@
 #include "Scenes/EditorScene/EditorScene.hpp"
 #include "Scenes/PlayScene/PlayScene.hpp"
 #include "World/Object.hpp"
+#include "Core/SceneManager.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -493,13 +494,13 @@ namespace Narradia
                     if (p->parentWindow->DestroyOnClose())
                     /************************************/
                     {
-                        if (SceneManager::Get().GetCurrentView() == Scenes::Play)
+                        if (SceneManager::Get().GetCurrentScene() == SceneNames::Play)
                         /***************************************************/
                         {
                             auto sceneGui = PlayScene::Get().GetSceneGui();
                             sceneGui->RemoveGuiComponent(p->parentWindow);
                         }
-                        else if (SceneManager::Get().GetCurrentView() == Scenes::Editor)
+                        else if (SceneManager::Get().GetCurrentScene() == SceneNames::Editor)
                         /************************************************************/
                         {
                             auto sceneGui = EditorScene::Get().GetSceneGui();
