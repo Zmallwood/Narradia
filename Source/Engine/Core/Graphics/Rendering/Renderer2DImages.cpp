@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 #include "Renderer2DImages.hpp"
-#include "ShaderProgram.hpp"
 #include "Engine/Assets.hpp"
+#include "ShaderProgram.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -19,32 +19,11 @@ namespace Narradia
     /*////////////////////////////////*/
     {
         const GLchar *vertexShaderSource =
-            R"(
-            #version 330 core
-            layout (location = 0) in vec2 in_Position;
-            layout (location = 1) in vec4 in_Color;
-            layout (location = 2) in vec2 in_TexCoord;
-            out vec4 ex_Color;
-            out vec2 ex_TexCoord;
-            void main() {
-               gl_Position = vec4(in_Position.x, in_Position.y, 0.0, 1.0);
-               ex_Color = in_Color;
-               ex_TexCoord = in_TexCoord;
-            }
-            )";
+#include "Shaders/2DImagesVertex.glsl"
+            ;
         const GLchar *fragmentShaderSource =
-            R"(
-            #version 330 core
-            precision mediump float;
-            in vec4 ex_Color;
-            in vec2 ex_TexCoord;
-            uniform sampler2D TexUnit;
-            out vec4 fragColor;
-            void main() {
-               vec4 texColor = texture(TexUnit, ex_TexCoord);
-               fragColor = ex_Color*0.0 + texColor;
-            }
-            )";
+#include "Shaders/2DImagesFragment.glsl"
+            ;
         GetShaderProgram()->Create(vertexShaderSource, fragmentShaderSource);
     }
 

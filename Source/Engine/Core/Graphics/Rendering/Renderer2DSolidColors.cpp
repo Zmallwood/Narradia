@@ -17,26 +17,11 @@ namespace Narradia
     /*//////////////////////////////////////////*/
     {
         const GLchar *vertexShaderSource =
-            R"(
-            #version 330 core
-            layout (location = 0) in vec2 in_Position;
-            layout (location = 1) in vec4 in_Color;
-            out vec4 ex_Color;
-            void main() {
-               gl_Position = vec4(in_Position.x, in_Position.y, 0.0, 1.0);
-               ex_Color = in_Color;
-            }
-            )";
+#include "Shaders/2DSolidColorsVertex.glsl"
+            ;
         const GLchar *fragmentShaderSource =
-            R"(
-            #version 330 core
-            precision mediump float;
-            in vec4 ex_Color;
-            out vec4 fragColor;
-            void main() {
-               fragColor = ex_Color;
-            }
-            )";
+#include "Shaders/2DSolidColorsFragment.glsl"
+            ;
         GetShaderProgram()->Create(vertexShaderSource, fragmentShaderSource);
     }
 
