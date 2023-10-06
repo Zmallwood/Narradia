@@ -1,6 +1,5 @@
 //////////////////////////////////////////////////////////////////////
 #include "ObjectMoving.hpp"
-#include "Engine/GuiCore.hpp"
 #include "Scenes/PlayScene/Gui/InventoryGui.hpp"
 #include "Scenes/PlayScene/Gui/OpenContainerGui.hpp"
 #include "Scenes/PlayScene/ObjectHandling.hpp"
@@ -16,6 +15,7 @@
 #include "Engine/Core/Input/MouseInput.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 #include "Engine/GuiCore/SceneGui.hpp"
+#include "Engine/GuiCore/GuiWindowObjectSlot.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

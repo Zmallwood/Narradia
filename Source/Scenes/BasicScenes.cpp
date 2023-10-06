@@ -1,6 +1,5 @@
 //////////////////////////////////////////////////////////////////////
 #include "BasicScenes.hpp"
-#include "Engine/GuiCore.hpp"
 #include "Scenes/Shared/MapFilesIO.hpp"
 #include "Engine/Core/GameEngine.hpp"
 #include "Engine/Core/SceneManager.hpp"

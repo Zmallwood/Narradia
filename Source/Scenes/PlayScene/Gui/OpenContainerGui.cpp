@@ -2,6 +2,7 @@
 #include "OpenContainerGui.hpp"
 #include "World/Object.hpp"
 #include "World/ObjectBehaviourList.hpp"
+#include "Engine/GuiCore/GuiWindowObjectSlot.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

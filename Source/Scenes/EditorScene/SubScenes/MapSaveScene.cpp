@@ -1,6 +1,5 @@
 //////////////////////////////////////////////////////////////////////
 #include "MapSaveScene.hpp"
-#include "Engine/GuiCore.hpp"
 #include "Scenes/Shared/MapFilesIO.hpp"
 #include "Engine/Core/SceneManager.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"

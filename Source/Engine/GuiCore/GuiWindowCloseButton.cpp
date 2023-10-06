@@ -3,7 +3,6 @@
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 #include "Engine/Core/Cursor.hpp"
 #include "Engine/Core/Input/MouseInput.hpp"
-#include "Engine/GuiCore.hpp"
 #include "Engine/Core/SceneManager.hpp"
 #include "Scenes/PlayScene/PlayScene.hpp"
 #include "SceneGui.hpp"
