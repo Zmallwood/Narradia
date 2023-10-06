@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 #include "InteractionMenu.hpp"
-#include "Engine/Rendering.hpp"
+#include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "PlaySceneModulesCore.hpp"
 #include "Scenes/PlayScene/Gui/InventoryGui.hpp"
 #include "Scenes/PlayScene/Gui/OpenContainerGui.hpp"
@@ -16,6 +16,7 @@
 #include "World/Player.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
+#include "Engine/Core/TextOutBox.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

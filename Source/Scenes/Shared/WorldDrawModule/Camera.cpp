@@ -1,13 +1,14 @@
 //////////////////////////////////////////////////////////////////////
 #include "Camera.hpp"
 #include "Configuration.hpp"
-#include "Engine/Rendering.hpp"
+#include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "World/MapArea.hpp"
 #include "World/Player.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
 #include "WorldDraw.hpp"
 #include "Engine/Core/SceneManager.hpp"
+#include "Engine/Core/Cursor.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

@@ -1,19 +1,14 @@
 //////////////////////////////////////////////////////////////////////
 #pragma once
-#include "Point2F.hpp"
-#include "Point3F.hpp"
-#include "Color.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class Vertex3F
+    class TextLine
     /*//////////*/
     {
       public:
-        Point3F position;
+        std::string text;
         Color color;
-        Point2F uv;
-        Point3F normal;
     };
 }
 //////////////////////////////////////////////////////////////////////

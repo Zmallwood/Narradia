@@ -3,7 +3,7 @@
 #include "Camera.hpp"
 #include "Configuration.hpp"
 #include "Engine/Assets.hpp"
-#include "Engine/Rendering.hpp"
+#include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "RenderLoop.hpp"
 #include "SubDraws.hpp"
 #include "World/Mob.hpp"

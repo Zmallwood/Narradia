@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 #include "GroundBrowserGui.hpp"
 #include "Engine/Assets.hpp"
-#include "Engine/Rendering.hpp"
+#include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "Scenes/EditorScene/Modules/ToolUsing.hpp"
 #include "World/Object.hpp"
 //////////////////////////////////////////////////////////////////////

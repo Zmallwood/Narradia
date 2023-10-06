@@ -1,7 +1,8 @@
 //////////////////////////////////////////////////////////////////////
 #include "SkillsGui.hpp"
-#include "Engine/Rendering.hpp"
+#include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "World/Player.hpp"
+#include "Engine/Core/Cursor.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

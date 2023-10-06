@@ -5,6 +5,7 @@
 #include "World/Player.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
+#include "Engine/Core/TextOutBox.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

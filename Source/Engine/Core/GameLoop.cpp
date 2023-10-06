@@ -4,6 +4,9 @@
 #include "GameEngine.hpp"
 #include "EventPoller.hpp"
 #include "SceneManager.hpp"
+#include "Cursor.hpp"
+#include "TextOutBox.hpp"
+#include "Graphics/Graphics.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

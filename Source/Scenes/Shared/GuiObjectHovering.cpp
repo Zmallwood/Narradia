@@ -2,7 +2,7 @@
 #include "GuiObjectHovering.hpp"
 #include "Engine/Assets.hpp"
 #include "Engine/GuiCore.hpp"
-#include "Engine/Rendering.hpp"
+#include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "World/Object.hpp"
 #include "World/ObjectBehaviourList.hpp"
 //////////////////////////////////////////////////////////////////////

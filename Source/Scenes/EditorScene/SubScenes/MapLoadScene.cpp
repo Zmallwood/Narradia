@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 #include "MapLoadScene.hpp"
 #include "Engine/GuiCore.hpp"
-#include "Engine/Rendering.hpp"
+#include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "Scenes/Shared/MapFilesIO.hpp"
 #include "Engine/Core/SceneManager.hpp"
 //////////////////////////////////////////////////////////////////////

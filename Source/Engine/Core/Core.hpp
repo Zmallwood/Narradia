@@ -1,6 +1,5 @@
 //////////////////////////////////////////////////////////////////////
 #pragma once
-#include "Matter/Color.hpp"
 #include "Matter/Colors.hpp"
 #include "Matter/Point2.hpp"
 #include "Matter/Size.hpp"
@@ -8,103 +7,6 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    enum class CursorTypes
-    /*//////////////////*/
-    {
-        Normal,
-        Hovering,
-        Rotating,
-        Attack
-    };
-
-    class Cursor : public Singleton<Cursor>
-    /*///////////////////////////////////*/
-    {
-      public:
-        Cursor();
-        void Render() const;
-        void Reset();
-        void SavePosition();
-        void RestoreSavedPosition() const;
-        Point2 GetSavedPosition() const;
-        void SetCursorType(CursorTypes);
-        void LockMousePos() const;
-        void UnlockMousePos() const;
-        void HideThisFrame();
-
-      private:
-        class Pimpl;
-        std::shared_ptr<Pimpl> p;
-    };
-
-    class Logger : public Singleton<Logger>
-    /*///////////////////////////////////*/
-    {
-      public:
-        Logger();
-        ~Logger();
-        void
-            Log(std::string_view = "",
-                const std::source_location = std::source_location::current());
-
-      private:
-        class Pimpl;
-        std::shared_ptr<Pimpl> p;
-    };
-
-    void Log(const std::source_location location = std::source_location::current());
-
-    struct TextLine
-    /*///////////*/
-    {
-        std::string text;
-        Color color;
-    };
-
-    class TextOutBox : public Singleton<TextOutBox>
-    /*///////////////////////////////////////////*/
-    {
-      public:
-        TextOutBox();
-        void Update();
-        void Render() const;
-        void Print(std::string_view, Color = Colors::wheat);
-
-      private:
-        int GetMaxNumLines() const;
-        class Pimpl;
-        std::shared_ptr<Pimpl> p;
-    };
-
-    class Graphics : public Singleton<Graphics>
-    /*///////////////////////////////////////*/
-    {
-      public:
-        Graphics();
-        SDL_Window *GetWindow() const;
-        void ClearCanvas() const;
-        void PresentCanvas() const;
-        void Cleanup();
-
-      private:
-        class Pimpl;
-        std::shared_ptr<Pimpl> p;
-    };
-
-    class GraphicsGl : public Singleton<GraphicsGl>
-    /*///////////////////////////////////////////*/
-    {
-      public:
-        GraphicsGl();
-        void Cleanup();
-        Color GetFogColorGround();
-        Color GetFogColorObjects();
-
-      private:
-        class Pimpl;
-        std::shared_ptr<Pimpl> p;
-    };
-
     class Audio : public Singleton<Audio>
     /*/////////////////////////////////*/
     {

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 #include "TileHovering.hpp"
-#include "Engine/Rendering.hpp"
+#include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "Scenes/Shared/WorldDrawModule/Configuration.hpp"
 #include "World/MapArea.hpp"
 #include "World/Object.hpp"

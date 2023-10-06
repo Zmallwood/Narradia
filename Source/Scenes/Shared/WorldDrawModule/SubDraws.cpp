@@ -2,7 +2,7 @@
 #include "SubDraws.hpp"
 #include "Camera.hpp"
 #include "Configuration.hpp"
-#include "Engine/Rendering.hpp"
+#include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "RenderLoop.hpp"
 #include "Scenes/Shared/TileHovering.hpp"
 #include "Utilities.hpp"

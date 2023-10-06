@@ -1,10 +1,11 @@
 //////////////////////////////////////////////////////////////////////
 #include "GuiCore.hpp"
-#include "Rendering.hpp"
+#include "Core/Graphics/Rendering/Rendering.hpp"
 #include "Scenes/EditorScene/EditorScene.hpp"
 #include "Scenes/PlayScene/PlayScene.hpp"
 #include "World/Object.hpp"
 #include "Core/SceneManager.hpp"
+#include "Core/Cursor.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

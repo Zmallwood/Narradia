@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 #include "PlaySceneGuiMenu.hpp"
 #include "Engine/GuiCore.hpp"
-#include "Engine/Rendering.hpp"
+#include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "Scenes/PlayScene/Modules/PlaySceneModulesCore.hpp"
 #include "Engine/Core/GameEngine.hpp"
 #include "Engine/Core/SceneManager.hpp"

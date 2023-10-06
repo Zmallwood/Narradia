@@ -1,19 +1,17 @@
 //////////////////////////////////////////////////////////////////////
 #pragma once
-#include "Point2F.hpp"
-#include "Point3F.hpp"
-#include "Color.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class Vertex3F
-    /*//////////*/
+    class SdlDeleter
+    /*////////////*/
     {
       public:
-        Point3F position;
-        Color color;
-        Point2F uv;
-        Point3F normal;
+        void operator()(SDL_Window *) const;
+        void operator()(SDL_Renderer *) const;
+        void operator()(SDL_Surface *) const;
+        void operator()(SDL_Texture *) const;
+        void operator()(TTF_Font *) const;
     };
 }
 //////////////////////////////////////////////////////////////////////

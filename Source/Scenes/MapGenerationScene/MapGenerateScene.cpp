@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 #include "MapGenerateScene.hpp"
-#include "Engine/Rendering.hpp"
+#include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "Scenes/Shared/WorldDrawModule/WorldDraw.hpp"
 #include "World/World.hpp"
 #include "Engine/Core/SceneManager.hpp"

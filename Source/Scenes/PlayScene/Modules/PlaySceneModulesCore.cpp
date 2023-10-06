@@ -1,12 +1,13 @@
 //////////////////////////////////////////////////////////////////////
 #include "PlaySceneModulesCore.hpp"
-#include "Engine/Rendering.hpp"
+#include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "Scenes/PlayScene/Gui/CharacterGui.hpp"
 #include "Scenes/PlayScene/Gui/InventoryGui.hpp"
 #include "Scenes/PlayScene/Gui/PlaySceneGuiMenu.hpp"
 #include "Scenes/PlayScene/Gui/SkillsGui.hpp"
 #include "World/MapArea.hpp"
 #include "World/Player.hpp"
+#include "Engine/Core/TextOutBox.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

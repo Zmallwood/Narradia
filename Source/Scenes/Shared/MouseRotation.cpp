@@ -4,6 +4,7 @@
 #include "World/Player.hpp"
 #include "WorldDrawModule/Camera.hpp"
 #include "WorldDrawModule/WorldDraw.hpp"
+#include "Engine/Core/Cursor.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 /****************/ {

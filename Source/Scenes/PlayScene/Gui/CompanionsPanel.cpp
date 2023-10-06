@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 #include "CompanionsPanel.hpp"
-#include "Engine/Rendering.hpp"
+#include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "World/Companion.hpp"
 #include "World/MapArea.hpp"
 #include "World/Player.hpp"
