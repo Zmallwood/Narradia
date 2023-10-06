@@ -1,10 +1,10 @@
 //////////////////////////////////////////////////////////////////////
 #include "GuiButton.hpp"
+#include "Engine/Core/Cursor.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
-#include "GuiContainer.hpp"
-#include "Engine/Core/Cursor.hpp"
 #include "Engine/Core/Input/MouseInput.hpp"
+#include "GuiContainer.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -40,7 +40,8 @@ namespace Narradia
         p->rendIdLabelText = TextRenderer::Get().NewString();
     }
 
-    void GuiButton::Update()
+    void
+    GuiButton::Update()
     /*////////////////////*/
     {
         p->hovered = false;
@@ -65,7 +66,8 @@ namespace Narradia
         }
     }
 
-    void GuiButton::Render() const
+    void
+    GuiButton::Render() const
     /*//////////////////////////*/
     {
         const std::string_view *usedImageName;

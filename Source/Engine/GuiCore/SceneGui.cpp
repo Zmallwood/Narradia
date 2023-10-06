@@ -19,7 +19,8 @@ namespace Narradia
     {
     }
 
-    void SceneGui::AddGuiButton(
+    void
+    SceneGui::AddGuiButton(
         std::string_view text, RectangleF bounds, std::function<void()> action,
         std::string_view imageName, std::string_view imageNameHovered)
     /*///////////////////////////////////////////////////////////////////////*/
@@ -33,7 +34,8 @@ namespace Narradia
         p->guiButtons.push_back(newGuiButton);
     }
 
-    void SceneGui::Update()
+    void
+    SceneGui::Update()
     /*//////////////////*/
     {
         for (auto &guiButton : p->guiButtons)
@@ -42,7 +44,8 @@ namespace Narradia
             guiComponent->Update();
     }
 
-    void SceneGui::Render() const
+    void
+    SceneGui::Render() const
     /*////////////////////////*/
     {
         Log();
@@ -59,13 +62,15 @@ namespace Narradia
         }
     }
 
-    void SceneGui::AddGuiComponent(std::shared_ptr<GuiComponent> newComponent)
+    void
+    SceneGui::AddGuiComponent(std::shared_ptr<GuiComponent> newComponent)
     /*/////////////////////////////////////////////////////////////////////*/
     {
         p->guiComponents.push_back(newComponent);
     }
 
-    void SceneGui::RemoveGuiComponent(GuiComponent *component)
+    void
+    SceneGui::RemoveGuiComponent(GuiComponent *component)
     /*/////////////////////////////////////////////////////*/
     {
         auto i = 0;
@@ -82,7 +87,8 @@ namespace Narradia
         }
     }
 
-    auto SceneGui::GetGuiComponents() const -> const std::vector<std::shared_ptr<GuiComponent>> &
+    auto
+    SceneGui::GetGuiComponents() const -> const std::vector<std::shared_ptr<GuiComponent>> &
     /*////////////////////////////////////////////////////////////////////////////////////////*/
     {
         return p->guiComponents;

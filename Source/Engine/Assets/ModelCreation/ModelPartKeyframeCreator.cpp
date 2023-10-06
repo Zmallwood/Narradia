@@ -9,7 +9,8 @@ using std::vector;
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    aiVectorKey ModelPartKeyframeCreator::GetPositionKeyframe(
+    aiVectorKey
+    ModelPartKeyframeCreator::GetPositionKeyframe(
         const aiScene *scene, string nodeName, int keyFrameIndex) const
     /*///////////////////////////////////////////////////////////////*/
     {
@@ -22,7 +23,8 @@ namespace Narradia
         return positionKeyframe;
     }
 
-    aiQuatKey ModelPartKeyframeCreator::GetRotationKeyframe(
+    aiQuatKey
+    ModelPartKeyframeCreator::GetRotationKeyframe(
         const aiScene *scene, string nodeName, int keyFrameIndex) const
     /*///////////////////////////////////////////////////////////////*/
     {
@@ -35,7 +37,8 @@ namespace Narradia
         return rotationKeyframe;
     }
 
-    aiVectorKey ModelPartKeyframeCreator::GetScalingKeyframe(
+    aiVectorKey
+    ModelPartKeyframeCreator::GetScalingKeyframe(
         const aiScene *scene, string nodeName, int keyFrameIndex) const
     /*///////////////////////////////////////////////////////////////*/
     {

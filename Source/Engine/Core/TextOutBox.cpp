@@ -1,11 +1,11 @@
 //////////////////////////////////////////////////////////////////////
 #include "TextOutBox.hpp"
-#include "TextLine.hpp"
-#include "SceneManager.hpp"
-#include "Scenes/PlayScene/Gui/ExperienceBar.hpp"
-#include "Input/KeyboardInput.hpp"
 #include "Graphics/Rendering/Renderer2DImages.hpp"
 #include "Graphics/Rendering/Text/TextRenderer.hpp"
+#include "Input/KeyboardInput.hpp"
+#include "SceneManager.hpp"
+#include "Scenes/PlayScene/Gui/ExperienceBar.hpp"
+#include "TextLine.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -41,7 +41,8 @@ namespace Narradia
             p->glIdTextLines.push_back(TextRenderer::Get().NewString());
     }
 
-    void TextOutBox::Update()
+    void
+    TextOutBox::Update()
     /*/////////////////////*/
     {
         if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_RETURN))
@@ -58,7 +59,8 @@ namespace Narradia
         }
     }
 
-    void TextOutBox::Render() const
+    void
+    TextOutBox::Render() const
     /*///////////////////////////*/
     {
         if (!p->enabled)
@@ -105,7 +107,8 @@ namespace Narradia
         }
     }
 
-    void TextOutBox::Print(std::string_view text, Color textColor)
+    void
+    TextOutBox::Print(std::string_view text, Color textColor)
     /*//////////////////////////////////////////////////////////*/
     {
         if (!p->enabled)
@@ -115,7 +118,8 @@ namespace Narradia
         p->textLines.push_back({printedText, textColor});
     }
 
-    int TextOutBox::GetMaxNumLines() const
+    int
+    TextOutBox::GetMaxNumLines() const
     /*//////////////////////////////////*/
     {
         return static_cast<int>(p->bounds.height / p->textLineHeight) - 2;

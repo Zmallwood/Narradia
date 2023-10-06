@@ -1,18 +1,19 @@
 //////////////////////////////////////////////////////////////////////
 #include "GameLoop.hpp"
-#include "World/World.hpp"
-#include "GameEngine.hpp"
-#include "EventPoller.hpp"
-#include "SceneManager.hpp"
-#include "Cursor.hpp"
-#include "TextOutBox.hpp"
-#include "Graphics/Graphics.hpp"
 #include "Audio.hpp"
+#include "Cursor.hpp"
+#include "EventPoller.hpp"
+#include "GameEngine.hpp"
+#include "Graphics/Graphics.hpp"
 #include "Input/MouseInput.hpp"
+#include "SceneManager.hpp"
+#include "TextOutBox.hpp"
+#include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    void GameLoop::Run() const
+    void
+    GameLoop::Run() const
     /*//////////////////////*/
     {
         Log();

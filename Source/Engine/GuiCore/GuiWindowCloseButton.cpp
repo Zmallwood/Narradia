@@ -1,13 +1,13 @@
 //////////////////////////////////////////////////////////////////////
 #include "GuiWindowCloseButton.hpp"
-#include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 #include "Engine/Core/Cursor.hpp"
+#include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 #include "Engine/Core/Input/MouseInput.hpp"
 #include "Engine/Core/SceneManager.hpp"
-#include "Scenes/PlayScene/PlayScene.hpp"
+#include "GuiWindow.hpp"
 #include "SceneGui.hpp"
 #include "Scenes/EditorScene/EditorScene.hpp"
-#include "GuiWindow.hpp"
+#include "Scenes/PlayScene/PlayScene.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -30,7 +30,8 @@ namespace Narradia
         p->parentWindow = parentWindow_;
     }
 
-    void GuiWindowCloseButton::Update()
+    void
+    GuiWindowCloseButton::Update()
     /*///////////////////////////////*/
     {
         p->hovered = false;
@@ -71,7 +72,8 @@ namespace Narradia
         }
     }
 
-    void GuiWindowCloseButton::Render() const
+    void
+    GuiWindowCloseButton::Render() const
     /*/////////////////////////////////////*/
     {
         if (p->hovered)
@@ -82,7 +84,8 @@ namespace Narradia
                 "GuiWindowCloseButton", p->rendIdCloseButtonImg, p->GetBounds());
     }
 
-    RectangleF GuiWindowCloseButton::Pimpl::GetBounds() const
+    RectangleF
+    GuiWindowCloseButton::Pimpl::GetBounds() const
     /*/////////////////////////////////////////////////////*/
     {
         auto width = Pimpl::kWidth;

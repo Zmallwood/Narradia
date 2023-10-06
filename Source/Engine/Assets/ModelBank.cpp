@@ -20,19 +20,22 @@ namespace Narradia
     {
     }
 
-    auto ModelBank::GetModel(int modelNameHash) const -> const Model *
+    auto
+    ModelBank::GetModel(int modelNameHash) const -> const Model *
     /*//////////////////////////////////////////////////////////////*/
     {
         return p->models.at(modelNameHash).get();
     }
 
-    auto ModelBank::GetAllModels() const -> std::map<int, std::shared_ptr<const Model>>
+    auto
+    ModelBank::GetAllModels() const -> std::map<int, std::shared_ptr<const Model>>
     /*///////////////////////////////////////////////////////////////////////////////*/
     {
         return p->models;
     }
 
-    void ModelBank::LoadModels()
+    void
+    ModelBank::LoadModels()
     /*////////////////////////*/
     {
         using iterator = std ::filesystem::recursive_directory_iterator;
@@ -55,7 +58,8 @@ namespace Narradia
         }
     }
 
-    std::shared_ptr<Model> ModelBank::Pimpl::LoadSingleModel(const std::string_view &pathStr)
+    std::shared_ptr<Model>
+    ModelBank::Pimpl::LoadSingleModel(const std::string_view &pathStr)
     /*/////////////////////////////////////////////////////////////////////////////////////*/
     {
         Assimp::Importer importer;

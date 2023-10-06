@@ -2,8 +2,8 @@
 #include "GuiWindowObjectSlot.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
-#include "World/Object.hpp"
 #include "GuiWindow.hpp"
+#include "World/Object.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -25,7 +25,8 @@ namespace Narradia
         rendIdTransformProgressFilled = Renderer2DImages::Get().NewImage();
     }
 
-    void GuiWindowObjectSlot::Update(int offset) const
+    void
+    GuiWindowObjectSlot::Update(int offset) const
     /*//////////////////////////////////////////////*/
     {
         auto mousePosF = GetMousePositionF();
@@ -43,7 +44,8 @@ namespace Narradia
         }
     }
 
-    void GuiWindowObjectSlot::Render(int offset) const
+    void
+    GuiWindowObjectSlot::Render(int offset) const
     /*//////////////////////////////////////////////*/
     {
         Log();
@@ -93,7 +95,8 @@ namespace Narradia
         }
     }
 
-    RectangleF GuiWindowObjectSlot::GetBounds() const
+    RectangleF
+    GuiWindowObjectSlot::GetBounds() const
     /*/////////////////////////////////////////////*/
     {
         auto bounds = parentWindow->GetBounds();
@@ -107,7 +110,8 @@ namespace Narradia
         return {xPos, yPos, w, h};
     }
 
-    float GuiWindowObjectSlot::GetSlotHeight() const
+    float
+    GuiWindowObjectSlot::GetSlotHeight() const
     /*////////////////////////////////////////////*/
     {
         return ConvertWidthToHeight(slotWidth);

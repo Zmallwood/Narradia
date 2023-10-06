@@ -12,13 +12,15 @@ namespace Narradia
         AudioBank::Get().LoadAudioFiles();
     }
 
-    void Audio::Cleanup()
+    void
+    Audio::Cleanup()
     /*/////////////////*/
     {
         AudioBank::Get().Cleanup();
     }
 
-    void Audio::PlaySound(std::string_view soundNameHash, int channel)
+    void
+    Audio::PlaySound(std::string_view soundNameHash, int channel)
     /*//////////////////////////////////////////////////////////////*/
     {
         if (muted)
@@ -28,20 +30,23 @@ namespace Narradia
         Mix_Volume(channel, MIX_MAX_VOLUME / 4);
     }
 
-    void Audio::PlayMusic(std::string_view musicNameHash)
+    void
+    Audio::PlayMusic(std::string_view musicNameHash)
     /*/////////////////////////////////////////////////*/
     {
         if (Mix_PlayingMusic() == 0)
             Mix_PlayMusic(AudioBank::Get().GetMusic(Hash(musicNameHash)), -1);
     }
 
-    void Audio::StopPlaySound()
+    void
+    Audio::StopPlaySound()
     /*///////////////////////*/
     {
         Mix_HaltChannel(0);
     }
 
-    void Audio::Mute()
+    void
+    Audio::Mute()
     /*//////////////*/
     {
         Mix_PauseMusic();
@@ -49,7 +54,8 @@ namespace Narradia
         muted = true;
     }
 
-    void Audio::Unmute()
+    void
+    Audio::Unmute()
     /*////////////////*/
     {
         Mix_ResumeMusic();

@@ -14,7 +14,8 @@ namespace Narradia
         std::map<const int, ImageEntry> images;
     };
 
-    std::map<const int, ImageEntry> &ImageBank::GetImages()
+    std::map<const int, ImageEntry> &
+    ImageBank::GetImages()
     /*///////////////////////////////////////////////////*/
     {
         return p->images;
@@ -26,7 +27,8 @@ namespace Narradia
     {
     }
 
-    GLuint ImageBank::GetImage(int imageNameHash) const
+    GLuint
+    ImageBank::GetImage(int imageNameHash) const
     /*///////////////////////////////////////////////*/
     {
         if (p->images.count(imageNameHash))
@@ -34,13 +36,15 @@ namespace Narradia
         return 0;
     }
 
-    GLuint ImageBank::GetImage(const std::string_view &imageName) const
+    GLuint
+    ImageBank::GetImage(const std::string_view &imageName) const
     /*///////////////////////////////////////////////////////////////*/
     {
         return GetImage(Hash(imageName));
     }
 
-    void ImageBank::GetBlankTextImage(const std::string_view &uniqueNameId)
+    void
+    ImageBank::GetBlankTextImage(const std::string_view &uniqueNameId)
     /*///////////////////////////////////////////////////////////////////*/
     {
         ImageEntry imageEntry;
@@ -48,7 +52,8 @@ namespace Narradia
         p->images.insert({Hash(uniqueNameId), imageEntry});
     }
 
-    void ImageBank::LoadImages()
+    void
+    ImageBank::LoadImages()
     /*////////////////////////*/
     {
         using iterator = std::filesystem::recursive_directory_iterator;
@@ -66,14 +71,16 @@ namespace Narradia
         }
     }
 
-    void ImageBank::Cleanup() const
+    void
+    ImageBank::Cleanup() const
     /*///////////////////////////*/
     {
         for (const auto &image : p->images)
             glDeleteTextures(1, &image.second.textureId);
     }
 
-    GLuint ImageBank::Pimpl::LoadSingleImage(const std::string_view &absFilePath) const
+    GLuint
+    ImageBank::Pimpl::LoadSingleImage(const std::string_view &absFilePath) const
     /*///////////////////////////////////////////////////////////////////////////////*/
     {
         auto surface = IMG_Load(absFilePath.data());

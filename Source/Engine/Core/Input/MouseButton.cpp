@@ -23,13 +23,15 @@ namespace Narradia
     {
     }
 
-    void MouseButton::Reset()
+    void
+    MouseButton::Reset()
     /*/////////////////////*/
     {
         p->isPressed = false;
     }
 
-    void MouseButton::PressDown()
+    void
+    MouseButton::PressDown()
     /*/////////////////////////*/
     {
         p->isPressed = true;
@@ -39,7 +41,8 @@ namespace Narradia
         p->ticksButtonDown = SDL_GetTicks();
     }
 
-    void MouseButton::Release()
+    void
+    MouseButton::Release()
     /*///////////////////////*/
     {
         p->isPressed = false;
@@ -47,13 +50,15 @@ namespace Narradia
         p->clickDuration = SDL_GetTicks() - p->ticksButtonDown;
     }
 
-    int MouseButton::GetPressDuration() const
+    int
+    MouseButton::GetPressDuration() const
     /*/////////////////////////////////////*/
     {
         return SDL_GetTicks() - p->ticksButtonDown;
     }
 
-    int MouseButton::ClickDurationPickResult()
+    int
+    MouseButton::ClickDurationPickResult()
     /*//////////////////////////////////////*/
     {
         auto result = p->clickDuration;
@@ -61,13 +66,15 @@ namespace Narradia
         return result;
     }
 
-    int MouseButton::ClickDurationPeekResult() const
+    int
+    MouseButton::ClickDurationPeekResult() const
     /*////////////////////////////////////////////*/
     {
         return p->clickDuration;
     }
 
-    void MouseButton::PerformMouseAction()
+    void
+    MouseButton::PerformMouseAction()
     /*//////////////////////////////////*/
     {
         Log();
@@ -82,7 +89,8 @@ namespace Narradia
             p->actionMngr.ClearReleasedActions();
     }
 
-    void MouseButton::AddFiredAction(
+    void
+    MouseButton::AddFiredAction(
         std::string_view uniqueName, std::function<void()> action, float priority, int delay,
         bool ensureIsExec)
     /*/////////////////////////////////////////////////////////////////////////////////////*/
@@ -96,7 +104,8 @@ namespace Narradia
             id, {action, priority, static_cast<Uint64>(delay), ensureIsExec});
     }
 
-    void MouseButton::AddReleasedAction(
+    void
+    MouseButton::AddReleasedAction(
         std::string_view uniqueName, std::function<void()> action, float priority, int delay,
         bool ensureIsExec)
     /*/////////////////////////////////////////////////////////////////////////////////////*/
@@ -110,7 +119,8 @@ namespace Narradia
             id, {action, priority, static_cast<Uint64>(delay), ensureIsExec});
     }
 
-    void MouseButton::ResetActions()
+    void
+    MouseButton::ResetActions()
     /*////////////////////////////*/
     {
         p->actionMngr.ClearFiredActions();
@@ -119,7 +129,8 @@ namespace Narradia
         p->hasBeenReleased = false;
     }
 
-    const int MouseButton::GetDefaultClickSpeed()
+    const int
+    MouseButton::GetDefaultClickSpeed()
     /*/////////////////////////////////////////*/
     {
         return Pimpl::defaultClickSpeed;

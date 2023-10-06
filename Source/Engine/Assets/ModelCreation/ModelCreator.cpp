@@ -11,7 +11,8 @@ using std::vector;
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    shared_ptr<Model> ModelCreator::CreateModel(const aiScene *scene)
+    shared_ptr<Model>
+    ModelCreator::CreateModel(const aiScene *scene)
     /*////////////////////////////////////////////////////////////*/
     {
         auto animDuration = scene->mNumAnimations > 0 ? scene->mAnimations[0]->mDuration : 0;
@@ -21,7 +22,8 @@ namespace Narradia
         return newModel;
     }
 
-    auto ModelCreator::GetModelParts(const aiScene *scene) const -> vector<shared_ptr<ModelPart>>
+    auto
+    ModelCreator::GetModelParts(const aiScene *scene) const -> vector<shared_ptr<ModelPart>>
     /*/////////////////////////////////////////////////////////////////////////////////////////*/
     {
         vector<shared_ptr<ModelPart>> allModelparts;
@@ -41,7 +43,8 @@ namespace Narradia
         return allModelparts;
     }
 
-    auto ModelCreator::GetModelMeshIds(const aiScene *scene) const
+    auto
+    ModelCreator::GetModelMeshIds(const aiScene *scene) const
         -> map<shared_ptr<string>, vector<int>>
     /*//////////////////////////////////////////////////////////*/
     {

@@ -8,27 +8,31 @@ namespace Narradia
     /*//////////////////////////////*/
     {
       public:
-        static void Create()
+        static void
+        Create()
         /*////////////////*/
         {
             if (!instance)
                 instance = std::make_shared<T>();
         }
-        static std::shared_ptr<T> GetPointer()
+        static std::shared_ptr<T>
+        GetPointer()
         /*//////////////////////////////////*/
         {
             if (!instance)
                 Create();
             return std::weak_ptr<T>(instance).lock();
         }
-        static T &Get()
+        static T &
+        Get()
         /*///////////*/
         {
             if (!instance)
                 Create();
             return *GetPointer();
         }
-        static void Dispose()
+        static void
+        Dispose()
         /*/////////////////*/
         {
             instance.reset();

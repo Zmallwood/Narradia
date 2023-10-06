@@ -1,15 +1,15 @@
 //////////////////////////////////////////////////////////////////////
 #include "SceneManager.hpp"
-#include "Scenes/MapGenerationScene/MapGenerateScene.hpp"
-#include "Scenes/GameSaveScene/GameSaveScene.hpp"
-#include "Scenes/PlayScene/PlayScene.hpp"
-#include "Scenes/EditorScene/EditorScene.hpp"
-#include "Scenes/MapLoadScene/MapLoadScene.hpp"
-#include "Scenes/MapSaveScene/MapSaveScene.hpp"
 #include "Input/MouseInput.hpp"
+#include "Scenes/EditorScene/EditorScene.hpp"
+#include "Scenes/GameSaveScene/GameSaveScene.hpp"
 #include "Scenes/IntroScene/IntroScene.hpp"
 #include "Scenes/MainMenuScene/MainMenuScene.hpp"
+#include "Scenes/MapGenerationScene/MapGenerateScene.hpp"
+#include "Scenes/MapLoadScene/MapLoadScene.hpp"
+#include "Scenes/MapSaveScene/MapSaveScene.hpp"
 #include "Scenes/MapTypeSelectionScene/MapTypeSelectionScene.hpp"
+#include "Scenes/PlayScene/PlayScene.hpp"
 #include "Scenes/UserMapSelectionScene/UserMapSelectionScene.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
@@ -28,7 +28,8 @@ namespace Narradia
     {
     }
 
-    void SceneManager::InitializeScenes()
+    void
+    SceneManager::InitializeScenes()
     /*///////////////////////////////*/
     {
         Log();
@@ -54,7 +55,8 @@ namespace Narradia
         p->currentView = SceneNames::Intro;
     }
 
-    void SceneManager::UpdateCurrentScene()
+    void
+    SceneManager::UpdateCurrentScene()
     /*/////////////////////////////////*/
     {
         Log();
@@ -66,7 +68,8 @@ namespace Narradia
         };
     }
 
-    void SceneManager::RenderCurrentScene() const
+    void
+    SceneManager::RenderCurrentScene() const
     /*///////////////////////////////////////*/
     {
         Log();
@@ -79,7 +82,8 @@ namespace Narradia
         Log();
     }
 
-    void SceneManager::FinalizeCurrentScene()
+    void
+    SceneManager::FinalizeCurrentScene()
     /*///////////////////////////////////*/
     {
         if (p->scenes.count(p->currentView))
@@ -90,7 +94,8 @@ namespace Narradia
         };
     }
 
-    void SceneManager::ChangeScene(SceneNames newScene)
+    void
+    SceneManager::ChangeScene(SceneNames newScene)
     /*////////////////////////////////////////*/
     {
         p->currentView = newScene;
@@ -99,7 +104,8 @@ namespace Narradia
         p->scenes.at(p->currentView)->Enter();
     }
 
-    SceneNames SceneManager::GetCurrentScene()
+    SceneNames
+    SceneManager::GetCurrentScene()
     /*///////////////////////////////*/
     {
         return p->currentView;

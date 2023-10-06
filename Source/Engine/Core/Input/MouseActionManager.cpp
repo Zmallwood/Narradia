@@ -91,7 +91,8 @@ namespace Narradia
             hasBeenFired = false;
     }
 
-    void MouseActionManager::PerformReleasedActions(int ticksButtonDown)
+    void
+    MouseActionManager::PerformReleasedActions(int ticksButtonDown)
     /*////////////////////////////////////////////////////////////////*/
     {
         std::function<void()> releasedAction;
@@ -166,37 +167,43 @@ namespace Narradia
             p->releasedActions.erase(key);
     }
 
-    void MouseActionManager::ClearFiredActions()
+    void
+    MouseActionManager::ClearFiredActions()
     /*////////////////////////////////////////*/
     {
         p->firedActions.clear();
     }
 
-    void MouseActionManager::ClearReleasedActions()
+    void
+    MouseActionManager::ClearReleasedActions()
     /*///////////////////////////////////////////*/
     {
         p->releasedActions.clear();
     }
 
-    bool MouseActionManager::FiredActionsContains(int actionId)
+    bool
+    MouseActionManager::FiredActionsContains(int actionId)
     /*///////////////////////////////////////////////////////*/
     {
         return p->firedActions.count(actionId);
     }
 
-    bool MouseActionManager::ReleasedActionsContains(int actionId)
+    bool
+    MouseActionManager::ReleasedActionsContains(int actionId)
     /*//////////////////////////////////////////////////////////*/
     {
         return p->releasedActions.count(actionId);
     }
 
-    void MouseActionManager::AddFiredAction(int actionId, MouseAction action)
+    void
+    MouseActionManager::AddFiredAction(int actionId, MouseAction action)
     /*/////////////////////////////////////////////////////////////////////*/
     {
         p->firedActions.insert({actionId, action});
     }
 
-    void MouseActionManager::AddReleasedAction(int actionId, MouseAction action)
+    void
+    MouseActionManager::AddReleasedAction(int actionId, MouseAction action)
     /*////////////////////////////////////////////////////////////////////////*/
     {
         p->releasedActions.insert({actionId, action});

@@ -31,7 +31,8 @@ namespace Narradia
         p->logFile.close();
     }
 
-    void Logger::Log(std::string_view message, const std::source_location location)
+    void
+    Logger::Log(std::string_view message, const std::source_location location)
     /*///////////////////////////////////////////////////////////////////////////*/
     {
         if (!p->enabled)
@@ -47,7 +48,8 @@ namespace Narradia
         p->logFile << logText << std::flush;
     }
 
-    void Log(const std::source_location location)
+    void
+    Log(const std::source_location location)
     /*//////*/
     {
         Logger::Get().Log("", location);

@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////
-#include "GuiWindowCloseButton.hpp"
 #include "GuiWindow.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
+#include "GuiWindowCloseButton.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -39,49 +39,57 @@ namespace Narradia
         p->destroyOnClose = destroyOnClose_;
     }
 
-    void GuiWindow::ToggleVisibility()
+    void
+    GuiWindow::ToggleVisibility()
     /*//////////////////////////////*/
     {
         p->visible = !p->visible;
     }
 
-    std::string_view GuiWindow::GetTitle()
+    std::string_view
+    GuiWindow::GetTitle()
     /*//////////////////////////////////*/
     {
         return p->title;
     }
 
-    bool GuiWindow::DestroyOnClose()
+    bool
+    GuiWindow::DestroyOnClose()
     /*////////////////////////////*/
     {
         return p->destroyOnClose;
     }
 
-    void GuiWindow::Show()
+    void
+    GuiWindow::Show()
     /*//////////////////*/
     {
         p->visible = true;
     }
 
-    void GuiWindow::Hide()
+    void
+    GuiWindow::Hide()
     /*//////////////////*/
     {
         p->visible = false;
     }
 
-    float GuiWindow::GetMargin()
+    float
+    GuiWindow::GetMargin()
     /*////////////////////////*/
     {
         return Pimpl::kMargin;
     }
 
-    float GuiWindow::GetTitleBarHeight()
+    float
+    GuiWindow::GetTitleBarHeight()
     /*////////////////////////////////*/
     {
         return Pimpl::kTitleBarHeight;
     }
 
-    void GuiWindow::Update()
+    void
+    GuiWindow::Update()
     /*////////////////////*/
     {
         if (!p->visible)
@@ -91,7 +99,8 @@ namespace Narradia
         GuiMovableContainer::Update();
     }
 
-    void GuiWindow::Render() const
+    void
+    GuiWindow::Render() const
     /*//////////////////////////*/
     {
         Log();
@@ -111,7 +120,8 @@ namespace Narradia
         GuiMovableContainer::Render();
     }
 
-    RectangleF GuiWindow::GetAbsoluteTitleBarBounds() const
+    RectangleF
+    GuiWindow::GetAbsoluteTitleBarBounds() const
     /*///////////////////////////////////////////////////*/
     {
         return {GetPosition().x, GetPosition().y, GetSize().width, Pimpl::kTitleBarHeight};

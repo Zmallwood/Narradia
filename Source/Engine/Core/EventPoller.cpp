@@ -6,7 +6,8 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    void EventPoller::PollEvents() const
+    void
+    EventPoller::PollEvents() const
     /*////////////////////////////////*/
     {
         SDL_Event event;

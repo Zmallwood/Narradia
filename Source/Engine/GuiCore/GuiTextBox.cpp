@@ -2,9 +2,9 @@
 #include "GuiTextBox.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
-#include "GuiContainer.hpp"
-#include "Engine/Core/Input/MouseInput.hpp"
 #include "Engine/Core/Input/KeyboardInput.hpp"
+#include "Engine/Core/Input/MouseInput.hpp"
+#include "GuiContainer.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -37,7 +37,8 @@ namespace Narradia
         p->text = text_;
     }
 
-    void GuiTextBox::Update()
+    void
+    GuiTextBox::Update()
     /*/////////////////////*/
     {
         auto mousePosF = GetMousePositionF();
@@ -107,7 +108,8 @@ namespace Narradia
         }
     }
 
-    void GuiTextBox::Render() const
+    void
+    GuiTextBox::Render() const
     /*///////////////////////////*/
     {
         auto usedBounds = p->bounds;
@@ -136,13 +138,15 @@ namespace Narradia
             p->glIdText, usedText, usedBounds.GetPosition().Translate(0.005f, 0.015f));
     }
 
-    std::string_view GuiTextBox::GetText()
+    std::string_view
+    GuiTextBox::GetText()
     /*//////////////////////////////////*/
     {
         return p->text;
     }
 
-    void GuiTextBox::SetText(const std::string &newText)
+    void
+    GuiTextBox::SetText(const std::string &newText)
     /*////////////////////////////////////////////////*/
     {
         p->text = newText;

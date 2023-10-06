@@ -25,7 +25,8 @@ namespace Narradia
         p->relDragableArea = relDragableArea_;
     }
 
-    void GuiMovableContainer::Update()
+    void
+    GuiMovableContainer::Update()
     /*//////////////////////////////*/
     {
         auto mousePosF = GetMousePositionF();
@@ -67,7 +68,8 @@ namespace Narradia
         GuiContainer::Update();
     }
 
-    void GuiMovableContainer::Render() const
+    void
+    GuiMovableContainer::Render() const
     /*////////////////////////////////////*/
     {
         GuiContainer::Render();
