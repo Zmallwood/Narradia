@@ -8,6 +8,7 @@
 #include "TextOutBox.hpp"
 #include "Graphics/Graphics.hpp"
 #include "Audio.hpp"
+#include "Input/MouseInput.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

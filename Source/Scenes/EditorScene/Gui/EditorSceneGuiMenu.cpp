@@ -1,6 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 #include "EditorSceneGuiMenu.hpp"
 #include "Engine/Core/Graphics/Rendering/Rendering.hpp"
+#include "Engine/Core/Graphics/Rendering/Renderer2DSolidColors.hpp"
 #include "Engine/Core/GameEngine.hpp"
 #include "Engine/Core/SceneManager.hpp"
 //////////////////////////////////////////////////////////////////////

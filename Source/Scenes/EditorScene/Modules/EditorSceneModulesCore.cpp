@@ -5,6 +5,7 @@
 #include "Scenes/EditorScene/Gui/MobBrowserGui.hpp"
 #include "Scenes/EditorScene/Gui/ObjectBrowserGui.hpp"
 #include "Scenes/EditorScene/Gui/RoofBrowserGui.hpp"
+#include "Engine/Core/Input/KeyboardInput.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

@@ -2,6 +2,10 @@
 #include "GraphicsGl.hpp"
 #include "Rendering/Rendering.hpp"
 #include "Engine/Assets.hpp"
+#include "Rendering/Renderer2DImages.hpp"
+#include "Rendering/Renderer2DSolidColors.hpp"
+#include "Rendering/RendererBillboardImages.hpp"
+#include "Rendering/RendererModels.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

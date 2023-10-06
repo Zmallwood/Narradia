@@ -1,5 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 #pragma once
+#include "Engine/Core/RotationDirections.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -17,7 +18,7 @@ namespace Narradia
         int GetMoveSpeed();
         float GetAngle();
         int GetRadius();
-        Directions GetDirection();
+        RotationDirections GetDirection();
         void IncreaseRadius();
         Point2 GetSpawnLocation();
         void SetAngle(float);

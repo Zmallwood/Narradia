@@ -5,6 +5,8 @@
 #include "World/MapArea.hpp"
 #include "World/Player.hpp"
 #include "World/World.hpp"
+#include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
+#include "Engine/Core/Graphics/Rendering/Renderer2DSolidColors.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

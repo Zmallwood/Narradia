@@ -10,6 +10,7 @@
 #include "World/Player.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
+#include "Engine/Core/Graphics/Rendering/CameraGl.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

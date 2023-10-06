@@ -17,6 +17,8 @@
 #include "World/Tile.hpp"
 #include "World/World.hpp"
 #include "Engine/Core/TextOutBox.hpp"
+#include "Engine/Core/Input/MouseInput.hpp"
+#include "Engine/Core/Graphics/Rendering/Renderer2DSolidColors.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

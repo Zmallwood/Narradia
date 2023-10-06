@@ -5,6 +5,7 @@
 #include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "World/Object.hpp"
 #include "World/ObjectBehaviourList.hpp"
+#include "Engine/Core/Graphics/Rendering/Renderer2DSolidColors.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

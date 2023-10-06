@@ -3,6 +3,7 @@
 #include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "World/MapArea.hpp"
 #include "World/Player.hpp"
+#include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

@@ -7,6 +7,7 @@
 #include "Scenes/EditorScene/EditorScene.hpp"
 #include "Scenes/EditorScene/SubScenes/MapLoadScene.hpp"
 #include "Scenes/EditorScene/SubScenes/MapSaveScene.hpp"
+#include "Input/MouseInput.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

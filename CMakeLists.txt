@@ -79,7 +79,7 @@ set(PCH_FILES
 "Source/Common/Singleton.hpp"
 "Source/Common/Typedefs.hpp"
 "Source/Engine/Core/Logger.hpp"
-"Source/Engine/Core/Core.hpp"
+"Source/Engine/Core/Utilities.hpp"
 "Source/Matter/Color.hpp"
 "Source/Matter/Colors.hpp"
 "Source/Matter/GlRectangleF.hpp"

@@ -3,6 +3,8 @@
 #include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "World/Player.hpp"
 #include "Engine/Core/Cursor.hpp"
+#include "Engine/Core/Input/MouseInput.hpp"
+#include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

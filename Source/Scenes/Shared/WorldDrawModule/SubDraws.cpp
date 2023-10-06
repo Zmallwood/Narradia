@@ -11,6 +11,9 @@
 #include "World/Mob.hpp"
 #include "World/Player.hpp"
 #include "World/Tile.hpp"
+#include "Engine/Core/Graphics/Rendering/CameraGl.hpp"
+#include "Engine/Core/Graphics/Rendering/RendererBillboardImages.hpp"
+#include "Engine/Core/Graphics/Rendering/RendererModels.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

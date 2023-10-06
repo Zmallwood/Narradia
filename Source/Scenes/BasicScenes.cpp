@@ -6,6 +6,9 @@
 #include "Engine/Core/GameEngine.hpp"
 #include "Engine/Core/SceneManager.hpp"
 #include "Engine/Core/Audio.hpp"
+#include "Engine/Core/Input/KeyboardInput.hpp"
+#include "Engine/Core/Input/MouseInput.hpp"
+#include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

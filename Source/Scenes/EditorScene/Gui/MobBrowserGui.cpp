@@ -4,6 +4,8 @@
 #include "Engine/Core/Graphics/Rendering/Rendering.hpp"
 #include "Scenes/EditorScene/Modules/ToolUsing.hpp"
 #include "World/Object.hpp"
+#include "Engine/Core/Input/MouseInput.hpp"
+#include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

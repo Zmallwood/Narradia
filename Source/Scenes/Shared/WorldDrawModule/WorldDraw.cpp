@@ -8,6 +8,7 @@
 #include "SubDraws.hpp"
 #include "World/Mob.hpp"
 #include "World/Tile.hpp"
+#include "Engine/Core/Graphics/Rendering/RendererModels.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

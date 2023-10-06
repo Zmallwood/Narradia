@@ -7,6 +7,7 @@
 #include "World/MapArea.hpp"
 #include "World/Player.hpp"
 #include "World/World.hpp"
+#include "Engine/Core/Input/MouseInput.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

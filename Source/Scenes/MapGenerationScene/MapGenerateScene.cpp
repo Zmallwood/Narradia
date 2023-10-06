@@ -4,6 +4,7 @@
 #include "Scenes/Shared/WorldDrawModule/WorldDraw.hpp"
 #include "World/World.hpp"
 #include "Engine/Core/SceneManager.hpp"
+#include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

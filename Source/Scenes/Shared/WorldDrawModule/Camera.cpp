@@ -9,6 +9,8 @@
 #include "WorldDraw.hpp"
 #include "Engine/Core/SceneManager.hpp"
 #include "Engine/Core/Cursor.hpp"
+#include "Engine/Core/Input/MouseInput.hpp"
+#include "Engine/Core/Graphics/Rendering/CameraGl.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

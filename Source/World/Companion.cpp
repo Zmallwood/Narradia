@@ -15,7 +15,7 @@ namespace Narradia
         int ticksLastMovement = 0;
         int moveSpeed = 200;
         int radius = 1;
-        Directions direction = Directions::Clockwise;
+        RotationDirections direction = RotationDirections::Clockwise;
         float angle = 0.0f;
         Point2 previousCoordinate = {-1, -1};
     };
@@ -80,7 +80,7 @@ namespace Narradia
         return p->radius;
     }
 
-    Directions Companion::GetDirection()
+    RotationDirections Companion::GetDirection()
     /*////////////////////////////////*/
     {
         return p->direction;
@@ -125,10 +125,10 @@ namespace Narradia
     void Companion::ReverseDirection()
     /*//////////////////////////////*/
     {
-        if (p->direction == Directions::Clockwise)
-            p->direction = Directions::CounterClockwise;
+        if (p->direction == RotationDirections::Clockwise)
+            p->direction = RotationDirections::CounterClockwise;
         else
-            p->direction = Directions::Clockwise;
+            p->direction = RotationDirections::Clockwise;
     }
 
     void Companion::DecreaseRadius()

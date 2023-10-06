@@ -8,6 +8,8 @@
 #include "World/MapArea.hpp"
 #include "World/Player.hpp"
 #include "Engine/Core/TextOutBox.hpp"
+#include "Engine/Core/Input/KeyboardInput.hpp"
+#include "Engine/Core/Graphics/Rendering/Renderer2DSolidColors.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

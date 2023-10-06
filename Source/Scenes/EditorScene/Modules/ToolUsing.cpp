@@ -6,6 +6,7 @@
 #include "World/Object.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
+#include "Engine/Core/Input/MouseInput.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

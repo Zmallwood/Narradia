@@ -6,6 +6,9 @@
 #include "World/Object.hpp"
 #include "Core/SceneManager.hpp"
 #include "Core/Cursor.hpp"
+#include "Core/Input/KeyboardInput.hpp"
+#include "Core/Input/MouseInput.hpp"
+#include "Core/Graphics/Rendering/Renderer2DImages.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
