@@ -13,13 +13,11 @@ namespace Narradia
       public:
         bool running = true;
     };
-
     GameEngine::GameEngine()
         : p(std::make_shared<Pimpl>())
     /*//////////////////////////////*/
     {
     }
-
     void GameEngine::Run() const
     /*////////////////////////*/
     {
@@ -44,13 +42,11 @@ namespace Narradia
         GameLoop().Run();
         SDL_Quit();
     }
-
     void GameEngine::StopGame()
     /*///////////////////////*/
     {
         p->running = false;
     }
-
     const bool GameEngine::IsRunning() const
     /*////////////////////////////////////*/
     {
