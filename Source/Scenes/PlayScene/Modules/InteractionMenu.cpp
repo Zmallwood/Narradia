@@ -182,9 +182,26 @@ namespace Narradia
     /*///////////////////////////////////////*/
     {
         p->available_menu_entries = {
-#include "MenuActions/CreateActions.inc.cpp"
-#include "MenuActions/ObjectActions.inc.cpp"
-#include "MenuActions/TileActions.inc.cpp"
+#include "MenuActions/CreateActions/CreateStoneAxe.inc.cpp"
+#include "MenuActions/CreateActions/CreateWoodenBox.inc.cpp"
+#include "MenuActions/CreateActions/CreateWoodLog.inc.cpp"
+#include "MenuActions/CreateActions/CreateWoodPlank.inc.cpp"
+#include "MenuActions/CreateActions/CreateWoodWallE.inc.cpp"
+#include "MenuActions/CreateActions/CreateWoodWallN.inc.cpp"
+#include "MenuActions/CreateActions/CreateWoodWallS.inc.cpp"
+#include "MenuActions/CreateActions/CreateWoodWallW.inc.cpp"
+#include "MenuActions/CreateActions/MineCaveEntrance.inc.cpp"
+#include "MenuActions/ObjectActions/ChopDownTree.inc.cpp"
+#include "MenuActions/ObjectActions/CreateBurningCampfire.inc.cpp"
+#include "MenuActions/ObjectActions/CutGrass.inc.cpp"
+#include "MenuActions/ObjectActions/EatItem.inc.cpp"
+#include "MenuActions/ObjectActions/OpenContainer.inc.cpp"
+#include "MenuActions/ObjectActions/SplitStack.inc.cpp"
+#include "MenuActions/TileActions/Fish.inc.cpp"
+#include "MenuActions/TileActions/Forage.inc.cpp"
+#include "MenuActions/TileActions/LayCobblestone.inc.cpp"
+#include "MenuActions/TileActions/LayWoodFloor.inc.cpp"
+#include "MenuActions/TileActions/SetWoodRoof.inc.cpp"
         };
     }
 
