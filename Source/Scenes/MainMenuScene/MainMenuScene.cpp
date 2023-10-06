@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////
 #include "MainMenuScene.hpp"
-#include "Engine/GuiCore/SceneGui.hpp"
-#include "Engine/Core/SceneManager.hpp"
 #include "Engine/Core/GameEngine.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
+#include "Engine/Core/SceneManager.hpp"
+#include "Engine/GuiCore/SceneGui.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -36,13 +36,15 @@ namespace Narradia
         p->glIdLogoImage = Renderer2DImages::Get().NewImage();
     }
 
-    void MainMenuScene::UpdateDerived()
+    void
+    MainMenuScene::UpdateDerived()
     /*//////////////////////////////*/
     {
         Log();
     }
 
-    void MainMenuScene::RenderDerived()
+    void
+    MainMenuScene::RenderDerived()
     /*//////////////////////////////*/
     {
         Log();

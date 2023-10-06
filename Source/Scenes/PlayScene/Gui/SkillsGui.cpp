@@ -1,10 +1,10 @@
 //////////////////////////////////////////////////////////////////////
 #include "SkillsGui.hpp"
-#include "World/Player.hpp"
 #include "Engine/Core/Cursor.hpp"
-#include "Engine/Core/Input/MouseInput.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
+#include "Engine/Core/Input/MouseInput.hpp"
+#include "World/Player.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -22,7 +22,8 @@ namespace Narradia
         glIdAvailablePoints = TextRenderer::Get().NewString();
     }
 
-    void SkillsGui::UpdateDerived()
+    void
+    SkillsGui::UpdateDerived()
     /*///////////////////////////*/
     {
         auto mousePos = GetMousePositionF();
@@ -53,7 +54,8 @@ namespace Narradia
         }
     }
 
-    void SkillsGui::RenderDerived() const
+    void
+    SkillsGui::RenderDerived() const
     /*/////////////////////////////////*/
     {
         auto mousePos = GetMousePositionF();

@@ -48,7 +48,8 @@ namespace Narradia
         ModelBank::Get().LoadModels();
     }
 
-    void GraphicsGl::Cleanup()
+    void
+    GraphicsGl::Cleanup()
     /*//////////////////////*/
     {
         Renderer2DSolidColors::Get().Cleanup();
@@ -59,13 +60,15 @@ namespace Narradia
         ImageBank::Get().Cleanup();
     }
 
-    Color GraphicsGl::GetFogColorGround()
+    Color
+    GraphicsGl::GetFogColorGround()
     /*/////////////////////////////////*/
     {
         return p->fogColorGround;
     }
 
-    Color GraphicsGl::GetFogColorObjects()
+    Color
+    GraphicsGl::GetFogColorObjects()
     /*//////////////////////////////////*/
     {
         return p->fogColorObjects;

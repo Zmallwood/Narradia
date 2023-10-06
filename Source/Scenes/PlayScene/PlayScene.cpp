@@ -1,5 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 #include "PlayScene.hpp"
+#include "Engine/Core/Audio.hpp"
 #include "Gui/PlaySceneGuiMenu.hpp"
 #include "Modules/Advicer.hpp"
 #include "Modules/CompanionsUpdate.hpp"
@@ -8,9 +9,11 @@
 #include "Modules/MobMovement.hpp"
 #include "Modules/ObjectMoving.hpp"
 #include "Modules/ObjectTransformation.hpp"
-#include "Modules/PlaySceneModulesCore.hpp"
 #include "Modules/SettlementCreator.hpp"
 #include "Modules/StartConditions.hpp"
+#include "Modules/PlaySceneHotkeys.hpp"
+#include "Modules/ActionRepeat.hpp"
+#include "Modules/ActiveGameRound.hpp"
 #include "PlaySceneGui.hpp"
 #include "Scenes/Shared/GuiObjectHovering.hpp"
 #include "Scenes/Shared/KeyboardMove.hpp"
@@ -18,7 +21,6 @@
 #include "Scenes/Shared/TileHovering.hpp"
 #include "Scenes/Shared/WorldDrawModule/WorldDraw.hpp"
 #include "World/Player.hpp"
-#include "Engine/Core/Audio.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -39,7 +41,8 @@ namespace Narradia
         ObjectMoving::Create();
     }
 
-    void PlayScene::Enter()
+    void
+    PlayScene::Enter()
     /*//////////////////*/
     {
         PlaySceneGuiMenu::Get().visible = false;
@@ -51,7 +54,8 @@ namespace Narradia
         Audio::Get().Unmute();
     }
 
-    void PlayScene::UpdateDerived()
+    void
+    PlayScene::UpdateDerived()
     /*//////////////////////////*/
     {
         Log();
@@ -90,7 +94,8 @@ namespace Narradia
         Advicer::Get().Update();
     }
 
-    void PlayScene::RenderDerived()
+    void
+    PlayScene::RenderDerived()
     /*//////////////////////////*/
     {
         Log();
@@ -104,7 +109,8 @@ namespace Narradia
         ActiveGameRound::Get().Render();
     }
 
-    void PlayScene::RenderAfterGuiDerived()
+    void
+    PlayScene::RenderAfterGuiDerived()
     /*//////////////////////////////////*/
     {
         InteractionMenu::Get().Render();

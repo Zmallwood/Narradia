@@ -25,7 +25,8 @@ namespace Narradia
         GetShaderProgram()->Create(vertexShaderSource, fragmentShaderSource);
     }
 
-    RenderId Renderer2DSolidColors::NewRectangle()
+    RenderId
+    Renderer2DSolidColors::NewRectangle()
     /*//////////////////////////////////////////*/
     {
         auto vaoId = GenerateNewVertexArrayId();
@@ -81,7 +82,8 @@ namespace Narradia
         UseVaoEnd();
     }
 
-    void Renderer2DSolidColors::Cleanup()
+    void
+    Renderer2DSolidColors::Cleanup()
     /*/////////////////////////////////*/
     {
         CleanupBase();

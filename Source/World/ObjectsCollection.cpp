@@ -12,7 +12,8 @@ namespace Narradia
     {
     }
 
-    void ObjectsCollection::CreateAdd(std::string_view objectType, int quantity)
+    void
+    ObjectsCollection::CreateAdd(std::string_view objectType, int quantity)
     /*////////////////////////////////////////////////////////////////////////*/
     {
         auto newObject = std::make_shared<Object>(objectType, quantity, this);
@@ -21,7 +22,8 @@ namespace Narradia
             newObject.get(), parentTile->GetCoordinate());
     }
 
-    void ObjectsCollection::CreateAdd(int objectTypeHash, int quantity)
+    void
+    ObjectsCollection::CreateAdd(int objectTypeHash, int quantity)
     /*///////////////////////////////////////////////////////////////*/
     {
         auto newObject = std::make_shared<Object>(objectTypeHash, quantity, this);
@@ -30,7 +32,8 @@ namespace Narradia
             newObject.get(), parentTile->GetCoordinate());
     }
 
-    void ObjectsCollection::Add(std::shared_ptr<Object> object)
+    void
+    ObjectsCollection::Add(std::shared_ptr<Object> object)
     /*///////////////////////////////////////////////////////*/
     {
         object->SetParentObjectsCollection(this);
@@ -38,13 +41,15 @@ namespace Narradia
         parentTile->GetParentMapArea()->AddObjectMirror(object.get(), parentTile->GetCoordinate());
     }
 
-    void ObjectsCollection::Clear()
+    void
+    ObjectsCollection::Clear()
     /*///////////////////////////*/
     {
         trueList.clear();
     }
 
-    bool ObjectsCollection::Contains(int objectNameHash) const
+    bool
+    ObjectsCollection::Contains(int objectNameHash) const
     /*//////////////////////////////////////////////////////*/
     {
         for (auto objectEntry : list)
@@ -53,7 +58,8 @@ namespace Narradia
         return false;
     }
 
-    void ObjectsCollection::Replace(
+    void
+    ObjectsCollection::Replace(
         std::shared_ptr<Object> origObject, std::shared_ptr<Object> newObject)
     /*/////////////////////////////////////////////////////////////////////////////////////////////*/
     {
@@ -73,7 +79,8 @@ namespace Narradia
             newObject.get(), parentTile->GetCoordinate());
     }
 
-    void ObjectsCollection::Remove(Object *object)
+    void
+    ObjectsCollection::Remove(Object *object)
     /*//////////////////////////////////////////*/
     {
         auto i = 0;
@@ -91,7 +98,8 @@ namespace Narradia
         }
     }
 
-    std::shared_ptr<Object> ObjectsCollection::GetObjectFromRawPtr(Object *object)
+    std::shared_ptr<Object>
+    ObjectsCollection::GetObjectFromRawPtr(Object *object)
     /*//////////////////////////////////////////////////////////////////////////*/
     {
         for (auto &objectEntry : list)

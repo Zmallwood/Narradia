@@ -1,15 +1,16 @@
 //////////////////////////////////////////////////////////////////////
 #include "EditorSceneHotkeys.hpp"
+#include "Engine/Core/Input/KeyboardInput.hpp"
 #include "Scenes/EditorScene/Gui/EditorSceneGuiMenu.hpp"
 #include "Scenes/EditorScene/Gui/GroundBrowserGui.hpp"
 #include "Scenes/EditorScene/Gui/MobBrowserGui.hpp"
 #include "Scenes/EditorScene/Gui/ObjectBrowserGui.hpp"
 #include "Scenes/EditorScene/Gui/RoofBrowserGui.hpp"
-#include "Engine/Core/Input/KeyboardInput.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    void EditorSceneHotkeys::Update()
+    void
+    EditorSceneHotkeys::Update()
     /*////////////////////////////*/
     {
         if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_1))

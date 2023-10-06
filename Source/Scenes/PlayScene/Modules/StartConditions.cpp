@@ -6,7 +6,8 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    void StartConditions::CreateStartConditions()
+    void
+    StartConditions::CreateStartConditions()
     /*/////////////////////////////////////////*/
     {
         auto &inventory = Player::Get().data.inventory;

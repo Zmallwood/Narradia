@@ -23,13 +23,15 @@ namespace Narradia
         TTF_SetFontOutline(p->sdlFontOutline.get(), kFontOutlineWidth);
     }
 
-    TTF_Font *Font::GetSdlFont() const
+    TTF_Font *
+    Font::GetSdlFont() const
     /*//////////////////////////////*/
     {
         return p->sdlFont.get();
     }
 
-    TTF_Font *Font::GetSdlFontOutline() const
+    TTF_Font *
+    Font::GetSdlFontOutline() const
     /*/////////////////////////////////////*/
     {
         return p->sdlFontOutline.get();

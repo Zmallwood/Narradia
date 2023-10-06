@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////
 #include "OpenContainerGui.hpp"
+#include "Engine/GuiCore/GuiWindowObjectSlot.hpp"
 #include "World/Object.hpp"
 #include "World/ObjectBehaviourList.hpp"
-#include "Engine/GuiCore/GuiWindowObjectSlot.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -30,7 +30,8 @@ namespace Narradia
         }
     }
 
-    void OpenContainerGui::UpdateDerived()
+    void
+    OpenContainerGui::UpdateDerived()
     /*//////////////////////////////////*/
     {
         if (GetBounds().Contains(GetMousePositionF()))
@@ -61,7 +62,8 @@ namespace Narradia
         }
     }
 
-    void OpenContainerGui::RenderDerived() const
+    void
+    OpenContainerGui::RenderDerived() const
     /*////////////////////////////////////////*/
     {
         auto i = 0;

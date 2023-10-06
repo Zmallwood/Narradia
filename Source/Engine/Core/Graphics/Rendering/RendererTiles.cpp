@@ -1,10 +1,10 @@
 //////////////////////////////////////////////////////////////////////
 #include "RendererTiles.hpp"
 #include "CameraGl.hpp"
+#include "Engine/Assets/ImageBank.hpp"
 #include "Engine/Core/Graphics/GraphicsGl.hpp"
 #include "ShaderProgram.hpp"
 #include "World/Player.hpp"
-#include "Engine/Assets/ImageBank.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -44,7 +44,8 @@ namespace Narradia
         p->locationFogColor = GetUniformLocation("fogColor");
     }
 
-    RenderId RendererTiles::NewImagePolygon(int numVertices)
+    RenderId
+    RendererTiles::NewImagePolygon(int numVertices)
     /*////////////////////////////////////////////////////*/
     {
         auto vertexArrayId = GenerateNewVertexArrayId();
@@ -64,13 +65,15 @@ namespace Narradia
         return vertexArrayId;
     }
 
-    RenderId RendererTiles::NewTile()
+    RenderId
+    RendererTiles::NewTile()
     /*/////////////////////////////*/
     {
         return NewImagePolygon(4);
     }
 
-    void RendererTiles::SetGeometryTile(
+    void
+    RendererTiles::SetGeometryTile(
         RenderId vaoId, Vertex3F &v0, Vertex3F &v1, Vertex3F &v2, Vertex3F &v3, Point3F &normal00,
         Point3F &normal10, Point3F &normal11, Point3F &normal01) const
     /*//////////////////////////////////////////////////////////////////////////////////////////*/
@@ -87,13 +90,15 @@ namespace Narradia
         SetGeometryImagePolygon(vaoId, vertices);
     }
 
-    void RendererTiles::DrawTile(int imageNameHash, RenderId vaoId, bool depthTestOff) const
+    void
+    RendererTiles::DrawTile(int imageNameHash, RenderId vaoId, bool depthTestOff) const
     /*////////////////////////////////////////////////////////////////////////////////////*/
     {
         DrawImagePolygon(imageNameHash, vaoId, 4, depthTestOff);
     }
 
-    void RendererTiles::UpdateDrawTile(
+    void
+    RendererTiles::UpdateDrawTile(
         int imageNameHash, RenderId vaoId, Vertex3F &v0, Vertex3F &v1, Vertex3F &v2, Vertex3F &v3,
         Point3F &normal00, Point3F &normal10, Point3F &normal11, Point3F &normal01,
         bool depthTestOff) const
@@ -157,7 +162,8 @@ namespace Narradia
             glUseProgram(0);
     }
 
-    void RendererTiles::StartBatchDrawing()
+    void
+    RendererTiles::StartBatchDrawing()
     /*///////////////////////////////////*/
     {
         p->isBatchDrawing = true;
@@ -183,7 +189,8 @@ namespace Narradia
         glCullFace(GL_FRONT);
     }
 
-    void RendererTiles::StopBatchDrawing()
+    void
+    RendererTiles::StopBatchDrawing()
     /*//////////////////////////////////*/
     {
         p->isBatchDrawing = false;
@@ -191,7 +198,8 @@ namespace Narradia
         glDisable(GL_CULL_FACE);
     }
 
-    void RendererTiles::DrawImagePolygon(
+    void
+    RendererTiles::DrawImagePolygon(
         int imageNameHash, RenderId vaoId, int vertexCount, bool depthTestOff) const
     /*////////////////////////////////////////////////////////////////////////////*/
     {
@@ -230,7 +238,8 @@ namespace Narradia
             glUseProgram(0);
     }
 
-    void RendererTiles::Cleanup()
+    void
+    RendererTiles::Cleanup()
     /*/////////////////////////*/
     {
         CleanupBase();

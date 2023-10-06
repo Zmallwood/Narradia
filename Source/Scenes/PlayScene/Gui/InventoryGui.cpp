@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////
 #include "InventoryGui.hpp"
-#include "World/Player.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 #include "Engine/GuiCore/GuiWindowObjectSlot.hpp"
+#include "World/Player.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -26,7 +26,8 @@ namespace Narradia
         bottomBarRendId = Renderer2DImages::Get().NewImage();
     }
 
-    void InventoryGui::UpdateDerived()
+    void
+    InventoryGui::UpdateDerived()
     /*//////////////////////////////*/
     {
         if (GetBounds().Contains(GetMousePositionF()))
@@ -47,7 +48,8 @@ namespace Narradia
                 slots[x][y]->Update();
     }
 
-    void InventoryGui::RenderDerived() const
+    void
+    InventoryGui::RenderDerived() const
     /*////////////////////////////////////*/
     {
         Log();

@@ -8,7 +8,8 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    void MobMovement::Update()
+    void
+    MobMovement::Update()
     /*//////////////////////*/
     {
         Log();

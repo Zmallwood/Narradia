@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////
 #include "RendererBillboardImages.hpp"
 #include "CameraGl.hpp"
-#include "ShaderProgram.hpp"
 #include "Engine/Assets/ImageBank.hpp"
+#include "ShaderProgram.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -35,7 +35,8 @@ namespace Narradia
         p->locationBillboardSize = GetUniformLocation("billboardSize");
     }
 
-    RenderId RendererBillboardImages::NewBillboardImage()
+    RenderId
+    RendererBillboardImages::NewBillboardImage()
     /*/////////////////////////////////////////////////*/
     {
         auto vaoId = GenerateNewVertexArrayId();
@@ -51,7 +52,8 @@ namespace Narradia
         return vaoId;
     }
 
-    void RendererBillboardImages::DrawBillboardImage(
+    void
+    RendererBillboardImages::DrawBillboardImage(
         int imageNameHash, RenderId vaoId, Point3F position, RectangleF &bounds,
         SizeF billboardSize) const
     /*////////////////////////////////////////////////////////////////////////*/
@@ -102,7 +104,8 @@ namespace Narradia
         UseVaoEnd();
     }
 
-    void RendererBillboardImages::Cleanup()
+    void
+    RendererBillboardImages::Cleanup()
     /*///////////////////////////////////*/
     {
         CleanupBase();

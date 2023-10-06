@@ -1,5 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 #include "Player.hpp"
+#include "Engine/Core/Audio.hpp"
+#include "Engine/Core/SceneManager.hpp"
 #include "MapArea.hpp"
 #include "Object.hpp"
 #include "ObjectBehaviourList.hpp"
@@ -8,72 +10,81 @@
 #include "Scenes/Shared/WorldDrawModule/Configuration.hpp"
 #include "Tile.hpp"
 #include "World.hpp"
-#include "Engine/Core/SceneManager.hpp"
-#include "Engine/Core/Audio.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    Point2F Player::GetPosition()
+    Point2F
+    Player::GetPosition()
     /*/////////////////////////*/
     {
         return data.movement.position;
     }
 
-    void Player::MoveForward()
+    void
+    Player::MoveForward()
     /*//////////////////////*/
     {
         MoveAtAngle(0);
     }
 
-    void Player::TurnForward()
+    void
+    Player::TurnForward()
     /*//////////////////////*/
     {
         data.movement.facingAngle = Camera::Get().horizontalAngle;
     }
 
-    void Player::TurnRight()
+    void
+    Player::TurnRight()
     /*////////////////////*/
     {
         data.movement.facingAngle = Camera::Get().horizontalAngle - 90.0f;
     }
 
-    void Player::TurnLeft()
+    void
+    Player::TurnLeft()
     /*///////////////////*/
     {
         data.movement.facingAngle = Camera::Get().horizontalAngle + 90.0f;
     }
 
-    void Player::TurnBack()
+    void
+    Player::TurnBack()
     /*///////////////////*/
     {
         data.movement.facingAngle = Camera::Get().horizontalAngle + 180.0f;
     }
 
-    void Player::TurnRightForward()
+    void
+    Player::TurnRightForward()
     /*///////////////////////////*/
     {
         data.movement.facingAngle = Camera::Get().horizontalAngle - 45.0f;
     }
 
-    void Player::TurnLeftForward()
+    void
+    Player::TurnLeftForward()
     /*//////////////////////////*/
     {
         data.movement.facingAngle = Camera::Get().horizontalAngle + 45.0f;
     }
 
-    void Player::TurnRightBack()
+    void
+    Player::TurnRightBack()
     /*////////////////////////*/
     {
         data.movement.facingAngle = Camera::Get().horizontalAngle + 225.0f;
     }
 
-    void Player::TurnLeftBack()
+    void
+    Player::TurnLeftBack()
     /*///////////////////////*/
     {
         data.movement.facingAngle = Camera::Get().horizontalAngle + 135.0f;
     }
 
-    Point3F Player::GetSpaceCoord()
+    Point3F
+    Player::GetSpaceCoord()
     /*///////////////////////////*/
     {
         auto position = GetPosition();
@@ -82,50 +93,58 @@ namespace Narradia
         return spaceCoord;
     }
 
-    Point3 Player::GetWorldAreaPos()
+    Point3
+    Player::GetWorldAreaPos()
     /*////////////////////////////*/
     {
         return data.movement.worldAreaPos;
     }
 
-    float Player::GetFacingAngle()
+    float
+    Player::GetFacingAngle()
     /*//////////////////////////*/
     {
         return data.movement.facingAngle;
     }
 
-    void Player::SetFacingAngle(float newFacingAngle)
+    void
+    Player::SetFacingAngle(float newFacingAngle)
     /*/////////////////////////////////////////////*/
     {
         data.movement.facingAngle = newFacingAngle;
     }
 
-    void Player::ClaimTile(Point2 Tile)
+    void
+    Player::ClaimTile(Point2 Tile)
     /*///////////////////////////////*/
     {
         claimedTiles.push_back(Tile);
     }
 
-    bool Player::HasClaimedTile(Point2 Tile)
+    bool
+    Player::HasClaimedTile(Point2 Tile)
     /*////////////////////////////////////*/
     {
         return std::count(claimedTiles.begin(), claimedTiles.end(), Tile) != 0;
     }
 
-    void Player::ClearClaimedTiles()
+    void
+    Player::ClearClaimedTiles()
     /*////////////////////////////*/
     {
         claimedTiles.clear();
     }
 
-    void Player::Jump()
+    void
+    Player::Jump()
     /*///////////////*/
     {
         if (SDL_GetTicks() > ticksStartJumping + jumpDuration)
             ticksStartJumping = SDL_GetTicks();
     }
 
-    void Player::MoveAtAngle(float angleOffset)
+    void
+    Player::MoveAtAngle(float angleOffset)
     /*///////////////////////////////////////*/
     {
         if (!data.movement.isMoving)
@@ -303,7 +322,8 @@ namespace Narradia
         }
     }
 
-    void Player::Update()
+    void
+    Player::Update()
     /*/////////////////*/
     {
         data.Update();

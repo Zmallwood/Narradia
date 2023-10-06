@@ -1,12 +1,13 @@
 //////////////////////////////////////////////////////////////////////
 #include "KeyboardMove.hpp"
+#include "Engine/Core/Input/KeyboardInput.hpp"
 #include "Scenes/PlayScene/Modules/DestinationMove.hpp"
 #include "World/Player.hpp"
-#include "Engine/Core/Input/KeyboardInput.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    void KeyboardMove::Update()
+    void
+    KeyboardMove::Update()
     /*///////////////////////*/
     {
         auto player = Player::GetPointer();

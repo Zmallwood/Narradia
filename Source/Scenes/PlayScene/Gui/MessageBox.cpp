@@ -19,12 +19,14 @@ namespace Narradia
         AddGuiButton("Ok", {0.45f, 0.06f, 0.035f, ConvertWidthToHeight(0.015f)}, confirmAction);
     }
 
-    void MessageBox::UpdateDerived()
+    void
+    MessageBox::UpdateDerived()
     /*////////////////////////////*/
     {
     }
 
-    void MessageBox::RenderDerived() const
+    void
+    MessageBox::RenderDerived() const
     /*//////////////////////////////////*/
     {
         TextRenderer::Get().DrawString(

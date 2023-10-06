@@ -23,20 +23,23 @@ namespace Narradia
     {
     }
 
-    void World::AddMapAreaAtZLevel(int zLevel, std::shared_ptr<MapArea> newMapArea)
+    void
+    World::AddMapAreaAtZLevel(int zLevel, std::shared_ptr<MapArea> newMapArea)
     /*///////////////////////////////////////////////////////////////////////////*/
     {
         p->mapAreas[zLevel] = newMapArea;
     }
 
-    void World::RemoveMapAreaAtZLevel(int zLevel)
+    void
+    World::RemoveMapAreaAtZLevel(int zLevel)
     /*/////////////////////////////////////////*/
     {
         if (p->mapAreas.count(zLevel))
             p->mapAreas.erase(zLevel);
     }
 
-    MapArea *World::GetMapAreaAtZLevel(int zLevel)
+    MapArea *
+    World::GetMapAreaAtZLevel(int zLevel)
     /*//////////////////////////////////////////*/
     {
         if (p->mapAreas.count(zLevel))
@@ -44,14 +47,16 @@ namespace Narradia
         return nullptr;
     }
 
-    MapArea *World::GetCurrentMapArea()
+    MapArea *
+    World::GetCurrentMapArea()
     /*///////////////////////////////*/
     {
         auto playerWorldAreaPos = Player::Get().GetWorldAreaPos();
         return p->mapAreas[playerWorldAreaPos.z].get();
     }
 
-    std::vector<MapArea *> World::GetAllMapAreas()
+    std::vector<MapArea *>
+    World::GetAllMapAreas()
     /*//////////////////////////////////////////*/
     {
         std::vector<MapArea *> mapAreasResult;
@@ -60,7 +65,8 @@ namespace Narradia
         return mapAreasResult;
     }
 
-    void World::CalculateNormals(bool updateExistingTiles)
+    void
+    World::CalculateNormals(bool updateExistingTiles)
     /*//////////////////////////////////////////////////*/
     {
         auto mapAreas = World::Get().GetAllMapAreas();
@@ -236,7 +242,8 @@ namespace Narradia
         }
     }
 
-    void World::ResetColorVariations()
+    void
+    World::ResetColorVariations()
     /*//////////////////////////////*/
     {
         auto mapAreas = World::Get().GetAllMapAreas();
@@ -257,7 +264,8 @@ namespace Narradia
         }
     }
 
-    void World::ApplyDefaultColorVariations()
+    void
+    World::ApplyDefaultColorVariations()
     /*/////////////////////////////////////*/
     {
         auto mapAreas = World::Get().GetAllMapAreas();
@@ -303,7 +311,8 @@ namespace Narradia
         }
     }
 
-    void World::GenerateRandomColorVariations()
+    void
+    World::GenerateRandomColorVariations()
     /*///////////////////////////////////////*/
     {
         auto mapAreas = World::Get().GetAllMapAreas();

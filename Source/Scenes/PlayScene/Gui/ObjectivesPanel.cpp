@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////
 #include "ObjectivesPanel.hpp"
-#include "World/MapArea.hpp"
-#include "World/Player.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
+#include "World/MapArea.hpp"
+#include "World/Player.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -20,13 +20,15 @@ namespace Narradia
             TextRenderer::Get().NewMultiLineString(5, kSize.width - 2 * 0.014f);
     }
 
-    void ObjectivesPanel::Update()
+    void
+    ObjectivesPanel::Update()
     /*//////////////////////////*/
     {
         GuiMovableContainer::Update();
     }
 
-    void ObjectivesPanel::Render() const
+    void
+    ObjectivesPanel::Render() const
     /*////////////////////////////////*/
     {
         Renderer2DImages::Get().DrawImage(Hash("PanelBg"), glIdBackgroundImage, GetBounds());

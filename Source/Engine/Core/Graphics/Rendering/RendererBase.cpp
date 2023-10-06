@@ -27,7 +27,8 @@ namespace Narradia
         p->shaderProgram = std::make_shared<ShaderProgram>();
     }
 
-    GLuint RendererBase::GenerateNewVertexArrayId()
+    GLuint
+    RendererBase::GenerateNewVertexArrayId()
     /*///////////////////////////////////////*/
     {
         GLuint newVaoId;
@@ -36,7 +37,8 @@ namespace Narradia
         return newVaoId;
     }
 
-    GLuint RendererBase::GenerateNewBufferId(BufferTypes bufferType, GLuint vaoId)
+    GLuint
+    RendererBase::GenerateNewBufferId(BufferTypes bufferType, GLuint vaoId)
     /*//////////////////////////////////////////////////////////////////////*/
     {
         GLuint newBufferId;
@@ -45,13 +47,15 @@ namespace Narradia
         return newBufferId;
     }
 
-    GLuint RendererBase::GetBufferId(BufferTypes bufferType, GLuint vaoId) const
+    GLuint
+    RendererBase::GetBufferId(BufferTypes bufferType, GLuint vaoId) const
     /*////////////////////////////////////////////////////////////////////*/
     {
         return p->vboIds.at(bufferType).at(vaoId);
     }
 
-    void RendererBase::SetIndicesData(GLuint indicesVboId, int numVertices, const void *data) const
+    void
+    RendererBase::SetIndicesData(GLuint indicesVboId, int numVertices, const void *data) const
     /*///////////////////////////////////////////////////////////////////////////////////////*/
     {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indicesVboId);
@@ -60,7 +64,8 @@ namespace Narradia
             GL_DYNAMIC_DRAW);
     }
 
-    void RendererBase::SetPositions2DData(
+    void
+    RendererBase::SetPositions2DData(
         GLuint pos2dVboId, int numVertices, const void *data, int layoutLocation) const
     /*///////////////////////////////////////////////////////////////////////////////*/
     {
@@ -78,7 +83,8 @@ namespace Narradia
         }
     }
 
-    void RendererBase::SetPositions3DData(
+    void
+    RendererBase::SetPositions3DData(
         GLuint pos3dVboId, int numVertices, const void *data, int layoutLocation) const
     /*///////////////////////////////////////////////////////////////////////////////*/
     {
@@ -96,7 +102,8 @@ namespace Narradia
         }
     }
 
-    void RendererBase::SetUvsData(
+    void
+    RendererBase::SetUvsData(
         GLuint uvVboId, int numVertices, const void *data, int layoutLocation) const
     /*/////////////////////////////////////////////////////////////////////////////////////////////*/
     {
@@ -113,7 +120,8 @@ namespace Narradia
         }
     }
 
-    void RendererBase::SetColorsData(
+    void
+    RendererBase::SetColorsData(
         GLuint colorVboId, int numVertices, const void *data, int layoutLocation) const
     /*///////////////////////////////////////////////////////////////////////////////*/
     {
@@ -131,7 +139,8 @@ namespace Narradia
         }
     }
 
-    void RendererBase::SetNormalsData(
+    void
+    RendererBase::SetNormalsData(
         GLuint normalVboId, int numVertices, const void *data, int layoutLocation) const
     /*////////////////////////////////////////////////////////////////////////////////*/
     {
@@ -149,14 +158,16 @@ namespace Narradia
         }
     }
 
-    void RendererBase::UpdateIndicesData(GLuint indicesVboId, std::vector<int> &indices) const
+    void
+    RendererBase::UpdateIndicesData(GLuint indicesVboId, std::vector<int> &indices) const
     /*//////////////////////////////////////////////////////////////////////////////////*/
     {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indicesVboId);
         glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, sizeof(float) * indices.size(), indices.data());
     }
 
-    void RendererBase::UpdatePositions2DData(
+    void
+    RendererBase::UpdatePositions2DData(
         GLuint positionsVboId, std::vector<float> &positions, int layoutLocation) const
     /*///////////////////////////////////////////////////////////////////////////////*/
     {
@@ -168,7 +179,8 @@ namespace Narradia
         glEnableVertexAttribArray(layoutLocation);
     }
 
-    void RendererBase::UpdatePositions3DData(
+    void
+    RendererBase::UpdatePositions3DData(
         GLuint positionsVboId, std::vector<float> &positions, int layoutLocation) const
     /*///////////////////////////////////////////////////////////////////////////////*/
     {
@@ -191,7 +203,8 @@ namespace Narradia
         glEnableVertexAttribArray(layoutLocation);
     }
 
-    void RendererBase::UpdateColorsData(
+    void
+    RendererBase::UpdateColorsData(
         GLuint colorsVboId, std::vector<float> &colors, int layoutLocation) const
     /*/////////////////////////////////////////////////////////////////////////*/
     {
@@ -202,7 +215,8 @@ namespace Narradia
         glEnableVertexAttribArray(layoutLocation);
     }
 
-    void RendererBase::UpdateNormalsData(
+    void
+    RendererBase::UpdateNormalsData(
         GLuint normalsVboId, std::vector<float> &normals, int layoutLocation) const
     /*///////////////////////////////////////////////////////////////////////////*/
     {
@@ -213,7 +227,8 @@ namespace Narradia
         glEnableVertexAttribArray(layoutLocation);
     }
 
-    void RendererBase::CleanupBase() const
+    void
+    RendererBase::CleanupBase() const
     /*//////////////////////////////*/
     {
         for (auto &bufferType : p->vboIds)
@@ -234,33 +249,38 @@ namespace Narradia
             p->shaderProgram->Cleanup();
     }
 
-    void RendererBase::UseVaoBegin(int vaoId) const
+    void
+    RendererBase::UseVaoBegin(int vaoId) const
     /*///////////////////////////////////////*/
     {
         glUseProgram(p->shaderProgram->GetProgramId());
         glBindVertexArray(vaoId);
     }
 
-    void RendererBase::UseVaoEnd() const
+    void
+    RendererBase::UseVaoEnd() const
     /*////////////////////////////*/
     {
         glBindVertexArray(0);
         glUseProgram(0);
     }
 
-    GLuint RendererBase::GetUniformLocation(std::string_view varName)
+    GLuint
+    RendererBase::GetUniformLocation(std::string_view varName)
     /*/////////////////////////////////////////////////////////*/
     {
         return glGetUniformLocation(p->shaderProgram->GetProgramId(), varName.data());
     }
 
-    ShaderProgram *RendererBase::GetShaderProgram() const
+    ShaderProgram *
+    RendererBase::GetShaderProgram() const
     /*/////////////////////////////////////////////*/
     {
         return p->shaderProgram.get();
     }
 
-    const int RendererBase::GetNumVerticlesInRectangle()
+    const int
+    RendererBase::GetNumVerticlesInRectangle()
     /*////////////////////////////////////////////*/
     {
         return Pimpl::kNumVerticesInRectangle;

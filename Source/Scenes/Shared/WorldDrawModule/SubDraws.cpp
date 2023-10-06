@@ -2,6 +2,11 @@
 #include "SubDraws.hpp"
 #include "Camera.hpp"
 #include "Configuration.hpp"
+#include "Engine/Core/Graphics/Rendering/CameraGl.hpp"
+#include "Engine/Core/Graphics/Rendering/RendererBillboardImages.hpp"
+#include "Engine/Core/Graphics/Rendering/RendererModels.hpp"
+#include "Engine/Core/Graphics/Rendering/RendererTiles.hpp"
+#include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
 #include "RenderLoop.hpp"
 #include "Scenes/Shared/TileHovering.hpp"
 #include "Utilities.hpp"
@@ -10,11 +15,6 @@
 #include "World/Mob.hpp"
 #include "World/Player.hpp"
 #include "World/Tile.hpp"
-#include "Engine/Core/Graphics/Rendering/CameraGl.hpp"
-#include "Engine/Core/Graphics/Rendering/RendererBillboardImages.hpp"
-#include "Engine/Core/Graphics/Rendering/RendererModels.hpp"
-#include "Engine/Core/Graphics/Rendering/RendererTiles.hpp"
-#include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -32,7 +32,8 @@ namespace Narradia
     {
     }
 
-    void SubDrawCompanion::Create()
+    void
+    SubDrawCompanion::Create()
     /*///////////////////////////*/
     {
         for (auto x = -kMaxRenderRadius; x < kMaxRenderRadius; x++)
@@ -47,7 +48,8 @@ namespace Narradia
         }
     }
 
-    void SubDrawCompanion::DrawCompanion()
+    void
+    SubDrawCompanion::DrawCompanion()
     /*//////////////////////////////////*/
     {
         auto tile = RenderLoop::currTile;
@@ -104,7 +106,8 @@ namespace Narradia
         }
     }
 
-    void SubDrawCompanion::Pimpl::DrawExclamationMark()
+    void
+    SubDrawCompanion::Pimpl::DrawExclamationMark()
     /*///////////////////////////////////////////////*/
     {
         auto tile = RenderLoop::currTile;
@@ -146,7 +149,8 @@ namespace Narradia
     {
     }
 
-    void SubDrawGround::Create()
+    void
+    SubDrawGround::Create()
     /*////////////////////////*/
     {
         for (auto y = 0; y < MapArea::GetMapSize().height; y++)
@@ -154,7 +158,8 @@ namespace Narradia
                 p->idsTileLayers[x][y] = RendererTiles::Get().NewTile();
     }
 
-    void SubDrawGround::DrawGround(bool doDrawTerritoryBorders)
+    void
+    SubDrawGround::DrawGround(bool doDrawTerritoryBorders)
     /*///////////////////////////////////////////////////////*/
     {
         auto tile = RenderLoop::currTile;
@@ -270,13 +275,15 @@ namespace Narradia
     {
     }
 
-    void SubDrawMob::Create()
+    void
+    SubDrawMob::Create()
     /*/////////////////////*/
     {
         p->InitializeIds();
     }
 
-    void SubDrawMob::DrawMob()
+    void
+    SubDrawMob::DrawMob()
     /*//////////////////////*/
     {
         auto tile = RenderLoop::currTile;
@@ -288,7 +295,8 @@ namespace Narradia
         p->IfCaseDrawMobLabel();
     }
 
-    void SubDrawMob::Pimpl::InitializeIds()
+    void
+    SubDrawMob::Pimpl::InitializeIds()
     /*///////////////////////////////////*/
     {
         for (auto x = -kMaxRenderRadius; x < kMaxRenderRadius; x++)
@@ -296,14 +304,16 @@ namespace Narradia
                 idsBillboardTexts[x][y] = TextRenderer::Get().NewBillboardString();
     }
 
-    int SubDrawMob::Pimpl::GetAnimationValue()
+    int
+    SubDrawMob::Pimpl::GetAnimationValue()
     /*//////////////////////////////////////*/
     {
         auto tileCoord = RenderLoop::currTileCoord;
         return tileCoord.x * tileCoord.y * 10 + SDL_GetTicks();
     }
 
-    void SubDrawMob::Pimpl::DrawShadow()
+    void
+    SubDrawMob::Pimpl::DrawShadow()
     /*////////////////////////////////*/
     {
         auto v0 = RenderLoop::currVertTile.v0;
@@ -327,7 +337,8 @@ namespace Narradia
             0.0f, 0.6f);
     }
 
-    void SubDrawMob::Pimpl::DrawMobModel()
+    void
+    SubDrawMob::Pimpl::DrawMobModel()
     /*//////////////////////////////////*/
     {
         auto v0 = RenderLoop::currVertTile.v0;
@@ -374,7 +385,8 @@ namespace Narradia
         }
     }
 
-    void SubDrawMob::Pimpl::IfCaseDrawMobLabel()
+    void
+    SubDrawMob::Pimpl::IfCaseDrawMobLabel()
     /*////////////////////////////////////////*/
     {
         auto v0 = RenderLoop::currVertTile.v0;
@@ -414,13 +426,15 @@ namespace Narradia
     {
     }
 
-    void SubDrawPlayer::Create()
+    void
+    SubDrawPlayer::Create()
     /*////////////////////////*/
     {
         p->idBillboardTextPlayerName = TextRenderer::Get().NewBillboardString();
     }
 
-    void SubDrawPlayer::DrawPlayer()
+    void
+    SubDrawPlayer::DrawPlayer()
     /*////////////////////////////*/
     {
         auto pos = Player::Get().GetSpaceCoord().Translate(0.0f, p->GetPlayerElevation(), 0.0f);
@@ -464,7 +478,8 @@ namespace Narradia
         p->DrawLabel();
     }
 
-    void SubDrawPlayer::Pimpl::DrawLabel()
+    void
+    SubDrawPlayer::Pimpl::DrawLabel()
     /*//////////////////////////////////*/
     {
         auto pos = Player::Get().GetSpaceCoord().Translate(0.0f, GetPlayerElevation(), 0.0f);
@@ -477,7 +492,8 @@ namespace Narradia
             idBillboardTextPlayerName, playerText, billboardTextPos, billboardSize);
     }
 
-    float SubDrawPlayer::Pimpl::GetPlayerElevation()
+    float
+    SubDrawPlayer::Pimpl::GetPlayerElevation()
     /*////////////////////////////////////////////*/
     {
         const auto playerPos = Player::Get().GetPosition();
@@ -495,7 +511,8 @@ namespace Narradia
         return playerElev;
     }
 
-    void SubDrawSky::DrawSky()
+    void
+    SubDrawSky::DrawSky()
     /*//////////////////////*/
     {
         const auto playerWorldAreaPos = Player::Get().GetWorldAreaPos();

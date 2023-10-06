@@ -1,17 +1,18 @@
 //////////////////////////////////////////////////////////////////////
 #include "DestinationMove.hpp"
+#include "Engine/Core/Input/MouseInput.hpp"
 #include "InteractionMenu.hpp"
 #include "ObjectMoving.hpp"
 #include "Scenes/Shared/TileHovering.hpp"
 #include "Scenes/Shared/WorldDrawModule/Camera.hpp"
 #include "World/MapArea.hpp"
-#include "World/Player.hpp"
+#include "World/Player.hpp" 
 #include "World/World.hpp"
-#include "Engine/Core/Input/MouseInput.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    void DestinationMove::Update()
+    void
+    DestinationMove::Update()
     /*//////////////////////////*/
     {
         if (Camera::Get().cameraDistance == 2.0f)
@@ -63,13 +64,15 @@ namespace Narradia
         }
     }
 
-    void DestinationMove::ResetDestination()
+    void
+    DestinationMove::ResetDestination()
     /*////////////////////////////////////*/
     {
         destination = {-1, -1};
     }
 
-    const Point2 &DestinationMove::GetDestination()
+    const Point2 &
+    DestinationMove::GetDestination()
     /*///////////////////////////////////////////*/
     {
         return destination;

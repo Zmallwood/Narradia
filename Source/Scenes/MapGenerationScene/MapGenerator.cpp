@@ -1,16 +1,17 @@
 //////////////////////////////////////////////////////////////////////
 #include "MapGenerator.hpp"
+#include "Engine/Core/TextOutBox.hpp"
 #include "World/MapArea.hpp"
 #include "World/Mob.hpp"
 #include "World/Object.hpp"
 #include "World/ObjectsCollection.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
-#include "Engine/Core/TextOutBox.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    void WorldMapGenerate::DoGenerationStep(GenerateSteps generationStep)
+    void
+    WorldMapGenerate::DoGenerationStep(GenerateSteps generationStep)
     /*/////////////////////////////////////////////////////////////////*/
     {
         switch (generationStep)
@@ -87,7 +88,8 @@ namespace Narradia
         }
     }
 
-    void WorldMapGenerate::AddElevation()
+    void
+    WorldMapGenerate::AddElevation()
     /*/////////////////////////////////*/
     {
         auto mapArea = World::Get().GetMapAreaAtZLevel(0);
@@ -217,7 +219,8 @@ namespace Narradia
         }
     }
 
-    void WorldMapGenerate::AddMobs()
+    void
+    WorldMapGenerate::AddMobs()
     /*////////////////////////////*/
     {
         auto mapArea = World::Get().GetMapAreaAtZLevel(0);
@@ -257,7 +260,8 @@ namespace Narradia
         }
     }
 
-    void WorldMapGenerate::AddObjects()
+    void
+    WorldMapGenerate::AddObjects()
     /*///////////////////////////////*/
     {
         auto mapArea = World::Get().GetMapAreaAtZLevel(0);
@@ -342,7 +346,8 @@ namespace Narradia
         }
     }
 
-    void WorldMapGenerate::AddWater()
+    void
+    WorldMapGenerate::AddWater()
     /*/////////////////////////////*/
     {
         auto mapArea = World::Get().GetMapAreaAtZLevel(0);
@@ -388,7 +393,8 @@ namespace Narradia
         }
     }
 
-    void WorldMapGenerate::AddWaterRivers()
+    void
+    WorldMapGenerate::AddWaterRivers()
     /*///////////////////////////////////*/
     {
         auto mapArea = World::Get().GetMapAreaAtZLevel(0);
@@ -522,7 +528,8 @@ namespace Narradia
         }
     }
 
-    void WorldMapGenerate::AddObjects(
+    void
+    WorldMapGenerate::AddObjects(
         std::string_view objectName, int amount, std::string_view groundType)
     /*/////////////////////////////////////////////////////////////////////*/
     {
@@ -544,7 +551,8 @@ namespace Narradia
         }
     }
 
-    void WorldMapGenerate::GenerateColorVariations()
+    void
+    WorldMapGenerate::GenerateColorVariations()
     /*////////////////////////////////////////////*/
     {
         World::Get().ResetColorVariations();

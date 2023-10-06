@@ -1,16 +1,17 @@
 //////////////////////////////////////////////////////////////////////
 #include "ToolUsing.hpp"
+#include "Engine/Core/Input/MouseInput.hpp"
 #include "Scenes/Shared/TileHovering.hpp"
 #include "World/MapArea.hpp"
 #include "World/Mob.hpp"
 #include "World/Object.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
-#include "Engine/Core/Input/MouseInput.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    void ToolUsing::Update()
+    void
+    ToolUsing::Update()
     /*//////////////////*/
     {
         MouseInput::Get().GetLeftButton().AddFiredAction(
@@ -118,19 +119,22 @@ namespace Narradia
             0);
     }
 
-    void ToolUsing::IncreaseToolRadius()
+    void
+    ToolUsing::IncreaseToolRadius()
     /*//////////////////////////////*/
     {
         toolRadius++;
     }
 
-    void ToolUsing::DecreaseToolRadius()
+    void
+    ToolUsing::DecreaseToolRadius()
     /*//////////////////////////////*/
     {
         toolRadius--;
     }
 
-    void ToolUsing::IncreaseElevationChange()
+    void
+    ToolUsing::IncreaseElevationChange()
     /*///////////////////////////////////*/
     {
         elevationChange++;
@@ -138,7 +142,8 @@ namespace Narradia
             elevationChange = 1;
     }
 
-    void ToolUsing::DecreaseElevationChange()
+    void
+    ToolUsing::DecreaseElevationChange()
     /*///////////////////////////////////*/
     {
         elevationChange--;
@@ -146,13 +151,15 @@ namespace Narradia
             elevationChange = -1;
     }
 
-    void ToolUsing::ChangeTool(Tools newTool)
+    void
+    ToolUsing::ChangeTool(Tools newTool)
     /*///////////////////////////////////*/
     {
         currentTool = newTool;
     }
 
-    void ToolUsing::SelectType(int newSelectedObjectType)
+    void
+    ToolUsing::SelectType(int newSelectedObjectType)
     /*///////////////////////////////////////////////*/
     {
         selectedType = newSelectedObjectType;

@@ -1,11 +1,11 @@
 //////////////////////////////////////////////////////////////////////
 #include "RoofBrowserGui.hpp"
+#include "Engine/Assets/ImageBank.hpp"
+#include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
+#include "Engine/Core/Input/MouseInput.hpp"
+#include "Engine/GuiCore/GuiWindowObjectSlot.hpp"
 #include "Scenes/EditorScene/Modules/ToolUsing.hpp"
 #include "World/Object.hpp"
-#include "Engine/Core/Input/MouseInput.hpp"
-#include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
-#include "Engine/Assets/ImageBank.hpp"
-#include "Engine/GuiCore/GuiWindowObjectSlot.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -48,7 +48,8 @@ namespace Narradia
         idSelectedSlotFrame = Renderer2DImages::Get().NewImage();
     }
 
-    void RoofBrowserGui::UpdateDerived()
+    void
+    RoofBrowserGui::UpdateDerived()
     /*////////////////////////////////*/
     {
         if (GetBounds().Contains(GetMousePositionF()))
@@ -92,7 +93,8 @@ namespace Narradia
         }
     }
 
-    void RoofBrowserGui::RenderDerived() const
+    void
+    RoofBrowserGui::RenderDerived() const
     /*//////////////////////////////////////*/
     {
         auto i = 0;

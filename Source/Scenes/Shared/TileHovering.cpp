@@ -1,5 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 #include "TileHovering.hpp"
+#include "Engine/Core/Graphics/Rendering/CameraGl.hpp"
+#include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
 #include "Scenes/Shared/WorldDrawModule/Configuration.hpp"
 #include "World/MapArea.hpp"
 #include "World/Object.hpp"
@@ -9,8 +11,6 @@
 #include "World/World.hpp"
 #include "WorldDrawModule/Camera.hpp"
 #include "WorldDrawModule/WorldDraw.hpp"
-#include "Engine/Core/Graphics/Rendering/CameraGl.hpp"
-#include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -20,7 +20,8 @@ namespace Narradia
         glIdTextHoveredObject = TextRenderer::Get().NewString();
     }
 
-    void TileHovering::Update()
+    void
+    TileHovering::Update()
     /*///////////////////////*/
     {
         if (Camera::Get().cameraDistance == 2.0f)
@@ -106,7 +107,8 @@ namespace Narradia
         }
     }
 
-    void TileHovering::Render()
+    void
+    TileHovering::Render()
     /*///////////////////////*/
     {
         if (hoveredObjectHash == 0)

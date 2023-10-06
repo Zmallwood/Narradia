@@ -1,15 +1,16 @@
 //////////////////////////////////////////////////////////////////////
 #include "MouseRotation.hpp"
+#include "Engine/Core/Cursor.hpp"
+#include "Engine/Core/Input/MouseInput.hpp"
 #include "Scenes/PlayScene/Modules/InteractionMenu.hpp"
 #include "World/Player.hpp"
 #include "WorldDrawModule/Camera.hpp"
 #include "WorldDrawModule/WorldDraw.hpp"
-#include "Engine/Core/Cursor.hpp"
-#include "Engine/Core/Input/MouseInput.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 /****************/ {
-    void MouseRotation::Update()
+    void
+    MouseRotation::Update()
     /*////////////////////////*/
     {
         if (Camera::Get().cameraDistance == 2.0f)
@@ -63,7 +64,8 @@ namespace Narradia
         UpdateRotationInProgress();
     }
 
-    void MouseRotation::UpdateRotationInProgress()
+    void
+    MouseRotation::UpdateRotationInProgress()
     /*//////////////////////////////////////////*/
     {
         if (rotationType != RotationTypes::None || Camera::Get().cameraDistance == 2.0f)

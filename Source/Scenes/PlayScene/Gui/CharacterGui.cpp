@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 #include "CharacterGui.hpp"
-#include "World/Player.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
+#include "World/Player.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -12,12 +12,14 @@ namespace Narradia
         glIdExpText = TextRenderer::Get().NewString();
     }
 
-    void CharacterGui::UpdateDerived()
+    void
+    CharacterGui::UpdateDerived()
     /*//////////////////////////////*/
     {
     }
 
-    void CharacterGui::RenderDerived() const
+    void
+    CharacterGui::RenderDerived() const
     /*////////////////////////////////////*/
     {
         std::stringstream stream;

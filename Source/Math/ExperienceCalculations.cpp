@@ -3,7 +3,8 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    int GetCurrentLevel(int exp)
+    int
+    GetCurrentLevel(int exp)
     /*////////////////////////*/
     {
         auto value = std::trunc(log2f(pow(exp + 70, 2) / 5000)) + 1;
@@ -11,7 +12,8 @@ namespace Narradia
         return lvl;
     }
 
-    int GetExpForLevel(int lvl)
+    int
+    GetExpForLevel(int lvl)
     /*///////////////////////*/
     {
         auto value = std::max(sqrt(powf(2, lvl - 1) * 5000) - 70, 0.0f);
@@ -19,7 +21,8 @@ namespace Narradia
         return exp;
     }
 
-    int GetExpDiffToNextLevel(int exp)
+    int
+    GetExpDiffToNextLevel(int exp)
     /*//////////////////////////////*/
     {
         auto currLvl = GetCurrentLevel(exp);
@@ -30,7 +33,8 @@ namespace Narradia
         return expDifference;
     }
 
-    int GetExpReqForCurrLevelStart(int exp)
+    int
+    GetExpReqForCurrLevelStart(int exp)
     /*///////////////////////////////////*/
     {
         auto currLvl = GetCurrentLevel(exp);
@@ -38,14 +42,16 @@ namespace Narradia
         return totExpCurrLvlStart;
     }
 
-    int GetExpGainedSinceLevelStart(int exp)
+    int
+    GetExpGainedSinceLevelStart(int exp)
     /*////////////////////////////////////*/
     {
         auto expSinceStart = exp - GetExpReqForCurrLevelStart(exp);
         return expSinceStart;
     }
 
-    float GetFractionalExpProgress(int exp)
+    float
+    GetFractionalExpProgress(int exp)
     /*///////////////////////////////////*/
     {
         auto expGain = exp - GetExpReqForCurrLevelStart(exp);

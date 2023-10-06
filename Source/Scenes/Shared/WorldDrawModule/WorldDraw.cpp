@@ -2,13 +2,13 @@
 #include "WorldDraw.hpp"
 #include "Camera.hpp"
 #include "Configuration.hpp"
+#include "Engine/Assets/ModelBank.hpp"
+#include "Engine/Core/Graphics/Rendering/RendererModels.hpp"
+#include "Engine/Core/Graphics/Rendering/RendererTiles.hpp"
 #include "RenderLoop.hpp"
 #include "SubDraws.hpp"
 #include "World/Mob.hpp"
 #include "World/Tile.hpp"
-#include "Engine/Core/Graphics/Rendering/RendererModels.hpp"
-#include "Engine/Core/Graphics/Rendering/RendererTiles.hpp"
-#include "Engine/Assets/ModelBank.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -33,13 +33,15 @@ namespace Narradia
             RendererModels::Get().NewModel(model.first);
     }
 
-    void WorldDraw::Update()
+    void
+    WorldDraw::Update()
     /*////////////////////*/
     {
         Camera::Get().Update();
     }
 
-    void WorldDraw::Render()
+    void
+    WorldDraw::Render()
     /*////////////////////*/
     {
         Log();
@@ -97,13 +99,15 @@ namespace Narradia
         }
     }
 
-    void WorldDraw::EnablePlayMode()
+    void
+    WorldDraw::EnablePlayMode()
     /*////////////////////////////*/
     {
         worldViewMode = WorldDrawModes::Play;
     }
 
-    void WorldDraw::EnableMapEditorMode()
+    void
+    WorldDraw::EnableMapEditorMode()
     /*/////////////////////////////////*/
     {
         worldViewMode = WorldDrawModes::Editor;

@@ -35,13 +35,15 @@ namespace Narradia
         p->glIdLogoImage = Renderer2DImages::Get().NewImage();
     }
 
-    void MapTypeSelectionScene::UpdateDerived()
+    void
+    MapTypeSelectionScene::UpdateDerived()
     /*//////////////////////////////////////*/
     {
         Log();
     }
 
-    void MapTypeSelectionScene::RenderDerived()
+    void
+    MapTypeSelectionScene::RenderDerived()
     /*//////////////////////////////////////*/
     {
         Log();

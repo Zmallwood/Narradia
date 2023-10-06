@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////
 #include "StatusPanel.hpp"
-#include "World/Player.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DSolidColors.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
+#include "World/Player.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -17,12 +17,14 @@ namespace Narradia
         rendIdPlStamBarFilled = Renderer2DImages::Get().NewImage();
     }
 
-    void StatusPanel::Update()
+    void
+    StatusPanel::Update()
     /*//////////////////////*/
     {
     }
 
-    void StatusPanel::Render() const
+    void
+    StatusPanel::Render() const
     /*////////////////////////////*/
     {
         auto player = Player::GetPointer();

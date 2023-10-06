@@ -1,5 +1,9 @@
 //////////////////////////////////////////////////////////////////////
 #include "ObjectMoving.hpp"
+#include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
+#include "Engine/Core/Input/MouseInput.hpp"
+#include "Engine/GuiCore/GuiWindowObjectSlot.hpp"
+#include "Engine/GuiCore/SceneGui.hpp"
 #include "Scenes/PlayScene/Gui/InventoryGui.hpp"
 #include "Scenes/PlayScene/Gui/OpenContainerGui.hpp"
 #include "Scenes/PlayScene/ObjectHandling.hpp"
@@ -12,10 +16,6 @@
 #include "World/Player.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
-#include "Engine/Core/Input/MouseInput.hpp"
-#include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
-#include "Engine/GuiCore/SceneGui.hpp"
-#include "Engine/GuiCore/GuiWindowObjectSlot.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -25,7 +25,8 @@ namespace Narradia
         id_moving_object_image = Renderer2DImages::Get().NewImage();
     }
 
-    void ObjectMoving::Update()
+    void
+    ObjectMoving::Update()
     /*///////////////////////*/
     {
         PickupObjectFromGuiIfIsTheCase();
@@ -33,7 +34,8 @@ namespace Narradia
         ReleaseObjectIfIsTheCase();
     }
 
-    void ObjectMoving::PickupObjectFromGuiIfIsTheCase()
+    void
+    ObjectMoving::PickupObjectFromGuiIfIsTheCase()
     /*///////////////////////////////////////////////*/
     {
         if (GuiWindowObjectSlot::hoveredObject)
@@ -42,13 +44,12 @@ namespace Narradia
             MouseInput::Get().GetLeftButton().AddFiredAction(
                 "ObjectMoveContainerObject", [=, this]()
                 /**************************************/
-                {
-                    objectInAir = MoveObject(GuiWindowObjectSlot::hoveredObject);
-                });
+                { objectInAir = MoveObject(GuiWindowObjectSlot::hoveredObject); });
         }
     }
 
-    void ObjectMoving::PickupObjectFromGroundIfIsTheCase()
+    void
+    ObjectMoving::PickupObjectFromGroundIfIsTheCase()
     /*//////////////////////////////////////////////////*/
     {
         if (MapArea::IsInsideMap(TileHovering::Get().hoveredTile))
@@ -83,7 +84,8 @@ namespace Narradia
         }
     }
 
-    void ObjectMoving::ReleaseObjectIfIsTheCase()
+    void
+    ObjectMoving::ReleaseObjectIfIsTheCase()
     /*/////////////////////////////////////////*/
     {
         MouseInput::Get().GetLeftButton().AddReleasedAction(
@@ -146,7 +148,8 @@ namespace Narradia
             0);
     }
 
-    void ObjectMoving::Render()
+    void
+    ObjectMoving::Render()
     /*///////////////////////*/
     {
         if (!objectInAir)

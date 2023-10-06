@@ -9,7 +9,8 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    void RemoveObjectMirror(Object *&object)
+    void
+    RemoveObjectMirror(Object *&object)
     /*////////////////////////////////////*/
     {
         if (ObjectMoving::Get().objectInAir.get() == object)
@@ -63,7 +64,8 @@ namespace Narradia
         }
     }
 
-    std::shared_ptr<Object> MoveObject(Object *object)
+    std::shared_ptr<Object>
+    MoveObject(Object *object)
     /*//////////////////////////////////////////////*/
     {
         if (ObjectMoving::Get().objectInAir.get() == object)

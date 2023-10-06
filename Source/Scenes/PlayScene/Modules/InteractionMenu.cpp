@@ -1,6 +1,11 @@
 //////////////////////////////////////////////////////////////////////
 #include "InteractionMenu.hpp"
-#include "PlaySceneModulesCore.hpp"
+#include "Engine/Core/Graphics/Rendering/Renderer2DSolidColors.hpp"
+#include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
+#include "Engine/Core/Input/MouseInput.hpp"
+#include "Engine/Core/TextOutBox.hpp"
+#include "Engine/GuiCore/GuiWindowObjectSlot.hpp"
+#include "Engine/GuiCore/SceneGui.hpp"
 #include "Scenes/PlayScene/Gui/InventoryGui.hpp"
 #include "Scenes/PlayScene/Gui/OpenContainerGui.hpp"
 #include "Scenes/PlayScene/Gui/SplitStackGui.hpp"
@@ -15,12 +20,7 @@
 #include "World/Player.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
-#include "Engine/Core/TextOutBox.hpp"
-#include "Engine/Core/Input/MouseInput.hpp"
-#include "Engine/Core/Graphics/Rendering/Renderer2DSolidColors.hpp"
-#include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
-#include "Engine/GuiCore/SceneGui.hpp"
-#include "Engine/GuiCore/GuiWindowObjectSlot.hpp"
+#include "ActionRepeat.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -47,7 +47,8 @@ namespace Narradia
         p->id_label = TextRenderer::Get().NewString();
     }
 
-    void InteractionMenuEntry::Render()
+    void
+    InteractionMenuEntry::Render()
     /*////////////////////////////*/
     {
         TextRenderer::Get().DrawString(
@@ -55,75 +56,87 @@ namespace Narradia
         ResetHovering();
     }
 
-    auto InteractionMenuEntry::Copy() -> InteractionMenuEntry
+    auto
+    InteractionMenuEntry::Copy() -> InteractionMenuEntry
     /*///////////////////////////////////////////////*/
     {
         return *this;
     }
 
-    RectangleF &InteractionMenuEntry::GetBounds()
+    RectangleF &
+    InteractionMenuEntry::GetBounds()
     /*//////////////////////////////////////*/
     {
         return p->bounds;
     }
 
-    auto InteractionMenuEntry::SetBounds(RectangleF new_bounds) -> InteractionMenuEntry
+    auto
+    InteractionMenuEntry::SetBounds(RectangleF new_bounds) -> InteractionMenuEntry
     /*/////////////////////////////////////////////////////////////////////////*/
     {
         p->bounds = new_bounds;
         return *this;
     }
 
-    auto InteractionMenuEntry::SetTargetObject(Object *object) -> InteractionMenuEntry
+    auto
+    InteractionMenuEntry::SetTargetObject(Object *object) -> InteractionMenuEntry
     /*////////////////////////////////////////////////////////////////////////*/
     {
         p->targeted_object = object;
         return *this;
     }
 
-    void InteractionMenuEntry::MakeHovered()
+    void
+    InteractionMenuEntry::MakeHovered()
     /*/////////////////////////////////*/
     {
         p->hovered = true;
     }
 
-    bool InteractionMenuEntry::IsHovered()
+    bool
+    InteractionMenuEntry::IsHovered()
     /*///////////////////////////////*/
     {
         return p->hovered;
     }
 
-    void InteractionMenuEntry::ResetHovering()
+    void
+    InteractionMenuEntry::ResetHovering()
     /*///////////////////////////////////*/
     {
         p->hovered = false;
     }
 
-    Object *&InteractionMenuEntry::GetTargetObject()
+    Object *&
+    InteractionMenuEntry::GetTargetObject()
     /*/////////////////////////////////////////*/
     {
         return p->targeted_object;
     }
 
-    float InteractionMenuEntry::GetMarginX()
+    float
+    InteractionMenuEntry::GetMarginX()
     /*/////////////////////////////////*/
     {
         return Pimpl::k_margin_x;
     }
 
-    float InteractionMenuEntry::GetMarginY()
+    float
+    InteractionMenuEntry::GetMarginY()
     /*/////////////////////////////////*/
     {
         return ConvertWidthToHeight(Pimpl::k_margin_x);
     }
 
-    const std::string_view &InteractionMenuEntry::GetLabel()
+    const std::string_view &
+    InteractionMenuEntry::GetLabel()
     /*/////////////////////////////////////////////////*/
     {
         return p->label;
     }
 
-    const std::function<void(Object *&)> &InteractionMenuEntry::GetAction()
+    const std::function<void(Object *&)> &
+    InteractionMenuEntry::GetAction()
     /*////////////////////////////////////////////////////////////////*/
     {
         return p->action;
@@ -157,13 +170,15 @@ namespace Narradia
         CreateAvailableActions();
     }
 
-    float InteractionMenu::GetMarginY()
+    float
+    InteractionMenu::GetMarginY()
     /*////////////////////////////*/
     {
         return ConvertWidthToHeight(Pimpl::k_margin_x);
     }
 
-    void InteractionMenu::CreateAvailableActions()
+    void
+    InteractionMenu::CreateAvailableActions()
     /*///////////////////////////////////////*/
     {
         p->available_menu_entries = {
@@ -173,7 +188,8 @@ namespace Narradia
         };
     }
 
-    void InteractionMenu::Update()
+    void
+    InteractionMenu::Update()
     /*///////////////////////*/
     {
         auto mouse_position = GetMousePositionF();
@@ -232,14 +248,16 @@ namespace Narradia
         }
     }
 
-    void InteractionMenu::CloseMenu()
+    void
+    InteractionMenu::CloseMenu()
     /*//////////////////////////*/
     {
         p->ticks_closed = SDL_GetTicks();
         p->shown = false;
     }
 
-    void InteractionMenu::AddEntryToMenu(std::string_view actionName, Object *object)
+    void
+    InteractionMenu::AddEntryToMenu(std::string_view actionName, Object *object)
     /*//////////////////////////////////////////////////////////////////////////*/
     {
         auto entry_index = p->current_menu_entries.size();
@@ -254,7 +272,8 @@ namespace Narradia
                                               .SetTargetObject(object));
     }
 
-    void InteractionMenu::ConstructMenu()
+    void
+    InteractionMenu::ConstructMenu()
     /*//////////////////////////////*/
     {
         auto mouse_position = GetMousePositionF();
@@ -375,7 +394,8 @@ namespace Narradia
         }
     }
 
-    void InteractionMenu::Render()
+    void
+    InteractionMenu::Render()
     /*///////////////////////*/
     {
         if (!p->shown)
@@ -402,7 +422,8 @@ namespace Narradia
         }
     }
 
-    int InteractionMenu::GetTicksClosed()
+    int
+    InteractionMenu::GetTicksClosed()
     /*//////////////////////////////*/
     {
         return p->ticks_closed;

@@ -11,12 +11,14 @@ namespace Narradia
         glIdBackgroundImage = Renderer2DImages::Get().NewImage();
     }
 
-    void GameSaveScene::UpdateDerived()
+    void
+    GameSaveScene::UpdateDerived()
     /*//////////////////////////////*/
     {
     }
 
-    void GameSaveScene::RenderDerived()
+    void
+    GameSaveScene::RenderDerived()
     /*//////////////////////////////*/
     {
         auto rectBack = RectangleF{0.0f, 0.0f, 1.0f, 1.0f};

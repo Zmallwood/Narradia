@@ -8,7 +8,8 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    Point2F GetMinorMovementOffsetForMob(Mob *mob)
+    Point2F
+    GetMinorMovementOffsetForMob(Mob *mob)
     /*//////////////////////////////////////////*/
     {
         auto mapArea = World::Get().GetCurrentMapArea();
@@ -23,7 +24,8 @@ namespace Narradia
         return {minorX, minorY};
     }
 
-    Point2F GetMinorMovementOffsetForCompanion(Companion *companion)
+    Point2F
+    GetMinorMovementOffsetForCompanion(Companion *companion)
     /*////////////////////////////////////////////////////////////*/
     {
         auto mapArea = World::Get().GetCurrentMapArea();

@@ -2,14 +2,14 @@
 #include "PlaySceneGui.hpp"
 #include "Gui/CharacterGui.hpp"
 #include "Gui/CompanionsPanel.hpp"
+#include "Gui/ExperienceBar.hpp"
+#include "Gui/FpsPanel.hpp"
 #include "Gui/InventoryGui.hpp"
 #include "Gui/ObjectivesPanel.hpp"
 #include "Gui/PlaySceneGuiMenu.hpp"
 #include "Gui/SkillsGui.hpp"
 #include "Gui/StatusPanel.hpp"
-#include "Modules/PlaySceneModulesCore.hpp"
-#include "Gui/FpsPanel.hpp"
-#include "Gui/ExperienceBar.hpp"
+#include "Modules/ActionRepeat.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

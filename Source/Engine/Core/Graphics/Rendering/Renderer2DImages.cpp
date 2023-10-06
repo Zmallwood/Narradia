@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 #include "Renderer2DImages.hpp"
-#include "ShaderProgram.hpp"
 #include "Engine/Assets/ImageBank.hpp"
+#include "ShaderProgram.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -27,7 +27,8 @@ namespace Narradia
         GetShaderProgram()->Create(vertexShaderSource, fragmentShaderSource);
     }
 
-    RenderId Renderer2DImages::NewImage()
+    RenderId
+    Renderer2DImages::NewImage()
     /*/////////////////////////////////*/
     {
         auto vaoId = GenerateNewVertexArrayId();
@@ -44,7 +45,8 @@ namespace Narradia
         return vaoId;
     }
 
-    void Renderer2DImages::DrawImage(
+    void
+    Renderer2DImages::DrawImage(
         int imageNameHash, RenderId vaoId, const RectangleF &rectangle, Color color) const
     /*//////////////////////////////////////////////////////////////////////////////////*/
     {
@@ -96,7 +98,8 @@ namespace Narradia
         UseVaoEnd();
     }
 
-    void Renderer2DImages::DrawImage(
+    void
+    Renderer2DImages::DrawImage(
         const std::string_view &imageName, RenderId vaoId, const RectangleF &rectangle,
         Color color) const
     /*///////////////////////////////////////////////////////////////////////////////*/
@@ -104,7 +107,8 @@ namespace Narradia
         DrawImage(Hash(imageName), vaoId, rectangle, color);
     }
 
-    void Renderer2DImages::Cleanup()
+    void
+    Renderer2DImages::Cleanup()
     /*////////////////////////////*/
     {
         CleanupBase();

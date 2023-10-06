@@ -1,11 +1,11 @@
 //////////////////////////////////////////////////////////////////////
 #include "ObjectBrowserGui.hpp"
+#include "Engine/Assets/ImageBank.hpp"
+#include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
+#include "Engine/Core/Input/MouseInput.hpp"
+#include "Engine/GuiCore/GuiWindowObjectSlot.hpp"
 #include "Scenes/EditorScene/Modules/ToolUsing.hpp"
 #include "World/Object.hpp"
-#include "Engine/Core/Input/MouseInput.hpp"
-#include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
-#include "Engine/Assets/ImageBank.hpp"
-#include "Engine/GuiCore/GuiWindowObjectSlot.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -48,7 +48,8 @@ namespace Narradia
         idSelectedSlotFrame = Renderer2DImages::Get().NewImage();
     }
 
-    void ObjectBrowserGui::UpdateDerived()
+    void
+    ObjectBrowserGui::UpdateDerived()
     /*//////////////////////////////////*/
     {
         if (GetBounds().Contains(GetMousePositionF()))
@@ -92,7 +93,8 @@ namespace Narradia
         }
     }
 
-    void ObjectBrowserGui::RenderDerived() const
+    void
+    ObjectBrowserGui::RenderDerived() const
     /*////////////////////////////////////////*/
     {
         auto i = 0;

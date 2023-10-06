@@ -1,15 +1,16 @@
 //////////////////////////////////////////////////////////////////////
 #include "CompanionsUpdate.hpp"
+#include "Engine/Core/TextOutBox.hpp"
 #include "World/Companion.hpp"
 #include "World/MapArea.hpp"
 #include "World/Player.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
-#include "Engine/Core/TextOutBox.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    void CompanionsUpdate::Update()
+    void
+    CompanionsUpdate::Update()
     /*///////////////////////////*/
     {
         auto mapArea = World::Get().GetCurrentMapArea();

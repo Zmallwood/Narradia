@@ -1,10 +1,10 @@
 //////////////////////////////////////////////////////////////////////
 #include "MapLoadScene.hpp"
-#include "Scenes/Shared/MapFilesIO.hpp"
-#include "Engine/Core/SceneManager.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
+#include "Engine/Core/SceneManager.hpp"
 #include "Engine/GuiCore/GuiTextBox.hpp"
 #include "Engine/GuiCore/SceneGui.hpp"
+#include "Scenes/Shared/MapFilesIO.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -24,12 +24,14 @@ namespace Narradia
         });
     }
 
-    void MapLoadScene::UpdateDerived()
+    void
+    MapLoadScene::UpdateDerived()
     /*/////////////////////////////*/
     {
     }
 
-    void MapLoadScene::RenderDerived()
+    void
+    MapLoadScene::RenderDerived()
     /*/////////////////////////////*/
     {
         auto rectBack = RectangleF{0.0f, 0.0f, 1.0f, 1.0f};

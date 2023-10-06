@@ -28,7 +28,8 @@ namespace Narradia
         p->idFpsText = TextRenderer::Get().NewString();
     }
 
-    void FpsPanel::Update()
+    void
+    FpsPanel::Update()
     /*///////////////////*/
     {
         if (SDL_GetTicks() > p->ticksLastUpdate + 1000)
@@ -42,7 +43,8 @@ namespace Narradia
         GuiMovableContainer::Update();
     }
 
-    void FpsPanel::Render() const
+    void
+    FpsPanel::Render() const
     /*/////////////////////////*/
     {
         if (!p->visible)

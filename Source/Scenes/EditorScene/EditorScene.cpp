@@ -1,6 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 #include "EditorScene.hpp"
 #include "EditorSceneGui.hpp"
+#include "Engine/Core/Audio.hpp"
 #include "Gui/EditorSceneGuiMenu.hpp"
 #include "Modules/EditorSceneHotkeys.hpp"
 #include "Modules/ToolUsing.hpp"
@@ -15,7 +16,6 @@
 #include "World/Player.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
-#include "Engine/Core/Audio.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -29,7 +29,8 @@ namespace Narradia
         ObjectBehaviourList::Get().Initialize();
     }
 
-    void EditorScene::Enter()
+    void
+    EditorScene::Enter()
     /*////////////////////*/
     {
         EditorSceneGuiMenu::Get().visible = false;
@@ -51,7 +52,8 @@ namespace Narradia
         Camera::Get().cameraDistance = 800.0f;
     }
 
-    void EditorScene::UpdateDerived()
+    void
+    EditorScene::UpdateDerived()
     /*////////////////////////////*/
     {
         TileHovering::Get().Update();
@@ -64,14 +66,16 @@ namespace Narradia
         ToolUsing::Get().Update();
     }
 
-    void EditorScene::RenderDerived()
+    void
+    EditorScene::RenderDerived()
     /*////////////////////////////*/
     {
         WorldDraw::Get().Render();
         TileHovering::Get().Render();
     }
 
-    void EditorScene::RenderAfterGuiDerived()
+    void
+    EditorScene::RenderAfterGuiDerived()
     /*////////////////////////////////////*/
     {
         GuiObjectHovering::Get().Render();

@@ -4,7 +4,8 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    void Inventory::Add(std::string_view objectName, int quantity)
+    void
+    Inventory::Add(std::string_view objectName, int quantity)
     /*//////////////////////////////////////////////////////////*/
     {
         for (auto i = 0; i < kMaxNumberInventoryObjects; i++)
@@ -20,7 +21,8 @@ namespace Narradia
         }
     }
 
-    void Inventory::Add(std::shared_ptr<Object> object)
+    void
+    Inventory::Add(std::shared_ptr<Object> object)
     /*///////////////////////////////////////////////*/
     {
         for (auto i = 0; i < kMaxNumberInventoryObjects; i++)
@@ -35,7 +37,8 @@ namespace Narradia
         }
     }
 
-    bool Inventory::ContainsObjectOfType(std::string_view objectType)
+    bool
+    Inventory::ContainsObjectOfType(std::string_view objectType)
     /*/////////////////////////////////////////////////////////////*/
     {
         for (auto &entry : objects)
@@ -44,7 +47,8 @@ namespace Narradia
         return false;
     }
 
-    void Inventory::RemoveObjectOfType(std::string_view objectType)
+    void
+    Inventory::RemoveObjectOfType(std::string_view objectType)
     /*///////////////////////////////////////////////////////////*/
     {
         for (auto &entry : objects)
@@ -59,7 +63,8 @@ namespace Narradia
         }
     }
 
-    void ActorData::Update()
+    void
+    ActorData::Update()
     /*////////////////////*/
     {
         if (movement.isMoving)

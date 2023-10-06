@@ -1,10 +1,10 @@
 //////////////////////////////////////////////////////////////////////
 #include "UserMapSelectionScene.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
+#include "Engine/Core/SceneManager.hpp"
 #include "Engine/GuiCore/GuiTextBox.hpp"
 #include "Engine/GuiCore/SceneGui.hpp"
 #include "Scenes/Shared/MapFilesIO.hpp"
-#include "Engine/Core/SceneManager.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -25,12 +25,14 @@ namespace Narradia
         });
     }
 
-    void UserMapSelectionScene::UpdateDerived()
+    void
+    UserMapSelectionScene::UpdateDerived()
     /*//////////////////////////////////////*/
     {
     }
 
-    void UserMapSelectionScene::RenderDerived()
+    void
+    UserMapSelectionScene::RenderDerived()
     /*//////////////////////////////////////*/
     {
         auto rectBack = RectangleF{0.0f, 0.0f, 1.0f, 1.0f};

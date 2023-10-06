@@ -2,15 +2,8 @@
 #include "ActiveGameRound.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DSolidColors.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
-#include "Engine/Core/Input/KeyboardInput.hpp"
-#include "Engine/Core/TextOutBox.hpp"
-#include "Engine/GuiCore/GuiTextBox.hpp"
-#include "Scenes/PlayScene/Gui/CharacterGui.hpp"
-#include "Scenes/PlayScene/Gui/InventoryGui.hpp"
-#include "Scenes/PlayScene/Gui/PlaySceneGuiMenu.hpp"
-#include "Scenes/PlayScene/Gui/SkillsGui.hpp"
-#include "World/MapArea.hpp"
 #include "World/Player.hpp"
+#include "World/MapArea.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

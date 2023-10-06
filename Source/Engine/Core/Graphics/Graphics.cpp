@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////
 #include "Graphics.hpp"
 #include "Engine/SdlDeleter.hpp"
-#include "Rendering/Text/TextRenderer.hpp"
 #include "GraphicsGl.hpp"
+#include "Rendering/Text/TextRenderer.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -50,25 +50,29 @@ namespace Narradia
         TextRenderer::Create();
     }
 
-    SDL_Window *Graphics::GetWindow() const
+    SDL_Window *
+    Graphics::GetWindow() const
     /*************************************/
     {
         return p->window.get();
     }
 
-    void Graphics::ClearCanvas() const
+    void
+    Graphics::ClearCanvas() const
     /********************************/
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
-    void Graphics::PresentCanvas() const
+    void
+    Graphics::PresentCanvas() const
     /**********************************/
     {
         SDL_GL_SwapWindow(p->window.get());
     }
 
-    void Graphics::Cleanup()
+    void
+    Graphics::Cleanup()
     /**********************/
     {
         GraphicsGl::Get().Cleanup();

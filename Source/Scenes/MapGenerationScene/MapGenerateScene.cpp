@@ -1,10 +1,10 @@
 //////////////////////////////////////////////////////////////////////
 #include "MapGenerateScene.hpp"
-#include "Scenes/Shared/WorldDrawModule/WorldDraw.hpp"
-#include "World/World.hpp"
-#include "Engine/Core/SceneManager.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
+#include "Engine/Core/SceneManager.hpp"
+#include "Scenes/Shared/WorldDrawModule/WorldDraw.hpp"
+#include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -16,13 +16,15 @@ namespace Narradia
         glIdGenerationText = TextRenderer::Get().NewString();
     }
 
-    void MapGenerateScene::Enter()
+    void
+    MapGenerateScene::Enter()
     /*/////////////////////////*/
     {
         currGenerationStep = GenerateSteps::CreateBlank;
     }
 
-    void MapGenerateScene::UpdateDerived()
+    void
+    MapGenerateScene::UpdateDerived()
     /*/////////////////////////////////*/
     {
         Log();
@@ -33,7 +35,8 @@ namespace Narradia
         currGenerationStep = (GenerateSteps)((int)currGenerationStep + 1);
     }
 
-    void MapGenerateScene::RenderDerived()
+    void
+    MapGenerateScene::RenderDerived()
     /*/////////////////////////////////*/
     {
         Log();
@@ -43,7 +46,8 @@ namespace Narradia
             glIdGenerationText, "Generating terrain...", {0.5f, 0.5f}, Colors::wheat, true);
     }
 
-    void MapGenerateScene::Finalize()
+    void
+    MapGenerateScene::Finalize()
     /*////////////////////////////*/
     {
         Log();

@@ -1,15 +1,15 @@
 //////////////////////////////////////////////////////////////////////
 #include "Camera.hpp"
 #include "Configuration.hpp"
+#include "Engine/Core/Cursor.hpp"
+#include "Engine/Core/Graphics/Rendering/CameraGl.hpp"
+#include "Engine/Core/Input/MouseInput.hpp"
+#include "Engine/Core/SceneManager.hpp"
 #include "World/MapArea.hpp"
 #include "World/Player.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
 #include "WorldDraw.hpp"
-#include "Engine/Core/SceneManager.hpp"
-#include "Engine/Core/Cursor.hpp"
-#include "Engine/Core/Input/MouseInput.hpp"
-#include "Engine/Core/Graphics/Rendering/CameraGl.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -20,7 +20,8 @@ namespace Narradia
         CalculateCameraPosition();
     }
 
-    void Camera::Update()
+    void
+    Camera::Update()
     /*/////////////////*/
     {
         Log();
@@ -47,13 +48,15 @@ namespace Narradia
             Cursor::Get().HideThisFrame();
     }
 
-    float Camera::GetZoomAmount()
+    float
+    Camera::GetZoomAmount()
     /*/////////////////////////*/
     {
         return cameraDistance;
     }
 
-    void Camera::UpdateZooming()
+    void
+    Camera::UpdateZooming()
     /*////////////////////////*/
     {
         auto mouseWheelDelta = MouseInput::Get().MouseWheelDeltaPickResult();
@@ -71,7 +74,8 @@ namespace Narradia
             cameraDistance = std::max(std::min(cameraDistance, 800.0f), 2.0f);
     }
 
-    void Camera::CalculateCameraPosition()
+    void
+    Camera::CalculateCameraPosition()
     /*//////////////////////////////////*/
     {
         auto modulePlayer = Player::GetPointer();
@@ -128,7 +132,8 @@ namespace Narradia
         }
     }
 
-    Point3F Camera::MoveCloserToCamera(Point3F original_point, float amount)
+    Point3F
+    Camera::MoveCloserToCamera(Point3F original_point, float amount)
     /*////////////////////////////////////////////////////////////////////*/
     {
         auto camDx = (float)cameraPosition.x - original_point.x;

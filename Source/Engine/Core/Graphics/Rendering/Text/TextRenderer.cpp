@@ -1,10 +1,10 @@
 //////////////////////////////////////////////////////////////////////
 #include "TextRenderer.hpp"
-#include "Font.hpp"
-#include "MultiLineText.hpp"
+#include "Engine/Assets/ImageBank.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 #include "Engine/Core/Graphics/Rendering/RendererBillboardImages.hpp"
-#include "Engine/Assets/ImageBank.hpp"
+#include "Font.hpp"
+#include "MultiLineText.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -35,7 +35,8 @@ namespace Narradia
         p->fonts.insert({FontSizes::_26, std::make_shared<Font>(fontPath.c_str(), 26)});
     }
 
-    RenderId TextRenderer::NewString()
+    RenderId
+    TextRenderer::NewString()
     /*//////////////////////////////*/
     {
         auto uniqueName = p->CreateBlankTexGetName();
@@ -44,7 +45,8 @@ namespace Narradia
         return rendIdImageRect;
     }
 
-    RenderId TextRenderer::NewBillboardString()
+    RenderId
+    TextRenderer::NewBillboardString()
     /*///////////////////////////////////////*/
     {
         auto uniqueName = p->CreateBlankTexGetName();
@@ -53,7 +55,8 @@ namespace Narradia
         return rendIdBboardTexRect;
     }
 
-    RenderId TextRenderer::NewMultiLineString(int numLines, float width)
+    RenderId
+    TextRenderer::NewMultiLineString(int numLines, float width)
     /*////////////////////////////////////////////////////////////////*/
     {
         MultiLineText multiLineText;
@@ -64,7 +67,8 @@ namespace Narradia
         return multiLineText.renderIds.at(0);
     }
 
-    void TextRenderer::Pimpl::RenderText(
+    void
+    TextRenderer::Pimpl::RenderText(
         RenderId vaoId, std::string_view text, Color color, bool centerAlign, FontSizes textSize,
         std::string &outUniqueNameId, SizeF &outSize) const
     /*/////////////////////////////////////////////////////////////////////////////////////////*/
@@ -113,7 +117,8 @@ namespace Narradia
         SDL_FreeSurface(textOutlineSurface);
     }
 
-    void TextRenderer::DrawMultiLineString(
+    void
+    TextRenderer::DrawMultiLineString(
         RenderId glId, const std::string &text, Point2F position, Color color, bool centerAlign,
         FontSizes textSize) const
     /*////////////////////////////////////////////////////////////////////////////////////////*/
@@ -150,7 +155,8 @@ namespace Narradia
         }
     }
 
-    void TextRenderer::DrawString(
+    void
+    TextRenderer::DrawString(
         RenderId vaoId, std::string_view text, Point2F position, Color color, bool centerAlign,
         FontSizes textSize) const
     /*///////////////////////////////////////////////////////////////////////////////////////*/
@@ -170,7 +176,8 @@ namespace Narradia
         Renderer2DImages::Get().DrawImage(uniqueNameId, vaoId, rect);
     }
 
-    void TextRenderer::DrawBillboardString(
+    void
+    TextRenderer::DrawBillboardString(
         RenderId vaoId, std::string_view text, Point3F position, SizeF billboardSize, Color color,
         bool centerAlign, FontSizes textSize) const
     /*//////////////////////////////////////////////////////////////////////////////////////////*/
@@ -194,7 +201,8 @@ namespace Narradia
             Hash(uniqueNameId), vaoId, position, rect, billboardSize);
     }
 
-    const std::string TextRenderer::Pimpl::CreateBlankTexGetName()
+    const std::string
+    TextRenderer::Pimpl::CreateBlankTexGetName()
     /*//////////////////////////////////////////////////////////*/
     {
         auto id = idCounter++;

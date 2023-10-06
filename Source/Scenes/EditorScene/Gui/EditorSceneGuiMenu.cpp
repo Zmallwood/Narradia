@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 #include "EditorSceneGuiMenu.hpp"
-#include "Engine/Core/Graphics/Rendering/Renderer2DSolidColors.hpp"
 #include "Engine/Core/GameEngine.hpp"
+#include "Engine/Core/Graphics/Rendering/Renderer2DSolidColors.hpp"
 #include "Engine/Core/SceneManager.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
@@ -38,14 +38,16 @@ namespace Narradia
             { GameEngine::Get().StopGame(); });
     }
 
-    void EditorSceneGuiMenu::Update()
+    void
+    EditorSceneGuiMenu::Update()
     /*////////////////////////////*/
     {
         if (visible)
             GuiContainer::Update();
     }
 
-    void EditorSceneGuiMenu::Render() const
+    void
+    EditorSceneGuiMenu::Render() const
     /*//////////////////////////////////*/
     {
         if (!visible)

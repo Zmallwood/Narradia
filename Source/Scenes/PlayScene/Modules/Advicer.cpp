@@ -1,12 +1,13 @@
 //////////////////////////////////////////////////////////////////////
 #include "Advicer.hpp"
+#include "Engine/GuiCore/SceneGui.hpp"
 #include "Scenes/PlayScene/Gui/MessageBox.hpp"
 #include "Scenes/PlayScene/PlayScene.hpp"
-#include "Engine/GuiCore/SceneGui.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    void Advicer::Update()
+    void
+    Advicer::Update()
     /*//////////////////*/
     {
         if (!has_given_foraging_advice && ready_for_next_advie)

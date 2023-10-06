@@ -1,10 +1,10 @@
 //////////////////////////////////////////////////////////////////////
 #include "IntroScene.hpp"
+#include "Engine/Core/Audio.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
-#include "Engine/Core/Audio.hpp"
-#include "Engine/Core/Input/MouseInput.hpp"
 #include "Engine/Core/Input/KeyboardInput.hpp"
+#include "Engine/Core/Input/MouseInput.hpp"
 #include "Engine/Core/SceneManager.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
@@ -29,24 +29,26 @@ namespace Narradia
         Audio::Get().PlayMusic("ForestSounds");
     }
 
-    void IntroScene::UpdateDerived()
+    void
+    IntroScene::UpdateDerived()
     /*///////////////////////////*/
     {
         Log();
         MouseInput::Get().GetLeftButton().AddFiredAction(
-            "IntroSceneGoToMainMenu", [&]() { SceneManager::Get().ChangeScene(SceneNames::MainMenu); },
-            0);
+            "IntroSceneGoToMainMenu",
+            [&]() { SceneManager::Get().ChangeScene(SceneNames::MainMenu); }, 0);
         MouseInput::Get().GetMiddleButton().AddFiredAction(
-            "IntroSceneGoToMainMenu", [&]() { SceneManager::Get().ChangeScene(SceneNames::MainMenu); },
-            0);
+            "IntroSceneGoToMainMenu",
+            [&]() { SceneManager::Get().ChangeScene(SceneNames::MainMenu); }, 0);
         MouseInput::Get().GetRightButton().AddFiredAction(
-            "IntroSceneGoToMainMenu", [&]() { SceneManager::Get().ChangeScene(SceneNames::MainMenu); },
-            0);
+            "IntroSceneGoToMainMenu",
+            [&]() { SceneManager::Get().ChangeScene(SceneNames::MainMenu); }, 0);
         if (KeyboardInput::Get().AnyKeyHasBeenFired())
             SceneManager::Get().ChangeScene(SceneNames::MainMenu);
     }
 
-    void IntroScene::RenderDerived()
+    void
+    IntroScene::RenderDerived()
     /*///////////////////////////*/
     {
         Log();

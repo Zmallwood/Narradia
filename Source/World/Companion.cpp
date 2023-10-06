@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 #include "Companion.hpp"
-#include "Object.hpp"
 #include "Engine/Core/TextOutBox.hpp"
+#include "Object.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -27,7 +27,8 @@ namespace Narradia
         p->spawnLocation = spawnLocation_;
     }
 
-    void Companion::GiveObject(std::shared_ptr<Object> object)
+    void
+    Companion::GiveObject(std::shared_ptr<Object> object)
     /*//////////////////////////////////////////////////////*/
     {
         if (object->GetObjectType() == Hash("ObjectRedApple") ||
@@ -44,85 +45,99 @@ namespace Narradia
         }
     }
 
-    int Companion::GetStamina()
+    int
+    Companion::GetStamina()
     /*///////////////////////*/
     {
         return p->stamina;
     }
 
-    int Companion::GetMaxStamina()
+    int
+    Companion::GetMaxStamina()
     /*//////////////////////////*/
     {
         return p->maxStamina;
     }
 
-    int Companion::GetTicksLastMovement()
+    int
+    Companion::GetTicksLastMovement()
     /*/////////////////////////////////*/
     {
         return p->ticksLastMovement;
     }
 
-    int Companion::GetMoveSpeed()
+    int
+    Companion::GetMoveSpeed()
     /*/////////////////////////*/
     {
         return p->moveSpeed;
     }
 
-    float Companion::GetAngle()
+    float
+    Companion::GetAngle()
     /*///////////////////////*/
     {
         return p->angle;
     }
 
-    int Companion::GetRadius()
+    int
+    Companion::GetRadius()
     /*//////////////////////*/
     {
         return p->radius;
     }
 
-    RotationDirections Companion::GetDirection()
+    RotationDirections
+    Companion::GetDirection()
     /*////////////////////////////////*/
     {
         return p->direction;
     }
 
-    void Companion::IncreaseRadius()
+    void
+    Companion::IncreaseRadius()
     /*////////////////////////////*/
     {
         p->radius++;
     }
 
-    Point2 Companion::GetSpawnLocation()
+    Point2
+    Companion::GetSpawnLocation()
     /*////////////////////////////////*/
     {
         return p->spawnLocation;
     }
 
-    void Companion::SetAngle(float newAngle)
+    void
+    Companion::SetAngle(float newAngle)
     /*////////////////////////////////////*/
     {
         p->angle = newAngle;
     }
 
-    void Companion::UpdateTicksLastMovement()
+    void
+    Companion::UpdateTicksLastMovement()
     /*/////////////////////////////////////*/
     {
         p->ticksLastMovement = SDL_GetTicks();
     }
 
-    void Companion::ConsumeStamina(int amountStamina)
+    void
+    Companion::ConsumeStamina(int amountStamina)
     /*/////////////////////////////////////////////*/
     {
         p->stamina -= amountStamina;
     }
 
-    bool Companion::OutOfStamina()
+    bool
+    Companion::OutOfStamina()
     /*//////////////////////////*/
     {
         return p->stamina <= 0;
     }
 
-    void Companion::ReverseDirection()
+    void
+    Companion::ReverseDirection()
     /*//////////////////////////////*/
     {
         if (p->direction == RotationDirections::Clockwise)
@@ -131,19 +146,22 @@ namespace Narradia
             p->direction = RotationDirections::Clockwise;
     }
 
-    void Companion::DecreaseRadius()
+    void
+    Companion::DecreaseRadius()
     /*////////////////////////////*/
     {
         p->radius--;
     }
 
-    void Companion::SetPreviousCoordinate(Point2 newPreviousCoordinate)
+    void
+    Companion::SetPreviousCoordinate(Point2 newPreviousCoordinate)
     /*///////////////////////////////////////////////////////////////*/
     {
         p->previousCoordinate = newPreviousCoordinate;
     }
 
-    Point2 Companion::GetPreviousCoordinate()
+    Point2
+    Companion::GetPreviousCoordinate()
     /*/////////////////////////////////////*/
     {
         return p->previousCoordinate;

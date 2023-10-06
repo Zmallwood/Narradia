@@ -1,11 +1,11 @@
 //////////////////////////////////////////////////////////////////////
 #include "SplitStackGui.hpp"
-#include "Scenes/PlayScene/Modules/PlaySceneModulesCore.hpp"
+#include "Engine/GuiCore/GuiTextBox.hpp"
+#include "Engine/GuiCore/SceneGui.hpp"
 #include "Scenes/PlayScene/PlayScene.hpp"
 #include "World/Object.hpp"
 #include "World/Player.hpp"
-#include "Engine/GuiCore/GuiTextBox.hpp"
-#include "Engine/GuiCore/SceneGui.hpp"
+#include "Scenes/PlayScene/Modules/ActionRepeat.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -87,12 +87,14 @@ namespace Narradia
         AddGuiButton("Ok", {0.12f, 0.11f, 0.035f, ConvertWidthToHeight(0.015f)}, confirmAction);
     }
 
-    void SplitStackGui::UpdateDerived()
+    void
+    SplitStackGui::UpdateDerived()
     /*//////////////////////////*/
     {
     }
 
-    void SplitStackGui::RenderDerived() const
+    void
+    SplitStackGui::RenderDerived() const
     /*////////////////////////////////*/
     {
     }

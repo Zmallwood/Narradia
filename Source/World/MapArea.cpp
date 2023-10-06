@@ -21,7 +21,8 @@ namespace Narradia
     {
     }
 
-    void MapArea::Create()
+    void
+    MapArea::Create()
     /*//////////////////*/
     {
         for (auto x = 0; x < Pimpl::mapSize.width; x++)
@@ -37,7 +38,8 @@ namespace Narradia
         }
     }
 
-    Tile *MapArea::GetTile(Point2 coordinate)
+    Tile *
+    MapArea::GetTile(Point2 coordinate)
     /*/////////////////////////////////////*/
     {
         if (IsInsideMap(coordinate))
@@ -45,7 +47,8 @@ namespace Narradia
         return nullptr;
     }
 
-    Tile *MapArea::GetTile(int x, int y)
+    Tile *
+    MapArea::GetTile(int x, int y)
     /*////////////////////////////////*/
     {
         if (IsInsideMap(x, y))
@@ -53,79 +56,92 @@ namespace Narradia
         return nullptr;
     }
 
-    Size MapArea::GetMapSize()
+    Size
+    MapArea::GetMapSize()
     /*//////////////////////*/
     {
         return Pimpl::mapSize;
     }
 
-    const std::map<Mob *, Point2> &MapArea::GetMobsMirror()
+    const std::map<Mob *, Point2> &
+    MapArea::GetMobsMirror()
     /*///////////////////////////////////////////////////*/
     {
         return p->mobsMirror;
     }
 
-    const std::map<Object *, Point2> &MapArea::GetObjectsMirror()
+    const std::map<Object *, Point2> &
+    MapArea::GetObjectsMirror()
     /*/////////////////////////////////////////////////////////*/
     {
         return p->objectsMirror;
     }
 
-    const std::map<Companion *, Point2> &MapArea::GetCompanionsMirror()
+    const std::map<Companion *, Point2> &
+    MapArea::GetCompanionsMirror()
     /*///////////////////////////////////////////////////////////////*/
     {
         return p->companionsMirror;
     }
 
-    void MapArea::RemoveMobMirror(std::map<Mob *, Point2>::const_iterator entry)
+    void
+    MapArea::RemoveMobMirror(std::map<Mob *, Point2>::const_iterator entry)
     /*////////////////////////////////////////////////////////////////////////*/
     {
         p->mobsMirror.erase(entry);
     }
 
-    void MapArea::RemoveMobMirror(Mob *mob)
+    void
+    MapArea::RemoveMobMirror(Mob *mob)
     /*///////////////////////////////////*/
     {
         p->mobsMirror.erase(mob);
     }
 
-    void MapArea::RemoveCompanionMirror(std::map<Companion *, Point2>::const_iterator entry)
+    void
+    MapArea::RemoveCompanionMirror(std::map<Companion *, Point2>::const_iterator entry)
     /*////////////////////////////////////////////////////////////////////////////////////*/
     {
         p->companionsMirror.erase(entry);
     }
 
-    void MapArea::RemoveObjectMirror(Object *object)
+    void
+    MapArea::RemoveObjectMirror(Object *object)
     /*////////////////////////////////////////////*/
     {
         p->objectsMirror.erase(object);
     }
 
-    void MapArea::AddMobMirror(Mob *mob, Point2 coordinate)
+    void
+    MapArea::AddMobMirror(Mob *mob, Point2 coordinate)
     /*///////////////////////////////////////////////////*/
     {
         p->mobsMirror.insert({mob, coordinate});
     }
 
-    void MapArea::AddCompanionMirror(Companion *companion, Point2 coordinate)
+    void
+    MapArea::AddCompanionMirror(Companion *companion, Point2 coordinate)
     /*/////////////////////////////////////////////////////////////////////*/
     {
         p->companionsMirror.insert({companion, coordinate});
     }
 
-    void MapArea::AddObjectMirror(Object *object, Point2 coordinate)
+    void
+    MapArea::AddObjectMirror(Object *object, Point2 coordinate)
     /*////////////////////////////////////////////////////////////*/
     {
         p->objectsMirror.insert({object, coordinate});
     }
 
-    bool MapArea::IsInsideMap(Point2 coordinate)
+    bool
+    MapArea::IsInsideMap(Point2 coordinate)
     /*////////////////////////////////////////*/
     {
         return IsInsideMap(coordinate.x, coordinate.y);
     }
 
-    bool MapArea::IsInsideMap(int x, int y)
+    bool
+    MapArea::IsInsideMap(int x, int y)
     /*///////////////////////////////////*/
     {
         return x >= 0 && y >= 0 && x < Pimpl::mapSize.width && y < Pimpl::mapSize.height;

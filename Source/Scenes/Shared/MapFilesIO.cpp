@@ -1,12 +1,12 @@
 //////////////////////////////////////////////////////////////////////
 #include "MapFilesIO.hpp"
+#include "Engine/Core/TextOutBox.hpp"
 #include "World/MapArea.hpp"
 #include "World/Mob.hpp"
 #include "World/Object.hpp"
 #include "World/ObjectsCollection.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
-#include "Engine/Core/TextOutBox.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -23,7 +23,8 @@ namespace Narradia
     {
     }
 
-    void MapFilesIO::SaveCurrentMapArea(std::string_view mapName)
+    void
+    MapFilesIO::SaveCurrentMapArea(std::string_view mapName)
     /*/////////////////////////////////////////////////////////*/
     {
         std::filesystem::create_directory(
@@ -83,7 +84,8 @@ namespace Narradia
         TextOutBox::Get().Print("World saved with name " + std::string(mapName.data()) + ".");
     }
 
-    void MapFilesIO::LoadMapArea(std::string_view mapName)
+    void
+    MapFilesIO::LoadMapArea(std::string_view mapName)
     /*//////////////////////////////////////////////////*/
     {
         std::ifstream mapFile;

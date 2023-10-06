@@ -1,15 +1,15 @@
 //////////////////////////////////////////////////////////////////////
 #include "RendererModels.hpp"
 #include "CameraGl.hpp"
+#include "Engine/Assets/ImageBank.hpp"
+#include "Engine/Assets/ModelBank.hpp"
 #include "Engine/Core/Graphics/GraphicsGl.hpp"
 #include "Engine/Core/ModelStructure/Model.hpp"
 #include "ShaderProgram.hpp"
 #include "World/Player.hpp"
-#include "Engine/Assets/ImageBank.hpp"
-#include "Engine/Assets/ModelBank.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
-{
+{   
     class RendererModels::Pimpl
     /*///////////////////////*/
     {
@@ -65,7 +65,8 @@ namespace Narradia
         p->locationNoLighting = GetUniformLocation("noLighting");
     }
 
-    void RendererModels::NewModel(int modelNameHash)
+    void
+    RendererModels::NewModel(int modelNameHash)
     /*////////////////////////////////////////////*/
     {
         auto model = ModelBank::Get().GetModel(modelNameHash);
@@ -116,7 +117,8 @@ namespace Narradia
         }
     }
 
-    RenderId RendererModels::NewBodyKeyframe(int modelNameHash, float msTime, int numVertices)
+    RenderId
+    RendererModels::NewBodyKeyframe(int modelNameHash, float msTime, int numVertices)
     /*//////////////////////////////////////////////////////////////////////////////////////*/
     {
         auto vaoId = GenerateNewVertexArrayId();
@@ -126,7 +128,8 @@ namespace Narradia
         return vaoId;
     }
 
-    void RendererModels::NewBodyKeyframeGeometry(
+    void
+    RendererModels::NewBodyKeyframeGeometry(
         int imageNamehash, float msTime, RenderId vaoId, std::vector<Vertex3F> vertices,
         std::vector<Point3F> vertexNormals)
     /*////////////////////////////////////////////////////////////////////////////////*/
@@ -183,7 +186,8 @@ namespace Narradia
         UseVaoEnd();
     }
 
-    void RendererModels::StartBatchDrawing()
+    void
+    RendererModels::StartBatchDrawing()
     /*////////////////////////////////////*/
     {
         p->isBatchDrawing = true;
@@ -195,13 +199,15 @@ namespace Narradia
             p->locationView, 1, GL_FALSE, glm::value_ptr(CameraGl::Get().GetViewMatrix()));
     }
 
-    void RendererModels::StopBatchDrawing()
+    void
+    RendererModels::StopBatchDrawing()
     /*///////////////////////////////////*/
     {
         p->isBatchDrawing = false;
     }
 
-    void RendererModels::DrawModel(
+    void
+    RendererModels::DrawModel(
         int modelNameHash, float msTime, Point3F position, float rotation, float scaling,
         float brightness, glm::vec3 colorMod, bool noFog, bool noLighting) const
     /*/////////////////////////////////////////////////////////////////////////////////*/
@@ -276,7 +282,8 @@ namespace Narradia
             glUseProgram(0);
     }
 
-    void RendererModels::DrawModelsMany(
+    void
+    RendererModels::DrawModelsMany(
         int modelNameHash, float msTime, std::vector<Point3F> positions,
         std::vector<float> rotations, std::vector<float> scalings, std::vector<float> brightnesses,
         std::vector<glm::vec3> colorMods) const
@@ -364,7 +371,8 @@ namespace Narradia
             glUseProgram(0);
     }
 
-    void RendererModels::Cleanup()
+    void
+    RendererModels::Cleanup()
     /*//////////////////////////*/
     {
         CleanupBase();
