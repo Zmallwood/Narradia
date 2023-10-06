@@ -1,11 +1,11 @@
 //////////////////////////////////////////////////////////////////////
 #include "GuiObjectHovering.hpp"
-#include "Engine/Assets.hpp"
 #include "Engine/GuiCore.hpp"
 #include "World/Object.hpp"
 #include "World/ObjectBehaviourList.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DSolidColors.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
+#include "Engine/Assets/ImageBank.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

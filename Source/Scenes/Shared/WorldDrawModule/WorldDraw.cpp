@@ -2,13 +2,13 @@
 #include "WorldDraw.hpp"
 #include "Camera.hpp"
 #include "Configuration.hpp"
-#include "Engine/Assets.hpp"
 #include "RenderLoop.hpp"
 #include "SubDraws.hpp"
 #include "World/Mob.hpp"
 #include "World/Tile.hpp"
 #include "Engine/Core/Graphics/Rendering/RendererModels.hpp"
 #include "Engine/Core/Graphics/Rendering/RendererTiles.hpp"
+#include "Engine/Assets/ModelBank.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

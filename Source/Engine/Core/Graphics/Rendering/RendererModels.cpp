@@ -1,11 +1,12 @@
 //////////////////////////////////////////////////////////////////////
 #include "RendererModels.hpp"
 #include "CameraGl.hpp"
-#include "Engine/Assets.hpp"
 #include "Engine/Core/Graphics/GraphicsGl.hpp"
 #include "Engine/Core/ModelStructure/Model.hpp"
 #include "ShaderProgram.hpp"
 #include "World/Player.hpp"
+#include "Engine/Assets/ImageBank.hpp"
+#include "Engine/Assets/ModelBank.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

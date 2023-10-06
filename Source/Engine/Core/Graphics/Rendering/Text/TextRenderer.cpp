@@ -4,7 +4,7 @@
 #include "MultiLineText.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 #include "Engine/Core/Graphics/Rendering/RendererBillboardImages.hpp"
-#include "Engine/Assets.hpp"
+#include "Engine/Assets/ImageBank.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

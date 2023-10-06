@@ -1,6 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 #include "GraphicsGl.hpp"
-#include "Engine/Assets.hpp"
+#include "Engine/Assets/ImageBank.hpp"
+#include "Engine/Assets/ModelBank.hpp"
 #include "Rendering/Renderer2DImages.hpp"
 #include "Rendering/Renderer2DSolidColors.hpp"
 #include "Rendering/RendererBillboardImages.hpp"

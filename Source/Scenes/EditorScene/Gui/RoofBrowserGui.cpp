@@ -1,10 +1,10 @@
 //////////////////////////////////////////////////////////////////////
 #include "RoofBrowserGui.hpp"
-#include "Engine/Assets.hpp"
 #include "Scenes/EditorScene/Modules/ToolUsing.hpp"
 #include "World/Object.hpp"
 #include "Engine/Core/Input/MouseInput.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
+#include "Engine/Assets/ImageBank.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
