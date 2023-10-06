@@ -3,7 +3,7 @@
 #include "Engine/Core/Cursor.hpp"
 #include "Engine/Core/Input/MouseInput.hpp"
 #include "Scenes/PlayScene/Modules/InteractionMenu.hpp"
-#include "World/Player.hpp"
+#include "World/Actors/Player.hpp"
 #include "WorldDrawModule/Camera.hpp"
 #include "WorldDrawModule/WorldDraw.hpp"
 //////////////////////////////////////////////////////////////////////

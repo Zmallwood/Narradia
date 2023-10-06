@@ -84,6 +84,8 @@ namespace Narradia
         skills["CriticalDamage"] = Skill{"Critical Damage"};
         skills["CriticalRate"] = Skill{"Critical Rate"};
         skills["MovementSpeed"] = Skill{"Movement Speed"};
+        skills["Sword"] = Skill{"Sword"};
+        skills["Club"] = Skill{"Club"};
     }
 };
 //////////////////////////////////////////////////////////////////////

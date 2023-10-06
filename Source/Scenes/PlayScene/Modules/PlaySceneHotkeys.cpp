@@ -4,7 +4,8 @@
 #include "Scenes/PlayScene/Gui/CharacterGui.hpp"
 #include "Scenes/PlayScene/Gui/InventoryGui.hpp"
 #include "Scenes/PlayScene/Gui/SkillsGui.hpp"
-#include "World/Player.hpp"
+#include "Scenes/PlayScene/Gui/BuildSelectorGui.hpp"
+#include "World/Actors/Player.hpp"
 #include "Scenes/PlayScene/Gui/PlaySceneGuiMenu.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
@@ -19,6 +20,8 @@ namespace Narradia
             InventoryGui::Get().ToggleVisibility();
         if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_v))
             SkillsGui::Get().ToggleVisibility();
+        if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_x))
+            BuildSelectorGui::Get().ToggleVisibility();
         if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_z))
             Player::Get().mounted = !Player::Get().mounted;
         if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_SPACE))

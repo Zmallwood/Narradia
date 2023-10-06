@@ -20,7 +20,7 @@
 #include "Scenes/Shared/MouseRotation.hpp"
 #include "Scenes/Shared/TileHovering.hpp"
 #include "Scenes/Shared/WorldDrawModule/WorldDraw.hpp"
-#include "World/Player.hpp"
+#include "World/Actors/Player.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

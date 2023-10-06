@@ -6,7 +6,7 @@
 #include "Scenes/Shared/TileHovering.hpp"
 #include "Scenes/Shared/WorldDrawModule/Camera.hpp"
 #include "World/MapArea.hpp"
-#include "World/Player.hpp" 
+#include "World/Actors/Player.hpp" 
 #include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia

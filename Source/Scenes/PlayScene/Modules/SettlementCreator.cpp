@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////
 #include "SettlementCreator.hpp"
 #include "Engine/Core/TextOutBox.hpp"
-#include "World/Companion.hpp"
+#include "World/Actors/Companion.hpp"
 #include "World/MapArea.hpp"
-#include "World/Player.hpp"
+#include "World/Actors/Player.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////

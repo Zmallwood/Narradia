@@ -6,7 +6,7 @@
 #include "World/MapArea.hpp"
 #include "World/Object.hpp"
 #include "World/ObjectBehaviourList.hpp"
-#include "World/Player.hpp"
+#include "World/Actors/Player.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
 #include "WorldDrawModule/Camera.hpp"

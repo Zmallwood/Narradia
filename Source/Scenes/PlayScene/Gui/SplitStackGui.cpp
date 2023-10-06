@@ -4,7 +4,7 @@
 #include "Engine/GuiCore/SceneGui.hpp"
 #include "Scenes/PlayScene/PlayScene.hpp"
 #include "World/Object.hpp"
-#include "World/Player.hpp"
+#include "World/Actors/Player.hpp"
 #include "Scenes/PlayScene/Modules/ActionRepeat.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia

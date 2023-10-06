@@ -2,7 +2,7 @@
 #include "MapGenerator.hpp"
 #include "Engine/Core/TextOutBox.hpp"
 #include "World/MapArea.hpp"
-#include "World/Mob.hpp"
+#include "World/Actors/Mob.hpp"
 #include "World/Object.hpp"
 #include "World/ObjectsCollection.hpp"
 #include "World/Tile.hpp"

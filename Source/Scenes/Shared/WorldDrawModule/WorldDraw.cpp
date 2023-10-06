@@ -7,7 +7,7 @@
 #include "Engine/Core/Graphics/Rendering/RendererTiles.hpp"
 #include "RenderLoop.hpp"
 #include "SubDraws.hpp"
-#include "World/Mob.hpp"
+#include "World/Actors/Mob.hpp"
 #include "World/Tile.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia

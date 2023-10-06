@@ -2,7 +2,7 @@
 #include "StartConditions.hpp"
 #include "World/MapArea.hpp"
 #include "World/ObjectBehaviourList.hpp"
-#include "World/Player.hpp"
+#include "World/Actors/Player.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

@@ -13,7 +13,7 @@
 #include "Scenes/Shared/WorldDrawModule/WorldDraw.hpp"
 #include "World/MapArea.hpp"
 #include "World/ObjectBehaviourList.hpp"
-#include "World/Player.hpp"
+#include "World/Actors/Player.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////

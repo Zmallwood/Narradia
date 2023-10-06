@@ -38,8 +38,10 @@ namespace Narradia
       public:
         int hp = 10;
         int maxHp = 10;
-        int stam = 1;
+        int stam = 10;
         int maxStam = 10;
+        int rage = 10;
+        int maxRage = 10;
     };
 
     class ActorData
@@ -55,9 +57,10 @@ namespace Narradia
         Inventory inventory;
     };
 
-    struct Skill
-    /*////////*/
+    class Skill
+    /*///////*/
     {
+      public:
         std::string_view label;
         float level = 1.0f;
     };

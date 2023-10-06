@@ -17,7 +17,7 @@
 #include "World/Object.hpp"
 #include "World/ObjectBehaviourList.hpp"
 #include "World/ObjectsCollection.hpp"
-#include "World/Player.hpp"
+#include "World/Actors/Player.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
 #include "ActionRepeat.hpp"

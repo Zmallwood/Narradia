@@ -4,7 +4,7 @@
 #include "Engine/Assets/ImageBank.hpp"
 #include "Engine/Core/Graphics/GraphicsGl.hpp"
 #include "ShaderProgram.hpp"
-#include "World/Player.hpp"
+#include "World/Actors/Player.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

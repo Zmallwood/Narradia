@@ -9,11 +9,11 @@
 #include "Scenes/PlayScene/ObjectHandling.hpp"
 #include "Scenes/PlayScene/PlayScene.hpp"
 #include "Scenes/Shared/TileHovering.hpp"
-#include "World/Companion.hpp"
+#include "World/Actors/Companion.hpp"
 #include "World/MapArea.hpp"
 #include "World/Object.hpp"
 #include "World/ObjectBehaviourList.hpp"
-#include "World/Player.hpp"
+#include "World/Actors/Player.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////

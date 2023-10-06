@@ -6,7 +6,7 @@
 #include "Engine/Core/Graphics/GraphicsGl.hpp"
 #include "Engine/Core/ModelStructure/Model.hpp"
 #include "ShaderProgram.hpp"
-#include "World/Player.hpp"
+#include "World/Actors/Player.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {   

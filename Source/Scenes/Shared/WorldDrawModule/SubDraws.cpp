@@ -10,10 +10,10 @@
 #include "RenderLoop.hpp"
 #include "Scenes/Shared/TileHovering.hpp"
 #include "Utilities.hpp"
-#include "World/Companion.hpp"
+#include "World/Actors/Companion.hpp"
+#include "World/Actors/Mob.hpp"
+#include "World/Actors/Player.hpp"
 #include "World/MapArea.hpp"
-#include "World/Mob.hpp"
-#include "World/Player.hpp"
 #include "World/Tile.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
@@ -460,8 +460,24 @@ namespace Narradia
         if (Camera::Get().cameraDistance > 2.0f)
         /**************************************/
         {
-            RendererModels::Get().DrawModel(
-                Hash("Player2"), animTile, pos, Player::Get().GetFacingAngle(), 0.6f);
+            if (Player::Get().playerBuild == PlayerBuilds::Sword)
+            /***************************************************/
+            {
+                RendererModels::Get().DrawModel(
+                    Hash("Player2Sword"), animTile, pos, Player::Get().GetFacingAngle(), 0.6f);
+            }
+            else if (Player::Get().playerBuild == PlayerBuilds::Club)
+            /*******************************************************/
+            {
+                RendererModels::Get().DrawModel(
+                    Hash("Player2Club"), animTile, pos, Player::Get().GetFacingAngle(), 0.6f);
+            }
+            else
+            /**/
+            {
+                RendererModels::Get().DrawModel(
+                    Hash("Player2"), animTile, pos, Player::Get().GetFacingAngle(), 0.6f);
+            }
         }
         else
         /**/

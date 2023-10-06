@@ -2,7 +2,7 @@
 #include "ExperienceBar.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DSolidColors.hpp"
-#include "World/Player.hpp"
+#include "World/Actors/Player.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

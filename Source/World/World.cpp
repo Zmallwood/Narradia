@@ -4,7 +4,7 @@
 #include "MapArea.hpp"
 #include "Object.hpp"
 #include "ObjectsCollection.hpp"
-#include "Player.hpp"
+#include "Actors/Player.hpp"
 #include "Scenes/Shared/WorldDrawModule/Configuration.hpp"
 #include "Tile.hpp"
 //////////////////////////////////////////////////////////////////////

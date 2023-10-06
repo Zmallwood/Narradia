@@ -2,14 +2,14 @@
 #include "Player.hpp"
 #include "Engine/Core/Audio.hpp"
 #include "Engine/Core/SceneManager.hpp"
-#include "MapArea.hpp"
-#include "Object.hpp"
-#include "ObjectBehaviourList.hpp"
-#include "ObjectsCollection.hpp"
+#include "World/MapArea.hpp"
+#include "World/Object.hpp"
+#include "World/ObjectBehaviourList.hpp"
+#include "World/ObjectsCollection.hpp"
 #include "Scenes/Shared/WorldDrawModule/Camera.hpp"
 #include "Scenes/Shared/WorldDrawModule/Configuration.hpp"
-#include "Tile.hpp"
-#include "World.hpp"
+#include "World/Tile.hpp"
+#include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

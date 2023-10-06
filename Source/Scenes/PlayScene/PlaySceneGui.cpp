@@ -1,6 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 #include "PlaySceneGui.hpp"
 #include "Gui/CharacterGui.hpp"
+#include "Gui/BuildSelectorGui.hpp"
 #include "Gui/CompanionsPanel.hpp"
 #include "Gui/ExperienceBar.hpp"
 #include "Gui/FpsPanel.hpp"
@@ -27,6 +28,8 @@ namespace Narradia
         Log();
         auto rectGButtonWinChar = RectangleF{0.79f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
         Log();
+        auto rectGButtonWinBuildSelector = RectangleF{0.75f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
+        Log();
         auto fnSys = [] { PlaySceneGuiMenu::Get().visible = !PlaySceneGuiMenu::Get().visible; };
         Log();
         auto fnRepeat = [] { ActionRepeat::Get().RepeatLastAction(); };
@@ -36,6 +39,8 @@ namespace Narradia
         auto fnWinInv = [] { InventoryGui::Get().ToggleVisibility(); };
         Log();
         auto fnWinChar = [] { CharacterGui::Get().ToggleVisibility(); };
+        Log();
+        auto fnWinBuildSelector = [] { BuildSelectorGui::Get().ToggleVisibility(); };
         Log();
         AddGuiButton("", rectGButtonSys, fnSys, "GuiButtonSys", "GuiButtonSysHovered");
         Log();
@@ -48,6 +53,8 @@ namespace Narradia
         Log();
         AddGuiButton("", rectGButtonWinChar, fnWinChar, "GuiButtonChar", "GuiButtonCharHovered");
         Log();
+        AddGuiButton("", rectGButtonWinBuildSelector, fnWinBuildSelector, "GuiButtonBuildSelector", "GuiButtonBuildSelectorHovered");
+        Log();
         AddGuiComponent(std::shared_ptr<PlaySceneGuiMenu>(PlaySceneGuiMenu::GetPointer()));
         Log();
         AddGuiComponent(std::shared_ptr<StatusPanel>(StatusPanel::GetPointer()));
@@ -57,6 +64,8 @@ namespace Narradia
         AddGuiComponent(std::shared_ptr<InventoryGui>(InventoryGui::GetPointer()));
         Log();
         AddGuiComponent(std::shared_ptr<SkillsGui>(SkillsGui::GetPointer()));
+        Log();
+        AddGuiComponent(std::shared_ptr<BuildSelectorGui>(BuildSelectorGui::GetPointer()));
         Log();
         AddGuiComponent(std::shared_ptr<FpsPanel>(FpsPanel::GetPointer()));
         Log();

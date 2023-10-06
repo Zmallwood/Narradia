@@ -1,6 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 #pragma once
 #include "ActorsData.hpp"
+#include "PlayerBuilds.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -30,6 +31,8 @@ namespace Narradia
         ActorData data;
         SkillSet skillSet;
         bool mounted = false;
+
+        PlayerBuilds playerBuild = PlayerBuilds::None;
 
       private:
         void Update();

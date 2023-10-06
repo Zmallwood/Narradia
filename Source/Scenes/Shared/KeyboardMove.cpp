@@ -2,7 +2,7 @@
 #include "KeyboardMove.hpp"
 #include "Engine/Core/Input/KeyboardInput.hpp"
 #include "Scenes/PlayScene/Modules/DestinationMove.hpp"
-#include "World/Player.hpp"
+#include "World/Actors/Player.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

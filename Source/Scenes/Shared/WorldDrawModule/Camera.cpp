@@ -6,7 +6,7 @@
 #include "Engine/Core/Input/MouseInput.hpp"
 #include "Engine/Core/SceneManager.hpp"
 #include "World/MapArea.hpp"
-#include "World/Player.hpp"
+#include "World/Actors/Player.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
 #include "WorldDraw.hpp"

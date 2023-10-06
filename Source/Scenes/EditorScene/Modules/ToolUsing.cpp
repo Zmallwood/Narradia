@@ -3,7 +3,7 @@
 #include "Engine/Core/Input/MouseInput.hpp"
 #include "Scenes/Shared/TileHovering.hpp"
 #include "World/MapArea.hpp"
-#include "World/Mob.hpp"
+#include "World/Actors/Mob.hpp"
 #include "World/Object.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
