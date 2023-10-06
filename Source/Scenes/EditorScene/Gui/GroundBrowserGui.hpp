@@ -1,12 +1,15 @@
 //////////////////////////////////////////////////////////////////////
 #pragma once
-#include "Engine/GuiCore.hpp"
+#include "Engine/GuiCore/GuiWindow.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
     class GuiWindowObjectSlot;
-    class GroundBrowserGui : public GuiWindow, public Singleton<GroundBrowserGui>
-    /*/////////////////////////////////////////////////////////////////////////*/
+    class Object;
+
+    class GroundBrowserGui : public GuiWindow,
+                             public Singleton<GroundBrowserGui>
+    /*///////////////////////////////////////////////////////*/
     {
       public:
         GroundBrowserGui();

@@ -19,6 +19,7 @@
 #include "Engine/Core/Input/MouseInput.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DSolidColors.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
+#include "Engine/GuiCore/SceneGui.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

@@ -15,6 +15,7 @@
 #include "World/World.hpp"
 #include "Engine/Core/Input/MouseInput.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
+#include "Engine/GuiCore/SceneGui.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

@@ -4,6 +4,8 @@
 #include "Scenes/PlayScene/PlayScene.hpp"
 #include "World/Object.hpp"
 #include "World/Player.hpp"
+#include "Engine/GuiCore/GuiTextBox.hpp"
+#include "Engine/GuiCore/SceneGui.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

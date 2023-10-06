@@ -4,6 +4,8 @@
 #include "Scenes/Shared/MapFilesIO.hpp"
 #include "Engine/Core/SceneManager.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
+#include "Engine/GuiCore/GuiTextBox.hpp"
+#include "Engine/GuiCore/SceneGui.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

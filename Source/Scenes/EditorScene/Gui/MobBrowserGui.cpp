@@ -5,6 +5,7 @@
 #include "Engine/Core/Input/MouseInput.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 #include "Engine/Assets/ImageBank.hpp"
+#include "Engine/GuiCore.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
