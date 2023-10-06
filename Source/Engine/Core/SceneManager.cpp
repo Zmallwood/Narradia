@@ -1,13 +1,16 @@
 //////////////////////////////////////////////////////////////////////
 #include "SceneManager.hpp"
-#include "Scenes/BasicScenes.hpp"
 #include "Scenes/MapGenerationScene/MapGenerateScene.hpp"
-#include "Scenes/PlayScene/SubScenes/GameSaveScene.hpp"
+#include "Scenes/GameSaveScene/GameSaveScene.hpp"
 #include "Scenes/PlayScene/PlayScene.hpp"
 #include "Scenes/EditorScene/EditorScene.hpp"
-#include "Scenes/EditorScene/SubScenes/MapLoadScene.hpp"
-#include "Scenes/EditorScene/SubScenes/MapSaveScene.hpp"
+#include "Scenes/MapLoadScene/MapLoadScene.hpp"
+#include "Scenes/MapSaveScene/MapSaveScene.hpp"
 #include "Input/MouseInput.hpp"
+#include "Scenes/IntroScene/IntroScene.hpp"
+#include "Scenes/MainMenuScene/MainMenuScene.hpp"
+#include "Scenes/MapTypeSelectionScene/MapTypeSelectionScene.hpp"
+#include "Scenes/UserMapSelectionScene/UserMapSelectionScene.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

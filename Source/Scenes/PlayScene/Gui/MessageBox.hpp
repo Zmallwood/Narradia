@@ -4,16 +4,17 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class CharacterGui : public GuiWindow, public Singleton<CharacterGui>
-    /*/////////////////////////////////////////////////////////////////*/
+    class MessageBox : public GuiWindow
+    /*///////////////////////////////*/
     {
       public:
-        CharacterGui();
+        MessageBox(std::string_view, std::string_view);
 
       private:
         void UpdateDerived() override;
         void RenderDerived() const override;
-        RenderId glIdExpText;
+        std::string_view messageText;
+        RenderId glIdMessageText;
     };
 }
 //////////////////////////////////////////////////////////////////////

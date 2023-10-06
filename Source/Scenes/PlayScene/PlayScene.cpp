@@ -1,6 +1,5 @@
 //////////////////////////////////////////////////////////////////////
 #include "PlayScene.hpp"
-#include "Gui/PlaySceneGuiCore.hpp"
 #include "Gui/PlaySceneGuiMenu.hpp"
 #include "Modules/Advicer.hpp"
 #include "Modules/CompanionsUpdate.hpp"

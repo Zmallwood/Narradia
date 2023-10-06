@@ -1,21 +1,19 @@
 //////////////////////////////////////////////////////////////////////
 #pragma once
-#include "Engine/GuiCore/GuiWindow.hpp"
+#include "Engine/Core/SceneBase.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class Object;
-
-    class SplitStackGui : public GuiWindow
-    /*//////////////////////////////////*/
+    class UserMapSelectionScene : public SceneBase
+    /*////////////////////////////////////////*/
     {
       public:
-        SplitStackGui(Object *);
+        UserMapSelectionScene();
+        void UpdateDerived() override;
+        void RenderDerived() override;
 
       private:
-        void UpdateDerived() override;
-        void RenderDerived() const override;
-        Object *object;
+        RenderId glIdBackgroundImage;
     };
 }
 //////////////////////////////////////////////////////////////////////

@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////
-#include "EditorSceneModulesCore.hpp"
+#include "EditorSceneHotkeys.hpp"
 #include "Scenes/EditorScene/Gui/EditorSceneGuiMenu.hpp"
 #include "Scenes/EditorScene/Gui/GroundBrowserGui.hpp"
 #include "Scenes/EditorScene/Gui/MobBrowserGui.hpp"

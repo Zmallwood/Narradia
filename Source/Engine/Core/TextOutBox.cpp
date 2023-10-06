@@ -2,7 +2,7 @@
 #include "TextOutBox.hpp"
 #include "TextLine.hpp"
 #include "SceneManager.hpp"
-#include "Scenes/PlayScene/Gui/PlaySceneGuiCore.hpp"
+#include "Scenes/PlayScene/Gui/ExperienceBar.hpp"
 #include "Input/KeyboardInput.hpp"
 #include "Graphics/Rendering/Renderer2DImages.hpp"
 #include "Graphics/Rendering/Text/TextRenderer.hpp"

@@ -2,7 +2,7 @@
 #include "EditorScene.hpp"
 #include "EditorSceneGui.hpp"
 #include "Gui/EditorSceneGuiMenu.hpp"
-#include "Modules/EditorSceneModulesCore.hpp"
+#include "Modules/EditorSceneHotkeys.hpp"
 #include "Modules/ToolUsing.hpp"
 #include "Scenes/Shared/GuiObjectHovering.hpp"
 #include "Scenes/Shared/KeyboardMove.hpp"

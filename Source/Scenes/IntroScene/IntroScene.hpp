@@ -1,19 +1,20 @@
 //////////////////////////////////////////////////////////////////////
 #pragma once
-#include "Engine/GuiCore/GuiWindow.hpp"
+#include "Engine/Core/SceneBase.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class CharacterGui : public GuiWindow, public Singleton<CharacterGui>
-    /*/////////////////////////////////////////////////////////////////*/
+    class IntroScene : public SceneBase
+    /*/////////////////////////////*/
     {
       public:
-        CharacterGui();
+        IntroScene();
 
       private:
         void UpdateDerived() override;
-        void RenderDerived() const override;
-        RenderId glIdExpText;
+        void RenderDerived() override;
+        class Pimpl;
+        std::shared_ptr<Pimpl> p;
     };
 }
 //////////////////////////////////////////////////////////////////////

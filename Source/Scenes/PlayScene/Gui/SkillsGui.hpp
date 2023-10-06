@@ -1,11 +1,12 @@
 //////////////////////////////////////////////////////////////////////
 #pragma once
-#include "PlaySceneGuiCore.hpp"
+#include "Engine/GuiCore/GuiWindow.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class SkillsGui : public GuiWindow, public Singleton<SkillsGui>
-    /*///////////////////////////////////////////////////////////*/
+    class SkillsGui : public GuiWindow,
+                      public Singleton<SkillsGui>
+    /*/////////////////////////////////////////*/
     {
       public:
         SkillsGui();

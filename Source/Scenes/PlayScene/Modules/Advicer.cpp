@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 #include "Advicer.hpp"
-#include "Scenes/PlayScene/Gui/PlaySceneGuiCore.hpp"
+#include "Scenes/PlayScene/Gui/MessageBox.hpp"
 #include "Scenes/PlayScene/PlayScene.hpp"
 #include "Engine/GuiCore/SceneGui.hpp"
 //////////////////////////////////////////////////////////////////////

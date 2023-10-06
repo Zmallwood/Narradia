@@ -8,6 +8,8 @@
 #include "Gui/SkillsGui.hpp"
 #include "Gui/StatusPanel.hpp"
 #include "Modules/PlaySceneModulesCore.hpp"
+#include "Gui/FpsPanel.hpp"
+#include "Gui/ExperienceBar.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
