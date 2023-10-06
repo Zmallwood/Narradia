@@ -3,11 +3,6 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    typedef GLuint RenderId;
-
-    class SceneBase;
-    class SceneGui;
-
     template <class T>
     class Singleton
     /*//////////////////////////////*/
