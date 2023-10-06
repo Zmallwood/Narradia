@@ -42,7 +42,8 @@ namespace Narradia
         srand(static_cast<unsigned int>(time(nullptr)));
         Log();
         if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
-        /************************************/ {
+        /************************************/
+        {
             std::cout << "SDL could not initialize! SDL Error: " << std::string(SDL_GetError())
                       << std::endl;
             return;
@@ -81,7 +82,8 @@ namespace Narradia
         Log();
         EventPoller eventPoller;
         while (GameEngine::Get().IsRunning())
-        /*********************************/ {
+        /*********************************/
+        {
             Log();
             Cursor::Get().Reset();
             TextOutBox::Get().Update();
@@ -115,31 +117,41 @@ namespace Narradia
     {
         SDL_Event event;
         while (SDL_PollEvent(&event) != 0)
-        /********************************/ {
+        /********************************/
+        {
             switch (event.type)
-            /*****************/ {
+            /*****************/
+            {
             case SDL_QUIT:
+                /********/
                 GameEngine::Get().StopGame();
                 break;
             case SDL_KEYDOWN:
+                /***********/
                 KeyboardInput::Get().KeyDown(event.key.keysym.sym);
                 break;
             case SDL_KEYUP:
+                /*********/
                 KeyboardInput::Get().KeyUp(event.key.keysym.sym);
                 break;
             case SDL_MOUSEBUTTONDOWN:
+                /*******************/
                 MouseInput::Get().MouseDown(event.button.button);
                 break;
             case SDL_MOUSEBUTTONUP:
+                /*****************/
                 MouseInput::Get().MouseUp(event.button.button);
                 break;
             case SDL_MOUSEMOTION:
+                /***************/
                 MouseInput::Get().MouseMove({event.motion.xrel, event.motion.yrel});
                 break;
             case SDL_TEXTINPUT:
+                /*************/
                 KeyboardInput::Get().AppendTextInput(event.text.text);
                 break;
             case SDL_MOUSEWHEEL:
+                /**************/
                 MouseInput::Get().MouseWheel(event.wheel.y);
                 break;
             }
@@ -255,7 +267,8 @@ namespace Narradia
     {
         Log();
         if (p->scenes.count(p->currentView))
-        /**********************************/ {
+        /**********************************/
+        {
             Log();
             p->scenes.at(p->currentView)->Update();
         };
@@ -266,7 +279,8 @@ namespace Narradia
     {
         Log();
         if (p->scenes.count(p->currentView))
-        /**********************************/ {
+        /**********************************/
+        {
             Log();
             p->scenes.at(p->currentView)->Render();
         };
@@ -277,7 +291,8 @@ namespace Narradia
     /*///////////////////////////////////*/
     {
         if (p->scenes.count(p->currentView))
-        /**********************************/ {
+        /**********************************/
+        {
             Log();
             p->scenes.at(p->currentView)->Finalize();
         };
@@ -334,18 +349,23 @@ namespace Narradia
             usedCursorSize};
         int imageNameHash;
         switch (p->currCursorType)
-        /************************/ {
+        /************************/
+        {
         case CursorTypes::Hovering:
+            /*********************/
             imageNameHash = p->hashCursorHovering;
             break;
         case CursorTypes::Rotating:
+            /*********************/
             imageNameHash = p->hashCursorRotating;
             break;
         case CursorTypes::Attack:
+            /*******************/
             imageNameHash = p->hashCursorAttack;
             break;
         case CursorTypes::Normal:
         default:
+            /*******************/
             imageNameHash = p->hashCursorDefault;
         }
         Renderer2DImages::Get().DrawImage(imageNameHash, p->idxCursorImage, bounds);
@@ -486,10 +506,14 @@ namespace Narradia
     void TextOutBox::Update()
     /*/////////////////////*/
     {
-        if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_RETURN)) {
+        if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_RETURN))
+        /**************************************************************/
+        {
             p->inputActive = !p->inputActive;
         }
-        if (p->inputActive) {
+        if (p->inputActive)
+        /*****************/
+        {
             auto newTextInput = KeyboardInput::Get().PickTextInput();
             p->inputText.insert(p->cursorPosition, newTextInput);
             p->cursorPosition += newTextInput.length();
@@ -507,10 +531,12 @@ namespace Narradia
         Renderer2DImages::Get().DrawImage("TextOutBoxBack", p->glIdImage, usedBounds);
         auto maxNumLines = GetMaxNumLines();
         for (auto i = 0; i < maxNumLines; i++)
-        /************************************/ {
+        /************************************/
+        {
             auto textLineIndex = static_cast<int>(p->textLines.size()) - maxNumLines + i;
             if (textLineIndex >= 0)
-            /*********************/ {
+            /*********************/
+            {
                 auto linePosY = usedBounds.y + (i + 1) * p->textLineHeight;
                 Point2F position = {usedBounds.x + 0.01f, linePosY};
                 TextRenderer::Get().DrawString(
@@ -522,7 +548,9 @@ namespace Narradia
             0.0f, usedBounds.y + usedBounds.height - 1.3f * p->textLineHeight, p->bounds.width,
             p->kSplitLineHeight};
         Renderer2DImages::Get().DrawImage("Wheat", p->idSplitLine, rect);
-        if (p->inputActive) {
+        if (p->inputActive)
+        /*****************/
+        {
             auto rectArrow = RectangleF{
                 0.0f, usedBounds.y + usedBounds.height - 1.3f * p->textLineHeight,
                 p->textLineHeight, p->textLineHeight};
@@ -580,7 +608,8 @@ namespace Narradia
                 p->configResolution.width, p->configResolution.height, p->windowFlags),
             SdlDeleter());
         if (p->window == nullptr)
-        /***********************/ {
+        /***********************/
+        {
             std::cout << "Window could not be created! SDL Error: " << std::string(SDL_GetError())
                       << std::endl;
             return;
@@ -588,7 +617,8 @@ namespace Narradia
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
         if (SDL_GL_CreateContext(p->window.get()) == nullptr)
-        /***************************************************/ {
+        /***************************************************/
+        {
             std::cout << "OpenGL context could not be created! SDL Error: "
                       << std::string(SDL_GetError()) << std::endl;
             return;
@@ -648,7 +678,8 @@ namespace Narradia
         RendererBillboardImages::Create();
         glClearColor(p->clearColor.r, p->clearColor.g, p->clearColor.b, p->clearColor.a);
         if (Pimpl::kCullFace)
-        /*******************/ {
+        /*******************/
+        {
             glEnable(GL_CULL_FACE);
             glCullFace(GL_FRONT);
         }
@@ -1035,14 +1066,18 @@ namespace Narradia
     /*/////////////////////////////////////////*/
     {
         switch (mouseButton)
-        /******************/ {
+        /******************/
+        {
         case SDL_BUTTON_LEFT:
+            /***************/
             p->leftButton.PressDown();
             break;
         case SDL_BUTTON_MIDDLE:
+            /*****************/
             p->middleButton.PressDown();
             break;
         case SDL_BUTTON_RIGHT:
+            /****************/
             p->rightButton.PressDown();
             break;
         }
@@ -1052,14 +1087,18 @@ namespace Narradia
     /*///////////////////////////////////////*/
     {
         switch (mouseButton)
-        /******************/ {
+        /******************/
+        {
         case SDL_BUTTON_LEFT:
+            /***************/
             p->leftButton.Release();
             break;
         case SDL_BUTTON_MIDDLE:
+            /*****************/
             p->middleButton.Release();
             break;
         case SDL_BUTTON_RIGHT:
+            /****************/
             p->rightButton.Release();
             break;
         }
@@ -1156,16 +1195,19 @@ namespace Narradia
         std::set<int> firedToDelete;
         Log();
         for (auto it = p->firedActions.begin(); it != p->firedActions.end();)
-        /*******************************************************************/ {
+        /*******************************************************************/
+        {
             if (it->second.priority > firedPriority)
-            /**************************************/ {
+            /**************************************/
+            {
                 firedPriority = it->second.priority;
                 firedAction = it->second.action;
                 ticksPerform = ticksButtonDown + it->second.delay;
                 key = it->first;
                 auto diff = (int)(ticksPerform - SDL_GetTicks());
                 if (diff > 0)
-                /***********/ {
+                /***********/
+                {
                     highestPrioNotReady = true;
                     it++;
                     continue;
@@ -1177,12 +1219,15 @@ namespace Narradia
         }
         Log();
         if (highestPrioNotReady)
-        /**********************/ {
+        /**********************/
+        {
             int prevPriority = -1;
             for (auto it = p->firedActions.begin(); it != p->firedActions.end();)
-            /*******************************************************************/ {
+            /*******************************************************************/
+            {
                 if (it->second.priority < firedPriority && it->second.priority > prevPriority)
-                /****************************************************************************/ {
+                /****************************************************************************/
+                {
                     key = it->first;
                     firedAction = it->second.action;
                     prevPriority = ticksButtonDown + it->second.delay;
@@ -1194,9 +1239,11 @@ namespace Narradia
         }
         Log();
         if (SDL_GetTicks() >= ticksPerform)
-        /*********************************/ {
+        /*********************************/
+        {
             if (firedAction)
-            /**************/ {
+            /**************/
+            {
                 if (isPressed)
                     firedAction();
                 p->firedActions.erase(key);
@@ -1221,10 +1268,12 @@ namespace Narradia
         std::set<int> releasedToDelete;
         Log();
         for (auto it = p->releasedActions.begin(); it != p->releasedActions.end();)
-        /*************************************************************************/ {
+        /*************************************************************************/
+        {
             Log();
             if (it->second.priority > releasedPriority)
-            /*****************************************/ {
+            /*****************************************/
+            {
                 releasedPriority = it->second.priority;
                 releasedAction = it->second.action;
                 ticksPerform = ticksButtonDown + it->second.delay;
@@ -1232,7 +1281,8 @@ namespace Narradia
                 auto diff = (int)(ticksPerform - SDL_GetTicks());
                 Log();
                 if (diff > 0)
-                /***********/ {
+                /***********/
+                {
                     highestPrioNotReady = true;
                     it++;
                     continue;
@@ -1245,12 +1295,15 @@ namespace Narradia
         }
         Log();
         if (highestPrioNotReady)
-        /**********************/ {
+        /**********************/
+        {
             int prevPriority = -1;
             for (auto it = p->releasedActions.begin(); it != p->releasedActions.end();)
-            /*************************************************************************/ {
+            /*************************************************************************/
+            {
                 if (it->second.priority < releasedPriority && it->second.priority > prevPriority)
-                /*******************************************************************************/ {
+                /*******************************************************************************/
+                {
                     key = it->first;
                     releasedAction = it->second.action;
                     prevPriority = ticksButtonDown + it->second.delay;
@@ -1262,10 +1315,12 @@ namespace Narradia
         }
         Log();
         if (SDL_GetTicks() >= ticksPerform)
-        /*********************************/ {
+        /*********************************/
+        {
             Log();
             if (releasedAction)
-            /*****************/ {
+            /*****************/
+            {
                 Log();
                 releasedAction();
                 Log();

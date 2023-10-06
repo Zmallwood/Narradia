@@ -15,9 +15,11 @@ namespace Narradia
         numSlots = ObjectBehaviourList::Get().GetContainerSlots(object_->GetObjectType());
         auto i = 0;
         for (auto y = 0; y < maxNumRows; y++)
-        /***********************************/ {
+        /***********************************/
+        {
             for (auto x = 0; x < maxNumCols; x++)
-            /***********************************/ {
+            /***********************************/
+            {
                 if (i >= numSlots)
                     break;
                 slots[x][y] = std::make_shared<GuiWindowObjectSlot>(
@@ -31,21 +33,25 @@ namespace Narradia
     /*//////////////////////////////////*/
     {
         if (GetBounds().Contains(GetMousePositionF()))
-        /********************************************/ {
+        /********************************************/
+        {
             GuiWindowObjectSlot::hoveredObject = nullptr;
             GuiWindowObjectSlot::hoveredIndex = -1;
             GuiWindowObjectSlot::activeWindow = this;
         }
         if (GuiWindowObjectSlot::activeWindow == this)
-        /********************************************/ {
+        /********************************************/
+        {
             GuiWindowObjectSlot::hoveredObject = nullptr;
             GuiWindowObjectSlot::hoveredIndex = -1;
         }
         auto i = 0;
         for (auto y = 0; y < maxNumRows; y++)
-        /***********************************/ {
+        /***********************************/
+        {
             for (auto x = 0; x < maxNumCols; x++)
-            /***********************************/ {
+            /***********************************/
+            {
                 if (i >= numSlots)
                     break;
                 slots[x][y]->Update();
@@ -59,9 +65,11 @@ namespace Narradia
     {
         auto i = 0;
         for (auto y = 0; y < maxNumRows; y++)
-        /***********************************/ {
+        /***********************************/
+        {
             for (auto x = 0; x < maxNumCols; x++)
-            /***********************************/ {
+            /***********************************/
+            {
                 if (i >= numSlots)
                     break;
                 slots[x][y]->Render();

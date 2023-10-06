@@ -15,18 +15,22 @@ namespace Narradia
         MouseInput::Get().GetLeftButton().AddFiredAction(
             "SelectObject",
             [&]
-            /*****************************/ {
+            /*****************************/
+            {
                 switch (currentTool)
-                /******************/ {
+                /******************/
+                {
                 case Tools::AddObject:
-                    /*****************/ {
+                    /*****************/
+                    {
                         auto hoveredTile = TileHovering::Get().hoveredTile;
                         auto newObject = std::make_shared<Object>(selectedType);
                         if (selectedType != Hash("ObjectWoodWallN") &&
                             selectedType != Hash("ObjectWoodWallE") &&
                             selectedType != Hash("ObjectWoodWallS") &&
                             selectedType != Hash("ObjectWoodWallW"))
-                        /********************************************/ {
+                        /********************************************/
+                        {
                             newObject->SetModelScaling(
                                 0.7f + static_cast<float>(rand()) / RAND_MAX * 0.6f);
                             newObject->SetModelRotation(
@@ -39,7 +43,8 @@ namespace Narradia
                         break;
                     }
                 case Tools::AddMob:
-                    /**************/ {
+                    /**************/
+                    {
                         auto hoveredTile = TileHovering::Get().hoveredTile;
                         auto newMob =
                             std::make_shared<Mob>(selectedType, hoveredTile.x, hoveredTile.y);
@@ -50,14 +55,17 @@ namespace Narradia
                         break;
                     }
                 case Tools::SetGround:
-                    /*****************/ {
+                    /*****************/
+                    {
                         auto hoveredTile = TileHovering::Get().hoveredTile;
                         for (auto y = hoveredTile.y - (toolRadius - 1);
                              y <= hoveredTile.y + (toolRadius - 1); y++)
-                        /**********************************************/ {
+                        /**********************************************/
+                        {
                             for (auto x = hoveredTile.x - (toolRadius - 1);
                                  x <= hoveredTile.x + (toolRadius - 1); x++)
-                            /**********************************************/ {
+                            /**********************************************/
+                            {
                                 World::Get().GetCurrentMapArea()->GetTile({x, y})->SetGroundType(
                                     selectedType);
                             }
@@ -67,7 +75,8 @@ namespace Narradia
                         break;
                     }
                 case Tools::SetRoof:
-                    /***************/ {
+                    /***************/
+                    {
                         auto hoveredTile = TileHovering::Get().hoveredTile;
                         World::Get()
                             .GetCurrentMapArea()
@@ -76,7 +85,8 @@ namespace Narradia
                         break;
                     }
                 case Tools::AlterElevation:
-                    /**********************/ {
+                    /**********************/
+                    {
                         auto hoveredTile = TileHovering::Get().hoveredTile;
                         for (auto y = hoveredTile.y - (toolRadius - 1);
                              y <= hoveredTile.y + (toolRadius - 1); y++)
@@ -89,7 +99,8 @@ namespace Narradia
                                 auto dx = x - hoveredTile.x;
                                 auto dy = y - hoveredTile.y;
                                 if (dx * dx + dy * dy <= (toolRadius - 1) * (toolRadius - 1))
-                                /***********************************************************/ {
+                                /***********************************************************/
+                                {
                                     World::Get()
                                         .GetCurrentMapArea()
                                         ->GetTile({x, y})

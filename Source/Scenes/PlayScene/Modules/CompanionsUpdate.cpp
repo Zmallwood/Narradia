@@ -14,16 +14,19 @@ namespace Narradia
         auto mapArea = World::Get().GetCurrentMapArea();
         for (auto it = mapArea->GetCompanionsMirror().cbegin();
              it != mapArea->GetCompanionsMirror().cend();)
-        /*****************************************************/ {
+        /*****************************************************/
+        {
             auto companion = it->first;
             auto coordinate = it->second;
             if (companion->OutOfStamina())
-            /****************************/ {
+            /****************************/
+            {
                 ++it;
                 continue;
             }
             if (SDL_GetTicks() > companion->GetTicksLastMovement() + companion->GetMoveSpeed())
-            /*********************************************************************************/ {
+            /*********************************************************************************/
+            {
                 auto angle = companion->GetAngle();
                 auto old_angle = angle;
                 auto new_angle = angle + 2.0f * M_PI / (companion->GetRadius() * 20) *
@@ -45,10 +48,12 @@ namespace Narradia
                 auto new_y_i = static_cast<int>(used_new_y);
                 companion->SetAngle(new_angle);
                 if (new_x_i != coordinate.x || new_y_i != coordinate.y)
-                /*****************************************************/ {
+                /*****************************************************/
+                {
                     companion->UpdateTicksLastMovement();
                     if (mapArea->GetTile({new_x_i, new_y_i})->GetCompanion() == nullptr)
-                    /******************************************************************/ {
+                    /******************************************************************/
+                    {
                         mapArea->GetTile({new_x_i, new_y_i})
                             ->SetCompanion(mapArea->GetTile(coordinate)->GetCompanion());
                         mapArea->GetTile(coordinate)->ClearCompanion();
@@ -56,19 +61,23 @@ namespace Narradia
                         mapArea->RemoveCompanionMirror(it++);
                         mapArea->AddCompanionMirror(companion, {new_x_i, new_y_i});
                         if (false == Player::Get().HasClaimedTile({new_x_i, new_y_i}))
-                        /**********************************************************/ {
+                        /**********************************************************/
+                        {
                             Player::Get().ClaimTile({new_x_i, new_y_i});
                             companion->ConsumeStamina(1);
                             if (companion->OutOfStamina())
-                            /****************************/ {
+                            /****************************/
+                            {
                                 TextOutBox::Get().Print(
                                     "Companion: I am hungry, could you please give me some food?");
                             }
                         }
                         ++it;
                         continue;
-                    } else
-                    /****/ {
+                    }
+                    else
+                    /**/
+                    {
                         companion->SetAngle(old_angle);
                         auto other_companion = mapArea->GetTile({new_x_i, new_y_i})->GetCompanion();
                         if (other_companion->GetAngle() > companion->GetAngle())

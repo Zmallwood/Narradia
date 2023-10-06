@@ -35,8 +35,10 @@ namespace Narradia
         {
             TextOutBox::Get().Print("Companion: Thanks for the food, I feel more energized.");
             p->stamina = std::min(p->maxStamina, p->stamina + 30);
-        } else
-        /****/ {
+        }
+        else
+        /**/
+        {
             TextOutBox::Get().Print("Companion: Thanks for the gift.");
         }
     }

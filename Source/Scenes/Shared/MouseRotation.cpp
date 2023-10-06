@@ -1,23 +1,26 @@
 //////////////////////////////////////////////////////////////////////
 #include "MouseRotation.hpp"
-#include "WorldDrawModule/Camera.hpp"
 #include "Scenes/PlayScene/Modules/InteractionMenu.hpp"
-#include "WorldDrawModule/WorldDraw.hpp"
 #include "World/Player.hpp"
+#include "WorldDrawModule/Camera.hpp"
+#include "WorldDrawModule/WorldDraw.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 /****************/ {
     void MouseRotation::Update()
     /*////////////////////////*/
     {
-        if (Camera::Get().cameraDistance == 2.0f) {
+        if (Camera::Get().cameraDistance == 2.0f)
+        /***************************************/
+        {
             Cursor::Get().SavePosition();
             Cursor::Get().LockMousePos();
         }
         MouseInput ::Get().GetRightButton().AddFiredAction(
             "StartRotateCameraAndPlayer",
             [&]
-            /*****************************************************/ {
+            /***********************************************/
+            {
                 rotationType = RotationTypes::CameraAndPlayer;
                 Cursor::Get().SavePosition();
                 Cursor::Get().LockMousePos();
@@ -27,7 +30,8 @@ namespace Narradia
         MouseInput::Get().GetRightButton().AddReleasedAction(
             "StopRotateCameraAndPlayer",
             [&]
-            /*****************************************************/ {
+            /***********************************************/
+            {
                 rotationType = RotationTypes::None;
                 Cursor::Get().UnlockMousePos();
                 Cursor::Get().SetCursorType(CursorTypes::Normal);
@@ -36,7 +40,8 @@ namespace Narradia
         MouseInput::Get().GetMiddleButton().AddFiredAction(
             "StartRotateOnlyCamera",
             [&]
-            /*****************************************************/ {
+            /***********************************************/
+            {
                 rotationType = RotationTypes::OnlyCamera;
                 Cursor::Get().SavePosition();
                 Cursor::Get().LockMousePos();
@@ -46,7 +51,8 @@ namespace Narradia
         MouseInput::Get().GetMiddleButton().AddReleasedAction(
             "StopRotateOnlyCamera",
             [&]
-            /*****************************************************/ {
+            /***********************************************/
+            {
                 rotationType = RotationTypes::None;
                 Cursor::Get().UnlockMousePos();
                 Cursor::Get().SetCursorType(CursorTypes::Normal);
@@ -59,7 +65,8 @@ namespace Narradia
     /*//////////////////////////////////////////*/
     {
         if (rotationType != RotationTypes::None || Camera::Get().cameraDistance == 2.0f)
-        /****************************************************************************/ {
+        /****************************************************************************/
+        {
             auto canvasSize = GetCanvasSize();
             auto motionDelta = MouseInput::Get().GetMotionDeltaPickResults();
             auto deltaX = -static_cast<float>(motionDelta.x) * rotationSens / canvasSize.width;

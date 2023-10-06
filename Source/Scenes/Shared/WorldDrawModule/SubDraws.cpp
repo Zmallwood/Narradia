@@ -32,9 +32,11 @@ namespace Narradia
     /*///////////////////////////*/
     {
         for (auto x = -kMaxRenderRadius; x < kMaxRenderRadius; x++)
-        /*********************************************************/ {
+        /*********************************************************/
+        {
             for (auto y = -kMaxRenderRadius; y < kMaxRenderRadius; y++)
-            /*********************************************************/ {
+            /*********************************************************/
+            {
                 p->idsCompanionBboardExlamationMarks[x][y] =
                     RendererBillboardImages::Get().NewBillboardImage();
             }
@@ -56,7 +58,8 @@ namespace Narradia
         auto y = RenderLoop::currY;
         auto companion = tile->GetCompanion();
         if (companion)
-        /************/ {
+        /************/
+        {
             auto minorMovementOffset = GetMinorMovementOffsetForCompanion(companion.get());
             auto elev00 = RenderLoop::currElev00;
             auto elev10 = RenderLoop::currElev10;
@@ -166,32 +169,40 @@ namespace Narradia
         auto groundType = tile->GetGroundType();
         auto tileVariation = (tileCoord.x * tileCoord.y) % 3;
         if (groundType == Hash("GroundWater"))
-        /************************************/ {
+        /************************************/
+        {
             auto waterAnimIndex =
                 ((SDL_GetTicks() * 2 + tileCoord.x * tileCoord.y * 6) % 2700) / 900;
             if (waterAnimIndex > 0)
                 groundType = Hash("GroundWater_" + std::to_string(waterAnimIndex));
             else
                 groundType = Hash("GroundWater");
-        } else if (groundType == Hash("GroundRiver"))
-        /*******************************************/ {
+        }
+        else if (groundType == Hash("GroundRiver"))
+        /*******************************************/
+        {
             auto riverAnimIndex =
                 ((SDL_GetTicks() * 3 + tileCoord.x * tileCoord.y * 6) % 2700) / 900;
             if (riverAnimIndex > 0)
                 groundType = Hash("GroundRiver_" + std::to_string(riverAnimIndex));
             else
                 groundType = Hash("GroundRiver");
-        } else if (groundType == Hash("GroundGrass"))
-        /*******************************************/ {
+        }
+        else if (groundType == Hash("GroundGrass"))
+        /*******************************************/
+        {
             groundType = Hash("GroundGrass_" + std::to_string(tileVariation));
-        } else if (groundType == Hash("GroundRock"))
-        /******************************************/ {
+        }
+        else if (groundType == Hash("GroundRock"))
+        /******************************************/
+        {
             groundType = Hash("GroundRock_" + std::to_string(tileVariation));
         }
         RendererTiles::Get().DrawTile(groundType, tile->GetTileRendId());
         auto groundLayerType = tile->GetGroundLayerType();
         if (groundLayerType)
-        /******************/ {
+        /******************/
+        {
             v0.position.y += 0.03f;
             v1.position.y += 0.03f;
             v2.position.y += 0.03f;
@@ -202,7 +213,8 @@ namespace Narradia
         }
         auto hoveredTile = TileHovering::Get().hoveredTile;
         if (hoveredTile.x == tileCoord.x && hoveredTile.y == tileCoord.y)
-        /***************************************************************/ {
+        /***************************************************************/
+        {
             v0.position.y += 0.03f;
             v1.position.y += 0.03f;
             v2.position.y += 0.03f;
@@ -216,15 +228,18 @@ namespace Narradia
         v2.position.y += 0.03f;
         v3.position.y += 0.03f;
         if (doDrawTerritoryBorders)
-        /*~~~~~~~~~~~~~~~~~~~~~~~*/ {
+        /*************************/
+        {
             if (thisTileClaimedByPlayer != eastTileClaimedByPlayer)
-            /*****************************************************/ {
+            /*****************************************************/
+            {
                 RendererTiles::Get().UpdateDrawTile(
                     Hash("PlayerClaimedTileBorderE"), p->idsTileLayers[tileCoord.x][tileCoord.y],
                     v0, v1, v2, v3, normal00, normal10, normal11, normal01);
             }
             if (thisTileClaimedByPlayer != southTileClaimedByPlayer)
-            /******************************************************/ {
+            /******************************************************/
+            {
                 RendererTiles::Get().UpdateDrawTile(
                     Hash("PlayerClaimedTileBorderS"), p->idsTileLayers[tileCoord.x][tileCoord.y],
                     v0, v1, v2, v3, normal00, normal10, normal11, normal01);
@@ -344,7 +359,8 @@ namespace Narradia
              z0 + kTileSize / 2 + minorMovementOffset.y * kTileSize},
             facingAngle, 0.5f, 1.0f);
         if (SDL_GetTicks() < mob->GetTicksLastHitRecieved() + kShowHitEffectDuration)
-        /***************************************************************************/ {
+        /***************************************************************************/
+        {
             RendererModels::Get().DrawModel(
                 Hash("HitEffect"), animValue,
                 {x0 + kTileSize / 2 + minorMovementOffset.x * kTileSize,
@@ -371,7 +387,8 @@ namespace Narradia
         auto billboardTextPos = Camera::Get().MoveCloserToCamera(billboardPos, 0.01f);
         auto billboardSize = SizeF{0.9f, 0.03f};
         if (TileHovering::Get().hoveredTile == RenderLoop::currTileCoord)
-        /**********************************************************************/ {
+        /**********************************************************************/
+        {
             TextRenderer::Get().DrawBillboardString(
                 idsBillboardTexts[RenderLoop::currX][RenderLoop::currY], "Mob Lvl. 1",
                 billboardTextPos, billboardSize);
@@ -404,7 +421,8 @@ namespace Narradia
     {
         auto pos = Player::Get().GetSpaceCoord().Translate(0.0f, p->GetPlayerElevation(), 0.0f);
         if (Player::Get().mounted)
-        /**********************/ {
+        /**********************/
+        {
             RendererModels::Get().DrawModel(
                 Hash("Mount1"), 0, pos, Player::Get().GetFacingAngle(), 0.8f);
         }
@@ -422,10 +440,14 @@ namespace Narradia
                 0.0f),
             0.0f, 0.6f);
         if (Camera::Get().cameraDistance > 2.0f)
-        /************************************/ {
+        /**************************************/
+        {
             RendererModels::Get().DrawModel(
                 Hash("Player2"), animTile, pos, Player::Get().GetFacingAngle(), 0.6f);
-        } else {
+        }
+        else
+        /**/
+        {
             auto handsPosition = pos;
             handsPosition.y = Camera::Get().cameraPosition.y - 0.5f * kTileSize;
             RendererModels::Get().DrawModel(

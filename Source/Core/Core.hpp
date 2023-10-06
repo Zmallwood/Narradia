@@ -13,22 +13,26 @@ namespace Narradia
     class SceneBase;
     class SceneGui;
 
-    template <class T> class Singleton
+    template <class T>
+    class Singleton
     /*//////////////////////////////*/
     {
       public:
         static void Create()
         /*////////////////*/ {
-            if (!instance) instance = std::make_shared<T>();
+            if (!instance)
+                instance = std::make_shared<T>();
         }
         static std::shared_ptr<T> GetPointer()
         /*//////////////////////////////////*/ {
-            if (!instance) Create();
+            if (!instance)
+                Create();
             return std::weak_ptr<T>(instance).lock();
         }
         static T &Get()
         /*///////////*/ {
-            if (!instance) Create();
+            if (!instance)
+                Create();
             return *GetPointer();
         }
         static void Dispose()
@@ -357,7 +361,7 @@ namespace Narradia
         Uint64 delay = 0;
         bool ensureIsExec = false;
     };
-    
+
     class MouseActionManager
     /*////////////////////*/
     {

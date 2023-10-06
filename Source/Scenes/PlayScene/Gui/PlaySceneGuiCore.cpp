@@ -33,7 +33,8 @@ namespace Narradia
     /*///////////////////*/
     {
         if (SDL_GetTicks() > p->ticksLastUpdate + 1000)
-        /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/ {
+        /*********************************************/
+        {
             p->fps = p->framesCount++;
             p->framesCount = 0;
             p->ticksLastUpdate = SDL_GetTicks();

@@ -12,9 +12,11 @@ namespace Narradia
         auto slotWidth = (GetBounds().width - 2 * GetMargin()) / numCols - GetMargin();
         auto i = 0;
         for (auto y = 0; y < numRows; y++)
-        /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/ {
+        /********************************/
+        {
             for (auto x = 0; x < numCols; x++)
-            /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/ {
+            /********************************/
+            {
                 slots[x][y] = std::make_shared<GuiWindowObjectSlot>(
                     this, x, y, i, slotWidth, Player::Get().data.inventory.objects);
                 i++;
@@ -27,13 +29,15 @@ namespace Narradia
     /*//////////////////////////////*/
     {
         if (GetBounds().Contains(GetMousePositionF()))
-        /********************************************/ {
+        /********************************************/
+        {
             GuiWindowObjectSlot::hoveredObject = nullptr;
             GuiWindowObjectSlot::hoveredIndex = -1;
             GuiWindowObjectSlot::activeWindow = this;
         }
         if (GuiWindowObjectSlot::activeWindow == this)
-        /********************************************/ {
+        /********************************************/
+        {
             GuiWindowObjectSlot::hoveredObject = nullptr;
             GuiWindowObjectSlot::hoveredIndex = -1;
         }

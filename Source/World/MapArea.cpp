@@ -25,10 +25,12 @@ namespace Narradia
     /*//////////////////*/
     {
         for (auto x = 0; x < Pimpl::mapSize.width; x++)
-        /*********************************************/ {
+        /*********************************************/
+        {
             p->tiles.push_back(std::vector<std::shared_ptr<Tile>>());
             for (auto y = 0; y < Pimpl::mapSize.height; y++)
-            /**********************************************/ {
+            /**********************************************/
+            {
                 auto newTile = std::make_shared<Tile>(this, Point2{x, y}, Hash("GroundGrass"));
                 p->tiles.at(x).push_back(newTile);
             }

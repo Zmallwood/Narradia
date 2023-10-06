@@ -39,7 +39,7 @@ namespace Narradia
             -> std::map<std::shared_ptr<std::string>, aiMatrix4x4>;
         void Translate(Point3F *, aiVectorKey) const;
     };
-    
+
     class ModelPartKeyframeCreator : public Singleton<ModelPartKeyframeCreator>
     /*///////////////////////////////////////////////////////////////////////*/
     {

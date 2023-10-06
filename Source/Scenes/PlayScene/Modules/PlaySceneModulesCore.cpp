@@ -51,10 +51,13 @@ namespace Narradia
     /*/////////////////////////////////*/
     {
         if (p->repeatingAction == nullptr)
-        /********************************/ {
+        /********************************/
+        {
             TextOutBox::Get().Print("There is no previous action to repeat.");
-        } else
-        /****/ {
+        }
+        else
+        /**/
+        {
             TextOutBox::Get().Print("Repeating action.");
             Log();
             p->repeatingAction();

@@ -14,27 +14,23 @@ namespace Narradia
         AddGuiButton(
             "Resume", {0.45f, 0.3f, 0.1f, 0.03f},
             []
-            /*************************************************************************/ {
-                PlaySceneGuiMenu::Get().visible = false;
-            });
+            /**************************************************/
+            { PlaySceneGuiMenu::Get().visible = false; });
         AddGuiButton(
             "Save game", {0.45f, 0.35f, 0.1f, 0.03f},
             []
-            /*************************************************************************/ {
-                SceneManager::Get().ChangeView(Scenes::GameSave);
-            });
+            /**************************************************/
+            { SceneManager::Get().ChangeView(Scenes::GameSave); });
         AddGuiButton(
             "Go to main menu", {0.45f, 0.4f, 0.1f, 0.03f},
             []
-            /*************************************************************************/ {
-                SceneManager::Get().ChangeView(Scenes::MainMenu);
-            });
+            /**************************************************/
+            { SceneManager::Get().ChangeView(Scenes::MainMenu); });
         AddGuiButton(
             "Exit game", {0.45f, 0.45f, 0.1f, 0.03f},
             []
-            /*************************************************************************/ {
-                GameEngine::Get().StopGame();
-            });
+            /**************************************************/
+            { GameEngine::Get().StopGame(); });
     }
 
     void PlaySceneGuiMenu::Update()

@@ -60,30 +60,37 @@ namespace Narradia
         p->programId = glCreateProgram();
         auto vertexShaderCompiled = p->InitVertexShader(vertexShaderSrc);
         if (vertexShaderCompiled != GL_TRUE)
-        /**********************************/ {
+        /**********************************/
+        {
             SDL_ShowSimpleMessageBox(
                 SDL_MESSAGEBOX_ERROR, "Shader error", "Unable to compile vertex shader.", nullptr);
             printf("Unable to compile vertex shader %d!\n", p->vertexShader);
             success = false;
-        } else
-        /****/ {
+        }
+        else
+        /**/
+        {
             glAttachShader(p->programId, p->vertexShader);
             auto fragShaderCompiled = p->InitFragShader(fragShaderSrc);
             if (fragShaderCompiled != GL_TRUE)
-            /********************************/ {
+            /********************************/
+            {
                 SDL_ShowSimpleMessageBox(
                     SDL_MESSAGEBOX_ERROR, "Shader error", "Unable to compile fragment shader.",
                     nullptr);
                 printf("Unable to compile fragment shader %d!\n", p->fragShader);
                 success = false;
-            } else
-            /****/ {
+            }
+            else
+            /**/
+            {
                 glAttachShader(p->programId, p->fragShader);
                 glLinkProgram(p->programId);
                 GLint program_success = GL_TRUE;
                 glGetProgramiv(p->programId, GL_LINK_STATUS, &program_success);
                 if (program_success != GL_TRUE)
-                /*****************************/ {
+                /*****************************/
+                {
                     SDL_ShowSimpleMessageBox(
                         SDL_MESSAGEBOX_ERROR, "Shader error", "Error linking shader program.",
                         nullptr);
@@ -196,7 +203,8 @@ namespace Narradia
             GL_ARRAY_BUFFER, numVertices * Pimpl::kNumFloatsPerPosition2D * sizeof(float), data,
             GL_DYNAMIC_DRAW);
         if (layoutLocation >= 0)
-        /**********************/ {
+        /**********************/
+        {
             glVertexAttribPointer(
                 layoutLocation, Pimpl::kNumFloatsPerPosition2D, GL_FLOAT, GL_FALSE, 0,
                 (const GLvoid *)0);
@@ -213,7 +221,8 @@ namespace Narradia
             GL_ARRAY_BUFFER, sizeof(float) * numVertices * Pimpl::kNumFloatsPerPosition3D, data,
             GL_STATIC_DRAW);
         if (layoutLocation >= 0)
-        /**********************/ {
+        /**********************/
+        {
             glVertexAttribPointer(
                 layoutLocation, Pimpl::kNumFloatsPerPosition3D, GL_FLOAT, GL_FALSE, 0,
                 (const GLvoid *)0);
@@ -230,7 +239,8 @@ namespace Narradia
             GL_ARRAY_BUFFER, numVertices * Pimpl::kNumFloatsPerUv * sizeof(float), data,
             GL_DYNAMIC_DRAW);
         if (layoutLocation >= 0)
-        /**********************/ {
+        /**********************/
+        {
             glVertexAttribPointer(
                 layoutLocation, Pimpl::kNumFloatsPerUv, GL_FLOAT, GL_FALSE, 0, (const GLvoid *)0);
             glEnableVertexAttribArray(layoutLocation);
@@ -246,7 +256,8 @@ namespace Narradia
             GL_ARRAY_BUFFER, numVertices * Pimpl::kNumFloatsPerColor * sizeof(float), data,
             GL_DYNAMIC_DRAW);
         if (layoutLocation >= 0)
-        /**********************/ {
+        /**********************/
+        {
             glVertexAttribPointer(
                 layoutLocation, Pimpl::kNumFloatsPerColor, GL_FLOAT, GL_FALSE, 0,
                 (const GLvoid *)0);
@@ -263,7 +274,8 @@ namespace Narradia
             GL_ARRAY_BUFFER, sizeof(float) * numVertices * Pimpl::kNumFloatsPerNormal, data,
             GL_STATIC_DRAW);
         if (layoutLocation >= 0)
-        /**********************/ {
+        /**********************/
+        {
             glVertexAttribPointer(
                 layoutLocation, Pimpl::kNumFloatsPerNormal, GL_FLOAT, GL_FALSE, 0,
                 (const GLvoid *)0);
@@ -338,17 +350,21 @@ namespace Narradia
     /*//////////////////////////////*/
     {
         for (auto &bufferType : p->vboIds)
-        /********************************/ {
+        /********************************/
+        {
             for (auto &bufferEntry : bufferType.second)
-            /*****************************************/ {
+            /*****************************************/
+            {
                 glDeleteBuffers(1, &bufferEntry.second);
             }
         }
         for (auto vaoId : p->vaoIds)
-        /**************************/ {
+        /**************************/
+        {
             glDeleteVertexArrays(1, &vaoId);
         }
-        if (p->shaderProgram) p->shaderProgram->Cleanup();
+        if (p->shaderProgram)
+            p->shaderProgram->Cleanup();
     }
 
     void RndrBase::UseVaoBegin(int vaoId) const
@@ -508,7 +524,8 @@ namespace Narradia
         std::vector<float> colors;
         std::vector<float> uvs;
         for (auto &vertex : vertices)
-        /***************************/ {
+        /***************************/
+        {
             positions.push_back(vertex.position.x);
             positions.push_back(vertex.position.y);
             colors.push_back(vertex.color.r);
@@ -617,7 +634,8 @@ namespace Narradia
         std::vector<float> positions;
         std::vector<float> colors;
         for (auto &vertex : vertices)
-        /***************************/ {
+        /***************************/
+        {
             positions.push_back(vertex.position.x);
             positions.push_back(vertex.position.y);
             colors.push_back(vertex.color.r);
@@ -745,7 +763,8 @@ namespace Narradia
         std::vector<float> positions;
         std::vector<float> uvs;
         for (auto &v : vertices)
-        /**********************/ {
+        /**********************/
+        {
             positions.push_back(v.position.x);
             positions.push_back(v.position.y);
             uvs.push_back(v.uv.x);
@@ -773,7 +792,8 @@ namespace Narradia
     {
       public:
         struct BodyData
-        /*///////////*/ {
+        /*///////////*/
+        {
             RenderId bodyId = 0;
             int numVertices = 0;
             int imageNameHash = 0;
@@ -924,10 +944,12 @@ namespace Narradia
             {modelNameHash, std::map<int, std::map<float, const Pimpl::BodyData>>()});
         auto iBody = 0;
         for (auto &body : model->modelParts)
-        /**********************************/ {
+        /**********************************/
+        {
             auto &timelines = body->timeline->keyframes;
             for (auto &keyframe : timelines)
-            /******************************/ {
+            /******************************/
+            {
                 auto keyframeTime = keyframe.first;
                 auto animKeyBodyKeyframe = keyframe.second;
                 auto vertexCount = animKeyBodyKeyframe->vertices.size();
@@ -945,7 +967,8 @@ namespace Narradia
                 std::vector<Point3F> normals;
                 auto &animVertices = modelKeyframe->vertices;
                 for (auto v : animVertices)
-                /*************************/ {
+                /*************************/
+                {
                     Vertex3F v3f;
                     v3f.position = v.position;
                     v3f.color = v.color;
@@ -996,7 +1019,8 @@ namespace Narradia
         std::vector<float> normals;
         auto i = 0;
         for (auto &vertex : vertices)
-        /***************************/ {
+        /***************************/
+        {
             positions.push_back(vertex.position.x);
             positions.push_back(vertex.position.y);
             positions.push_back(vertex.position.z);
@@ -1007,7 +1031,8 @@ namespace Narradia
             uvs.push_back(vertex.uv.x);
             uvs.push_back(vertex.uv.y);
             if (vertexNormals.size() > i)
-            /***************************/ {
+            /***************************/
+            {
                 auto vertexNormal = vertexNormals.at(i);
                 normals.push_back(vertexNormal.x);
                 normals.push_back(-vertexNormal.y);
@@ -1052,9 +1077,11 @@ namespace Narradia
         float brightness, glm::vec3 colorMod, bool noFog, bool noLighting) const
     /*/////////////////////////////////////////////////////////////////////////////////*/
     {
-        if (p->modelIds.count(modelNameHash) == 0) return;
+        if (p->modelIds.count(modelNameHash) == 0)
+            return;
         if (!p->isBatchDrawing)
-        /*********************/ {
+        /*********************/
+        {
             glEnable(GL_DEPTH_TEST);
             glUseProgram(GetShaderProgram()->GetProgramId());
             glUniformMatrix4fv(
@@ -1097,14 +1124,17 @@ namespace Narradia
             msTimeUsed = static_cast<int>(msTime * p->globalAnimSpeed) % pModel->animDuration;
         auto &modelData = allNodes;
         for (auto &entry : allNodes)
-        /**************************/ {
+        /**************************/
+        {
             auto &timeline = entry.second;
             auto foundTime = -1.0f;
             const Pimpl::BodyData *pBodyData = nullptr;
             for (auto &keyframe : timeline)
-            /*****************************/ {
+            /*****************************/
+            {
                 auto time = keyframe.first;
-                if (msTimeUsed >= time) foundTime = time;
+                if (msTimeUsed >= time)
+                    foundTime = time;
             }
             auto &bodyData = timeline.at(foundTime);
             glBindVertexArray(bodyData.bodyId);
@@ -1113,7 +1143,8 @@ namespace Narradia
             glDrawElements(GL_TRIANGLES, bodyData.numVertices, GL_UNSIGNED_INT, NULL);
         }
         glBindVertexArray(0);
-        if (!p->isBatchDrawing) glUseProgram(0);
+        if (!p->isBatchDrawing)
+            glUseProgram(0);
     }
 
     void RendererModels::DrawModelsMany(
@@ -1122,9 +1153,11 @@ namespace Narradia
         std::vector<glm::vec3> colorMods) const
     /*///////////////////////////////////////////////////////////////////////////////////////////*/
     {
-        if (p->modelIds.count(modelNameHash) == 0) return;
+        if (p->modelIds.count(modelNameHash) == 0)
+            return;
         if (!p->isBatchDrawing)
-        /*********************/ {
+        /*********************/
+        {
             glEnable(GL_DEPTH_TEST);
             glUseProgram(GetShaderProgram()->GetProgramId());
             glUniformMatrix4fv(
@@ -1142,19 +1175,23 @@ namespace Narradia
             msTimeUsed = static_cast<int>(msTime * p->globalAnimSpeed) % pModel->animDuration;
         auto &modelData = allNodes;
         for (auto &entry : allNodes)
-        /**************************/ {
+        /**************************/
+        {
             auto &timeline = entry.second;
             auto foundTime = -1.0f;
             const Pimpl::BodyData *pBodyData = nullptr;
             for (auto &keyframe : timeline)
-            /*****************************/ {
+            /*****************************/
+            {
                 auto time = keyframe.first;
-                if (msTimeUsed >= time) foundTime = time;
+                if (msTimeUsed >= time)
+                    foundTime = time;
             }
             auto &bodyData = timeline.at(foundTime);
             auto imageId = ImageBank::Get().GetImage(bodyData.imageNameHash);
             for (auto i = 0; i < positions.size(); i++)
-            /*****************************************/ {
+            /*****************************************/
+            {
                 auto position = positions.at(i);
                 auto rotation = rotations.at(i);
                 auto scaling = scalings.at(i);
@@ -1194,7 +1231,8 @@ namespace Narradia
             }
         }
         glBindVertexArray(0);
-        if (!p->isBatchDrawing) glUseProgram(0);
+        if (!p->isBatchDrawing)
+            glUseProgram(0);
     }
 
     void RendererModels::Cleanup()
@@ -1380,7 +1418,8 @@ namespace Narradia
     RendererTiles::SetGeometryImagePolygon(RenderId vaoId, std::vector<Vertex3F> &vertices) const
     /*/////////////////////////////////////////////////////////////////////////////////////////*/
     {
-        if (!p->isBatchDrawing) glUseProgram(GetShaderProgram()->GetProgramId());
+        if (!p->isBatchDrawing)
+            glUseProgram(GetShaderProgram()->GetProgramId());
         std::vector<int> indices(vertices.size());
         std::iota(std::begin(indices), std::end(indices), 0);
         std::vector<float> positions;
@@ -1388,7 +1427,8 @@ namespace Narradia
         std::vector<float> uvs;
         std::vector<float> normals;
         for (auto &vertex : vertices)
-        /***************************/ {
+        /***************************/
+        {
             positions.push_back(vertex.position.x);
             positions.push_back(vertex.position.y);
             positions.push_back(vertex.position.z);
@@ -1415,7 +1455,8 @@ namespace Narradia
         UpdateUvsData(uvBufferId, uvs, p->locationUv);
         UpdateNormalsData(normalBufferId, normals, p->locationNormal);
         glBindVertexArray(0);
-        if (!p->isBatchDrawing) glUseProgram(0);
+        if (!p->isBatchDrawing)
+            glUseProgram(0);
     }
 
     void RendererTiles::StartBatchDrawing()
@@ -1461,7 +1502,8 @@ namespace Narradia
         else
             glEnable(GL_DEPTH_TEST);
         if (!p->isBatchDrawing)
-        /*********************/ {
+        /*********************/
+        {
             glUseProgram(GetShaderProgram()->GetProgramId());
             glUniformMatrix4fv(
                 p->locationProjection, 1, GL_FALSE,
@@ -1486,7 +1528,8 @@ namespace Narradia
         glBindVertexArray(vaoId);
         glDrawElements(GL_TRIANGLE_FAN, vertexCount, GL_UNSIGNED_INT, NULL);
         glBindVertexArray(0);
-        if (!p->isBatchDrawing) glUseProgram(0);
+        if (!p->isBatchDrawing)
+            glUseProgram(0);
     }
 
     void RendererTiles::Cleanup()
@@ -1595,12 +1638,14 @@ namespace Narradia
     /*/////////////////////////////////////////////////////////////////////////////////////////*/
     {
         auto font = fonts.at(textSize)->GetSdlFont();
-        if (!font) return;
+        if (!font)
+            return;
         auto sdlColor = color.ToSdlColor();
         auto outlineSdlColor = outlineColor.ToSdlColor();
         auto textOutlineSurface = TTF_RenderText_Blended(
             fonts.at(textSize)->GetSdlFontOutline(), text.data(), outlineSdlColor);
-        if (!textOutlineSurface) return;
+        if (!textOutlineSurface)
+            return;
         auto textSurface = TTF_RenderText_Blended(font, text.data(), sdlColor);
         glEnable(GL_TEXTURE_2D);
         auto uniqueNameId = uniqueNameIds.at(vaoId);
@@ -1652,7 +1697,8 @@ namespace Narradia
         auto numCharactersPerLine = text.length() / numLines;
         auto lineHeight = static_cast<float>(fullTextH) / canvasSize.height;
         for (auto i = 0; i < numLines; i++)
-        /*********************************/ {
+        /*********************************/
+        {
             auto lineText = text.substr(i * numCharactersPerLine, numCharactersPerLine + 1);
             std::string uniqueNameId;
             SizeF size;

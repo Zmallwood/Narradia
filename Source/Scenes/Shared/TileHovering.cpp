@@ -23,7 +23,8 @@ namespace Narradia
     /*///////////////////////*/
     {
         if (Camera::Get().cameraDistance == 2.0f)
-        /*************************************/ {
+        /*************************************/
+        {
             hoveredTile = {-1, -1};
             return;
         }
@@ -50,7 +51,8 @@ namespace Narradia
         auto playerYMajor = static_cast<int>(playerY);
         bool tileFound = false;
         auto iterationFunc = [&](int x, int y) -> bool
-        /********************************************/ {
+        /********************************************/
+        {
             auto mapX = playerXMajor + x;
             auto mapY = playerYMajor + y;
             if (!MapArea::IsInsideMap({mapX, mapY}))
@@ -81,7 +83,8 @@ namespace Narradia
             auto closestPoint =
                 glm::closestPointOnLine(center, mouseWorldNearplane, mouseWorldFarplane);
             if (glm::distance(center, closestPoint) < tileSize / 2)
-            /*****************************************************/ {
+            /*****************************************************/
+            {
                 hoveredTile = {mapX, mapY};
                 if (tile->GetObjectsCount() > 0)
                     hoveredObjectHash = tile->GetObjectAt(0)->GetObjectType();
@@ -91,9 +94,11 @@ namespace Narradia
             return false;
         };
         for (int y = -(rowsCount - 1) / 2; y < (rowsCount - 1) / 2 && !tileFound; y++)
-        /*****************************************************************************/ {
+        /*****************************************************************************/
+        {
             for (int x = -(columnsCount - 1) / 2; x < (columnsCount - 1) / 2 && !tileFound; x++)
-            /******************************************************************************/ {
+            /******************************************************************************/
+            {
                 if (iterationFunc(x, y))
                     return;
             }

@@ -12,33 +12,28 @@ namespace Narradia
         AddGuiButton(
             "Resume", {0.45f, 0.3f, 0.1f, 0.03f},
             []
-            /************************************************************/ {
-                EditorSceneGuiMenu::Get().visible = false;
-            });
+            /************************************************************/
+            { EditorSceneGuiMenu::Get().visible = false; });
         AddGuiButton(
             "Save map", {0.45f, 0.35f, 0.1f, 0.03f},
             []
-            /************************************************************/ {
-                SceneManager::Get().ChangeView(Scenes::MapSave);
-            });
+            /************************************************************/
+            { SceneManager::Get().ChangeView(Scenes::MapSave); });
         AddGuiButton(
             "Load map", {0.45f, 0.40f, 0.1f, 0.03f},
             []
-            /************************************************************/ {
-                SceneManager::Get().ChangeView(Scenes::MapLoad);
-            });
+            /************************************************************/
+            { SceneManager::Get().ChangeView(Scenes::MapLoad); });
         AddGuiButton(
             "Go to main menu", {0.45f, 0.45f, 0.1f, 0.03f},
             []
-            /************************************************************/ {
-                SceneManager::Get().ChangeView(Scenes::MainMenu);
-            });
+            /************************************************************/
+            { SceneManager::Get().ChangeView(Scenes::MainMenu); });
         AddGuiButton(
             "Exit game", {0.45f, 0.50f, 0.1f, 0.03f},
             []
-            /************************************************************/ {
-                GameEngine::Get().StopGame();
-            });
+            /************************************************************/
+            { GameEngine::Get().StopGame(); });
     }
 
     void EditorSceneGuiMenu::Update()

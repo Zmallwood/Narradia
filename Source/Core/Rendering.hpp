@@ -90,7 +90,8 @@ namespace Narradia
         std::shared_ptr<Pimpl> p;
     };
 
-    class Renderer2DImages : RndrBase, public Singleton<Renderer2DImages>
+    class Renderer2DImages : RndrBase,
+                             public Singleton<Renderer2DImages>
     /*/////////////////////////////////////////////////////////////////*/
     {
       public:
@@ -100,7 +101,8 @@ namespace Narradia
             const std::string_view &, RenderId, const RectangleF &, Color = Colors::white) const;
         void DrawImage(int, RenderId, const RectangleF &, Color = Colors::white) const;
         void Cleanup();
-        template <int N> auto NewImages()
+        template <int N>
+        auto NewImages()
         /*/////////////////////////////*/ {
             std::array<RenderId, N> result;
             for (auto &entry : result)
@@ -113,7 +115,8 @@ namespace Narradia
         std::shared_ptr<Pimpl> p;
     };
 
-    class Renderer2DSolidColors : public RndrBase, public Singleton<Renderer2DSolidColors>
+    class Renderer2DSolidColors : public RndrBase,
+                                  public Singleton<Renderer2DSolidColors>
     /*//////////////////////////////////////////////////////////////////////////////////*/
     {
       public:
@@ -121,7 +124,8 @@ namespace Narradia
         RenderId NewRectangle();
         void FillRectangle(RenderId, const RectangleF &, Color) const;
         void Cleanup();
-        template <int N> auto NewRectangles()
+        template <int N>
+        auto NewRectangles()
         /*/////////////////////////////////*/ {
             std::array<RenderId, N> result;
             for (auto &entry : result)
@@ -134,7 +138,8 @@ namespace Narradia
         std::shared_ptr<Pimpl> p;
     };
 
-    class RendererBillboardImages : public RndrBase, public Singleton<RendererBillboardImages>
+    class RendererBillboardImages : public RndrBase,
+                                    public Singleton<RendererBillboardImages>
     /*//////////////////////////////////////////////////////////////////////////////////////*/
     {
       public:
@@ -148,7 +153,8 @@ namespace Narradia
         std::shared_ptr<Pimpl> p;
     };
 
-    class RendererModels : public RndrBase, public Singleton<RendererModels>
+    class RendererModels : public RndrBase,
+                           public Singleton<RendererModels>
     /*////////////////////////////////////////////////////////////////////*/
     {
       public:
@@ -173,7 +179,8 @@ namespace Narradia
         std::shared_ptr<Pimpl> p;
     };
 
-    class RendererTiles : public RndrBase, public Singleton<RendererTiles>
+    class RendererTiles : public RndrBase,
+                          public Singleton<RendererTiles>
     /*//////////////////////////////////////////////////////////////////*/
     {
       public:
@@ -226,7 +233,7 @@ namespace Narradia
         std::vector<RenderId> renderIds;
         float width;
     };
-    
+
     class TextRenderer : public Singleton<TextRenderer>
     /*///////////////////////////////////////////////*/
     {
@@ -244,8 +251,10 @@ namespace Narradia
         void DrawMultiLineString(
             RenderId, const std::string &, Point2F, Color = Colors::wheat, bool = false,
             TextSizes = TextSizes::_20) const;
-        template <int N> auto NewStrings()
-        /*//////////////////////////////*/ {
+        template <int N>
+        auto NewStrings()
+        /*/////////////*/
+        {
             std::array<RenderId, N> result;
             for (auto &entry : result)
                 entry = NewString();

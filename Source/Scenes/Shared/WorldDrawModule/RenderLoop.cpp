@@ -51,9 +51,11 @@ namespace Narradia
         const auto modelMat = glm::rotate(glm::mat4(1.0), angleRad, up);
         auto renderRadius = static_cast<int>(kMaxRenderRadius * 0.7f);
         for (auto y = -renderRadius; y < renderRadius; y++)
-        /*************************************************/ {
+        /*************************************************/
+        {
             for (auto x = -renderRadius; x < renderRadius; x++)
-            /*************************************************/ {
+            /*************************************************/
+            {
                 currX = x;
                 currY = y;
                 Point2 tileCoord = {playerTileCoord.x + x, playerTileCoord.y + y};
@@ -111,7 +113,8 @@ namespace Narradia
                 auto tileAvgElev = (elev00 + elev10 + elev01 + elev11) / 4.0f;
                 currTileAvgElev = tileAvgElev;
                 if (tileCoord.x == playerTileCoord.x && tileCoord.y == playerTileCoord.y)
-                /***********************************************************************/ {
+                /***********************************************************************/
+                {
                     playerElev00 = elev00;
                     playerElev10 = elev10;
                     playerElev11 = elev11;
@@ -122,7 +125,8 @@ namespace Narradia
                     glm::vec3{(x0 + x2) / 2.0f - usedPos.x, 0, (z0 + z2) / 2.0f - usedPos.z};
                 auto screenCoord = glm::project(cRel, modelMat, projMat, viewPort);
                 if (Camera::Get().cameraDistance > 10.0f)
-                /*************************************/ {
+                /*************************************/
+                {
                     if (screenCoord.x <= -0.4f * canvasSize.width ||
                         screenCoord.x >= canvasSize.width * 1.4f)
                         continue;
@@ -142,12 +146,14 @@ namespace Narradia
                 bool southTileClaimedByPlayer = false;
                 thisTileClaimedByPlayer = Player::Get().HasClaimedTile(tileCoord);
                 if (x < MapArea::GetMapSize().width - 1)
-                /**************************************/ {
+                /**************************************/
+                {
                     auto eastTile = Point2{tileCoord.x + 1, tileCoord.y};
                     eastTileClaimedByPlayer = Player::Get().HasClaimedTile(eastTile);
                 }
                 if (y < MapArea::GetMapSize().height - 1)
-                /***************************************/ {
+                /***************************************/
+                {
                     auto southTile = Point2{tileCoord.x, tileCoord.y + 1};
                     southTileClaimedByPlayer = Player::Get().HasClaimedTile(southTile);
                 }
@@ -156,9 +162,11 @@ namespace Narradia
                 currSouthTileClaimedByPlayer = southTileClaimedByPlayer;
                 bool doDrawObjects = true;
                 if (doDrawObjects)
-                /****************/ {
+                /****************/
+                {
                     for (auto &objectEntry : tile->GetObjects().list)
-                    /***********************************************/ {
+                    /***********************************************/
+                    {
                         auto objectType = objectEntry->GetObjectType();
                         auto objectScaling = objectEntry->GetModelScaling();
                         auto objectRotation = objectEntry->GetModelRotation();
@@ -168,7 +176,8 @@ namespace Narradia
                         auto blueVar = objectEntry->GetBlueVariation();
                         bool shadowAlreadyDrawn = false;
                         if (objectType)
-                        /*************/ {
+                        /*************/
+                        {
                             std::map<int, ModelRenderParameters> *data = nullptr;
                             if ((tileCoord.x + tileCoord.y) % 2 == 0)
                                 data = &data1;
@@ -177,15 +186,17 @@ namespace Narradia
                             if (data->count(Hash("Shadow")) == 0)
                                 data->insert({Hash("Shadow"), ModelRenderParameters()});
                             if (!shadowAlreadyDrawn)
-                            /**********************/ {
+                            /**********************/
+                            {
                                 if (distSquared < 600)
-                                /********************/ {
+                                /********************/
+                                {
                                     if (objectType != Hash("ObjectTallGrass6") &&
                                         (false == ObjectBehaviourList::Get().HasBehaviourData(
                                                       objectType) ||
                                          ObjectBehaviourList::Get().GetFlags(objectType) &
                                              (int)ObjectBehaviourFlags::NoShadow == 0))
-                                    /********************************************************************/
+                                    /********************************************************/
                                     {
                                         data->at(Hash("Shadow"))
                                             .positions.push_back(

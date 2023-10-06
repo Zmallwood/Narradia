@@ -96,7 +96,8 @@ namespace Narradia
         Log();
         WorldDraw::Get().Render();
         if (true == PlaySceneGuiMenu::Get().visible)
-        /*****************************************************/ {
+        /******************************************/
+        {
             Log();
             TileHovering::Get().Render();
         }

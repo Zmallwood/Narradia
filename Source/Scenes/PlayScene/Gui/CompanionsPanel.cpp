@@ -49,7 +49,8 @@ namespace Narradia
         auto map_area = World::Get().GetMapAreaAtZLevel(player_world_area_pos.z);
         auto it = map_area->GetCompanionsMirror().cbegin();
         for (auto i = 0; i < 4; i++)
-        /**************************/ {
+        /**************************/
+        {
             auto companion = it->first;
             auto stamina = companion->GetStamina();
             auto max_stamina = companion->GetMaxStamina();

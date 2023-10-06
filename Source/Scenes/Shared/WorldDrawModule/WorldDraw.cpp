@@ -52,7 +52,8 @@ namespace Narradia
         auto msTime1 = SDL_GetTicks() * 2;
         auto msTime2 = SDL_GetTicks() * 2 + 1000;
         for (auto &d : RenderLoop::data1)
-        /*******************************/ {
+        /*******************************/
+        {
             auto modelNameHash = d.first;
             Log();
             RendererModels::Get().DrawModelsMany(
@@ -60,7 +61,8 @@ namespace Narradia
                 d.second.brightnesses, d.second.colorMods);
         }
         for (auto &d : RenderLoop::data2)
-        /*******************************/ {
+        /*******************************/
+        {
             auto modelNameHash = d.first;
             Log();
             RendererModels::Get().DrawModelsMany(
@@ -68,9 +70,11 @@ namespace Narradia
                 d.second.brightnesses, d.second.colorMods);
         }
         RenderLoop([]
-                   /************************************************/ {
+                   /********************************************/
+                   {
                        if (RenderLoop::currTile->GetRoofType())
-                       /**************************************/ {
+                       /**************************************/
+                       {
                            Log();
                            RendererModels::Get().DrawModel(
                                RenderLoop::currTile->GetRoofType(), 0,
@@ -85,7 +89,8 @@ namespace Narradia
                        SubDrawCompanion::Get().DrawCompanion();
                    })();
         if (worldViewMode == WorldDrawModes::Play)
-        /****************************************/ {
+        /****************************************/
+        {
             Log();
             SubDrawPlayer::Get().DrawPlayer();
         }

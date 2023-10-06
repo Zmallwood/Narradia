@@ -16,10 +16,12 @@ namespace Narradia
         auto settlement_radius = 3;
         for (auto y = settlement_center.y - settlement_radius;
              y <= settlement_center.y + settlement_radius; y++)
-        /*****************************************************/ {
+        /*****************************************************/
+        {
             for (auto x = settlement_center.x - settlement_radius;
                  x <= settlement_center.x + settlement_radius; x++)
-            /*****************************************************/ {
+            /*****************************************************/
+            {
                 auto dx = x - settlement_center.x;
                 auto dy = y - settlement_center.y;
                 if (dx * dx + dy * dy <= settlement_radius * settlement_radius)

@@ -15,18 +15,22 @@ namespace Narradia
         auto images = ImageBank::Get().GetImages();
         int j = 0;
         for (auto &entry : images)
-        /************************/ {
+        /************************/
+        {
             if (entry.second.fileName.substr(0, 3) == "Mob")
-            /**********************************************/ {
+            /**********************************************/
+            {
                 objectsLibrary.insert({j, std::make_shared<Object>(entry.second.fileName)});
                 j++;
             }
         }
         auto i = 0;
         for (auto y = 0; y < numRows; y++)
-        /********************************/ {
+        /********************************/
+        {
             for (auto x = 0; x < numCols; x++)
-            /********************************/ {
+            /********************************/
+            {
                 slots[x][y] =
                     std::make_shared<GuiWindowObjectSlot>(this, x, y, i, slotWidth, objectsLibrary);
                 i++;
@@ -46,28 +50,35 @@ namespace Narradia
     /*///////////////////////////////*/
     {
         if (GetBounds().Contains(GetMousePositionF()))
-        /********************************************/ {
+        /********************************************/
+        {
             GuiWindowObjectSlot::hoveredObject = nullptr;
             GuiWindowObjectSlot::hoveredIndex = -1;
             GuiWindowObjectSlot::activeWindow = this;
         }
         if (GuiWindowObjectSlot::activeWindow == this)
-        /********************************************/ {
+        /********************************************/
+        {
             GuiWindowObjectSlot::hoveredObject = nullptr;
             GuiWindowObjectSlot::hoveredIndex = -1;
         }
         for (auto y = 0; y < numRows; y++)
-        /********************************/ {
+        /********************************/
+        {
             for (auto x = 0; x < numCols; x++)
-            /********************************/ {
+            /********************************/
+            {
                 slots[x][y]->Update(page * numRows * numCols);
                 if (slots[x][y]->GetBounds().Contains(GetMousePositionF()))
-                /*********************************************************/ {
+                /*********************************************************/
+                {
                     MouseInput::Get().GetLeftButton().AddFiredAction(
                         "SelectObject", [&]
-                        /*****************/ {
+                        /*****************/
+                        {
                             if (GuiWindowObjectSlot::hoveredObject)
-                            /*************************************/ {
+                            /*************************************/
+                            {
                                 selectedObjectIndex = GuiWindowObjectSlot::hoveredIndex;
                                 ToolUsing::Get().ChangeTool(Tools::AddMob);
                                 ToolUsing::Get().SelectType(
@@ -84,12 +95,15 @@ namespace Narradia
     {
         auto i = 0;
         for (auto y = 0; y < numRows; y++)
-        /********************************/ {
+        /********************************/
+        {
             for (auto x = 0; x < numCols; x++)
-            /********************************/ {
+            /********************************/
+            {
                 slots[x][y]->Render(page * numRows * numCols);
                 if (i + page * numRows * numCols == selectedObjectIndex)
-                /******************************************************/ {
+                /******************************************************/
+                {
                     Renderer2DImages::Get().DrawImage(
                         "GuiSelectedSlotFrame", idSelectedSlotFrame, slots[x][y]->GetBounds());
                 }

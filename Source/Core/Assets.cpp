@@ -54,7 +54,8 @@ namespace Narradia
         using iterator = std::filesystem::recursive_directory_iterator;
         auto absAllImagesPath = std::string(SDL_GetBasePath()) + p->relImagesPath.data();
         for (const auto &imageFileEntry : iterator(absAllImagesPath))
-        /***********************************************************/ {
+        /***********************************************************/
+        {
             auto absFilePath = imageFileEntry.path().string();
             if (FileUtilities::GetFileExtension(absFilePath) != "png")
                 continue;
@@ -128,7 +129,8 @@ namespace Narradia
         using iterator = std ::filesystem::recursive_directory_iterator;
         auto absAllModelsPath = std::string(SDL_GetBasePath()) + p->relModelsPath.data();
         for (const auto &filePath : iterator(absAllModelsPath))
-        /*****************************************************/ {
+        /*****************************************************/
+        {
             auto pathStr = filePath.path().string();
             auto extensionPos = pathStr.find_last_of('.') + 1;
             auto fileExtension = pathStr.substr(extensionPos);
@@ -174,14 +176,16 @@ namespace Narradia
         auto absAllSoundsAudioPath = std::string(SDL_GetBasePath()) + p->relSoundsAudioPath.data();
         using iterator = std::filesystem::recursive_directory_iterator;
         for (const auto &imageFileEntry : iterator(absAllSoundsAudioPath))
-        /****************************************************************/ {
+        /****************************************************************/
+        {
             auto absFilePath = imageFileEntry.path().string();
             if (FileUtilities::GetFileExtension(absFilePath) != "wav" &&
                 FileUtilities::GetFileExtension(absFilePath) != "mp3")
                 continue;
             auto sound = Mix_LoadWAV((absFilePath).c_str());
             if (sound == nullptr)
-            /*******************/ {
+            /*******************/
+            {
                 std::cout << "Error loading sound file." << std::endl;
                 return;
             }
@@ -190,14 +194,16 @@ namespace Narradia
         auto absAllMusicAudioPath = std::string(SDL_GetBasePath()) + p->relMusicAudioPath.data();
         using iterator = std::filesystem::recursive_directory_iterator;
         for (const auto &imageFileEntry : iterator(absAllMusicAudioPath))
-        /***************************************************************/ {
+        /***************************************************************/
+        {
             auto absFilePath = imageFileEntry.path().string();
             if (FileUtilities::GetFileExtension(absFilePath) != "wav" &&
                 FileUtilities::GetFileExtension(absFilePath) != "mp3")
                 continue;
             auto music = Mix_LoadMUS((absFilePath).c_str());
             if (music == nullptr)
-            /*******************/ {
+            /*******************/
+            {
                 std::cout << "Error loading music file." << std::endl;
                 return;
             }

@@ -26,19 +26,25 @@ namespace Narradia
             auto coordinate = it->second;
             Log();
             if (SDL_GetTicks() > mob->GetTicksLastMovement() + mob->GetMoveSpeed())
-            /*********************************************************************/ {
+            /*********************************************************************/
+            {
                 if (mob->IsAggroingPlayer()) {
                     mob->SetDestination(Player::Get().GetPosition().ToIntPoint());
-                } else if (mob->HasNoDestination())
-                /*********************************/ {
+                }
+                else if (mob->HasNoDestination())
+                /*********************************/
+                {
                     int new_dest_x;
                     int new_dest_y;
                     if (mob->GetMobType() == Hash("MobTypeBird1"))
-                    /********************************************/ {
+                    /********************************************/
+                    {
                         new_dest_x = coordinate.x + rand() % 8 - rand() % 8;
                         new_dest_y = coordinate.y + rand() % 8 - rand() % 8;
-                    } else
-                    /****/ {
+                    }
+                    else
+                    /**/
+                    {
                         auto spawnX = mob->GetSpawnX();
                         auto spawnY = mob->GetSpawnY();
                         new_dest_x = spawnX + rand() % 3 - rand() % 3;
@@ -66,16 +72,19 @@ namespace Narradia
                 if (Point2{new_x, new_y} == mob->GetDestination())
                     mob->ClearDestination();
                 if (new_x != coordinate.x || new_y != coordinate.y)
-                /*************************************************/ {
+                /*************************************************/
+                {
                     if (MapArea::IsInsideMap({new_x, new_y}))
-                    /***************************************/ {
+                    /***************************************/
+                    {
                         if (mob->GetMobType() == Hash("MobTypeBird1") ||
                             map_area->GetTile({new_x, new_y})->GetGroundType() !=
                                 Hash("GroundWater"))
                         /****************************************************************************/
                         {
                             if (map_area->GetTile({new_x, new_y})->GetMob() == nullptr)
-                            /*********************************************************/ {
+                            /*********************************************************/
+                            {
                                 Log();
                                 map_area->GetTile({new_x, new_y})
                                     ->SetMob(map_area->GetTile(coordinate)->GetMob());
@@ -89,12 +98,16 @@ namespace Narradia
                                 mob->UpdateTicksLastMovement();
                                 mob->SetPreviousCoordinate(coordinate);
                                 continue;
-                            } else
-                            /****/ {
+                            }
+                            else
+                            /**/
+                            {
                                 mob->ClearDestination();
                             }
-                        } else
-                        /****/ {
+                        }
+                        else
+                        /**/
+                        {
                             mob->ClearDestination();
                         }
                     }

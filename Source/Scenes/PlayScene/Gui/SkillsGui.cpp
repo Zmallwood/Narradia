@@ -10,7 +10,8 @@ namespace Narradia
     /*//////////////////////////////////////////////////*/
     {
         for (auto i = 0; i < Player::Get().skillSet.skills.size(); i++)
-        /***********************************************************/ {
+        /***********************************************************/
+        {
             glIdsSkillLabels.push_back(TextRenderer::Get().NewString());
             glIdsSkillLevelValues.push_back(TextRenderer::Get().NewString());
             glIdsSkillAddPointButton.push_back(Renderer2DImages::Get().NewImage());
@@ -24,18 +25,22 @@ namespace Narradia
         auto mousePos = GetMousePositionF();
         auto i = 0;
         for (auto &skill : Player::Get().skillSet.skills)
-        /*********************************************/ {
+        /*********************************************/
+        {
             if (Player::Get().skillSet.availablePoints > 0)
-            /*******************************************/ {
+            /*******************************************/
+            {
                 RectangleF addPointButtonRect = {
                     GetPosition().x + 0.15f, GetPosition().y + 0.04f + i * 0.03f, 0.01f,
                     ConvertWidthToHeight(0.01f)};
                 if (addPointButtonRect.Contains(mousePos))
-                /****************************************/ {
+                /****************************************/
+                {
                     Cursor::Get().SetCursorType(CursorTypes::Hovering);
                     MouseInput::Get().GetLeftButton().AddFiredAction(
                         "AddPointToSkill", [&]
-                        /********************/ {
+                        /********************/
+                        {
                             skill.second.level += 0.1f;
                             Player::Get().skillSet.availablePoints--;
                         });
@@ -51,7 +56,8 @@ namespace Narradia
         auto mousePos = GetMousePositionF();
         auto i = 0;
         for (auto &skill : Player::Get().skillSet.skills)
-        /*********************************************/ {
+        /*********************************************/
+        {
             TextRenderer::Get().DrawString(
                 glIdsSkillLabels.at(i), skill.second.label.data(),
                 GetPosition().Translate(0.01f, 0.05f + i * 0.03f));
@@ -61,17 +67,21 @@ namespace Narradia
             TextRenderer::Get().DrawString(
                 glIdsSkillLevelValues.at(i), s, GetPosition().Translate(0.13f, 0.05f + i * 0.03f));
             if (Player::Get().skillSet.availablePoints > 0)
-            /*******************************************/ {
+            /*******************************************/
+            {
                 RectangleF addPointButtonRect = {
                     GetPosition().x + 0.15f, GetPosition().y + 0.04f + i * 0.03f, 0.01f,
                     ConvertWidthToHeight(0.01f)};
                 if (addPointButtonRect.Contains(mousePos))
-                /****************************************/ {
+                /****************************************/
+                {
                     Renderer2DImages::Get().DrawImage(
                         "SkillsWindowAddPointButtonHovered", glIdsSkillAddPointButton.at(i),
                         addPointButtonRect);
-                } else
-                /****/ {
+                }
+                else
+                /**/
+                {
                     Renderer2DImages::Get().DrawImage(
                         "SkillsWindowAddPointButton", glIdsSkillAddPointButton.at(i),
                         addPointButtonRect);

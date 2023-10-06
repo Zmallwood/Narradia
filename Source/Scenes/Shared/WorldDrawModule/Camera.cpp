@@ -55,7 +55,8 @@ namespace Narradia
     {
         auto mouseWheelDelta = MouseInput::Get().MouseWheelDeltaPickResult();
         if (mouseWheelDelta != 0)
-        /***********************/ {
+        /***********************/
+        {
             auto distanceChange = mouseWheelDelta / zoomSens;
             if (SceneManager::Get().GetCurrentView() == Scenes::Editor)
                 distanceChange *= 2;
@@ -86,11 +87,13 @@ namespace Narradia
         Log();
         auto playerPos = modulePlayer->GetPosition();
         if (worldMap)
-        /***********/ {
+        /***********/
+        {
             Log();
             auto mapArea = worldMap->GetMapAreaAtZLevel(playerWorldAreaPos.z);
             if (mapArea)
-            /**********/ {
+            /**********/
+            {
                 Log();
                 auto playerTile = mapArea->GetTile(playerPos.ToIntPoint());
                 auto elevAmount = kElevAmount;

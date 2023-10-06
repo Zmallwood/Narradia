@@ -146,7 +146,7 @@ namespace Narradia
     };
 
     class Object;
-    
+
     class GuiWindowObjectSlot
     /*/////////////////////*/
     {

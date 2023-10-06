@@ -34,7 +34,8 @@ namespace Narradia
              KeyboardInput::Get().KeyIsPressed(SDLK_a) ||
              KeyboardInput::Get().KeyIsPressed(SDLK_s) ||
              KeyboardInput::Get().KeyIsPressed(SDLK_d)))
-        /****************************************************************************************/ {
+        /***********************************************/
+        {
             DestinationMove::Get().ResetDestination();
             player->MoveForward();
             player->data.movement.isMoving = true;

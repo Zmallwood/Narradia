@@ -59,9 +59,11 @@ namespace Narradia
     {
         parentTile->GetParentMapArea()->RemoveObjectMirror(origObject.get());
         for (auto &objectEntry : trueList)
-        /********************************/ {
+        /********************************/
+        {
             if (objectEntry == origObject)
-            /****************************/ {
+            /****************************/
+            {
                 newObject->SetParentObjectsCollection(this);
                 objectEntry = newObject;
                 return;
@@ -76,9 +78,11 @@ namespace Narradia
     {
         auto i = 0;
         for (auto &objectEntry : trueList)
-        /********************************/ {
+        /********************************/
+        {
             if (objectEntry.get() == object)
-            /******************************/ {
+            /******************************/
+            {
                 trueList.erase(trueList.begin() + i);
                 parentTile->GetParentMapArea()->RemoveObjectMirror(object);
                 return;

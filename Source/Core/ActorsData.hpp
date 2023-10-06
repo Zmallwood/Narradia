@@ -61,7 +61,7 @@ namespace Narradia
         std::string_view label;
         float level = 1.0f;
     };
-    
+
     class SkillSet
     /*//////////*/
     {

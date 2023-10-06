@@ -134,7 +134,8 @@ namespace Narradia
         auto dy = SinDegrees(usedAngle) * data.movement.stepSize * data.deltaT /
                   data.movement.moveSpeed * skillSet.skills.at("MovementSpeed").level;
         if (SceneManager::Get().GetCurrentView() == Scenes::Editor)
-        /*******************************************************/ {
+        /*******************************************************/
+        {
             dx *= 2;
             dy *= 2;
         }
@@ -144,84 +145,100 @@ namespace Narradia
         auto newY = data.movement.position.y + dy;
         auto tileNew = mapArea->GetTile({static_cast<int>(newX), static_cast<int>(newY)});
         if (SceneManager::Get().GetCurrentView() != Scenes::Editor)
-        /*******************************************************/ {
+        /*******************************************************/
+        {
             for (auto objectEntry : tileBeforeMove->GetObjects().list)
-            /********************************************************/ {
+            /********************************************************/
+            {
                 if (ObjectBehaviourList::Get().GetFlags(objectEntry->GetObjectType()))
-                /********************************************************************/ {
+                /********************************************************************/
+                {
                     if ((ObjectBehaviourList::Get().GetFlags(objectEntry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockN) != 0 &&
                         (int)newY == (int)data.movement.position.y - 1)
-                    /**********************************************************************/ {
+                    /**********************************************************************/
+                    {
                         data.deltaT = 0;
                         return;
                     }
                     if ((ObjectBehaviourList::Get().GetFlags(objectEntry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockS) != 0 &&
                         (int)newY == (int)data.movement.position.y + 1)
-                    /**********************************************************************/ {
+                    /**********************************************************************/
+                    {
                         data.deltaT = 0;
                         return;
                     }
                     if ((ObjectBehaviourList::Get().GetFlags(objectEntry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockE) != 0 &&
                         (int)newX == (int)data.movement.position.x + 1)
-                    /**********************************************************************/ {
+                    /**********************************************************************/
+                    {
                         data.deltaT = 0;
                         return;
                     }
                     if ((ObjectBehaviourList::Get().GetFlags(objectEntry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockW) != 0 &&
                         (int)newX == (int)data.movement.position.x - 1)
-                    /**********************************************************************/ {
+                    /**********************************************************************/
+                    {
                         data.deltaT = 0;
                         return;
                     }
                 }
             }
             for (auto objectEntry : tileNew->GetObjects().list)
-            /*************************************************/ {
+            /*************************************************/
+            {
                 if (objectEntry->GetObjectType() == Hash("ObjectCaveBlock"))
-                /**********************************************************/ {
+                /**********************************************************/
+                {
                     if (SDL_GetTicks() < tickLastTimeDidMine + mineSpeed)
-                    /***************************************************/ {
+                    /***************************************************/
+                    {
                         data.deltaT = 0;
                         return;
                     }
                 }
                 if (ObjectBehaviourList::Get().GetFlags(objectEntry->GetObjectType()))
-                /********************************************************************/ {
+                /********************************************************************/
+                {
                     if (ObjectBehaviourList::Get().GetFlags(objectEntry->GetObjectType()) &
                         (int)ObjectBehaviourFlags::MovementBlock != 0)
-                    /*********************************************************************/ {
+                    /*********************************************************************/
+                    {
                         data.deltaT = 0;
                         return;
                     }
                     if ((ObjectBehaviourList::Get().GetFlags(objectEntry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockN) != 0 &&
                         (int)newY == (int)data.movement.position.y + 1)
-                    /**********************************************************************/ {
+                    /**********************************************************************/
+                    {
                         data.deltaT = 0;
                         return;
                     }
                     if ((ObjectBehaviourList::Get().GetFlags(objectEntry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockS) != 0 &&
                         (int)newY == (int)data.movement.position.y - 1)
-                    /**********************************************************************/ {
+                    /**********************************************************************/
+                    {
                         data.deltaT = 0;
                         return;
                     }
                     if ((ObjectBehaviourList::Get().GetFlags(objectEntry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockE) != 0 &&
                         (int)newX == (int)data.movement.position.x - 1)
-                    /**********************************************************************/ {
+                    /**********************************************************************/
+                    {
                         data.deltaT = 0;
                         return;
                     }
                     if ((ObjectBehaviourList::Get().GetFlags(objectEntry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockW) != 0 &&
                         (int)newX == (int)data.movement.position.x + 1)
-                    /**********************************************************************/ {
+                    /**********************************************************************/
+                    {
                         data.deltaT = 0;
                         return;
                     }
@@ -229,7 +246,8 @@ namespace Narradia
             }
         }
         if (newX != data.movement.position.x || newY != data.movement.position.y)
-        /***********************************************************************/ {
+        /***********************************************************************/
+        {
             data.movement.position.x = newX;
             data.movement.position.y = newY;
             Audio::Get().PlaySound("Footsteps");
@@ -237,35 +255,43 @@ namespace Narradia
         }
         auto tile = mapArea->GetTile(data.movement.position.ToIntPoint());
         for (auto objectEntry : tile->GetObjects().list)
-        /**********************************************/ {
+        /**********************************************/
+        {
             if (objectEntry->GetObjectType() == Hash("ObjectMineEntrance") &&
                 false == tileBeforeMove->GetObjects().Contains(Hash("ObjectMineEntrance")))
-            /*****************************************************************************/ {
+            /*****************************************************************************/
+            {
                 data.movement.worldAreaPos.z--;
                 auto mapArea = World::Get().GetMapAreaAtZLevel(data.movement.worldAreaPos.z);
                 tile = mapArea->GetTile(data.movement.position.ToIntPoint());
                 if (false == tile->GetObjects().Contains(Hash("ObjectMineExit")))
-                /***************************************************************/ {
+                /***************************************************************/
+                {
                     tile->ClearObjects();
                     auto mineExit = std::make_shared<Object>("ObjectMineExit");
                     mineExit->SetModelScaling(0.7f);
                     tile->AddObject(mineExit);
                 }
                 tickLastTimeDidMine = SDL_GetTicks();
-            } else if (
+            }
+            else if (
                 objectEntry->GetObjectType() == Hash("ObjectMineExit") &&
                 false == tileBeforeMove->GetObjects().Contains(Hash("ObjectMineExit")))
-            /*************************************************************************/ {
+            /*************************************************************************/
+            {
                 data.movement.worldAreaPos.z++;
             }
         }
         tile = mapArea->GetTile(data.movement.position.ToIntPoint());
         for (auto objectEntry : tile->GetObjects().list)
-        /**********************************************/ {
+        /**********************************************/
+        {
             if (objectEntry->GetObjectType() == Hash("ObjectCaveBlock"))
-            /**********************************************************/ {
+            /**********************************************************/
+            {
                 if (false == tile->GetObjects().Contains(Hash("ObjectMineExit")))
-                /***************************************************************/ {
+                /***************************************************************/
+                {
                     tile->ReplaceObject(objectEntry, std::make_shared<Object>("ObjectStone"));
                     objectEntry->SetModelScaling(
                         0.5f + rand() / static_cast<float>(RAND_MAX) * 0.7f);
@@ -283,13 +309,16 @@ namespace Narradia
             Audio::Get().StopPlaySound();
 
         if (SDL_GetTicks() < ticksStartJumping + jumpDuration)
-        /****************************************************/ {
+        /****************************************************/
+        {
             auto jumpProgress =
                 (SDL_GetTicks() - ticksStartJumping) * 2 / static_cast<float>(jumpDuration);
             auto jumpHeight = -std::pow(jumpProgress - 1.0f, 2) + 1.0f;
             data.movement.jumpHeight = -jumpHeight * maxJumpHeight * kTileSize;
-        } else
-        /****/ {
+        }
+        else
+        /**/
+        {
             data.movement.jumpHeight = 0.0f;
         }
     }

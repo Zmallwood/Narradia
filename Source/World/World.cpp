@@ -65,11 +65,14 @@ namespace Narradia
     {
         auto mapAreas = World::Get().GetAllMapAreas();
         for (auto &mapArea : mapAreas)
-        /****************************/ {
+        /****************************/
+        {
             for (auto y = 0; y < MapArea::GetMapSize().height; y++)
-            /*****************************************************/ {
+            /*****************************************************/
+            {
                 for (auto x = 0; x < MapArea::GetMapSize().width; x++)
-                /****************************************************/ {
+                /****************************************************/
+                {
                     auto tileCoord = Point2{x, y};
                     const auto tile = mapArea->GetTile(tileCoord.x, tileCoord.y);
                     const auto elev00 = static_cast<float>(tile->GetElevation());
@@ -104,9 +107,11 @@ namespace Narradia
                 }
             }
             for (auto y = 0; y < MapArea::GetMapSize().height; y++)
-            /*****************************************************/ {
+            /*****************************************************/
+            {
                 for (auto x = 0; x < MapArea::GetMapSize().width; x++)
-                /****************************************************/ {
+                /****************************************************/
+                {
                     Point2 tileCoord = {x, y};
                     const auto tile = mapArea->GetTile(tileCoord.x, tileCoord.y);
                     const auto elev00 = static_cast<float>(tile->GetElevation());
@@ -159,7 +164,8 @@ namespace Narradia
                     auto gVarSE = gVar;
                     auto bVarSE = bVar;
                     if (tileCoord.x < MapArea::GetMapSize().width - 1)
-                    /************************************************/ {
+                    /************************************************/
+                    {
                         rVarE = mapArea->GetTile({tileCoord.x + 1, tileCoord.y})->GetRedVariation();
                         gVarE =
                             mapArea->GetTile({tileCoord.x + 1, tileCoord.y})->GetGreenVariation();
@@ -167,7 +173,8 @@ namespace Narradia
                             mapArea->GetTile({tileCoord.x + 1, tileCoord.y})->GetBlueVariation();
                     }
                     if (tileCoord.y < MapArea::GetMapSize().height - 1)
-                    /*************************************************/ {
+                    /*************************************************/
+                    {
                         rVarS = mapArea->GetTile({tileCoord.x, tileCoord.y + 1})->GetRedVariation();
                         gVarS =
                             mapArea->GetTile({tileCoord.x, tileCoord.y + 1})->GetGreenVariation();
@@ -186,7 +193,8 @@ namespace Narradia
                                      ->GetBlueVariation();
                     }
                     if (tile->GetGroundType() == Hash("GroundWater"))
-                    /***********************************************/ {
+                    /***********************************************/
+                    {
                         rVar = rVarE = rVarS = rVarSE = 0.0f;
                         gVar = gVarE = gVarS = gVarSE = 0.0f;
                         bVar = bVarE = bVarS = bVarSE = 0.0f;
@@ -211,10 +219,13 @@ namespace Narradia
                         normal01 = mapArea->GetTile(coord01)->GetNormal();
                     GLuint tileRendId;
                     if (false == updateExistingTiles)
-                    /*******************************/ {
+                    /*******************************/
+                    {
                         tileRendId = RendererTiles::Get().NewTile();
-                    } else
-                    /****/ {
+                    }
+                    else
+                    /**/
+                    {
                         tileRendId = tile->GetTileRendId();
                     }
                     RendererTiles::Get().SetGeometryTile(
@@ -230,11 +241,14 @@ namespace Narradia
     {
         auto mapAreas = World::Get().GetAllMapAreas();
         for (auto &mapArea : mapAreas)
-        /****************************/ {
+        /****************************/
+        {
             for (auto y = 0; y < MapArea::GetMapSize().height; y++)
-            /*****************************************************/ {
+            /*****************************************************/
+            {
                 for (auto x = 0; x < MapArea::GetMapSize().width; x++)
-                /****************************************************/ {
+                /****************************************************/
+                {
                     mapArea->GetTile({x, y})->SetRedVariation(0.0f);
                     mapArea->GetTile({x, y})->SetGreenVariation(0.0f);
                     mapArea->GetTile({x, y})->SetBlueVariation(0.0f);
@@ -248,27 +262,35 @@ namespace Narradia
     {
         auto mapAreas = World::Get().GetAllMapAreas();
         for (auto &mapArea : mapAreas)
-        /****************************/ {
+        /****************************/
+        {
             for (auto y = 0; y < MapArea::GetMapSize().height; y++)
-            /*****************************************************/ {
+            /*****************************************************/
+            {
                 for (auto x = 0; x < MapArea::GetMapSize().width; x++)
-                /****************************************************/ {
+                /****************************************************/
+                {
                     if (mapArea->GetTile({x, y})->GetGroundType() == Hash("GroundRock"))
-                    /******************************************************************/ {
+                    /******************************************************************/
+                    {
                         if (mapArea->GetTile({x, y})->GetRedVariation() < 0.3f)
                             mapArea->GetTile({x, y})->AlterRedVariation(0.3f);
                         if (mapArea->GetTile({x, y})->GetGreenVariation() < 0.5f)
                             mapArea->GetTile({x, y})->AlterGreenVariation(0.5f);
-                    } else if (mapArea->GetTile({x, y})->GetGroundType() == Hash("GroundRiver"))
-                    /**************************************************************************/ {
+                    }
+                    else if (mapArea->GetTile({x, y})->GetGroundType() == Hash("GroundRiver"))
+                    /**************************************************************************/
+                    {
                         if (mapArea->GetTile({x, y})->GetRedVariation() < 0.5f)
                             mapArea->GetTile({x, y})->AlterRedVariation(0.5f);
                         if (mapArea->GetTile({x, y})->GetGreenVariation() < 0.3f)
                             mapArea->GetTile({x, y})->AlterGreenVariation(0.3f);
                         if (mapArea->GetTile({x, y})->GetBlueVariation() > -1.5f)
                             mapArea->GetTile({x, y})->AlterBlueVariation(-1.5f);
-                    } else if (mapArea->GetTile({x, y})->GetGroundType() == Hash("GroundGrass"))
-                    /**************************************************************************/ {
+                    }
+                    else if (mapArea->GetTile({x, y})->GetGroundType() == Hash("GroundGrass"))
+                    /**************************************************************************/
+                    {
                         if (mapArea->GetTile({x, y})->GetRedVariation() < 0.6f)
                             mapArea->GetTile({x, y})->AlterRedVariation(0.6f);
                         if (mapArea->GetTile({x, y})->GetGreenVariation() < 0.3f)
@@ -286,9 +308,11 @@ namespace Narradia
     {
         auto mapAreas = World::Get().GetAllMapAreas();
         for (auto &mapArea : mapAreas)
-        /****************************/ {
+        /****************************/
+        {
             for (auto i = 0; i < 10000; i++)
-            /******************************/ {
+            /******************************/
+            {
                 auto xCenter = rand() % MapArea::GetMapSize().width;
                 auto yCenter = rand() % MapArea::GetMapSize().height;
                 auto r = 3 + rand() % 10;
@@ -296,9 +320,11 @@ namespace Narradia
                 auto gVar = ((float)rand()) / RAND_MAX * 0.4f;
                 auto bVar = ((float)rand()) / RAND_MAX * 0.2f;
                 for (auto y = yCenter - r; y <= yCenter + r; y++)
-                /***********************************************/ {
+                /***********************************************/
+                {
                     for (auto x = xCenter - r; x <= xCenter + r; x++)
-                    /***********************************************/ {
+                    /***********************************************/
+                    {
                         if (x < 0 || y < 0 || x >= MapArea::GetMapSize().width ||
                             y >= MapArea::GetMapSize().height)
                             continue;
@@ -307,20 +333,25 @@ namespace Narradia
                         auto dx = x - xCenter;
                         auto dy = y - yCenter;
                         if (dx * dx + dy * dy < r * r)
-                        /****************************/ {
+                        /****************************/
+                        {
                             if (mapArea->GetTile({x, y})->GetGroundType() != Hash("GroundRock"))
-                            /******************************************************************/ {
+                            /******************************************************************/
+                            {
                                 mapArea->GetTile({x, y})->SetRedVariation(rVar);
                                 mapArea->GetTile({x, y})->SetGreenVariation(gVar);
                                 mapArea->GetTile({x, y})->SetBlueVariation(bVar);
-                            } else
-                            /****/ {
+                            }
+                            else
+                            /**/
+                            {
                                 mapArea->GetTile({x, y})->SetRedVariation(rVar / 3.0f);
                                 mapArea->GetTile({x, y})->SetGreenVariation(gVar / 3.0f);
                                 mapArea->GetTile({x, y})->SetBlueVariation(bVar / 3.0f);
                             }
                             for (auto &object : mapArea->GetTile(x, y)->GetObjects().list)
-                            /************************************************************/ {
+                            /************************************************************/
+                            {
                                 auto rVarObj = 0.8f + ((float)rand()) / RAND_MAX * 0.2f;
                                 auto gVarObj = 0.8f + ((float)rand()) / RAND_MAX * 0.2f;
                                 auto bVarObj = 0.8f + ((float)rand()) / RAND_MAX * 0.2f;

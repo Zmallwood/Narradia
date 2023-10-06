@@ -2,7 +2,8 @@
  InteractionMenuEntry(
      "Create stone axe",
      [=, this](Object *&object)
-     /************************/ {
+     /************************/
+     {
          if (object->GetObjectType() == Hash("ObjectSmallStone") ||
              object->GetObjectType() == Hash("ObjectBranch"))
          /*********************************************************/
@@ -18,8 +19,10 @@
                  else if (object->GetObjectType() == Hash("ObjectBranch"))
                      Player::Get().data.inventory.RemoveObjectOfType("ObjectSmallStone");
                  RemoveObjectMirror(object);
-             } else
-             /****/ {
+             }
+             else
+             /**/
+             {
                  TextOutBox::Get().Print("You are missing materials to create a stone axe.");
              }
          }
@@ -27,9 +30,11 @@
     {"CreateWoodenBox", InteractionMenuEntry(
                             "Create wooden box",
                             [=, this](Object *&object)
-                            /************************/ {
+                            /************************/
+                            {
                                 if (object->GetObjectType() == Hash("ObjectWoodPlank"))
-                                /*****************************************************/ {
+                                /*****************************************************/
+                                {
                                     Player::Get().data.stats.stam =
                                         Player::Get().data.stats.stam - 2;
                                     TextOutBox::Get().Print("You create a wooden box.");
@@ -43,9 +48,11 @@
     {"CreateWoodLog", InteractionMenuEntry(
                           "Create wood log",
                           [=, this](Object *&object)
-                          /************************/ {
+                          /************************/
+                          {
                               if (object->GetObjectType() == Hash("ObjectFelledTree"))
-                              /******************************************************/ {
+                              /******************************************************/
+                              {
                                   Player::Get().data.stats.stam = Player::Get().data.stats.stam - 2;
                                   object->AddToWorkProgress(0.34f);
                                   auto percent = (int)(object->GetWorkProgress() * 100);
@@ -56,15 +63,18 @@
                                   wood_log->SetModelScaling(1.0f);
                                   wood_log->SetModelRotation(rand() % 360);
                                   object->GetParentObjectsCollection()->Add(wood_log);
-                                  if (object->GetWorkProgress() >= 1.0f) RemoveObjectMirror(object);
+                                  if (object->GetWorkProgress() >= 1.0f)
+                                      RemoveObjectMirror(object);
                               }
                           })},
     {"CreateWoodPlank", InteractionMenuEntry(
                             "Create wood plank",
                             [=, this](Object *&object)
-                            /************************/ {
+                            /************************/
+                            {
                                 if (object->GetObjectType() == Hash("ObjectWoodLog"))
-                                /***************************************************/ {
+                                /***************************************************/
+                                {
                                     Player::Get().data.stats.stam =
                                         Player::Get().data.stats.stam - 2;
                                     TextOutBox::Get().Print("You create a wood plank.");
@@ -79,7 +89,8 @@
      InteractionMenuEntry(
          "Create wood wall (east)",
          [=, this](Object *&object)
-         /************************/ {
+         /************************/
+         {
              auto playerPosition = Player::Get().GetPosition().ToIntPoint();
              auto map_area = World::Get().GetMapAreaAtZLevel(Player::Get().GetWorldAreaPos().z);
              auto woodWall = std::make_shared<Object>("ObjectWoodWallE");
@@ -90,7 +101,8 @@
      InteractionMenuEntry(
          "Create wood wall (north)",
          [=, this](Object *&object)
-         /************************/ {
+         /************************/
+         {
              auto playerPosition = Player::Get().GetPosition().ToIntPoint();
              auto map_area = World::Get().GetMapAreaAtZLevel(Player::Get().GetWorldAreaPos().z);
              auto woodWall = std::make_shared<Object>("ObjectWoodWallN");
@@ -101,7 +113,8 @@
      InteractionMenuEntry(
          "Create wood wall (south)",
          [=, this](Object *&object)
-         /************************/ {
+         /************************/
+         {
              auto playerPosition = Player::Get().GetPosition().ToIntPoint();
              auto map_area = World::Get().GetMapAreaAtZLevel(Player::Get().GetWorldAreaPos().z);
              auto wood_wall = std::make_shared<Object>("ObjectWoodWallS");
@@ -112,7 +125,8 @@
      InteractionMenuEntry(
          "Create wood wall (west)",
          [=, this](Object *&object)
-         /************************/ {
+         /************************/
+         {
              auto playerPosition = Player::Get().GetPosition().ToIntPoint();
              auto map_area = World::Get().GetMapAreaAtZLevel(Player::Get().GetWorldAreaPos().z);
              auto wood_wall = std::make_shared<Object>("ObjectWoodWallW");
@@ -122,7 +136,8 @@
     {"MineCaveEntrance",
      InteractionMenuEntry(
          "Mine cave entrance", [=, this](Object *&object)
-         /**********************************************/ {
+         /**********************************************/
+         {
              auto playerPosition = Player::Get().GetPosition().ToIntPoint();
              auto map_area = World::Get().GetMapAreaAtZLevel(Player::Get().GetWorldAreaPos().z);
              auto mine_entrance = std::make_shared<Object>("ObjectMineEntrance");

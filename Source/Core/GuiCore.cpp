@@ -114,9 +114,11 @@ namespace Narradia
         auto mousePosF = GetMousePositionF();
         auto absDragableArea = p->relDragableArea.Translate(GetPosition().x, GetPosition().y);
         if (absDragableArea.Contains(mousePosF))
-        /**************************************/ {
+        /**************************************/
+        {
             if (!p->isMoving && !p->movementTrigger)
-            /**************************************/ {
+            /**************************************/
+            {
                 MouseInput::Get().GetLeftButton().AddFiredAction(
                     "GuiWindowStartMoving" + std::to_string(SDL_GetTicks()),
                     [&]
@@ -129,7 +131,8 @@ namespace Narradia
             }
         }
         if (p->isMoving)
-        /**************/ {
+        /**************/
+        {
             auto dx = mousePosF.x - p->mousePosStartMoving.x;
             auto dy = mousePosF.y - p->mousePosStartMoving.y;
             SetPosition({p->posStartMoving.x + dx, p->posStartMoving.y + dy});
@@ -137,7 +140,8 @@ namespace Narradia
             MouseInput::Get().GetLeftButton().AddReleasedAction(
                 "GuiWindowStopMoving" + std::to_string(SDL_GetTicks()),
                 [&]
-                /*****************/ {
+                /*****************/
+                {
                     p->isMoving = false;
                     p->movementTrigger = false;
                 },
@@ -190,12 +194,14 @@ namespace Narradia
         p->hovered = false;
         auto usedBounds = p->bounds;
         if (p->parentContainer)
-        /*********************/ {
+        /*********************/
+        {
             usedBounds.x += p->parentContainer->GetPosition().x;
             usedBounds.y += p->parentContainer->GetPosition().y;
         }
         if (usedBounds.Contains(GetMousePositionF()))
-        /*******************************************/ {
+        /*******************************************/
+        {
             Cursor::Get().SetCursorType(CursorTypes::Hovering);
             p->hovered = true;
             MouseInput::Get().GetLeftButton().AddFiredAction(
@@ -217,7 +223,8 @@ namespace Narradia
             usedImageName = &p->imageName;
         auto usedBounds = p->bounds;
         if (p->parentContainer)
-        /*********************/ {
+        /*********************/
+        {
             usedBounds.x += p->parentContainer->GetPosition().x;
             usedBounds.y += p->parentContainer->GetPosition().y;
         }
@@ -261,23 +268,27 @@ namespace Narradia
         auto mousePosF = GetMousePositionF();
         auto usedBounds = p->bounds;
         if (p->parentContainer)
-        /*********************/ {
+        /*********************/
+        {
             usedBounds.x += p->parentContainer->GetPosition().x;
             usedBounds.y += p->parentContainer->GetPosition().y;
         }
         if (usedBounds.Contains(mousePosF))
-        /*********************************/ {
+        /*********************************/
+        {
             MouseInput::Get().GetLeftButton().AddFiredAction(
                 "ClickTextBox",
                 [&]
-                /********************/ {
+                /********************/
+                {
                     GuiTextBox::Pimpl::activeTextBox = this;
                     KeyboardInput::Get().ResetTextInput();
                 },
                 0);
         }
         if (Pimpl::activeTextBox == this)
-        /*******************************/ {
+        /*******************************/
+        {
             auto newTextInput = KeyboardInput::Get().PickTextInput();
             p->text += newTextInput;
             p->cursorPosition += newTextInput.length();
@@ -285,25 +296,34 @@ namespace Narradia
                 if (p->textChangeEvent)
                     (*p->textChangeEvent)();
             if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_RIGHT))
-            /***********************************************************/ {
+            /***********************************************************/
+            {
                 p->cursorPosition =
                     std::min(static_cast<int>(p->text.length()), p->cursorPosition + 1);
-            } else if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_LEFT))
-            /*****************************************************************/ {
+            }
+            else if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_LEFT))
+            /*****************************************************************/
+            {
                 p->cursorPosition = std::max(0, p->cursorPosition - 1);
-            } else if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_BACKSPACE))
-            /**********************************************************************/ {
+            }
+            else if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_BACKSPACE))
+            /**********************************************************************/
+            {
                 if (p->cursorPosition > 0)
-                /************************/ {
+                /************************/
+                {
                     p->text.erase(p->cursorPosition - 1, 1);
                     p->cursorPosition--;
                     if (p->textChangeEvent)
                         (*p->textChangeEvent)();
                 }
-            } else if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_DELETE))
-            /*******************************************************************/ {
+            }
+            else if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_DELETE))
+            /*******************************************************************/
+            {
                 if (p->cursorPosition < p->text.length())
-                /***************************************/ {
+                /***************************************/
+                {
                     p->text.erase(p->cursorPosition, 1);
                     if (p->textChangeEvent)
                         (*p->textChangeEvent)();
@@ -317,7 +337,8 @@ namespace Narradia
     {
         auto usedBounds = p->bounds;
         if (p->parentContainer)
-        /*********************/ {
+        /*********************/
+        {
             usedBounds.x += p->parentContainer->GetPosition().x;
             usedBounds.y += p->parentContainer->GetPosition().y;
         }
@@ -329,7 +350,8 @@ namespace Narradia
                 "GTextBoxBackground", p->glIdBackgroundImage, usedBounds);
         auto usedText = p->text;
         if (Pimpl::activeTextBox == this)
-        /*******************************/ {
+        /*******************************/
+        {
             if (SDL_GetTicks() % 1000 > 500)
                 usedText.insert(p->cursorPosition, "|");
             else
@@ -393,12 +415,14 @@ namespace Narradia
     {
         Log();
         for (auto &guiButton : p->guiButtons | std::views::reverse)
-        /*********************************************************/ {
+        /*********************************************************/
+        {
             guiButton->Render();
         }
         Log();
         for (auto &guiComponent : p->guiComponents | std::views::reverse)
-        /***************************************************************/ {
+        /***************************************************************/
+        {
             guiComponent->Render();
         }
     }
@@ -414,9 +438,11 @@ namespace Narradia
     {
         auto i = 0;
         for (auto &entry : p->guiComponents)
-        /**********************************/ {
+        /**********************************/
+        {
             if (entry.get() == component)
-            /***************************/ {
+            /***************************/
+            {
                 p->guiComponents.erase(p->guiComponents.begin() + i);
                 break;
             }
@@ -454,27 +480,35 @@ namespace Narradia
     {
         p->hovered = false;
         if (p->GetBounds().Contains(GetMousePositionF()))
-        /***********************************************/ {
+        /***********************************************/
+        {
             Cursor::Get().SetCursorType(CursorTypes::Hovering);
             p->hovered = true;
             MouseInput::Get().GetLeftButton().AddFiredAction(
                 "GuiWindowClose" + std::string(p->parentWindow->GetTitle()) +
                     std::to_string(SDL_GetTicks()),
                 [&]
-                /**********************/ {
+                /**********************/
+                {
                     if (p->parentWindow->DestroyOnClose())
-                    /************************************/ {
+                    /************************************/
+                    {
                         if (SceneManager::Get().GetCurrentView() == Scenes::Play)
-                        /***************************************************/ {
+                        /***************************************************/
+                        {
                             auto sceneGui = PlayScene::Get().GetSceneGui();
                             sceneGui->RemoveGuiComponent(p->parentWindow);
-                        } else if (SceneManager::Get().GetCurrentView() == Scenes::Editor)
-                        /************************************************************/ {
+                        }
+                        else if (SceneManager::Get().GetCurrentView() == Scenes::Editor)
+                        /************************************************************/
+                        {
                             auto sceneGui = EditorScene::Get().GetSceneGui();
                             sceneGui->RemoveGuiComponent(p->parentWindow);
                         }
-                    } else
-                    /****/ {
+                    }
+                    else
+                    /**/
+                    {
                         p->parentWindow->Hide();
                     }
                 },
@@ -637,10 +671,12 @@ namespace Narradia
     {
         auto mousePosF = GetMousePositionF();
         if (GetBounds().Contains(mousePosF))
-        /**********************************/ {
+        /**********************************/
+        {
             hoveredIndex = i + offset;
             if (objectsList.count(i + offset) > 0)
-            /************************************/ {
+            /************************************/
+            {
                 auto object = objectsList.at(i + offset);
                 hoveredObject = object.get();
                 return;
@@ -659,17 +695,21 @@ namespace Narradia
         Object *object = nullptr;
         Log();
         if (objectsList.count(i + offset) > 0)
-        /************************************/ {
+        /************************************/
+        {
             Log();
             object = objectsList.at(i + offset).get();
         }
         Log();
         if (object)
-        /*********/ {
+        /*********/
+        {
             Log();
             auto imageNameHash = object->GetObjectType();
             Renderer2DImages::Get().DrawImage(imageNameHash, rendIdObject, GetBounds());
-            if (object->GetQuantity() > 1) {
+            if (object->GetQuantity() > 1)
+            /****************************/
+            {
                 Log();
                 auto qtyText = "x" + std::to_string(object->GetQuantity());
                 TextRenderer::Get().DrawString(
@@ -677,7 +717,8 @@ namespace Narradia
                     GetBounds().GetPosition().Translate(slotWidth * 0.65f, slotHeight * 0.7f));
             }
             if (object->GetTransformationProgress() > 0.0f)
-            /*********************************************/ {
+            /*********************************************/
+            {
                 Log();
                 auto pos =
                     GetBounds().GetPosition().Translate(slotWidth * 0.01f, slotHeight * 0.1f);

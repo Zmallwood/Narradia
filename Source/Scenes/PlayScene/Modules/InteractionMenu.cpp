@@ -173,17 +173,22 @@ namespace Narradia
     {
         auto mouse_position = GetMousePositionF();
         if (p->shown)
-        /***********/ {
+        /***********/
+        {
             for (auto &menu_entry : p->current_menu_entries)
-            /**********************************************/ {
+            /**********************************************/
+            {
                 if (menu_entry.GetBounds().Contains(mouse_position))
-                /**************************************************/ {
+                /**************************************************/
+                {
                     MouseInput::Get().GetLeftButton().AddFiredAction(
                         "RClickMenuExecuteAction" + std::string(menu_entry.GetLabel()),
                         [&]
-                        /************************************/ {
+                        /************************************/
+                        {
                             if (menu_entry.GetBounds().Contains(GetMousePositionF()))
-                            /*******************************************************/ {
+                            /*******************************************************/
+                            {
                                 menu_entry.GetAction()(menu_entry.GetTargetObject());
                                 ActionRepeat::Get().SetRepeatingAction(
                                     [&] { menu_entry.GetAction()(menu_entry.GetTargetObject()); });
@@ -197,19 +202,24 @@ namespace Narradia
             }
             MouseInput::Get().GetLeftButton().AddFiredAction(
                 "RClickMenuHideMenu", [&]
-                /***********************/ {
+                /***********************/
+                {
                     p->shown = false;
                     p->ticks_closed = SDL_GetTicks();
                 });
-        } else if (!p->shown)
-        /*******************/ {
+        }
+        else if (!p->shown)
+        /*******************/
+        {
             MouseInput::Get().GetRightButton().AddReleasedAction(
                 "RClickMenuShowMenu",
                 [=, this]
-                /*******/ {
+                /*******/
+                {
                     if (MouseInput::Get().GetRightButton().ClickDurationPeekResult() <
                         MouseButton::GetDefaultClickSpeed())
-                    /**************************************************************/ {
+                    /**************************************************************/
+                    {
                         ConstructMenu();
                     }
                 },
@@ -252,7 +262,8 @@ namespace Narradia
         if (tile == nullptr && GuiWindowObjectSlot::hoveredObject == nullptr)
             return;
         if (tile->GetMob() == nullptr || GuiWindowObjectSlot::hoveredObject)
-        /******************************************************************/ {
+        /******************************************************************/
+        {
             p->shown = true;
             MouseInput::Get().GetLeftButton().AddFiredAction(
                 "RClickMenuHideOnMouseLeftClick", [&] { CloseMenu(); }, 6);
@@ -260,65 +271,87 @@ namespace Narradia
             p->current_menu_entries.clear();
             AddEntryToMenu("MineCaveEntrance");
             auto fn_create_entries_for_object = [&](Object *object)
-            /*****************************************************/ {
+            /*****************************************************/
+            {
                 if (!object)
                     return;
                 if (object->GetObjectType() == Hash("ObjectRedApple") ||
                     object->GetObjectType() == Hash("ObjectCookedFi.hpp"))
-                /********************************************************/ {
+                /********************************************************/
+                {
                     AddEntryToMenu("EatItem", object);
-                } else if (
+                }
+                else if (
                     object->GetObjectType() == Hash("ObjectTree1") ||
                     object->GetObjectType() == Hash("ObjectTree2"))
-                /***************************************************/ {
+                /***************************************************/
+                {
                     AddEntryToMenu("ChopDownTree", object);
-                } else if (object->GetObjectType() == Hash("ObjectFelledTree"))
-                /*************************************************************/ {
+                }
+                else if (object->GetObjectType() == Hash("ObjectFelledTree"))
+                /*************************************************************/
+                {
                     AddEntryToMenu("CreateWoodLog", object);
-                } else if (object->GetObjectType() == Hash("ObjectWoodLog"))
-                /**********************************************************/ {
+                }
+                else if (object->GetObjectType() == Hash("ObjectWoodLog"))
+                /**********************************************************/
+                {
                     AddEntryToMenu("CreateWoodPlank", object);
-                } else if (object->GetObjectType() == Hash("ObjectKindling"))
-                /***********************************************************/ {
+                }
+                else if (object->GetObjectType() == Hash("ObjectKindling"))
+                /***********************************************************/
+                {
                     AddEntryToMenu("CreateBurningCampfire", object);
-                } else if (object->GetObjectType() == Hash("ObjectTallGrass6"))
-                /*************************************************************/ {
+                }
+                else if (object->GetObjectType() == Hash("ObjectTallGrass6"))
+                /*************************************************************/
+                {
                     AddEntryToMenu("CutGrass", object);
                     AddEntryToMenu("Forage");
-                } else if (object->GetObjectType() == Hash("ObjectWoodPlank"))
-                /************************************************************/ {
+                }
+                else if (object->GetObjectType() == Hash("ObjectWoodPlank"))
+                /************************************************************/
+                {
                     AddEntryToMenu("CreateWoodenBox", object);
-                } else if (
+                }
+                else if (
                     object->GetObjectType() == Hash("ObjectSmallStone") ||
                     object->GetObjectType() == Hash("ObjectBranch"))
-                /********************************************************/ {
+                /********************************************************/
+                {
                     AddEntryToMenu("CreateStoneAxe", object);
                 }
                 if (ObjectBehaviourList::Get().HasBehaviourData(object->GetObjectType()) &&
                     ObjectBehaviourList::Get().IsContainer(object->GetObjectType()) > 0)
-                /***********************************************************************/ {
+                /***********************************************************************/
+                {
                     AddEntryToMenu("OpenContainer", object);
                 }
                 if (object->GetQuantity() > 1)
                     AddEntryToMenu("SplitStack", object);
             };
             if (GuiWindowObjectSlot::hoveredObject)
-            /*************************************/ {
+            /*************************************/
+            {
                 fn_create_entries_for_object(GuiWindowObjectSlot::hoveredObject);
                 return;
-            } else
-            /****/ {
+            }
+            else
+            /**/
+            {
                 for (auto object : tile->GetObjects().list)
                     fn_create_entries_for_object(object.get());
             }
             if (tile->GetGroundType() != Hash("GroundWater") &&
                 tile->GetObjects().Contains(Hash("ObjectTallGrass6")) == false)
-            /*****************************************************************/ {
+            /*****************************************************************/
+            {
                 AddEntryToMenu("LayWoodFloor");
                 AddEntryToMenu("LayCobblestone");
             }
             if (tile->GetGroundType() != Hash("GroundWater"))
-            /***********************************************/ {
+            /***********************************************/
+            {
                 AddEntryToMenu("CreateWoodWallN");
                 AddEntryToMenu("CreateWoodWallE");
                 AddEntryToMenu("CreateWoodWallS");
@@ -329,8 +362,10 @@ namespace Narradia
             if (tile->GetGroundType() == Hash("GroundWater"))
                 AddEntryToMenu("Fish");
             p->clicked_tile = block_tile_hovering->hoveredTile;
-        } else
-        /****/ {
+        }
+        else
+        /**/
+        {
             CloseMenu();
         }
     }
@@ -350,9 +385,11 @@ namespace Narradia
             "Actions:", {rectangle.x + Pimpl::k_margin_x, rectangle.y + GetMarginY()},
             Colors::yellow);
         for (auto &entry : p->current_menu_entries)
-        /*****************************************/ {
+        /*****************************************/
+        {
             if (entry.IsHovered())
-            /********************/ {
+            /********************/
+            {
                 Renderer2DSolidColors::Get().FillRectangle(
                     p->id_hovered_entry_back, entry.GetBounds(), Colors::alphaMildBlue);
             }

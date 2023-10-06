@@ -24,11 +24,13 @@ namespace Narradia
     {
         vector<shared_ptr<ModelPart>> allModelparts;
         for (auto &entry : GetModelMeshIds(scene))
-        /****************************************/ {
+        /****************************************/
+        {
             string nodeName = *entry.first;
             auto nodeMeshIds = entry.second;
             for (auto &mesh : GetNodeMeshes(scene, nodeMeshIds))
-            /**************************************************/ {
+            /**************************************************/
+            {
                 auto newModelPart =
                     ModelPartCreator::Get().CreateModelPartFromMesh(scene, nodeName, mesh);
                 allModelparts.push_back(newModelPart);
@@ -45,7 +47,8 @@ namespace Narradia
         auto numSubNodes = rootNode->mNumChildren;
         map<shared_ptr<string>, vector<int>> nodeNameToMeshes;
         for (auto i = 0; i < numSubNodes; i++)
-        /************************************/ {
+        /************************************/
+        {
             auto subNode = rootNode->mChildren[i];
             auto subNodeName = subNode->mName;
             auto numMeshes = subNode->mNumMeshes;
@@ -64,7 +67,8 @@ namespace Narradia
         vector<aiMesh *> nodeMeshes;
         auto numMeshes = nodeMeshIds.size();
         for (auto i = 0; i < numMeshes; i++)
-        /**********************************/ {
+        /**********************************/
+        {
             auto mesh = scene->mMeshes[nodeMeshIds.at(i)];
             nodeMeshes.push_back(mesh);
         }
@@ -83,7 +87,8 @@ namespace Narradia
         auto nrOfKeyframes =
             ModelPartKeyframeCreator::Get().GetNodePositionKeyframes(scene, nodeName).size();
         for (auto k = 0; k < nrOfKeyframes; k++)
-        /**************************************/ {
+        /**************************************/
+        {
             auto positionKeyframe =
                 ModelPartKeyframeCreator::Get().GetPositionKeyframe(scene, nodeName, k);
             auto rotationKeyFrame =
@@ -119,7 +124,8 @@ namespace Narradia
         auto nodeTransformation = GetNodeTransformation(scene, nodeName);
         auto numVertices = mesh->mNumVertices;
         for (auto i = 0; i < numVertices; i++)
-        /************************************/ {
+        /************************************/
+        {
             auto meshVertex = mesh->mVertices[i];
             auto meshNormal = mesh->mNormals[i];
             auto meshUv = mesh->mTextureCoords[0][i];
@@ -147,7 +153,8 @@ namespace Narradia
         vector<int> textureNameHashcodes;
         auto numMaterials = scene->mNumMaterials;
         for (auto i = 0; i < numMaterials; i++)
-        /*************************************/ {
+        /*************************************/
+        {
             auto materialName = scene->mMaterials[i]->GetName();
             aiString textureNameCstr;
             scene->mMaterials[i]->Get(AI_MATKEY_TEXTURE(aiTextureType_DIFFUSE, 0), textureNameCstr);
@@ -164,8 +171,10 @@ namespace Narradia
     {
         auto allTransformations = GetTransformations(scene);
         for (auto &alpha : allTransformations)
-        /************************************/ {
-            if (*alpha.first == nodeName.data()) return alpha.second;
+        /************************************/
+        {
+            if (*alpha.first == nodeName.data())
+                return alpha.second;
         }
         return aiMatrix4x4();
     }
@@ -200,7 +209,8 @@ namespace Narradia
         auto numNodes = rootNode->mNumChildren;
         auto nodeNameToTransformations = map<shared_ptr<string>, aiMatrix4x4>();
         for (auto i = 0; i < numNodes; i++)
-        /*********************************/ {
+        /*********************************/
+        {
             auto node = rootNode->mChildren[i];
             auto nodeName = node->mName;
             auto nodeTransformation = node->mTransformation;
@@ -277,7 +287,8 @@ namespace Narradia
         auto numPositionKeyframes = nodePositionKeyframes.size();
         auto numMaxKeyframes = numPositionKeyframes;
         if (numMaxKeyframes == 0)
-        /***********************/ {
+        /***********************/
+        {
             numMaxKeyframes = 1;
             nodePositionKeyframes.push_back(aiVectorKey(0.0, aiVector3D()));
         }
@@ -296,7 +307,8 @@ namespace Narradia
         auto numRotationKeyframes = nodeRotationKeyframes.size();
         auto numMaxKeyframes = numRotationKeyframes;
         if (numMaxKeyframes == 0)
-        /***********************/ {
+        /***********************/
+        {
             numMaxKeyframes = 1;
             nodeRotationKeyframes.push_back(aiQuatKey(0.0, aiQuaternion()));
         }
@@ -315,7 +327,8 @@ namespace Narradia
         auto numScalingKeyframes = nodeScalingKeyframes.size();
         auto numMaxKeyframes = numScalingKeyframes;
         if (numMaxKeyframes == 0)
-        /***********************/ {
+        /***********************/
+        {
             numMaxKeyframes = 1;
             nodeScalingKeyframes.push_back(aiVectorKey(0.0, aiVector3D(1.0)));
         }
@@ -328,10 +341,12 @@ namespace Narradia
     {
         auto nodeNameToPositionKeyframes = map<string, vector<aiVectorKey>>();
         if (scene->mNumAnimations == 0)
-        /*****************************/ {
+        /*****************************/
+        {
             auto numMeshes = scene->mNumMeshes;
             for (auto i = 0; i < numMeshes; i++)
-            /**********************************/ {
+            /**********************************/
+            {
                 auto mesh = scene->mMeshes[i];
                 auto originalName = string(mesh->mName.C_Str());
                 auto nodeName = originalName.substr(0, originalName.length() - 5);
@@ -342,20 +357,25 @@ namespace Narradia
                 positionKeyframes.push_back(positionKeyframe);
                 nodeNameToPositionKeyframes.insert({nodeName.c_str(), positionKeyframes});
             }
-        } else
-        /****/ {
+        }
+        else
+        /****/
+        {
             auto animation0 = scene->mAnimations[0];
             auto numChannels = animation0->mNumChannels;
             for (auto i = 0; i < numChannels; i++)
-            /************************************/ {
+            /************************************/
+            {
                 auto animChannel = animation0->mChannels[i];
                 auto nodeName = string(animChannel->mNodeName.C_Str());
                 auto numPositionKeys = animChannel->mNumPositionKeys;
                 vector<aiVectorKey> positionKeyframes;
                 aiVectorKey originalPositionKeyframe;
                 for (auto j = 0; j < numPositionKeys; j++)
-                /****************************************/ {
-                    if (j == 0) originalPositionKeyframe = animChannel->mPositionKeys[j];
+                /****************************************/
+                {
+                    if (j == 0)
+                        originalPositionKeyframe = animChannel->mPositionKeys[j];
                     auto positionKeyframe = animChannel->mPositionKeys[j];
                     positionKeyframe.mValue -= originalPositionKeyframe.mValue;
                     positionKeyframe.mValue.z *= -1;
@@ -374,10 +394,12 @@ namespace Narradia
     {
         auto nodeNameToRotationKeyframes = map<string, vector<aiQuatKey>>();
         if (scene->mNumAnimations == 0)
-        /*****************************/ {
+        /*****************************/
+        {
             auto numMeshes = scene->mNumMeshes;
             for (auto i = 0; i < numMeshes; i++)
-            /**********************************/ {
+            /**********************************/
+            {
                 auto mesh = scene->mMeshes[i];
                 auto originalName = string(mesh->mName.C_Str());
                 auto nodeName = originalName.substr(0, originalName.length() - 5);
@@ -388,20 +410,25 @@ namespace Narradia
                 rotationKeyframes.push_back(rotationKeyframe);
                 nodeNameToRotationKeyframes.insert({nodeName.c_str(), rotationKeyframes});
             }
-        } else
-        /****/ {
+        }
+        else
+        /**/
+        {
             auto animation0 = scene->mAnimations[0];
             auto numChannels = animation0->mNumChannels;
             for (auto i = 0; i < numChannels; i++)
-            /************************************/ {
+            /************************************/
+            {
                 auto animChannel = animation0->mChannels[i];
                 auto nodeName = string(animChannel->mNodeName.C_Str());
                 auto numRotationKeys = animChannel->mNumRotationKeys;
                 vector<aiQuatKey> rotationKeyframes;
                 aiQuatKey originalRotationKeyframe;
                 for (auto j = 0; j < numRotationKeys; j++)
-                /****************************************/ {
-                    if (j == 0) originalRotationKeyframe = animChannel->mRotationKeys[j];
+                /****************************************/
+                {
+                    if (j == 0)
+                        originalRotationKeyframe = animChannel->mRotationKeys[j];
                     auto rotationKeyframe = animChannel->mRotationKeys[j];
                     rotationKeyframe.mValue.x -= originalRotationKeyframe.mValue.x;
                     rotationKeyframe.mValue.y -= originalRotationKeyframe.mValue.y;
@@ -421,10 +448,12 @@ namespace Narradia
     {
         auto nodeNameToScalingKeyframes = map<string, vector<aiVectorKey>>();
         if (scene->mNumAnimations == 0)
-        /*****************************/ {
+        /*****************************/
+        {
             auto numMeshes = scene->mNumMeshes;
             for (auto i = 0; i < numMeshes; i++)
-            /**********************************/ {
+            /**********************************/
+            {
                 auto mesh = scene->mMeshes[i];
                 auto originalName = string(mesh->mName.C_Str());
                 auto nodeName = originalName.substr(0, originalName.length() - 5);
@@ -435,20 +464,25 @@ namespace Narradia
                 scalingKeyframes.push_back(scalingKeyframe);
                 nodeNameToScalingKeyframes.insert({nodeName.c_str(), scalingKeyframes});
             }
-        } else
-        /****/ {
+        }
+        else
+        /**/
+        {
             auto animation0 = scene->mAnimations[0];
             auto numChannels = animation0->mNumChannels;
             for (auto i = 0; i < numChannels; i++)
-            /************************************/ {
+            /************************************/
+            {
                 auto animChannel = animation0->mChannels[i];
                 auto nodeName = string(animChannel->mNodeName.C_Str());
                 auto numScalingKeys = animChannel->mNumScalingKeys;
                 vector<aiVectorKey> scalingKeyframes;
                 aiVectorKey originalScalingKeyframe;
                 for (auto j = 0; j < numScalingKeys; j++)
-                /***************************************/ {
-                    if (j == 0) originalScalingKeyframe = animChannel->mScalingKeys[i];
+                /***************************************/
+                {
+                    if (j == 0)
+                        originalScalingKeyframe = animChannel->mScalingKeys[i];
                     auto scalingKeyframe = animChannel->mScalingKeys[j];
                     scalingKeyframe.mValue.x /= originalScalingKeyframe.mValue.x;
                     scalingKeyframe.mValue.y /= originalScalingKeyframe.mValue.y;

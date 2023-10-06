@@ -22,24 +22,32 @@ namespace Narradia
         auto rightTextBox = std::make_shared<GuiTextBox>(
             RectangleF{0.11f, 0.05f, 0.05f, 0.03f}, this, text, rightTbChangeEvent);
         *leftTbChangeEvent = [=]
-        /**********************/ {
+        /**********************/
+        {
             if (leftTextBox->GetText() == "")
-            /*******************************/ {
+            /*******************************/
+            {
                 rightTextBox->SetText(std::to_string(quantity));
-            } else
-            /****/ {
+            }
+            else
+            /**/
+            {
                 auto newValue = std::stoi(leftTextBox->GetText().data());
                 auto otherValue = quantity - newValue;
                 rightTextBox->SetText(std::to_string(otherValue));
             }
         };
         *rightTbChangeEvent = [=]
-        /***********************/ {
+        /***********************/
+        {
             if (rightTextBox->GetText() == "")
-            /********************************/ {
+            /********************************/
+            {
                 leftTextBox->SetText(std::to_string(quantity));
-            } else
-            /****/ {
+            }
+            else
+            /**/
+            {
                 auto newValue = std::stoi(rightTextBox->GetText().data());
                 auto otherValue = quantity - newValue;
                 leftTextBox->SetText(std::to_string(otherValue));
@@ -48,14 +56,17 @@ namespace Narradia
         AddGuiComponent(leftTextBox);
         AddGuiComponent(rightTextBox);
         auto splitAction = [=]
-        /********************/ {
+        /********************/
+        {
             auto leftValue = std::stoi(leftTextBox->GetText().data());
             auto rightValue = std::stoi(rightTextBox->GetText().data());
             object_->AlterQuantity(-rightValue);
             for (auto i = 0; i < 1000; i++)
-            /*****************************/ {
+            /*****************************/
+            {
                 if (Player::Get().data.inventory.objects.count(i) == 0)
-                /***************************************************/ {
+                /***************************************************/
+                {
                     Player::Get().data.inventory.objects.insert(
                         {i, std::make_shared<Object>(object_->GetObjectType(), rightValue)});
                     return;
@@ -63,7 +74,8 @@ namespace Narradia
             }
         };
         auto confirmAction = [=, this]
-        /****************************/ {
+        /****************************/
+        {
             splitAction();
             ActionRepeat::Get().SetRepeatingAction(splitAction);
             auto mainScene = PlayScene::GetPointer();
