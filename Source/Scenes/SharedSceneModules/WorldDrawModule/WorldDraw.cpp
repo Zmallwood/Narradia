@@ -6,10 +6,13 @@
 #include "Engine/Core/Graphics/Rendering/RendererModels.hpp"
 #include "Engine/Core/Graphics/Rendering/RendererTiles.hpp"
 #include "RenderLoop.hpp"
-#include "SubDraws.hpp"
 #include "World/Actors/Mob.hpp"
 #include "World/Tile.hpp"
 #include "SubDrawers/SubDrawerCompanion.hpp"
+#include "SubDrawers/SubDrawerGround.hpp"
+#include "SubDrawers/SubDrawerMob.hpp"
+#include "SubDrawers/SubDrawerPlayer.hpp"
+#include "SubDrawers/SubDrawerSky.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
