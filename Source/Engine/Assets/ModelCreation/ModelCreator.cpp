@@ -12,34 +12,33 @@ namespace Narradia
 {
     shared_ptr<Model>
     ModelCreator::CreateModel(const aiScene *scene)
-    /*///////////////////////////////////////////*/
-    {
-        auto animDuration = scene->mNumAnimations > 0 ? scene->mAnimations[0]->mDuration : 0;
-        auto newModel = make_shared<Model>(animDuration);
-        for (auto &modelPart : GetModelParts(scene))
-            newModel->modelParts.push_back(modelPart);
-        return newModel;
+    { /*/////////////////////////////////////////*/
+        auto anim_duration = scene->mNumAnimations > 0 ? scene->mAnimations[0]->mDuration : 0;
+        auto new_model = make_shared<Model>(anim_duration);
+        for (auto &model_part : GetModelParts(scene))
+            new_model->modelParts.push_back(model_part);
+        return new_model;
     }
 
     auto
     ModelCreator::GetModelParts(const aiScene *scene) const -> vector<shared_ptr<ModelPart>>
     /*////////////////////////////////////////////////////////////////////////////////////*/
     {
-        vector<shared_ptr<ModelPart>> allModelparts;
+        vector<shared_ptr<ModelPart>> all_model_parts;
         for (auto &entry : GetModelMeshIds(scene))
         /****************************************/
         {
-            string nodeName = *entry.first;
-            auto nodeMeshIds = entry.second;
-            for (auto &mesh : GetNodeMeshes(scene, nodeMeshIds))
-            /**************************************************/
+            string node_name = *entry.first;
+            auto node_mesh_ids = entry.second;
+            for (auto &mesh : GetNodeMeshes(scene, node_mesh_ids))
+            /****************************************************/
             {
-                auto newModelPart =
-                    ModelPartCreator::Get()->CreateModelPartFromMesh(scene, nodeName, mesh);
-                allModelparts.push_back(newModelPart);
+                auto new_model_part =
+                    ModelPartCreator::Get()->CreateModelPartFromMesh(scene, node_name, mesh);
+                all_model_parts.push_back(new_model_part);
             }
         }
-        return allModelparts;
+        return all_model_parts;
     }
 
     auto
@@ -47,35 +46,35 @@ namespace Narradia
         -> map<shared_ptr<string>, vector<int>>
     /*/////////////////////////////////////////////////////*/
     {
-        auto rootNode = scene->mRootNode;
-        auto numSubNodes = rootNode->mNumChildren;
-        map<shared_ptr<string>, vector<int>> nodeNameToMeshes;
-        for (auto i = 0; i < numSubNodes; i++)
+        auto root_node = scene->mRootNode;
+        auto num_sub_nodes = root_node->mNumChildren;
+        map<shared_ptr<string>, vector<int>> node_name_to_meshes;
+        for (auto i = 0; i < num_sub_nodes; i++)
         /************************************/
         {
-            auto subNode = rootNode->mChildren[i];
-            auto subNodeName = subNode->mName;
-            auto numMeshes = subNode->mNumMeshes;
+            auto sub_node = root_node->mChildren[i];
+            auto sub_node_name = sub_node->mName;
+            auto num_meshes = sub_node->mNumMeshes;
             vector<int> meshes;
-            for (auto j = 0; j < numMeshes; j++)
-                meshes.push_back(subNode->mMeshes[j]);
-            nodeNameToMeshes.insert({make_shared<string>(subNodeName.C_Str()), meshes});
+            for (auto j = 0; j < num_meshes; j++)
+                meshes.push_back(sub_node->mMeshes[j]);
+            node_name_to_meshes.insert({make_shared<string>(sub_node_name.C_Str()), meshes});
         }
-        return nodeNameToMeshes;
+        return node_name_to_meshes;
     }
 
     vector<aiMesh *>
     ModelCreator::GetNodeMeshes(const aiScene *scene, vector<int> nodeMeshIds) const
     /*////////////////////////////////////////////////////////////////////////////*/
     {
-        vector<aiMesh *> nodeMeshes;
-        auto numMeshes = nodeMeshIds.size();
-        for (auto i = 0; i < numMeshes; i++)
+        vector<aiMesh *> node_meshes;
+        auto num_meshes = nodeMeshIds.size();
+        for (auto i = 0; i < num_meshes; i++)
         /**********************************/
         {
             auto mesh = scene->mMeshes[nodeMeshIds.at(i)];
-            nodeMeshes.push_back(mesh);
+            node_meshes.push_back(mesh);
         }
-        return nodeMeshes;
+        return node_meshes;
     }
 }

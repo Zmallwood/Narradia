@@ -7,32 +7,32 @@ namespace Narradia
     /*/////////////*/
     {
       public:
-        std::shared_ptr<TTF_Font> sdlFont = nullptr;
-        std::shared_ptr<TTF_Font> sdlFontOutline = nullptr;
+        std::shared_ptr<TTF_Font> sdl_font_ = nullptr;
+        std::shared_ptr<TTF_Font> sdl_font_outline_ = nullptr;
     };
 
     Font::Font(std::string_view fontFileName, int fontSize)
         : p(std::make_shared<Pimpl>())
     /*///////////////////////////////////////////////////*/
     {
-        p->sdlFont =
+        p->sdl_font_ =
             std::shared_ptr<TTF_Font>(TTF_OpenFont(fontFileName.data(), fontSize), SdlDeleter());
-        p->sdlFontOutline =
+        p->sdl_font_outline_ =
             std::shared_ptr<TTF_Font>(TTF_OpenFont(fontFileName.data(), fontSize), SdlDeleter());
-        TTF_SetFontOutline(p->sdlFontOutline.get(), kFontOutlineWidth);
+        TTF_SetFontOutline(p->sdl_font_outline_.get(), kFontOutlineWidth);
     }
 
     TTF_Font *
     Font::GetSdlFont() const
     /*////////////////////*/
     {
-        return p->sdlFont.get();
+        return p->sdl_font_.get();
     }
 
     TTF_Font *
     Font::GetSdlFontOutline() const
     /*///////////////////////////*/
     {
-        return p->sdlFontOutline.get();
+        return p->sdl_font_outline_.get();
     }
 }

@@ -15,12 +15,12 @@ namespace Narradia
             RenderId, std::string_view, Color, bool, FontSizes, std::string &, SizeF &) const;
         const std::string CreateBlankTexGetName();
 
-        const std::string relFontsPath = "Resources/Fonts/";
-        const Color outlineColor = Colors::black;
-        std::map<FontSizes, std::shared_ptr<const Font>> fonts;
-        std::map<RenderId, std::string> uniqueNameIds;
-        int idCounter = 0;
-        std::map<RenderId, MultiLineText> multiLines;
+        const std::string kRelFontsPath = "Resources/Fonts/";
+        const Color outline_color_ = Colors::black;
+        std::map<FontSizes, std::shared_ptr<const Font>> fonts_;
+        std::map<RenderId, std::string> unique_name_ids_;
+        int id_counter_ = 0;
+        std::map<RenderId, MultiLineText> multi_lines_;
     };
 
     TextRenderer::TextRenderer()
@@ -28,42 +28,42 @@ namespace Narradia
     /*//////////////////////////////*/
     {
         TTF_Init();
-        auto fontPath =
-            std::string(SDL_GetBasePath()) + p->relFontsPath + "PartyConfettiRegular-eZOn3.ttf";
-        p->fonts.insert({FontSizes::_20, std::make_shared<Font>(fontPath.c_str(), 20)});
-        p->fonts.insert({FontSizes::_26, std::make_shared<Font>(fontPath.c_str(), 26)});
+        auto font_path =
+            std::string(SDL_GetBasePath()) + p->kRelFontsPath + "PartyConfettiRegular-eZOn3.ttf";
+        p->fonts_.insert({FontSizes::_20, std::make_shared<Font>(font_path.c_str(), 20)});
+        p->fonts_.insert({FontSizes::_26, std::make_shared<Font>(font_path.c_str(), 26)});
     }
 
     RenderId
     TextRenderer::NewString()
     /*/////////////////////*/
     {
-        auto uniqueName = p->CreateBlankTexGetName();
-        auto rendIdImageRect = Renderer2DImages::Get()->NewImage();
-        p->uniqueNameIds.insert({rendIdImageRect, uniqueName});
-        return rendIdImageRect;
+        auto unique_name = p->CreateBlankTexGetName();
+        auto rendid_image_rect = Renderer2DImages::Get()->NewImage();
+        p->unique_name_ids_.insert({rendid_image_rect, unique_name});
+        return rendid_image_rect;
     }
 
     RenderId
     TextRenderer::NewBillboardString()
     /*//////////////////////////////*/
     {
-        auto uniqueName = p->CreateBlankTexGetName();
-        auto rendIdBboardTexRect = RendererBillboardImages::Get()->NewBillboardImage();
-        p->uniqueNameIds.insert({rendIdBboardTexRect, uniqueName});
-        return rendIdBboardTexRect;
+        auto unique_name = p->CreateBlankTexGetName();
+        auto rendid_billboard_tex_rect = RendererBillboardImages::Get()->NewBillboardImage();
+        p->unique_name_ids_.insert({rendid_billboard_tex_rect, unique_name});
+        return rendid_billboard_tex_rect;
     }
 
     RenderId
     TextRenderer::NewMultiLineString(int numLines, float width)
     /*///////////////////////////////////////////////////////*/
     {
-        MultiLineText multiLineText;
-        multiLineText.width = width;
+        MultiLineText multi_line_text;
+        multi_line_text.width = width;
         for (auto i = 0; i < numLines; i++)
-            multiLineText.renderIds.push_back(NewString());
-        p->multiLines.insert({multiLineText.renderIds.at(0), multiLineText});
-        return multiLineText.renderIds.at(0);
+            multi_line_text.renderIds.push_back(NewString());
+        p->multi_lines_.insert({multi_line_text.renderIds.at(0), multi_line_text});
+        return multi_line_text.renderIds.at(0);
     }
 
     void
@@ -72,48 +72,48 @@ namespace Narradia
         std::string &outUniqueNameId, SizeF &outSize) const
     /*/////////////////////////////////////////////////////////////////////////////////////////*/
     {
-        auto font = fonts.at(textSize)->GetSdlFont();
+        auto font = fonts_.at(textSize)->GetSdlFont();
         if (!font)
             return;
-        auto sdlColor = color.ToSdlColor();
-        auto outlineSdlColor = outlineColor.ToSdlColor();
-        auto textOutlineSurface = TTF_RenderText_Blended(
-            fonts.at(textSize)->GetSdlFontOutline(), text.data(), outlineSdlColor);
-        if (!textOutlineSurface)
+        auto sdl_color = color.ToSdlColor();
+        auto outline_sdl_color = outline_color_.ToSdlColor();
+        auto text_outline_surface = TTF_RenderText_Blended(
+            fonts_.at(textSize)->GetSdlFontOutline(), text.data(), outline_sdl_color);
+        if (!text_outline_surface)
             return;
-        auto textSurface = TTF_RenderText_Blended(font, text.data(), sdlColor);
+        auto text_surface = TTF_RenderText_Blended(font, text.data(), sdl_color);
         glEnable(GL_TEXTURE_2D);
-        auto uniqueNameId = uniqueNameIds.at(vaoId);
-        auto imageId = ImageBank::Get()->GetImage(uniqueNameId.c_str());
-        glBindTexture(GL_TEXTURE_2D, imageId);
+        auto unique_name_id = unique_name_ids_.at(vaoId);
+        auto image_id = ImageBank::Get()->GetImage(unique_name_id.c_str());
+        glBindTexture(GL_TEXTURE_2D, image_id);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        auto w = textOutlineSurface->w;
-        auto h = textOutlineSurface->h;
+        auto w = text_outline_surface->w;
+        auto h = text_outline_surface->h;
         auto image = SDL_CreateRGBSurface(
             SDL_SWSURFACE, w, h, 32, 0x000000FF, 0x0000FF00, 0x00FF0000, 0xFF000000);
         auto area = SDL_Rect{
             Font::GetFontOutlineWidth(), Font::GetFontOutlineWidth(),
-            textSurface ? textSurface->w : 0, textSurface ? textSurface->h : 0};
-        auto areaOutline = SDL_Rect{
-            0, 0, textOutlineSurface ? textOutlineSurface->w : 0,
-            textOutlineSurface ? textOutlineSurface->h : 0};
-        SDL_BlitSurface(textOutlineSurface, &area, image, &areaOutline);
-        SDL_BlitSurface(textSurface, &areaOutline, image, &areaOutline);
+            text_surface ? text_surface->w : 0, text_surface ? text_surface->h : 0};
+        auto area_outline = SDL_Rect{
+            0, 0, text_outline_surface ? text_outline_surface->w : 0,
+            text_outline_surface ? text_outline_surface->h : 0};
+        SDL_BlitSurface(text_outline_surface, &area, image, &area_outline);
+        SDL_BlitSurface(text_surface, &area_outline, image, &area_outline);
         glTexImage2D(
             GL_TEXTURE_2D, 0, GL_RGBA, image->w, image->h, 0, GL_RGBA, GL_UNSIGNED_BYTE,
             image->pixels);
-        auto canvasSize = GetCanvasSize();
-        auto width = textSurface ? static_cast<float>(textSurface->w) / canvasSize.width : 0;
-        auto height = textSurface ? static_cast<float>(textSurface->h) / canvasSize.height : 0;
-        outUniqueNameId = uniqueNameId;
+        auto canvas_size = GetCanvasSize();
+        auto width = text_surface ? static_cast<float>(text_surface->w) / canvas_size.width : 0;
+        auto height = text_surface ? static_cast<float>(text_surface->h) / canvas_size.height : 0;
+        outUniqueNameId = unique_name_id;
         outSize = {width, height};
         SDL_FreeSurface(image);
-        SDL_FreeSurface(textSurface);
-        SDL_FreeSurface(textOutlineSurface);
+        SDL_FreeSurface(text_surface);
+        SDL_FreeSurface(text_outline_surface);
     }
 
     void
@@ -122,35 +122,35 @@ namespace Narradia
         FontSizes textSize) const
     /*////////////////////////////////////////////////////////////////////////////////////////*/
     {
-        int fullTextW;
-        int fullTextH;
-        auto multiLineObject = p->multiLines.at(glId);
-        auto canvasSize = GetCanvasSize();
-        auto aspectRatio = GetAspectRatio();
-        TTF_SizeText(p->fonts.at(textSize)->GetSdlFont(), text.c_str(), &fullTextW, &fullTextH);
-        auto totalTextWidthF = static_cast<float>(fullTextW) / canvasSize.width;
-        auto numLines = totalTextWidthF / multiLineObject.width;
-        auto numCharactersPerLine = text.length() / numLines;
-        auto lineHeight = static_cast<float>(fullTextH) / canvasSize.height;
-        for (auto i = 0; i < numLines; i++)
+        int full_text_w;
+        int full_text_h;
+        auto multi_line_object = p->multi_lines_.at(glId);
+        auto canvas_size = GetCanvasSize();
+        auto aspect_ratio = GetAspectRatio();
+        TTF_SizeText(p->fonts_.at(textSize)->GetSdlFont(), text.c_str(), &full_text_w, &full_text_h);
+        auto total_text_width_f = static_cast<float>(full_text_w) / canvas_size.width;
+        auto num_lines = total_text_width_f / multi_line_object.width;
+        auto num_characters_per_line = text.length() / num_lines;
+        auto line_height = static_cast<float>(full_text_h) / canvas_size.height;
+        for (auto i = 0; i < num_lines; i++)
         /*********************************/
         {
-            auto lineText = text.substr(i * numCharactersPerLine, numCharactersPerLine + 1);
-            std::string uniqueNameId;
+            auto line_text = text.substr(i * num_characters_per_line, num_characters_per_line + 1);
+            std::string unique_name_id;
             SizeF size;
             p->RenderText(
-                multiLineObject.renderIds.at(i), lineText, color, centerAlign, textSize,
-                uniqueNameId, size);
+                multi_line_object.renderIds.at(i), line_text, color, centerAlign, textSize,
+                unique_name_id, size);
             auto rect =
-                RectangleF{position.x, position.y + i * lineHeight, size.width, size.height};
-            int textW;
-            int textH;
-            TTF_SizeText(p->fonts.at(textSize)->GetSdlFont(), text.c_str(), &textW, &textH);
-            rect.y -= static_cast<float>(textH / GetAspectRatio()) / canvasSize.height / 2.0f;
+                RectangleF{position.x, position.y + i * line_height, size.width, size.height};
+            int text_w;
+            int text_h;
+            TTF_SizeText(p->fonts_.at(textSize)->GetSdlFont(), text.c_str(), &text_w, &text_h);
+            rect.y -= static_cast<float>(text_h / GetAspectRatio()) / canvas_size.height / 2.0f;
             if (centerAlign)
-                rect.x -= static_cast<float>(textW) / static_cast<float>(canvasSize.height) / 2.0f /
+                rect.x -= static_cast<float>(text_w) / static_cast<float>(canvas_size.height) / 2.0f /
                           GetAspectRatio();
-            Renderer2DImages::Get()->DrawImage(uniqueNameId, multiLineObject.renderIds.at(i), rect);
+            Renderer2DImages::Get()->DrawImage(unique_name_id, multi_line_object.renderIds.at(i), rect);
         }
     }
 
@@ -160,19 +160,19 @@ namespace Narradia
         FontSizes textSize) const
     /*///////////////////////////////////////////////////////////////////////////////////////*/
     {
-        std::string uniqueNameId;
+        std::string unique_name_id;
         SizeF size;
-        p->RenderText(vaoId, text, color, centerAlign, textSize, uniqueNameId, size);
-        auto canvasSize = GetCanvasSize();
+        p->RenderText(vaoId, text, color, centerAlign, textSize, unique_name_id, size);
+        auto canvas_size = GetCanvasSize();
         auto rect = RectangleF{position.x, position.y, size.width, size.height};
-        int textW;
-        int textH;
-        TTF_SizeText(p->fonts.at(textSize)->GetSdlFont(), text.data(), &textW, &textH);
-        rect.y -= static_cast<float>(textH / GetAspectRatio()) / canvasSize.height / 2.0f;
+        int text_w;
+        int text_h;
+        TTF_SizeText(p->fonts_.at(textSize)->GetSdlFont(), text.data(), &text_w, &text_h);
+        rect.y -= static_cast<float>(text_h / GetAspectRatio()) / canvas_size.height / 2.0f;
         if (centerAlign)
-            rect.x -= static_cast<float>(textW) / static_cast<float>(canvasSize.height) / 2.0f /
+            rect.x -= static_cast<float>(text_w) / static_cast<float>(canvas_size.height) / 2.0f /
                       GetAspectRatio();
-        Renderer2DImages::Get()->DrawImage(uniqueNameId, vaoId, rect);
+        Renderer2DImages::Get()->DrawImage(unique_name_id, vaoId, rect);
     }
 
     void
@@ -181,32 +181,32 @@ namespace Narradia
         bool centerAlign, FontSizes textSize) const
     /*//////////////////////////////////////////////////////////////////////////////////////////*/
     {
-        std::string uniqueNameId;
+        std::string unique_name_id;
         SizeF size;
-        p->RenderText(vaoId, text, color, centerAlign, textSize, uniqueNameId, size);
-        auto canvasSize = GetCanvasSize();
+        p->RenderText(vaoId, text, color, centerAlign, textSize, unique_name_id, size);
+        auto canvas_size = GetCanvasSize();
         int text_w;
         int text_h;
-        TTF_SizeText(p->fonts.at(textSize)->GetSdlFont(), text.data(), &text_w, &text_h);
+        TTF_SizeText(p->fonts_.at(textSize)->GetSdlFont(), text.data(), &text_w, &text_h);
         size.height = 1.0f;
         size.width = size.height / static_cast<float>(text_h) * text_w / billboardSize.width *
                      billboardSize.height / GetAspectRatio();
         auto rect = RectangleF{-size.width / 2, -size.height / 2, size.width, size.height};
-        rect.y -= static_cast<float>(text_h / GetAspectRatio()) / canvasSize.height / 2.0f;
+        rect.y -= static_cast<float>(text_h / GetAspectRatio()) / canvas_size.height / 2.0f;
         if (centerAlign)
-            rect.x -= static_cast<float>(text_w) / static_cast<float>(canvasSize.height) / 2.0f /
+            rect.x -= static_cast<float>(text_w) / static_cast<float>(canvas_size.height) / 2.0f /
                       GetAspectRatio();
         RendererBillboardImages::Get()->DrawBillboardImage(
-            Hash(uniqueNameId), vaoId, position, rect, billboardSize);
+            Hash(unique_name_id), vaoId, position, rect, billboardSize);
     }
 
     const std::string
     TextRenderer::Pimpl::CreateBlankTexGetName()
     /*////////////////////////////////////////*/
     {
-        auto id = idCounter++;
-        auto uniqueName = "RenderedImage" + std::to_string(id);
-        ImageBank::Get()->GetBlankTextImage(uniqueName);
-        return uniqueName;
+        auto id = id_counter_++;
+        auto unique_name = "RenderedImage" + std::to_string(id);
+        ImageBank::Get()->GetBlankTextImage(unique_name);
+        return unique_name;
     }
 }

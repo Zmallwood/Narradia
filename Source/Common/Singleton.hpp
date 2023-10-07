@@ -9,7 +9,7 @@ namespace Narradia
       public:
         static void
         Create()
-        /*///////*/
+        /*////*/
         {
             if (!instance)
                 instance = std::make_shared<T>();
@@ -17,7 +17,7 @@ namespace Narradia
 
         static std::shared_ptr<T>
         Get()
-        /*//////*/
+        /*/*/
         {
             if (!instance)
                 Create();
@@ -26,7 +26,7 @@ namespace Narradia
 
         static void
         Dispose()
-        /*///////*/
+        /*/////*/
         {
             instance.reset();
         }

@@ -6,6 +6,7 @@
 #include "Engine/Core/ModelStructure/Model.hpp"
 #include "ShaderProgram.hpp"
 #include "World/Actors/Player.hpp"
+#include "BodyData.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -13,55 +14,47 @@ namespace Narradia
     /*///////////////////////*/
     {
       public:
-        struct BodyData
-        /*///////////*/
-        {
-            RenderId bodyId = 0;
-            int numVertices = 0;
-            int imageNameHash = 0;
-        };
-
-        const int locationPosition = 0;
-        const int locationColor = 1;
-        const int locationUv = 2;
-        const int locationNormal = 3;
-        int locationProjection = -1;
-        int locationView = -1;
-        int locationAlpha = -1;
-        int locationModel = -1;
-        int locationModelNoTranslation = -1;
-        int locationColorMod = -1;
-        int locationViewPos = -1;
-        int locationFogColor = -1;
-        int locationNoFog = -1;
-        int locationNoLighting = -1;
-        std::map<int, std::map<int, std::map<float, const BodyData>>> modelIds;
-        std::map<int, std::map<float, RenderId>> timelines;
-        float globalAnimSpeed = 1.0f;
-        bool isBatchDrawing = false;
+        const int kLocationPosition = 0;
+        const int kLocationColor = 1;
+        const int kLocationUv = 2;
+        const int kLocationNormal = 3;
+        int location_projection_ = -1;
+        int location_view_ = -1;
+        int location_alpha_ = -1;
+        int location_model_ = -1;
+        int location_model_no_translation_ = -1;
+        int location_color_mod_ = -1;
+        int location_view_pos_ = -1;
+        int location_fog_color_ = -1;
+        int location_no_fog_ = -1;
+        int location_no_lighting_ = -1;
+        std::map<int, std::map<int, std::map<float, const BodyData>>> model_ids_;
+        std::map<int, std::map<float, RenderId>> timelines_;
+        float global_animation_speed_ = 1.0f;
+        bool is_batch_drawing_ = false;
     };
 
     RendererModels::RendererModels()
         : p(std::make_shared<Pimpl>())
     /*//////////////////////////////*/
     {
-        const GLchar *vertexShaderSource =
+        const GLchar *vertex_shader_source =
 #include "Shaders/ModelsVertex.glsl"
             ;
-        const GLchar *fragmentShaderSource =
+        const GLchar *fragment_shader_source =
 #include "Shaders/ModelsFragment.glsl"
             ;
-        GetShaderProgram()->Create(vertexShaderSource, fragmentShaderSource);
-        p->locationView = GetUniformLocation("view");
-        p->locationProjection = GetUniformLocation("projection");
-        p->locationAlpha = GetUniformLocation("mAlpha");
-        p->locationModel = GetUniformLocation("model");
-        p->locationModelNoTranslation = GetUniformLocation("modelNoTranslation");
-        p->locationColorMod = GetUniformLocation("mColorMod");
-        p->locationViewPos = GetUniformLocation("viewPos");
-        p->locationFogColor = GetUniformLocation("fogColor");
-        p->locationNoFog = GetUniformLocation("noFog");
-        p->locationNoLighting = GetUniformLocation("noLighting");
+        GetShaderProgram()->Create(vertex_shader_source, fragment_shader_source);
+        p->location_view_ = GetUniformLocation("view");
+        p->location_projection_ = GetUniformLocation("projection");
+        p->location_alpha_ = GetUniformLocation("mAlpha");
+        p->location_model_ = GetUniformLocation("model");
+        p->location_model_no_translation_ = GetUniformLocation("modelNoTranslation");
+        p->location_color_mod_ = GetUniformLocation("mColorMod");
+        p->location_view_pos_ = GetUniformLocation("viewPos");
+        p->location_fog_color_ = GetUniformLocation("fogColor");
+        p->location_no_fog_ = GetUniformLocation("noFog");
+        p->location_no_lighting_ = GetUniformLocation("noLighting");
     }
 
     void
@@ -69,9 +62,9 @@ namespace Narradia
     /*///////////////////////////////////////*/
     {
         auto model = ModelBank::Get()->GetModel(modelNameHash);
-        p->modelIds.insert(
-            {modelNameHash, std::map<int, std::map<float, const Pimpl::BodyData>>()});
-        auto iBody = 0;
+        p->model_ids_.insert(
+            {modelNameHash, std::map<int, std::map<float, const BodyData>>()});
+        auto i_body = 0;
         for (auto &body : model->modelParts)
         /**********************************/
         {
@@ -79,23 +72,23 @@ namespace Narradia
             for (auto &keyframe : timelines)
             /******************************/
             {
-                auto keyframeTime = keyframe.first;
-                auto animKeyBodyKeyframe = keyframe.second;
-                auto vertexCount = animKeyBodyKeyframe->vertices.size();
-                auto bodyKeyframeId = NewBodyKeyframe(modelNameHash, keyframeTime, vertexCount);
-                if (p->modelIds.at(modelNameHash).count(iBody) == 0)
-                    p->modelIds.at(modelNameHash)
-                        .insert({iBody, std::map<float, const Pimpl::BodyData>()});
-                Pimpl::BodyData bodyData;
-                bodyData.bodyId = bodyKeyframeId;
-                bodyData.imageNameHash = body->texNameHash;
-                bodyData.numVertices = vertexCount;
-                p->modelIds.at(modelNameHash).at(iBody).insert({keyframeTime, bodyData});
-                auto &modelKeyframe = body->timeline->keyframes.at(keyframeTime);
+                auto keyframe_time = keyframe.first;
+                auto anim_key_body_keyframe = keyframe.second;
+                auto vertex_count = anim_key_body_keyframe->vertices.size();
+                auto body_keyframe_id = NewBodyKeyframe(modelNameHash, keyframe_time, vertex_count);
+                if (p->model_ids_.at(modelNameHash).count(i_body) == 0)
+                    p->model_ids_.at(modelNameHash)
+                        .insert({i_body, std::map<float, const BodyData>()});
+                BodyData body_data;
+                body_data.bodyId = body_keyframe_id;
+                body_data.imageNameHash = body->texNameHash;
+                body_data.numVertices = vertex_count;
+                p->model_ids_.at(modelNameHash).at(i_body).insert({keyframe_time, body_data});
+                auto &model_keyframe = body->timeline->keyframes.at(keyframe_time);
                 std::vector<Vertex3F> vertices;
                 std::vector<Point3F> normals;
-                auto &animVertices = modelKeyframe->vertices;
-                for (auto v : animVertices)
+                auto &anim_vertices = model_keyframe->vertices;
+                for (auto v : anim_vertices)
                 /*************************/
                 {
                     Vertex3F v3f;
@@ -110,9 +103,9 @@ namespace Narradia
                     normals.push_back(n3f);
                 }
                 NewBodyKeyframeGeometry(
-                    body->texNameHash, keyframeTime, bodyKeyframeId, vertices, normals);
+                    body->texNameHash, keyframe_time, body_keyframe_id, vertices, normals);
             }
-            iBody++;
+            i_body++;
         }
     }
 
@@ -120,11 +113,11 @@ namespace Narradia
     RendererModels::NewBodyKeyframe(int modelNameHash, float msTime, int numVertices)
     /*/////////////////////////////////////////////////////////////////////////////*/
     {
-        auto vaoId = GenerateNewVertexArrayId();
-        if (p->timelines.count(modelNameHash) == 0)
-            p->timelines.insert({modelNameHash, std::map<float, RenderId>()});
-        p->timelines.at(modelNameHash).insert({msTime, vaoId});
-        return vaoId;
+        auto vao_id = GenerateNewVertexArrayId();
+        if (p->timelines_.count(modelNameHash) == 0)
+            p->timelines_.insert({modelNameHash, std::map<float, RenderId>()});
+        p->timelines_.at(modelNameHash).insert({msTime, vao_id});
+        return vao_id;
     }
 
     void
@@ -136,12 +129,12 @@ namespace Narradia
         glEnable(GL_DEPTH_TEST);
         UseVaoBegin(vaoId);
         glUniformMatrix4fv(
-            p->locationProjection, 1, GL_FALSE, value_ptr(CameraGl::Get()->GetPerspectiveMatrix()));
+            p->location_projection_, 1, GL_FALSE, value_ptr(CameraGl::Get()->GetPerspectiveMatrix()));
         glUniformMatrix4fv(
-            p->locationView, 1, GL_FALSE, value_ptr(CameraGl::Get()->GetViewMatrix()));
-        glUniform1f(p->locationAlpha, 1.0f);
-        auto imageId = ImageBank::Get()->GetImage(imageNamehash);
-        glBindTexture(GL_TEXTURE_2D, imageId);
+            p->location_view_, 1, GL_FALSE, value_ptr(CameraGl::Get()->GetViewMatrix()));
+        glUniform1f(p->location_alpha_, 1.0f);
+        auto image_id = ImageBank::Get()->GetImage(imageNamehash);
+        glBindTexture(GL_TEXTURE_2D, image_id);
         std::vector<int> indices(vertices.size());
         std::iota(std::begin(indices), std::end(indices), 0);
         std::vector<float> positions;
@@ -171,17 +164,17 @@ namespace Narradia
             }
             i++;
         }
-        auto indexBufferId = GenerateNewBufferId(BufferTypes::Indices, vaoId);
-        auto positionBufferId = GenerateNewBufferId(BufferTypes::Positions, vaoId);
-        auto colorBufferid = GenerateNewBufferId(BufferTypes::Colors, vaoId);
-        auto uvBufferId = GenerateNewBufferId(BufferTypes::Uvs, vaoId);
-        auto normalBufferId = GenerateNewBufferId(BufferTypes::Normals, vaoId);
-        auto numVertices = vertices.size();
-        SetIndicesData(indexBufferId, numVertices, indices.data());
-        SetPositions3DData(positionBufferId, numVertices, positions.data(), p->locationPosition);
-        SetColorsData(colorBufferid, numVertices, colors.data(), p->locationColor);
-        SetUvsData(uvBufferId, numVertices, uvs.data(), p->locationUv);
-        SetNormalsData(normalBufferId, numVertices, normals.data(), p->locationNormal);
+        auto index_buffer_id = GenerateNewBufferId(BufferTypes::Indices, vaoId);
+        auto position_buffer_id = GenerateNewBufferId(BufferTypes::Positions, vaoId);
+        auto color_buffer_id = GenerateNewBufferId(BufferTypes::Colors, vaoId);
+        auto uv_buffer_id = GenerateNewBufferId(BufferTypes::Uvs, vaoId);
+        auto normal_buffer_id = GenerateNewBufferId(BufferTypes::Normals, vaoId);
+        auto num_vertices = vertices.size();
+        SetIndicesData(index_buffer_id, num_vertices, indices.data());
+        SetPositions3DData(position_buffer_id, num_vertices, positions.data(), p->kLocationPosition);
+        SetColorsData(color_buffer_id, num_vertices, colors.data(), p->kLocationColor);
+        SetUvsData(uv_buffer_id, num_vertices, uvs.data(), p->kLocationUv);
+        SetNormalsData(normal_buffer_id, num_vertices, normals.data(), p->kLocationNormal);
         UseVaoEnd();
     }
 
@@ -189,20 +182,20 @@ namespace Narradia
     RendererModels::StartBatchDrawing()
     /*///////////////////////////////*/
     {
-        p->isBatchDrawing = true;
+        p->is_batch_drawing_ = true;
         glEnable(GL_DEPTH_TEST);
         glUseProgram(GetShaderProgram()->GetProgramId());
         glUniformMatrix4fv(
-            p->locationProjection, 1, GL_FALSE, value_ptr(CameraGl::Get()->GetPerspectiveMatrix()));
+            p->location_projection_, 1, GL_FALSE, value_ptr(CameraGl::Get()->GetPerspectiveMatrix()));
         glUniformMatrix4fv(
-            p->locationView, 1, GL_FALSE, glm::value_ptr(CameraGl::Get()->GetViewMatrix()));
+            p->location_view_, 1, GL_FALSE, glm::value_ptr(CameraGl::Get()->GetViewMatrix()));
     }
 
     void
     RendererModels::StopBatchDrawing()
     /*//////////////////////////////*/
     {
-        p->isBatchDrawing = false;
+        p->is_batch_drawing_ = false;
     }
 
     void
@@ -211,73 +204,73 @@ namespace Narradia
         float brightness, glm::vec3 colorMod, bool noFog, bool noLighting) const
     /*/////////////////////////////////////////////////////////////////////////////////*/
     {
-        if (p->modelIds.count(modelNameHash) == 0)
+        if (p->model_ids_.count(modelNameHash) == 0)
             return;
-        if (!p->isBatchDrawing)
+        if (!p->is_batch_drawing_)
         /*********************/
         {
             glEnable(GL_DEPTH_TEST);
             glUseProgram(GetShaderProgram()->GetProgramId());
             glUniformMatrix4fv(
-                p->locationProjection, 1, GL_FALSE,
+                p->location_projection_, 1, GL_FALSE,
                 value_ptr(CameraGl::Get()->GetPerspectiveMatrix()));
-            auto &viewMatrix = CameraGl::Get()->GetViewMatrix();
-            glUniformMatrix4fv(p->locationView, 1, GL_FALSE, glm::value_ptr(viewMatrix));
+            auto &view_matrix = CameraGl::Get()->GetViewMatrix();
+            glUniformMatrix4fv(p->location_view_, 1, GL_FALSE, glm::value_ptr(view_matrix));
         }
-        auto modelMatrix = glm::rotate(
+        auto model_matrix = glm::rotate(
             glm::scale(
                 glm::translate(glm::mat4(1.0), glm::vec3(position.x, position.y, position.z)),
                 glm::vec3(scaling, scaling, scaling)),
             glm::radians(rotation), glm::vec3(0, 1, 0));
-        auto modelNoTranslationMatrix = glm::rotate(
+        auto model_no_translation_matrix = glm::rotate(
             glm::scale(
                 glm::translate(glm::mat4(1.0), glm::vec3(0.0, 0.0, 0.0)),
                 glm::vec3(scaling, scaling, scaling)),
             glm::radians(rotation), glm::vec3(0, 1, 0));
-        glUniformMatrix4fv(p->locationModel, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+        glUniformMatrix4fv(p->location_model_, 1, GL_FALSE, glm::value_ptr(model_matrix));
         glUniformMatrix4fv(
-            p->locationModelNoTranslation, 1, GL_FALSE, glm::value_ptr(modelNoTranslationMatrix));
-        glUniform3fv(p->locationColorMod, 1, glm::value_ptr(colorMod));
+            p->location_model_no_translation_, 1, GL_FALSE, glm::value_ptr(model_no_translation_matrix));
+        glUniform3fv(p->location_color_mod_, 1, glm::value_ptr(colorMod));
         glm::vec3 viewPos(
             Player::Get()->GetSpaceCoord().x, Player::Get()->GetSpaceCoord().y,
             Player::Get()->GetSpaceCoord().z);
-        glUniform3fv(p->locationViewPos, 1, glm::value_ptr(viewPos));
+        glUniform3fv(p->location_view_pos_, 1, glm::value_ptr(viewPos));
         glm::vec3 fogColorGl(
             GraphicsGl::Get()->GetFogColorObjects().r, GraphicsGl::Get()->GetFogColorObjects().g,
             GraphicsGl::Get()->GetFogColorObjects().b);
-        glUniform3fv(p->locationFogColor, 1, glm::value_ptr(fogColorGl));
-        glUniform1f(p->locationAlpha, brightness);
-        glUniform1f(p->locationNoFog, noFog ? 1.0f : 0.0f);
-        glUniform1f(p->locationNoLighting, noLighting ? 1.0f : 0.0f);
-        auto &allNodes = p->modelIds.at(modelNameHash);
-        auto pModel = ModelBank::Get()->GetModel(modelNameHash);
-        int msTimeUsed;
-        if (pModel->animDuration == 0)
-            msTimeUsed = 0;
+        glUniform3fv(p->location_fog_color_, 1, glm::value_ptr(fogColorGl));
+        glUniform1f(p->location_alpha_, brightness);
+        glUniform1f(p->location_no_fog_, noFog ? 1.0f : 0.0f);
+        glUniform1f(p->location_no_lighting_, noLighting ? 1.0f : 0.0f);
+        auto &all_nodes = p->model_ids_.at(modelNameHash);
+        auto p_model = ModelBank::Get()->GetModel(modelNameHash);
+        int ms_time_used;
+        if (p_model->animDuration == 0)
+            ms_time_used = 0;
         else
-            msTimeUsed = static_cast<int>(msTime * p->globalAnimSpeed) % pModel->animDuration;
-        auto &modelData = allNodes;
-        for (auto &entry : allNodes)
+            ms_time_used = static_cast<int>(msTime * p->global_animation_speed_) % p_model->animDuration;
+        auto &model_data = all_nodes;
+        for (auto &entry : all_nodes)
         /**************************/
         {
             auto &timeline = entry.second;
-            auto foundTime = -1.0f;
-            const Pimpl::BodyData *pBodyData = nullptr;
+            auto found_time = -1.0f;
+            const BodyData *p_body_data = nullptr;
             for (auto &keyframe : timeline)
             /*****************************/
             {
                 auto time = keyframe.first;
-                if (msTimeUsed >= time)
-                    foundTime = time;
+                if (ms_time_used >= time)
+                    found_time = time;
             }
-            auto &bodyData = timeline.at(foundTime);
-            glBindVertexArray(bodyData.bodyId);
-            auto imageId = ImageBank::Get()->GetImage(bodyData.imageNameHash);
-            glBindTexture(GL_TEXTURE_2D, imageId);
-            glDrawElements(GL_TRIANGLES, bodyData.numVertices, GL_UNSIGNED_INT, NULL);
+            auto &body_data = timeline.at(found_time);
+            glBindVertexArray(body_data.bodyId);
+            auto image_id = ImageBank::Get()->GetImage(body_data.imageNameHash);
+            glBindTexture(GL_TEXTURE_2D, image_id);
+            glDrawElements(GL_TRIANGLES, body_data.numVertices, GL_UNSIGNED_INT, NULL);
         }
         glBindVertexArray(0);
-        if (!p->isBatchDrawing)
+        if (!p->is_batch_drawing_)
             glUseProgram(0);
     }
 
@@ -288,42 +281,42 @@ namespace Narradia
         std::vector<glm::vec3> colorMods) const
     /*///////////////////////////////////////////////////////////////////////////////////////////*/
     {
-        if (p->modelIds.count(modelNameHash) == 0)
+        if (p->model_ids_.count(modelNameHash) == 0)
             return;
-        if (!p->isBatchDrawing)
+        if (!p->is_batch_drawing_)
         /*********************/
         {
             glEnable(GL_DEPTH_TEST);
             glUseProgram(GetShaderProgram()->GetProgramId());
             glUniformMatrix4fv(
-                p->locationProjection, 1, GL_FALSE,
+                p->location_projection_, 1, GL_FALSE,
                 value_ptr(CameraGl::Get()->GetPerspectiveMatrix()));
-            auto &viewMatrix = CameraGl::Get()->GetViewMatrix();
-            glUniformMatrix4fv(p->locationView, 1, GL_FALSE, glm::value_ptr(viewMatrix));
+            auto &view_matrix = CameraGl::Get()->GetViewMatrix();
+            glUniformMatrix4fv(p->location_view_, 1, GL_FALSE, glm::value_ptr(view_matrix));
         }
-        auto &allNodes = p->modelIds.at(modelNameHash);
-        auto pModel = ModelBank::Get()->GetModel(modelNameHash);
-        int msTimeUsed;
-        if (pModel->animDuration == 0)
-            msTimeUsed = 0;
+        auto &all_nodes = p->model_ids_.at(modelNameHash);
+        auto p_model = ModelBank::Get()->GetModel(modelNameHash);
+        int ms_time_used;
+        if (p_model->animDuration == 0)
+            ms_time_used = 0;
         else
-            msTimeUsed = static_cast<int>(msTime * p->globalAnimSpeed) % pModel->animDuration;
-        auto &modelData = allNodes;
-        for (auto &entry : allNodes)
-        /**************************/
+            ms_time_used = static_cast<int>(msTime * p->global_animation_speed_) % p_model->animDuration;
+        auto &model_data = all_nodes;
+        for (auto &entry : all_nodes)
+        /***************************/
         {
             auto &timeline = entry.second;
-            auto foundTime = -1.0f;
-            const Pimpl::BodyData *pBodyData = nullptr;
+            auto found_time = -1.0f;
+            const BodyData *p_body_data = nullptr;
             for (auto &keyframe : timeline)
             /*****************************/
             {
                 auto time = keyframe.first;
-                if (msTimeUsed >= time)
-                    foundTime = time;
+                if (ms_time_used >= time)
+                    found_time = time;
             }
-            auto &bodyData = timeline.at(foundTime);
-            auto imageId = ImageBank::Get()->GetImage(bodyData.imageNameHash);
+            auto &body_data = timeline.at(found_time);
+            auto image_id = ImageBank::Get()->GetImage(body_data.imageNameHash);
             for (auto i = 0; i < positions.size(); i++)
             /*****************************************/
             {
@@ -332,41 +325,41 @@ namespace Narradia
                 auto scaling = scalings.at(i);
                 auto colorMod = colorMods.at(i);
                 auto brightness = brightnesses.at(i);
-                auto modelMatrix = glm::rotate(
+                auto model_matrix = glm::rotate(
                     glm::scale(
                         glm::translate(
                             glm::mat4(1.0), glm::vec3(position.x, position.y, position.z)),
                         glm::vec3(scaling, scaling, scaling)),
                     glm::radians(rotation), glm::vec3(0, 1, 0));
-                auto modelNoTranslationMatrix = glm::rotate(
+                auto model_no_translation_matrix = glm::rotate(
                     glm::scale(
                         glm::translate(glm::mat4(1.0), glm::vec3(0.0, 0.0, 0.0)),
                         glm::vec3(scaling, scaling, scaling)),
                     glm::radians(rotation), glm::vec3(0, 1, 0));
-                glUniformMatrix4fv(p->locationModel, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+                glUniformMatrix4fv(p->location_model_, 1, GL_FALSE, glm::value_ptr(model_matrix));
                 glUniformMatrix4fv(
-                    p->locationModelNoTranslation, 1, GL_FALSE,
-                    glm::value_ptr(modelNoTranslationMatrix));
-                glUniform3fv(p->locationColorMod, 1, glm::value_ptr(colorMod));
+                    p->location_model_no_translation_, 1, GL_FALSE,
+                    glm::value_ptr(model_no_translation_matrix));
+                glUniform3fv(p->location_color_mod_, 1, glm::value_ptr(colorMod));
                 glm::vec3 viewPos(
                     Player::Get()->GetSpaceCoord().x, Player::Get()->GetSpaceCoord().y,
                     Player::Get()->GetSpaceCoord().z);
-                glUniform3fv(p->locationViewPos, 1, glm::value_ptr(viewPos));
+                glUniform3fv(p->location_view_pos_, 1, glm::value_ptr(viewPos));
                 glm::vec3 fogColorGl(
                     GraphicsGl::Get()->GetFogColorObjects().r,
                     GraphicsGl::Get()->GetFogColorObjects().g,
                     GraphicsGl::Get()->GetFogColorObjects().b);
-                glUniform3fv(p->locationFogColor, 1, glm::value_ptr(fogColorGl));
-                glUniform1f(p->locationAlpha, brightness);
-                glUniform1f(p->locationNoFog, 0.0f);
-                glUniform1f(p->locationNoLighting, 0.0f);
-                glBindVertexArray(bodyData.bodyId);
-                glBindTexture(GL_TEXTURE_2D, imageId);
-                glDrawElements(GL_TRIANGLES, bodyData.numVertices, GL_UNSIGNED_INT, NULL);
+                glUniform3fv(p->location_fog_color_, 1, glm::value_ptr(fogColorGl));
+                glUniform1f(p->location_alpha_, brightness);
+                glUniform1f(p->location_no_fog_, 0.0f);
+                glUniform1f(p->location_no_lighting_, 0.0f);
+                glBindVertexArray(body_data.bodyId);
+                glBindTexture(GL_TEXTURE_2D, image_id);
+                glDrawElements(GL_TRIANGLES, body_data.numVertices, GL_UNSIGNED_INT, NULL);
             }
         }
         glBindVertexArray(0);
-        if (!p->isBatchDrawing)
+        if (!p->is_batch_drawing_)
             glUseProgram(0);
     }
 

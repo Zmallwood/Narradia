@@ -6,28 +6,28 @@ namespace Narradia
     FileUtilities::GetFileExtension(const std::string_view &absFilePath)
     /*////////////////////////////////////////////////////////////////*/
     {
-        auto extPos = absFilePath.find_last_of('.') + 1;
-        auto fileExt = absFilePath.substr(extPos);
-        return fileExt;
+        auto ext_pos = absFilePath.find_last_of('.') + 1;
+        auto file_ext = absFilePath.substr(ext_pos);
+        return file_ext;
     }
 
     const std::string_view
     FileUtilities::GetFileNameNoExt(const std::string_view &absFilePath)
     /*////////////////////////////////////////////////////////////////*/
     {
-        auto imgNameStart = absFilePath.find_last_of('/') + 1;
-        auto imgNameWithExt = absFilePath.substr(imgNameStart);
-        auto imgNameExtPos = imgNameWithExt.find_last_of('.');
-        auto fileNameNoExt = imgNameWithExt.substr(0, imgNameExtPos);
-        return fileNameNoExt;
+        auto img_name_start = absFilePath.find_last_of('/') + 1;
+        auto image_name_with_ext = absFilePath.substr(img_name_start);
+        auto img_name_ext_pos = image_name_with_ext.find_last_of('.');
+        auto file_name_no_ext = image_name_with_ext.substr(0, img_name_ext_pos);
+        return file_name_no_ext;
     }
 
     const int
     FileUtilities::GetFileNameHash(const std::string_view &absFilePath)
     /*///////////////////////////////////////////////////////////////*/
     {
-        auto fileNameNoExt = GetFileNameNoExt(absFilePath);
-        auto imgNameHash = Hash(fileNameNoExt);
-        return imgNameHash;
+        auto file_name_no_ext = GetFileNameNoExt(absFilePath);
+        auto img_name_hash = Hash(file_name_no_ext);
+        return img_name_hash;
     }
 }

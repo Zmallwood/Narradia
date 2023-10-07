@@ -6,8 +6,8 @@ namespace Narradia
     /*/////////////////*/
     {
       public:
-        glm::mat4 perspectiveMatrix;
-        glm::mat4 viewMatrix;
+        glm::mat4 perspective_matrix_;
+        glm::mat4 view_matrix_;
     };
 
     CameraGl::CameraGl()
@@ -20,27 +20,27 @@ namespace Narradia
     CameraGl::GetPerspectiveMatrix()
     /*////////////////////////////*/
     {
-        return p->perspectiveMatrix;
+        return p->perspective_matrix_;
     }
 
     const glm::mat4 &
     CameraGl::GetViewMatrix()
     /*/////////////////////*/
     {
-        return p->viewMatrix;
+        return p->view_matrix_;
     }
 
     void
     CameraGl::SetPerspectiveMatrix(glm::mat4 newPerspectiveMatrix)
     /*//////////////////////////////////////////////////////////*/
     {
-        p->perspectiveMatrix = newPerspectiveMatrix;
+        p->perspective_matrix_ = newPerspectiveMatrix;
     }
 
     void
     CameraGl::SetViewMatrix(glm::mat4 newViewMatrix)
     /*////////////////////////////////////////////*/
     {
-        p->viewMatrix = newViewMatrix;
+        p->view_matrix_ = newViewMatrix;
     }
 }

@@ -14,43 +14,43 @@ namespace Narradia
         constexpr static int kNumFloatsPerColor = 4;
         constexpr static int kNumFloatsPerUv = 2;
         constexpr static int kNumFloatsPerNormal = 3;
-        std::vector<GLuint> vaoIds;
-        std::map<BufferTypes, std::map<GLuint, GLuint>> vboIds;
-        std::shared_ptr<ShaderProgram> shaderProgram;
+        std::vector<GLuint> vao_ids_;
+        std::map<BufferTypes, std::map<GLuint, GLuint>> vbo_ids_;
+        std::shared_ptr<ShaderProgram> shader_program_;
     };
 
     RendererBase::RendererBase()
         : p(std::make_shared<Pimpl>())
     /*//////////////////////////////*/
     {
-        p->shaderProgram = std::make_shared<ShaderProgram>();
+        p->shader_program_ = std::make_shared<ShaderProgram>();
     }
 
     GLuint
     RendererBase::GenerateNewVertexArrayId()
     /*////////////////////////////////////*/
     {
-        GLuint newVaoId;
-        glGenVertexArrays(1, &newVaoId);
-        p->vaoIds.push_back(newVaoId);
-        return newVaoId;
+        GLuint new_vao_id;
+        glGenVertexArrays(1, &new_vao_id);
+        p->vao_ids_.push_back(new_vao_id);
+        return new_vao_id;
     }
 
     GLuint
     RendererBase::GenerateNewBufferId(BufferTypes bufferType, GLuint vaoId)
     /*///////////////////////////////////////////////////////////////////*/
     {
-        GLuint newBufferId;
-        glGenBuffers(1, &newBufferId);
-        p->vboIds[bufferType][vaoId] = newBufferId;
-        return newBufferId;
+        GLuint new_buffer_id;
+        glGenBuffers(1, &new_buffer_id);
+        p->vbo_ids_[bufferType][vaoId] = new_buffer_id;
+        return new_buffer_id;
     }
 
     GLuint
     RendererBase::GetBufferId(BufferTypes bufferType, GLuint vaoId) const
     /*/////////////////////////////////////////////////////////////////*/
     {
-        return p->vboIds.at(bufferType).at(vaoId);
+        return p->vbo_ids_.at(bufferType).at(vaoId);
     }
 
     void
@@ -230,29 +230,29 @@ namespace Narradia
     RendererBase::CleanupBase() const
     /*//////////////////////////////*/
     {
-        for (auto &bufferType : p->vboIds)
-        /********************************/
+        for (auto &buffer_type : p->vbo_ids_)
+        /**********************************/
         {
-            for (auto &bufferEntry : bufferType.second)
+            for (auto &buffer_entry : buffer_type.second)
             /*****************************************/
             {
-                glDeleteBuffers(1, &bufferEntry.second);
+                glDeleteBuffers(1, &buffer_entry.second);
             }
         }
-        for (auto vaoId : p->vaoIds)
-        /**************************/
+        for (auto vao_id : p->vao_ids_)
+        /****************************/
         {
-            glDeleteVertexArrays(1, &vaoId);
+            glDeleteVertexArrays(1, &vao_id);
         }
-        if (p->shaderProgram)
-            p->shaderProgram->Cleanup();
+        if (p->shader_program_)
+            p->shader_program_->Cleanup();
     }
 
     void
     RendererBase::UseVaoBegin(int vaoId) const
     /*///////////////////////////////////////*/
     {
-        glUseProgram(p->shaderProgram->GetProgramId());
+        glUseProgram(p->shader_program_->GetProgramId());
         glBindVertexArray(vaoId);
     }
 
@@ -268,14 +268,14 @@ namespace Narradia
     RendererBase::GetUniformLocation(std::string_view varName)
     /*//////////////////////////////////////////////////////*/
     {
-        return glGetUniformLocation(p->shaderProgram->GetProgramId(), varName.data());
+        return glGetUniformLocation(p->shader_program_->GetProgramId(), varName.data());
     }
 
     ShaderProgram *
     RendererBase::GetShaderProgram() const
     /*//////////////////////////////////*/
     {
-        return p->shaderProgram.get();
+        return p->shader_program_.get();
     }
 
     const int

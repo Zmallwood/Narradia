@@ -9,8 +9,8 @@ namespace Narradia
       public:
         std::shared_ptr<Model> LoadSingleModel(const std::string_view &pathStr);
 
-        const std::string_view relModelsPath = "Resources/Models/";
-        std::map<int, std::shared_ptr<const Model>> models;
+        const std::string_view kRelModelsPath = "Resources/Models/";
+        std::map<int, std::shared_ptr<const Model>> models_;
     };
 
     ModelBank::ModelBank()
@@ -23,14 +23,14 @@ namespace Narradia
     ModelBank::GetModel(int modelNameHash) const -> const Model *
     /*/////////////////////////////////////////////////////////*/
     {
-        return p->models.at(modelNameHash).get();
+        return p->models_.at(modelNameHash).get();
     }
 
     auto
     ModelBank::GetAllModels() const -> std::map<int, std::shared_ptr<const Model>>
     /*//////////////////////////////////////////////////////////////////////////*/
     {
-        return p->models;
+        return p->models_;
     }
 
     void
@@ -38,22 +38,22 @@ namespace Narradia
     /*///////////////////*/
     {
         using iterator = std ::filesystem::recursive_directory_iterator;
-        auto absAllModelsPath = std::string(SDL_GetBasePath()) + p->relModelsPath.data();
-        for (const auto &filePath : iterator(absAllModelsPath))
-        /*****************************************************/
+        auto abs_all_models_path = std::string(SDL_GetBasePath()) + p->kRelModelsPath.data();
+        for (const auto &file_path : iterator(abs_all_models_path))
+        /********************************************************/
         {
-            auto pathStr = filePath.path().string();
-            auto extensionPos = pathStr.find_last_of('.') + 1;
-            auto fileExtension = pathStr.substr(extensionPos);
-            if (fileExtension != "dae")
+            auto path_str = file_path.path().string();
+            auto extension_pos = path_str.find_last_of('.') + 1;
+            auto file_extension = path_str.substr(extension_pos);
+            if (file_extension != "dae")
                 continue;
-            auto loadedModel = p->LoadSingleModel(pathStr);
-            auto imageNameStart = pathStr.find_last_of('/') + 1;
-            auto imageNameWithExt = pathStr.substr(imageNameStart);
-            auto imageNameExtPos = imageNameWithExt.find_last_of('.');
-            auto fileNameNoExt = imageNameWithExt.substr(0, imageNameExtPos);
-            auto imageNameHash = Hash(fileNameNoExt);
-            p->models.insert({imageNameHash, loadedModel});
+            auto loaded_model = p->LoadSingleModel(path_str);
+            auto image_name_start = path_str.find_last_of('/') + 1;
+            auto image_name_with_ext = path_str.substr(image_name_start);
+            auto image_name_ext_pos = image_name_with_ext.find_last_of('.');
+            auto file_name_no_ext = image_name_with_ext.substr(0, image_name_ext_pos);
+            auto image_name_hash = Hash(file_name_no_ext);
+            p->models_.insert({image_name_hash, loaded_model});
         }
     }
 

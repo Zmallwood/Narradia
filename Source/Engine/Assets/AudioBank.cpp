@@ -7,10 +7,10 @@ namespace Narradia
     /*//////////////////*/
     {
       public:
-        const std::string_view relMusicAudioPath = "Resources/Audio/Music/";
-        const std::string_view relSoundsAudioPath = "Resources/Audio/Sounds/";
-        std::map<int, Mix_Chunk *> soundFiles;
-        std::map<int, Mix_Music *> musicFiles;
+        const std::string_view kRelMusicAudioPath = "Resources/Audio/Music/";
+        const std::string_view kRelSoundsAudioPath = "Resources/Audio/Sounds/";
+        std::map<int, Mix_Chunk *> sound_files_;
+        std::map<int, Mix_Music *> music_files_;
     };
 
     AudioBank::AudioBank()
@@ -23,41 +23,41 @@ namespace Narradia
     AudioBank::LoadAudioFiles()
     /*///////////////////////*/
     {
-        auto absAllSoundsAudioPath = std::string(SDL_GetBasePath()) + p->relSoundsAudioPath.data();
+        auto abs_all_sounds_audio_path = std::string(SDL_GetBasePath()) + p->kRelSoundsAudioPath.data();
         using iterator = std::filesystem::recursive_directory_iterator;
-        for (const auto &imageFileEntry : iterator(absAllSoundsAudioPath))
-        /****************************************************************/
+        for (const auto &audio_file_entry : iterator(abs_all_sounds_audio_path))
+        /**********************************************************************/
         {
-            auto absFilePath = imageFileEntry.path().string();
-            if (FileUtilities::GetFileExtension(absFilePath) != "wav" &&
-                FileUtilities::GetFileExtension(absFilePath) != "mp3")
+            auto abs_file_path = audio_file_entry.path().string();
+            if (FileUtilities::GetFileExtension(abs_file_path) != "wav" &&
+                FileUtilities::GetFileExtension(abs_file_path) != "mp3")
                 continue;
-            auto sound = Mix_LoadWAV((absFilePath).c_str());
+            auto sound = Mix_LoadWAV((abs_file_path).c_str());
             if (sound == nullptr)
             /*******************/
             {
                 std::cout << "Error loading sound file." << std::endl;
                 return;
             }
-            p->soundFiles.insert({FileUtilities::GetFileNameHash(absFilePath), sound});
+            p->sound_files_.insert({FileUtilities::GetFileNameHash(abs_file_path), sound});
         }
-        auto absAllMusicAudioPath = std::string(SDL_GetBasePath()) + p->relMusicAudioPath.data();
+        auto abs_all_music_audio_path = std::string(SDL_GetBasePath()) + p->kRelMusicAudioPath.data();
         using iterator = std::filesystem::recursive_directory_iterator;
-        for (const auto &imageFileEntry : iterator(absAllMusicAudioPath))
-        /***************************************************************/
+        for (const auto &audio_file_entry : iterator(abs_all_music_audio_path))
+        /*********************************************************************/
         {
-            auto absFilePath = imageFileEntry.path().string();
-            if (FileUtilities::GetFileExtension(absFilePath) != "wav" &&
-                FileUtilities::GetFileExtension(absFilePath) != "mp3")
+            auto abs_file_path = audio_file_entry.path().string();
+            if (FileUtilities::GetFileExtension(abs_file_path) != "wav" &&
+                FileUtilities::GetFileExtension(abs_file_path) != "mp3")
                 continue;
-            auto music = Mix_LoadMUS((absFilePath).c_str());
+            auto music = Mix_LoadMUS((abs_file_path).c_str());
             if (music == nullptr)
             /*******************/
             {
                 std::cout << "Error loading music file." << std::endl;
                 return;
             }
-            p->musicFiles.insert({FileUtilities::GetFileNameHash(absFilePath), music});
+            p->music_files_.insert({FileUtilities::GetFileNameHash(abs_file_path), music});
         }
     }
 
@@ -65,9 +65,9 @@ namespace Narradia
     AudioBank::Cleanup()
     /*////////////////*/
     {
-        for (auto entry : p->soundFiles)
+        for (auto entry : p->sound_files_)
             Mix_FreeChunk(entry.second);
-        for (auto entry : p->musicFiles)
+        for (auto entry : p->music_files_)
             Mix_FreeMusic(entry.second);
         Mix_CloseAudio();
     }
@@ -76,13 +76,13 @@ namespace Narradia
     AudioBank::GetSound(int soundNameHash)
     /*//////////////////////////////////*/
     {
-        return p->soundFiles.at(soundNameHash);
+        return p->sound_files_.at(soundNameHash);
     }
 
     Mix_Music *
     AudioBank::GetMusic(int musicNameHash)
     /*//////////////////////////////////*/
     {
-        return p->musicFiles.at(musicNameHash);
+        return p->music_files_.at(musicNameHash);
     }
 }
