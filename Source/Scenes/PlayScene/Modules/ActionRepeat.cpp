@@ -8,7 +8,7 @@ namespace Narradia
     /*/////////////////////*/
     {
       public:
-        std::function<void()> repeatingAction = nullptr;
+        std::function<void()> repeating_action_ = nullptr;
     };
 
     ActionRepeat::ActionRepeat()
@@ -29,7 +29,7 @@ namespace Narradia
     ActionRepeat::RepeatLastAction()
     /*////////////////////////////*/
     {
-        if (p->repeatingAction == nullptr)
+        if (p->repeating_action_ == nullptr)
         /********************************/
         {
             TextOutBox::Get()->Print("There is no previous action to repeat.");
@@ -39,7 +39,7 @@ namespace Narradia
         {
             TextOutBox::Get()->Print("Repeating action.");
             Log();
-            p->repeatingAction();
+            p->repeating_action_();
         }
     }
 
@@ -47,6 +47,6 @@ namespace Narradia
     ActionRepeat::SetRepeatingAction(std::function<void()> action)
     /*//////////////////////////////////////////////////////////*/
     {
-        p->repeatingAction = action;
+        p->repeating_action_ = action;
     }
 }

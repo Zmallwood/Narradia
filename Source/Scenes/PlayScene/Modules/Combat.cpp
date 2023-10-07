@@ -19,19 +19,19 @@ namespace Narradia
         {
             return;
         }
-        auto targetedMob = MobTargeting::Get()->GetTargetedMob();
-        if (nullptr != targetedMob)
+        auto targeted_mob = MobTargeting::Get()->GetTargetedMob();
+        if (nullptr != targeted_mob)
         /*************************/
         {
-            auto playerWorldAreaPos = Player::Get()->GetWorldAreaPos();
-            auto mapArea = World::Get()->GetMapAreaAtZLevel(playerWorldAreaPos.z);
-            auto mobCoordinate = mapArea->GetMobsMirror().at(targetedMob);
-            auto playerPos = Player::Get()->GetPosition();
-            auto dx = playerPos.x - mobCoordinate.x;
-            auto dy = playerPos.y - mobCoordinate.y;
-            auto dxAbs = std::abs(dx);
-            auto dyAbs = std::abs(dy);
-            if (dxAbs <= 0.8f && dyAbs <= 0.8f)
+            auto player_world_area_pos = Player::Get()->GetWorldAreaPos();
+            auto map_area = World::Get()->GetMapAreaAtZLevel(player_world_area_pos.z);
+            auto mob_coordinate = map_area->GetMobsMirror().at(targeted_mob);
+            auto player_position = Player::Get()->GetPosition();
+            auto dx = player_position.x - mob_coordinate.x;
+            auto dy = player_position.y - mob_coordinate.y;
+            auto dx_abs = std::abs(dx);
+            auto dy_abs = std::abs(dy);
+            if (dx_abs <= 0.8f && dy_abs <= 0.8f)
             /***************************/
             {
                 auto damage = 1 + rand() % 3;
@@ -49,7 +49,7 @@ namespace Narradia
                     /**/
                     {
                         Audio::Get()->PlaySound("Punch",1);
-                        targetedMob->Hit(damage);
+                        targeted_mob->Hit(damage);
                         Player::Get()->data.stats.stam -= 1;
                         Player::Get()->data.stats.rage += 1;
                         TextOutBox::Get()->Print(
@@ -68,7 +68,7 @@ namespace Narradia
                     /**/
                     {
                         Audio::Get()->PlaySound("Punch",1);
-                        targetedMob->Hit(damage);
+                        targeted_mob->Hit(damage);
                         Player::Get()->data.stats.rage -= 1;
                         TextOutBox::Get()->Print(
                             "You hit mob with your club for " + std::to_string(damage) +

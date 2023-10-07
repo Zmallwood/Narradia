@@ -2,7 +2,6 @@
              "Fish", [=, this](Object *&object)
              /************************/
              {
-                 auto playerPosition = Player::Get()->GetPosition().ToIntPoint();
                  auto map_area = World::Get()->GetMapAreaAtZLevel(Player::Get()->GetWorldAreaPos().z);
                  if (map_area->GetTile(p->clicked_tile)->GetGroundType() == Hash("GroundWater"))
                  /*****************************************************************************/

@@ -11,7 +11,8 @@ namespace Narradia
 
       private:
         void Update();
-        Point2 destination = {-1, -1};
+
+        Point2 destination_ = {-1, -1};
         friend class PlayScene;
     };
 }

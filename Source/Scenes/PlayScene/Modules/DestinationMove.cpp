@@ -29,17 +29,17 @@ namespace Narradia
                     if (SDL_GetTicks() > InteractionMenu::Get()->GetTicksClosed() + 400)
                     /************************************************************/
                     {
-                        destination = TileHovering::Get()->hoveredTile;
+                        destination_ = TileHovering::Get()->hoveredTile;
                     }
                 },
                 0, 0);
         }
-        if ((destination.x != -1 && destination.y != -1))
+        if ((destination_.x != -1 && destination_.y != -1))
         /***********************************************/
         {
             auto player_position = Player::Get()->GetPosition();
-            auto dx = destination.x + 0.5f - player_position.x;
-            auto dy = destination.y + 0.5f - player_position.y;
+            auto dx = destination_.x + 0.5f - player_position.x;
+            auto dy = destination_.y + 0.5f - player_position.y;
             if (dx != 0 || dy != 0)
             /*********************/
             {
@@ -56,7 +56,7 @@ namespace Narradia
                 /**/
                 {
                     Player::Get()->data.deltaT = 0;
-                    destination = {-1, -1};
+                    destination_ = {-1, -1};
                     Player::Get()->data.movement.isMoving = false;
                 }
             }
@@ -67,13 +67,13 @@ namespace Narradia
     DestinationMove::ResetDestination()
     /*///////////////////////////////*/
     {
-        destination = {-1, -1};
+        destination_ = {-1, -1};
     }
 
     const Point2 &
     DestinationMove::GetDestination()
     /*/////////////////////////////*/
     {
-        return destination;
+        return destination_;
     }
 }

@@ -12,9 +12,9 @@ namespace Narradia
     CompanionsUpdate::Update()
     /*//////////////////////*/
     {
-        auto mapArea = World::Get()->GetCurrentMapArea();
-        for (auto it = mapArea->GetCompanionsMirror().cbegin();
-             it != mapArea->GetCompanionsMirror().cend();)
+        auto map_area = World::Get()->GetCurrentMapArea();
+        for (auto it = map_area->GetCompanionsMirror().cbegin();
+             it != map_area->GetCompanionsMirror().cend();)
         /*****************************************************/
         {
             auto companion = it->first;
@@ -52,15 +52,15 @@ namespace Narradia
                 /*****************************************************/
                 {
                     companion->UpdateTicksLastMovement();
-                    if (mapArea->GetTile({new_x_i, new_y_i})->GetCompanion() == nullptr)
+                    if (map_area->GetTile({new_x_i, new_y_i})->GetCompanion() == nullptr)
                     /******************************************************************/
                     {
-                        mapArea->GetTile({new_x_i, new_y_i})
-                            ->SetCompanion(mapArea->GetTile(coordinate)->GetCompanion());
-                        mapArea->GetTile(coordinate)->ClearCompanion();
+                        map_area->GetTile({new_x_i, new_y_i})
+                            ->SetCompanion(map_area->GetTile(coordinate)->GetCompanion());
+                        map_area->GetTile(coordinate)->ClearCompanion();
                         companion->SetPreviousCoordinate(coordinate);
-                        mapArea->RemoveCompanionMirror(it++);
-                        mapArea->AddCompanionMirror(companion, {new_x_i, new_y_i});
+                        map_area->RemoveCompanionMirror(it++);
+                        map_area->AddCompanionMirror(companion, {new_x_i, new_y_i});
                         if (false == Player::Get()->HasClaimedTile({new_x_i, new_y_i}))
                         /**********************************************************/
                         {
@@ -80,7 +80,7 @@ namespace Narradia
                     /**/
                     {
                         companion->SetAngle(old_angle);
-                        auto other_companion = mapArea->GetTile({new_x_i, new_y_i})->GetCompanion();
+                        auto other_companion = map_area->GetTile({new_x_i, new_y_i})->GetCompanion();
                         if (other_companion->GetAngle() > companion->GetAngle())
                             companion->ReverseDirection();
                         companion->DecreaseRadius();

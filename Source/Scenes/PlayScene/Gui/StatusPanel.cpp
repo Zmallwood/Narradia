@@ -9,7 +9,7 @@ namespace Narradia
     StatusPanel::StatusPanel()
     /*//////////////////////*/
     {
-        renid_background_image_ = Renderer2DImages::Get()->NewImage();
+        rendid_background_image_ = Renderer2DImages::Get()->NewImage();
         std::tie(rendid_health_text_, rendid_stamina_text_, rendid_rage_text_) =
             TextRenderer::Get()->NewStrings<3>();
         std::tie(rendid_health_bar_, rendid_stamina_bar_, rendid_rage_bar_) =
@@ -30,7 +30,7 @@ namespace Narradia
     /*///////////////////////*/
     {
         auto player = Player::Get();
-        Renderer2DImages::Get()->DrawImage(kHashPanelBackground, renid_background_image_, kBoundsPanel);
+        Renderer2DImages::Get()->DrawImage(kHashPanelBackground, rendid_background_image_, kBoundsPanel);
         auto text_renderer = TextRenderer::Get();
         text_renderer->DrawString(rendid_health_text_, kLabelTextHealth.data(), {0.01f, 0.03f});
         text_renderer->DrawString(rendid_stamina_text_, kLabelTextStamina.data(), {0.01f, 0.06f});

@@ -2,7 +2,6 @@
                          "Mine cave entrance", [=, this](Object *&object)
                          /**********************************************/
                          {
-                             auto playerPosition = Player::Get()->GetPosition().ToIntPoint();
                              auto map_area =
                                  World::Get()->GetMapAreaAtZLevel(Player::Get()->GetWorldAreaPos().z);
                              auto mine_entrance = std::make_shared<Object>("ObjectMineEntrance");

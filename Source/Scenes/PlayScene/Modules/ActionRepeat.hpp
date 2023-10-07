@@ -12,6 +12,7 @@ namespace Narradia
       private:
         void Update();
         void SetRepeatingAction(std::function<void()>);
+        
         class Pimpl;
         std::shared_ptr<Pimpl> p;
         friend class PlayScene;

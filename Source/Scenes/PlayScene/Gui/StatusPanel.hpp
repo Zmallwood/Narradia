@@ -21,7 +21,7 @@ namespace Narradia
         const std::string_view kLabelTextHealth = "Health";
         const std::string_view kLabelTextStamina = "Stamina";
         const std::string_view kLabelTextRage = "Rage";
-        RenderId renid_background_image_;
+        RenderId rendid_background_image_;
         RenderId rendid_health_text_;
         RenderId rendid_stamina_text_;
         RenderId rendid_rage_text_;

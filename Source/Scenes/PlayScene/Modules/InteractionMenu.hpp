@@ -22,8 +22,10 @@ namespace Narradia
         const std::function<void(Object *&)> &GetAction();
         static float GetMarginX();
         static float GetMarginY();
+
         class Pimpl;
         std::shared_ptr<Pimpl> p;
+
         friend class InteractionMenu;
     };
     
@@ -41,8 +43,10 @@ namespace Narradia
         void ConstructMenu();
         void CloseMenu();
         static float GetMarginY();
+
         class Pimpl;
         std::shared_ptr<Pimpl> p;
+        
         friend class PlayScene;
     };
 }

@@ -7,10 +7,10 @@ namespace Narradia
     {
       public:
         void Update();
-        bool ready_for_next_advie = true;
+        bool ready_for_next_advice_ = true;
 
       private:
-        bool has_given_foraging_advice = false;
-        bool has_given_create_stone_axe_advice = false;
+        bool has_given_foraging_advice_ = false;
+        bool has_given_create_stone_axe_advice_ = false;
     };
 }
