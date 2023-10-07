@@ -1,5 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 #include "InteractionMenu.hpp"
+#include "ActionRepeat.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DSolidColors.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
 #include "Engine/Core/Input/MouseInput.hpp"
@@ -9,18 +10,18 @@
 #include "Scenes/PlayScene/Gui/InventoryGui.hpp"
 #include "Scenes/PlayScene/Gui/OpenContainerGui.hpp"
 #include "Scenes/PlayScene/Gui/SplitStackGui.hpp"
+#include "Scenes/PlayScene/Modules/MobTargeting.hpp"
 #include "Scenes/PlayScene/ObjectHandling.hpp"
 #include "Scenes/PlayScene/PlayScene.hpp"
 #include "Scenes/Shared/MouseRotation.hpp"
 #include "Scenes/Shared/TileHovering.hpp"
+#include "World/Actors/Player.hpp"
 #include "World/MapArea.hpp"
 #include "World/Object.hpp"
 #include "World/ObjectBehaviourList.hpp"
 #include "World/ObjectsCollection.hpp"
-#include "World/Actors/Player.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
-#include "ActionRepeat.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -183,13 +184,13 @@ namespace Narradia
     {
         p->available_menu_entries = {
 #include "MenuActions/CreateActions/CreateStoneAxe.inc.cpp"
-#include "MenuActions/CreateActions/CreateWoodenBox.inc.cpp"
 #include "MenuActions/CreateActions/CreateWoodLog.inc.cpp"
 #include "MenuActions/CreateActions/CreateWoodPlank.inc.cpp"
 #include "MenuActions/CreateActions/CreateWoodWallE.inc.cpp"
 #include "MenuActions/CreateActions/CreateWoodWallN.inc.cpp"
 #include "MenuActions/CreateActions/CreateWoodWallS.inc.cpp"
 #include "MenuActions/CreateActions/CreateWoodWallW.inc.cpp"
+#include "MenuActions/CreateActions/CreateWoodenBox.inc.cpp"
 #include "MenuActions/CreateActions/MineCaveEntrance.inc.cpp"
 #include "MenuActions/ObjectActions/ChopDownTree.inc.cpp"
 #include "MenuActions/ObjectActions/CreateBurningCampfire.inc.cpp"
@@ -246,8 +247,8 @@ namespace Narradia
                     p->ticks_closed = SDL_GetTicks();
                 });
         }
-        else if (!p->shown)
-        /*******************/
+        else if (!p->shown && nullptr == MobTargeting::Get().GetTargetedMob())
+        /********************************************************************/
         {
             MouseInput::Get().GetRightButton().AddReleasedAction(
                 "RClickMenuShowMenu",

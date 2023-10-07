@@ -2,18 +2,19 @@
 #include "PlayScene.hpp"
 #include "Engine/Core/Audio.hpp"
 #include "Gui/PlaySceneGuiMenu.hpp"
+#include "Modules/ActionRepeat.hpp"
+#include "Modules/ActiveGameRound.hpp"
 #include "Modules/Advicer.hpp"
 #include "Modules/CompanionsUpdate.hpp"
 #include "Modules/DestinationMove.hpp"
 #include "Modules/InteractionMenu.hpp"
 #include "Modules/MobMovement.hpp"
+#include "Modules/MobTargeting.hpp"
 #include "Modules/ObjectMoving.hpp"
 #include "Modules/ObjectTransformation.hpp"
+#include "Modules/PlaySceneHotkeys.hpp"
 #include "Modules/SettlementCreator.hpp"
 #include "Modules/StartConditions.hpp"
-#include "Modules/PlaySceneHotkeys.hpp"
-#include "Modules/ActionRepeat.hpp"
-#include "Modules/ActiveGameRound.hpp"
 #include "PlaySceneGui.hpp"
 #include "Scenes/Shared/GuiObjectHovering.hpp"
 #include "Scenes/Shared/KeyboardMove.hpp"
@@ -92,6 +93,8 @@ namespace Narradia
         MobMovement::Get().Update();
         Log();
         Advicer::Get().Update();
+        Log();
+        MobTargeting::Get().Update();
     }
 
     void

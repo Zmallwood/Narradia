@@ -44,7 +44,14 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "cinttypes": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "forward_list": "cpp",
+        "map": "cpp",
+        "unordered_set": "cpp",
+        "optional": "cpp",
+        "istream": "cpp",
+        "sstream": "cpp",
+        "typeindex": "cpp"
     },
     "workbench.editor.showTabs": false
 }

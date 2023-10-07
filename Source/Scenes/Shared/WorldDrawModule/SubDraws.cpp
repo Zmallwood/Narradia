@@ -8,6 +8,7 @@
 #include "Engine/Core/Graphics/Rendering/RendererTiles.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
 #include "RenderLoop.hpp"
+#include "Scenes/PlayScene/Modules/MobTargeting.hpp"
 #include "Scenes/Shared/TileHovering.hpp"
 #include "Utilities.hpp"
 #include "World/Actors/Companion.hpp"
@@ -230,6 +231,18 @@ namespace Narradia
             v3.position.y += 0.03f;
             RendererTiles::Get().UpdateDrawTile(
                 Hash("TileHovered"), p->idsTileLayers[tileCoord.x][tileCoord.y], v0, v1, v2, v3,
+                normal00, normal10, normal11, normal01);
+        }
+        auto mob = tile->GetMob().get();
+        if (MobTargeting::Get().GetTargetedMob() == mob && nullptr != mob)
+        /****************************************************************/
+        {
+            v0.position.y += 0.03f;
+            v1.position.y += 0.03f;
+            v2.position.y += 0.03f;
+            v3.position.y += 0.03f;
+            RendererTiles::Get().UpdateDrawTile(
+                Hash("TileTargetedMob"), p->idsTileLayers[tileCoord.x][tileCoord.y], v0, v1, v2, v3,
                 normal00, normal10, normal11, normal01);
         }
         v0.position.y += 0.03f;

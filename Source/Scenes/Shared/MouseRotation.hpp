@@ -22,6 +22,7 @@ namespace Narradia
         Uint64 ticksLastUpdate = 0;
         friend class PlayScene;
         friend class EditorScene;
+        friend class MobTargeting;
     };
 }
 //////////////////////////////////////////////////////////////////////
