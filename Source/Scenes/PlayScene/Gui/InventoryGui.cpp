@@ -19,16 +19,16 @@ namespace Narradia
             /********************************/
             {
                 slots[x][y] = std::make_shared<GuiWindowObjectSlot>(
-                    this, x, y, i, slotWidth, Player::Get().data.inventory.objects);
+                    this, x, y, i, slotWidth, Player::Get()->data.inventory.objects);
                 i++;
             }
         }
-        bottomBarRendId = Renderer2DImages::Get().NewImage();
+        bottomBarRendId = Renderer2DImages::Get()->NewImage();
     }
 
     void
     InventoryGui::UpdateDerived()
-    /*//////////////////////////////*/
+    /*/////////////////////////*/
     {
         if (GetBounds().Contains(GetMousePositionF()))
         /********************************************/
@@ -50,7 +50,7 @@ namespace Narradia
 
     void
     InventoryGui::RenderDerived() const
-    /*////////////////////////////////////*/
+    /*///////////////////////////////*/
     {
         Log();
         for (auto y = 0; y < numRows; y++)
@@ -63,8 +63,7 @@ namespace Narradia
             GetBounds().x, GetBounds().y + GetBounds().height - bottomBarHeight, GetBounds().width,
             bottomBarHeight};
         Log();
-        Renderer2DImages::Get().DrawImage(
+        Renderer2DImages::Get()->DrawImage(
             "GuiWindowInvBottomBarBg", bottomBarRendId, bottomBarBounds);
     }
 }
-//////////////////////////////////////////////////////////////////////

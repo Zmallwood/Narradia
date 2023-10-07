@@ -10,7 +10,7 @@
 namespace Narradia
 {
     class IntroScene::Pimpl
-    /*//////////////////*/
+    /*///////////////////*/
     {
       public:
         RenderId rendIdBackImage;
@@ -23,46 +23,45 @@ namespace Narradia
     /*//////////////////////////////*/
     {
         CreateGui();
-        p->rendIdBackImage = Renderer2DImages::Get().NewImage();
-        p->rendIdLogoImage = Renderer2DImages::Get().NewImage();
-        p->rendIdStartText = TextRenderer::Get().NewString();
-        Audio::Get().PlayMusic("ForestSounds");
+        p->rendIdBackImage = Renderer2DImages::Get()->NewImage();
+        p->rendIdLogoImage = Renderer2DImages::Get()->NewImage();
+        p->rendIdStartText = TextRenderer::Get()->NewString();
+        Audio::Get()->PlayMusic("ForestSounds");
     }
 
     void
     IntroScene::UpdateDerived()
-    /*///////////////////////////*/
+    /*///////////////////////*/
     {
         Log();
-        MouseInput::Get().GetLeftButton().AddFiredAction(
+        MouseInput::Get()->GetLeftButton().AddFiredAction(
             "IntroSceneGoToMainMenu",
-            [&]() { SceneManager::Get().ChangeScene(SceneNames::MainMenu); }, 0);
-        MouseInput::Get().GetMiddleButton().AddFiredAction(
+            [&]() { SceneManager::Get()->ChangeScene(SceneNames::MainMenu); }, 0);
+        MouseInput::Get()->GetMiddleButton().AddFiredAction(
             "IntroSceneGoToMainMenu",
-            [&]() { SceneManager::Get().ChangeScene(SceneNames::MainMenu); }, 0);
-        MouseInput::Get().GetRightButton().AddFiredAction(
+            [&]() { SceneManager::Get()->ChangeScene(SceneNames::MainMenu); }, 0);
+        MouseInput::Get()->GetRightButton().AddFiredAction(
             "IntroSceneGoToMainMenu",
-            [&]() { SceneManager::Get().ChangeScene(SceneNames::MainMenu); }, 0);
-        if (KeyboardInput::Get().AnyKeyHasBeenFired())
-            SceneManager::Get().ChangeScene(SceneNames::MainMenu);
+            [&]() { SceneManager::Get()->ChangeScene(SceneNames::MainMenu); }, 0);
+        if (KeyboardInput::Get()->AnyKeyHasBeenFired())
+            SceneManager::Get()->ChangeScene(SceneNames::MainMenu);
     }
 
     void
     IntroScene::RenderDerived()
-    /*///////////////////////////*/
+    /*///////////////////////*/
     {
         Log();
         RectangleF rectBack = {0.0f, 0.0f, 1.0f, 1.0f};
         Log();
-        Renderer2DImages::Get().DrawImage("DefaultSceneBackground", p->rendIdBackImage, rectBack);
+        Renderer2DImages::Get()->DrawImage("DefaultSceneBackground", p->rendIdBackImage, rectBack);
         Log();
         RectangleF rectLogo = {0.3f, 0.1f, 0.4f, 0.1f};
-        Renderer2DImages::Get().DrawImage("NarradiaLogo", p->rendIdLogoImage, rectLogo);
+        Renderer2DImages::Get()->DrawImage("NarradiaLogo", p->rendIdLogoImage, rectLogo);
         Log();
         if (SDL_GetTicks() % 1000 < 500)
-            TextRenderer::Get().DrawString(
+            TextRenderer::Get()->DrawString(
                 p->rendIdStartText, "Press to Start", {0.5f, 0.5f}, Colors::wheat, true);
         Log();
     }
 }
-//////////////////////////////////////////////////////////////////////

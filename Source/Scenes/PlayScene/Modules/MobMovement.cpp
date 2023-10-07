@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////
 #include "MobMovement.hpp"
-#include "World/MapArea.hpp"
 #include "World/Actors/Mob.hpp"
 #include "World/Actors/Player.hpp"
+#include "World/MapArea.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
@@ -10,14 +10,14 @@ namespace Narradia
 {
     void
     MobMovement::Update()
-    /*//////////////////////*/
+    /*/////////////////*/
     {
         Log();
-        auto player_world_area_position = Player::Get().GetWorldAreaPos();
-        if (nullptr == World::GetPointer())
+        auto player_world_area_position = Player::Get()->GetWorldAreaPos();
+        if (nullptr == World::Get())
             return;
         Log();
-        auto map_area = World::Get().GetMapAreaAtZLevel(player_world_area_position.z);
+        auto map_area = World::Get()->GetMapAreaAtZLevel(player_world_area_position.z);
         if (nullptr == map_area)
             return;
         for (auto it = map_area->GetMobsMirror().cbegin(); it != map_area->GetMobsMirror().cend();)
@@ -30,7 +30,7 @@ namespace Narradia
             /*********************************************************************/
             {
                 if (mob->IsAggroingPlayer()) {
-                    mob->SetDestination(Player::Get().GetPosition().ToIntPoint());
+                    mob->SetDestination(Player::Get()->GetPosition().ToIntPoint());
                 }
                 else if (mob->HasNoDestination())
                 /*********************************/
@@ -118,4 +118,3 @@ namespace Narradia
         }
     }
 }
-//////////////////////////////////////////////////////////////////////

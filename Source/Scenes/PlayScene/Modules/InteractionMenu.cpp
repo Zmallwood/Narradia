@@ -13,8 +13,8 @@
 #include "Scenes/PlayScene/Modules/MobTargeting.hpp"
 #include "Scenes/PlayScene/ObjectHandling.hpp"
 #include "Scenes/PlayScene/PlayScene.hpp"
-#include "Scenes/Shared/MouseRotation.hpp"
-#include "Scenes/Shared/TileHovering.hpp"
+#include "Scenes/SharedSceneModules/MouseRotation.hpp"
+#include "Scenes/SharedSceneModules/TileHovering.hpp"
 #include "World/Actors/Player.hpp"
 #include "World/MapArea.hpp"
 #include "World/Object.hpp"
@@ -26,7 +26,7 @@
 namespace Narradia
 {
     class InteractionMenuEntry::Pimpl
-    /*//////////////////////////*/
+    /*/////////////////////////////*/
     {
       public:
         static constexpr float k_margin_x = 0.003f;
@@ -45,35 +45,35 @@ namespace Narradia
     {
         p->label = init_label;
         p->action = init_action;
-        p->id_label = TextRenderer::Get().NewString();
+        p->id_label = TextRenderer::Get()->NewString();
     }
 
     void
     InteractionMenuEntry::Render()
-    /*////////////////////////////*/
+    /*//////////////////////////*/
     {
-        TextRenderer::Get().DrawString(
+        TextRenderer::Get()->DrawString(
             p->id_label, p->label, p->bounds.GetPosition().Translate(GetMarginX(), GetMarginY()));
         ResetHovering();
     }
 
     auto
     InteractionMenuEntry::Copy() -> InteractionMenuEntry
-    /*///////////////////////////////////////////////*/
+    /*////////////////////////////////////////////////*/
     {
         return *this;
     }
 
     RectangleF &
     InteractionMenuEntry::GetBounds()
-    /*//////////////////////////////////////*/
+    /*/////////////////////////////*/
     {
         return p->bounds;
     }
 
     auto
     InteractionMenuEntry::SetBounds(RectangleF new_bounds) -> InteractionMenuEntry
-    /*/////////////////////////////////////////////////////////////////////////*/
+    /*//////////////////////////////////////////////////////////////////////////*/
     {
         p->bounds = new_bounds;
         return *this;
@@ -81,7 +81,7 @@ namespace Narradia
 
     auto
     InteractionMenuEntry::SetTargetObject(Object *object) -> InteractionMenuEntry
-    /*////////////////////////////////////////////////////////////////////////*/
+    /*/////////////////////////////////////////////////////////////////////////*/
     {
         p->targeted_object = object;
         return *this;
@@ -89,62 +89,62 @@ namespace Narradia
 
     void
     InteractionMenuEntry::MakeHovered()
-    /*/////////////////////////////////*/
+    /*///////////////////////////////*/
     {
         p->hovered = true;
     }
 
     bool
     InteractionMenuEntry::IsHovered()
-    /*///////////////////////////////*/
+    /*/////////////////////////////*/
     {
         return p->hovered;
     }
 
     void
     InteractionMenuEntry::ResetHovering()
-    /*///////////////////////////////////*/
+    /*/////////////////////////////////*/
     {
         p->hovered = false;
     }
 
     Object *&
     InteractionMenuEntry::GetTargetObject()
-    /*/////////////////////////////////////////*/
+    /*///////////////////////////////////*/
     {
         return p->targeted_object;
     }
 
     float
     InteractionMenuEntry::GetMarginX()
-    /*/////////////////////////////////*/
+    /*//////////////////////////////*/
     {
         return Pimpl::k_margin_x;
     }
 
     float
     InteractionMenuEntry::GetMarginY()
-    /*/////////////////////////////////*/
+    /*//////////////////////////////*/
     {
         return ConvertWidthToHeight(Pimpl::k_margin_x);
     }
 
     const std::string_view &
     InteractionMenuEntry::GetLabel()
-    /*/////////////////////////////////////////////////*/
+    /*////////////////////////////*/
     {
         return p->label;
     }
 
     const std::function<void(Object *&)> &
     InteractionMenuEntry::GetAction()
-    /*////////////////////////////////////////////////////////////////*/
+    /*//////////////////////////////////*/
     {
         return p->action;
     }
 
     class InteractionMenu::Pimpl
-    /*/////////////////////*/
+    /*////////////////////////*/
     {
       public:
         static constexpr float k_menu_width = 0.1f;
@@ -165,22 +165,22 @@ namespace Narradia
         : p(std::make_shared<Pimpl>())
     /*//////////////////////////////*/
     {
-        p->id_menu_back = Renderer2DSolidColors::Get().NewRectangle();
-        p->id_hovered_entry_back = Renderer2DSolidColors::Get().NewRectangle();
-        p->id_menu_title = TextRenderer::Get().NewString();
+        p->id_menu_back = Renderer2DSolidColors::Get()->NewRectangle();
+        p->id_hovered_entry_back = Renderer2DSolidColors::Get()->NewRectangle();
+        p->id_menu_title = TextRenderer::Get()->NewString();
         CreateAvailableActions();
     }
 
     float
     InteractionMenu::GetMarginY()
-    /*////////////////////////////*/
+    /*/////////////////////////*/
     {
         return ConvertWidthToHeight(Pimpl::k_margin_x);
     }
 
     void
     InteractionMenu::CreateAvailableActions()
-    /*///////////////////////////////////////*/
+    /*/////////////////////////////////////*/
     {
         p->available_menu_entries = {
 #include "MenuActions/CreateActions/CreateStoneAxe.inc.cpp"
@@ -208,7 +208,7 @@ namespace Narradia
 
     void
     InteractionMenu::Update()
-    /*///////////////////////*/
+    /*/////////////////////*/
     {
         auto mouse_position = GetMousePositionF();
         if (p->shown)
@@ -220,7 +220,7 @@ namespace Narradia
                 if (menu_entry.GetBounds().Contains(mouse_position))
                 /**************************************************/
                 {
-                    MouseInput::Get().GetLeftButton().AddFiredAction(
+                    MouseInput::Get()->GetLeftButton().AddFiredAction(
                         "RClickMenuExecuteAction" + std::string(menu_entry.GetLabel()),
                         [&]
                         /************************************/
@@ -229,7 +229,7 @@ namespace Narradia
                             /*******************************************************/
                             {
                                 menu_entry.GetAction()(menu_entry.GetTargetObject());
-                                ActionRepeat::Get().SetRepeatingAction(
+                                ActionRepeat::Get()->SetRepeatingAction(
                                     [&] { menu_entry.GetAction()(menu_entry.GetTargetObject()); });
                                 CloseMenu();
                             }
@@ -239,7 +239,7 @@ namespace Narradia
                     menu_entry.MakeHovered();
                 }
             }
-            MouseInput::Get().GetLeftButton().AddFiredAction(
+            MouseInput::Get()->GetLeftButton().AddFiredAction(
                 "RClickMenuHideMenu", [&]
                 /***********************/
                 {
@@ -247,15 +247,15 @@ namespace Narradia
                     p->ticks_closed = SDL_GetTicks();
                 });
         }
-        else if (!p->shown && nullptr == MobTargeting::Get().GetTargetedMob())
+        else if (!p->shown && nullptr == MobTargeting::Get()->GetTargetedMob())
         /********************************************************************/
         {
-            MouseInput::Get().GetRightButton().AddReleasedAction(
+            MouseInput::Get()->GetRightButton().AddReleasedAction(
                 "RClickMenuShowMenu",
                 [=, this]
                 /*******/
                 {
-                    if (MouseInput::Get().GetRightButton().ClickDurationPeekResult() <
+                    if (MouseInput::Get()->GetRightButton().ClickDurationPeekResult() <
                         MouseButton::GetDefaultClickSpeed())
                     /**************************************************************/
                     {
@@ -268,7 +268,7 @@ namespace Narradia
 
     void
     InteractionMenu::CloseMenu()
-    /*//////////////////////////*/
+    /*////////////////////////*/
     {
         p->ticks_closed = SDL_GetTicks();
         p->shown = false;
@@ -276,7 +276,7 @@ namespace Narradia
 
     void
     InteractionMenu::AddEntryToMenu(std::string_view actionName, Object *object)
-    /*//////////////////////////////////////////////////////////////////////////*/
+    /*////////////////////////////////////////////////////////////////////////*/
     {
         auto entry_index = p->current_menu_entries.size();
         auto entry_bounds = RectangleF{
@@ -292,22 +292,22 @@ namespace Narradia
 
     void
     InteractionMenu::ConstructMenu()
-    /*//////////////////////////////*/
+    /*////////////////////////////*/
     {
         auto mouse_position = GetMousePositionF();
-        auto block_tile_hovering = TileHovering::GetPointer();
-        auto player = Player::GetPointer();
+        auto block_tile_hovering = TileHovering::Get();
+        auto player = Player::Get();
         auto player_world_area_position = player->GetWorldAreaPos();
-        auto map_area = World::Get().GetMapAreaAtZLevel(player_world_area_position.z);
+        auto map_area = World::Get()->GetMapAreaAtZLevel(player_world_area_position.z);
         auto tile = map_area->GetTile(block_tile_hovering->hoveredTile);
-        auto gui_window_inventory = InventoryGui::GetPointer();
+        auto gui_window_inventory = InventoryGui::Get();
         if (tile == nullptr && GuiWindowObjectSlot::hoveredObject == nullptr)
             return;
         if (tile->GetMob() == nullptr || GuiWindowObjectSlot::hoveredObject)
         /******************************************************************/
         {
             p->shown = true;
-            MouseInput::Get().GetLeftButton().AddFiredAction(
+            MouseInput::Get()->GetLeftButton().AddFiredAction(
                 "RClickMenuHideOnMouseLeftClick", [&] { CloseMenu(); }, 6);
             p->position = mouse_position;
             p->current_menu_entries.clear();
@@ -363,8 +363,8 @@ namespace Narradia
                 {
                     AddEntryToMenu("CreateStoneAxe", object);
                 }
-                if (ObjectBehaviourList::Get().HasBehaviourData(object->GetObjectType()) &&
-                    ObjectBehaviourList::Get().IsContainer(object->GetObjectType()) > 0)
+                if (ObjectBehaviourList::Get()->HasBehaviourData(object->GetObjectType()) &&
+                    ObjectBehaviourList::Get()->IsContainer(object->GetObjectType()) > 0)
                 /***********************************************************************/
                 {
                     AddEntryToMenu("OpenContainer", object);
@@ -414,16 +414,16 @@ namespace Narradia
 
     void
     InteractionMenu::Render()
-    /*///////////////////////*/
+    /*/////////////////////*/
     {
         if (!p->shown)
             return;
         auto rectangle = RectangleF{
             p->position.x, p->position.y, Pimpl::k_menu_width,
             (p->current_menu_entries.size() + 1) * (Pimpl::k_line_height + GetMarginY())};
-        Renderer2DSolidColors::Get().FillRectangle(
+        Renderer2DSolidColors::Get()->FillRectangle(
             p->id_menu_back, rectangle, Colors::alphaElegantBlue);
-        TextRenderer::Get().DrawString(
+        TextRenderer::Get()->DrawString(
             p->id_menu_title,
             "Actions:", {rectangle.x + Pimpl::k_margin_x, rectangle.y + GetMarginY()},
             Colors::yellow);
@@ -433,7 +433,7 @@ namespace Narradia
             if (entry.IsHovered())
             /********************/
             {
-                Renderer2DSolidColors::Get().FillRectangle(
+                Renderer2DSolidColors::Get()->FillRectangle(
                     p->id_hovered_entry_back, entry.GetBounds(), Colors::alphaMildBlue);
             }
             entry.Render();
@@ -442,9 +442,8 @@ namespace Narradia
 
     int
     InteractionMenu::GetTicksClosed()
-    /*//////////////////////////////*/
+    /*/////////////////////////////*/
     {
         return p->ticks_closed;
     }
 }
-//////////////////////////////////////////////////////////////////////

@@ -18,5 +18,4 @@ namespace Narradia
         class Pimpl;
         std::shared_ptr<Pimpl> p;
     };
-}
-//////////////////////////////////////////////////////////////////////
+} 

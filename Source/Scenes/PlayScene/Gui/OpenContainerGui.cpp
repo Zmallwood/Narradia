@@ -13,7 +13,7 @@ namespace Narradia
     {
         Show();
         auto slotWidth = (GetBounds().width - 2 * GetMargin()) / maxNumCols - GetMargin();
-        numSlots = ObjectBehaviourList::Get().GetContainerSlots(object_->GetObjectType());
+        numSlots = ObjectBehaviourList::Get()->GetContainerSlots(object_->GetObjectType());
         auto i = 0;
         for (auto y = 0; y < maxNumRows; y++)
         /***********************************/
@@ -32,7 +32,7 @@ namespace Narradia
 
     void
     OpenContainerGui::UpdateDerived()
-    /*//////////////////////////////////*/
+    /*/////////////////////////////*/
     {
         if (GetBounds().Contains(GetMousePositionF()))
         /********************************************/
@@ -64,7 +64,7 @@ namespace Narradia
 
     void
     OpenContainerGui::RenderDerived() const
-    /*////////////////////////////////////////*/
+    /*///////////////////////////////////*/
     {
         auto i = 0;
         for (auto y = 0; y < maxNumRows; y++)
@@ -81,4 +81,3 @@ namespace Narradia
         }
     }
 }
-//////////////////////////////////////////////////////////////////////

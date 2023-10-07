@@ -37,7 +37,7 @@ namespace Narradia
 
     RenderId
     RendererBillboardImages::NewBillboardImage()
-    /*/////////////////////////////////////////////////*/
+    /*////////////////////////////////////////*/
     {
         auto vaoId = GenerateNewVertexArrayId();
         UseVaoBegin(vaoId);
@@ -72,14 +72,14 @@ namespace Narradia
         UseVaoBegin(vaoId);
         glUniformMatrix4fv(
             p->locationProjection, 1, GL_FALSE,
-            glm::value_ptr(CameraGl::Get().GetPerspectiveMatrix()));
+            glm::value_ptr(CameraGl::Get()->GetPerspectiveMatrix()));
         glUniformMatrix4fv(
-            p->locationView, 1, GL_FALSE, glm::value_ptr(CameraGl::Get().GetViewMatrix()));
+            p->locationView, 1, GL_FALSE, glm::value_ptr(CameraGl::Get()->GetViewMatrix()));
         glm::vec3 centerGl = {position.x, position.y, position.z};
         glUniform3fv(p->locationParticleCenterWorldspace, 1, &centerGl[0]);
         glm::vec2 glmBillboardSize = {billboardSize.width, billboardSize.height};
         glUniform2fv(p->locationBillboardSize, 1, &glmBillboardSize[0]);
-        auto imageId = ImageBank::Get().GetImage(imageNameHash);
+        auto imageId = ImageBank::Get()->GetImage(imageNameHash);
         glBindTexture(GL_TEXTURE_2D, imageId);
         std::vector<int> indices(RendererBase::GetNumVerticlesInRectangle());
         std::iota(std::begin(indices), std::end(indices), 0);
@@ -106,9 +106,8 @@ namespace Narradia
 
     void
     RendererBillboardImages::Cleanup()
-    /*///////////////////////////////////*/
+    /*//////////////////////////////*/
     {
         CleanupBase();
     }
 }
-//////////////////////////////////////////////////////////////////////

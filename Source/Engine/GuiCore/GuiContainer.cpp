@@ -24,35 +24,35 @@ namespace Narradia
 
     RectangleF
     GuiContainer::GetBounds() const
-    /*//////////////////////////////////////*/
+    /*///////////////////////////*/
     {
         return {p->position.x, p->position.y, p->size.width, p->size.height};
     }
 
     const SizeF &
     GuiContainer::GetSize() const
-    /*//////////////////////////////////////*/
+    /*/////////////////////////*/
     {
         return p->size;
     }
 
     const Point2F &
     GuiContainer::GetPosition() const
-    /*////////////////////////////////////////////*/
+    /*/////////////////////////////*/
     {
         return p->position;
     }
 
     void
     GuiContainer::SetPosition(Point2F newPosition)
-    /*///////////////////////////////////////////////*/
+    /*//////////////////////////////////////////*/
     {
         p->position = newPosition;
     }
 
     void
     GuiContainer::Update()
-    /*///////////////////////*/
+    /*//////////////////*/
     {
         for (auto &guiButton : p->guiButtons)
             guiButton->Update();
@@ -62,7 +62,7 @@ namespace Narradia
 
     void
     GuiContainer::Render() const
-    /*/////////////////////////////*/
+    /*////////////////////////*/
     {
         for (auto &guiButton : p->guiButtons)
             guiButton->Render();
@@ -74,7 +74,7 @@ namespace Narradia
     GuiContainer::AddGuiButton(
         const std::string_view &text, RectangleF bounds, std::function<void()> action,
         const std::string_view &imageName, const std::string_view &imageNameHovered)
-    /*////////////////////////////////////////////////////////////////////////////*/
+    /*//////////////////////////////////////////////////////////////////////////////*/
     {
         std::shared_ptr<GuiButton> newGuiButton;
         if (imageName != "" && imageNameHovered != "")
@@ -87,9 +87,8 @@ namespace Narradia
 
     void
     GuiContainer::AddGuiComponent(std::shared_ptr<GuiComponent> newComponent)
-    /*//////////////////////////////////////////////////////////////////////////*/
+    /*/////////////////////////////////////////////////////////////////////*/
     {
         p->guiComponents.push_back(newComponent);
     }
 }
-//////////////////////////////////////////////////////////////////////

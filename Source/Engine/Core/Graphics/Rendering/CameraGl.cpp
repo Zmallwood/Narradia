@@ -17,28 +17,31 @@ namespace Narradia
     {
     }
 
-    const glm::mat4 &CameraGl::GetPerspectiveMatrix()
-    /*/////////////////////////////////////////////*/
+    const glm::mat4 &
+    CameraGl::GetPerspectiveMatrix()
+    /*////////////////////////////*/
     {
         return p->perspectiveMatrix;
     }
 
-    const glm::mat4 &CameraGl::GetViewMatrix()
-    /*//////////////////////////////////////*/
+    const glm::mat4 &
+    CameraGl::GetViewMatrix()
+    /*/////////////////////*/
     {
         return p->viewMatrix;
     }
 
-    void CameraGl::SetPerspectiveMatrix(glm::mat4 newPerspectiveMatrix)
-    /*///////////////////////////////////////////////////////////////*/
+    void
+    CameraGl::SetPerspectiveMatrix(glm::mat4 newPerspectiveMatrix)
+    /*//////////////////////////////////////////////////////////*/
     {
         p->perspectiveMatrix = newPerspectiveMatrix;
     }
 
-    void CameraGl::SetViewMatrix(glm::mat4 newViewMatrix)
-    /*/////////////////////////////////////////////////*/
+    void
+    CameraGl::SetViewMatrix(glm::mat4 newViewMatrix)
+    /*////////////////////////////////////////////*/
     {
         p->viewMatrix = newViewMatrix;
     }
 }
-//////////////////////////////////////////////////////////////////////

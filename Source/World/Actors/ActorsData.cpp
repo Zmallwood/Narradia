@@ -6,7 +6,7 @@ namespace Narradia
 {
     void
     Inventory::Add(std::string_view objectName, int quantity)
-    /*//////////////////////////////////////////////////////////*/
+    /*/////////////////////////////////////////////////////*/
     {
         for (auto i = 0; i < kMaxNumberInventoryObjects; i++)
         /***************************************************/
@@ -23,7 +23,7 @@ namespace Narradia
 
     void
     Inventory::Add(std::shared_ptr<Object> object)
-    /*///////////////////////////////////////////////*/
+    /*//////////////////////////////////////////*/
     {
         for (auto i = 0; i < kMaxNumberInventoryObjects; i++)
         /***************************************************/
@@ -39,7 +39,7 @@ namespace Narradia
 
     bool
     Inventory::ContainsObjectOfType(std::string_view objectType)
-    /*/////////////////////////////////////////////////////////////*/
+    /*////////////////////////////////////////////////////////*/
     {
         for (auto &entry : objects)
             if (entry.second->GetObjectType() == Hash(objectType))
@@ -49,7 +49,7 @@ namespace Narradia
 
     void
     Inventory::RemoveObjectOfType(std::string_view objectType)
-    /*///////////////////////////////////////////////////////////*/
+    /*//////////////////////////////////////////////////////*/
     {
         for (auto &entry : objects)
         /*************************/
@@ -65,7 +65,7 @@ namespace Narradia
 
     void
     ActorData::Update()
-    /*////////////////////*/
+    /*///////////////*/
     {
         if (movement.isMoving)
             if (ticksLastUpdate != 0)
@@ -87,5 +87,4 @@ namespace Narradia
         skills["Sword"] = Skill{"Sword"};
         skills["Club"] = Skill{"Club"};
     }
-};
-//////////////////////////////////////////////////////////////////////
+}

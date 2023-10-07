@@ -14,7 +14,7 @@ namespace Narradia
     /*//////////////////////////////////////////////////////*/
     {
         auto slotWidth = (GetBounds().width - 2 * GetMargin()) / numCols - GetMargin();
-        auto images = ImageBank::Get().GetImages();
+        auto images = ImageBank::Get()->GetImages();
         int j = 0;
         for (auto &entry : images)
         /************************/
@@ -38,19 +38,19 @@ namespace Narradia
                 i++;
             }
         }
-        bottomBarRendId = Renderer2DImages::Get().NewImage();
+        bottomBarRendId = Renderer2DImages::Get()->NewImage();
         AddGuiButton(
             "", {0.02f, 0.42f, 0.015f, ConvertWidthToHeight(0.015f)}, [&] { page--; },
             "GuiLeftArrow", "GuiLeftArrow");
         AddGuiButton(
             "", {0.15f, 0.42f, 0.015f, ConvertWidthToHeight(0.015f)}, [&] { page++; },
             "GuiRightArrow", "GuiRightArrow");
-        idSelectedSlotFrame = Renderer2DImages::Get().NewImage();
+        idSelectedSlotFrame = Renderer2DImages::Get()->NewImage();
     }
 
     void
     RoofBrowserGui::UpdateDerived()
-    /*////////////////////////////////*/
+    /*///////////////////////////*/
     {
         if (GetBounds().Contains(GetMousePositionF()))
         /********************************************/
@@ -75,7 +75,7 @@ namespace Narradia
                 if (slots[x][y]->GetBounds().Contains(GetMousePositionF()))
                 /*********************************************************/
                 {
-                    MouseInput::Get().GetLeftButton().AddFiredAction(
+                    MouseInput::Get()->GetLeftButton().AddFiredAction(
                         "SelectObject", [&]
                         /*****************/
                         {
@@ -83,8 +83,8 @@ namespace Narradia
                             /*************************************/
                             {
                                 selectedObjectIndex = GuiWindowObjectSlot::hoveredIndex;
-                                ToolUsing::Get().ChangeTool(Tools::SetRoof);
-                                ToolUsing::Get().SelectType(
+                                ToolUsing::Get()->ChangeTool(Tools::SetRoof);
+                                ToolUsing::Get()->SelectType(
                                     GuiWindowObjectSlot::hoveredObject->GetObjectType());
                             }
                         });
@@ -95,7 +95,7 @@ namespace Narradia
 
     void
     RoofBrowserGui::RenderDerived() const
-    /*//////////////////////////////////////*/
+    /*/////////////////////////////////*/
     {
         auto i = 0;
         for (auto y = 0; y < numRows; y++)
@@ -108,7 +108,7 @@ namespace Narradia
                 if (i + page * numRows * numCols == selectedObjectIndex)
                 /******************************************************/
                 {
-                    Renderer2DImages::Get().DrawImage(
+                    Renderer2DImages::Get()->DrawImage(
                         "GuiSelectedSlotFrame", idSelectedSlotFrame, slots[x][y]->GetBounds());
                 }
                 i++;
@@ -118,8 +118,7 @@ namespace Narradia
         auto bottomBarBounds = RectangleF{
             GetBounds().x, GetBounds().y + GetBounds().height - bottomBarHeight, GetBounds().width,
             bottomBarHeight};
-        Renderer2DImages::Get().DrawImage(
+        Renderer2DImages::Get()->DrawImage(
             "GuiWindowInvBottomBarBg", bottomBarRendId, bottomBarBounds);
     }
 }
-//////////////////////////////////////////////////////////////////////

@@ -25,16 +25,15 @@ namespace Narradia
 
     TTF_Font *
     Font::GetSdlFont() const
-    /*//////////////////////////////*/
+    /*////////////////////*/
     {
         return p->sdlFont.get();
     }
 
     TTF_Font *
     Font::GetSdlFontOutline() const
-    /*/////////////////////////////////////*/
+    /*///////////////////////////*/
     {
         return p->sdlFontOutline.get();
     }
 }
-//////////////////////////////////////////////////////////////////////

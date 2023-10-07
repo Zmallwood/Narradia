@@ -2,8 +2,8 @@
 #include "CompanionsUpdate.hpp"
 #include "Engine/Core/TextOutBox.hpp"
 #include "World/Actors/Companion.hpp"
-#include "World/MapArea.hpp"
 #include "World/Actors/Player.hpp"
+#include "World/MapArea.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
@@ -11,9 +11,9 @@ namespace Narradia
 {
     void
     CompanionsUpdate::Update()
-    /*///////////////////////////*/
+    /*//////////////////////*/
     {
-        auto mapArea = World::Get().GetCurrentMapArea();
+        auto mapArea = World::Get()->GetCurrentMapArea();
         for (auto it = mapArea->GetCompanionsMirror().cbegin();
              it != mapArea->GetCompanionsMirror().cend();)
         /*****************************************************/
@@ -62,15 +62,15 @@ namespace Narradia
                         companion->SetPreviousCoordinate(coordinate);
                         mapArea->RemoveCompanionMirror(it++);
                         mapArea->AddCompanionMirror(companion, {new_x_i, new_y_i});
-                        if (false == Player::Get().HasClaimedTile({new_x_i, new_y_i}))
+                        if (false == Player::Get()->HasClaimedTile({new_x_i, new_y_i}))
                         /**********************************************************/
                         {
-                            Player::Get().ClaimTile({new_x_i, new_y_i});
+                            Player::Get()->ClaimTile({new_x_i, new_y_i});
                             companion->ConsumeStamina(1);
                             if (companion->OutOfStamina())
                             /****************************/
                             {
-                                TextOutBox::Get().Print(
+                                TextOutBox::Get()->Print(
                                     "Companion: I am hungry, could you please give me some food?");
                             }
                         }
@@ -92,4 +92,3 @@ namespace Narradia
         }
     }
 }
-//////////////////////////////////////////////////////////////////////

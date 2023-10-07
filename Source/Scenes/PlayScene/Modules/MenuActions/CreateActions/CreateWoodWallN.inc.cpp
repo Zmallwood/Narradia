@@ -2,9 +2,9 @@
                         "Create wood wall (north)", [=, this](Object *&object)
                         /************************/
                         {
-                            auto playerPosition = Player::Get().GetPosition().ToIntPoint();
+                            auto playerPosition = Player::Get()->GetPosition().ToIntPoint();
                             auto map_area =
-                                World::Get().GetMapAreaAtZLevel(Player::Get().GetWorldAreaPos().z);
+                                World::Get()->GetMapAreaAtZLevel(Player::Get()->GetWorldAreaPos().z);
                             auto woodWall = std::make_shared<Object>("ObjectWoodWallN");
                             woodWall->SetModelScaling(1.0f);
                             map_area->GetTile(p->clicked_tile)->AddObject(woodWall);

@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 #include "PlaySceneGui.hpp"
-#include "Gui/CharacterGui.hpp"
 #include "Gui/BuildSelectorGui.hpp"
+#include "Gui/CharacterGui.hpp"
 #include "Gui/CompanionsPanel.hpp"
 #include "Gui/ExperienceBar.hpp"
 #include "Gui/FpsPanel.hpp"
@@ -28,19 +28,20 @@ namespace Narradia
         Log();
         auto rectGButtonWinChar = RectangleF{0.79f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
         Log();
-        auto rectGButtonWinBuildSelector = RectangleF{0.75f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
+        auto rectGButtonWinBuildSelector =
+            RectangleF{0.75f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
         Log();
-        auto fnSys = [] { PlaySceneGuiMenu::Get().visible = !PlaySceneGuiMenu::Get().visible; };
+        auto fnSys = [] { PlaySceneGuiMenu::Get()->visible = !PlaySceneGuiMenu::Get()->visible; };
         Log();
-        auto fnRepeat = [] { ActionRepeat::Get().RepeatLastAction(); };
+        auto fnRepeat = [] { ActionRepeat::Get()->RepeatLastAction(); };
         Log();
-        auto fnWinSkills = [] { SkillsGui::Get().ToggleVisibility(); };
+        auto fnWinSkills = [] { SkillsGui::Get()->ToggleVisibility(); };
         Log();
-        auto fnWinInv = [] { InventoryGui::Get().ToggleVisibility(); };
+        auto fnWinInv = [] { InventoryGui::Get()->ToggleVisibility(); };
         Log();
-        auto fnWinChar = [] { CharacterGui::Get().ToggleVisibility(); };
+        auto fnWinChar = [] { CharacterGui::Get()->ToggleVisibility(); };
         Log();
-        auto fnWinBuildSelector = [] { BuildSelectorGui::Get().ToggleVisibility(); };
+        auto fnWinBuildSelector = [] { BuildSelectorGui::Get()->ToggleVisibility(); };
         Log();
         AddGuiButton("", rectGButtonSys, fnSys, "GuiButtonSys", "GuiButtonSysHovered");
         Log();
@@ -53,27 +54,28 @@ namespace Narradia
         Log();
         AddGuiButton("", rectGButtonWinChar, fnWinChar, "GuiButtonChar", "GuiButtonCharHovered");
         Log();
-        AddGuiButton("", rectGButtonWinBuildSelector, fnWinBuildSelector, "GuiButtonBuildSelector", "GuiButtonBuildSelectorHovered");
+        AddGuiButton(
+            "", rectGButtonWinBuildSelector, fnWinBuildSelector, "GuiButtonBuildSelector",
+            "GuiButtonBuildSelectorHovered");
         Log();
-        AddGuiComponent(std::shared_ptr<PlaySceneGuiMenu>(PlaySceneGuiMenu::GetPointer()));
+        AddGuiComponent(std::shared_ptr<PlaySceneGuiMenu>(PlaySceneGuiMenu::Get()));
         Log();
-        AddGuiComponent(std::shared_ptr<StatusPanel>(StatusPanel::GetPointer()));
+        AddGuiComponent(std::shared_ptr<StatusPanel>(StatusPanel::Get()));
         Log();
-        AddGuiComponent(std::shared_ptr<CharacterGui>(CharacterGui::GetPointer()));
+        AddGuiComponent(std::shared_ptr<CharacterGui>(CharacterGui::Get()));
         Log();
-        AddGuiComponent(std::shared_ptr<InventoryGui>(InventoryGui::GetPointer()));
+        AddGuiComponent(std::shared_ptr<InventoryGui>(InventoryGui::Get()));
         Log();
-        AddGuiComponent(std::shared_ptr<SkillsGui>(SkillsGui::GetPointer()));
+        AddGuiComponent(std::shared_ptr<SkillsGui>(SkillsGui::Get()));
         Log();
-        AddGuiComponent(std::shared_ptr<BuildSelectorGui>(BuildSelectorGui::GetPointer()));
+        AddGuiComponent(std::shared_ptr<BuildSelectorGui>(BuildSelectorGui::Get()));
         Log();
-        AddGuiComponent(std::shared_ptr<FpsPanel>(FpsPanel::GetPointer()));
+        AddGuiComponent(std::shared_ptr<FpsPanel>(FpsPanel::Get()));
         Log();
-        AddGuiComponent(std::shared_ptr<ObjectivesPanel>(ObjectivesPanel::GetPointer()));
+        AddGuiComponent(std::shared_ptr<ObjectivesPanel>(ObjectivesPanel::Get()));
         Log();
-        AddGuiComponent(std::shared_ptr<CompanionsPanel>(CompanionsPanel::GetPointer()));
+        AddGuiComponent(std::shared_ptr<CompanionsPanel>(CompanionsPanel::Get()));
         Log();
-        AddGuiComponent(std::shared_ptr<ExperienceBar>(ExperienceBar::GetPointer()));
+        AddGuiComponent(std::shared_ptr<ExperienceBar>(ExperienceBar::Get()));
     }
 }
-//////////////////////////////////////////////////////////////////////

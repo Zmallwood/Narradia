@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////
 #include "MobTargeting.hpp"
 #include "Engine/Core/Input/MouseInput.hpp"
-#include "Scenes/Shared/MouseRotation.hpp"
-#include "Scenes/Shared/TileHovering.hpp"
+#include "Scenes/SharedSceneModules/MouseRotation.hpp"
+#include "Scenes/SharedSceneModules/TileHovering.hpp"
 #include "World/Actors/Player.hpp"
 #include "World/MapArea.hpp"
 #include "World/Tile.hpp"
@@ -27,18 +27,18 @@ namespace Narradia
     MobTargeting::Update()
     /*//////////////////*/
     {
-        auto hoveredTile = TileHovering::Get().hoveredTile;
+        auto hoveredTile = TileHovering::Get()->hoveredTile;
         if (MapArea::IsInsideMap(hoveredTile))
         /************************************/
         {
-            auto playerWorldAreaPos = Player::Get().GetWorldAreaPos();
-            auto mapArea = World::Get().GetMapAreaAtZLevel(playerWorldAreaPos.z);
+            auto playerWorldAreaPos = Player::Get()->GetWorldAreaPos();
+            auto mapArea = World::Get()->GetMapAreaAtZLevel(playerWorldAreaPos.z);
             auto tile = mapArea->GetTile(hoveredTile);
             if (nullptr != tile->GetMob())
             /****************************/
             {
                 auto action = [=] { p->targetedMob = tile->GetMob().get(); };
-                MouseInput::Get().GetRightButton().AddFiredAction(
+                MouseInput::Get()->GetRightButton().AddFiredAction(
                     "TargetHoveredMob", action, 100000);
             }
             else
@@ -47,14 +47,14 @@ namespace Narradia
                 auto action = [=]
                 /***************/
                 {
-                    if (MouseInput::Get().GetRightButton().ClickDurationPickResult() <
+                    if (MouseInput::Get()->GetRightButton().ClickDurationPickResult() <
                         MouseButton::GetDefaultClickSpeed())
                     /****************************************************************/
                     {
                         p->targetedMob = nullptr;
                     }
                 };
-                MouseInput::Get().GetRightButton().AddReleasedAction(
+                MouseInput::Get()->GetRightButton().AddReleasedAction(
                     "TargetHoveredMob", action, 0, 0, true);
             }
         }
@@ -67,4 +67,3 @@ namespace Narradia
         return p->targetedMob;
     }
 }
-//////////////////////////////////////////////////////////////////////

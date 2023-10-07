@@ -22,7 +22,7 @@ namespace Narradia
 
     void
     AudioBank::LoadAudioFiles()
-    /*////////////////////////////*/
+    /*///////////////////////*/
     {
         auto absAllSoundsAudioPath = std::string(SDL_GetBasePath()) + p->relSoundsAudioPath.data();
         using iterator = std::filesystem::recursive_directory_iterator;
@@ -64,7 +64,7 @@ namespace Narradia
 
     void
     AudioBank::Cleanup()
-    /*/////////////////////*/
+    /*////////////////*/
     {
         for (auto entry : p->soundFiles)
             Mix_FreeChunk(entry.second);
@@ -75,16 +75,15 @@ namespace Narradia
 
     Mix_Chunk *
     AudioBank::GetSound(int soundNameHash)
-    /*/////////////////////////////////////////////*/
+    /*//////////////////////////////////*/
     {
         return p->soundFiles.at(soundNameHash);
     }
 
     Mix_Music *
     AudioBank::GetMusic(int musicNameHash)
-    /*/////////////////////////////////////////////*/
+    /*//////////////////////////////////*/
     {
         return p->musicFiles.at(musicNameHash);
     }
 }
-//////////////////////////////////////////////////////////////////////

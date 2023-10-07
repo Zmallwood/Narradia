@@ -23,7 +23,7 @@ namespace Narradia
 
     bool
     ShaderProgram::Create(const GLchar *vertexShaderSrc, const GLchar *fragShaderSrc)
-    /*//////////////////////////////////////////////////////////////////////////////////*/
+    /*/////////////////////////////////////////////////////////////////////////////*/
     {
         auto success = true;
         p->programId = glCreateProgram();
@@ -75,21 +75,21 @@ namespace Narradia
 
     void
     ShaderProgram::Cleanup() const
-    /*///////////////////////////////*/
+    /*//////////////////////////*/
     {
         glDeleteProgram(p->programId);
     }
 
     GLuint
     ShaderProgram::GetProgramId()
-    /*////////////////////////////////*/
+    /*/////////////////////////*/
     {
         return p->programId;
     }
 
     GLuint
     ShaderProgram::Pimpl::InitVertexShader(const GLchar *vertexShaderSource)
-    /*///////////////////////////////////////////////////////////////////////////*/
+    /*////////////////////////////////////////////////////////////////////*/
     {
         vertexShader = glCreateShader(GL_VERTEX_SHADER);
         glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
@@ -101,7 +101,7 @@ namespace Narradia
 
     GLuint
     ShaderProgram::Pimpl::InitFragShader(const GLchar *fragmentShaderSource)
-    /*///////////////////////////////////////////////////////////////////////////*/
+    /*////////////////////////////////////////////////////////////////////*/
     {
         fragShader = glCreateShader(GL_FRAGMENT_SHADER);
         glShaderSource(fragShader, 1, &fragmentShaderSource, NULL);
@@ -111,4 +111,3 @@ namespace Narradia
         return fragShaderCompiled;
     }
 }
-//////////////////////////////////////////////////////////////////////

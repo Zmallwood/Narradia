@@ -31,15 +31,15 @@ namespace Narradia
         p->bounds = bounds_;
         p->parentContainer = parentContainer_;
         p->textChangeEvent = textChangeEvent_;
-        p->glIdBackgroundImage = Renderer2DImages::Get().NewImage();
-        p->glIdText = TextRenderer::Get().NewString();
+        p->glIdBackgroundImage = Renderer2DImages::Get()->NewImage();
+        p->glIdText = TextRenderer::Get()->NewString();
         p->cursorPosition = text_.length();
         p->text = text_;
     }
 
     void
     GuiTextBox::Update()
-    /*/////////////////////*/
+    /*////////////////*/
     {
         auto mousePosF = GetMousePositionF();
         auto usedBounds = p->bounds;
@@ -52,37 +52,37 @@ namespace Narradia
         if (usedBounds.Contains(mousePosF))
         /*********************************/
         {
-            MouseInput::Get().GetLeftButton().AddFiredAction(
+            MouseInput::Get()->GetLeftButton().AddFiredAction(
                 "ClickTextBox",
                 [&]
                 /********************/
                 {
                     GuiTextBox::Pimpl::activeTextBox = this;
-                    KeyboardInput::Get().ResetTextInput();
+                    KeyboardInput::Get()->ResetTextInput();
                 },
                 0);
         }
         if (Pimpl::activeTextBox == this)
         /*******************************/
         {
-            auto newTextInput = KeyboardInput::Get().PickTextInput();
+            auto newTextInput = KeyboardInput::Get()->PickTextInput();
             p->text += newTextInput;
             p->cursorPosition += newTextInput.length();
             if (newTextInput != "")
                 if (p->textChangeEvent)
                     (*p->textChangeEvent)();
-            if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_RIGHT))
+            if (KeyboardInput::Get()->KeyHasBeenFiredPickResult(SDLK_RIGHT))
             /***********************************************************/
             {
                 p->cursorPosition =
                     std::min(static_cast<int>(p->text.length()), p->cursorPosition + 1);
             }
-            else if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_LEFT))
+            else if (KeyboardInput::Get()->KeyHasBeenFiredPickResult(SDLK_LEFT))
             /*****************************************************************/
             {
                 p->cursorPosition = std::max(0, p->cursorPosition - 1);
             }
-            else if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_BACKSPACE))
+            else if (KeyboardInput::Get()->KeyHasBeenFiredPickResult(SDLK_BACKSPACE))
             /**********************************************************************/
             {
                 if (p->cursorPosition > 0)
@@ -94,7 +94,7 @@ namespace Narradia
                         (*p->textChangeEvent)();
                 }
             }
-            else if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_DELETE))
+            else if (KeyboardInput::Get()->KeyHasBeenFiredPickResult(SDLK_DELETE))
             /*******************************************************************/
             {
                 if (p->cursorPosition < p->text.length())
@@ -110,7 +110,7 @@ namespace Narradia
 
     void
     GuiTextBox::Render() const
-    /*///////////////////////////*/
+    /*//////////////////////*/
     {
         auto usedBounds = p->bounds;
         if (p->parentContainer)
@@ -120,10 +120,10 @@ namespace Narradia
             usedBounds.y += p->parentContainer->GetPosition().y;
         }
         if (Pimpl::activeTextBox == this)
-            Renderer2DImages::Get().DrawImage(
+            Renderer2DImages::Get()->DrawImage(
                 "GTextBoxActiveBackground", p->glIdBackgroundImage, usedBounds);
         else
-            Renderer2DImages::Get().DrawImage(
+            Renderer2DImages::Get()->DrawImage(
                 "GTextBoxBackground", p->glIdBackgroundImage, usedBounds);
         auto usedText = p->text;
         if (Pimpl::activeTextBox == this)
@@ -134,22 +134,21 @@ namespace Narradia
             else
                 usedText.insert(p->cursorPosition, " ");
         }
-        TextRenderer::Get().DrawString(
+        TextRenderer::Get()->DrawString(
             p->glIdText, usedText, usedBounds.GetPosition().Translate(0.005f, 0.015f));
     }
 
     std::string_view
     GuiTextBox::GetText()
-    /*//////////////////////////////////*/
+    /*/////////////////*/
     {
         return p->text;
     }
 
     void
     GuiTextBox::SetText(const std::string &newText)
-    /*////////////////////////////////////////////////*/
+    /*///////////////////////////////////////////*/
     {
         p->text = newText;
     }
 }
-//////////////////////////////////////////////////////////////////////

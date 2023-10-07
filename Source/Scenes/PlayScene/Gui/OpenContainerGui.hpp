@@ -25,4 +25,3 @@ namespace Narradia
         std::shared_ptr<GuiWindowObjectSlot> slots[maxNumCols][maxNumRows];
     };
 }
-//////////////////////////////////////////////////////////////////////

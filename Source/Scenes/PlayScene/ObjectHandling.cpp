@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////
 #include "ObjectHandling.hpp"
 #include "Modules/ObjectMoving.hpp"
+#include "World/Actors/Player.hpp"
 #include "World/MapArea.hpp"
 #include "World/Object.hpp"
-#include "World/Actors/Player.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
@@ -11,17 +11,17 @@ namespace Narradia
 {
     void
     RemoveObjectMirror(Object *&object)
-    /*////////////////////////////////////*/
+    /*///////////////////////////////*/
     {
-        if (ObjectMoving::Get().objectInAir.get() == object)
-            ObjectMoving::Get().objectInAir = nullptr;
-        for (auto &inventoryObject : Player::Get().data.inventory.objects)
+        if (ObjectMoving::Get()->objectInAir.get() == object)
+            ObjectMoving::Get()->objectInAir = nullptr;
+        for (auto &inventoryObject : Player::Get()->data.inventory.objects)
         /****************************************************************/
         {
             if (inventoryObject.second.get() == object)
             /*****************************************/
             {
-                Player::Get().data.inventory.objects.erase(inventoryObject.first);
+                Player::Get()->data.inventory.objects.erase(inventoryObject.first);
                 object = nullptr;
                 return;
             }
@@ -37,7 +37,7 @@ namespace Narradia
                 }
             }
         }
-        auto mapArea = World::Get().GetCurrentMapArea();
+        auto mapArea = World::Get()->GetCurrentMapArea();
         for (auto worldObject : mapArea->GetObjectsMirror())
         /**************************************************/
         {
@@ -66,23 +66,23 @@ namespace Narradia
 
     std::shared_ptr<Object>
     MoveObject(Object *object)
-    /*//////////////////////////////////////////////*/
+    /*//////////////////////*/
     {
-        if (ObjectMoving::Get().objectInAir.get() == object)
+        if (ObjectMoving::Get()->objectInAir.get() == object)
         /**************************************************/
         {
-            auto result = ObjectMoving::Get().objectInAir;
-            ObjectMoving::Get().objectInAir = nullptr;
+            auto result = ObjectMoving::Get()->objectInAir;
+            ObjectMoving::Get()->objectInAir = nullptr;
             return result;
         }
-        for (auto &inventoryObject : Player::Get().data.inventory.objects)
+        for (auto &inventoryObject : Player::Get()->data.inventory.objects)
         /****************************************************************/
         {
             if (inventoryObject.second.get() == object)
             /*****************************************/
             {
                 auto result = inventoryObject.second;
-                Player::Get().data.inventory.objects.erase(inventoryObject.first);
+                Player::Get()->data.inventory.objects.erase(inventoryObject.first);
                 return result;
             }
             for (auto &entry : inventoryObject.second->GetContainedObjects())
@@ -97,7 +97,7 @@ namespace Narradia
                 }
             }
         }
-        auto mapArea = World::Get().GetCurrentMapArea();
+        auto mapArea = World::Get()->GetCurrentMapArea();
         for (auto worldObject : mapArea->GetObjectsMirror())
         /**************************************************/
         {
@@ -125,4 +125,3 @@ namespace Narradia
         return nullptr;
     }
 };
-//////////////////////////////////////////////////////////////////////

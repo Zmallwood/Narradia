@@ -13,7 +13,7 @@ namespace Narradia
 {
     shared_ptr<Model>
     ModelCreator::CreateModel(const aiScene *scene)
-    /*////////////////////////////////////////////////////////////*/
+    /*///////////////////////////////////////////*/
     {
         auto animDuration = scene->mNumAnimations > 0 ? scene->mAnimations[0]->mDuration : 0;
         auto newModel = make_shared<Model>(animDuration);
@@ -24,7 +24,7 @@ namespace Narradia
 
     auto
     ModelCreator::GetModelParts(const aiScene *scene) const -> vector<shared_ptr<ModelPart>>
-    /*/////////////////////////////////////////////////////////////////////////////////////////*/
+    /*////////////////////////////////////////////////////////////////////////////////////*/
     {
         vector<shared_ptr<ModelPart>> allModelparts;
         for (auto &entry : GetModelMeshIds(scene))
@@ -36,7 +36,7 @@ namespace Narradia
             /**************************************************/
             {
                 auto newModelPart =
-                    ModelPartCreator::Get().CreateModelPartFromMesh(scene, nodeName, mesh);
+                    ModelPartCreator::Get()->CreateModelPartFromMesh(scene, nodeName, mesh);
                 allModelparts.push_back(newModelPart);
             }
         }
@@ -46,7 +46,7 @@ namespace Narradia
     auto
     ModelCreator::GetModelMeshIds(const aiScene *scene) const
         -> map<shared_ptr<string>, vector<int>>
-    /*//////////////////////////////////////////////////////////*/
+    /*/////////////////////////////////////////////////////*/
     {
         auto rootNode = scene->mRootNode;
         auto numSubNodes = rootNode->mNumChildren;
@@ -67,7 +67,7 @@ namespace Narradia
 
     vector<aiMesh *>
     ModelCreator::GetNodeMeshes(const aiScene *scene, vector<int> nodeMeshIds) const
-    /*/////////////////////////////////////////////////////////////////////////////////////////////*/
+    /*////////////////////////////////////////////////////////////////////////////*/
     {
         vector<aiMesh *> nodeMeshes;
         auto numMeshes = nodeMeshIds.size();
@@ -80,4 +80,3 @@ namespace Narradia
         return nodeMeshes;
     }
 }
-//////////////////////////////////////////////////////////////////////

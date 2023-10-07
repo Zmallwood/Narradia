@@ -16,7 +16,7 @@ namespace Narradia
 
     std::map<const int, ImageEntry> &
     ImageBank::GetImages()
-    /*///////////////////////////////////////////////////*/
+    /*/////////////////////////////*/
     {
         return p->images;
     }
@@ -29,7 +29,7 @@ namespace Narradia
 
     GLuint
     ImageBank::GetImage(int imageNameHash) const
-    /*///////////////////////////////////////////////*/
+    /*////////////////////////////////////////*/
     {
         if (p->images.count(imageNameHash))
             return p->images.at(imageNameHash).textureId;
@@ -38,14 +38,14 @@ namespace Narradia
 
     GLuint
     ImageBank::GetImage(const std::string_view &imageName) const
-    /*///////////////////////////////////////////////////////////////*/
+    /*////////////////////////////////////////////////////////*/
     {
         return GetImage(Hash(imageName));
     }
 
     void
     ImageBank::GetBlankTextImage(const std::string_view &uniqueNameId)
-    /*///////////////////////////////////////////////////////////////////*/
+    /*//////////////////////////////////////////////////////////////*/
     {
         ImageEntry imageEntry;
         glGenTextures(1, &imageEntry.textureId);
@@ -54,7 +54,7 @@ namespace Narradia
 
     void
     ImageBank::LoadImages()
-    /*////////////////////////*/
+    /*///////////////////*/
     {
         using iterator = std::filesystem::recursive_directory_iterator;
         auto absAllImagesPath = std::string(SDL_GetBasePath()) + p->relImagesPath.data();
@@ -73,7 +73,7 @@ namespace Narradia
 
     void
     ImageBank::Cleanup() const
-    /*///////////////////////////*/
+    /*//////////////////////*/
     {
         for (const auto &image : p->images)
             glDeleteTextures(1, &image.second.textureId);
@@ -81,7 +81,7 @@ namespace Narradia
 
     GLuint
     ImageBank::Pimpl::LoadSingleImage(const std::string_view &absFilePath) const
-    /*///////////////////////////////////////////////////////////////////////////////*/
+    /*////////////////////////////////////////////////////////////////////////*/
     {
         auto surface = IMG_Load(absFilePath.data());
         glEnable(GL_TEXTURE_2D);
@@ -102,4 +102,3 @@ namespace Narradia
         return textureId;
     }
 }
-//////////////////////////////////////////////////////////////////////

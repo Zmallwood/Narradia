@@ -10,22 +10,22 @@ namespace Narradia
 {
     void
     Combat::Update()
-    /*******************/
+    /*////////////*/
     {
-        if (SDL_GetTicks() < Player::Get().data.combat.ticksLastHitGivenOther +
-                                 Player::Get().data.combat.attackSpeed)
-        /**********************************************************************/
+        if (SDL_GetTicks() < Player::Get()->data.combat.ticksLastHitGivenOther +
+                                 Player::Get()->data.combat.attackSpeed)
+        /*********************************************************************/
         {
             return;
         }
-        auto targetedMob = MobTargeting::Get().GetTargetedMob();
+        auto targetedMob = MobTargeting::Get()->GetTargetedMob();
         if (nullptr != targetedMob)
         /*************************/
         {
-            auto playerWorldAreaPos = Player::Get().GetWorldAreaPos();
-            auto mapArea = World::Get().GetMapAreaAtZLevel(playerWorldAreaPos.z);
+            auto playerWorldAreaPos = Player::Get()->GetWorldAreaPos();
+            auto mapArea = World::Get()->GetMapAreaAtZLevel(playerWorldAreaPos.z);
             auto mobCoordinate = mapArea->GetMobsMirror().at(targetedMob);
-            auto playerPos = Player::Get().GetPosition();
+            auto playerPos = Player::Get()->GetPosition();
             auto dx = playerPos.x - mobCoordinate.x;
             auto dy = playerPos.y - mobCoordinate.y;
             auto dxAbs = std::abs(dx);
@@ -34,7 +34,7 @@ namespace Narradia
             /***************************/
             {
                 auto damage = 1 + rand() % 3;
-                switch (Player::Get().playerBuild)
+                switch (Player::Get()->playerBuild)
                 /********************************/
                 {
                 case PlayerBuilds::Sword:
@@ -52,13 +52,12 @@ namespace Narradia
                     break;
                 case PlayerBuilds::None:
                     /******************/
-                    TextOutBox::Get().Print(
+                    TextOutBox::Get()->Print(
                         "You try to attack mob but have not equipped any weapon.");
                     break;
                 }
-                Player::Get().data.combat.ticksLastHitGivenOther = SDL_GetTicks();
+                Player::Get()->data.combat.ticksLastHitGivenOther = SDL_GetTicks();
             }
         }
     }
 }
-//////////////////////////////////////////////////////////////////////

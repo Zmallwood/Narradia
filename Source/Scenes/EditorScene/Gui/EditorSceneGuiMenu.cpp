@@ -10,37 +10,37 @@ namespace Narradia
         : GuiContainer({0.0f, 0.0f}, {1.0f, 1.0f})
     /*//////////////////////////////////////////*/
     {
-        glIdCanvasCover = Renderer2DSolidColors::Get().NewRectangle();
+        glIdCanvasCover = Renderer2DSolidColors::Get()->NewRectangle();
         AddGuiButton(
             "Resume", {0.45f, 0.3f, 0.1f, 0.03f},
             []
             /************************************************************/
-            { EditorSceneGuiMenu::Get().visible = false; });
+            { EditorSceneGuiMenu::Get()->visible = false; });
         AddGuiButton(
             "Save map", {0.45f, 0.35f, 0.1f, 0.03f},
             []
             /************************************************************/
-            { SceneManager::Get().ChangeScene(SceneNames::MapSave); });
+            { SceneManager::Get()->ChangeScene(SceneNames::MapSave); });
         AddGuiButton(
             "Load map", {0.45f, 0.40f, 0.1f, 0.03f},
             []
             /************************************************************/
-            { SceneManager::Get().ChangeScene(SceneNames::MapLoad); });
+            { SceneManager::Get()->ChangeScene(SceneNames::MapLoad); });
         AddGuiButton(
             "Go to main menu", {0.45f, 0.45f, 0.1f, 0.03f},
             []
             /************************************************************/
-            { SceneManager::Get().ChangeScene(SceneNames::MainMenu); });
+            { SceneManager::Get()->ChangeScene(SceneNames::MainMenu); });
         AddGuiButton(
             "Exit game", {0.45f, 0.50f, 0.1f, 0.03f},
             []
             /************************************************************/
-            { GameEngine::Get().StopGame(); });
+            { GameEngine::Get()->StopGame(); });
     }
 
     void
     EditorSceneGuiMenu::Update()
-    /*////////////////////////////*/
+    /*////////////////////////*/
     {
         if (visible)
             GuiContainer::Update();
@@ -48,14 +48,13 @@ namespace Narradia
 
     void
     EditorSceneGuiMenu::Render() const
-    /*//////////////////////////////////*/
+    /*//////////////////////////////*/
     {
         if (!visible)
             return;
         auto rect = RectangleF{0.0f, 0.0f, 1.0f, 1.0f};
         auto color = Color{0.3f, 0.6f, 1.0f, 0.5f};
-        Renderer2DSolidColors::Get().FillRectangle(glIdCanvasCover, rect, color);
+        Renderer2DSolidColors::Get()->FillRectangle(glIdCanvasCover, rect, color);
         GuiContainer::Render();
     }
 }
-//////////////////////////////////////////////////////////////////////

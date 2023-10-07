@@ -20,18 +20,18 @@ namespace Narradia
         auto texNameHash = GetTexNameHashForMesh(scene, mesh);
         newModelPart->texNameHash = texNameHash;
         auto noKeyfrmAtTime0Exists =
-            ModelPartKeyframeCreator::Get().GetPositionKeyframe(scene, nodeName, 0).mTime > 0;
+            ModelPartKeyframeCreator::Get()->GetPositionKeyframe(scene, nodeName, 0).mTime > 0;
         auto nrOfKeyframes =
-            ModelPartKeyframeCreator::Get().GetNodePositionKeyframes(scene, nodeName).size();
+            ModelPartKeyframeCreator::Get()->GetNodePositionKeyframes(scene, nodeName).size();
         for (auto k = 0; k < nrOfKeyframes; k++)
         /**************************************/
         {
             auto positionKeyframe =
-                ModelPartKeyframeCreator::Get().GetPositionKeyframe(scene, nodeName, k);
+                ModelPartKeyframeCreator::Get()->GetPositionKeyframe(scene, nodeName, k);
             auto rotationKeyFrame =
-                ModelPartKeyframeCreator::Get().GetRotationKeyframe(scene, nodeName, k);
+                ModelPartKeyframeCreator::Get()->GetRotationKeyframe(scene, nodeName, k);
             auto scalingKeyframe =
-                ModelPartKeyframeCreator::Get().GetScalingKeyframe(scene, nodeName, k);
+                ModelPartKeyframeCreator::Get()->GetScalingKeyframe(scene, nodeName, k);
             auto keyframeTime = static_cast<float>(positionKeyframe.mTime);
             auto newModelPartKeyframe = GetNewModelPartKeyframe(
                 scene, nodeName, mesh, positionKeyframe, rotationKeyFrame, scalingKeyframe);
@@ -44,7 +44,7 @@ namespace Narradia
 
     int
     ModelPartCreator::GetTexNameHashForMesh(const aiScene *scene, aiMesh *mesh) const
-    /*/////////////////////////////////////////////////////////////////////////////////*/
+    /*/////////////////////////////////////////////////////////////////////////////*/
     {
         auto textureNameHashcodes = GetTexNameHashcodes(scene);
         auto material = mesh->mMaterialIndex;
@@ -88,7 +88,7 @@ namespace Narradia
 
     vector<int>
     ModelPartCreator::GetTexNameHashcodes(const aiScene *scene) const
-    /*/////////////////////////////////////////////////////////////////////////*/
+    /*/////////////////////////////////////////////////////////////*/
     {
         vector<int> textureNameHashcodes;
         auto numMaterials = scene->mNumMaterials;
@@ -108,7 +108,7 @@ namespace Narradia
 
     aiMatrix4x4
     ModelPartCreator::GetNodeTransformation(const aiScene *scene, string nodeName) const
-    /*////////////////////////////////////////////////////////////////////////////////////////////*/
+    /*////////////////////////////////////////////////////////////////////////////////*/
     {
         auto allTransformations = GetTransformations(scene);
         for (auto &alpha : allTransformations)
@@ -146,7 +146,7 @@ namespace Narradia
     auto
     ModelPartCreator::GetTransformations(const aiScene *scene) const
         -> map<shared_ptr<string>, aiMatrix4x4>
-    /*/////////////////////////////////////////////////////////////////*/
+    /*////////////////////////////////////////////////////////////*/
     {
         auto rootNode = scene->mRootNode;
         auto numNodes = rootNode->mNumChildren;
@@ -165,7 +165,7 @@ namespace Narradia
 
     void
     ModelPartCreator::Translate(Point3F *position, aiVectorKey positionKeyFrame) const
-    /*///////////////////////////////////////////////////////////////////////////////////*/
+    /*//////////////////////////////////////////////////////////////////////////////*/
     {
         auto translationMatrix = aiMatrix4x4();
         translationMatrix[0][3] = positionKeyFrame.mValue.x;
@@ -180,4 +180,3 @@ namespace Narradia
         *position = {-aiPosition.x, aiPosition.y, aiPosition.z};
     }
 }
-//////////////////////////////////////////////////////////////////////

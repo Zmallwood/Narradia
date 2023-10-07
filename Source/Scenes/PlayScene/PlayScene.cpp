@@ -17,17 +17,17 @@
 #include "Modules/SettlementCreator.hpp"
 #include "Modules/StartConditions.hpp"
 #include "PlaySceneGui.hpp"
-#include "Scenes/Shared/GuiObjectHovering.hpp"
-#include "Scenes/Shared/KeyboardMove.hpp"
-#include "Scenes/Shared/MouseRotation.hpp"
-#include "Scenes/Shared/TileHovering.hpp"
-#include "Scenes/Shared/WorldDrawModule/WorldDraw.hpp"
+#include "Scenes/SharedSceneModules/GuiObjectHovering.hpp"
+#include "Scenes/SharedSceneModules/KeyboardMove.hpp"
+#include "Scenes/SharedSceneModules/MouseRotation.hpp"
+#include "Scenes/SharedSceneModules/TileHovering.hpp"
+#include "Scenes/SharedSceneModules/WorldDrawModule/WorldDraw.hpp"
 #include "World/Actors/Player.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
     PlayScene::PlayScene()
-    /*////////////////*/
+    /*//////////////////*/
     {
         Log();
         SetSceneGui(std::make_shared<PlaySceneGui>());
@@ -45,83 +45,82 @@ namespace Narradia
 
     void
     PlayScene::Enter()
-    /*//////////////////*/
+    /*//////////////*/
     {
-        PlaySceneGuiMenu::Get().visible = false;
+        PlaySceneGuiMenu::Get()->visible = false;
         ActiveGameRound::Create();
         StartConditions().CreateStartConditions();
         SettlementCreator().CreateSettlement();
-        WorldDraw::Get().EnablePlayMode();
-        DestinationMove::Get().ResetDestination();
-        Audio::Get().Unmute();
+        WorldDraw::Get()->EnablePlayMode();
+        DestinationMove::Get()->ResetDestination();
+        Audio::Get()->Unmute();
     }
 
     void
     PlayScene::UpdateDerived()
-    /*//////////////////////////*/
+    /*//////////////////////*/
     {
         Log();
-        ActiveGameRound::Get().Update();
-        if (ActiveGameRound::Get().GameIsCompleted())
+        ActiveGameRound::Get()->Update();
+        if (ActiveGameRound::Get()->GameIsCompleted())
             return;
         Log();
         PlaySceneHotkeys().Update();
-        if (true == PlaySceneGuiMenu::Get().visible)
+        if (true == PlaySceneGuiMenu::Get()->visible)
             return;
         Log();
-        ActionRepeat::Get().Update();
+        ActionRepeat::Get()->Update();
         Log();
-        ObjectTransformation::Get().Update();
+        ObjectTransformation::Get()->Update();
         Log();
-        DestinationMove::Get().Update();
+        DestinationMove::Get()->Update();
         Log();
-        InteractionMenu::Get().Update();
+        InteractionMenu::Get()->Update();
         Log();
-        MouseRotation::Get().Update();
+        MouseRotation::Get()->Update();
         Log();
-        Player::Get().Update();
+        Player::Get()->Update();
         Log();
-        ObjectMoving::Get().Update();
+        ObjectMoving::Get()->Update();
         Log();
         KeyboardMove().Update();
         Log();
-        TileHovering::Get().Update();
+        TileHovering::Get()->Update();
         Log();
-        WorldDraw::Get().Update();
+        WorldDraw::Get()->Update();
         Log();
         CompanionsUpdate().Update();
         Log();
-        MobMovement::Get().Update();
+        MobMovement::Get()->Update();
         Log();
-        Advicer::Get().Update();
+        Advicer::Get()->Update();
         Log();
-        MobTargeting::Get().Update();
+        MobTargeting::Get()->Update();
         Log();
-        Combat::Get().Update();
+        Combat::Get()->Update();
     }
 
     void
     PlayScene::RenderDerived()
-    /*//////////////////////////*/
+    /*//////////////////////*/
     {
         Log();
-        WorldDraw::Get().Render();
-        if (true == PlaySceneGuiMenu::Get().visible)
+        WorldDraw::Get()->Render();
+        if (true == PlaySceneGuiMenu::Get()->visible)
         /******************************************/
         {
             Log();
-            TileHovering::Get().Render();
+            TileHovering::Get()->Render();
         }
-        ActiveGameRound::Get().Render();
+        ActiveGameRound::Get()->Render();
     }
 
     void
     PlayScene::RenderAfterGuiDerived()
-    /*//////////////////////////////////*/
+    /*//////////////////////////////*/
     {
-        InteractionMenu::Get().Render();
-        GuiObjectHovering::Get().Render();
-        ObjectMoving::Get().Render();
+        InteractionMenu::Get()->Render();
+        GuiObjectHovering::Get()->Render();
+        ObjectMoving::Get()->Render();
     }
 }
-//////////////////////////////////////////////////////////////////////

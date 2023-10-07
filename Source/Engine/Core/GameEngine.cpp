@@ -22,7 +22,7 @@ namespace Narradia
 
     void
     GameEngine::Run() const
-    /*////////////////////////*/
+    /*///////////////////*/
     {
         Logger::Create();
         srand(static_cast<unsigned int>(time(nullptr)));
@@ -40,7 +40,7 @@ namespace Narradia
         Audio::Create();
         Log();
         TextOutBox::Create();
-        TextOutBox::Get().Print("Game started.");
+        TextOutBox::Get()->Print("Game started.");
         Log();
         GameLoop().Run();
         SDL_Quit();
@@ -48,16 +48,15 @@ namespace Narradia
 
     void
     GameEngine::StopGame()
-    /*///////////////////////*/
+    /*//////////////////*/
     {
         p->running = false;
     }
 
     const bool
     GameEngine::IsRunning() const
-    /*////////////////////////////////////*/
+    /*/////////////////////////*/
     {
         return p->running;
     }
 }
-//////////////////////////////////////////////////////////////////////

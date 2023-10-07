@@ -10,8 +10,8 @@
                  object->GetObjectType() == Hash("ObjectCookedFi.hpp"))
              /********************************************************/
              {
-                 Player::Get().data.stats.stam =
-                     std::min(Player::Get().data.stats.maxStam, Player::Get().data.stats.stam + 2);
+                 Player::Get()->data.stats.stam =
+                     std::min(Player::Get()->data.stats.maxStam, Player::Get()->data.stats.stam + 2);
                  object->DecreaseQuantity();
                  if (object->GetQuantity() == 0)
                  /*****************************/

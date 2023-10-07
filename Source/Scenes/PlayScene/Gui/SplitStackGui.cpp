@@ -2,10 +2,10 @@
 #include "SplitStackGui.hpp"
 #include "Engine/GuiCore/GuiTextBox.hpp"
 #include "Engine/GuiCore/SceneGui.hpp"
-#include "Scenes/PlayScene/PlayScene.hpp"
-#include "World/Object.hpp"
-#include "World/Actors/Player.hpp"
 #include "Scenes/PlayScene/Modules/ActionRepeat.hpp"
+#include "Scenes/PlayScene/PlayScene.hpp"
+#include "World/Actors/Player.hpp"
+#include "World/Object.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -66,10 +66,10 @@ namespace Narradia
             for (auto i = 0; i < 1000; i++)
             /*****************************/
             {
-                if (Player::Get().data.inventory.objects.count(i) == 0)
+                if (Player::Get()->data.inventory.objects.count(i) == 0)
                 /***************************************************/
                 {
-                    Player::Get().data.inventory.objects.insert(
+                    Player::Get()->data.inventory.objects.insert(
                         {i, std::make_shared<Object>(object_->GetObjectType(), rightValue)});
                     return;
                 }
@@ -79,8 +79,8 @@ namespace Narradia
         /****************************/
         {
             splitAction();
-            ActionRepeat::Get().SetRepeatingAction(splitAction);
-            auto mainScene = PlayScene::GetPointer();
+            ActionRepeat::Get()->SetRepeatingAction(splitAction);
+            auto mainScene = PlayScene::Get();
             auto sceneGui = mainScene->GetSceneGui();
             sceneGui->RemoveGuiComponent(this);
         };
@@ -99,4 +99,3 @@ namespace Narradia
     {
     }
 }
-//////////////////////////////////////////////////////////////////////

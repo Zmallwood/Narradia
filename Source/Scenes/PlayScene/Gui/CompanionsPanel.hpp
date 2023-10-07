@@ -25,4 +25,3 @@ namespace Narradia
         std::array<RenderId, 4> ids_companions_stamina_filled;
     };
 }
-//////////////////////////////////////////////////////////////////////

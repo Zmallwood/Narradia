@@ -20,4 +20,3 @@ namespace Narradia
 
     void Log(const std::source_location location = std::source_location::current());
 }
-//////////////////////////////////////////////////////////////////////

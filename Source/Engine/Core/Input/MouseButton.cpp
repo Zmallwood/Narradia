@@ -25,14 +25,14 @@ namespace Narradia
 
     void
     MouseButton::Reset()
-    /*/////////////////////*/
+    /*////////////////*/
     {
         p->isPressed = false;
     }
 
     void
     MouseButton::PressDown()
-    /*/////////////////////////*/
+    /*////////////////////*/
     {
         p->isPressed = true;
         p->hasBeenFired = true;
@@ -43,7 +43,7 @@ namespace Narradia
 
     void
     MouseButton::Release()
-    /*///////////////////////*/
+    /*//////////////////*/
     {
         p->isPressed = false;
         p->hasBeenReleased = true;
@@ -52,14 +52,14 @@ namespace Narradia
 
     int
     MouseButton::GetPressDuration() const
-    /*/////////////////////////////////////*/
+    /*/////////////////////////////////*/
     {
         return SDL_GetTicks() - p->ticksButtonDown;
     }
 
     int
     MouseButton::ClickDurationPickResult()
-    /*//////////////////////////////////////*/
+    /*//////////////////////////////////*/
     {
         auto result = p->clickDuration;
         p->clickDuration = Pimpl::defaultClickSpeed;
@@ -68,14 +68,14 @@ namespace Narradia
 
     int
     MouseButton::ClickDurationPeekResult() const
-    /*////////////////////////////////////////////*/
+    /*////////////////////////////////////////*/
     {
         return p->clickDuration;
     }
 
     void
     MouseButton::PerformMouseAction()
-    /*//////////////////////////////////*/
+    /*/////////////////////////////*/
     {
         Log();
         if (p->hasBeenFired)
@@ -121,7 +121,7 @@ namespace Narradia
 
     void
     MouseButton::ResetActions()
-    /*////////////////////////////*/
+    /*///////////////////////*/
     {
         p->actionMngr.ClearFiredActions();
         p->hasBeenFired = false;
@@ -131,9 +131,8 @@ namespace Narradia
 
     const int
     MouseButton::GetDefaultClickSpeed()
-    /*/////////////////////////////////////////*/
+    /*///////////////////////////////*/
     {
         return Pimpl::defaultClickSpeed;
     }
 }
-//////////////////////////////////////////////////////////////////////

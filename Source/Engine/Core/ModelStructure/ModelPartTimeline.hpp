@@ -11,4 +11,3 @@ namespace Narradia
         std::map<float, std::shared_ptr<const ModelPartKeyframe>> keyframes;
     };
 }
-//////////////////////////////////////////////////////////////////////
