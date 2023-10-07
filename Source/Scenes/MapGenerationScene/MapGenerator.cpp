@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////
 #include "MapGenerator.hpp"
 #include "Engine/Core/TextOutBox.hpp"
-#include "World/MapArea.hpp"
 #include "World/Actors/Mob.hpp"
+#include "World/MapArea.hpp"
 #include "World/Object.hpp"
 #include "World/ObjectsCollection.hpp"
 #include "World/Tile.hpp"
@@ -12,7 +12,7 @@ namespace Narradia
 {
     void
     WorldMapGenerate::DoGenerationStep(GenerateSteps generationStep)
-    /*/////////////////////////////////////////////////////////////////*/
+    /*////////////////////////////////////////////////////////////*/
     {
         switch (generationStep)
         /*********************/
@@ -90,7 +90,7 @@ namespace Narradia
 
     void
     WorldMapGenerate::AddElevation()
-    /*/////////////////////////////////*/
+    /*////////////////////////////*/
     {
         auto mapArea = World::Get().GetMapAreaAtZLevel(0);
         auto areaCount = 8;
@@ -221,7 +221,7 @@ namespace Narradia
 
     void
     WorldMapGenerate::AddMobs()
-    /*////////////////////////////*/
+    /*///////////////////////*/
     {
         auto mapArea = World::Get().GetMapAreaAtZLevel(0);
         auto numBoars = 60;
@@ -262,7 +262,7 @@ namespace Narradia
 
     void
     WorldMapGenerate::AddObjects()
-    /*///////////////////////////////*/
+    /*//////////////////////////*/
     {
         auto mapArea = World::Get().GetMapAreaAtZLevel(0);
         auto forestsCount = 70;
@@ -348,7 +348,7 @@ namespace Narradia
 
     void
     WorldMapGenerate::AddWater()
-    /*/////////////////////////////*/
+    /*////////////////////////*/
     {
         auto mapArea = World::Get().GetMapAreaAtZLevel(0);
         auto areaCount = 30;
@@ -395,7 +395,7 @@ namespace Narradia
 
     void
     WorldMapGenerate::AddWaterRivers()
-    /*///////////////////////////////////*/
+    /*//////////////////////////////*/
     {
         auto mapArea = World::Get().GetMapAreaAtZLevel(0);
         std::vector<Point2F> predefinedSpawnLocs = {
@@ -553,7 +553,7 @@ namespace Narradia
 
     void
     WorldMapGenerate::GenerateColorVariations()
-    /*////////////////////////////////////////////*/
+    /*///////////////////////////////////////*/
     {
         World::Get().ResetColorVariations();
         World::Get().GenerateRandomColorVariations();

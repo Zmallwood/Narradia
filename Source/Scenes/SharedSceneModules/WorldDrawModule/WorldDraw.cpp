@@ -35,14 +35,14 @@ namespace Narradia
 
     void
     WorldDraw::Update()
-    /*////////////////////*/
+    /*///////////////*/
     {
         Camera::Get().Update();
     }
 
     void
     WorldDraw::Render()
-    /*////////////////////*/
+    /*///////////////*/
     {
         Log();
         SubDrawSky::Get().DrawSky();
@@ -101,14 +101,14 @@ namespace Narradia
 
     void
     WorldDraw::EnablePlayMode()
-    /*////////////////////////////*/
+    /*///////////////////////*/
     {
         worldViewMode = WorldDrawModes::Play;
     }
 
     void
     WorldDraw::EnableMapEditorMode()
-    /*/////////////////////////////////*/
+    /*////////////////////////////*/
     {
         worldViewMode = WorldDrawModes::Editor;
     }

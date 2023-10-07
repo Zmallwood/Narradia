@@ -11,16 +11,16 @@
 #include "Scenes/SharedSceneModules/TileHovering.hpp"
 #include "Scenes/SharedSceneModules/WorldDrawModule/Camera.hpp"
 #include "Scenes/SharedSceneModules/WorldDrawModule/WorldDraw.hpp"
+#include "World/Actors/Player.hpp"
 #include "World/MapArea.hpp"
 #include "World/ObjectBehaviourList.hpp"
-#include "World/Actors/Player.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
     EditorScene::EditorScene()
-    /*////////////////////*/
+    /*//////////////////////*/
     {
         Log();
         SetSceneGui(std::make_shared<EditorSceneGui>());
@@ -31,7 +31,7 @@ namespace Narradia
 
     void
     EditorScene::Enter()
-    /*////////////////////*/
+    /*////////////////*/
     {
         EditorSceneGuiMenu::Get().visible = false;
         if (nullptr == World::Get().GetMapAreaAtZLevel(0))
@@ -54,7 +54,7 @@ namespace Narradia
 
     void
     EditorScene::UpdateDerived()
-    /*////////////////////////////*/
+    /*////////////////////////*/
     {
         TileHovering::Get().Update();
         EditorSceneHotkeys().Update();
@@ -68,7 +68,7 @@ namespace Narradia
 
     void
     EditorScene::RenderDerived()
-    /*////////////////////////////*/
+    /*////////////////////////*/
     {
         WorldDraw::Get().Render();
         TileHovering::Get().Render();
@@ -76,7 +76,7 @@ namespace Narradia
 
     void
     EditorScene::RenderAfterGuiDerived()
-    /*////////////////////////////////////*/
+    /*////////////////////////////////*/
     {
         GuiObjectHovering::Get().Render();
     }

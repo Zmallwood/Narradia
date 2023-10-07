@@ -2,8 +2,8 @@
 #include "ObjectivesPanel.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
-#include "World/MapArea.hpp"
 #include "World/Actors/Player.hpp"
+#include "World/MapArea.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -22,14 +22,14 @@ namespace Narradia
 
     void
     ObjectivesPanel::Update()
-    /*//////////////////////////*/
+    /*/////////////////////*/
     {
         GuiMovableContainer::Update();
     }
 
     void
     ObjectivesPanel::Render() const
-    /*////////////////////////////////*/
+    /*///////////////////////////*/
     {
         Renderer2DImages::Get().DrawImage(Hash("PanelBg"), glIdBackgroundImage, GetBounds());
         TextRenderer::Get().DrawString(

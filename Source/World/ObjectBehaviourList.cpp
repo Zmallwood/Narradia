@@ -21,7 +21,7 @@ namespace Narradia
 
     void
     ObjectBehaviourList::Initialize()
-    /*//////////////////////////////////*/
+    /*/////////////////////////////*/
     {
         AddLabel("ObjectKindling", "Kindling");
         AddLabel("ObjectFishingNet", "Fishing net");
@@ -62,7 +62,7 @@ namespace Narradia
 
     void
     ObjectBehaviourList::AddLabel(std::string_view objectName, std::string_view label)
-    /*///////////////////////////////////////////////////////////////////////////////////*/
+    /*//////////////////////////////////////////////////////////////////////////////*/
     {
         p->CreateEntryIfDoesntExist(objectName);
         p->list.at(Hash(objectName.data())).label = label;
@@ -70,7 +70,7 @@ namespace Narradia
 
     void
     ObjectBehaviourList::AddFlag(std::string_view objectName, ObjectBehaviourFlags flag)
-    /*/////////////////////////////////////////////////////////////////////////////////////*/
+    /*////////////////////////////////////////////////////////////////////////////////*/
     {
         p->CreateEntryIfDoesntExist(objectName);
         p->list.at(Hash(objectName.data())).flags |= static_cast<int>(flag);
@@ -78,7 +78,7 @@ namespace Narradia
 
     void
     ObjectBehaviourList::SetContainerSlots(std::string_view objectName, int containerSlots)
-    /*////////////////////////////////////////////////////////////////////////////////////////*/
+    /*///////////////////////////////////////////////////////////////////////////////////*/
     {
         p->CreateEntryIfDoesntExist(objectName);
         p->list.at(Hash(objectName.data())).containerSlots = containerSlots;
@@ -86,7 +86,7 @@ namespace Narradia
 
     bool
     ObjectBehaviourList::IsContainer(int objectTypeHash)
-    /*/////////////////////////////////////////////////////*/
+    /*////////////////////////////////////////////////*/
     {
         if (p->list.count(objectTypeHash))
             return p->list.at(objectTypeHash).containerSlots > 0;
@@ -95,14 +95,14 @@ namespace Narradia
 
     bool
     ObjectBehaviourList::HasBehaviourData(int objectTypeHash)
-    /*//////////////////////////////////////////////////////////*/
+    /*/////////////////////////////////////////////////////*/
     {
         return p->list.count(objectTypeHash) != 0;
     }
 
     int
     ObjectBehaviourList::GetFlags(int objectTypeHash)
-    /*/////////////////////////////////////////////////*/
+    /*/////////////////////////////////////////////*/
     {
         if (p->list.count(objectTypeHash))
             return p->list.at(objectTypeHash).flags;
@@ -111,7 +111,7 @@ namespace Narradia
 
     std::string_view
     ObjectBehaviourList::GetLabel(int objectTypeHash)
-    /*//////////////////////////////////////////////////////////////*/
+    /*/////////////////////////////////////////////*/
     {
         if (p->list.count(objectTypeHash))
             return p->list.at(objectTypeHash).label;
@@ -120,7 +120,7 @@ namespace Narradia
 
     int
     ObjectBehaviourList::GetContainerSlots(int objectTypeHash)
-    /*//////////////////////////////////////////////////////////*/
+    /*//////////////////////////////////////////////////////*/
     {
         if (p->list.count(objectTypeHash))
             return p->list.at(objectTypeHash).containerSlots;
@@ -129,14 +129,14 @@ namespace Narradia
 
     void
     ObjectBehaviourList::Clear()
-    /*/////////////////////////////*/
+    /*////////////////////////*/
     {
         p->list.clear();
     }
 
     void
     ObjectBehaviourList::Pimpl::CreateEntryIfDoesntExist(std::string_view objectName)
-    /*//////////////////////////////////////////////////////////////////////////////////*/
+    /*/////////////////////////////////////////////////////////////////////////////*/
     {
         auto objectNameHash = Hash(objectName.data());
         if (list.count(objectNameHash) == 0)

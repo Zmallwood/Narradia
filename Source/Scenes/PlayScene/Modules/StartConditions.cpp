@@ -1,14 +1,14 @@
 //////////////////////////////////////////////////////////////////////
 #include "StartConditions.hpp"
+#include "World/Actors/Player.hpp"
 #include "World/MapArea.hpp"
 #include "World/ObjectBehaviourList.hpp"
-#include "World/Actors/Player.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
     void
     StartConditions::CreateStartConditions()
-    /*/////////////////////////////////////////*/
+    /*////////////////////////////////////*/
     {
         auto &inventory = Player::Get().data.inventory;
         inventory.Add("ObjectKindling");

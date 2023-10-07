@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////
 #include "ObjectHandling.hpp"
 #include "Modules/ObjectMoving.hpp"
+#include "World/Actors/Player.hpp"
 #include "World/MapArea.hpp"
 #include "World/Object.hpp"
-#include "World/Actors/Player.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
@@ -11,7 +11,7 @@ namespace Narradia
 {
     void
     RemoveObjectMirror(Object *&object)
-    /*////////////////////////////////////*/
+    /*///////////////////////////////*/
     {
         if (ObjectMoving::Get().objectInAir.get() == object)
             ObjectMoving::Get().objectInAir = nullptr;
@@ -66,7 +66,7 @@ namespace Narradia
 
     std::shared_ptr<Object>
     MoveObject(Object *object)
-    /*//////////////////////////////////////////////*/
+    /*//////////////////////*/
     {
         if (ObjectMoving::Get().objectInAir.get() == object)
         /**************************************************/

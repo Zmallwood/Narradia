@@ -10,11 +10,11 @@ namespace Narradia
 {
     void
     Combat::Update()
-    /*******************/
+    /*////////////*/
     {
         if (SDL_GetTicks() < Player::Get().data.combat.ticksLastHitGivenOther +
                                  Player::Get().data.combat.attackSpeed)
-        /**********************************************************************/
+        /*********************************************************************/
         {
             return;
         }

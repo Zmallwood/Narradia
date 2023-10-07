@@ -4,8 +4,8 @@
 #include "Engine/Core/Graphics/Rendering/Renderer2DSolidColors.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
 #include "World/Actors/Companion.hpp"
-#include "World/MapArea.hpp"
 #include "World/Actors/Player.hpp"
+#include "World/MapArea.hpp"
 #include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
@@ -34,14 +34,14 @@ namespace Narradia
 
     void
     CompanionsPanel::Update()
-    /*//////////////////////////*/
+    /*/////////////////////*/
     {
         GuiMovableContainer::Update();
     }
 
     void
     CompanionsPanel::Render() const
-    /*////////////////////////////////*/
+    /*///////////////////////////*/
     {
         Renderer2DImages::Get().DrawImage(Hash("PanelBg"), id_background_image, GetBounds());
         TextRenderer::Get().DrawString(

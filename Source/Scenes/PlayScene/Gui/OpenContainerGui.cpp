@@ -32,7 +32,7 @@ namespace Narradia
 
     void
     OpenContainerGui::UpdateDerived()
-    /*//////////////////////////////////*/
+    /*/////////////////////////////*/
     {
         if (GetBounds().Contains(GetMousePositionF()))
         /********************************************/
@@ -64,7 +64,7 @@ namespace Narradia
 
     void
     OpenContainerGui::RenderDerived() const
-    /*////////////////////////////////////////*/
+    /*///////////////////////////////////*/
     {
         auto i = 0;
         for (auto y = 0; y < maxNumRows; y++)

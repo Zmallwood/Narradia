@@ -7,7 +7,7 @@
 namespace Narradia
 {
     class MapTypeSelectionScene::Pimpl
-    /*/////////////////////////////*/
+    /*//////////////////////////////*/
     {
       public:
         const RectangleF rectBack = {0.0f, 0.0f, 1.0f, 1.0f};
@@ -18,7 +18,7 @@ namespace Narradia
 
     MapTypeSelectionScene::MapTypeSelectionScene()
         : p(std::make_shared<Pimpl>())
-    /*////////////////////////////////////////*/
+    /*//////////////////////////////////////////*/
     {
         CreateGui();
         auto sceneGui = GetSceneGui();
@@ -37,14 +37,14 @@ namespace Narradia
 
     void
     MapTypeSelectionScene::UpdateDerived()
-    /*//////////////////////////////////////*/
+    /*//////////////////////////////////*/
     {
         Log();
     }
 
     void
     MapTypeSelectionScene::RenderDerived()
-    /*//////////////////////////////////////*/
+    /*//////////////////////////////////*/
     {
         Log();
         Renderer2DImages::Get().DrawImage("DefaultSceneBackground", p->glIdBackImage, p->rectBack);

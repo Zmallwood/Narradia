@@ -14,13 +14,13 @@ namespace Narradia
 
     void
     CharacterGui::UpdateDerived()
-    /*//////////////////////////////*/
+    /*/////////////////////////*/
     {
     }
 
     void
     CharacterGui::RenderDerived() const
-    /*////////////////////////////////////*/
+    /*///////////////////////////////*/
     {
         std::stringstream stream;
         stream << std::fixed << std::setprecision(2)

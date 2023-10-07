@@ -10,7 +10,7 @@
 namespace Narradia
 {
     class IntroScene::Pimpl
-    /*//////////////////*/
+    /*///////////////////*/
     {
       public:
         RenderId rendIdBackImage;
@@ -31,7 +31,7 @@ namespace Narradia
 
     void
     IntroScene::UpdateDerived()
-    /*///////////////////////////*/
+    /*///////////////////////*/
     {
         Log();
         MouseInput::Get().GetLeftButton().AddFiredAction(
@@ -49,7 +49,7 @@ namespace Narradia
 
     void
     IntroScene::RenderDerived()
-    /*///////////////////////////*/
+    /*///////////////////////*/
     {
         Log();
         RectangleF rectBack = {0.0f, 0.0f, 1.0f, 1.0f};

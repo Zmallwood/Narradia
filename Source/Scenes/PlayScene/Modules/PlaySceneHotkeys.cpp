@@ -1,18 +1,18 @@
 //////////////////////////////////////////////////////////////////////
 #include "PlaySceneHotkeys.hpp"
 #include "Engine/Core/Input/KeyboardInput.hpp"
+#include "Scenes/PlayScene/Gui/BuildSelectorGui.hpp"
 #include "Scenes/PlayScene/Gui/CharacterGui.hpp"
 #include "Scenes/PlayScene/Gui/InventoryGui.hpp"
-#include "Scenes/PlayScene/Gui/SkillsGui.hpp"
-#include "Scenes/PlayScene/Gui/BuildSelectorGui.hpp"
-#include "World/Actors/Player.hpp"
 #include "Scenes/PlayScene/Gui/PlaySceneGuiMenu.hpp"
+#include "Scenes/PlayScene/Gui/SkillsGui.hpp"
+#include "World/Actors/Player.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
     void
     PlaySceneHotkeys::Update()
-    /*//////////////////////////*/
+    /*//////////////////////*/
     {
         if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_c))
             CharacterGui::Get().ToggleVisibility();

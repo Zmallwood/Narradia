@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////
 #include "MapFilesIO.hpp"
 #include "Engine/Core/TextOutBox.hpp"
-#include "World/MapArea.hpp"
 #include "World/Actors/Mob.hpp"
+#include "World/MapArea.hpp"
 #include "World/Object.hpp"
 #include "World/ObjectsCollection.hpp"
 #include "World/Tile.hpp"
@@ -25,7 +25,7 @@ namespace Narradia
 
     void
     MapFilesIO::SaveCurrentMapArea(std::string_view mapName)
-    /*/////////////////////////////////////////////////////////*/
+    /*////////////////////////////////////////////////////*/
     {
         std::filesystem::create_directory(
             std::string(SDL_GetBasePath()) + Pimpl::relMapsPath.data());
@@ -86,7 +86,7 @@ namespace Narradia
 
     void
     MapFilesIO::LoadMapArea(std::string_view mapName)
-    /*//////////////////////////////////////////////////*/
+    /*/////////////////////////////////////////////*/
     {
         std::ifstream mapFile;
         mapFile.open(

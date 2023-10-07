@@ -9,7 +9,7 @@
 namespace Narradia
 {
     MapLoadScene::MapLoadScene()
-    /*//////////////////////*/
+    /*////////////////////////*/
     {
         CreateGui();
         glIdBackgroundImage = Renderer2DImages::Get().NewImage();
@@ -26,13 +26,13 @@ namespace Narradia
 
     void
     MapLoadScene::UpdateDerived()
-    /*/////////////////////////////*/
+    /*/////////////////////////*/
     {
     }
 
     void
     MapLoadScene::RenderDerived()
-    /*/////////////////////////////*/
+    /*/////////////////////////*/
     {
         auto rectBack = RectangleF{0.0f, 0.0f, 1.0f, 1.0f};
         Renderer2DImages::Get().DrawImage("DefaultSceneBackground", glIdBackgroundImage, rectBack);

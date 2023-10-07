@@ -21,13 +21,13 @@ namespace Narradia
 
     void
     MessageBox::UpdateDerived()
-    /*////////////////////////////*/
+    /*///////////////////////*/
     {
     }
 
     void
     MessageBox::RenderDerived() const
-    /*//////////////////////////////////*/
+    /*/////////////////////////////*/
     {
         TextRenderer::Get().DrawString(
             glIdMessageText, messageText, GetPosition().Translate(0.01f, 0.05f), Colors::yellow);

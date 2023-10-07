@@ -28,7 +28,7 @@ namespace Narradia
 
     void
     InventoryGui::UpdateDerived()
-    /*//////////////////////////////*/
+    /*/////////////////////////*/
     {
         if (GetBounds().Contains(GetMousePositionF()))
         /********************************************/
@@ -50,7 +50,7 @@ namespace Narradia
 
     void
     InventoryGui::RenderDerived() const
-    /*////////////////////////////////////*/
+    /*///////////////////////////////*/
     {
         Log();
         for (auto y = 0; y < numRows; y++)

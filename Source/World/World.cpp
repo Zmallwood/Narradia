@@ -1,10 +1,10 @@
 //////////////////////////////////////////////////////////////////////
 #include "World.hpp"
+#include "Actors/Player.hpp"
 #include "Engine/Core/Graphics/Rendering/RendererTiles.hpp"
 #include "MapArea.hpp"
 #include "Object.hpp"
 #include "ObjectsCollection.hpp"
-#include "Actors/Player.hpp"
 #include "Scenes/SharedSceneModules/WorldDrawModule/ConfigurationWorldDraw.hpp"
 #include "Tile.hpp"
 //////////////////////////////////////////////////////////////////////
@@ -19,20 +19,20 @@ namespace Narradia
 
     World::World()
         : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////////*/
+    /*//////////////////////////////*/
     {
     }
 
     void
     World::AddMapAreaAtZLevel(int zLevel, std::shared_ptr<MapArea> newMapArea)
-    /*///////////////////////////////////////////////////////////////////////////*/
+    /*//////////////////////////////////////////////////////////////////////*/
     {
         p->mapAreas[zLevel] = newMapArea;
     }
 
     void
     World::RemoveMapAreaAtZLevel(int zLevel)
-    /*/////////////////////////////////////////*/
+    /*////////////////////////////////////*/
     {
         if (p->mapAreas.count(zLevel))
             p->mapAreas.erase(zLevel);
@@ -40,7 +40,7 @@ namespace Narradia
 
     MapArea *
     World::GetMapAreaAtZLevel(int zLevel)
-    /*//////////////////////////////////////////*/
+    /*/////////////////////////////////*/
     {
         if (p->mapAreas.count(zLevel))
             return p->mapAreas[zLevel].get();
@@ -49,7 +49,7 @@ namespace Narradia
 
     MapArea *
     World::GetCurrentMapArea()
-    /*///////////////////////////////*/
+    /*//////////////////////*/
     {
         auto playerWorldAreaPos = Player::Get().GetWorldAreaPos();
         return p->mapAreas[playerWorldAreaPos.z].get();
@@ -57,7 +57,7 @@ namespace Narradia
 
     std::vector<MapArea *>
     World::GetAllMapAreas()
-    /*//////////////////////////////////////////*/
+    /*///////////////////*/
     {
         std::vector<MapArea *> mapAreasResult;
         for (auto &mapArea : p->mapAreas)
@@ -67,7 +67,7 @@ namespace Narradia
 
     void
     World::CalculateNormals(bool updateExistingTiles)
-    /*//////////////////////////////////////////////////*/
+    /*/////////////////////////////////////////////*/
     {
         auto mapAreas = World::Get().GetAllMapAreas();
         for (auto &mapArea : mapAreas)
@@ -244,7 +244,7 @@ namespace Narradia
 
     void
     World::ResetColorVariations()
-    /*//////////////////////////////*/
+    /*/////////////////////////*/
     {
         auto mapAreas = World::Get().GetAllMapAreas();
         for (auto &mapArea : mapAreas)
@@ -266,7 +266,7 @@ namespace Narradia
 
     void
     World::ApplyDefaultColorVariations()
-    /*/////////////////////////////////////*/
+    /*////////////////////////////////*/
     {
         auto mapAreas = World::Get().GetAllMapAreas();
         for (auto &mapArea : mapAreas)
@@ -313,7 +313,7 @@ namespace Narradia
 
     void
     World::GenerateRandomColorVariations()
-    /*///////////////////////////////////////*/
+    /*//////////////////////////////////*/
     {
         auto mapAreas = World::Get().GetAllMapAreas();
         for (auto &mapArea : mapAreas)

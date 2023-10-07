@@ -30,7 +30,7 @@ namespace Narradia
 
     void
     FpsPanel::Update()
-    /*///////////////////*/
+    /*//////////////*/
     {
         if (SDL_GetTicks() > p->ticksLastUpdate + 1000)
         /*********************************************/
@@ -45,7 +45,7 @@ namespace Narradia
 
     void
     FpsPanel::Render() const
-    /*/////////////////////////*/
+    /*////////////////////*/
     {
         if (!p->visible)
             return;

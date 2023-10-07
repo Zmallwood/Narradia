@@ -3,11 +3,11 @@
 #include "Camera.hpp"
 #include "ConfigurationWorldDraw.hpp"
 #include "Engine/Core/Graphics/Rendering/CameraGl.hpp"
+#include "World/Actors/Player.hpp"
 #include "World/MapArea.hpp"
 #include "World/Object.hpp"
 #include "World/ObjectBehaviourList.hpp"
 #include "World/ObjectsCollection.hpp"
-#include "World/Actors/Player.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
@@ -21,7 +21,7 @@ namespace Narradia
 
     void
     RenderLoop::operator()()
-    /*/////////////////////////*/
+    /*////////////////////*/
     {
         const auto &playerWorldAreaPos = Player::Get().GetWorldAreaPos();
         const auto &playerPos = Player::Get().GetPosition();

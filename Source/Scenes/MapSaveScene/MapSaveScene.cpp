@@ -1,15 +1,15 @@
 //////////////////////////////////////////////////////////////////////
 #include "MapSaveScene.hpp"
-#include "Scenes/SharedSceneModules/MapFilesIO.hpp"
-#include "Engine/Core/SceneManager.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
+#include "Engine/Core/SceneManager.hpp"
 #include "Engine/GuiCore/GuiTextBox.hpp"
 #include "Engine/GuiCore/SceneGui.hpp"
+#include "Scenes/SharedSceneModules/MapFilesIO.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
     MapSaveScene::MapSaveScene()
-    /*//////////////////////*/
+    /*////////////////////////*/
     {
         CreateGui();
         glIdBackgroundImage = Renderer2DImages::Get().NewImage();
@@ -24,13 +24,15 @@ namespace Narradia
         });
     }
 
-    void MapSaveScene::UpdateDerived()
-    /*/////////////////////////////*/
+    void
+    MapSaveScene::UpdateDerived()
+    /*/////////////////////////*/
     {
     }
 
-    void MapSaveScene::RenderDerived()
-    /*/////////////////////////////*/
+    void
+    MapSaveScene::RenderDerived()
+    /*/////////////////////////*/
     {
         auto rectBack = RectangleF{0.0f, 0.0f, 1.0f, 1.0f};
         Renderer2DImages::Get().DrawImage("DefaultSceneBackground", glIdBackgroundImage, rectBack);

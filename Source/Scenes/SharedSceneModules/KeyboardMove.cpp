@@ -8,7 +8,7 @@ namespace Narradia
 {
     void
     KeyboardMove::Update()
-    /*///////////////////////*/
+    /*//////////////////*/
     {
         auto player = Player::GetPointer();
         if (DestinationMove::Get().GetDestination() == Point2{-1, -1})

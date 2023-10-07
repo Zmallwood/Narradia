@@ -26,7 +26,7 @@ namespace Narradia
 
     void
     ActiveGameRound::Update()
-    /*//////////////////////////*/
+    /*/////////////////////*/
     {
         auto num_claimed_tiles = Player::Get().claimedTiles.size();
         auto tot_number_of_tiles = MapArea::GetMapSize().width * MapArea::GetMapSize().height;
@@ -37,7 +37,7 @@ namespace Narradia
 
     void
     ActiveGameRound::Render()
-    /*//////////////////////////*/
+    /*/////////////////////*/
     {
         if (!p->game_completed)
             return;
@@ -51,7 +51,7 @@ namespace Narradia
 
     bool
     ActiveGameRound::GameIsCompleted()
-    /*///////////////////////////////////*/
+    /*//////////////////////////////*/
     {
         return p->game_completed;
     }

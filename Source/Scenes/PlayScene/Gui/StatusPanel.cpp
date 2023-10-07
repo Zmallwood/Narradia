@@ -11,8 +11,10 @@ namespace Narradia
     /*//////////////////////*/
     {
         rendIdBgImage = Renderer2DImages::Get().NewImage();
-        std::tie(rendIdPlHpText, rendIdPlStamText, rendIdPlRageText) = TextRenderer::Get().NewStrings<3>();
-        std::tie(rendIdPlHpBar, rendIdPlStamBar, rendIdPlRageBar) = Renderer2DSolidColors::Get().NewRectangles<3>();
+        std::tie(rendIdPlHpText, rendIdPlStamText, rendIdPlRageText) =
+            TextRenderer::Get().NewStrings<3>();
+        std::tie(rendIdPlHpBar, rendIdPlStamBar, rendIdPlRageBar) =
+            Renderer2DSolidColors::Get().NewRectangles<3>();
         rendIdPlHpBarFilled = Renderer2DImages::Get().NewImage();
         rendIdPlStamBarFilled = Renderer2DImages::Get().NewImage();
         rendIdPlRageBarFilled = Renderer2DImages::Get().NewImage();
@@ -20,13 +22,13 @@ namespace Narradia
 
     void
     StatusPanel::Update()
-    /*//////////////////////*/
+    /*/////////////////*/
     {
     }
 
     void
     StatusPanel::Render() const
-    /*////////////////////////////*/
+    /*///////////////////////*/
     {
         auto player = Player::GetPointer();
         Renderer2DImages::Get().DrawImage(hashPanelBg, rendIdBgImage, boundsPanel);

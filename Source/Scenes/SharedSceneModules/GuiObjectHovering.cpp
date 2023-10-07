@@ -18,7 +18,7 @@ namespace Narradia
 
     void
     GuiObjectHovering::Render()
-    /*////////////////////////////*/
+    /*///////////////////////*/
     {
         if (GuiWindowObjectSlot::hoveredObject)
         /*************************************/

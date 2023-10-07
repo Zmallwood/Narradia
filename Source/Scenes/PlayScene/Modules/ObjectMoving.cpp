@@ -10,10 +10,10 @@
 #include "Scenes/PlayScene/PlayScene.hpp"
 #include "Scenes/SharedSceneModules/TileHovering.hpp"
 #include "World/Actors/Companion.hpp"
+#include "World/Actors/Player.hpp"
 #include "World/MapArea.hpp"
 #include "World/Object.hpp"
 #include "World/ObjectBehaviourList.hpp"
-#include "World/Actors/Player.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
@@ -27,7 +27,7 @@ namespace Narradia
 
     void
     ObjectMoving::Update()
-    /*///////////////////////*/
+    /*//////////////////*/
     {
         PickupObjectFromGuiIfIsTheCase();
         PickupObjectFromGroundIfIsTheCase();
@@ -36,7 +36,7 @@ namespace Narradia
 
     void
     ObjectMoving::PickupObjectFromGuiIfIsTheCase()
-    /*///////////////////////////////////////////////*/
+    /*//////////////////////////////////////////*/
     {
         if (GuiWindowObjectSlot::hoveredObject)
         /*************************************/
@@ -50,10 +50,10 @@ namespace Narradia
 
     void
     ObjectMoving::PickupObjectFromGroundIfIsTheCase()
-    /*//////////////////////////////////////////////////*/
+    /*/////////////////////////////////////////////*/
     {
         if (MapArea::IsInsideMap(TileHovering::Get().hoveredTile))
-        /******************************************************/
+        /********************************************************/
         {
             auto player = Player::GetPointer();
             auto player_position = player->GetPosition().ToIntPoint();
@@ -86,7 +86,7 @@ namespace Narradia
 
     void
     ObjectMoving::ReleaseObjectIfIsTheCase()
-    /*/////////////////////////////////////////*/
+    /*////////////////////////////////////*/
     {
         MouseInput::Get().GetLeftButton().AddReleasedAction(
             "ObjectMovingReleaseObject",
@@ -150,7 +150,7 @@ namespace Narradia
 
     void
     ObjectMoving::Render()
-    /*///////////////////////*/
+    /*//////////////////*/
     {
         if (!objectInAir)
             return;

@@ -2,8 +2,8 @@
 #include "CompanionsUpdate.hpp"
 #include "Engine/Core/TextOutBox.hpp"
 #include "World/Actors/Companion.hpp"
-#include "World/MapArea.hpp"
 #include "World/Actors/Player.hpp"
+#include "World/MapArea.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
@@ -11,7 +11,7 @@ namespace Narradia
 {
     void
     CompanionsUpdate::Update()
-    /*///////////////////////////*/
+    /*//////////////////////*/
     {
         auto mapArea = World::Get().GetCurrentMapArea();
         for (auto it = mapArea->GetCompanionsMirror().cbegin();

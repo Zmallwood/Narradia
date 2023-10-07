@@ -20,7 +20,7 @@ namespace Narradia
 
     void
     ActionRepeat::Update()
-    /*///////////////////////*/
+    /*//////////////////*/
     {
         if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_r))
             RepeatLastAction();
@@ -28,7 +28,7 @@ namespace Narradia
 
     void
     ActionRepeat::RepeatLastAction()
-    /*/////////////////////////////////*/
+    /*////////////////////////////*/
     {
         if (p->repeatingAction == nullptr)
         /********************************/
@@ -46,7 +46,7 @@ namespace Narradia
 
     void
     ActionRepeat::SetRepeatingAction(std::function<void()> action)
-    /*///////////////////////////////////////////////////////////////*/
+    /*//////////////////////////////////////////////////////////*/
     {
         p->repeatingAction = action;
     }

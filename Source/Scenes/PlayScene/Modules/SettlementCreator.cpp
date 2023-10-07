@@ -2,8 +2,8 @@
 #include "SettlementCreator.hpp"
 #include "Engine/Core/TextOutBox.hpp"
 #include "World/Actors/Companion.hpp"
-#include "World/MapArea.hpp"
 #include "World/Actors/Player.hpp"
+#include "World/MapArea.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
@@ -11,7 +11,7 @@ namespace Narradia
 {
     void
     SettlementCreator::CreateSettlement()
-    /*//////////////////////////////////////*/
+    /*/////////////////////////////////*/
     {
         auto settlement_center = Player::Get().GetPosition().ToIntPoint();
         auto map_area = World::Get().GetMapAreaAtZLevel(Player::Get().GetWorldAreaPos().z);

@@ -15,13 +15,13 @@ namespace Narradia
 
     void
     ExperienceBar::Update()
-    /*////////////////////////*/
+    /*///////////////////*/
     {
     }
 
     void
     ExperienceBar::Render() const
-    /*//////////////////////////////*/
+    /*/////////////////////////*/
     {
         auto unfilledArea = RectangleF{0.0f, 1.0f - kBarHeight, 1.0f, kBarHeight};
         Renderer2DSolidColors::Get().FillRectangle(glIdUnfilledArea, unfilledArea, Colors::black);

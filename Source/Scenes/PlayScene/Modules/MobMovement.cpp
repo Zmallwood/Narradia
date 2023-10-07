@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////
 #include "MobMovement.hpp"
-#include "World/MapArea.hpp"
 #include "World/Actors/Mob.hpp"
 #include "World/Actors/Player.hpp"
+#include "World/MapArea.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
@@ -10,7 +10,7 @@ namespace Narradia
 {
     void
     MobMovement::Update()
-    /*//////////////////////*/
+    /*/////////////////*/
     {
         Log();
         auto player_world_area_position = Player::Get().GetWorldAreaPos();

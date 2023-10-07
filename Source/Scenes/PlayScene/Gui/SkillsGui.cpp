@@ -24,7 +24,7 @@ namespace Narradia
 
     void
     SkillsGui::UpdateDerived()
-    /*///////////////////////////*/
+    /*//////////////////////*/
     {
         auto mousePos = GetMousePositionF();
         auto i = 0;
@@ -56,7 +56,7 @@ namespace Narradia
 
     void
     SkillsGui::RenderDerived() const
-    /*/////////////////////////////////*/
+    /*////////////////////////////*/
     {
         auto mousePos = GetMousePositionF();
         auto i = 0;

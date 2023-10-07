@@ -9,7 +9,7 @@
 namespace Narradia
 {
     MapGenerateScene::MapGenerateScene()
-    /*//////////////////////////////*/
+    /*////////////////////////////////*/
     {
         CreateGui();
         glIdBackgroundImage = Renderer2DImages::Get().NewImage();
@@ -18,14 +18,14 @@ namespace Narradia
 
     void
     MapGenerateScene::Enter()
-    /*/////////////////////////*/
+    /*/////////////////////*/
     {
         currGenerationStep = GenerateSteps::CreateBlank;
     }
 
     void
     MapGenerateScene::UpdateDerived()
-    /*/////////////////////////////////*/
+    /*/////////////////////////////*/
     {
         Log();
         if (currGenerationStep == GenerateSteps::CalcNormals)
@@ -37,7 +37,7 @@ namespace Narradia
 
     void
     MapGenerateScene::RenderDerived()
-    /*/////////////////////////////////*/
+    /*/////////////////////////////*/
     {
         Log();
         auto rectBack = RectangleF{0.0f, 0.0f, 1.0f, 1.0f};
@@ -48,7 +48,7 @@ namespace Narradia
 
     void
     MapGenerateScene::Finalize()
-    /*////////////////////////////*/
+    /*////////////////////////*/
     {
         Log();
         if (currGenerationStep == GenerateSteps::Completed)

@@ -8,7 +8,7 @@ namespace Narradia
 {
     void
     Advicer::Update()
-    /*//////////////////*/
+    /*/////////////*/
     {
         if (!has_given_foraging_advice && ready_for_next_advie)
         /*****************************************************/
@@ -23,7 +23,7 @@ namespace Narradia
             ready_for_next_advie = false;
         }
         else if (!has_given_create_stone_axe_advice && ready_for_next_advie)
-        /********************************************************************/
+        /******************************************************************/
         {
             auto main_scene = PlayScene::GetPointer();
             auto scene_gui = main_scene->GetSceneGui();

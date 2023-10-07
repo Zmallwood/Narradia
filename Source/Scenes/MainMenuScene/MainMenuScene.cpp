@@ -8,7 +8,7 @@
 namespace Narradia
 {
     class MainMenuScene::Pimpl
-    /*/////////////////////*/
+    /*//////////////////////*/
     {
       public:
         const RectangleF rectBack = {0.0f, 0.0f, 1.0f, 1.0f};
@@ -38,14 +38,14 @@ namespace Narradia
 
     void
     MainMenuScene::UpdateDerived()
-    /*//////////////////////////////*/
+    /*//////////////////////////*/
     {
         Log();
     }
 
     void
     MainMenuScene::RenderDerived()
-    /*//////////////////////////////*/
+    /*//////////////////////////*/
     {
         Log();
         Renderer2DImages::Get().DrawImage("DefaultSceneBackground", p->glIdBackImage, p->rectBack);

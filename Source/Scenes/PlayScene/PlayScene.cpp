@@ -27,7 +27,7 @@
 namespace Narradia
 {
     PlayScene::PlayScene()
-    /*////////////////*/
+    /*//////////////////*/
     {
         Log();
         SetSceneGui(std::make_shared<PlaySceneGui>());
@@ -45,7 +45,7 @@ namespace Narradia
 
     void
     PlayScene::Enter()
-    /*//////////////////*/
+    /*//////////////*/
     {
         PlaySceneGuiMenu::Get().visible = false;
         ActiveGameRound::Create();
@@ -58,7 +58,7 @@ namespace Narradia
 
     void
     PlayScene::UpdateDerived()
-    /*//////////////////////////*/
+    /*//////////////////////*/
     {
         Log();
         ActiveGameRound::Get().Update();
@@ -102,7 +102,7 @@ namespace Narradia
 
     void
     PlayScene::RenderDerived()
-    /*//////////////////////////*/
+    /*//////////////////////*/
     {
         Log();
         WorldDraw::Get().Render();
@@ -117,7 +117,7 @@ namespace Narradia
 
     void
     PlayScene::RenderAfterGuiDerived()
-    /*//////////////////////////////////*/
+    /*//////////////////////////////*/
     {
         InteractionMenu::Get().Render();
         GuiObjectHovering::Get().Render();

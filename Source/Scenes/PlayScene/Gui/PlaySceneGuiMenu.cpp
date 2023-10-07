@@ -35,7 +35,7 @@ namespace Narradia
 
     void
     PlaySceneGuiMenu::Update()
-    /*//////////////////////////*/
+    /*//////////////////////*/
     {
         if (visible)
             GuiContainer::Update();
@@ -43,7 +43,7 @@ namespace Narradia
 
     void
     PlaySceneGuiMenu::Render() const
-    /*////////////////////////////////*/
+    /*////////////////////////////*/
     {
         if (!visible)
             return;
