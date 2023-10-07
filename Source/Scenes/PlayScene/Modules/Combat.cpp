@@ -6,6 +6,7 @@
 #include "World/Actors/Player.hpp"
 #include "World/MapArea.hpp"
 #include "World/World.hpp"
+#include "Engine/Core/Audio.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -48,6 +49,7 @@ namespace Narradia
                     else
                     /**/
                     {
+                        Audio::Get()->PlaySound("Punch",1);
                         targetedMob->Hit(damage);
                         Player::Get()->data.stats.stam -= 1;
                         Player::Get()->data.stats.rage += 1;
@@ -66,6 +68,7 @@ namespace Narradia
                     else
                     /**/
                     {
+                        Audio::Get()->PlaySound("Punch",1);
                         targetedMob->Hit(damage);
                         Player::Get()->data.stats.rage -= 1;
                         TextOutBox::Get()->Print(

@@ -38,7 +38,7 @@ namespace Narradia
         void Update();
         void MoveAtAngle(float);
 
-        inline static const int kStaminaRegenerationSpeed = 6000;
+        inline static const int kStaminaRegenerationSpeed = 4500;
         int mineSpeed = 800;
         int tickLastTimeDidMine = 0;
         int ticksStartJumping = 0;
