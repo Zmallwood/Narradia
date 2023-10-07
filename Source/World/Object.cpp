@@ -196,7 +196,7 @@ namespace Narradia
     Object::IsContainer()
     /*/////////////////*/
     {
-        return ObjectBehaviourList::Get().GetContainerSlots(p->objectType) > 0;
+        return ObjectBehaviourList::Get()->GetContainerSlots(p->objectType) > 0;
     }
 
     void

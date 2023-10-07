@@ -16,28 +16,28 @@ namespace Narradia
     /*//////////////////*/
     {
         Log();
-        Camera::Get().Create();
+        Camera::Get()->Create();
         Log();
-        SubDrawGround::Get().Create();
+        SubDrawGround::Get()->Create();
         Log();
-        SubDrawMob::Get().Create();
+        SubDrawMob::Get()->Create();
         Log();
-        SubDrawCompanion::Get().Create();
+        SubDrawCompanion::Get()->Create();
         Log();
-        SubDrawPlayer::Get().Create();
+        SubDrawPlayer::Get()->Create();
         Log();
-        SubDrawSky::Get().Create();
+        SubDrawSky::Get()->Create();
         Log();
-        auto allModels = ModelBank::Get().GetAllModels();
+        auto allModels = ModelBank::Get()->GetAllModels();
         for (auto &model : allModels)
-            RendererModels::Get().NewModel(model.first);
+            RendererModels::Get()->NewModel(model.first);
     }
 
     void
     WorldDraw::Update()
     /*///////////////*/
     {
-        Camera::Get().Update();
+        Camera::Get()->Update();
     }
 
     void
@@ -45,13 +45,13 @@ namespace Narradia
     /*///////////////*/
     {
         Log();
-        SubDrawSky::Get().DrawSky();
+        SubDrawSky::Get()->DrawSky();
         RenderLoop::data1.clear();
         RenderLoop::data2.clear();
-        RendererTiles::Get().StartBatchDrawing();
+        RendererTiles::Get()->StartBatchDrawing();
         RenderLoop(
-            [&]() { SubDrawGround::Get().DrawGround(worldViewMode == WorldDrawModes::Play); })();
-        RendererTiles::Get().StopBatchDrawing();
+            [&]() { SubDrawGround::Get()->DrawGround(worldViewMode == WorldDrawModes::Play); })();
+        RendererTiles::Get()->StopBatchDrawing();
         auto msTime1 = SDL_GetTicks() * 2;
         auto msTime2 = SDL_GetTicks() * 2 + 1000;
         for (auto &d : RenderLoop::data1)
@@ -59,7 +59,7 @@ namespace Narradia
         {
             auto modelNameHash = d.first;
             Log();
-            RendererModels::Get().DrawModelsMany(
+            RendererModels::Get()->DrawModelsMany(
                 modelNameHash, msTime1, d.second.positions, d.second.rotations, d.second.scalings,
                 d.second.brightnesses, d.second.colorMods);
         }
@@ -68,7 +68,7 @@ namespace Narradia
         {
             auto modelNameHash = d.first;
             Log();
-            RendererModels::Get().DrawModelsMany(
+            RendererModels::Get()->DrawModelsMany(
                 modelNameHash, msTime2, d.second.positions, d.second.rotations, d.second.scalings,
                 d.second.brightnesses, d.second.colorMods);
         }
@@ -79,7 +79,7 @@ namespace Narradia
                        /**************************************/
                        {
                            Log();
-                           RendererModels::Get().DrawModel(
+                           RendererModels::Get()->DrawModel(
                                RenderLoop::currTile->GetRoofType(), 0,
                                {RenderLoop::currVertTile.v0.position.x + kTileSize / 2,
                                 RenderLoop::currTileAvgElev * kElevAmount,
@@ -87,15 +87,15 @@ namespace Narradia
                                0.0f, 0.6f, 1.0f);
                        }
                        Log();
-                       SubDrawMob::Get().DrawMob();
+                       SubDrawMob::Get()->DrawMob();
                        Log();
-                       SubDrawCompanion::Get().DrawCompanion();
+                       SubDrawCompanion::Get()->DrawCompanion();
                    })();
         if (worldViewMode == WorldDrawModes::Play)
         /****************************************/
         {
             Log();
-            SubDrawPlayer::Get().DrawPlayer();
+            SubDrawPlayer::Get()->DrawPlayer();
         }
     }
 

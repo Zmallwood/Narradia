@@ -36,7 +36,7 @@ namespace Narradia
             /**************************************************/
             {
                 auto newModelPart =
-                    ModelPartCreator::Get().CreateModelPartFromMesh(scene, nodeName, mesh);
+                    ModelPartCreator::Get()->CreateModelPartFromMesh(scene, nodeName, mesh);
                 allModelparts.push_back(newModelPart);
             }
         }

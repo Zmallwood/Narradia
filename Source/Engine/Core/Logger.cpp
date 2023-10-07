@@ -52,7 +52,7 @@ namespace Narradia
     Log(const std::source_location location)
     /*////////////////////////////////////*/
     {
-        Logger::Get().Log("", location);
+        Logger::Get()->Log("", location);
     }
 }
 //////////////////////////////////////////////////////////////////////

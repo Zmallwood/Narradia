@@ -25,7 +25,7 @@ namespace Narradia
     /*//////////////////////////////*/
     {
         SDL_ShowCursor(0);
-        p->idxCursorImage = Renderer2DImages::Get().NewImage();
+        p->idxCursorImage = Renderer2DImages::Get()->NewImage();
     }
 
     void
@@ -61,7 +61,7 @@ namespace Narradia
             /*******************/
             imageNameHash = p->hashCursorDefault;
         }
-        Renderer2DImages::Get().DrawImage(imageNameHash, p->idxCursorImage, bounds);
+        Renderer2DImages::Get()->DrawImage(imageNameHash, p->idxCursorImage, bounds);
     }
 
     void
@@ -84,7 +84,7 @@ namespace Narradia
     /*////////////////////////////////*/
     {
         SDL_WarpMouseInWindow(
-            Graphics::Get().GetWindow(), p->savedMousePosPx.x, p->savedMousePosPx.y);
+            Graphics::Get()->GetWindow(), p->savedMousePosPx.x, p->savedMousePosPx.y);
     }
 
     Point2

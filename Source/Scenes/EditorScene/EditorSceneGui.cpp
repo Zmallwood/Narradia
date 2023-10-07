@@ -30,29 +30,29 @@ namespace Narradia
         Log();
         auto rectGButtonContract = RectangleF{0.63f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
         Log();
-        auto fnSys = [] { EditorSceneGuiMenu::Get().visible = !EditorSceneGuiMenu::Get().visible; };
+        auto fnSys = [] { EditorSceneGuiMenu::Get()->visible = !EditorSceneGuiMenu::Get()->visible; };
         Log();
-        auto fnMobBrowser = [] { MobBrowserGui::Get().ToggleVisibility(); };
+        auto fnMobBrowser = [] { MobBrowserGui::Get()->ToggleVisibility(); };
         Log();
-        auto fnRoofBrowser = [] { RoofBrowserGui::Get().ToggleVisibility(); };
+        auto fnRoofBrowser = [] { RoofBrowserGui::Get()->ToggleVisibility(); };
         Log();
-        auto fnObjectsBrowser = [] { ObjectBrowserGui::Get().ToggleVisibility(); };
+        auto fnObjectsBrowser = [] { ObjectBrowserGui::Get()->ToggleVisibility(); };
         Log();
-        auto fnGroundBrowser = [] { GroundBrowserGui::Get().ToggleVisibility(); };
+        auto fnGroundBrowser = [] { GroundBrowserGui::Get()->ToggleVisibility(); };
         Log();
         auto fnRaiseGround = [] {
-            ToolUsing::Get().IncreaseElevationChange();
-            ToolUsing::Get().ChangeTool(Tools::AlterElevation);
+            ToolUsing::Get()->IncreaseElevationChange();
+            ToolUsing::Get()->ChangeTool(Tools::AlterElevation);
         };
         Log();
         auto fnLowerGround = [] {
-            ToolUsing::Get().DecreaseElevationChange();
-            ToolUsing::Get().ChangeTool(Tools::AlterElevation);
+            ToolUsing::Get()->DecreaseElevationChange();
+            ToolUsing::Get()->ChangeTool(Tools::AlterElevation);
         };
         Log();
-        auto fnExpand = [] { ToolUsing::Get().IncreaseToolRadius(); };
+        auto fnExpand = [] { ToolUsing::Get()->IncreaseToolRadius(); };
         Log();
-        auto fnContract = [] { ToolUsing::Get().DecreaseToolRadius(); };
+        auto fnContract = [] { ToolUsing::Get()->DecreaseToolRadius(); };
         Log();
         AddGuiButton("", rectGButtonSys, fnSys, "GuiButtonSys", "GuiButtonSysHovered");
         Log();
@@ -85,15 +85,15 @@ namespace Narradia
         AddGuiButton(
             "", rectGButtonContract, fnContract, "GuiButtonContract", "GuiButtonContractHovered");
         Log();
-        AddGuiComponent(std::shared_ptr<EditorSceneGuiMenu>(EditorSceneGuiMenu::GetPointer()));
+        AddGuiComponent(std::shared_ptr<EditorSceneGuiMenu>(EditorSceneGuiMenu::Get()));
         Log();
-        AddGuiComponent(std::shared_ptr<ObjectBrowserGui>(ObjectBrowserGui::GetPointer()));
+        AddGuiComponent(std::shared_ptr<ObjectBrowserGui>(ObjectBrowserGui::Get()));
         Log();
-        AddGuiComponent(std::shared_ptr<GroundBrowserGui>(GroundBrowserGui::GetPointer()));
+        AddGuiComponent(std::shared_ptr<GroundBrowserGui>(GroundBrowserGui::Get()));
         Log();
-        AddGuiComponent(std::shared_ptr<RoofBrowserGui>(RoofBrowserGui::GetPointer()));
+        AddGuiComponent(std::shared_ptr<RoofBrowserGui>(RoofBrowserGui::Get()));
         Log();
-        AddGuiComponent(std::shared_ptr<MobBrowserGui>(MobBrowserGui::GetPointer()));
+        AddGuiComponent(std::shared_ptr<MobBrowserGui>(MobBrowserGui::Get()));
     }
 }
 //////////////////////////////////////////////////////////////////////

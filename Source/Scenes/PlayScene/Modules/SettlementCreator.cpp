@@ -13,8 +13,8 @@ namespace Narradia
     SettlementCreator::CreateSettlement()
     /*/////////////////////////////////*/
     {
-        auto settlement_center = Player::Get().GetPosition().ToIntPoint();
-        auto map_area = World::Get().GetMapAreaAtZLevel(Player::Get().GetWorldAreaPos().z);
+        auto settlement_center = Player::Get()->GetPosition().ToIntPoint();
+        auto map_area = World::Get()->GetMapAreaAtZLevel(Player::Get()->GetWorldAreaPos().z);
         auto settlement_radius = 3;
         for (auto y = settlement_center.y - settlement_radius;
              y <= settlement_center.y + settlement_radius; y++)
@@ -27,7 +27,7 @@ namespace Narradia
                 auto dx = x - settlement_center.x;
                 auto dy = y - settlement_center.y;
                 if (dx * dx + dy * dy <= settlement_radius * settlement_radius)
-                    Player::Get().ClaimTile({x, y});
+                    Player::Get()->ClaimTile({x, y});
             }
         }
         map_area->GetTile(settlement_center)->CreateAddObject("ObjectClaimFlag");
@@ -49,7 +49,7 @@ namespace Narradia
         map_area->AddCompanionMirror(companion2.get(), companion_2_coordinate);
         map_area->AddCompanionMirror(companion3.get(), companion_3_coordinate);
         map_area->AddCompanionMirror(companion4.get(), companion_4_coordinate);
-        TextOutBox::Get().Print("You have created a settlement.");
+        TextOutBox::Get()->Print("You have created a settlement.");
     }
 }
 //////////////////////////////////////////////////////////////////////

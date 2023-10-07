@@ -20,15 +20,15 @@ namespace Narradia
         : p(std::make_shared<Pimpl>())
     /*//////////////////////////////*/
     {
-        p->id_canvas_layer = Renderer2DSolidColors::Get().NewRectangle();
-        p->id_game_result_text = TextRenderer::Get().NewString();
+        p->id_canvas_layer = Renderer2DSolidColors::Get()->NewRectangle();
+        p->id_game_result_text = TextRenderer::Get()->NewString();
     }
 
     void
     ActiveGameRound::Update()
     /*/////////////////////*/
     {
-        auto num_claimed_tiles = Player::Get().claimedTiles.size();
+        auto num_claimed_tiles = Player::Get()->claimedTiles.size();
         auto tot_number_of_tiles = MapArea::GetMapSize().width * MapArea::GetMapSize().height;
         auto progress = (int)(((float)num_claimed_tiles) / tot_number_of_tiles * 100);
         if (progress >= 51)
@@ -42,9 +42,9 @@ namespace Narradia
         if (!p->game_completed)
             return;
         RectangleF rect = {0.0f, 0.0f, 1.0f, 1.0f};
-        Renderer2DSolidColors::Get().FillRectangle(
+        Renderer2DSolidColors::Get()->FillRectangle(
             p->id_canvas_layer, rect, Colors::alphaElegantBlue);
-        TextRenderer::Get().DrawString(
+        TextRenderer::Get()->DrawString(
             p->id_game_result_text, "Congratulations! You have won the game", {0.5f, 0.3f},
             Colors::green, true, FontSizes::_26);
     }

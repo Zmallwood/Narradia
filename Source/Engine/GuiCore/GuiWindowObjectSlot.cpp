@@ -18,11 +18,11 @@ namespace Narradia
           objectsList(objectsList_)
     /*///////////////////////////////////////////////////////////////////*/
     {
-        rendIdFrame = Renderer2DImages::Get().NewImage();
-        rendIdObject = Renderer2DImages::Get().NewImage();
-        rendIdQtyText = TextRenderer::Get().NewString();
-        rendIdTransformProgressBack = Renderer2DImages::Get().NewImage();
-        rendIdTransformProgressFilled = Renderer2DImages::Get().NewImage();
+        rendIdFrame = Renderer2DImages::Get()->NewImage();
+        rendIdObject = Renderer2DImages::Get()->NewImage();
+        rendIdQtyText = TextRenderer::Get()->NewString();
+        rendIdTransformProgressBack = Renderer2DImages::Get()->NewImage();
+        rendIdTransformProgressFilled = Renderer2DImages::Get()->NewImage();
     }
 
     void
@@ -51,7 +51,7 @@ namespace Narradia
         Log();
         auto slotHeight = GetSlotHeight();
         Log();
-        Renderer2DImages::Get().DrawImage(frameImgNameHash, rendIdFrame, GetBounds());
+        Renderer2DImages::Get()->DrawImage(frameImgNameHash, rendIdFrame, GetBounds());
         Log();
         Object *object = nullptr;
         Log();
@@ -67,13 +67,13 @@ namespace Narradia
         {
             Log();
             auto imageNameHash = object->GetObjectType();
-            Renderer2DImages::Get().DrawImage(imageNameHash, rendIdObject, GetBounds());
+            Renderer2DImages::Get()->DrawImage(imageNameHash, rendIdObject, GetBounds());
             if (object->GetQuantity() > 1)
             /****************************/
             {
                 Log();
                 auto qtyText = "x" + std::to_string(object->GetQuantity());
-                TextRenderer::Get().DrawString(
+                TextRenderer::Get()->DrawString(
                     rendIdQtyText, qtyText,
                     GetBounds().GetPosition().Translate(slotWidth * 0.65f, slotHeight * 0.7f));
             }
@@ -88,8 +88,8 @@ namespace Narradia
                 auto widthFilled = width * object->GetTransformationProgress();
                 auto rect = RectangleF{pos.x, pos.y, width, height};
                 auto rectFilled = RectangleF{pos.x, pos.y, widthFilled, height};
-                Renderer2DImages::Get().DrawImage("Black", rendIdTransformProgressBack, rect);
-                Renderer2DImages::Get().DrawImage(
+                Renderer2DImages::Get()->DrawImage("Black", rendIdTransformProgressBack, rect);
+                Renderer2DImages::Get()->DrawImage(
                     "Yellow", rendIdTransformProgressFilled, rectFilled);
             }
         }

@@ -170,19 +170,19 @@ namespace Narradia
         glUseProgram(GetShaderProgram()->GetProgramId());
         glUniformMatrix4fv(
             p->locationProjection, 1, GL_FALSE,
-            glm::value_ptr(CameraGl::Get().GetPerspectiveMatrix()));
+            glm::value_ptr(CameraGl::Get()->GetPerspectiveMatrix()));
         glUniformMatrix4fv(
-            p->locationView, 1, GL_FALSE, glm::value_ptr(CameraGl::Get().GetViewMatrix()));
+            p->locationView, 1, GL_FALSE, glm::value_ptr(CameraGl::Get()->GetViewMatrix()));
         glm::mat4 model(1.0);
         glUniformMatrix4fv(p->locationModel, 1, GL_FALSE, glm::value_ptr(model));
         glUniform1f(p->locationAlpha, 1.0f);
         glm::vec3 viewPos(
-            Player::Get().GetSpaceCoord().x, Player::Get().GetSpaceCoord().y,
-            Player::Get().GetSpaceCoord().z);
+            Player::Get()->GetSpaceCoord().x, Player::Get()->GetSpaceCoord().y,
+            Player::Get()->GetSpaceCoord().z);
         glUniform3fv(p->locationViewPos, 1, glm::value_ptr(viewPos));
         glm::vec3 fogColorGl(
-            GraphicsGl::Get().GetFogColorGround().r, GraphicsGl::Get().GetFogColorGround().g,
-            GraphicsGl::Get().GetFogColorGround().b);
+            GraphicsGl::Get()->GetFogColorGround().r, GraphicsGl::Get()->GetFogColorGround().g,
+            GraphicsGl::Get()->GetFogColorGround().b);
         glUniform3fv(p->locationFogColor, 1, glm::value_ptr(fogColorGl));
         glUseProgram(GetShaderProgram()->GetProgramId());
         glEnable(GL_CULL_FACE);
@@ -213,23 +213,23 @@ namespace Narradia
             glUseProgram(GetShaderProgram()->GetProgramId());
             glUniformMatrix4fv(
                 p->locationProjection, 1, GL_FALSE,
-                glm::value_ptr(CameraGl::Get().GetPerspectiveMatrix()));
+                glm::value_ptr(CameraGl::Get()->GetPerspectiveMatrix()));
             glUniformMatrix4fv(
-                p->locationView, 1, GL_FALSE, glm::value_ptr(CameraGl::Get().GetViewMatrix()));
+                p->locationView, 1, GL_FALSE, glm::value_ptr(CameraGl::Get()->GetViewMatrix()));
             glm::mat4 model(1.0);
             glUniformMatrix4fv(p->locationModel, 1, GL_FALSE, glm::value_ptr(model));
             glUniform1f(p->locationAlpha, 1.0f);
             glm::vec3 viewPos(
-                Player::Get().GetSpaceCoord().x, Player::Get().GetSpaceCoord().y,
-                Player::Get().GetSpaceCoord().z);
+                Player::Get()->GetSpaceCoord().x, Player::Get()->GetSpaceCoord().y,
+                Player::Get()->GetSpaceCoord().z);
             glUniform3fv(p->locationViewPos, 1, glm::value_ptr(viewPos));
             glm::vec3 fogColorGl(
-                GraphicsGl::Get().GetFogColorGround().r, GraphicsGl::Get().GetFogColorGround().g,
-                GraphicsGl::Get().GetFogColorGround().b);
+                GraphicsGl::Get()->GetFogColorGround().r, GraphicsGl::Get()->GetFogColorGround().g,
+                GraphicsGl::Get()->GetFogColorGround().b);
             glUniform3fv(p->locationFogColor, 1, glm::value_ptr(fogColorGl));
             glUseProgram(GetShaderProgram()->GetProgramId());
         }
-        auto imageId = ImageBank::Get().GetImage(imageNameHash);
+        auto imageId = ImageBank::Get()->GetImage(imageNameHash);
         glBindTexture(GL_TEXTURE_2D, imageId);
         glBindVertexArray(vaoId);
         glDrawElements(GL_TRIANGLE_FAN, vertexCount, GL_UNSIGNED_INT, NULL);

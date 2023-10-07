@@ -37,7 +37,7 @@ namespace Narradia
             std::string(SDL_GetBasePath()) + Pimpl::relMapsPath.data() + "/" + mapName.data() +
                 ".map",
             std::ofstream::out | std::ofstream::trunc);
-        auto mapArea = World::Get().GetCurrentMapArea();
+        auto mapArea = World::Get()->GetCurrentMapArea();
         for (auto y = 0; y < MapArea::GetMapSize().height; y++)
         /*****************************************************/
         {
@@ -81,7 +81,7 @@ namespace Narradia
             }
         }
         mapFile.close();
-        TextOutBox::Get().Print("World saved with name " + std::string(mapName.data()) + ".");
+        TextOutBox::Get()->Print("World saved with name " + std::string(mapName.data()) + ".");
     }
 
     void
@@ -92,7 +92,7 @@ namespace Narradia
         mapFile.open(
             std::string(SDL_GetBasePath()) + Pimpl::relMapsPath.data() + "/" + mapName.data() +
             ".map");
-        World::Get().RemoveMapAreaAtZLevel(0);
+        World::Get()->RemoveMapAreaAtZLevel(0);
         auto newMapArea = std::make_shared<MapArea>();
         newMapArea->Create();
         for (auto y = 0; y < MapArea::GetMapSize().height; y++)
@@ -220,10 +220,10 @@ namespace Narradia
                 }
             }
         }
-        World::Get().AddMapAreaAtZLevel(0, newMapArea);
-        World::Get().CalculateNormals();
+        World::Get()->AddMapAreaAtZLevel(0, newMapArea);
+        World::Get()->CalculateNormals();
         mapFile.close();
-        TextOutBox::Get().Print("World loaded with name " + std::string(mapName.data()) + ".");
+        TextOutBox::Get()->Print("World loaded with name " + std::string(mapName.data()) + ".");
     }
 }
 //////////////////////////////////////////////////////////////////////

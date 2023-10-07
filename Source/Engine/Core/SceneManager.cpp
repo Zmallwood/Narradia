@@ -45,7 +45,7 @@ namespace Narradia
         Log();
         p->scenes[SceneNames::GameSave] = std::make_shared<GameSaveScene>();
         Log();
-        p->scenes[SceneNames::Play] = PlayScene::GetPointer();
+        p->scenes[SceneNames::Play] = PlayScene::Get();
         Log();
         p->scenes[SceneNames::Editor] = std::make_shared<EditorScene>();
         Log();
@@ -99,8 +99,8 @@ namespace Narradia
     /*//////////////////////////////////////////*/
     {
         p->currentView = newScene;
-        MouseInput::Get().Reset();
-        MouseInput::Get().ResetMouseActions();
+        MouseInput::Get()->Reset();
+        MouseInput::Get()->ResetMouseActions();
         p->scenes.at(p->currentView)->Enter();
     }
 

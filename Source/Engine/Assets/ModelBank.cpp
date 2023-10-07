@@ -64,7 +64,7 @@ namespace Narradia
     {
         Assimp::Importer importer;
         const aiScene *scene = importer.ReadFile(pathStr.data(), 0);
-        return ModelCreator::Get().CreateModel(scene);
+        return ModelCreator::Get()->CreateModel(scene);
     }
 }
 //////////////////////////////////////////////////////////////////////

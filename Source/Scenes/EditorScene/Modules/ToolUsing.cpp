@@ -14,7 +14,7 @@ namespace Narradia
     ToolUsing::Update()
     /*///////////////*/
     {
-        MouseInput::Get().GetLeftButton().AddFiredAction(
+        MouseInput::Get()->GetLeftButton().AddFiredAction(
             "SelectObject",
             [&]
             /*****************************/
@@ -25,7 +25,7 @@ namespace Narradia
                 case Tools::AddObject:
                     /*****************/
                     {
-                        auto hoveredTile = TileHovering::Get().hoveredTile;
+                        auto hoveredTile = TileHovering::Get()->hoveredTile;
                         auto newObject = std::make_shared<Object>(selectedType);
                         if (selectedType != Hash("ObjectWoodWallN") &&
                             selectedType != Hash("ObjectWoodWallE") &&
@@ -39,7 +39,7 @@ namespace Narradia
                                 static_cast<float>(rand()) / RAND_MAX * 360.0f);
                         }
                         World::Get()
-                            .GetCurrentMapArea()
+                            ->GetCurrentMapArea()
                             ->GetTile(hoveredTile)
                             ->AddObject(newObject);
                         break;
@@ -47,19 +47,19 @@ namespace Narradia
                 case Tools::AddMob:
                     /**************/
                     {
-                        auto hoveredTile = TileHovering::Get().hoveredTile;
+                        auto hoveredTile = TileHovering::Get()->hoveredTile;
                         auto newMob =
                             std::make_shared<Mob>(selectedType, hoveredTile.x, hoveredTile.y);
-                        World::Get().GetCurrentMapArea()->GetTile(hoveredTile)->SetMob(newMob);
-                        World::Get().GetCurrentMapArea()->AddMobMirror(
-                            World::Get().GetCurrentMapArea()->GetTile(hoveredTile)->GetMob().get(),
+                        World::Get()->GetCurrentMapArea()->GetTile(hoveredTile)->SetMob(newMob);
+                        World::Get()->GetCurrentMapArea()->AddMobMirror(
+                            World::Get()->GetCurrentMapArea()->GetTile(hoveredTile)->GetMob().get(),
                             hoveredTile);
                         break;
                     }
                 case Tools::SetGround:
                     /*****************/
                     {
-                        auto hoveredTile = TileHovering::Get().hoveredTile;
+                        auto hoveredTile = TileHovering::Get()->hoveredTile;
                         for (auto y = hoveredTile.y - (toolRadius - 1);
                              y <= hoveredTile.y + (toolRadius - 1); y++)
                         /**********************************************/
@@ -68,20 +68,20 @@ namespace Narradia
                                  x <= hoveredTile.x + (toolRadius - 1); x++)
                             /**********************************************/
                             {
-                                World::Get().GetCurrentMapArea()->GetTile({x, y})->SetGroundType(
+                                World::Get()->GetCurrentMapArea()->GetTile({x, y})->SetGroundType(
                                     selectedType);
                             }
                         }
-                        World::Get().ApplyDefaultColorVariations();
-                        World::Get().CalculateNormals(true);
+                        World::Get()->ApplyDefaultColorVariations();
+                        World::Get()->CalculateNormals(true);
                         break;
                     }
                 case Tools::SetRoof:
                     /***************/
                     {
-                        auto hoveredTile = TileHovering::Get().hoveredTile;
+                        auto hoveredTile = TileHovering::Get()->hoveredTile;
                         World::Get()
-                            .GetCurrentMapArea()
+                            ->GetCurrentMapArea()
                             ->GetTile(hoveredTile)
                             ->SetRoofType(selectedType);
                         break;
@@ -89,7 +89,7 @@ namespace Narradia
                 case Tools::AlterElevation:
                     /**********************/
                     {
-                        auto hoveredTile = TileHovering::Get().hoveredTile;
+                        auto hoveredTile = TileHovering::Get()->hoveredTile;
                         for (auto y = hoveredTile.y - (toolRadius - 1);
                              y <= hoveredTile.y + (toolRadius - 1); y++)
                         /**********************************************/
@@ -104,14 +104,14 @@ namespace Narradia
                                 /***********************************************************/
                                 {
                                     World::Get()
-                                        .GetCurrentMapArea()
+                                        ->GetCurrentMapArea()
                                         ->GetTile({x, y})
                                         ->AlterElevation(elevationChange);
                                 }
                             }
                         }
-                        World::Get().ApplyDefaultColorVariations();
-                        World::Get().CalculateNormals(true);
+                        World::Get()->ApplyDefaultColorVariations();
+                        World::Get()->CalculateNormals(true);
                         break;
                     }
                 }

@@ -22,7 +22,7 @@ namespace Narradia
     ActionRepeat::Update()
     /*//////////////////*/
     {
-        if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_r))
+        if (KeyboardInput::Get()->KeyHasBeenFiredPickResult(SDLK_r))
             RepeatLastAction();
     }
 
@@ -33,12 +33,12 @@ namespace Narradia
         if (p->repeatingAction == nullptr)
         /********************************/
         {
-            TextOutBox::Get().Print("There is no previous action to repeat.");
+            TextOutBox::Get()->Print("There is no previous action to repeat.");
         }
         else
         /**/
         {
-            TextOutBox::Get().Print("Repeating action.");
+            TextOutBox::Get()->Print("Repeating action.");
             Log();
             p->repeatingAction();
         }

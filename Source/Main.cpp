@@ -5,7 +5,7 @@ int
 main(int argc, char *argv[])
 /*////////////////////////*/
 {
-    Narradia::GameEngine::Get().Run();
+    Narradia::GameEngine::Get()->Run();
     return 0;
 }
 //////////////////////////////////////////////////////////////////////

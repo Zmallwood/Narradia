@@ -40,7 +40,7 @@ namespace Narradia
     /*/////////////////////*/
     {
         auto uniqueName = p->CreateBlankTexGetName();
-        auto rendIdImageRect = Renderer2DImages::Get().NewImage();
+        auto rendIdImageRect = Renderer2DImages::Get()->NewImage();
         p->uniqueNameIds.insert({rendIdImageRect, uniqueName});
         return rendIdImageRect;
     }
@@ -50,7 +50,7 @@ namespace Narradia
     /*//////////////////////////////*/
     {
         auto uniqueName = p->CreateBlankTexGetName();
-        auto rendIdBboardTexRect = RendererBillboardImages::Get().NewBillboardImage();
+        auto rendIdBboardTexRect = RendererBillboardImages::Get()->NewBillboardImage();
         p->uniqueNameIds.insert({rendIdBboardTexRect, uniqueName});
         return rendIdBboardTexRect;
     }
@@ -85,7 +85,7 @@ namespace Narradia
         auto textSurface = TTF_RenderText_Blended(font, text.data(), sdlColor);
         glEnable(GL_TEXTURE_2D);
         auto uniqueNameId = uniqueNameIds.at(vaoId);
-        auto imageId = ImageBank::Get().GetImage(uniqueNameId.c_str());
+        auto imageId = ImageBank::Get()->GetImage(uniqueNameId.c_str());
         glBindTexture(GL_TEXTURE_2D, imageId);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -151,7 +151,7 @@ namespace Narradia
             if (centerAlign)
                 rect.x -= static_cast<float>(textW) / static_cast<float>(canvasSize.height) / 2.0f /
                           GetAspectRatio();
-            Renderer2DImages::Get().DrawImage(uniqueNameId, multiLineObject.renderIds.at(i), rect);
+            Renderer2DImages::Get()->DrawImage(uniqueNameId, multiLineObject.renderIds.at(i), rect);
         }
     }
 
@@ -173,7 +173,7 @@ namespace Narradia
         if (centerAlign)
             rect.x -= static_cast<float>(textW) / static_cast<float>(canvasSize.height) / 2.0f /
                       GetAspectRatio();
-        Renderer2DImages::Get().DrawImage(uniqueNameId, vaoId, rect);
+        Renderer2DImages::Get()->DrawImage(uniqueNameId, vaoId, rect);
     }
 
     void
@@ -197,7 +197,7 @@ namespace Narradia
         if (centerAlign)
             rect.x -= static_cast<float>(text_w) / static_cast<float>(canvasSize.height) / 2.0f /
                       GetAspectRatio();
-        RendererBillboardImages::Get().DrawBillboardImage(
+        RendererBillboardImages::Get()->DrawBillboardImage(
             Hash(uniqueNameId), vaoId, position, rect, billboardSize);
     }
 
@@ -207,7 +207,7 @@ namespace Narradia
     {
         auto id = idCounter++;
         auto uniqueName = "RenderedImage" + std::to_string(id);
-        ImageBank::Get().GetBlankTextImage(uniqueName);
+        ImageBank::Get()->GetBlankTextImage(uniqueName);
         return uniqueName;
     }
 }

@@ -44,20 +44,20 @@ namespace Narradia
         }
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        ImageBank::Get().LoadImages();
-        ModelBank::Get().LoadModels();
+        ImageBank::Get()->LoadImages();
+        ModelBank::Get()->LoadModels();
     }
 
     void
     GraphicsGl::Cleanup()
     /*/////////////////*/
     {
-        Renderer2DSolidColors::Get().Cleanup();
-        Renderer2DImages::Get().Cleanup();
-        RendererTiles::Get().Cleanup();
-        RendererModels::Get().Cleanup();
-        RendererBillboardImages::Get().Cleanup();
-        ImageBank::Get().Cleanup();
+        Renderer2DSolidColors::Get()->Cleanup();
+        Renderer2DImages::Get()->Cleanup();
+        RendererTiles::Get()->Cleanup();
+        RendererModels::Get()->Cleanup();
+        RendererBillboardImages::Get()->Cleanup();
+        ImageBank::Get()->Cleanup();
     }
 
     Color

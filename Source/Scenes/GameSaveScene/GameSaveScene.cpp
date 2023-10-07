@@ -8,7 +8,7 @@ namespace Narradia
     /*//////////////////////////*/
     {
         CreateGui();
-        glIdBackgroundImage = Renderer2DImages::Get().NewImage();
+        glIdBackgroundImage = Renderer2DImages::Get()->NewImage();
     }
 
     void
@@ -22,7 +22,7 @@ namespace Narradia
     /*//////////////////////////*/
     {
         auto rectBack = RectangleF{0.0f, 0.0f, 1.0f, 1.0f};
-        Renderer2DImages::Get().DrawImage("DefaultSceneBackground", glIdBackgroundImage, rectBack);
+        Renderer2DImages::Get()->DrawImage("DefaultSceneBackground", glIdBackgroundImage, rectBack);
     }
 }
 //////////////////////////////////////////////////////////////////////

@@ -23,16 +23,16 @@ namespace Narradia
         CreateGui();
         auto sceneGui = GetSceneGui();
         sceneGui->AddGuiButton("Random wilderness map", {0.45f, 0.3f, 0.1f, 0.05f}, [=]() {
-            SceneManager::Get().ChangeScene(SceneNames::MapGeneration);
+            SceneManager::Get()->ChangeScene(SceneNames::MapGeneration);
         });
         sceneGui->AddGuiButton("User created map", {0.45f, 0.38f, 0.1f, 0.05f}, [=]() {
-            SceneManager::Get().ChangeScene(SceneNames::UserMapSelection);
+            SceneManager::Get()->ChangeScene(SceneNames::UserMapSelection);
         });
         sceneGui->AddGuiButton("Back", {0.45f, 0.46f, 0.1f, 0.05f}, [=]() {
-            SceneManager::Get().ChangeScene(SceneNames::MainMenu);
+            SceneManager::Get()->ChangeScene(SceneNames::MainMenu);
         });
-        p->glIdBackImage = Renderer2DImages::Get().NewImage();
-        p->glIdLogoImage = Renderer2DImages::Get().NewImage();
+        p->glIdBackImage = Renderer2DImages::Get()->NewImage();
+        p->glIdLogoImage = Renderer2DImages::Get()->NewImage();
     }
 
     void
@@ -47,8 +47,8 @@ namespace Narradia
     /*//////////////////////////////////*/
     {
         Log();
-        Renderer2DImages::Get().DrawImage("DefaultSceneBackground", p->glIdBackImage, p->rectBack);
-        Renderer2DImages::Get().DrawImage("NarradiaLogo", p->glIdLogoImage, p->rectLogo);
+        Renderer2DImages::Get()->DrawImage("DefaultSceneBackground", p->glIdBackImage, p->rectBack);
+        Renderer2DImages::Get()->DrawImage("NarradiaLogo", p->glIdLogoImage, p->rectLogo);
     }
 }
 //////////////////////////////////////////////////////////////////////

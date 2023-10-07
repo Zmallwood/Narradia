@@ -35,13 +35,13 @@ namespace Narradia
             object->GetObjectType() == Hash("ObjectCookedFish"))
         /******************************************************/
         {
-            TextOutBox::Get().Print("Companion: Thanks for the food, I feel more energized.");
+            TextOutBox::Get()->Print("Companion: Thanks for the food, I feel more energized.");
             p->stamina = std::min(p->maxStamina, p->stamina + 30);
         }
         else
         /**/
         {
-            TextOutBox::Get().Print("Companion: Thanks for the gift.");
+            TextOutBox::Get()->Print("Companion: Thanks for the gift.");
         }
     }
 

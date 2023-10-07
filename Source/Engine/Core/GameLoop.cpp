@@ -19,38 +19,38 @@ namespace Narradia
         Log();
         World::Create();
         Log();
-        SceneManager::Get().InitializeScenes();
+        SceneManager::Get()->InitializeScenes();
         Log();
         EventPoller eventPoller;
-        while (GameEngine::Get().IsRunning())
+        while (GameEngine::Get()->IsRunning())
         /*********************************/
         {
             Log();
-            Cursor::Get().Reset();
-            TextOutBox::Get().Update();
+            Cursor::Get()->Reset();
+            TextOutBox::Get()->Update();
             Log();
-            Graphics::Get().ClearCanvas();
+            Graphics::Get()->ClearCanvas();
             Log();
-            SceneManager::Get().UpdateCurrentScene();
+            SceneManager::Get()->UpdateCurrentScene();
             Log();
             eventPoller.PollEvents();
             Log();
-            MouseInput::Get().PerformMouseActions();
+            MouseInput::Get()->PerformMouseActions();
             Log();
-            SceneManager::Get().RenderCurrentScene();
+            SceneManager::Get()->RenderCurrentScene();
             Log();
-            SceneManager::Get().FinalizeCurrentScene();
+            SceneManager::Get()->FinalizeCurrentScene();
             Log();
-            TextOutBox::Get().Render();
+            TextOutBox::Get()->Render();
             Log();
-            Cursor::Get().Render();
+            Cursor::Get()->Render();
             Log();
-            Graphics::Get().PresentCanvas();
+            Graphics::Get()->PresentCanvas();
         }
         Log();
-        Graphics::Get().Cleanup();
+        Graphics::Get()->Cleanup();
         Log();
-        Audio::Get().Cleanup();
+        Audio::Get()->Cleanup();
     }
 }
 //////////////////////////////////////////////////////////////////////

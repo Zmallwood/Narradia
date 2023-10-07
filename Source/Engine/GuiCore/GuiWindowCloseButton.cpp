@@ -26,7 +26,7 @@ namespace Narradia
         : p(std::make_shared<Pimpl>())
     /*////////////////////////////////////////////////////////////////*/
     {
-        p->rendIdCloseButtonImg = Renderer2DImages::Get().NewImage();
+        p->rendIdCloseButtonImg = Renderer2DImages::Get()->NewImage();
         p->parentWindow = parentWindow_;
     }
 
@@ -38,9 +38,9 @@ namespace Narradia
         if (p->GetBounds().Contains(GetMousePositionF()))
         /***********************************************/
         {
-            Cursor::Get().SetCursorType(CursorTypes::Hovering);
+            Cursor::Get()->SetCursorType(CursorTypes::Hovering);
             p->hovered = true;
-            MouseInput::Get().GetLeftButton().AddFiredAction(
+            MouseInput::Get()->GetLeftButton().AddFiredAction(
                 "GuiWindowClose" + std::string(p->parentWindow->GetTitle()) +
                     std::to_string(SDL_GetTicks()),
                 [&]
@@ -49,16 +49,16 @@ namespace Narradia
                     if (p->parentWindow->DestroyOnClose())
                     /************************************/
                     {
-                        if (SceneManager::Get().GetCurrentScene() == SceneNames::Play)
+                        if (SceneManager::Get()->GetCurrentScene() == SceneNames::Play)
                         /***************************************************/
                         {
-                            auto sceneGui = PlayScene::Get().GetSceneGui();
+                            auto sceneGui = PlayScene::Get()->GetSceneGui();
                             sceneGui->RemoveGuiComponent(p->parentWindow);
                         }
-                        else if (SceneManager::Get().GetCurrentScene() == SceneNames::Editor)
+                        else if (SceneManager::Get()->GetCurrentScene() == SceneNames::Editor)
                         /************************************************************/
                         {
-                            auto sceneGui = EditorScene::Get().GetSceneGui();
+                            auto sceneGui = EditorScene::Get()->GetSceneGui();
                             sceneGui->RemoveGuiComponent(p->parentWindow);
                         }
                     }
@@ -77,10 +77,10 @@ namespace Narradia
     /*////////////////////////////////*/
     {
         if (p->hovered)
-            Renderer2DImages::Get().DrawImage(
+            Renderer2DImages::Get()->DrawImage(
                 "GuiWindowCloseButtonHovered", p->rendIdCloseButtonImg, p->GetBounds());
         else
-            Renderer2DImages::Get().DrawImage(
+            Renderer2DImages::Get()->DrawImage(
                 "GuiWindowCloseButton", p->rendIdCloseButtonImg, p->GetBounds());
     }
 

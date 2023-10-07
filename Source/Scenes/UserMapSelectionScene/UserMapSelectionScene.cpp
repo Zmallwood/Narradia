@@ -12,16 +12,16 @@ namespace Narradia
     /*//////////////////////////////////////////*/
     {
         CreateGui();
-        glIdBackgroundImage = Renderer2DImages::Get().NewImage();
+        glIdBackgroundImage = Renderer2DImages::Get()->NewImage();
         auto bounds = RectangleF{0.45f, 0.4f, 0.1f, 0.035f};
         auto textBox = std::make_shared<GuiTextBox>(bounds, nullptr);
         GetSceneGui()->AddGuiComponent(textBox);
         GetSceneGui()->AddGuiButton("Load", {0.56f, 0.4f, 0.04f, 0.04f}, [=] {
-            MapFilesIO::Get().LoadMapArea(textBox->GetText());
-            SceneManager::Get().ChangeScene(SceneNames::Play);
+            MapFilesIO::Get()->LoadMapArea(textBox->GetText());
+            SceneManager::Get()->ChangeScene(SceneNames::Play);
         });
         GetSceneGui()->AddGuiButton("Return", {0.02f, 0.02f, 0.04f, 0.04f}, [] {
-            SceneManager::Get().ChangeScene(SceneNames::MapTypeSelection);
+            SceneManager::Get()->ChangeScene(SceneNames::MapTypeSelection);
         });
     }
 
@@ -36,7 +36,7 @@ namespace Narradia
     /*//////////////////////////////////*/
     {
         auto rectBack = RectangleF{0.0f, 0.0f, 1.0f, 1.0f};
-        Renderer2DImages::Get().DrawImage("DefaultSceneBackground", glIdBackgroundImage, rectBack);
+        Renderer2DImages::Get()->DrawImage("DefaultSceneBackground", glIdBackgroundImage, rectBack);
     }
 }
 //////////////////////////////////////////////////////////////////////

@@ -46,7 +46,7 @@ namespace Narradia
                       << std::string(SDL_GetError()) << std::endl;
             return;
         }
-        GraphicsGl::GetPointer();
+        GraphicsGl::Get();
         TextRenderer::Create();
     }
 
@@ -75,7 +75,7 @@ namespace Narradia
     Graphics::Cleanup()
     /*//////////////**/
     {
-        GraphicsGl::Get().Cleanup();
+        GraphicsGl::Get()->Cleanup();
     }
 }
 //////////////////////////////////////////////////////////////////////

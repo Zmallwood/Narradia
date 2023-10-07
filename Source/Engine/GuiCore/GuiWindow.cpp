@@ -31,8 +31,8 @@ namespace Narradia
               bounds_.GetSize())
     /*/////////////////////////////////////////////////////////////////////////////////*/
     {
-        std::tie(p->backRendId, p->titleBarRendId) = Renderer2DImages::Get().NewImages<2>();
-        p->titleTextId = TextRenderer::Get().NewString();
+        std::tie(p->backRendId, p->titleBarRendId) = Renderer2DImages::Get()->NewImages<2>();
+        p->titleTextId = TextRenderer::Get()->NewString();
         p->closeButton = GuiWindowCloseButton(this);
         p->backgroundImageName = backgroundImageName_;
         p->title = title_;
@@ -107,13 +107,13 @@ namespace Narradia
         if (!p->visible)
             return;
         Log();
-        Renderer2DImages::Get().DrawImage(p->backgroundImageName, p->backRendId, GetBounds());
+        Renderer2DImages::Get()->DrawImage(p->backgroundImageName, p->backRendId, GetBounds());
         Log();
-        Renderer2DImages::Get().DrawImage(
+        Renderer2DImages::Get()->DrawImage(
             "GuiWindowTitleBar", p->titleBarRendId, GetAbsoluteTitleBarBounds());
         p->closeButton.Render();
         Log();
-        TextRenderer::Get().DrawString(
+        TextRenderer::Get()->DrawString(
             p->titleTextId, p->title, GetBounds().GetPosition().Translate(0.005f, 0.01f));
         Log();
         RenderDerived();

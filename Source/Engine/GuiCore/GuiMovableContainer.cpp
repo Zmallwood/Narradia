@@ -37,7 +37,7 @@ namespace Narradia
             if (!p->isMoving && !p->movementTrigger)
             /**************************************/
             {
-                MouseInput::Get().GetLeftButton().AddFiredAction(
+                MouseInput::Get()->GetLeftButton().AddFiredAction(
                     "GuiWindowStartMoving" + std::to_string(SDL_GetTicks()),
                     [&]
                     /*****************/ {
@@ -55,7 +55,7 @@ namespace Narradia
             auto dy = mousePosF.y - p->mousePosStartMoving.y;
             SetPosition({p->posStartMoving.x + dx, p->posStartMoving.y + dy});
             p->movementTrigger = true;
-            MouseInput::Get().GetLeftButton().AddReleasedAction(
+            MouseInput::Get()->GetLeftButton().AddReleasedAction(
                 "GuiWindowStopMoving" + std::to_string(SDL_GetTicks()),
                 [&]
                 /*****************/

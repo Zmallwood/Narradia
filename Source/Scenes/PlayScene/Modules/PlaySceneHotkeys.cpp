@@ -14,20 +14,20 @@ namespace Narradia
     PlaySceneHotkeys::Update()
     /*//////////////////////*/
     {
-        if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_c))
-            CharacterGui::Get().ToggleVisibility();
-        if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_b))
-            InventoryGui::Get().ToggleVisibility();
-        if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_v))
-            SkillsGui::Get().ToggleVisibility();
-        if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_x))
-            BuildSelectorGui::Get().ToggleVisibility();
-        if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_z))
-            Player::Get().mounted = !Player::Get().mounted;
-        if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_SPACE))
-            Player::Get().Jump();
-        if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_ESCAPE))
-            PlaySceneGuiMenu::Get().visible = !PlaySceneGuiMenu::Get().visible;
+        if (KeyboardInput::Get()->KeyHasBeenFiredPickResult(SDLK_c))
+            CharacterGui::Get()->ToggleVisibility();
+        if (KeyboardInput::Get()->KeyHasBeenFiredPickResult(SDLK_b))
+            InventoryGui::Get()->ToggleVisibility();
+        if (KeyboardInput::Get()->KeyHasBeenFiredPickResult(SDLK_v))
+            SkillsGui::Get()->ToggleVisibility();
+        if (KeyboardInput::Get()->KeyHasBeenFiredPickResult(SDLK_x))
+            BuildSelectorGui::Get()->ToggleVisibility();
+        if (KeyboardInput::Get()->KeyHasBeenFiredPickResult(SDLK_z))
+            Player::Get()->mounted = !Player::Get()->mounted;
+        if (KeyboardInput::Get()->KeyHasBeenFiredPickResult(SDLK_SPACE))
+            Player::Get()->Jump();
+        if (KeyboardInput::Get()->KeyHasBeenFiredPickResult(SDLK_ESCAPE))
+            PlaySceneGuiMenu::Get()->visible = !PlaySceneGuiMenu::Get()->visible;
     }
 }
 //////////////////////////////////////////////////////////////////////

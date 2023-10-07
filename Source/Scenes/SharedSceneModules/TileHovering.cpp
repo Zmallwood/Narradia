@@ -17,30 +17,30 @@ namespace Narradia
     TileHovering::TileHovering()
     /*////////////////////////*/
     {
-        glIdTextHoveredObject = TextRenderer::Get().NewString();
+        glIdTextHoveredObject = TextRenderer::Get()->NewString();
     }
 
     void
     TileHovering::Update()
     /*//////////////////*/
     {
-        if (Camera::Get().cameraDistance == 2.0f)
+        if (Camera::Get()->cameraDistance == 2.0f)
         /*************************************/
         {
             hoveredTile = {-1, -1};
             return;
         }
         hoveredObjectHash = 0;
-        auto &viewMat = CameraGl::Get().GetViewMatrix();
-        auto &projMat = CameraGl::Get().GetPerspectiveMatrix();
+        auto &viewMat = CameraGl::Get()->GetViewMatrix();
+        auto &projMat = CameraGl::Get()->GetPerspectiveMatrix();
         auto mousePos = GetMousePositionF();
         auto canvasSize = GetCanvasSize();
-        auto playerX = Player::Get().GetPosition().x;
-        auto playerY = Player::Get().GetPosition().y;
+        auto playerX = Player::Get()->GetPosition().x;
+        auto playerY = Player::Get()->GetPosition().y;
         auto tileSize = kTileSize;
         auto elevAmount = kElevAmount;
-        auto playerWorldAreaPos = Player::Get().GetWorldAreaPos();
-        auto *mapArea = World::Get().GetMapAreaAtZLevel(playerWorldAreaPos.z);
+        auto playerWorldAreaPos = Player::Get()->GetWorldAreaPos();
+        auto *mapArea = World::Get()->GetMapAreaAtZLevel(playerWorldAreaPos.z);
         auto mouseWorldNearplane = glm::unProject(
             glm::vec3(mousePos.x * canvasSize.width, (1.0f - mousePos.y) * canvasSize.height, 0.0f),
             viewMat, projMat, glm::ivec4(0, 0, canvasSize.width, canvasSize.height));
@@ -113,10 +113,10 @@ namespace Narradia
     {
         if (hoveredObjectHash == 0)
             return;
-        if (false == ObjectBehaviourList::Get().HasBehaviourData(hoveredObjectHash))
+        if (false == ObjectBehaviourList::Get()->HasBehaviourData(hoveredObjectHash))
             return;
-        TextRenderer::Get().DrawString(
-            glIdTextHoveredObject, ObjectBehaviourList::Get().GetLabel(hoveredObjectHash).data(),
+        TextRenderer::Get()->DrawString(
+            glIdTextHoveredObject, ObjectBehaviourList::Get()->GetLabel(hoveredObjectHash).data(),
             GetMousePositionF().Translate(0.02f, 0.01f));
     }
 }

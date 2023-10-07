@@ -9,13 +9,13 @@ namespace Narradia
     /*//////////////////////////////////////////////////////////*/
     {
         AddGuiButton("None", {0.02f, 0.04f, 0.055f, ConvertWidthToHeight(0.015f)}, [] {
-            Player::Get().playerBuild = PlayerBuilds::None;
+            Player::Get()->playerBuild = PlayerBuilds::None;
         });
         AddGuiButton("Sword", {0.02f, 0.09f, 0.055f, ConvertWidthToHeight(0.015f)}, [] {
-            Player::Get().playerBuild = PlayerBuilds::Sword;
+            Player::Get()->playerBuild = PlayerBuilds::Sword;
         });
         AddGuiButton("Club", {0.02f, 0.14f, 0.055f, ConvertWidthToHeight(0.015f)}, [] {
-            Player::Get().playerBuild = PlayerBuilds::Club;
+            Player::Get()->playerBuild = PlayerBuilds::Club;
         });
     }
 

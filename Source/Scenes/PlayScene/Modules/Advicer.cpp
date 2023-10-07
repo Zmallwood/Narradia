@@ -13,7 +13,7 @@ namespace Narradia
         if (!has_given_foraging_advice && ready_for_next_advie)
         /*****************************************************/
         {
-            auto main_scene = PlayScene::GetPointer();
+            auto main_scene = PlayScene::Get();
             auto scene_gui = main_scene->GetSceneGui();
             auto gui_message_box = std::make_shared<MessageBox>(
                 "Advice",
@@ -25,7 +25,7 @@ namespace Narradia
         else if (!has_given_create_stone_axe_advice && ready_for_next_advie)
         /******************************************************************/
         {
-            auto main_scene = PlayScene::GetPointer();
+            auto main_scene = PlayScene::Get();
             auto scene_gui = main_scene->GetSceneGui();
             auto gui_message_box = std::make_shared<MessageBox>(
                 "Advice",

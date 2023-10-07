@@ -10,10 +10,10 @@
                  object->GetObjectType() == Hash("ObjectTree2"))
              /***************************************************/
              {
-                 Player::Get().data.stats.stam = Player::Get().data.stats.stam - 2;
+                 Player::Get()->data.stats.stam = Player::Get()->data.stats.stam - 2;
                  object->AddToWorkProgress(0.2f);
                  auto percent = (int)(object->GetWorkProgress() * 100);
-                 TextOutBox::Get().Print(
+                 TextOutBox::Get()->Print(
                      "You are chopping the tree, progress: " + std::to_string(percent) + "%");
                  if (object->GetWorkProgress() >= 1.0f)
                  /************************************/
@@ -29,6 +29,6 @@
          else
          /**/
          {
-             TextOutBox::Get().Print("The tree does no longer exist.");
+             TextOutBox::Get()->Print("The tree does no longer exist.");
          }
      })},

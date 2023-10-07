@@ -20,44 +20,44 @@ namespace Narradia
         case GenerateSteps::CreateBlank:
             /***************************/
             {
-                TextOutBox::Get().Print("Creating blank map.");
+                TextOutBox::Get()->Print("Creating blank map.");
                 newMapArea = std::make_shared<MapArea>();
                 newMapArea->Create();
-                World::Get().AddMapAreaAtZLevel(0, newMapArea);
+                World::Get()->AddMapAreaAtZLevel(0, newMapArea);
                 break;
             }
         case GenerateSteps::GenWater:
             /************************/
             {
-                TextOutBox::Get().Print("Generating water.");
+                TextOutBox::Get()->Print("Generating water.");
                 AddWater();
                 break;
             }
         case GenerateSteps::GenElev:
             /***********************/
             {
-                TextOutBox::Get().Print("Generating elevation.");
+                TextOutBox::Get()->Print("Generating elevation.");
                 AddElevation();
                 break;
             }
         case GenerateSteps::GenRock:
             /***********************/
             {
-                TextOutBox::Get().Print("Generating rock.");
+                TextOutBox::Get()->Print("Generating rock.");
                 AddWaterRivers();
                 break;
             }
         case GenerateSteps::GenObjects:
             /**************************/
             {
-                TextOutBox::Get().Print("Generating objects.");
+                TextOutBox::Get()->Print("Generating objects.");
                 AddObjects();
                 break;
             }
         case GenerateSteps::GenMobs:
             /***********************/
             {
-                TextOutBox::Get().Print("Generating animals.");
+                TextOutBox::Get()->Print("Generating animals.");
                 AddMobs();
                 break;
             }
@@ -68,8 +68,8 @@ namespace Narradia
             /************************/
             {
                 GenerateColorVariations();
-                TextOutBox::Get().Print("Finalizing map.");
-                TextOutBox::Get().Print("Map terrain generation finished.");
+                TextOutBox::Get()->Print("Finalizing map.");
+                TextOutBox::Get()->Print("Map terrain generation finished.");
                 auto undergroundMap = std::make_shared<MapArea>();
                 undergroundMap->Create();
                 for (auto y = 0; y < MapArea::GetMapSize().height; y++)
@@ -80,7 +80,7 @@ namespace Narradia
                     {
                         undergroundMap->GetTile({x, y})->SetGroundType(Hash("GroundCaveFloor"));
                         undergroundMap->GetTile({x, y})->CreateAddObject("ObjectCaveBlock");
-                        World::Get().AddMapAreaAtZLevel(-1, undergroundMap);
+                        World::Get()->AddMapAreaAtZLevel(-1, undergroundMap);
                     }
                 }
                 break;
@@ -92,7 +92,7 @@ namespace Narradia
     WorldMapGenerate::AddElevation()
     /*////////////////////////////*/
     {
-        auto mapArea = World::Get().GetMapAreaAtZLevel(0);
+        auto mapArea = World::Get()->GetMapAreaAtZLevel(0);
         auto areaCount = 8;
         for (auto i = 0; i < areaCount; i++)
         /**********************************/
@@ -223,7 +223,7 @@ namespace Narradia
     WorldMapGenerate::AddMobs()
     /*///////////////////////*/
     {
-        auto mapArea = World::Get().GetMapAreaAtZLevel(0);
+        auto mapArea = World::Get()->GetMapAreaAtZLevel(0);
         auto numBoars = 60;
         for (auto i = 0; i < numBoars; i++)
         /*********************************/
@@ -264,7 +264,7 @@ namespace Narradia
     WorldMapGenerate::AddObjects()
     /*//////////////////////////*/
     {
-        auto mapArea = World::Get().GetMapAreaAtZLevel(0);
+        auto mapArea = World::Get()->GetMapAreaAtZLevel(0);
         auto forestsCount = 70;
         for (auto i = 0; i < forestsCount; i++)
         /*************************************/
@@ -350,7 +350,7 @@ namespace Narradia
     WorldMapGenerate::AddWater()
     /*////////////////////////*/
     {
-        auto mapArea = World::Get().GetMapAreaAtZLevel(0);
+        auto mapArea = World::Get()->GetMapAreaAtZLevel(0);
         auto areaCount = 30;
         for (auto i = 0; i < areaCount; i++)
         /**********************************/
@@ -397,7 +397,7 @@ namespace Narradia
     WorldMapGenerate::AddWaterRivers()
     /*//////////////////////////////*/
     {
-        auto mapArea = World::Get().GetMapAreaAtZLevel(0);
+        auto mapArea = World::Get()->GetMapAreaAtZLevel(0);
         std::vector<Point2F> predefinedSpawnLocs = {
             {0.05f, 0.05f}, {0.15f, 0.05f}, {0.25f, 0.05f}, {0.35f, 0.05f}, {0.45f, 0.05f},
             {0.55f, 0.05f}, {0.65f, 0.05f}, {0.75f, 0.05f}, {0.85f, 0.05f}, {0.95f, 0.05f},
@@ -533,7 +533,7 @@ namespace Narradia
         std::string_view objectName, int amount, std::string_view groundType)
     /*/////////////////////////////////////////////////////////////////////*/
     {
-        auto mapArea = World::Get().GetMapAreaAtZLevel(0);
+        auto mapArea = World::Get()->GetMapAreaAtZLevel(0);
         for (auto i = 0; i < amount; i++)
         /*******************************/
         {
@@ -555,9 +555,9 @@ namespace Narradia
     WorldMapGenerate::GenerateColorVariations()
     /*///////////////////////////////////////*/
     {
-        World::Get().ResetColorVariations();
-        World::Get().GenerateRandomColorVariations();
-        World::Get().ApplyDefaultColorVariations();
+        World::Get()->ResetColorVariations();
+        World::Get()->GenerateRandomColorVariations();
+        World::Get()->ApplyDefaultColorVariations();
     }
 }
 //////////////////////////////////////////////////////////////////////

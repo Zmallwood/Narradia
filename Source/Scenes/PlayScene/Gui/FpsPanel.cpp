@@ -24,8 +24,8 @@ namespace Narradia
           GuiMovableContainer(Pimpl::kSize.ToRectangle(), Pimpl::kStartPosition, Pimpl::kSize)
     /*//////////////////////////////////////////////////////////////////////////////////////*/
     {
-        p->idBackgroundImage = Renderer2DImages::Get().NewImage();
-        p->idFpsText = TextRenderer::Get().NewString();
+        p->idBackgroundImage = Renderer2DImages::Get()->NewImage();
+        p->idFpsText = TextRenderer::Get()->NewString();
     }
 
     void
@@ -49,9 +49,9 @@ namespace Narradia
     {
         if (!p->visible)
             return;
-        Renderer2DImages::Get().DrawImage(Hash("PanelBg"), p->idBackgroundImage, GetBounds());
+        Renderer2DImages::Get()->DrawImage(Hash("PanelBg"), p->idBackgroundImage, GetBounds());
         std::string_view fpsText = "Fps: " + std::to_string(p->fps);
-        TextRenderer::Get().DrawString(
+        TextRenderer::Get()->DrawString(
             p->idFpsText, fpsText, GetPosition().Translate(0.014f, 0.018f));
         GuiMovableContainer::Render();
     }

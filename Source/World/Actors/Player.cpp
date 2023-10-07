@@ -31,56 +31,56 @@ namespace Narradia
     Player::TurnForward()
     /*/////////////////*/
     {
-        data.movement.facingAngle = Camera::Get().horizontalAngle;
+        data.movement.facingAngle = Camera::Get()->horizontalAngle;
     }
 
     void
     Player::TurnRight()
     /*///////////////*/
     {
-        data.movement.facingAngle = Camera::Get().horizontalAngle - 90.0f;
+        data.movement.facingAngle = Camera::Get()->horizontalAngle - 90.0f;
     }
 
     void
     Player::TurnLeft()
     /*//////////////*/
     {
-        data.movement.facingAngle = Camera::Get().horizontalAngle + 90.0f;
+        data.movement.facingAngle = Camera::Get()->horizontalAngle + 90.0f;
     }
 
     void
     Player::TurnBack()
     /*//////////////*/
     {
-        data.movement.facingAngle = Camera::Get().horizontalAngle + 180.0f;
+        data.movement.facingAngle = Camera::Get()->horizontalAngle + 180.0f;
     }
 
     void
     Player::TurnRightForward()
     /*//////////////////////*/
     {
-        data.movement.facingAngle = Camera::Get().horizontalAngle - 45.0f;
+        data.movement.facingAngle = Camera::Get()->horizontalAngle - 45.0f;
     }
 
     void
     Player::TurnLeftForward()
     /*/////////////////////*/
     {
-        data.movement.facingAngle = Camera::Get().horizontalAngle + 45.0f;
+        data.movement.facingAngle = Camera::Get()->horizontalAngle + 45.0f;
     }
 
     void
     Player::TurnRightBack()
     /*///////////////////*/
     {
-        data.movement.facingAngle = Camera::Get().horizontalAngle + 225.0f;
+        data.movement.facingAngle = Camera::Get()->horizontalAngle + 225.0f;
     }
 
     void
     Player::TurnLeftBack()
     /*//////////////////*/
     {
-        data.movement.facingAngle = Camera::Get().horizontalAngle + 135.0f;
+        data.movement.facingAngle = Camera::Get()->horizontalAngle + 135.0f;
     }
 
     Point3F
@@ -89,7 +89,7 @@ namespace Narradia
     {
         auto position = GetPosition();
         Point3F spaceCoord = {position.x * kTileSize, 0.0f, position.y * kTileSize};
-        spaceCoord.y -= Player::Get().data.movement.jumpHeight;
+        spaceCoord.y -= Player::Get()->data.movement.jumpHeight;
         return spaceCoord;
     }
 
@@ -154,27 +154,27 @@ namespace Narradia
                   data.movement.moveSpeed * skillSet.skills.at("MovementSpeed").level;
         auto dy = SinDegrees(usedAngle) * data.movement.stepSize * data.deltaT /
                   data.movement.moveSpeed * skillSet.skills.at("MovementSpeed").level;
-        if (SceneManager::Get().GetCurrentScene() == SceneNames::Editor)
+        if (SceneManager::Get()->GetCurrentScene() == SceneNames::Editor)
         /*******************************************************/
         {
             dx *= 2;
             dy *= 2;
         }
-        auto mapArea = World::Get().GetMapAreaAtZLevel(data.movement.worldAreaPos.z);
+        auto mapArea = World::Get()->GetMapAreaAtZLevel(data.movement.worldAreaPos.z);
         auto tileBeforeMove = mapArea->GetTile(data.movement.position.ToIntPoint());
         auto newX = data.movement.position.x - dx;
         auto newY = data.movement.position.y + dy;
         auto tileNew = mapArea->GetTile({static_cast<int>(newX), static_cast<int>(newY)});
-        if (SceneManager::Get().GetCurrentScene() != SceneNames::Editor)
+        if (SceneManager::Get()->GetCurrentScene() != SceneNames::Editor)
         /*******************************************************/
         {
             for (auto objectEntry : tileBeforeMove->GetObjects().list)
             /********************************************************/
             {
-                if (ObjectBehaviourList::Get().GetFlags(objectEntry->GetObjectType()))
+                if (ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()))
                 /********************************************************************/
                 {
-                    if ((ObjectBehaviourList::Get().GetFlags(objectEntry->GetObjectType()) &
+                    if ((ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockN) != 0 &&
                         (int)newY == (int)data.movement.position.y - 1)
                     /**********************************************************************/
@@ -182,7 +182,7 @@ namespace Narradia
                         data.deltaT = 0;
                         return;
                     }
-                    if ((ObjectBehaviourList::Get().GetFlags(objectEntry->GetObjectType()) &
+                    if ((ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockS) != 0 &&
                         (int)newY == (int)data.movement.position.y + 1)
                     /**********************************************************************/
@@ -190,7 +190,7 @@ namespace Narradia
                         data.deltaT = 0;
                         return;
                     }
-                    if ((ObjectBehaviourList::Get().GetFlags(objectEntry->GetObjectType()) &
+                    if ((ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockE) != 0 &&
                         (int)newX == (int)data.movement.position.x + 1)
                     /**********************************************************************/
@@ -198,7 +198,7 @@ namespace Narradia
                         data.deltaT = 0;
                         return;
                     }
-                    if ((ObjectBehaviourList::Get().GetFlags(objectEntry->GetObjectType()) &
+                    if ((ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockW) != 0 &&
                         (int)newX == (int)data.movement.position.x - 1)
                     /**********************************************************************/
@@ -221,17 +221,17 @@ namespace Narradia
                         return;
                     }
                 }
-                if (ObjectBehaviourList::Get().GetFlags(objectEntry->GetObjectType()))
+                if (ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()))
                 /********************************************************************/
                 {
-                    if (ObjectBehaviourList::Get().GetFlags(objectEntry->GetObjectType()) &
+                    if (ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
                         (int)ObjectBehaviourFlags::MovementBlock != 0)
                     /*********************************************************************/
                     {
                         data.deltaT = 0;
                         return;
                     }
-                    if ((ObjectBehaviourList::Get().GetFlags(objectEntry->GetObjectType()) &
+                    if ((ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockN) != 0 &&
                         (int)newY == (int)data.movement.position.y + 1)
                     /**********************************************************************/
@@ -239,7 +239,7 @@ namespace Narradia
                         data.deltaT = 0;
                         return;
                     }
-                    if ((ObjectBehaviourList::Get().GetFlags(objectEntry->GetObjectType()) &
+                    if ((ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockS) != 0 &&
                         (int)newY == (int)data.movement.position.y - 1)
                     /**********************************************************************/
@@ -247,7 +247,7 @@ namespace Narradia
                         data.deltaT = 0;
                         return;
                     }
-                    if ((ObjectBehaviourList::Get().GetFlags(objectEntry->GetObjectType()) &
+                    if ((ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockE) != 0 &&
                         (int)newX == (int)data.movement.position.x - 1)
                     /**********************************************************************/
@@ -255,7 +255,7 @@ namespace Narradia
                         data.deltaT = 0;
                         return;
                     }
-                    if ((ObjectBehaviourList::Get().GetFlags(objectEntry->GetObjectType()) &
+                    if ((ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockW) != 0 &&
                         (int)newX == (int)data.movement.position.x + 1)
                     /**********************************************************************/
@@ -271,7 +271,7 @@ namespace Narradia
         {
             data.movement.position.x = newX;
             data.movement.position.y = newY;
-            Audio::Get().PlaySound("Footsteps");
+            Audio::Get()->PlaySound("Footsteps");
             data.deltaT = 0;
         }
         auto tile = mapArea->GetTile(data.movement.position.ToIntPoint());
@@ -283,7 +283,7 @@ namespace Narradia
             /*****************************************************************************/
             {
                 data.movement.worldAreaPos.z--;
-                auto mapArea = World::Get().GetMapAreaAtZLevel(data.movement.worldAreaPos.z);
+                auto mapArea = World::Get()->GetMapAreaAtZLevel(data.movement.worldAreaPos.z);
                 tile = mapArea->GetTile(data.movement.position.ToIntPoint());
                 if (false == tile->GetObjects().Contains(Hash("ObjectMineExit")))
                 /***************************************************************/
@@ -328,7 +328,7 @@ namespace Narradia
     {
         data.Update();
         if (!data.movement.isMoving)
-            Audio::Get().StopPlaySound();
+            Audio::Get()->StopPlaySound();
 
         if (SDL_GetTicks() < ticksStartJumping + jumpDuration)
         /****************************************************/

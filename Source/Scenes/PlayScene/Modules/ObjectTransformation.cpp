@@ -14,7 +14,7 @@ namespace Narradia
         /******************************************************/
         {
             ticks_last_update = SDL_GetTicks();
-            auto map_area = World::Get().GetCurrentMapArea();
+            auto map_area = World::Get()->GetCurrentMapArea();
             for (auto &entry : map_area->GetObjectsMirror())
             /**********************************************/
             {

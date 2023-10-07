@@ -10,35 +10,35 @@ namespace Narradia
     KeyboardMove::Update()
     /*//////////////////*/
     {
-        auto player = Player::GetPointer();
-        if (DestinationMove::Get().GetDestination() == Point2{-1, -1})
+        auto player = Player::Get();
+        if (DestinationMove::Get()->GetDestination() == Point2{-1, -1})
             player->data.movement.isMoving = false;
-        if (KeyboardInput::Get().KeyIsPressed(SDLK_a) && KeyboardInput::Get().KeyIsPressed(SDLK_w))
+        if (KeyboardInput::Get()->KeyIsPressed(SDLK_a) && KeyboardInput::Get()->KeyIsPressed(SDLK_w))
             player->TurnLeftForward();
         else if (
-            KeyboardInput::Get().KeyIsPressed(SDLK_d) && KeyboardInput::Get().KeyIsPressed(SDLK_w))
+            KeyboardInput::Get()->KeyIsPressed(SDLK_d) && KeyboardInput::Get()->KeyIsPressed(SDLK_w))
             player->TurnRightForward();
         else if (
-            KeyboardInput::Get().KeyIsPressed(SDLK_a) && KeyboardInput::Get().KeyIsPressed(SDLK_s))
+            KeyboardInput::Get()->KeyIsPressed(SDLK_a) && KeyboardInput::Get()->KeyIsPressed(SDLK_s))
             player->TurnLeftBack();
         else if (
-            KeyboardInput::Get().KeyIsPressed(SDLK_d) && KeyboardInput::Get().KeyIsPressed(SDLK_s))
+            KeyboardInput::Get()->KeyIsPressed(SDLK_d) && KeyboardInput::Get()->KeyIsPressed(SDLK_s))
             player->TurnRightBack();
-        else if (KeyboardInput::Get().KeyIsPressed(SDLK_a))
+        else if (KeyboardInput::Get()->KeyIsPressed(SDLK_a))
             player->TurnLeft();
-        else if (KeyboardInput::Get().KeyIsPressed(SDLK_d))
+        else if (KeyboardInput::Get()->KeyIsPressed(SDLK_d))
             player->TurnRight();
-        else if (KeyboardInput::Get().KeyIsPressed(SDLK_s))
+        else if (KeyboardInput::Get()->KeyIsPressed(SDLK_s))
             player->TurnBack();
-        else if (KeyboardInput::Get().KeyIsPressed(SDLK_w))
+        else if (KeyboardInput::Get()->KeyIsPressed(SDLK_w))
             player->TurnForward();
-        if ((KeyboardInput::Get().KeyIsPressed(SDLK_w) ||
-             KeyboardInput::Get().KeyIsPressed(SDLK_a) ||
-             KeyboardInput::Get().KeyIsPressed(SDLK_s) ||
-             KeyboardInput::Get().KeyIsPressed(SDLK_d)))
+        if ((KeyboardInput::Get()->KeyIsPressed(SDLK_w) ||
+             KeyboardInput::Get()->KeyIsPressed(SDLK_a) ||
+             KeyboardInput::Get()->KeyIsPressed(SDLK_s) ||
+             KeyboardInput::Get()->KeyIsPressed(SDLK_d)))
         /***********************************************/
         {
-            DestinationMove::Get().ResetDestination();
+            DestinationMove::Get()->ResetDestination();
             player->MoveForward();
             player->data.movement.isMoving = true;
         }

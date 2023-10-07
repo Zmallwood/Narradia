@@ -20,18 +20,18 @@ namespace Narradia
         auto texNameHash = GetTexNameHashForMesh(scene, mesh);
         newModelPart->texNameHash = texNameHash;
         auto noKeyfrmAtTime0Exists =
-            ModelPartKeyframeCreator::Get().GetPositionKeyframe(scene, nodeName, 0).mTime > 0;
+            ModelPartKeyframeCreator::Get()->GetPositionKeyframe(scene, nodeName, 0).mTime > 0;
         auto nrOfKeyframes =
-            ModelPartKeyframeCreator::Get().GetNodePositionKeyframes(scene, nodeName).size();
+            ModelPartKeyframeCreator::Get()->GetNodePositionKeyframes(scene, nodeName).size();
         for (auto k = 0; k < nrOfKeyframes; k++)
         /**************************************/
         {
             auto positionKeyframe =
-                ModelPartKeyframeCreator::Get().GetPositionKeyframe(scene, nodeName, k);
+                ModelPartKeyframeCreator::Get()->GetPositionKeyframe(scene, nodeName, k);
             auto rotationKeyFrame =
-                ModelPartKeyframeCreator::Get().GetRotationKeyframe(scene, nodeName, k);
+                ModelPartKeyframeCreator::Get()->GetRotationKeyframe(scene, nodeName, k);
             auto scalingKeyframe =
-                ModelPartKeyframeCreator::Get().GetScalingKeyframe(scene, nodeName, k);
+                ModelPartKeyframeCreator::Get()->GetScalingKeyframe(scene, nodeName, k);
             auto keyframeTime = static_cast<float>(positionKeyframe.mTime);
             auto newModelPartKeyframe = GetNewModelPartKeyframe(
                 scene, nodeName, mesh, positionKeyframe, rotationKeyFrame, scalingKeyframe);

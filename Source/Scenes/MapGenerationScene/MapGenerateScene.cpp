@@ -12,8 +12,8 @@ namespace Narradia
     /*////////////////////////////////*/
     {
         CreateGui();
-        glIdBackgroundImage = Renderer2DImages::Get().NewImage();
-        glIdGenerationText = TextRenderer::Get().NewString();
+        glIdBackgroundImage = Renderer2DImages::Get()->NewImage();
+        glIdGenerationText = TextRenderer::Get()->NewString();
     }
 
     void
@@ -29,7 +29,7 @@ namespace Narradia
     {
         Log();
         if (currGenerationStep == GenerateSteps::CalcNormals)
-            World::Get().CalculateNormals();
+            World::Get()->CalculateNormals();
         else
             worldMapGenerator.DoGenerationStep(currGenerationStep);
         currGenerationStep = (GenerateSteps)((int)currGenerationStep + 1);
@@ -41,8 +41,8 @@ namespace Narradia
     {
         Log();
         auto rectBack = RectangleF{0.0f, 0.0f, 1.0f, 1.0f};
-        Renderer2DImages::Get().DrawImage("DefaultSceneBackground", glIdBackgroundImage, rectBack);
-        TextRenderer::Get().DrawString(
+        Renderer2DImages::Get()->DrawImage("DefaultSceneBackground", glIdBackgroundImage, rectBack);
+        TextRenderer::Get()->DrawString(
             glIdGenerationText, "Generating terrain...", {0.5f, 0.5f}, Colors::wheat, true);
     }
 
@@ -52,7 +52,7 @@ namespace Narradia
     {
         Log();
         if (currGenerationStep == GenerateSteps::Completed)
-            SceneManager::Get().ChangeScene(SceneNames::Play);
+            SceneManager::Get()->ChangeScene(SceneNames::Play);
     }
 }
 //////////////////////////////////////////////////////////////////////

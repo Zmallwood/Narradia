@@ -36,8 +36,8 @@ namespace Narradia
         p->parentContainer = parentContainer_;
         p->imageName = imageName_;
         p->imageNameHovered = imageNameHovered_;
-        p->rendIdImage = Renderer2DImages::Get().NewImage();
-        p->rendIdLabelText = TextRenderer::Get().NewString();
+        p->rendIdImage = Renderer2DImages::Get()->NewImage();
+        p->rendIdLabelText = TextRenderer::Get()->NewString();
     }
 
     void
@@ -55,9 +55,9 @@ namespace Narradia
         if (usedBounds.Contains(GetMousePositionF()))
         /*******************************************/
         {
-            Cursor::Get().SetCursorType(CursorTypes::Hovering);
+            Cursor::Get()->SetCursorType(CursorTypes::Hovering);
             p->hovered = true;
-            MouseInput::Get().GetLeftButton().AddFiredAction(
+            MouseInput::Get()->GetLeftButton().AddFiredAction(
                 "PerformGuiButtonAction",
                 [&]
                 /************************/
@@ -82,8 +82,8 @@ namespace Narradia
             usedBounds.x += p->parentContainer->GetPosition().x;
             usedBounds.y += p->parentContainer->GetPosition().y;
         }
-        Renderer2DImages::Get().DrawImage(*usedImageName, p->rendIdImage, usedBounds);
-        TextRenderer::Get().DrawString(
+        Renderer2DImages::Get()->DrawImage(*usedImageName, p->rendIdImage, usedBounds);
+        TextRenderer::Get()->DrawString(
             p->rendIdLabelText, p->text, usedBounds.Center(), Colors::wheat, true);
     }
 }

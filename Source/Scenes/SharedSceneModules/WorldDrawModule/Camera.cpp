@@ -41,11 +41,11 @@ namespace Narradia
             glm::vec3(lookFrom.x, lookFrom.y, lookFrom.z), glm::vec3(lookAt.x, lookAt.y, lookAt.z),
             glm::vec3(0.0, 1.0, 0.0));
         Log();
-        CameraGl::Get().SetPerspectiveMatrix(newPerspectiveMat);
+        CameraGl::Get()->SetPerspectiveMatrix(newPerspectiveMat);
         Log();
-        CameraGl::Get().SetViewMatrix(newViewMat);
+        CameraGl::Get()->SetViewMatrix(newViewMat);
         if (cameraDistance == 2.0f)
-            Cursor::Get().HideThisFrame();
+            Cursor::Get()->HideThisFrame();
     }
 
     float
@@ -59,18 +59,18 @@ namespace Narradia
     Camera::UpdateZooming()
     /*///////////////////*/
     {
-        auto mouseWheelDelta = MouseInput::Get().MouseWheelDeltaPickResult();
+        auto mouseWheelDelta = MouseInput::Get()->MouseWheelDeltaPickResult();
         if (mouseWheelDelta != 0)
         /***********************/
         {
             auto distanceChange = mouseWheelDelta / zoomSens;
-            if (SceneManager::Get().GetCurrentScene() == SceneNames::Editor)
+            if (SceneManager::Get()->GetCurrentScene() == SceneNames::Editor)
                 distanceChange *= 2;
             cameraDistance += distanceChange;
         }
-        if (SceneManager::Get().GetCurrentScene() == SceneNames::Play)
+        if (SceneManager::Get()->GetCurrentScene() == SceneNames::Play)
             cameraDistance = std::max(std::min(cameraDistance, 250.0f), 2.0f);
-        else if (SceneManager::Get().GetCurrentScene() == SceneNames::Editor)
+        else if (SceneManager::Get()->GetCurrentScene() == SceneNames::Editor)
             cameraDistance = std::max(std::min(cameraDistance, 800.0f), 2.0f);
     }
 
@@ -78,8 +78,8 @@ namespace Narradia
     Camera::CalculateCameraPosition()
     /*/////////////////////////////*/
     {
-        auto modulePlayer = Player::GetPointer();
-        auto worldMap = World::GetPointer();
+        auto modulePlayer = Player::Get();
+        auto worldMap = World::Get();
         auto usedCameraDistance = cameraDistance;
         auto usedVerticalAngle = verticalAngle;
         auto playerPosNoElev = modulePlayer->GetSpaceCoord();

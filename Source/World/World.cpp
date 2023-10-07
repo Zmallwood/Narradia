@@ -51,7 +51,7 @@ namespace Narradia
     World::GetCurrentMapArea()
     /*//////////////////////*/
     {
-        auto playerWorldAreaPos = Player::Get().GetWorldAreaPos();
+        auto playerWorldAreaPos = Player::Get()->GetWorldAreaPos();
         return p->mapAreas[playerWorldAreaPos.z].get();
     }
 
@@ -69,7 +69,7 @@ namespace Narradia
     World::CalculateNormals(bool updateExistingTiles)
     /*/////////////////////////////////////////////*/
     {
-        auto mapAreas = World::Get().GetAllMapAreas();
+        auto mapAreas = World::Get()->GetAllMapAreas();
         for (auto &mapArea : mapAreas)
         /****************************/
         {
@@ -227,14 +227,14 @@ namespace Narradia
                     if (false == updateExistingTiles)
                     /*******************************/
                     {
-                        tileRendId = RendererTiles::Get().NewTile();
+                        tileRendId = RendererTiles::Get()->NewTile();
                     }
                     else
                     /**/
                     {
                         tileRendId = tile->GetTileRendId();
                     }
-                    RendererTiles::Get().SetGeometryTile(
+                    RendererTiles::Get()->SetGeometryTile(
                         tileRendId, v0, v1, v2, v3, normal00, normal10, normal11, normal01);
                     tile->SetTileRendId(tileRendId);
                 }
@@ -246,7 +246,7 @@ namespace Narradia
     World::ResetColorVariations()
     /*/////////////////////////*/
     {
-        auto mapAreas = World::Get().GetAllMapAreas();
+        auto mapAreas = World::Get()->GetAllMapAreas();
         for (auto &mapArea : mapAreas)
         /****************************/
         {
@@ -268,7 +268,7 @@ namespace Narradia
     World::ApplyDefaultColorVariations()
     /*////////////////////////////////*/
     {
-        auto mapAreas = World::Get().GetAllMapAreas();
+        auto mapAreas = World::Get()->GetAllMapAreas();
         for (auto &mapArea : mapAreas)
         /****************************/
         {
@@ -315,7 +315,7 @@ namespace Narradia
     World::GenerateRandomColorVariations()
     /*//////////////////////////////////*/
     {
-        auto mapAreas = World::Get().GetAllMapAreas();
+        auto mapAreas = World::Get()->GetAllMapAreas();
         for (auto &mapArea : mapAreas)
         /****************************/
         {

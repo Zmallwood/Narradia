@@ -23,16 +23,16 @@ namespace Narradia
     RenderLoop::operator()()
     /*////////////////////*/
     {
-        const auto &playerWorldAreaPos = Player::Get().GetWorldAreaPos();
-        const auto &playerPos = Player::Get().GetPosition();
+        const auto &playerWorldAreaPos = Player::Get()->GetWorldAreaPos();
+        const auto &playerPos = Player::Get()->GetPosition();
         const auto &playerTileCoord = playerPos.ToIntPoint();
-        auto mapArea = World::Get().GetMapAreaAtZLevel(playerWorldAreaPos.z);
+        auto mapArea = World::Get()->GetMapAreaAtZLevel(playerWorldAreaPos.z);
         currMapArea = mapArea;
-        auto camera = Camera::GetPointer();
+        auto camera = Camera::Get();
         const auto zoomAmount = camera->GetZoomAmount();
         const auto elevAmount = kElevAmount;
         const auto canvasSize = GetCanvasSize();
-        const auto &projMat = CameraGl::Get().GetPerspectiveMatrix();
+        const auto &projMat = CameraGl::Get()->GetPerspectiveMatrix();
         const auto viewPort =
             glm::vec4(0.0f, canvasSize.height / 2, canvasSize.width, canvasSize.height);
         const float camOffsetAmount = kTileSize * 10.0f;
@@ -125,7 +125,7 @@ namespace Narradia
                 glm::vec3 cRel =
                     glm::vec3{(x0 + x2) / 2.0f - usedPos.x, 0, (z0 + z2) / 2.0f - usedPos.z};
                 auto screenCoord = glm::project(cRel, modelMat, projMat, viewPort);
-                if (Camera::Get().cameraDistance > 10.0f)
+                if (Camera::Get()->cameraDistance > 10.0f)
                 /*************************************/
                 {
                     if (screenCoord.x <= -0.4f * canvasSize.width ||
@@ -145,18 +145,18 @@ namespace Narradia
                 bool thisTileClaimedByPlayer = false;
                 bool eastTileClaimedByPlayer = false;
                 bool southTileClaimedByPlayer = false;
-                thisTileClaimedByPlayer = Player::Get().HasClaimedTile(tileCoord);
+                thisTileClaimedByPlayer = Player::Get()->HasClaimedTile(tileCoord);
                 if (x < MapArea::GetMapSize().width - 1)
                 /**************************************/
                 {
                     auto eastTile = Point2{tileCoord.x + 1, tileCoord.y};
-                    eastTileClaimedByPlayer = Player::Get().HasClaimedTile(eastTile);
+                    eastTileClaimedByPlayer = Player::Get()->HasClaimedTile(eastTile);
                 }
                 if (y < MapArea::GetMapSize().height - 1)
                 /***************************************/
                 {
                     auto southTile = Point2{tileCoord.x, tileCoord.y + 1};
-                    southTileClaimedByPlayer = Player::Get().HasClaimedTile(southTile);
+                    southTileClaimedByPlayer = Player::Get()->HasClaimedTile(southTile);
                 }
                 currThisTileClaimedByPlayer = thisTileClaimedByPlayer;
                 currEastTileClaimedByPlayer = eastTileClaimedByPlayer;
@@ -193,9 +193,9 @@ namespace Narradia
                                 /********************/
                                 {
                                     if (objectType != Hash("ObjectTallGrass6") &&
-                                        (false == ObjectBehaviourList::Get().HasBehaviourData(
+                                        (false == ObjectBehaviourList::Get()->HasBehaviourData(
                                                       objectType) ||
-                                         ObjectBehaviourList::Get().GetFlags(objectType) &
+                                         ObjectBehaviourList::Get()->GetFlags(objectType) &
                                              (int)ObjectBehaviourFlags::NoShadow == 0))
                                     /********************************************************/
                                     {

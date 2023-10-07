@@ -10,7 +10,7 @@ namespace Narradia
     {
         int width;
         int height;
-        SDL_GetWindowSize(Graphics::Get().GetWindow(), &width, &height);
+        SDL_GetWindowSize(Graphics::Get()->GetWindow(), &width, &height);
         return {width, height};
     }
 
