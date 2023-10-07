@@ -22,7 +22,7 @@ namespace Narradia
 
     void
     MouseInput::Reset()
-    /*////////////////////*/
+    /*///////////////*/
     {
         p->leftButton.Reset();
         p->middleButton.Reset();
@@ -34,7 +34,7 @@ namespace Narradia
 
     void
     MouseInput::MouseDown(Uint8 mouseButton)
-    /*/////////////////////////////////////////*/
+    /*////////////////////////////////////*/
     {
         switch (mouseButton)
         /******************/
@@ -56,7 +56,7 @@ namespace Narradia
 
     void
     MouseInput::MouseUp(Uint8 mouseButton)
-    /*///////////////////////////////////////*/
+    /*//////////////////////////////////*/
     {
         switch (mouseButton)
         /******************/
@@ -78,21 +78,21 @@ namespace Narradia
 
     void
     MouseInput::MouseWheel(int deltaScroll)
-    /*////////////////////////////////////////*/
+    /*///////////////////////////////////*/
     {
         p->mouseWheelDelta += deltaScroll;
     }
 
     void
     MouseInput::MouseMove(Point2 motionDelta_)
-    /*///////////////////////////////////////////*/
+    /*//////////////////////////////////////*/
     {
         p->motionDelta = motionDelta_;
     }
 
     int
     MouseInput::MouseWheelDeltaPickResult()
-    /*///////////////////////////////////////*/
+    /*///////////////////////////////////*/
     {
         auto resultMouseWheelDelta = p->mouseWheelDelta;
         p->mouseWheelDelta = 0;
@@ -101,7 +101,7 @@ namespace Narradia
 
     void
     MouseInput::PerformMouseActions()
-    /*//////////////////////////////////*/
+    /*/////////////////////////////*/
     {
         Log();
         p->leftButton.PerformMouseAction();
@@ -113,7 +113,7 @@ namespace Narradia
 
     void
     MouseInput::ResetMouseActions()
-    /*////////////////////////////////*/
+    /*///////////////////////////*/
     {
         p->leftButton.ResetActions();
         p->middleButton.ResetActions();
@@ -122,7 +122,7 @@ namespace Narradia
 
     Point2
     MouseInput::GetMotionDeltaPickResults()
-    /*//////////////////////////////////////////*/
+    /*///////////////////////////////////*/
     {
         auto result = p->motionDelta;
         p->motionDelta = {0, 0};
@@ -131,21 +131,21 @@ namespace Narradia
 
     MouseButton &
     MouseInput::GetLeftButton()
-    /*////////////////////////////////////*/
+    /*///////////////////////*/
     {
         return p->leftButton;
     }
 
     MouseButton &
     MouseInput::GetMiddleButton()
-    /*//////////////////////////////////////*/
+    /*/////////////////////////*/
     {
         return p->middleButton;
     }
 
     MouseButton &
     MouseInput::GetRightButton()
-    /*/////////////////////////////////////*/
+    /*////////////////////////*/
     {
         return p->rightButton;
     }

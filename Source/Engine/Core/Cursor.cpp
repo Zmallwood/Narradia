@@ -30,7 +30,7 @@ namespace Narradia
 
     void
     Cursor::Render() const
-    /*///////////////////////*/
+    /*//////////////////*/
     {
         if (!p->visibleThisFrame)
             return;
@@ -66,7 +66,7 @@ namespace Narradia
 
     void
     Cursor::Reset()
-    /*////////////////*/
+    /*///////////*/
     {
         p->currCursorType = CursorTypes::Normal;
         p->visibleThisFrame = true;
@@ -74,14 +74,14 @@ namespace Narradia
 
     void
     Cursor::SavePosition()
-    /*///////////////////////*/
+    /*//////////////////*/
     {
         p->savedMousePosPx = GetMousePositionPx();
     }
 
     void
     Cursor::RestoreSavedPosition() const
-    /*/////////////////////////////////////*/
+    /*////////////////////////////////*/
     {
         SDL_WarpMouseInWindow(
             Graphics::Get().GetWindow(), p->savedMousePosPx.x, p->savedMousePosPx.y);
@@ -89,35 +89,35 @@ namespace Narradia
 
     Point2
     Cursor::GetSavedPosition() const
-    /*///////////////////////////////////*/
+    /*////////////////////////////*/
     {
         return p->savedMousePosPx;
     }
 
     void
     Cursor::SetCursorType(CursorTypes newCursorType)
-    /*/////////////////////////////////////////////////*/
+    /*////////////////////////////////////////////*/
     {
         p->currCursorType = newCursorType;
     }
 
     void
     Cursor::LockMousePos() const
-    /*/////////////////////////////*/
+    /*////////////////////////*/
     {
         SDL_SetRelativeMouseMode(SDL_TRUE);
     }
 
     void
     Cursor::UnlockMousePos() const
-    /*///////////////////////////////*/
+    /*//////////////////////////*/
     {
         SDL_SetRelativeMouseMode(SDL_FALSE);
     }
 
     void
     Cursor::HideThisFrame()
-    /*////////////////////////*/
+    /*///////////////////*/
     {
         p->visibleThisFrame = false;
     }

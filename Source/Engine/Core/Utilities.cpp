@@ -6,7 +6,7 @@ namespace Narradia
 {
     Size
     GetCanvasSize()
-    /*////////////////*/
+    /*///////////*/
     {
         int width;
         int height;
@@ -16,7 +16,7 @@ namespace Narradia
 
     float
     GetAspectRatio()
-    /*//////////////////*/
+    /*////////////*/
     {
         auto canvasSize = GetCanvasSize();
         return static_cast<float>(canvasSize.width) / canvasSize.height;
@@ -24,14 +24,14 @@ namespace Narradia
 
     float
     ConvertWidthToHeight(float width)
-    /*///////////////////////////////////*/
+    /*/////////////////////////////*/
     {
         return width * GetAspectRatio();
     }
 
     std::string_view
     GetCurrentTime()
-    /*/////////////////////////////*/
+    /*////////////*/
     {
         time_t now = time(0);
         char buffer[80];
@@ -42,7 +42,7 @@ namespace Narradia
 
     std::string_view
     GetCurrentDateTime()
-    /*/////////////////////////////////*/
+    /*////////////////*/
     {
         time_t now = time(0);
         char buffer[80];
@@ -53,14 +53,14 @@ namespace Narradia
 
     const int
     Hash(const std::string_view &text)
-    /*////////////////////////////////////////*/
+    /*//////////////////////////////*/
     {
         return std::hash<std::string_view>{}(text);
     }
 
     Point2
     GetMousePositionPx()
-    /*///////////////////////*/
+    /*////////////////*/
     {
         int x;
         int y;
@@ -70,7 +70,7 @@ namespace Narradia
 
     Point2F
     GetMousePositionF()
-    /*///////////////////////*/
+    /*///////////////*/
     {
         auto canvasSize = GetCanvasSize();
         auto mousePosPx = GetMousePositionPx();

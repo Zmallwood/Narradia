@@ -40,7 +40,7 @@ namespace Narradia
 
     void
     EditorSceneGuiMenu::Update()
-    /*////////////////////////////*/
+    /*////////////////////////*/
     {
         if (visible)
             GuiContainer::Update();
@@ -48,7 +48,7 @@ namespace Narradia
 
     void
     EditorSceneGuiMenu::Render() const
-    /*//////////////////////////////////*/
+    /*//////////////////////////////*/
     {
         if (!visible)
             return;

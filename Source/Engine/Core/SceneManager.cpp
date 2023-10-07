@@ -57,7 +57,7 @@ namespace Narradia
 
     void
     SceneManager::UpdateCurrentScene()
-    /*/////////////////////////////////*/
+    /*//////////////////////////////*/
     {
         Log();
         if (p->scenes.count(p->currentView))
@@ -70,7 +70,7 @@ namespace Narradia
 
     void
     SceneManager::RenderCurrentScene() const
-    /*///////////////////////////////////////*/
+    /*////////////////////////////////////*/
     {
         Log();
         if (p->scenes.count(p->currentView))
@@ -84,7 +84,7 @@ namespace Narradia
 
     void
     SceneManager::FinalizeCurrentScene()
-    /*///////////////////////////////////*/
+    /*////////////////////////////////*/
     {
         if (p->scenes.count(p->currentView))
         /**********************************/
@@ -96,7 +96,7 @@ namespace Narradia
 
     void
     SceneManager::ChangeScene(SceneNames newScene)
-    /*////////////////////////////////////////*/
+    /*//////////////////////////////////////////*/
     {
         p->currentView = newScene;
         MouseInput::Get().Reset();
@@ -106,7 +106,7 @@ namespace Narradia
 
     SceneNames
     SceneManager::GetCurrentScene()
-    /*///////////////////////////////*/
+    /*///////////////////////////*/
     {
         return p->currentView;
     }

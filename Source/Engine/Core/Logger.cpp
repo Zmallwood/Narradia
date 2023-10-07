@@ -33,7 +33,7 @@ namespace Narradia
 
     void
     Logger::Log(std::string_view message, const std::source_location location)
-    /*///////////////////////////////////////////////////////////////////////////*/
+    /*//////////////////////////////////////////////////////////////////////*/
     {
         if (!p->enabled)
             return;
@@ -50,7 +50,7 @@ namespace Narradia
 
     void
     Log(const std::source_location location)
-    /*//////*/
+    /*////////////////////////////////////*/
     {
         Logger::Get().Log("", location);
     }

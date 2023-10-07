@@ -6,7 +6,7 @@
 namespace Narradia
 {
     class SceneGui::Pimpl
-    /*////////////////*/
+    /*/////////////////*/
     {
       public:
         std::vector<std::shared_ptr<GuiComponent>> guiComponents;
@@ -36,7 +36,7 @@ namespace Narradia
 
     void
     SceneGui::Update()
-    /*//////////////////*/
+    /*//////////////*/
     {
         for (auto &guiButton : p->guiButtons)
             guiButton->Update();
@@ -46,7 +46,7 @@ namespace Narradia
 
     void
     SceneGui::Render() const
-    /*////////////////////////*/
+    /*////////////////////*/
     {
         Log();
         for (auto &guiButton : p->guiButtons | std::views::reverse)
@@ -64,14 +64,14 @@ namespace Narradia
 
     void
     SceneGui::AddGuiComponent(std::shared_ptr<GuiComponent> newComponent)
-    /*/////////////////////////////////////////////////////////////////////*/
+    /*/////////////////////////////////////////////////////////////////*/
     {
         p->guiComponents.push_back(newComponent);
     }
 
     void
     SceneGui::RemoveGuiComponent(GuiComponent *component)
-    /*/////////////////////////////////////////////////////*/
+    /*/////////////////////////////////////////////////*/
     {
         auto i = 0;
         for (auto &entry : p->guiComponents)
@@ -89,7 +89,7 @@ namespace Narradia
 
     auto
     SceneGui::GetGuiComponents() const -> const std::vector<std::shared_ptr<GuiComponent>> &
-    /*////////////////////////////////////////////////////////////////////////////////////////*/
+    /*////////////////////////////////////////////////////////////////////////////////////*/
     {
         return p->guiComponents;
     }

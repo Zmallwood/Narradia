@@ -14,7 +14,7 @@ namespace Narradia
 {
     void
     GameLoop::Run() const
-    /*//////////////////////*/
+    /*/////////////////*/
     {
         Log();
         World::Create();

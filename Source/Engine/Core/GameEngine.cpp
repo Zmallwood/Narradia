@@ -22,7 +22,7 @@ namespace Narradia
 
     void
     GameEngine::Run() const
-    /*////////////////////////*/
+    /*///////////////////*/
     {
         Logger::Create();
         srand(static_cast<unsigned int>(time(nullptr)));
@@ -48,14 +48,14 @@ namespace Narradia
 
     void
     GameEngine::StopGame()
-    /*///////////////////////*/
+    /*//////////////////*/
     {
         p->running = false;
     }
 
     const bool
     GameEngine::IsRunning() const
-    /*////////////////////////////////////*/
+    /*/////////////////////////*/
     {
         return p->running;
     }

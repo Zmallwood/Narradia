@@ -27,7 +27,7 @@ namespace Narradia
 
     void
     GuiWindowObjectSlot::Update(int offset) const
-    /*//////////////////////////////////////////////*/
+    /*/////////////////////////////////////////*/
     {
         auto mousePosF = GetMousePositionF();
         if (GetBounds().Contains(mousePosF))
@@ -46,7 +46,7 @@ namespace Narradia
 
     void
     GuiWindowObjectSlot::Render(int offset) const
-    /*//////////////////////////////////////////////*/
+    /*/////////////////////////////////////////*/
     {
         Log();
         auto slotHeight = GetSlotHeight();
@@ -97,7 +97,7 @@ namespace Narradia
 
     RectangleF
     GuiWindowObjectSlot::GetBounds() const
-    /*/////////////////////////////////////////////*/
+    /*//////////////////////////////////*/
     {
         auto bounds = parentWindow->GetBounds();
         auto margin = parentWindow->GetMargin();
@@ -112,7 +112,7 @@ namespace Narradia
 
     float
     GuiWindowObjectSlot::GetSlotHeight() const
-    /*////////////////////////////////////////////*/
+    /*//////////////////////////////////////*/
     {
         return ConvertWidthToHeight(slotWidth);
     }

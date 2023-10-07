@@ -39,7 +39,7 @@ namespace Narradia
 
     void
     GuiTextBox::Update()
-    /*/////////////////////*/
+    /*////////////////*/
     {
         auto mousePosF = GetMousePositionF();
         auto usedBounds = p->bounds;
@@ -110,7 +110,7 @@ namespace Narradia
 
     void
     GuiTextBox::Render() const
-    /*///////////////////////////*/
+    /*//////////////////////*/
     {
         auto usedBounds = p->bounds;
         if (p->parentContainer)
@@ -140,14 +140,14 @@ namespace Narradia
 
     std::string_view
     GuiTextBox::GetText()
-    /*//////////////////////////////////*/
+    /*/////////////////*/
     {
         return p->text;
     }
 
     void
     GuiTextBox::SetText(const std::string &newText)
-    /*////////////////////////////////////////////////*/
+    /*///////////////////////////////////////////*/
     {
         p->text = newText;
     }

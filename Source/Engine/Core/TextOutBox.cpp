@@ -43,7 +43,7 @@ namespace Narradia
 
     void
     TextOutBox::Update()
-    /*/////////////////////*/
+    /*////////////////*/
     {
         if (KeyboardInput::Get().KeyHasBeenFiredPickResult(SDLK_RETURN))
         /**************************************************************/
@@ -61,7 +61,7 @@ namespace Narradia
 
     void
     TextOutBox::Render() const
-    /*///////////////////////////*/
+    /*//////////////////////*/
     {
         if (!p->enabled)
             return;
@@ -109,7 +109,7 @@ namespace Narradia
 
     void
     TextOutBox::Print(std::string_view text, Color textColor)
-    /*//////////////////////////////////////////////////////////*/
+    /*/////////////////////////////////////////////////////*/
     {
         if (!p->enabled)
             return;
@@ -120,7 +120,7 @@ namespace Narradia
 
     int
     TextOutBox::GetMaxNumLines() const
-    /*//////////////////////////////////*/
+    /*//////////////////////////////*/
     {
         return static_cast<int>(p->bounds.height / p->textLineHeight) - 2;
     }

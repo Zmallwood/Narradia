@@ -42,7 +42,7 @@ namespace Narradia
 
     void
     GuiButton::Update()
-    /*////////////////////*/
+    /*///////////////*/
     {
         p->hovered = false;
         auto usedBounds = p->bounds;
@@ -68,7 +68,7 @@ namespace Narradia
 
     void
     GuiButton::Render() const
-    /*//////////////////////////*/
+    /*/////////////////////*/
     {
         const std::string_view *usedImageName;
         if (p->hovered)

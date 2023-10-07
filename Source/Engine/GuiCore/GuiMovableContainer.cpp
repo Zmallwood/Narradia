@@ -27,7 +27,7 @@ namespace Narradia
 
     void
     GuiMovableContainer::Update()
-    /*//////////////////////////////*/
+    /*/////////////////////////*/
     {
         auto mousePosF = GetMousePositionF();
         auto absDragableArea = p->relDragableArea.Translate(GetPosition().x, GetPosition().y);
@@ -70,7 +70,7 @@ namespace Narradia
 
     void
     GuiMovableContainer::Render() const
-    /*////////////////////////////////////*/
+    /*///////////////////////////////*/
     {
         GuiContainer::Render();
     }

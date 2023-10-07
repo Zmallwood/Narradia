@@ -8,7 +8,7 @@ namespace Narradia
 {
     void
     EventPoller::PollEvents() const
-    /*////////////////////////////////*/
+    /*///////////////////////////*/
     {
         SDL_Event event;
         while (SDL_PollEvent(&event) != 0)

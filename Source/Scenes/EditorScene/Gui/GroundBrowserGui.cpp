@@ -50,7 +50,7 @@ namespace Narradia
 
     void
     GroundBrowserGui::UpdateDerived()
-    /*//////////////////////////////////*/
+    /*/////////////////////////////*/
     {
         if (GetBounds().Contains(GetMousePositionF()))
         /********************************************/
@@ -95,7 +95,7 @@ namespace Narradia
 
     void
     GroundBrowserGui::RenderDerived() const
-    /*////////////////////////////////////////*/
+    /*///////////////////////////////////*/
     {
         auto i = 0;
         for (auto y = 0; y < numRows; y++)

@@ -41,56 +41,56 @@ namespace Narradia
 
     void
     GuiWindow::ToggleVisibility()
-    /*//////////////////////////////*/
+    /*/////////////////////////*/
     {
         p->visible = !p->visible;
     }
 
     std::string_view
     GuiWindow::GetTitle()
-    /*//////////////////////////////////*/
+    /*/////////////////*/
     {
         return p->title;
     }
 
     bool
     GuiWindow::DestroyOnClose()
-    /*////////////////////////////*/
+    /*///////////////////////*/
     {
         return p->destroyOnClose;
     }
 
     void
     GuiWindow::Show()
-    /*//////////////////*/
+    /*/////////////*/
     {
         p->visible = true;
     }
 
     void
     GuiWindow::Hide()
-    /*//////////////////*/
+    /*/////////////*/
     {
         p->visible = false;
     }
 
     float
     GuiWindow::GetMargin()
-    /*////////////////////////*/
+    /*//////////////////*/
     {
         return Pimpl::kMargin;
     }
 
     float
     GuiWindow::GetTitleBarHeight()
-    /*////////////////////////////////*/
+    /*//////////////////////////*/
     {
         return Pimpl::kTitleBarHeight;
     }
 
     void
     GuiWindow::Update()
-    /*////////////////////*/
+    /*///////////////*/
     {
         if (!p->visible)
             return;
@@ -101,7 +101,7 @@ namespace Narradia
 
     void
     GuiWindow::Render() const
-    /*//////////////////////////*/
+    /*/////////////////////*/
     {
         Log();
         if (!p->visible)
@@ -122,7 +122,7 @@ namespace Narradia
 
     RectangleF
     GuiWindow::GetAbsoluteTitleBarBounds() const
-    /*///////////////////////////////////////////////////*/
+    /*////////////////////////////////////////*/
     {
         return {GetPosition().x, GetPosition().y, GetSize().width, Pimpl::kTitleBarHeight};
     }

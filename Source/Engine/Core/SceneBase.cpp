@@ -19,13 +19,13 @@ namespace Narradia
 
     void
     SceneBase::Enter()
-    /*//////////////////*/
+    /*//////////////*/
     {
     }
 
     void
     SceneBase::Update()
-    /*///////////////////*/
+    /*///////////////*/
     {
         p->sceneGui->Update();
         UpdateDerived();
@@ -33,7 +33,7 @@ namespace Narradia
 
     void
     SceneBase::Render()
-    /*///////////////////*/
+    /*///////////////*/
     {
         Log();
         RenderDerived();
@@ -45,33 +45,33 @@ namespace Narradia
 
     void
     SceneBase::Finalize()
-    /*/////////////////////*/
+    /*/////////////////*/
     {
     }
 
     SceneGui *
     SceneBase::GetSceneGui()
-    /*///////////////////////////*/
+    /*////////////////////*/
     {
         return p->sceneGui.get();
     }
 
     void
     SceneBase::CreateGui()
-    /*//////////////////////*/
+    /*//////////////////*/
     {
         SetSceneGui(std::make_shared<SceneGui>());
     }
 
     void
     SceneBase::RenderAfterGuiDerived()
-    /*//////////////////////////////////*/
+    /*//////////////////////////////*/
     {
     }
 
     void
     SceneBase::SetSceneGui(std::shared_ptr<SceneGui> newSceneGui)
-    /*///////////////////////////////////////////////////////////*/
+    /*/////////////////////////////////////////////////////////*/
     {
         p->sceneGui = newSceneGui;
     }

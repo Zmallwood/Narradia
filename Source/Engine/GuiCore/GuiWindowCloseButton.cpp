@@ -32,7 +32,7 @@ namespace Narradia
 
     void
     GuiWindowCloseButton::Update()
-    /*///////////////////////////////*/
+    /*//////////////////////////*/
     {
         p->hovered = false;
         if (p->GetBounds().Contains(GetMousePositionF()))
@@ -74,7 +74,7 @@ namespace Narradia
 
     void
     GuiWindowCloseButton::Render() const
-    /*/////////////////////////////////////*/
+    /*////////////////////////////////*/
     {
         if (p->hovered)
             Renderer2DImages::Get().DrawImage(
@@ -86,7 +86,7 @@ namespace Narradia
 
     RectangleF
     GuiWindowCloseButton::Pimpl::GetBounds() const
-    /*/////////////////////////////////////////////////////*/
+    /*//////////////////////////////////////////*/
     {
         auto width = Pimpl::kWidth;
         auto height = ConvertWidthToHeight(width);
