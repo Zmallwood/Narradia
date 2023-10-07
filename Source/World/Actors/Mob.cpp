@@ -176,4 +176,12 @@ namespace Narradia
     {
         p->ticksLastAttack = SDL_GetTicks();
     }
+
+    void
+    Mob::Hit(int damage)
+    /*////////////////*/
+    {
+        p->hp -= damage;
+        p->ticksLastHitRecieved = SDL_GetTicks();
+    }
 }

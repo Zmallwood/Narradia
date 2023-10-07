@@ -2,6 +2,7 @@
 #include "Combat.hpp"
 #include "Engine/Core/TextOutBox.hpp"
 #include "MobTargeting.hpp"
+#include "World/Actors/Mob.hpp"
 #include "World/Actors/Player.hpp"
 #include "World/MapArea.hpp"
 #include "World/World.hpp"
@@ -39,16 +40,38 @@ namespace Narradia
                 {
                 case PlayerBuilds::Sword:
                     /*******************/
-                    Player::Get()->data.stats.stam -= 1;
-                    Player::Get()->data.stats.rage += 1;
-                    TextOutBox::Get()->Print(
-                        "You hit mob with your sword for " + std::to_string(damage) + " damage.");
+                    if (Player::Get()->data.stats.stam <= 0)
+                    /**************************************/
+                    {
+                        TextOutBox::Get()->Print("Your stamina is too low to hit with a sword.");
+                    }
+                    else
+                    /**/
+                    {
+                        targetedMob->Hit(damage);
+                        Player::Get()->data.stats.stam -= 1;
+                        Player::Get()->data.stats.rage += 1;
+                        TextOutBox::Get()->Print(
+                            "You hit mob with your sword for " + std::to_string(damage) +
+                            " damage.");
+                    }
                     break;
                 case PlayerBuilds::Club:
                     /******************/
-                    Player::Get()->data.stats.rage -= 1;
-                    TextOutBox::Get()->Print(
-                        "You hit mob with your club for " + std::to_string(damage) + " damage.");
+                    if (Player::Get()->data.stats.rage <= 0)
+                    /**************************************/
+                    {
+                        TextOutBox::Get()->Print("Your rage is too low to hit with a club.");
+                    }
+                    else
+                    /**/
+                    {
+                        targetedMob->Hit(damage);
+                        Player::Get()->data.stats.rage -= 1;
+                        TextOutBox::Get()->Print(
+                            "You hit mob with your club for " + std::to_string(damage) +
+                            " damage.");
+                    }
                     break;
                 case PlayerBuilds::None:
                     /******************/

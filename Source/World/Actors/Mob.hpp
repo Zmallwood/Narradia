@@ -29,6 +29,7 @@ namespace Narradia
         int GetTicksLastAttack();
         int GetAttackSpeed();
         void UpdateTicksLastAttack();
+        void Hit(int);
 
       private:
         class Pimpl;

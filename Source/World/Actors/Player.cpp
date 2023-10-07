@@ -330,6 +330,13 @@ namespace Narradia
         if (!data.movement.isMoving)
             Audio::Get()->StopPlaySound();
 
+        if (SDL_GetTicks() > ticksLastStaminaRegeneration + kStaminaRegenerationSpeed)
+        /****************************************************************************/
+        {
+            data.stats.stam = std::min(data.stats.maxStam, data.stats.stam + 1);
+            ticksLastStaminaRegeneration = SDL_GetTicks();
+        }
+
         if (SDL_GetTicks() < ticksStartJumping + jumpDuration)
         /****************************************************/
         {

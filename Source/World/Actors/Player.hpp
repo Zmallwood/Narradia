@@ -37,10 +37,13 @@ namespace Narradia
       private:
         void Update();
         void MoveAtAngle(float);
+
+        inline static const int kStaminaRegenerationSpeed = 6000;
         int mineSpeed = 800;
         int tickLastTimeDidMine = 0;
         int ticksStartJumping = 0;
         int jumpDuration = 1000;
+        int ticksLastStaminaRegeneration = 0;
         float maxJumpHeight = 1.5f;
         friend class PlayScene;
         friend class EditorScene;
