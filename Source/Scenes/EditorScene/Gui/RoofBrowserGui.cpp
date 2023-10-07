@@ -12,7 +12,7 @@ namespace Narradia
         : GuiWindow("Roof browser", {0.7f, 0.2f, 0.2f, 0.45f})
     /*//////////////////////////////////////////////////////*/
     {
-        auto slotWidth = (GetBounds().width - 2 * GetMargin()) / numCols - GetMargin();
+        auto slot_with = (GetBounds().width - 2 * GetMargin()) / kNumCols - GetMargin();
         auto images = ImageBank::Get()->GetImages();
         int j = 0;
         for (auto &entry : images)
@@ -21,30 +21,30 @@ namespace Narradia
             if (entry.second.fileName.substr(0, 4) == "Roof")
             /***********************************************/
             {
-                objectsLibrary.insert({j, std::make_shared<Object>(entry.second.fileName)});
+                objects_library_.insert({j, std::make_shared<Object>(entry.second.fileName)});
                 j++;
             }
         }
         auto i = 0;
-        for (auto y = 0; y < numRows; y++)
+        for (auto y = 0; y < kNumRows; y++)
         /********************************/
         {
-            for (auto x = 0; x < numCols; x++)
+            for (auto x = 0; x < kNumCols; x++)
             /********************************/
             {
-                slots[x][y] =
-                    std::make_shared<GuiWindowObjectSlot>(this, x, y, i, slotWidth, objectsLibrary);
+                slots_[x][y] =
+                    std::make_shared<GuiWindowObjectSlot>(this, x, y, i, slot_with, objects_library_);
                 i++;
             }
         }
-        bottomBarRendId = Renderer2DImages::Get()->NewImage();
+        rendid_bottom_bar_ = Renderer2DImages::Get()->NewImage();
         AddGuiButton(
-            "", {0.02f, 0.42f, 0.015f, ConvertWidthToHeight(0.015f)}, [&] { page--; },
+            "", {0.02f, 0.42f, 0.015f, ConvertWidthToHeight(0.015f)}, [&] { page_--; },
             "GuiLeftArrow", "GuiLeftArrow");
         AddGuiButton(
-            "", {0.15f, 0.42f, 0.015f, ConvertWidthToHeight(0.015f)}, [&] { page++; },
+            "", {0.15f, 0.42f, 0.015f, ConvertWidthToHeight(0.015f)}, [&] { page_++; },
             "GuiRightArrow", "GuiRightArrow");
-        idSelectedSlotFrame = Renderer2DImages::Get()->NewImage();
+        rendid_selected_slot_frame_ = Renderer2DImages::Get()->NewImage();
     }
 
     void
@@ -64,14 +64,14 @@ namespace Narradia
             GuiWindowObjectSlot::hovered_object_ = nullptr;
             GuiWindowObjectSlot::hovered_index_ = -1;
         }
-        for (auto y = 0; y < numRows; y++)
+        for (auto y = 0; y < kNumRows; y++)
         /********************************/
         {
-            for (auto x = 0; x < numCols; x++)
+            for (auto x = 0; x < kNumCols; x++)
             /********************************/
             {
-                slots[x][y]->Update(page * numRows * numCols);
-                if (slots[x][y]->GetBounds().Contains(GetMousePositionF()))
+                slots_[x][y]->Update(page_ * kNumRows * kNumCols);
+                if (slots_[x][y]->GetBounds().Contains(GetMousePositionF()))
                 /*********************************************************/
                 {
                     MouseInput::Get()->GetLeftButton().AddFiredAction(
@@ -81,7 +81,7 @@ namespace Narradia
                             if (GuiWindowObjectSlot::hovered_object_)
                             /*************************************/
                             {
-                                selectedObjectIndex = GuiWindowObjectSlot::hovered_index_;
+                                selected_object_index_ = GuiWindowObjectSlot::hovered_index_;
                                 ToolUsing::Get()->ChangeTool(Tools::SetRoof);
                                 ToolUsing::Get()->SelectType(
                                     GuiWindowObjectSlot::hovered_object_->GetObjectType());
@@ -97,27 +97,27 @@ namespace Narradia
     /*/////////////////////////////////*/
     {
         auto i = 0;
-        for (auto y = 0; y < numRows; y++)
+        for (auto y = 0; y < kNumRows; y++)
         /********************************/
         {
-            for (auto x = 0; x < numCols; x++)
+            for (auto x = 0; x < kNumCols; x++)
             /********************************/
             {
-                slots[x][y]->Render(page * numRows * numCols);
-                if (i + page * numRows * numCols == selectedObjectIndex)
+                slots_[x][y]->Render(page_ * kNumRows * kNumCols);
+                if (i + page_ * kNumRows * kNumCols == selected_object_index_)
                 /******************************************************/
                 {
                     Renderer2DImages::Get()->DrawImage(
-                        "GuiSelectedSlotFrame", idSelectedSlotFrame, slots[x][y]->GetBounds());
+                        "GuiSelectedSlotFrame", rendid_selected_slot_frame_, slots_[x][y]->GetBounds());
                 }
                 i++;
             }
         }
-        auto bottomBarHeight = 0.04f;
-        auto bottomBarBounds = RectangleF{
-            GetBounds().x, GetBounds().y + GetBounds().height - bottomBarHeight, GetBounds().width,
-            bottomBarHeight};
+        auto bottom_bar_height = 0.04f;
+        auto bottom_bar_bounds = RectangleF{
+            GetBounds().x, GetBounds().y + GetBounds().height - bottom_bar_height, GetBounds().width,
+            bottom_bar_height};
         Renderer2DImages::Get()->DrawImage(
-            "GuiWindowInvBottomBarBg", bottomBarRendId, bottomBarBounds);
+            "GuiWindowInvBottomBarBg", rendid_bottom_bar_, bottom_bar_bounds);
     }
 }

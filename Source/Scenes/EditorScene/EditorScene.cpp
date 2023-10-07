@@ -36,9 +36,9 @@ namespace Narradia
         if (nullptr == World::Get()->GetMapAreaAtZLevel(0))
         /**********************************************/
         {
-            auto newMapArea = std::make_shared<MapArea>();
-            newMapArea->Create();
-            World::Get()->AddMapAreaAtZLevel(0, newMapArea);
+            auto new_map_area = std::make_shared<MapArea>();
+            new_map_area->Create();
+            World::Get()->AddMapAreaAtZLevel(0, new_map_area);
             World::Get()->ResetColorVariations();
             World::Get()->GenerateRandomColorVariations();
             World::Get()->ApplyDefaultColorVariations();

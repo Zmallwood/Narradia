@@ -7,7 +7,7 @@ namespace Narradia
     /*//////////////////////////*/
     {
         CreateGui();
-        glIdBackgroundImage = Renderer2DImages::Get()->NewImage();
+        rendid_background_image_ = Renderer2DImages::Get()->NewImage();
     }
 
     void
@@ -20,7 +20,8 @@ namespace Narradia
     GameSaveScene::RenderDerived()
     /*//////////////////////////*/
     {
-        auto rectBack = RectangleF{0.0f, 0.0f, 1.0f, 1.0f};
-        Renderer2DImages::Get()->DrawImage("DefaultSceneBackground", glIdBackgroundImage, rectBack);
+        auto rect_back = RectangleF{0.0f, 0.0f, 1.0f, 1.0f};
+        Renderer2DImages::Get()->DrawImage(
+            "DefaultSceneBackground", rendid_background_image_, rect_back);
     }
 }

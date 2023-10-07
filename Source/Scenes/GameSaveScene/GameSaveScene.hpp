@@ -12,6 +12,6 @@ namespace Narradia
         void RenderDerived() override;
 
       private:
-        RenderId glIdBackgroundImage;
+        RenderId rendid_background_image_;
     };
 }

@@ -12,9 +12,9 @@ namespace Narradia
     /*///////////////////*/
     {
       public:
-        RenderId rendIdBackImage;
-        RenderId rendIdLogoImage;
-        RenderId rendIdStartText;
+        RenderId rendid_background_image_;
+        RenderId rendid_logo_image_;
+        RenderId rendid_start_text_;
     };
 
     IntroScene::IntroScene()
@@ -22,9 +22,9 @@ namespace Narradia
     /*//////////////////////////////*/
     {
         CreateGui();
-        p->rendIdBackImage = Renderer2DImages::Get()->NewImage();
-        p->rendIdLogoImage = Renderer2DImages::Get()->NewImage();
-        p->rendIdStartText = TextRenderer::Get()->NewString();
+        p->rendid_background_image_ = Renderer2DImages::Get()->NewImage();
+        p->rendid_logo_image_ = Renderer2DImages::Get()->NewImage();
+        p->rendid_start_text_ = TextRenderer::Get()->NewString();
         Audio::Get()->PlayMusic("ForestSounds");
     }
 
@@ -51,16 +51,16 @@ namespace Narradia
     /*///////////////////////*/
     {
         Log();
-        RectangleF rectBack = {0.0f, 0.0f, 1.0f, 1.0f};
+        RectangleF rect_background_image = {0.0f, 0.0f, 1.0f, 1.0f};
         Log();
-        Renderer2DImages::Get()->DrawImage("DefaultSceneBackground", p->rendIdBackImage, rectBack);
+        Renderer2DImages::Get()->DrawImage("DefaultSceneBackground", p->rendid_background_image_, rect_background_image);
         Log();
-        RectangleF rectLogo = {0.3f, 0.1f, 0.4f, 0.1f};
-        Renderer2DImages::Get()->DrawImage("NarradiaLogo", p->rendIdLogoImage, rectLogo);
+        RectangleF rect_logo = {0.3f, 0.1f, 0.4f, 0.1f};
+        Renderer2DImages::Get()->DrawImage("NarradiaLogo", p->rendid_logo_image_, rect_logo);
         Log();
         if (SDL_GetTicks() % 1000 < 500)
             TextRenderer::Get()->DrawString(
-                p->rendIdStartText, "Press to Start", {0.5f, 0.5f}, Colors::wheat, true);
+                p->rendid_start_text_, "Press to Start", {0.5f, 0.5f}, Colors::wheat, true);
         Log();
     }
 }

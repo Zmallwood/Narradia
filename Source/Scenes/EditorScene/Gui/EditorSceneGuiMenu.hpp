@@ -13,6 +13,6 @@ namespace Narradia
         bool visible = false;
 
       private:
-        RenderId glIdCanvasCover;
+        RenderId rendid_canvas_cover_;
     };
 }

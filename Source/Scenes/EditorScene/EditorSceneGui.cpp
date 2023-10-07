@@ -9,80 +9,80 @@
 namespace Narradia
 {
     EditorSceneGui::EditorSceneGui() {
-        Log();
-        auto rectGButtonSys = RectangleF{0.95f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
-        Log();
-        auto rectGButtonMobBrowser = RectangleF{0.91f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
-        Log();
-        auto rectGButtonRoofBrowser = RectangleF{0.87f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
-        Log();
-        auto rectGButtonObjectsBrowser =
+        auto rect_gui_button_sys = RectangleF{0.95f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
+        auto rect_gui_button_mob_browser =
+            RectangleF{0.91f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
+        auto rect_gui_button_roof_browser =
+            RectangleF{0.87f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
+        auto rect_gui_button_objects_browser =
             RectangleF{0.83f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
+        auto rect_gui_button_ground_browser =
+            RectangleF{0.79f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
+        auto rect_gui_button_raise_ground =
+            RectangleF{0.75f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
+        auto rect_gui_button_lower_ground =
+            RectangleF{0.71f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
+        auto rect_gui_button_expand = RectangleF{0.67f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
+        auto rect_gui_button_contract = RectangleF{0.63f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
         Log();
-        auto rectGButtonGroundBrowser = RectangleF{0.79f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
+        auto fn_sys = [] {
+            EditorSceneGuiMenu::Get()->visible = !EditorSceneGuiMenu::Get()->visible;
+        };
         Log();
-        auto rectGButtonRaiseGround = RectangleF{0.75f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
+        auto fn_mob_browser = [] { MobBrowserGui::Get()->ToggleVisibility(); };
         Log();
-        auto rectGButtonLowerGround = RectangleF{0.71f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
+        auto fn_roof_browser = [] { RoofBrowserGui::Get()->ToggleVisibility(); };
         Log();
-        auto rectGButtonExpand = RectangleF{0.67f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
+        auto fn_objects_browser = [] { ObjectBrowserGui::Get()->ToggleVisibility(); };
         Log();
-        auto rectGButtonContract = RectangleF{0.63f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
+        auto fn_ground_browser = [] { GroundBrowserGui::Get()->ToggleVisibility(); };
         Log();
-        auto fnSys = [] { EditorSceneGuiMenu::Get()->visible = !EditorSceneGuiMenu::Get()->visible; };
-        Log();
-        auto fnMobBrowser = [] { MobBrowserGui::Get()->ToggleVisibility(); };
-        Log();
-        auto fnRoofBrowser = [] { RoofBrowserGui::Get()->ToggleVisibility(); };
-        Log();
-        auto fnObjectsBrowser = [] { ObjectBrowserGui::Get()->ToggleVisibility(); };
-        Log();
-        auto fnGroundBrowser = [] { GroundBrowserGui::Get()->ToggleVisibility(); };
-        Log();
-        auto fnRaiseGround = [] {
+        auto fn_raise_ground = [] {
             ToolUsing::Get()->IncreaseElevationChange();
             ToolUsing::Get()->ChangeTool(Tools::AlterElevation);
         };
         Log();
-        auto fnLowerGround = [] {
+        auto fn_lower_ground = [] {
             ToolUsing::Get()->DecreaseElevationChange();
             ToolUsing::Get()->ChangeTool(Tools::AlterElevation);
         };
         Log();
-        auto fnExpand = [] { ToolUsing::Get()->IncreaseToolRadius(); };
+        auto fn_expand = [] { ToolUsing::Get()->IncreaseToolRadius(); };
         Log();
-        auto fnContract = [] { ToolUsing::Get()->DecreaseToolRadius(); };
+        auto fn_contract = [] { ToolUsing::Get()->DecreaseToolRadius(); };
         Log();
-        AddGuiButton("", rectGButtonSys, fnSys, "GuiButtonSys", "GuiButtonSysHovered");
+        AddGuiButton("", rect_gui_button_sys, fn_sys, "GuiButtonSys", "GuiButtonSysHovered");
         Log();
         AddGuiButton(
-            "", rectGButtonMobBrowser, fnMobBrowser, "GuiButtonMobBrowser",
+            "", rect_gui_button_mob_browser, fn_mob_browser, "GuiButtonMobBrowser",
             "GuiButtonMobBrowserHovered");
         Log();
         AddGuiButton(
-            "", rectGButtonRoofBrowser, fnRoofBrowser, "GuiButtonRoofBrowser",
+            "", rect_gui_button_roof_browser, fn_roof_browser, "GuiButtonRoofBrowser",
             "GuiButtonRoofBrowserHovered");
         Log();
         AddGuiButton(
-            "", rectGButtonObjectsBrowser, fnObjectsBrowser, "GuiButtonObjectsBrowser",
+            "", rect_gui_button_objects_browser, fn_objects_browser, "GuiButtonObjectsBrowser",
             "GuiButtonObjectsBrowserHovered");
         Log();
         AddGuiButton(
-            "", rectGButtonGroundBrowser, fnGroundBrowser, "GuiButtonGroundBrowser",
+            "", rect_gui_button_ground_browser, fn_ground_browser, "GuiButtonGroundBrowser",
             "GuiButtonGroundBrowserHovered");
         Log();
         AddGuiButton(
-            "", rectGButtonRaiseGround, fnRaiseGround, "GuiButtonRaiseGround",
+            "", rect_gui_button_raise_ground, fn_raise_ground, "GuiButtonRaiseGround",
             "GuiButtonRaiseGroundHovered");
         Log();
         AddGuiButton(
-            "", rectGButtonLowerGround, fnLowerGround, "GuiButtonLowerGround",
+            "", rect_gui_button_lower_ground, fn_lower_ground, "GuiButtonLowerGround",
             "GuiButtonLowerGroundHovered");
         Log();
-        AddGuiButton("", rectGButtonExpand, fnExpand, "GuiButtonExpand", "GuiButtonExpandHovered");
+        AddGuiButton(
+            "", rect_gui_button_expand, fn_expand, "GuiButtonExpand", "GuiButtonExpandHovered");
         Log();
         AddGuiButton(
-            "", rectGButtonContract, fnContract, "GuiButtonContract", "GuiButtonContractHovered");
+            "", rect_gui_button_contract, fn_contract, "GuiButtonContract",
+            "GuiButtonContractHovered");
         Log();
         AddGuiComponent(std::shared_ptr<EditorSceneGuiMenu>(EditorSceneGuiMenu::Get()));
         Log();

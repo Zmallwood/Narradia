@@ -26,9 +26,9 @@ namespace Narradia
         void DecreaseElevationChange();
 
       private:
-        Tools currentTool = Tools::None;
-        int selectedType = 0;
-        int toolRadius = 1;
-        int elevationChange = 1;
+        Tools current_tool_ = Tools::None;
+        int selected_type_ = 0;
+        int tool_radius_ = 1;
+        int elevation_change_ = 1;
     };
 }

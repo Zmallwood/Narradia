@@ -9,7 +9,7 @@ namespace Narradia
         : GuiContainer({0.0f, 0.0f}, {1.0f, 1.0f})
     /*//////////////////////////////////////////*/
     {
-        glIdCanvasCover = Renderer2DSolidColors::Get()->NewRectangle();
+        rendid_canvas_cover_ = Renderer2DSolidColors::Get()->NewRectangle();
         AddGuiButton(
             "Resume", {0.45f, 0.3f, 0.1f, 0.03f},
             []
@@ -53,7 +53,7 @@ namespace Narradia
             return;
         auto rect = RectangleF{0.0f, 0.0f, 1.0f, 1.0f};
         auto color = Color{0.3f, 0.6f, 1.0f, 0.5f};
-        Renderer2DSolidColors::Get()->FillRectangle(glIdCanvasCover, rect, color);
+        Renderer2DSolidColors::Get()->FillRectangle(rendid_canvas_cover_, rect, color);
         GuiContainer::Render();
     }
 }

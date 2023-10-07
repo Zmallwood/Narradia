@@ -18,57 +18,57 @@ namespace Narradia
             [&]
             /*****************************/
             {
-                switch (currentTool)
+                switch (current_tool_)
                 /******************/
                 {
                 case Tools::AddObject:
                     /*****************/
                     {
-                        auto hoveredTile = TileHovering::Get()->hoveredTile;
-                        auto newObject = std::make_shared<Object>(selectedType);
-                        if (selectedType != Hash("ObjectWoodWallN") &&
-                            selectedType != Hash("ObjectWoodWallE") &&
-                            selectedType != Hash("ObjectWoodWallS") &&
-                            selectedType != Hash("ObjectWoodWallW"))
+                        auto hovered_tile = TileHovering::Get()->hoveredTile;
+                        auto new_objects = std::make_shared<Object>(selected_type_);
+                        if (selected_type_ != Hash("ObjectWoodWallN") &&
+                            selected_type_ != Hash("ObjectWoodWallE") &&
+                            selected_type_ != Hash("ObjectWoodWallS") &&
+                            selected_type_ != Hash("ObjectWoodWallW"))
                         /********************************************/
                         {
-                            newObject->SetModelScaling(
+                            new_objects->SetModelScaling(
                                 0.7f + static_cast<float>(rand()) / RAND_MAX * 0.6f);
-                            newObject->SetModelRotation(
+                            new_objects->SetModelRotation(
                                 static_cast<float>(rand()) / RAND_MAX * 360.0f);
                         }
                         World::Get()
                             ->GetCurrentMapArea()
-                            ->GetTile(hoveredTile)
-                            ->AddObject(newObject);
+                            ->GetTile(hovered_tile)
+                            ->AddObject(new_objects);
                         break;
                     }
                 case Tools::AddMob:
                     /**************/
                     {
-                        auto hoveredTile = TileHovering::Get()->hoveredTile;
-                        auto newMob =
-                            std::make_shared<Mob>(selectedType, hoveredTile.x, hoveredTile.y);
-                        World::Get()->GetCurrentMapArea()->GetTile(hoveredTile)->SetMob(newMob);
+                        auto hovered_tile = TileHovering::Get()->hoveredTile;
+                        auto new_mob =
+                            std::make_shared<Mob>(selected_type_, hovered_tile.x, hovered_tile.y);
+                        World::Get()->GetCurrentMapArea()->GetTile(hovered_tile)->SetMob(new_mob);
                         World::Get()->GetCurrentMapArea()->AddMobMirror(
-                            World::Get()->GetCurrentMapArea()->GetTile(hoveredTile)->GetMob().get(),
-                            hoveredTile);
+                            World::Get()->GetCurrentMapArea()->GetTile(hovered_tile)->GetMob().get(),
+                            hovered_tile);
                         break;
                     }
                 case Tools::SetGround:
                     /*****************/
                     {
-                        auto hoveredTile = TileHovering::Get()->hoveredTile;
-                        for (auto y = hoveredTile.y - (toolRadius - 1);
-                             y <= hoveredTile.y + (toolRadius - 1); y++)
+                        auto hovered_tile = TileHovering::Get()->hoveredTile;
+                        for (auto y = hovered_tile.y - (tool_radius_ - 1);
+                             y <= hovered_tile.y + (tool_radius_ - 1); y++)
                         /**********************************************/
                         {
-                            for (auto x = hoveredTile.x - (toolRadius - 1);
-                                 x <= hoveredTile.x + (toolRadius - 1); x++)
+                            for (auto x = hovered_tile.x - (tool_radius_ - 1);
+                                 x <= hovered_tile.x + (tool_radius_ - 1); x++)
                             /**********************************************/
                             {
                                 World::Get()->GetCurrentMapArea()->GetTile({x, y})->SetGroundType(
-                                    selectedType);
+                                    selected_type_);
                             }
                         }
                         World::Get()->ApplyDefaultColorVariations();
@@ -78,34 +78,34 @@ namespace Narradia
                 case Tools::SetRoof:
                     /***************/
                     {
-                        auto hoveredTile = TileHovering::Get()->hoveredTile;
+                        auto hovered_tile = TileHovering::Get()->hoveredTile;
                         World::Get()
                             ->GetCurrentMapArea()
-                            ->GetTile(hoveredTile)
-                            ->SetRoofType(selectedType);
+                            ->GetTile(hovered_tile)
+                            ->SetRoofType(selected_type_);
                         break;
                     }
                 case Tools::AlterElevation:
                     /**********************/
                     {
-                        auto hoveredTile = TileHovering::Get()->hoveredTile;
-                        for (auto y = hoveredTile.y - (toolRadius - 1);
-                             y <= hoveredTile.y + (toolRadius - 1); y++)
+                        auto hovered_tile = TileHovering::Get()->hoveredTile;
+                        for (auto y = hovered_tile.y - (tool_radius_ - 1);
+                             y <= hovered_tile.y + (tool_radius_ - 1); y++)
                         /**********************************************/
                         {
-                            for (auto x = hoveredTile.x - (toolRadius - 1);
-                                 x <= hoveredTile.x + (toolRadius - 1); x++)
+                            for (auto x = hovered_tile.x - (tool_radius_ - 1);
+                                 x <= hovered_tile.x + (tool_radius_ - 1); x++)
                             /**********************************************/
                             {
-                                auto dx = x - hoveredTile.x;
-                                auto dy = y - hoveredTile.y;
-                                if (dx * dx + dy * dy <= (toolRadius - 1) * (toolRadius - 1))
+                                auto dx = x - hovered_tile.x;
+                                auto dy = y - hovered_tile.y;
+                                if (dx * dx + dy * dy <= (tool_radius_ - 1) * (tool_radius_ - 1))
                                 /***********************************************************/
                                 {
                                     World::Get()
                                         ->GetCurrentMapArea()
                                         ->GetTile({x, y})
-                                        ->AlterElevation(elevationChange);
+                                        ->AlterElevation(elevation_change_);
                                 }
                             }
                         }
@@ -122,45 +122,45 @@ namespace Narradia
     ToolUsing::IncreaseToolRadius()
     /*///////////////////////////*/
     {
-        toolRadius++;
+        tool_radius_++;
     }
 
     void
     ToolUsing::DecreaseToolRadius()
     /*///////////////////////////*/
     {
-        toolRadius--;
+        tool_radius_--;
     }
 
     void
     ToolUsing::IncreaseElevationChange()
     /*////////////////////////////////*/
     {
-        elevationChange++;
-        if (elevationChange == 0)
-            elevationChange = 1;
+        elevation_change_++;
+        if (elevation_change_ == 0)
+            elevation_change_ = 1;
     }
 
     void
     ToolUsing::DecreaseElevationChange()
     /*////////////////////////////////*/
     {
-        elevationChange--;
-        if (elevationChange == 0)
-            elevationChange = -1;
+        elevation_change_--;
+        if (elevation_change_ == 0)
+            elevation_change_ = -1;
     }
 
     void
     ToolUsing::ChangeTool(Tools newTool)
     /*////////////////////////////////*/
     {
-        currentTool = newTool;
+        current_tool_ = newTool;
     }
 
     void
     ToolUsing::SelectType(int newSelectedObjectType)
     /*////////////////////////////////////////////*/
     {
-        selectedType = newSelectedObjectType;
+        selected_type_ = newSelectedObjectType;
     }
 }
