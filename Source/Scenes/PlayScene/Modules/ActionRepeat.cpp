@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "ActionRepeat.hpp"
 #include "Engine/Core/Input/KeyboardInput.hpp"
 #include "Engine/Core/TextOutBox.hpp"

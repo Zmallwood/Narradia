@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "DestinationMove.hpp"
 #include "Engine/Core/Input/MouseInput.hpp"
 #include "InteractionMenu.hpp"

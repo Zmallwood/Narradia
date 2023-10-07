@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "RendererTiles.hpp"
 #include "CameraGl.hpp"
 #include "Engine/Assets/ImageBank.hpp"

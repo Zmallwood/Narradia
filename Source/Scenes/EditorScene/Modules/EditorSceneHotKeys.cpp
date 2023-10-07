@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "EditorSceneHotkeys.hpp"
 #include "Engine/Core/Input/KeyboardInput.hpp"
 #include "Scenes/EditorScene/Gui/EditorSceneGuiMenu.hpp"

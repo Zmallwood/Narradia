@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "SubDrawerGround.hpp"
 #include "World/MapArea.hpp"
 #include "Engine/Core/Graphics/Rendering/RendererTiles.hpp"

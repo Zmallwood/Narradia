@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "EditorSceneGui.hpp"
 #include "Gui/EditorSceneGuiMenu.hpp"
 #include "Gui/GroundBrowserGui.hpp"

@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "PlayScene.hpp"
 #include "Engine/Core/Audio.hpp"
 #include "Gui/PlaySceneGuiMenu.hpp"

@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "TextOutBox.hpp"
 #include "Graphics/Rendering/Renderer2DImages.hpp"
 #include "Graphics/Rendering/Text/TextRenderer.hpp"

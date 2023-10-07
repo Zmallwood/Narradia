@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "GuiObjectHovering.hpp"
 #include "Engine/Assets/ImageBank.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DSolidColors.hpp"

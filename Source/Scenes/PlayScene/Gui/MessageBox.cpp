@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "MessageBox.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
 #include "Engine/GuiCore/SceneGui.hpp"

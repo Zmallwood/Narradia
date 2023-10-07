@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "CompanionsUpdate.hpp"
 #include "Engine/Core/TextOutBox.hpp"
 #include "World/Actors/Companion.hpp"

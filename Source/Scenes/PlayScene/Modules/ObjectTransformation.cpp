@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "ObjectTransformation.hpp"
 #include "World/MapArea.hpp"
 #include "World/Object.hpp"

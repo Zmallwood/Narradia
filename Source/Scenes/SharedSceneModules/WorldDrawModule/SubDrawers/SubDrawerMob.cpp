@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "SubDrawerMob.hpp"
 #include "Engine/Core/Graphics/Rendering/RendererModels.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"

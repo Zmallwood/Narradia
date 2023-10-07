@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "ModelPartCreator.hpp"
 #include "Engine/Core/ModelStructure/ModelPart.hpp"
 #include "ModelPartKeyframeCreator.hpp"

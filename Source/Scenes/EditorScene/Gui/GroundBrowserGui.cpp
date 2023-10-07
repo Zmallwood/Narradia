@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "GroundBrowserGui.hpp"
 #include "Engine/Assets/ImageBank.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"

@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "Renderer2DImages.hpp"
 #include "Engine/Assets/ImageBank.hpp"
 #include "ShaderProgram.hpp"

@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "Camera.hpp"
 #include "ConfigurationWorldDraw.hpp"
 #include "Engine/Core/Cursor.hpp"

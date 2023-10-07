@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "ActiveGameRound.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DSolidColors.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"

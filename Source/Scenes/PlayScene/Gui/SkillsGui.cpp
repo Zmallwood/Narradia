@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "SkillsGui.hpp"
 #include "Engine/Core/Cursor.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"

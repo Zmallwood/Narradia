@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "GraphicsGl.hpp"
 #include "Engine/Assets/ImageBank.hpp"
 #include "Engine/Assets/ModelBank.hpp"

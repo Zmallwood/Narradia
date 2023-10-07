@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "RendererBillboardImages.hpp"
 #include "CameraGl.hpp"
 #include "Engine/Assets/ImageBank.hpp"

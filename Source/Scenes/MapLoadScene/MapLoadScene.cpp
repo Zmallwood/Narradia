@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "MapLoadScene.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 #include "Engine/Core/SceneManager.hpp"

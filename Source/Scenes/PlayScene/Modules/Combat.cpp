@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "Combat.hpp"
 #include "Engine/Core/TextOutBox.hpp"
 #include "MobTargeting.hpp"

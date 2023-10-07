@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "Cursor.hpp"
 #include "Graphics/Graphics.hpp"
 #include "Graphics/Rendering/Renderer2DImages.hpp"

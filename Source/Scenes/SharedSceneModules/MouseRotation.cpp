@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "MouseRotation.hpp"
 #include "Engine/Core/Cursor.hpp"
 #include "Engine/Core/Input/MouseInput.hpp"

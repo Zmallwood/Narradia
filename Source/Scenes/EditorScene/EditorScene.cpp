@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "EditorScene.hpp"
 #include "EditorSceneGui.hpp"
 #include "Engine/Core/Audio.hpp"

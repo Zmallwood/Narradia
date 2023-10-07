@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "MapFilesIO.hpp"
 #include "Engine/Core/TextOutBox.hpp"
 #include "World/Actors/Mob.hpp"

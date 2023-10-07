@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "ObjectMoving.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 #include "Engine/Core/Input/MouseInput.hpp"

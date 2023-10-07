@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "StartConditions.hpp"
 #include "World/Actors/Player.hpp"
 #include "World/MapArea.hpp"

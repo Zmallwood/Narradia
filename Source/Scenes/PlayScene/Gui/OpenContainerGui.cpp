@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "OpenContainerGui.hpp"
 #include "Engine/GuiCore/GuiWindowObjectSlot.hpp"
 #include "World/Object.hpp"

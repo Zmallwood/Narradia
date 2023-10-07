@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "MobTargeting.hpp"
 #include "Engine/Core/Input/MouseInput.hpp"
 #include "Scenes/SharedSceneModules/MouseRotation.hpp"

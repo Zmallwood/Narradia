@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "KeyboardMove.hpp"
 #include "Engine/Core/Input/KeyboardInput.hpp"
 #include "Scenes/PlayScene/Modules/DestinationMove.hpp"

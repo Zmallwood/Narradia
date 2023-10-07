@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "PlaySceneHotkeys.hpp"
 #include "Engine/Core/Input/KeyboardInput.hpp"
 #include "Scenes/PlayScene/Gui/BuildSelectorGui.hpp"

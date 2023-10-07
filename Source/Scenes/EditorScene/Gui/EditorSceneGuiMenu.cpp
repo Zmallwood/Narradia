@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "EditorSceneGuiMenu.hpp"
 #include "Engine/Core/GameEngine.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DSolidColors.hpp"

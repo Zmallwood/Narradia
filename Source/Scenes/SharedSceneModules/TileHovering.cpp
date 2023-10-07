@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "TileHovering.hpp"
 #include "Engine/Core/Graphics/Rendering/CameraGl.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"

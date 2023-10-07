@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "WorldDraw.hpp"
 #include "Camera.hpp"
 #include "ConfigurationWorldDraw.hpp"

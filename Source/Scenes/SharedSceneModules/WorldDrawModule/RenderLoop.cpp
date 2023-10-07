@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "RenderLoop.hpp"
 #include "Camera.hpp"
 #include "ConfigurationWorldDraw.hpp"

@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "SubDrawerCompanion.hpp"
 #include "Scenes/SharedSceneModules/WorldDrawModule/ConfigurationWorldDraw.hpp"
 #include "Scenes/SharedSceneModules/WorldDrawModule/RenderLoop.hpp"

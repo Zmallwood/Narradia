@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "MobMovement.hpp"
 #include "World/Actors/Mob.hpp"
 #include "World/Actors/Player.hpp"

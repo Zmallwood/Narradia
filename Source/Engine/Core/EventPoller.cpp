@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "EventPoller.hpp"
 #include "GameEngine.hpp"
 #include "Input/KeyboardInput.hpp"

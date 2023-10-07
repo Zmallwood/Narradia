@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "ObjectHandling.hpp"
 #include "Modules/ObjectMoving.hpp"
 #include "World/Actors/Player.hpp"

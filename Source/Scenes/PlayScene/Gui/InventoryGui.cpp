@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "InventoryGui.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 #include "Engine/GuiCore/GuiWindowObjectSlot.hpp"

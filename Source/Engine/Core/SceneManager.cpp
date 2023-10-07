@@ -1,11 +1,10 @@
-//////////////////////////////////////////////////////////////////////
 #include "SceneManager.hpp"
 #include "Input/MouseInput.hpp"
 #include "Scenes/EditorScene/EditorScene.hpp"
 #include "Scenes/GameSaveScene/GameSaveScene.hpp"
 #include "Scenes/IntroScene/IntroScene.hpp"
 #include "Scenes/MainMenuScene/MainMenuScene.hpp"
-#include "Scenes/MapGenerationScene/MapGenerateScene.hpp"
+#include "Scenes/MapGenerationScene/MapGenerationScene.hpp"
 #include "Scenes/MapLoadScene/MapLoadScene.hpp"
 #include "Scenes/MapSaveScene/MapSaveScene.hpp"
 #include "Scenes/MapTypeSelectionScene/MapTypeSelectionScene.hpp"
@@ -41,7 +40,7 @@ namespace Narradia
         Log();
         p->scenes[SceneNames::UserMapSelection] = std::make_shared<UserMapSelectionScene>();
         Log();
-        p->scenes[SceneNames::MapGeneration] = std::make_shared<MapGenerateScene>();
+        p->scenes[SceneNames::MapGeneration] = std::make_shared<MapGenerationScene>();
         Log();
         p->scenes[SceneNames::GameSave] = std::make_shared<GameSaveScene>();
         Log();

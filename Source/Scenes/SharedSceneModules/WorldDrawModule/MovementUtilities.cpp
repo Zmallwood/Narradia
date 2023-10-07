@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "MovementUtilities.hpp"
 #include "Camera.hpp"
 #include "World/Actors/Companion.hpp"

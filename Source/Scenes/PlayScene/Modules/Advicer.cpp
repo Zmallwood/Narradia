@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "Advicer.hpp"
 #include "Engine/GuiCore/SceneGui.hpp"
 #include "Scenes/PlayScene/Gui/MessageBox.hpp"

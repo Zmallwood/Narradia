@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "IntroScene.hpp"
 #include "Engine/Core/Audio.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"

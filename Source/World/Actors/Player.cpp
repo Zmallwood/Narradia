@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "Player.hpp"
 #include "Engine/Core/Audio.hpp"
 #include "Engine/Core/SceneManager.hpp"

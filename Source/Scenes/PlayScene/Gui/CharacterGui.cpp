@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "CharacterGui.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
 #include "World/Actors/Player.hpp"

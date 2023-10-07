@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "PlaySceneGui.hpp"
 #include "Gui/BuildSelectorGui.hpp"
 #include "Gui/CharacterGui.hpp"

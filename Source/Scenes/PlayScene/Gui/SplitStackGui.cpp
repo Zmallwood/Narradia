@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "SplitStackGui.hpp"
 #include "Engine/GuiCore/GuiTextBox.hpp"
 #include "Engine/GuiCore/SceneGui.hpp"

@@ -1,15 +1,14 @@
-//////////////////////////////////////////////////////////////////////
 #pragma once
 #include "Engine/Core/SceneBase.hpp"
 #include "MapGenerator.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class MapGenerateScene : public SceneBase
+    class MapGenerationScene : public SceneBase
     /*///////////////////////////////////*/
     {
       public:
-        MapGenerateScene();
+        MapGenerationScene();
         void Finalize() override;
 
       private:

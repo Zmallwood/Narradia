@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "ModelCreator.hpp"
 #include "Engine/Core/ModelStructure/Model.hpp"
 #include "ModelPartCreator.hpp"

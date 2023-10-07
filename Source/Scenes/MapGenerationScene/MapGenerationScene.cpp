@@ -1,5 +1,4 @@
-//////////////////////////////////////////////////////////////////////
-#include "MapGenerateScene.hpp"
+#include "MapGenerationScene.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
 #include "Engine/Core/SceneManager.hpp"
@@ -8,7 +7,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    MapGenerateScene::MapGenerateScene()
+    MapGenerationScene::MapGenerationScene()
     /*////////////////////////////////*/
     {
         CreateGui();
@@ -17,14 +16,14 @@ namespace Narradia
     }
 
     void
-    MapGenerateScene::Enter()
+    MapGenerationScene::Enter()
     /*/////////////////////*/
     {
         currGenerationStep = GenerateSteps::CreateBlank;
     }
 
     void
-    MapGenerateScene::UpdateDerived()
+    MapGenerationScene::UpdateDerived()
     /*/////////////////////////////*/
     {
         Log();
@@ -36,7 +35,7 @@ namespace Narradia
     }
 
     void
-    MapGenerateScene::RenderDerived()
+    MapGenerationScene::RenderDerived()
     /*/////////////////////////////*/
     {
         Log();
@@ -47,7 +46,7 @@ namespace Narradia
     }
 
     void
-    MapGenerateScene::Finalize()
+    MapGenerationScene::Finalize()
     /*////////////////////////*/
     {
         Log();

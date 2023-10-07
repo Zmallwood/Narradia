@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "SubDrawerPlayer.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
 #include "Engine/Core/Graphics/Rendering/RendererModels.hpp"

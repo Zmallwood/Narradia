@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "InteractionMenu.hpp"
 #include "ActionRepeat.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DSolidColors.hpp"

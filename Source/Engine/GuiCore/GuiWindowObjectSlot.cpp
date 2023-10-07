@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "GuiWindowObjectSlot.hpp"
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"

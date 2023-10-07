@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////
 #include "Companion.hpp"
 #include "Engine/Core/TextOutBox.hpp"
 #include "World/Object.hpp"
