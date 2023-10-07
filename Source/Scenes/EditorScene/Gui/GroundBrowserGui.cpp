@@ -54,15 +54,15 @@ namespace Narradia
         if (GetBounds().Contains(GetMousePositionF()))
         /********************************************/
         {
-            GuiWindowObjectSlot::hoveredObject = nullptr;
-            GuiWindowObjectSlot::hoveredIndex = -1;
-            GuiWindowObjectSlot::activeWindow = this;
+            GuiWindowObjectSlot::hovered_object_ = nullptr;
+            GuiWindowObjectSlot::hovered_index_ = -1;
+            GuiWindowObjectSlot::active_window_ = this;
         }
-        if (GuiWindowObjectSlot::activeWindow == this)
+        if (GuiWindowObjectSlot::active_window_ == this)
         /********************************************/
         {
-            GuiWindowObjectSlot::hoveredObject = nullptr;
-            GuiWindowObjectSlot::hoveredIndex = -1;
+            GuiWindowObjectSlot::hovered_object_ = nullptr;
+            GuiWindowObjectSlot::hovered_index_ = -1;
         }
         for (auto y = 0; y < numRows; y++)
         /********************************/
@@ -78,13 +78,13 @@ namespace Narradia
                         "SelectObject", [&]
                         /****************************************************/
                         {
-                            if (GuiWindowObjectSlot::hoveredObject)
+                            if (GuiWindowObjectSlot::hovered_object_)
                             /*************************************/
                             {
-                                selectedObjectIndex = GuiWindowObjectSlot::hoveredIndex;
+                                selectedObjectIndex = GuiWindowObjectSlot::hovered_index_;
                                 ToolUsing::Get()->ChangeTool(Tools::SetGround);
                                 ToolUsing::Get()->SelectType(
-                                    GuiWindowObjectSlot::hoveredObject->GetObjectType());
+                                    GuiWindowObjectSlot::hovered_object_->GetObjectType());
                             }
                         });
                 }

@@ -16,55 +16,55 @@ namespace Narradia
       public:
         RectangleF GetBounds() const;
         static constexpr float kWidth = 0.01f;
-        GuiWindow *parentWindow;
-        bool hovered = false;
-        RenderId rendIdCloseButtonImg;
+        GuiWindow *parent_window_;
+        bool hovered_ = false;
+        RenderId rendid_close_button_image_;
     };
 
     GuiWindowCloseButton::GuiWindowCloseButton(GuiWindow *parentWindow_)
         : p(std::make_shared<Pimpl>())
     /*////////////////////////////////////////////////////////////////*/
     {
-        p->rendIdCloseButtonImg = Renderer2DImages::Get()->NewImage();
-        p->parentWindow = parentWindow_;
+        p->rendid_close_button_image_ = Renderer2DImages::Get()->NewImage();
+        p->parent_window_ = parentWindow_;
     }
 
     void
     GuiWindowCloseButton::Update()
     /*//////////////////////////*/
     {
-        p->hovered = false;
+        p->hovered_ = false;
         if (p->GetBounds().Contains(GetMousePositionF()))
         /***********************************************/
         {
             Cursor::Get()->SetCursorType(CursorTypes::Hovering);
-            p->hovered = true;
+            p->hovered_ = true;
             MouseInput::Get()->GetLeftButton().AddFiredAction(
-                "GuiWindowClose" + std::string(p->parentWindow->GetTitle()) +
+                "GuiWindowClose" + std::string(p->parent_window_->GetTitle()) +
                     std::to_string(SDL_GetTicks()),
                 [&]
                 /**********************/
                 {
-                    if (p->parentWindow->DestroyOnClose())
+                    if (p->parent_window_->DestroyOnClose())
                     /************************************/
                     {
                         if (SceneManager::Get()->GetCurrentScene() == SceneNames::Play)
                         /***************************************************/
                         {
-                            auto sceneGui = PlayScene::Get()->GetSceneGui();
-                            sceneGui->RemoveGuiComponent(p->parentWindow);
+                            auto scene_gui = PlayScene::Get()->GetSceneGui();
+                            scene_gui->RemoveGuiComponent(p->parent_window_);
                         }
                         else if (SceneManager::Get()->GetCurrentScene() == SceneNames::Editor)
                         /************************************************************/
                         {
-                            auto sceneGui = EditorScene::Get()->GetSceneGui();
-                            sceneGui->RemoveGuiComponent(p->parentWindow);
+                            auto scene_gui = EditorScene::Get()->GetSceneGui();
+                            scene_gui->RemoveGuiComponent(p->parent_window_);
                         }
                     }
                     else
                     /**/
                     {
-                        p->parentWindow->Hide();
+                        p->parent_window_->Hide();
                     }
                 },
                 SDL_GetTicks() + 100);
@@ -75,12 +75,12 @@ namespace Narradia
     GuiWindowCloseButton::Render() const
     /*////////////////////////////////*/
     {
-        if (p->hovered)
+        if (p->hovered_)
             Renderer2DImages::Get()->DrawImage(
-                "GuiWindowCloseButtonHovered", p->rendIdCloseButtonImg, p->GetBounds());
+                "GuiWindowCloseButtonHovered", p->rendid_close_button_image_, p->GetBounds());
         else
             Renderer2DImages::Get()->DrawImage(
-                "GuiWindowCloseButton", p->rendIdCloseButtonImg, p->GetBounds());
+                "GuiWindowCloseButton", p->rendid_close_button_image_, p->GetBounds());
     }
 
     RectangleF
@@ -90,7 +90,7 @@ namespace Narradia
         auto width = Pimpl::kWidth;
         auto height = ConvertWidthToHeight(width);
         return RectangleF{
-            parentWindow->GetBounds().x + parentWindow->GetBounds().width - width - 0.005f,
-            parentWindow->GetBounds().y + 0.03f / 2 - height / 2, width, height};
+            parent_window_->GetBounds().x + parent_window_->GetBounds().width - width - 0.005f,
+            parent_window_->GetBounds().y + 0.03f / 2 - height / 2, width, height};
     }
 }

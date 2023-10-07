@@ -300,9 +300,9 @@ namespace Narradia
         auto map_area = World::Get()->GetMapAreaAtZLevel(player_world_area_position.z);
         auto tile = map_area->GetTile(block_tile_hovering->hoveredTile);
         auto gui_window_inventory = InventoryGui::Get();
-        if (tile == nullptr && GuiWindowObjectSlot::hoveredObject == nullptr)
+        if (tile == nullptr && GuiWindowObjectSlot::hovered_object_ == nullptr)
             return;
-        if (tile->GetMob() == nullptr || GuiWindowObjectSlot::hoveredObject)
+        if (tile->GetMob() == nullptr || GuiWindowObjectSlot::hovered_object_)
         /******************************************************************/
         {
             p->shown = true;
@@ -371,10 +371,10 @@ namespace Narradia
                 if (object->GetQuantity() > 1)
                     AddEntryToMenu("SplitStack", object);
             };
-            if (GuiWindowObjectSlot::hoveredObject)
+            if (GuiWindowObjectSlot::hovered_object_)
             /*************************************/
             {
-                fn_create_entries_for_object(GuiWindowObjectSlot::hoveredObject);
+                fn_create_entries_for_object(GuiWindowObjectSlot::hovered_object_);
                 return;
             }
             else

@@ -19,7 +19,7 @@ namespace Narradia
     GuiObjectHovering::Render()
     /*///////////////////////*/
     {
-        if (GuiWindowObjectSlot::hoveredObject)
+        if (GuiWindowObjectSlot::hovered_object_)
         /*************************************/
         {
             auto boxPos = GetMousePositionF().Translate(0.003f, 0.01f);
@@ -27,17 +27,17 @@ namespace Narradia
             Renderer2DSolidColors::Get()->FillRectangle(idLabelBox, rect, Colors::alphaBlack);
             std::string labelText;
             if (ObjectBehaviourList::Get()->HasBehaviourData(
-                    GuiWindowObjectSlot::hoveredObject->GetObjectType()))
+                    GuiWindowObjectSlot::hovered_object_->GetObjectType()))
             /***********************************************************/
             {
                 labelText = ObjectBehaviourList::Get()->GetLabel(
-                    GuiWindowObjectSlot::hoveredObject->GetObjectType());
+                    GuiWindowObjectSlot::hovered_object_->GetObjectType());
             }
             else
             /**/
             {
                 auto images = ImageBank::Get()->GetImages();
-                auto objectType = GuiWindowObjectSlot::hoveredObject->GetObjectType();
+                auto objectType = GuiWindowObjectSlot::hovered_object_->GetObjectType();
                 if (images.count(objectType))
                 /***************************/
                 {

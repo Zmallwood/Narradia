@@ -37,13 +37,13 @@ namespace Narradia
     ObjectMoving::PickupObjectFromGuiIfIsTheCase()
     /*//////////////////////////////////////////*/
     {
-        if (GuiWindowObjectSlot::hoveredObject)
+        if (GuiWindowObjectSlot::hovered_object_)
         /*************************************/
         {
             MouseInput::Get()->GetLeftButton().AddFiredAction(
                 "ObjectMoveContainerObject", [=, this]()
                 /**************************************/
-                { objectInAir = MoveObject(GuiWindowObjectSlot::hoveredObject); });
+                { objectInAir = MoveObject(GuiWindowObjectSlot::hovered_object_); });
         }
     }
 
@@ -95,12 +95,12 @@ namespace Narradia
                 if (objectInAir)
                 /**************/
                 {
-                    if (GuiWindowObjectSlot::hoveredIndex != -1 &&
-                        GuiWindowObjectSlot::activeWindow == InventoryGui::Get().get())
+                    if (GuiWindowObjectSlot::hovered_index_ != -1 &&
+                        GuiWindowObjectSlot::active_window_ == InventoryGui::Get().get())
                     /************************************************************************/
                     {
                         Player::Get()->data.inventory.objects.insert(
-                            {GuiWindowObjectSlot::hoveredIndex, MoveObject(objectInAir.get())});
+                            {GuiWindowObjectSlot::hovered_index_, MoveObject(objectInAir.get())});
                     }
                     else
                     /**/
@@ -112,12 +112,12 @@ namespace Narradia
                             if (casted)
                             /*********/
                             {
-                                if (GuiWindowObjectSlot::hoveredIndex != -1 &&
-                                    GuiWindowObjectSlot::activeWindow == entry.get())
+                                if (GuiWindowObjectSlot::hovered_index_ != -1 &&
+                                    GuiWindowObjectSlot::active_window_ == entry.get())
                                 /***************************************************/
                                 {
                                     casted->object->AddContainedObject(
-                                        GuiWindowObjectSlot::hoveredIndex,
+                                        GuiWindowObjectSlot::hovered_index_,
                                         MoveObject(objectInAir.get()));
                                     return;
                                 }

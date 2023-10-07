@@ -11,14 +11,14 @@ namespace Narradia
       public:
         static constexpr float kTitleBarHeight = 0.03f;
         static constexpr float kMargin = 0.005f;
-        std::string_view title = "Unnamed window";
-        bool visible = false;
-        bool destroyOnClose = false;
-        GuiWindowCloseButton closeButton;
-        RenderId backRendId;
-        RenderId titleBarRendId;
-        RenderId titleTextId;
-        std::string_view backgroundImageName;
+        std::string_view title_ = "Unnamed window";
+        bool visible_ = false;
+        bool destroy_on_close_ = false;
+        GuiWindowCloseButton gui_window_close_button_;
+        RenderId rendid_background_;
+        RenderId rendid_title_bar_;
+        RenderId rendid_title_text_;
+        std::string_view background_image_name_;
     };
 
     GuiWindow::GuiWindow(
@@ -30,47 +30,47 @@ namespace Narradia
               bounds_.GetSize())
     /*/////////////////////////////////////////////////////////////////////////////////*/
     {
-        std::tie(p->backRendId, p->titleBarRendId) = Renderer2DImages::Get()->NewImages<2>();
-        p->titleTextId = TextRenderer::Get()->NewString();
-        p->closeButton = GuiWindowCloseButton(this);
-        p->backgroundImageName = backgroundImageName_;
-        p->title = title_;
-        p->destroyOnClose = destroyOnClose_;
+        std::tie(p->rendid_background_, p->rendid_title_bar_) = Renderer2DImages::Get()->NewImages<2>();
+        p->rendid_title_text_ = TextRenderer::Get()->NewString();
+        p->gui_window_close_button_ = GuiWindowCloseButton(this);
+        p->background_image_name_ = backgroundImageName_;
+        p->title_ = title_;
+        p->destroy_on_close_ = destroyOnClose_;
     }
 
     void
     GuiWindow::ToggleVisibility()
     /*/////////////////////////*/
     {
-        p->visible = !p->visible;
+        p->visible_ = !p->visible_;
     }
 
     std::string_view
     GuiWindow::GetTitle()
     /*/////////////////*/
     {
-        return p->title;
+        return p->title_;
     }
 
     bool
     GuiWindow::DestroyOnClose()
     /*///////////////////////*/
     {
-        return p->destroyOnClose;
+        return p->destroy_on_close_;
     }
 
     void
     GuiWindow::Show()
     /*/////////////*/
     {
-        p->visible = true;
+        p->visible_ = true;
     }
 
     void
     GuiWindow::Hide()
     /*/////////////*/
     {
-        p->visible = false;
+        p->visible_ = false;
     }
 
     float
@@ -91,9 +91,9 @@ namespace Narradia
     GuiWindow::Update()
     /*///////////////*/
     {
-        if (!p->visible)
+        if (!p->visible_)
             return;
-        p->closeButton.Update();
+        p->gui_window_close_button_.Update();
         UpdateDerived();
         GuiMovableContainer::Update();
     }
@@ -103,17 +103,17 @@ namespace Narradia
     /*/////////////////////*/
     {
         Log();
-        if (!p->visible)
+        if (!p->visible_)
             return;
         Log();
-        Renderer2DImages::Get()->DrawImage(p->backgroundImageName, p->backRendId, GetBounds());
+        Renderer2DImages::Get()->DrawImage(p->background_image_name_, p->rendid_background_, GetBounds());
         Log();
         Renderer2DImages::Get()->DrawImage(
-            "GuiWindowTitleBar", p->titleBarRendId, GetAbsoluteTitleBarBounds());
-        p->closeButton.Render();
+            "GuiWindowTitleBar", p->rendid_title_bar_, GetAbsoluteTitleBarBounds());
+        p->gui_window_close_button_.Render();
         Log();
         TextRenderer::Get()->DrawString(
-            p->titleTextId, p->title, GetBounds().GetPosition().Translate(0.005f, 0.01f));
+            p->rendid_title_text_, p->title_, GetBounds().GetPosition().Translate(0.005f, 0.01f));
         Log();
         RenderDerived();
         GuiMovableContainer::Render();

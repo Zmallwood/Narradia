@@ -9,35 +9,35 @@ namespace Narradia
     GuiWindowObjectSlot::GuiWindowObjectSlot(
         GuiWindow *parentWindow_, int x_, int y_, int i_, float slotWidth_,
         const std::map<int, std::shared_ptr<Object>> &objectsList_)
-        : parentWindow(parentWindow_),
-          x(x_),
-          y(y_),
-          i(i_),
-          slotWidth(slotWidth_),
-          objectsList(objectsList_)
+        : parent_window_(parentWindow_),
+          x_(x_),
+          y_(y_),
+          i_(i_),
+          slot_width_(slotWidth_),
+          kObjectsList(objectsList_)
     /*///////////////////////////////////////////////////////////////////*/
     {
-        rendIdFrame = Renderer2DImages::Get()->NewImage();
-        rendIdObject = Renderer2DImages::Get()->NewImage();
-        rendIdQtyText = TextRenderer::Get()->NewString();
-        rendIdTransformProgressBack = Renderer2DImages::Get()->NewImage();
-        rendIdTransformProgressFilled = Renderer2DImages::Get()->NewImage();
+        rendid_frame_ = Renderer2DImages::Get()->NewImage();
+        rendid_object_ = Renderer2DImages::Get()->NewImage();
+        rendid_quantity_text_ = TextRenderer::Get()->NewString();
+        rendid_transform_progress_back_ = Renderer2DImages::Get()->NewImage();
+        rendid_transform_progress_filled_ = Renderer2DImages::Get()->NewImage();
     }
 
     void
     GuiWindowObjectSlot::Update(int offset) const
     /*/////////////////////////////////////////*/
     {
-        auto mousePosF = GetMousePositionF();
-        if (GetBounds().Contains(mousePosF))
+        auto mouse_position_f = GetMousePositionF();
+        if (GetBounds().Contains(mouse_position_f))
         /**********************************/
         {
-            hoveredIndex = i + offset;
-            if (objectsList.count(i + offset) > 0)
+            hovered_index_ = i_ + offset;
+            if (kObjectsList.count(i_ + offset) > 0)
             /************************************/
             {
-                auto object = objectsList.at(i + offset);
-                hoveredObject = object.get();
+                auto object = kObjectsList.at(i_ + offset);
+                hovered_object_ = object.get();
                 return;
             }
         }
@@ -48,48 +48,48 @@ namespace Narradia
     /*/////////////////////////////////////////*/
     {
         Log();
-        auto slotHeight = GetSlotHeight();
+        auto slot_height = GetSlotHeight();
         Log();
-        Renderer2DImages::Get()->DrawImage(frameImgNameHash, rendIdFrame, GetBounds());
+        Renderer2DImages::Get()->DrawImage(kFrameImageNameHash, rendid_frame_, GetBounds());
         Log();
         Object *object = nullptr;
         Log();
-        if (objectsList.count(i + offset) > 0)
+        if (kObjectsList.count(i_ + offset) > 0)
         /************************************/
         {
             Log();
-            object = objectsList.at(i + offset).get();
+            object = kObjectsList.at(i_ + offset).get();
         }
         Log();
         if (object)
         /*********/
         {
             Log();
-            auto imageNameHash = object->GetObjectType();
-            Renderer2DImages::Get()->DrawImage(imageNameHash, rendIdObject, GetBounds());
+            auto image_name_hash = object->GetObjectType();
+            Renderer2DImages::Get()->DrawImage(image_name_hash, rendid_object_, GetBounds());
             if (object->GetQuantity() > 1)
             /****************************/
             {
                 Log();
-                auto qtyText = "x" + std::to_string(object->GetQuantity());
+                auto quantity_text = "x" + std::to_string(object->GetQuantity());
                 TextRenderer::Get()->DrawString(
-                    rendIdQtyText, qtyText,
-                    GetBounds().GetPosition().Translate(slotWidth * 0.65f, slotHeight * 0.7f));
+                    rendid_quantity_text_, quantity_text,
+                    GetBounds().GetPosition().Translate(slot_width_ * 0.65f, slot_height * 0.7f));
             }
             if (object->GetTransformationProgress() > 0.0f)
             /*********************************************/
             {
                 Log();
-                auto pos =
-                    GetBounds().GetPosition().Translate(slotWidth * 0.01f, slotHeight * 0.1f);
-                auto height = slotHeight * 0.2f;
-                auto width = slotWidth * 0.8f;
-                auto widthFilled = width * object->GetTransformationProgress();
-                auto rect = RectangleF{pos.x, pos.y, width, height};
-                auto rectFilled = RectangleF{pos.x, pos.y, widthFilled, height};
-                Renderer2DImages::Get()->DrawImage("Black", rendIdTransformProgressBack, rect);
+                auto position =
+                    GetBounds().GetPosition().Translate(slot_width_ * 0.01f, slot_height * 0.1f);
+                auto height = slot_height * 0.2f;
+                auto width = slot_width_ * 0.8f;
+                auto width_filled = width * object->GetTransformationProgress();
+                auto rect = RectangleF{position.x, position.y, width, height};
+                auto rect_filled = RectangleF{position.x, position.y, width_filled, height};
+                Renderer2DImages::Get()->DrawImage("Black", rendid_transform_progress_back_, rect);
                 Renderer2DImages::Get()->DrawImage(
-                    "Yellow", rendIdTransformProgressFilled, rectFilled);
+                    "Yellow", rendid_transform_progress_filled_, rect_filled);
             }
         }
     }
@@ -98,21 +98,21 @@ namespace Narradia
     GuiWindowObjectSlot::GetBounds() const
     /*//////////////////////////////////*/
     {
-        auto bounds = parentWindow->GetBounds();
-        auto margin = parentWindow->GetMargin();
-        auto slotHeight = GetSlotHeight();
-        auto titleBarHeight = parentWindow->GetTitleBarHeight();
-        float xPos = bounds.x + margin + x * (slotWidth + margin);
-        float yPos = bounds.y + titleBarHeight + margin + y * (slotHeight + margin);
-        float w = slotWidth;
-        float h = slotHeight;
-        return {xPos, yPos, w, h};
+        auto bounds = parent_window_->GetBounds();
+        auto margin = parent_window_->GetMargin();
+        auto slot_height = GetSlotHeight();
+        auto title_bar_height = parent_window_->GetTitleBarHeight();
+        float x_position = bounds.x + margin + x_ * (slot_width_ + margin);
+        float y_position = bounds.y + title_bar_height + margin + y_ * (slot_height + margin);
+        float w = slot_width_;
+        float h = slot_height;
+        return {x_position, y_position, w, h};
     }
 
     float
     GuiWindowObjectSlot::GetSlotHeight() const
     /*//////////////////////////////////////*/
     {
-        return ConvertWidthToHeight(slotWidth);
+        return ConvertWidthToHeight(slot_width_);
     }
 }
