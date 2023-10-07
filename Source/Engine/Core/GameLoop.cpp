@@ -20,7 +20,7 @@ namespace Narradia
         Log();
         SceneManager::Get()->InitializeScenes();
         Log();
-        EventPoller eventPoller;
+        EventPoller event_poller;
         while (GameEngine::Get()->IsRunning())
         /*********************************/
         {
@@ -32,7 +32,7 @@ namespace Narradia
             Log();
             SceneManager::Get()->UpdateCurrentScene();
             Log();
-            eventPoller.PollEvents();
+            event_poller.PollEvents();
             Log();
             MouseInput::Get()->PerformMouseActions();
             Log();

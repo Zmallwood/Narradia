@@ -17,8 +17,8 @@ namespace Narradia
     /*////////////////////*/
     {
       public:
-        std::map<SceneNames, std::shared_ptr<SceneBase>> scenes;
-        SceneNames currentView = SceneNames::None;
+        std::map<SceneNames, std::shared_ptr<SceneBase>> scenes_;
+        SceneNames current_scene_ = SceneNames::None;
     };
 
     SceneManager::SceneManager()
@@ -32,26 +32,26 @@ namespace Narradia
     /*///////////////////////////////*/
     {
         Log();
-        p->scenes[SceneNames::Intro] = std::make_shared<IntroScene>();
+        p->scenes_[SceneNames::Intro] = std::make_shared<IntroScene>();
         Log();
-        p->scenes[SceneNames::MainMenu] = std::make_shared<MainMenuScene>();
+        p->scenes_[SceneNames::MainMenu] = std::make_shared<MainMenuScene>();
         Log();
-        p->scenes[SceneNames::MapTypeSelection] = std::make_shared<MapTypeSelectionScene>();
+        p->scenes_[SceneNames::MapTypeSelection] = std::make_shared<MapTypeSelectionScene>();
         Log();
-        p->scenes[SceneNames::UserMapSelection] = std::make_shared<UserMapSelectionScene>();
+        p->scenes_[SceneNames::UserMapSelection] = std::make_shared<UserMapSelectionScene>();
         Log();
-        p->scenes[SceneNames::MapGeneration] = std::make_shared<MapGenerationScene>();
+        p->scenes_[SceneNames::MapGeneration] = std::make_shared<MapGenerationScene>();
         Log();
-        p->scenes[SceneNames::GameSave] = std::make_shared<GameSaveScene>();
+        p->scenes_[SceneNames::GameSave] = std::make_shared<GameSaveScene>();
         Log();
-        p->scenes[SceneNames::Play] = PlayScene::Get();
+        p->scenes_[SceneNames::Play] = PlayScene::Get();
         Log();
-        p->scenes[SceneNames::Editor] = std::make_shared<EditorScene>();
+        p->scenes_[SceneNames::Editor] = std::make_shared<EditorScene>();
         Log();
-        p->scenes[SceneNames::MapSave] = std::make_shared<MapSaveScene>();
+        p->scenes_[SceneNames::MapSave] = std::make_shared<MapSaveScene>();
         Log();
-        p->scenes[SceneNames::MapLoad] = std::make_shared<MapLoadScene>();
-        p->currentView = SceneNames::Intro;
+        p->scenes_[SceneNames::MapLoad] = std::make_shared<MapLoadScene>();
+        p->current_scene_ = SceneNames::Intro;
     }
 
     void
@@ -59,11 +59,11 @@ namespace Narradia
     /*//////////////////////////////*/
     {
         Log();
-        if (p->scenes.count(p->currentView))
+        if (p->scenes_.count(p->current_scene_))
         /**********************************/
         {
             Log();
-            p->scenes.at(p->currentView)->Update();
+            p->scenes_.at(p->current_scene_)->Update();
         };
     }
 
@@ -72,11 +72,11 @@ namespace Narradia
     /*////////////////////////////////////*/
     {
         Log();
-        if (p->scenes.count(p->currentView))
+        if (p->scenes_.count(p->current_scene_))
         /**********************************/
         {
             Log();
-            p->scenes.at(p->currentView)->Render();
+            p->scenes_.at(p->current_scene_)->Render();
         };
         Log();
     }
@@ -85,11 +85,11 @@ namespace Narradia
     SceneManager::FinalizeCurrentScene()
     /*////////////////////////////////*/
     {
-        if (p->scenes.count(p->currentView))
+        if (p->scenes_.count(p->current_scene_))
         /**********************************/
         {
             Log();
-            p->scenes.at(p->currentView)->Finalize();
+            p->scenes_.at(p->current_scene_)->Finalize();
         };
     }
 
@@ -97,16 +97,16 @@ namespace Narradia
     SceneManager::ChangeScene(SceneNames newScene)
     /*//////////////////////////////////////////*/
     {
-        p->currentView = newScene;
+        p->current_scene_ = newScene;
         MouseInput::Get()->Reset();
         MouseInput::Get()->ResetMouseActions();
-        p->scenes.at(p->currentView)->Enter();
+        p->scenes_.at(p->current_scene_)->Enter();
     }
 
     SceneNames
     SceneManager::GetCurrentScene()
     /*///////////////////////////*/
     {
-        return p->currentView;
+        return p->current_scene_;
     }
 }

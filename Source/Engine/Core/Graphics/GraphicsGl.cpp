@@ -14,9 +14,9 @@ namespace Narradia
     {
       public:
         static constexpr bool kCullFace = false;
-        const Color fogColorGround = Colors::mildBlue;
-        const Color fogColorObjects = Colors::mildBlue;
-        const Color clearColor = Colors::black;
+        const Color kFogColorGround = Colors::mildBlue;
+        const Color kFogColorObjects = Colors::mildBlue;
+        const Color kClearColor = Colors::black;
     };
 
     GraphicsGl::GraphicsGl()
@@ -24,9 +24,9 @@ namespace Narradia
     /*//////////////////////////////*/
     {
         glewExperimental = GL_TRUE;
-        auto glewError = glewInit();
-        if (glewError != GLEW_OK)
-            printf("Error initializing GLEW! %s\n", glewGetErrorString(glewError));
+        auto glew_error = glewInit();
+        if (glew_error != GLEW_OK)
+            printf("Error initializing GLEW! %s\n", glewGetErrorString(glew_error));
         if (SDL_GL_SetSwapInterval(0) < 0)
             printf("Warning: Unable to disable VSync! SDL Error: %s\n", SDL_GetError());
         Renderer2DSolidColors::Create();
@@ -34,7 +34,7 @@ namespace Narradia
         RendererTiles::Create();
         RendererModels::Create();
         RendererBillboardImages::Create();
-        glClearColor(p->clearColor.r, p->clearColor.g, p->clearColor.b, p->clearColor.a);
+        glClearColor(p->kClearColor.r, p->kClearColor.g, p->kClearColor.b, p->kClearColor.a);
         if (Pimpl::kCullFace)
         /*******************/
         {
@@ -63,13 +63,13 @@ namespace Narradia
     GraphicsGl::GetFogColorGround()
     /*///////////////////////////*/
     {
-        return p->fogColorGround;
+        return p->kFogColorGround;
     }
 
     Color
     GraphicsGl::GetFogColorObjects()
     /*////////////////////////////*/
     {
-        return p->fogColorObjects;
+        return p->kFogColorObjects;
     }
 }

@@ -9,14 +9,14 @@ namespace Narradia
     {
       public:
         static constexpr float kCursorSize = 0.04f;
-        const int hashCursorDefault = Hash("CursorDefault");
-        const int hashCursorAttack = Hash("CursorAttack");
-        const int hashCursorHovering = Hash("CursorHovering");
-        const int hashCursorRotating = Hash("CursorRotating");
-        GLuint idxCursorImage;
-        Point2 savedMousePosPx;
-        CursorTypes currCursorType = CursorTypes::Normal;
-        bool visibleThisFrame = true;
+        const int kHashCursorDefault = Hash("CursorDefault");
+        const int kHashCursorAttack = Hash("CursorAttack");
+        const int kHashCursorHovering = Hash("CursorHovering");
+        const int kHashCursorRotating = Hash("CursorRotating");
+        RenderId rendid_cursor_image_;
+        Point2 saved_mouse_position_pixels_;
+        CursorTypes current_cursor_type_ = CursorTypes::Normal;
+        bool visible_this_frame_ = true;
     };
 
     Cursor::Cursor()
@@ -24,58 +24,58 @@ namespace Narradia
     /*//////////////////////////////*/
     {
         SDL_ShowCursor(0);
-        p->idxCursorImage = Renderer2DImages::Get()->NewImage();
+        p->rendid_cursor_image_ = Renderer2DImages::Get()->NewImage();
     }
 
     void
     Cursor::Render() const
     /*//////////////////*/
     {
-        if (!p->visibleThisFrame)
+        if (!p->visible_this_frame_)
             return;
-        const auto mousePos = GetMousePositionF();
-        const auto usedCursorSize =
+        const auto mouse_position = GetMousePositionF();
+        const auto used_cursor_size =
             SizeF{Pimpl::kCursorSize, ConvertWidthToHeight(Pimpl::kCursorSize)};
         const auto bounds = RectangleF{
-            mousePos.Translate(-usedCursorSize.width / 2.0f, -usedCursorSize.height / 2.0f),
-            usedCursorSize};
-        int imageNameHash;
-        switch (p->currCursorType)
+            mouse_position.Translate(-used_cursor_size.width / 2.0f, -used_cursor_size.height / 2.0f),
+            used_cursor_size};
+        int image_name_hash;
+        switch (p->current_cursor_type_)
         /************************/
         {
         case CursorTypes::Hovering:
             /*********************/
-            imageNameHash = p->hashCursorHovering;
+            image_name_hash = p->kHashCursorHovering;
             break;
         case CursorTypes::Rotating:
             /*********************/
-            imageNameHash = p->hashCursorRotating;
+            image_name_hash = p->kHashCursorRotating;
             break;
         case CursorTypes::Attack:
             /*******************/
-            imageNameHash = p->hashCursorAttack;
+            image_name_hash = p->kHashCursorAttack;
             break;
         case CursorTypes::Normal:
         default:
             /*******************/
-            imageNameHash = p->hashCursorDefault;
+            image_name_hash = p->kHashCursorDefault;
         }
-        Renderer2DImages::Get()->DrawImage(imageNameHash, p->idxCursorImage, bounds);
+        Renderer2DImages::Get()->DrawImage(image_name_hash, p->rendid_cursor_image_, bounds);
     }
 
     void
     Cursor::Reset()
     /*///////////*/
     {
-        p->currCursorType = CursorTypes::Normal;
-        p->visibleThisFrame = true;
+        p->current_cursor_type_ = CursorTypes::Normal;
+        p->visible_this_frame_ = true;
     }
 
     void
     Cursor::SavePosition()
     /*//////////////////*/
     {
-        p->savedMousePosPx = GetMousePositionPx();
+        p->saved_mouse_position_pixels_ = GetMousePositionPx();
     }
 
     void
@@ -83,21 +83,21 @@ namespace Narradia
     /*////////////////////////////////*/
     {
         SDL_WarpMouseInWindow(
-            Graphics::Get()->GetWindow(), p->savedMousePosPx.x, p->savedMousePosPx.y);
+            Graphics::Get()->GetWindow(), p->saved_mouse_position_pixels_.x, p->saved_mouse_position_pixels_.y);
     }
 
     Point2
     Cursor::GetSavedPosition() const
     /*////////////////////////////*/
     {
-        return p->savedMousePosPx;
+        return p->saved_mouse_position_pixels_;
     }
 
     void
     Cursor::SetCursorType(CursorTypes newCursorType)
     /*////////////////////////////////////////////*/
     {
-        p->currCursorType = newCursorType;
+        p->current_cursor_type_ = newCursorType;
     }
 
     void
@@ -118,6 +118,6 @@ namespace Narradia
     Cursor::HideThisFrame()
     /*///////////////////*/
     {
-        p->visibleThisFrame = false;
+        p->visible_this_frame_ = false;
     }
 }

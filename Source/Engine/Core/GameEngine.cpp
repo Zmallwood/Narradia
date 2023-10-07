@@ -10,7 +10,7 @@ namespace Narradia
     /*///////////////////*/
     {
       public:
-        bool running = true;
+        bool running_ = true;
     };
 
     GameEngine::GameEngine()
@@ -49,13 +49,13 @@ namespace Narradia
     GameEngine::StopGame()
     /*//////////////////*/
     {
-        p->running = false;
+        p->running_ = false;
     }
 
     const bool
     GameEngine::IsRunning() const
     /*/////////////////////////*/
     {
-        return p->running;
+        return p->running_;
     }
 }

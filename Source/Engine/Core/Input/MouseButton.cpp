@@ -7,13 +7,13 @@ namespace Narradia
     /*////////////////////*/
     {
       public:
-        static constexpr int defaultClickSpeed = 200;
-        bool isPressed = false;
-        Uint64 ticksButtonDown = 0;
-        int clickDuration = 0;
-        bool hasBeenFired = false;
-        bool hasBeenReleased = false;
-        MouseActionManager actionMngr;
+        static constexpr int kDefaultClickSpeed = 200;
+        bool is_pressed_ = false;
+        Uint64 ticks_button_down_ = 0;
+        int click_duration_ = 0;
+        bool has_been_fired_ = false;
+        bool has_been_released_ = false;
+        MouseActionManager mouse_action_manager_;
     };
 
     MouseButton::MouseButton()
@@ -26,42 +26,42 @@ namespace Narradia
     MouseButton::Reset()
     /*////////////////*/
     {
-        p->isPressed = false;
+        p->is_pressed_ = false;
     }
 
     void
     MouseButton::PressDown()
     /*////////////////////*/
     {
-        p->isPressed = true;
-        p->hasBeenFired = true;
-        p->hasBeenReleased = false;
-        p->clickDuration = 0;
-        p->ticksButtonDown = SDL_GetTicks();
+        p->is_pressed_ = true;
+        p->has_been_fired_ = true;
+        p->has_been_released_ = false;
+        p->click_duration_ = 0;
+        p->ticks_button_down_ = SDL_GetTicks();
     }
 
     void
     MouseButton::Release()
     /*//////////////////*/
     {
-        p->isPressed = false;
-        p->hasBeenReleased = true;
-        p->clickDuration = SDL_GetTicks() - p->ticksButtonDown;
+        p->is_pressed_ = false;
+        p->has_been_released_ = true;
+        p->click_duration_ = SDL_GetTicks() - p->ticks_button_down_;
     }
 
     int
     MouseButton::GetPressDuration() const
     /*/////////////////////////////////*/
     {
-        return SDL_GetTicks() - p->ticksButtonDown;
+        return SDL_GetTicks() - p->ticks_button_down_;
     }
 
     int
     MouseButton::ClickDurationPickResult()
     /*//////////////////////////////////*/
     {
-        auto result = p->clickDuration;
-        p->clickDuration = Pimpl::defaultClickSpeed;
+        auto result = p->click_duration_;
+        p->click_duration_ = Pimpl::kDefaultClickSpeed;
         return result;
     }
 
@@ -69,7 +69,7 @@ namespace Narradia
     MouseButton::ClickDurationPeekResult() const
     /*////////////////////////////////////////*/
     {
-        return p->clickDuration;
+        return p->click_duration_;
     }
 
     void
@@ -77,15 +77,15 @@ namespace Narradia
     /*/////////////////////////////*/
     {
         Log();
-        if (p->hasBeenFired)
-            p->actionMngr.PerformFiredActions(p->ticksButtonDown, p->isPressed, p->hasBeenFired);
+        if (p->has_been_fired_)
+            p->mouse_action_manager_.PerformFiredActions(p->ticks_button_down_, p->is_pressed_, p->has_been_fired_);
         else
-            p->actionMngr.ClearFiredActions();
+            p->mouse_action_manager_.ClearFiredActions();
         Log();
-        if (p->hasBeenReleased)
-            p->actionMngr.PerformReleasedActions(p->ticksButtonDown);
+        if (p->has_been_released_)
+            p->mouse_action_manager_.PerformReleasedActions(p->ticks_button_down_);
         else
-            p->actionMngr.ClearReleasedActions();
+            p->mouse_action_manager_.ClearReleasedActions();
     }
 
     void
@@ -94,12 +94,12 @@ namespace Narradia
         bool ensureIsExec)
     /*/////////////////////////////////////////////////////////////////////////////////////*/
     {
-        if (p->hasBeenFired == true)
+        if (p->has_been_fired_ == true)
             return;
         auto id = Hash(uniqueName);
-        if (p->actionMngr.FiredActionsContains(id))
+        if (p->mouse_action_manager_.FiredActionsContains(id))
             return;
-        p->actionMngr.AddFiredAction(
+        p->mouse_action_manager_.AddFiredAction(
             id, {action, priority, static_cast<Uint64>(delay), ensureIsExec});
     }
 
@@ -109,12 +109,12 @@ namespace Narradia
         bool ensureIsExec)
     /*/////////////////////////////////////////////////////////////////////////////////////*/
     {
-        if (p->hasBeenReleased == true)
+        if (p->has_been_released_ == true)
             return;
         auto id = Hash(uniqueName);
-        if (p->actionMngr.ReleasedActionsContains(id))
+        if (p->mouse_action_manager_.ReleasedActionsContains(id))
             return;
-        p->actionMngr.AddReleasedAction(
+        p->mouse_action_manager_.AddReleasedAction(
             id, {action, priority, static_cast<Uint64>(delay), ensureIsExec});
     }
 
@@ -122,16 +122,16 @@ namespace Narradia
     MouseButton::ResetActions()
     /*///////////////////////*/
     {
-        p->actionMngr.ClearFiredActions();
-        p->hasBeenFired = false;
-        p->actionMngr.ClearReleasedActions();
-        p->hasBeenReleased = false;
+        p->mouse_action_manager_.ClearFiredActions();
+        p->has_been_fired_ = false;
+        p->mouse_action_manager_.ClearReleasedActions();
+        p->has_been_released_ = false;
     }
 
     const int
     MouseButton::GetDefaultClickSpeed()
     /*///////////////////////////////*/
     {
-        return Pimpl::defaultClickSpeed;
+        return Pimpl::kDefaultClickSpeed;
     }
 }

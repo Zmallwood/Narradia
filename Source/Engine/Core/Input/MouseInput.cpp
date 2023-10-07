@@ -6,11 +6,11 @@ namespace Narradia
     /*///////////////////*/
     {
       public:
-        Point2 motionDelta = {0, 0};
-        int mouseWheelDelta = 0;
-        MouseButton leftButton;
-        MouseButton middleButton;
-        MouseButton rightButton;
+        Point2 motion_delta_ = {0, 0};
+        int mouse_wheel_delta_ = 0;
+        MouseButton left_mouse_button_;
+        MouseButton middle_mouse_button_;
+        MouseButton right_mouse_button_;
     };
 
     MouseInput::MouseInput()
@@ -23,11 +23,11 @@ namespace Narradia
     MouseInput::Reset()
     /*///////////////*/
     {
-        p->leftButton.Reset();
-        p->middleButton.Reset();
-        p->rightButton.Reset();
-        p->mouseWheelDelta = 0;
-        p->motionDelta = {0, 0};
+        p->left_mouse_button_.Reset();
+        p->middle_mouse_button_.Reset();
+        p->right_mouse_button_.Reset();
+        p->mouse_wheel_delta_ = 0;
+        p->motion_delta_ = {0, 0};
         ResetMouseActions();
     }
 
@@ -40,15 +40,15 @@ namespace Narradia
         {
         case SDL_BUTTON_LEFT:
             /***************/
-            p->leftButton.PressDown();
+            p->left_mouse_button_.PressDown();
             break;
         case SDL_BUTTON_MIDDLE:
             /*****************/
-            p->middleButton.PressDown();
+            p->middle_mouse_button_.PressDown();
             break;
         case SDL_BUTTON_RIGHT:
             /****************/
-            p->rightButton.PressDown();
+            p->right_mouse_button_.PressDown();
             break;
         }
     }
@@ -62,15 +62,15 @@ namespace Narradia
         {
         case SDL_BUTTON_LEFT:
             /***************/
-            p->leftButton.Release();
+            p->left_mouse_button_.Release();
             break;
         case SDL_BUTTON_MIDDLE:
             /*****************/
-            p->middleButton.Release();
+            p->middle_mouse_button_.Release();
             break;
         case SDL_BUTTON_RIGHT:
             /****************/
-            p->rightButton.Release();
+            p->right_mouse_button_.Release();
             break;
         }
     }
@@ -79,23 +79,23 @@ namespace Narradia
     MouseInput::MouseWheel(int deltaScroll)
     /*///////////////////////////////////*/
     {
-        p->mouseWheelDelta += deltaScroll;
+        p->mouse_wheel_delta_ += deltaScroll;
     }
 
     void
     MouseInput::MouseMove(Point2 motionDelta_)
     /*//////////////////////////////////////*/
     {
-        p->motionDelta = motionDelta_;
+        p->motion_delta_ = motionDelta_;
     }
 
     int
     MouseInput::MouseWheelDeltaPickResult()
     /*///////////////////////////////////*/
     {
-        auto resultMouseWheelDelta = p->mouseWheelDelta;
-        p->mouseWheelDelta = 0;
-        return resultMouseWheelDelta;
+        auto result_mouse_wheel_delta = p->mouse_wheel_delta_;
+        p->mouse_wheel_delta_ = 0;
+        return result_mouse_wheel_delta;
     }
 
     void
@@ -103,28 +103,28 @@ namespace Narradia
     /*/////////////////////////////*/
     {
         Log();
-        p->leftButton.PerformMouseAction();
+        p->left_mouse_button_.PerformMouseAction();
         Log();
-        p->middleButton.PerformMouseAction();
+        p->middle_mouse_button_.PerformMouseAction();
         Log();
-        p->rightButton.PerformMouseAction();
+        p->right_mouse_button_.PerformMouseAction();
     }
 
     void
     MouseInput::ResetMouseActions()
     /*///////////////////////////*/
     {
-        p->leftButton.ResetActions();
-        p->middleButton.ResetActions();
-        p->rightButton.ResetActions();
+        p->left_mouse_button_.ResetActions();
+        p->middle_mouse_button_.ResetActions();
+        p->right_mouse_button_.ResetActions();
     }
 
     Point2
     MouseInput::GetMotionDeltaPickResults()
     /*///////////////////////////////////*/
     {
-        auto result = p->motionDelta;
-        p->motionDelta = {0, 0};
+        auto result = p->motion_delta_;
+        p->motion_delta_ = {0, 0};
         return result;
     }
 
@@ -132,20 +132,20 @@ namespace Narradia
     MouseInput::GetLeftButton()
     /*///////////////////////*/
     {
-        return p->leftButton;
+        return p->left_mouse_button_;
     }
 
     MouseButton &
     MouseInput::GetMiddleButton()
     /*/////////////////////////*/
     {
-        return p->middleButton;
+        return p->middle_mouse_button_;
     }
 
     MouseButton &
     MouseInput::GetRightButton()
     /*////////////////////////*/
     {
-        return p->rightButton;
+        return p->right_mouse_button_;
     }
 }

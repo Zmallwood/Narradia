@@ -17,8 +17,8 @@ namespace Narradia
     GetAspectRatio()
     /*////////////*/
     {
-        auto canvasSize = GetCanvasSize();
-        return static_cast<float>(canvasSize.width) / canvasSize.height;
+        auto canvas_size = GetCanvasSize();
+        return static_cast<float>(canvas_size.width) / canvas_size.height;
     }
 
     float
@@ -34,8 +34,8 @@ namespace Narradia
     {
         time_t now = time(0);
         char buffer[80];
-        auto pTstruct = localtime(&now);
-        strftime(buffer, sizeof(buffer), "%X", pTstruct);
+        auto p_tstruct = localtime(&now);
+        strftime(buffer, sizeof(buffer), "%X", p_tstruct);
         return buffer;
     }
 
@@ -45,8 +45,8 @@ namespace Narradia
     {
         time_t now = time(0);
         char buffer[80];
-        auto pTstruct = localtime(&now);
-        strftime(buffer, sizeof(buffer), "%Y.%m.%d.%H.%M.%S", pTstruct);
+        auto p_tstruct = localtime(&now);
+        strftime(buffer, sizeof(buffer), "%Y.%m.%d.%H.%M.%S", p_tstruct);
         return buffer;
     }
 
@@ -71,10 +71,10 @@ namespace Narradia
     GetMousePositionF()
     /*///////////////*/
     {
-        auto canvasSize = GetCanvasSize();
-        auto mousePosPx = GetMousePositionPx();
-        auto x = static_cast<float>(mousePosPx.x) / canvasSize.width;
-        auto y = static_cast<float>(mousePosPx.y) / canvasSize.height;
+        auto canvas_size = GetCanvasSize();
+        auto mouse_position_pixels = GetMousePositionPx();
+        auto x = static_cast<float>(mouse_position_pixels.x) / canvas_size.width;
+        auto y = static_cast<float>(mouse_position_pixels.y) / canvas_size.height;
         return {x, y};
     }
 }

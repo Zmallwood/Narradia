@@ -6,9 +6,9 @@ namespace Narradia
     /*//////////////////////*/
     {
       public:
-        std::string textInput;
-        std::set<SDL_Keycode> pressedKeys;
-        std::set<SDL_Keycode> firedKeys;
+        std::string text_input_;
+        std::set<SDL_Keycode> pressed_keys_;
+        std::set<SDL_Keycode> fired_keys_;
     };
 
     KeyboardInput::KeyboardInput()
@@ -21,38 +21,38 @@ namespace Narradia
     KeyboardInput::KeyDown(SDL_Keycode key)
     /*///////////////////////////////////*/
     {
-        if (p->pressedKeys.count(key) == 0)
-            p->firedKeys.insert(key);
-        p->pressedKeys.insert(key);
+        if (p->pressed_keys_.count(key) == 0)
+            p->fired_keys_.insert(key);
+        p->pressed_keys_.insert(key);
     }
 
     void
     KeyboardInput::KeyUp(SDL_Keycode key)
     /*/////////////////////////////////*/
     {
-        p->pressedKeys.erase(key);
+        p->pressed_keys_.erase(key);
     }
 
     bool
     KeyboardInput::AnyKeyHasBeenFired() const
     /*/////////////////////////////////////*/
     {
-        return p->firedKeys.size() > 0;
+        return p->fired_keys_.size() > 0;
     }
 
     bool
     KeyboardInput::KeyIsPressed(SDL_Keycode key) const
     /*//////////////////////////////////////////////*/
     {
-        return p->pressedKeys.count(key) > 0;
+        return p->pressed_keys_.count(key) > 0;
     }
 
     bool
     KeyboardInput::KeyHasBeenFiredPickResult(SDL_Keycode key)
     /*/////////////////////////////////////////////////////*/
     {
-        auto result = p->firedKeys.count(key) > 0;
-        p->firedKeys.erase(key);
+        auto result = p->fired_keys_.count(key) > 0;
+        p->fired_keys_.erase(key);
         return result;
     }
 
@@ -60,8 +60,8 @@ namespace Narradia
     KeyboardInput::PickTextInput()
     /*//////////////////////////*/
     {
-        auto result = p->textInput;
-        p->textInput = "";
+        auto result = p->text_input_;
+        p->text_input_ = "";
         return result;
     }
 
@@ -69,13 +69,13 @@ namespace Narradia
     KeyboardInput::ResetTextInput()
     /*///////////////////////////*/
     {
-        p->textInput = "";
+        p->text_input_ = "";
     }
 
     void
     KeyboardInput::AppendTextInput(std::string_view toAppend)
     /*/////////////////////////////////////////////////////*/
     {
-        p->textInput.append(toAppend);
+        p->text_input_.append(toAppend);
     }
 }

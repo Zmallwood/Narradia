@@ -12,32 +12,32 @@ namespace Narradia
     /*///////////////////*/
     {
       public:
-        RenderId glIdImage = 0;
-        RenderId idSplitLine;
-        RenderId idCommandLineInputArrow;
-        RenderId idInputText;
-        std::vector<TextLine> textLines;
-        std::vector<GLuint> glIdTextLines;
-        const RectangleF bounds = {0.0f, 0.8f, 0.3f, 0.2f};
-        const float textLineHeight = 0.02f;
+        const RectangleF kbounds = {0.0f, 0.8f, 0.3f, 0.2f};
+        const float kTextLineHeight = 0.02f;
         const float kSplitLineHeight = 0.001f;
-        bool enabled = true;
-        bool inputActive = false;
-        int cursorPosition = 0;
-        std::string inputText;
+        RenderId rendid_image_ = 0;
+        RenderId rendid_split_line_;
+        RenderId rendid_command_line_input_arrow_;
+        RenderId rendid_input_text_;
+        std::vector<TextLine> text_lines_;
+        std::vector<GLuint> rendids_text_lines_;
+        bool enabled_ = true;
+        bool input_active_ = false;
+        int cursor_position_ = 0;
+        std::string input_text_;
     };
 
     TextOutBox::TextOutBox()
         : p(std::make_shared<Pimpl>())
     /*//////////////////////////////*/
     {
-        p->glIdImage = Renderer2DImages::Get()->NewImage();
-        p->idSplitLine = Renderer2DImages::Get()->NewImage();
-        p->idCommandLineInputArrow = Renderer2DImages::Get()->NewImage();
-        p->idInputText = TextRenderer::Get()->NewString();
-        auto maxNumLines = GetMaxNumLines();
-        for (auto i = 0; i < maxNumLines; i++)
-            p->glIdTextLines.push_back(TextRenderer::Get()->NewString());
+        p->rendid_image_ = Renderer2DImages::Get()->NewImage();
+        p->rendid_split_line_ = Renderer2DImages::Get()->NewImage();
+        p->rendid_command_line_input_arrow_ = Renderer2DImages::Get()->NewImage();
+        p->rendid_input_text_ = TextRenderer::Get()->NewString();
+        auto max_num_lines = GetMaxNumLines();
+        for (auto i = 0; i < max_num_lines; i++)
+            p->rendids_text_lines_.push_back(TextRenderer::Get()->NewString());
     }
 
     void
@@ -47,14 +47,14 @@ namespace Narradia
         if (KeyboardInput::Get()->KeyHasBeenFiredPickResult(SDLK_RETURN))
         /**************************************************************/
         {
-            p->inputActive = !p->inputActive;
+            p->input_active_ = !p->input_active_;
         }
-        if (p->inputActive)
+        if (p->input_active_)
         /*****************/
         {
-            auto newTextInput = KeyboardInput::Get()->PickTextInput();
-            p->inputText.insert(p->cursorPosition, newTextInput);
-            p->cursorPosition += newTextInput.length();
+            auto new_text_input = KeyboardInput::Get()->PickTextInput();
+            p->input_text_.insert(p->cursor_position_, new_text_input);
+            p->cursor_position_ += new_text_input.length();
         }
     }
 
@@ -62,47 +62,47 @@ namespace Narradia
     TextOutBox::Render() const
     /*//////////////////////*/
     {
-        if (!p->enabled)
+        if (!p->enabled_)
             return;
-        auto usedBounds = p->bounds;
+        auto used_bounds = p->kbounds;
         if (SceneManager::Get()->GetCurrentScene() == SceneNames::Play)
-            usedBounds = usedBounds.Translate(0.0f, -ExperienceBar::kBarHeight);
-        Renderer2DImages::Get()->DrawImage("TextOutBoxBack", p->glIdImage, usedBounds);
-        auto maxNumLines = GetMaxNumLines();
-        for (auto i = 0; i < maxNumLines; i++)
+            used_bounds = used_bounds.Translate(0.0f, -ExperienceBar::kBarHeight);
+        Renderer2DImages::Get()->DrawImage("TextOutBoxBack", p->rendid_image_, used_bounds);
+        auto max_num_lines = GetMaxNumLines();
+        for (auto i = 0; i < max_num_lines; i++)
         /************************************/
         {
-            auto textLineIndex = static_cast<int>(p->textLines.size()) - maxNumLines + i;
-            if (textLineIndex >= 0)
+            auto text_line_index = static_cast<int>(p->text_lines_.size()) - max_num_lines + i;
+            if (text_line_index >= 0)
             /*********************/
             {
-                auto linePosY = usedBounds.y + (i + 1) * p->textLineHeight;
-                Point2F position = {usedBounds.x + 0.01f, linePosY};
+                auto line_position_y = used_bounds.y + (i + 1) * p->kTextLineHeight;
+                Point2F position = {used_bounds.x + 0.01f, line_position_y};
                 TextRenderer::Get()->DrawString(
-                    p->glIdTextLines.at(i), p->textLines.at(textLineIndex).text, position,
-                    p->textLines.at(textLineIndex).color);
+                    p->rendids_text_lines_.at(i), p->text_lines_.at(text_line_index).text, position,
+                    p->text_lines_.at(text_line_index).color);
             }
         }
         auto rect = RectangleF{
-            0.0f, usedBounds.y + usedBounds.height - 1.3f * p->textLineHeight, p->bounds.width,
+            0.0f, used_bounds.y + used_bounds.height - 1.3f * p->kTextLineHeight, p->kbounds.width,
             p->kSplitLineHeight};
-        Renderer2DImages::Get()->DrawImage("Wheat", p->idSplitLine, rect);
-        if (p->inputActive)
+        Renderer2DImages::Get()->DrawImage("Wheat", p->rendid_split_line_, rect);
+        if (p->input_active_)
         /*****************/
         {
-            auto rectArrow = RectangleF{
-                0.0f, usedBounds.y + usedBounds.height - 1.3f * p->textLineHeight,
-                p->textLineHeight, p->textLineHeight};
+            auto rect_arrow = RectangleF{
+                0.0f, used_bounds.y + used_bounds.height - 1.3f * p->kTextLineHeight,
+                p->kTextLineHeight, p->kTextLineHeight};
             Renderer2DImages::Get()->DrawImage(
-                "CommandLineInputArrow", p->idCommandLineInputArrow, rectArrow);
-            auto posText =
-                rectArrow.GetPosition().Translate(p->textLineHeight, p->textLineHeight / 2);
-            auto usedText = p->inputText;
+                "CommandLineInputArrow", p->rendid_command_line_input_arrow_, rect_arrow);
+            auto position_text =
+                rect_arrow.GetPosition().Translate(p->kTextLineHeight, p->kTextLineHeight / 2);
+            auto used_text = p->input_text_;
             if (SDL_GetTicks() % 600 < 300)
-                usedText.insert(p->cursorPosition, "|");
+                used_text.insert(p->cursor_position_, "|");
             else
-                usedText.insert(p->cursorPosition, " ");
-            TextRenderer::Get()->DrawString(p->idInputText, usedText, posText);
+                used_text.insert(p->cursor_position_, " ");
+            TextRenderer::Get()->DrawString(p->rendid_input_text_, used_text, position_text);
         }
     }
 
@@ -110,17 +110,17 @@ namespace Narradia
     TextOutBox::Print(std::string_view text, Color textColor)
     /*/////////////////////////////////////////////////////*/
     {
-        if (!p->enabled)
+        if (!p->enabled_)
             return;
-        std::string printedText = std::string(GetCurrentTime().data()) + "." +
+        std::string printed_text = std::string(GetCurrentTime().data()) + "." +
                                   std::to_string(SDL_GetTicks() % 1000) + ") " + text.data();
-        p->textLines.push_back({printedText, textColor});
+        p->text_lines_.push_back({printed_text, textColor});
     }
 
     int
     TextOutBox::GetMaxNumLines() const
     /*//////////////////////////////*/
     {
-        return static_cast<int>(p->bounds.height / p->textLineHeight) - 2;
+        return static_cast<int>(p->kbounds.height / p->kTextLineHeight) - 2;
     }
 }

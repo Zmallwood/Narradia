@@ -11,57 +11,57 @@ namespace Narradia
     /*//////////////////////*/
     {
       public:
-        const int locationPosition = 0;
-        const int locationColor = 1;
-        const int locationUv = 2;
-        const int locationNormal = 3;
-        int locationProjection = -1;
-        int locationView = -1;
-        int locationModel = -1;
-        int locationAlpha = -1;
-        int locationViewPos = -1;
-        int locationFogColor = -1;
-        bool isBatchDrawing = false;
+        const int kLocationPosition = 0;
+        const int kLocationColor = 1;
+        const int kLocationUv = 2;
+        const int kLocationNormal = 3;
+        int location_projection_ = -1;
+        int location_view_ = -1;
+        int location_model_ = -1;
+        int location_alpha_ = -1;
+        int location_view_pos_ = -1;
+        int location_fog_color_ = -1;
+        bool is_batch_drawing_ = false;
     };
 
     RendererTiles::RendererTiles()
         : p(std::make_shared<Pimpl>())
     /*//////////////////////////////*/
     {
-        const GLchar *vertexShaderSource =
+        const GLchar *vertex_shader_source =
 #include "Shaders/TilesVertex.glsl"
             ;
-        const GLchar *fragmentShaderSource =
+        const GLchar *fragment_shader_source =
 #include "Shaders/TilesFragment.glsl"
             ;
-        GetShaderProgram()->Create(vertexShaderSource, fragmentShaderSource);
-        p->locationProjection = GetUniformLocation("projection");
-        p->locationView = GetUniformLocation("view");
-        p->locationModel = GetUniformLocation("model");
-        p->locationAlpha = GetUniformLocation("mAlpha");
-        p->locationViewPos = GetUniformLocation("viewPos");
-        p->locationFogColor = GetUniformLocation("fogColor");
+        GetShaderProgram()->Create(vertex_shader_source, fragment_shader_source);
+        p->location_projection_ = GetUniformLocation("projection");
+        p->location_view_ = GetUniformLocation("view");
+        p->location_model_ = GetUniformLocation("model");
+        p->location_alpha_ = GetUniformLocation("mAlpha");
+        p->location_view_pos_ = GetUniformLocation("viewPos");
+        p->location_fog_color_ = GetUniformLocation("fogColor");
     }
 
     RenderId
     RendererTiles::NewImagePolygon(int numVertices)
     /*///////////////////////////////////////////*/
     {
-        auto vertexArrayId = GenerateNewVertexArrayId();
-        auto indexBufferId = GenerateNewBufferId(BufferTypes::Indices, vertexArrayId);
-        auto positionBufferId = GenerateNewBufferId(BufferTypes::Positions, vertexArrayId);
-        auto colorBufferId = GenerateNewBufferId(BufferTypes::Colors, vertexArrayId);
-        auto uvBufferId = GenerateNewBufferId(BufferTypes::Uvs, vertexArrayId);
-        auto normalBufferId = GenerateNewBufferId(BufferTypes::Normals, vertexArrayId);
+        auto vertex_array_id = GenerateNewVertexArrayId();
+        auto index_buffer_id = GenerateNewBufferId(BufferTypes::Indices, vertex_array_id);
+        auto position_buffer_id = GenerateNewBufferId(BufferTypes::Positions, vertex_array_id);
+        auto color_buffer_id = GenerateNewBufferId(BufferTypes::Colors, vertex_array_id);
+        auto uv_buffer_id = GenerateNewBufferId(BufferTypes::Uvs, vertex_array_id);
+        auto normal_buffer_id = GenerateNewBufferId(BufferTypes::Normals, vertex_array_id);
         glUseProgram(GetShaderProgram()->GetProgramId());
-        SetIndicesData(indexBufferId, numVertices, nullptr);
-        SetPositions3DData(positionBufferId, numVertices, nullptr);
-        SetColorsData(colorBufferId, numVertices, nullptr);
-        SetUvsData(uvBufferId, numVertices, nullptr);
-        SetNormalsData(normalBufferId, numVertices, nullptr);
+        SetIndicesData(index_buffer_id, numVertices, nullptr);
+        SetPositions3DData(position_buffer_id, numVertices, nullptr);
+        SetColorsData(color_buffer_id, numVertices, nullptr);
+        SetUvsData(uv_buffer_id, numVertices, nullptr);
+        SetNormalsData(normal_buffer_id, numVertices, nullptr);
         glBindVertexArray(0);
         glUseProgram(0);
-        return vertexArrayId;
+        return vertex_array_id;
     }
 
     RenderId
@@ -120,7 +120,7 @@ namespace Narradia
     RendererTiles::SetGeometryImagePolygon(RenderId vaoId, std::vector<Vertex3F> &vertices) const
     /*/////////////////////////////////////////////////////////////////////////////////////////*/
     {
-        if (!p->isBatchDrawing)
+        if (!p->is_batch_drawing_)
             glUseProgram(GetShaderProgram()->GetProgramId());
         std::vector<int> indices(vertices.size());
         std::iota(std::begin(indices), std::end(indices), 0);
@@ -145,19 +145,19 @@ namespace Narradia
             normals.push_back(vertex_normal.y);
             normals.push_back(vertex_normal.z);
         }
-        auto indexBufferId = GetBufferId(BufferTypes::Indices, vaoId);
-        auto positionBufferId = GetBufferId(BufferTypes::Positions, vaoId);
-        auto colorBufferId = GetBufferId(BufferTypes::Colors, vaoId);
-        auto uvBufferId = GetBufferId(BufferTypes::Uvs, vaoId);
-        auto normalBufferId = GetBufferId(BufferTypes::Normals, vaoId);
+        auto index_buffer_id = GetBufferId(BufferTypes::Indices, vaoId);
+        auto position_buffer_id = GetBufferId(BufferTypes::Positions, vaoId);
+        auto color_buffer_id = GetBufferId(BufferTypes::Colors, vaoId);
+        auto uv_buffer_id = GetBufferId(BufferTypes::Uvs, vaoId);
+        auto normal_buffer_id = GetBufferId(BufferTypes::Normals, vaoId);
         glBindVertexArray(vaoId);
-        UpdateIndicesData(indexBufferId, indices);
-        UpdatePositions3DData(positionBufferId, positions, p->locationPosition);
-        UpdateColorsData(colorBufferId, colors, p->locationColor);
-        UpdateUvsData(uvBufferId, uvs, p->locationUv);
-        UpdateNormalsData(normalBufferId, normals, p->locationNormal);
+        UpdateIndicesData(index_buffer_id, indices);
+        UpdatePositions3DData(position_buffer_id, positions, p->kLocationPosition);
+        UpdateColorsData(color_buffer_id, colors, p->kLocationColor);
+        UpdateUvsData(uv_buffer_id, uvs, p->kLocationUv);
+        UpdateNormalsData(normal_buffer_id, normals, p->kLocationNormal);
         glBindVertexArray(0);
-        if (!p->isBatchDrawing)
+        if (!p->is_batch_drawing_)
             glUseProgram(0);
     }
 
@@ -165,24 +165,24 @@ namespace Narradia
     RendererTiles::StartBatchDrawing()
     /*//////////////////////////////*/
     {
-        p->isBatchDrawing = true;
+        p->is_batch_drawing_ = true;
         glUseProgram(GetShaderProgram()->GetProgramId());
         glUniformMatrix4fv(
-            p->locationProjection, 1, GL_FALSE,
+            p->location_projection_, 1, GL_FALSE,
             glm::value_ptr(CameraGl::Get()->GetPerspectiveMatrix()));
         glUniformMatrix4fv(
-            p->locationView, 1, GL_FALSE, glm::value_ptr(CameraGl::Get()->GetViewMatrix()));
+            p->location_view_, 1, GL_FALSE, glm::value_ptr(CameraGl::Get()->GetViewMatrix()));
         glm::mat4 model(1.0);
-        glUniformMatrix4fv(p->locationModel, 1, GL_FALSE, glm::value_ptr(model));
-        glUniform1f(p->locationAlpha, 1.0f);
-        glm::vec3 viewPos(
+        glUniformMatrix4fv(p->location_model_, 1, GL_FALSE, glm::value_ptr(model));
+        glUniform1f(p->location_alpha_, 1.0f);
+        glm::vec3 view_pos(
             Player::Get()->GetSpaceCoord().x, Player::Get()->GetSpaceCoord().y,
             Player::Get()->GetSpaceCoord().z);
-        glUniform3fv(p->locationViewPos, 1, glm::value_ptr(viewPos));
-        glm::vec3 fogColorGl(
+        glUniform3fv(p->location_view_pos_, 1, glm::value_ptr(view_pos));
+        glm::vec3 fog_color_gl(
             GraphicsGl::Get()->GetFogColorGround().r, GraphicsGl::Get()->GetFogColorGround().g,
             GraphicsGl::Get()->GetFogColorGround().b);
-        glUniform3fv(p->locationFogColor, 1, glm::value_ptr(fogColorGl));
+        glUniform3fv(p->location_fog_color_, 1, glm::value_ptr(fog_color_gl));
         glUseProgram(GetShaderProgram()->GetProgramId());
         glEnable(GL_CULL_FACE);
         glCullFace(GL_FRONT);
@@ -192,7 +192,7 @@ namespace Narradia
     RendererTiles::StopBatchDrawing()
     /*/////////////////////////////*/
     {
-        p->isBatchDrawing = false;
+        p->is_batch_drawing_ = false;
         glUseProgram(0);
         glDisable(GL_CULL_FACE);
     }
@@ -206,26 +206,26 @@ namespace Narradia
             glDisable(GL_DEPTH_TEST);
         else
             glEnable(GL_DEPTH_TEST);
-        if (!p->isBatchDrawing)
+        if (!p->is_batch_drawing_)
         /*********************/
         {
             glUseProgram(GetShaderProgram()->GetProgramId());
             glUniformMatrix4fv(
-                p->locationProjection, 1, GL_FALSE,
+                p->location_projection_, 1, GL_FALSE,
                 glm::value_ptr(CameraGl::Get()->GetPerspectiveMatrix()));
             glUniformMatrix4fv(
-                p->locationView, 1, GL_FALSE, glm::value_ptr(CameraGl::Get()->GetViewMatrix()));
+                p->location_view_, 1, GL_FALSE, glm::value_ptr(CameraGl::Get()->GetViewMatrix()));
             glm::mat4 model(1.0);
-            glUniformMatrix4fv(p->locationModel, 1, GL_FALSE, glm::value_ptr(model));
-            glUniform1f(p->locationAlpha, 1.0f);
-            glm::vec3 viewPos(
+            glUniformMatrix4fv(p->location_model_, 1, GL_FALSE, glm::value_ptr(model));
+            glUniform1f(p->location_alpha_, 1.0f);
+            glm::vec3 view_pos(
                 Player::Get()->GetSpaceCoord().x, Player::Get()->GetSpaceCoord().y,
                 Player::Get()->GetSpaceCoord().z);
-            glUniform3fv(p->locationViewPos, 1, glm::value_ptr(viewPos));
-            glm::vec3 fogColorGl(
+            glUniform3fv(p->location_view_pos_, 1, glm::value_ptr(view_pos));
+            glm::vec3 fog_color_gl(
                 GraphicsGl::Get()->GetFogColorGround().r, GraphicsGl::Get()->GetFogColorGround().g,
                 GraphicsGl::Get()->GetFogColorGround().b);
-            glUniform3fv(p->locationFogColor, 1, glm::value_ptr(fogColorGl));
+            glUniform3fv(p->location_fog_color_, 1, glm::value_ptr(fog_color_gl));
             glUseProgram(GetShaderProgram()->GetProgramId());
         }
         auto imageId = ImageBank::Get()->GetImage(imageNameHash);
@@ -233,7 +233,7 @@ namespace Narradia
         glBindVertexArray(vaoId);
         glDrawElements(GL_TRIANGLE_FAN, vertexCount, GL_UNSIGNED_INT, NULL);
         glBindVertexArray(0);
-        if (!p->isBatchDrawing)
+        if (!p->is_batch_drawing_)
             glUseProgram(0);
     }
 

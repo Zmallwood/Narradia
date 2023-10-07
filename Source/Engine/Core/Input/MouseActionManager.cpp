@@ -6,8 +6,8 @@ namespace Narradia
     /*///////////////////////////*/
     {
       public:
-        std::map<int, MouseAction> firedActions;
-        std::map<int, MouseAction> releasedActions;
+        std::map<int, MouseAction> fired_actions_;
+        std::map<int, MouseAction> released_actions_;
     };
 
     MouseActionManager::MouseActionManager()
@@ -20,73 +20,73 @@ namespace Narradia
     MouseActionManager::PerformFiredActions(int ticksButtonDown, bool isPressed, bool &hasBeenFired)
     /*////////////////////////////////////////////////////////////////////////////////////////////*/
     {
-        std::function<void()> firedAction;
-        float firedPriority = -1;
-        Uint64 ticksPerform = 0;
+        std::function<void()> fired_action;
+        float fired_priority = -1;
+        Uint64 ticks_perform = 0;
         int key = 0;
-        bool highestPrioNotReady = false;
-        std::set<int> firedToDelete;
+        bool highest_prio_not_ready = false;
+        std::set<int> fired_to_delete;
         Log();
-        for (auto it = p->firedActions.begin(); it != p->firedActions.end();)
+        for (auto it = p->fired_actions_.begin(); it != p->fired_actions_.end();)
         /*******************************************************************/
         {
-            if (it->second.priority > firedPriority)
+            if (it->second.priority > fired_priority)
             /**************************************/
             {
-                firedPriority = it->second.priority;
-                firedAction = it->second.action;
-                ticksPerform = ticksButtonDown + it->second.delay;
+                fired_priority = it->second.priority;
+                fired_action = it->second.action;
+                ticks_perform = ticksButtonDown + it->second.delay;
                 key = it->first;
-                auto diff = (int)(ticksPerform - SDL_GetTicks());
+                auto diff = (int)(ticks_perform - SDL_GetTicks());
                 if (diff > 0)
                 /***********/
                 {
-                    highestPrioNotReady = true;
+                    highest_prio_not_ready = true;
                     it++;
                     continue;
                 }
             }
             if (false == it->second.ensureIsExec)
-                firedToDelete.insert(it->first);
+                fired_to_delete.insert(it->first);
             it++;
         }
         Log();
-        if (highestPrioNotReady)
+        if (highest_prio_not_ready)
         /**********************/
         {
-            int prevPriority = -1;
-            for (auto it = p->firedActions.begin(); it != p->firedActions.end();)
+            int prev_priority = -1;
+            for (auto it = p->fired_actions_.begin(); it != p->fired_actions_.end();)
             /*******************************************************************/
             {
-                if (it->second.priority < firedPriority && it->second.priority > prevPriority)
+                if (it->second.priority < fired_priority && it->second.priority > prev_priority)
                 /****************************************************************************/
                 {
                     key = it->first;
-                    firedAction = it->second.action;
-                    prevPriority = ticksButtonDown + it->second.delay;
-                    ticksPerform = ticksButtonDown + it->second.delay;
-                    firedPriority = it->second.priority;
+                    fired_action = it->second.action;
+                    prev_priority = ticksButtonDown + it->second.delay;
+                    ticks_perform = ticksButtonDown + it->second.delay;
+                    fired_priority = it->second.priority;
                 }
                 it++;
             }
         }
         Log();
-        if (SDL_GetTicks() >= ticksPerform)
+        if (SDL_GetTicks() >= ticks_perform)
         /*********************************/
         {
-            if (firedAction)
+            if (fired_action)
             /**************/
             {
                 if (isPressed)
-                    firedAction();
-                p->firedActions.erase(key);
+                    fired_action();
+                p->fired_actions_.erase(key);
             }
         }
         Log();
-        for (auto key : firedToDelete)
-            p->firedActions.erase(key);
+        for (auto key : fired_to_delete)
+            p->fired_actions_.erase(key);
         Log();
-        if (p->firedActions.size() == 0 && isPressed == false)
+        if (p->fired_actions_.size() == 0 && isPressed == false)
             hasBeenFired = false;
     }
 
@@ -94,117 +94,117 @@ namespace Narradia
     MouseActionManager::PerformReleasedActions(int ticksButtonDown)
     /*///////////////////////////////////////////////////////////*/
     {
-        std::function<void()> releasedAction;
-        float releasedPriority = -1;
-        Uint64 ticksPerform = 0;
+        std::function<void()> released_action;
+        float released_priority = -1;
+        Uint64 ticks_perform = 0;
         int key = 0;
-        bool highestPrioNotReady = false;
-        std::set<int> releasedToDelete;
+        bool highest_prio_not_ready = false;
+        std::set<int> released_to_delete;
         Log();
-        for (auto it = p->releasedActions.begin(); it != p->releasedActions.end();)
+        for (auto it = p->released_actions_.begin(); it != p->released_actions_.end();)
         /*************************************************************************/
         {
             Log();
-            if (it->second.priority > releasedPriority)
+            if (it->second.priority > released_priority)
             /*****************************************/
             {
-                releasedPriority = it->second.priority;
-                releasedAction = it->second.action;
-                ticksPerform = ticksButtonDown + it->second.delay;
+                released_priority = it->second.priority;
+                released_action = it->second.action;
+                ticks_perform = ticksButtonDown + it->second.delay;
                 key = it->first;
-                auto diff = (int)(ticksPerform - SDL_GetTicks());
+                auto diff = (int)(ticks_perform - SDL_GetTicks());
                 Log();
                 if (diff > 0)
                 /***********/
                 {
-                    highestPrioNotReady = true;
+                    highest_prio_not_ready = true;
                     it++;
                     continue;
                 }
             }
             Log();
             if (false == it->second.ensureIsExec)
-                releasedToDelete.insert(it->first);
+                released_to_delete.insert(it->first);
             it++;
         }
         Log();
-        if (highestPrioNotReady)
+        if (highest_prio_not_ready)
         /**********************/
         {
-            int prevPriority = -1;
-            for (auto it = p->releasedActions.begin(); it != p->releasedActions.end();)
+            int prev_priority = -1;
+            for (auto it = p->released_actions_.begin(); it != p->released_actions_.end();)
             /*************************************************************************/
             {
-                if (it->second.priority < releasedPriority && it->second.priority > prevPriority)
+                if (it->second.priority < released_priority && it->second.priority > prev_priority)
                 /*******************************************************************************/
                 {
                     key = it->first;
-                    releasedAction = it->second.action;
-                    prevPriority = ticksButtonDown + it->second.delay;
-                    ticksPerform = ticksButtonDown + it->second.delay;
-                    releasedPriority = it->second.priority;
+                    released_action = it->second.action;
+                    prev_priority = ticksButtonDown + it->second.delay;
+                    ticks_perform = ticksButtonDown + it->second.delay;
+                    released_priority = it->second.priority;
                 }
                 it++;
             }
         }
         Log();
-        if (SDL_GetTicks() >= ticksPerform)
+        if (SDL_GetTicks() >= ticks_perform)
         /*********************************/
         {
             Log();
-            if (releasedAction)
+            if (released_action)
             /*****************/
             {
                 Log();
-                releasedAction();
+                released_action();
                 Log();
-                p->releasedActions.erase(key);
+                p->released_actions_.erase(key);
             }
         }
         Log();
-        for (auto key : releasedToDelete)
-            p->releasedActions.erase(key);
+        for (auto key : released_to_delete)
+            p->released_actions_.erase(key);
     }
 
     void
     MouseActionManager::ClearFiredActions()
     /*///////////////////////////////////*/
     {
-        p->firedActions.clear();
+        p->fired_actions_.clear();
     }
 
     void
     MouseActionManager::ClearReleasedActions()
     /*//////////////////////////////////////*/
     {
-        p->releasedActions.clear();
+        p->released_actions_.clear();
     }
 
     bool
     MouseActionManager::FiredActionsContains(int actionId)
     /*//////////////////////////////////////////////////*/
     {
-        return p->firedActions.count(actionId);
+        return p->fired_actions_.count(actionId);
     }
 
     bool
     MouseActionManager::ReleasedActionsContains(int actionId)
     /*/////////////////////////////////////////////////////*/
     {
-        return p->releasedActions.count(actionId);
+        return p->released_actions_.count(actionId);
     }
 
     void
     MouseActionManager::AddFiredAction(int actionId, MouseAction action)
     /*////////////////////////////////////////////////////////////////*/
     {
-        p->firedActions.insert({actionId, action});
+        p->fired_actions_.insert({actionId, action});
     }
 
     void
     MouseActionManager::AddReleasedAction(int actionId, MouseAction action)
     /*///////////////////////////////////////////////////////////////////*/
     {
-        p->releasedActions.insert({actionId, action});
+        p->released_actions_.insert({actionId, action});
     }
 }

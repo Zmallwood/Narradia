@@ -9,13 +9,13 @@ namespace Narradia
     /*/////////////////*/
     {
       public:
-        const std::string_view windowTitle = "Narradia";
-        std::shared_ptr<SDL_Window> window;
-        const Size configResolution = {1600, 900};
+        const std::string_view kWindowTitle = "Narradia";
+        std::shared_ptr<SDL_Window> window_;
+        const Size kConfigResolution = {1600, 900};
 #if defined(_DEBUG) || !defined(NDEBUG)
-        const Uint32 windowFlags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN;
+        const Uint32 kWindowFlags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN;
 #else
-        const Uint32 windowFlags =
+        const Uint32 kWindowFlags =
             SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN_DESKTOP;
 #endif
     };
@@ -24,12 +24,12 @@ namespace Narradia
         : p(std::make_shared<Pimpl>())
     /*//////////////////////////////*/
     {
-        p->window = std::shared_ptr<SDL_Window>(
+        p->window_ = std::shared_ptr<SDL_Window>(
             SDL_CreateWindow(
-                p->windowTitle.data(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                p->configResolution.width, p->configResolution.height, p->windowFlags),
+                p->kWindowTitle.data(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                p->kConfigResolution.width, p->kConfigResolution.height, p->kWindowFlags),
             SdlDeleter());
-        if (p->window == nullptr)
+        if (p->window_ == nullptr)
         /***********************/
         {
             std::cout << "Window could not be created! SDL Error: " << std::string(SDL_GetError())
@@ -38,7 +38,7 @@ namespace Narradia
         }
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
-        if (SDL_GL_CreateContext(p->window.get()) == nullptr)
+        if (SDL_GL_CreateContext(p->window_.get()) == nullptr)
         /***************************************************/
         {
             std::cout << "OpenGL context could not be created! SDL Error: "
@@ -53,7 +53,7 @@ namespace Narradia
     Graphics::GetWindow() const
     /*///////////////////////*/
     {
-        return p->window.get();
+        return p->window_.get();
     }
 
     void
@@ -67,7 +67,7 @@ namespace Narradia
     Graphics::PresentCanvas() const
     /*///////////////////////////*/
     {
-        SDL_GL_SwapWindow(p->window.get());
+        SDL_GL_SwapWindow(p->window_.get());
     }
 
     void
