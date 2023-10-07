@@ -10,7 +10,7 @@
 #include "RenderLoop.hpp"
 #include "Scenes/PlayScene/Modules/MobTargeting.hpp"
 #include "Scenes/SharedSceneModules/TileHovering.hpp"
-#include "Utilities.hpp"
+#include "MovementUtilities.hpp"
 #include "World/Actors/Companion.hpp"
 #include "World/Actors/Mob.hpp"
 #include "World/Actors/Player.hpp"
@@ -19,139 +19,21 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class SubDrawCompanion::Pimpl
-    /*/////////////////////////*/
-    {
-      public:
-        void DrawExclamationMark();
-        std::map<int, std::map<int, RenderId>> idsCompanionBboardExlamationMarks;
-    };
-
-    SubDrawCompanion::SubDrawCompanion()
-        : p(std::make_shared<Pimpl>())
-    /*////////////////////////////////*/
-    {
-    }
-
-    void
-    SubDrawCompanion::Create()
-    /*//////////////////////*/
-    {
-        for (auto x = -kMaxRenderRadius; x < kMaxRenderRadius; x++)
-        /*********************************************************/
-        {
-            for (auto y = -kMaxRenderRadius; y < kMaxRenderRadius; y++)
-            /*********************************************************/
-            {
-                p->idsCompanionBboardExlamationMarks[x][y] =
-                    RendererBillboardImages::Get()->NewBillboardImage();
-            }
-        }
-    }
-
-    void
-    SubDrawCompanion::DrawCompanion()
-    /*/////////////////////////////*/
-    {
-        auto tile = RenderLoop::currTile;
-        auto tileSize = kTileSize;
-        auto elevAmount = kElevAmount;
-        auto tileAvgElev = RenderLoop::currTileAvgElev;
-        auto v0 = RenderLoop::currVertTile.v0;
-        auto x0 = v0.position.x;
-        auto y0 = v0.position.y;
-        auto z0 = v0.position.z;
-        auto x = RenderLoop::currX;
-        auto y = RenderLoop::currY;
-        auto companion = tile->GetCompanion();
-        if (companion)
-        /************/
-        {
-            auto minorMovementOffset = GetMinorMovementOffsetForCompanion(companion.get());
-            auto elev00 = RenderLoop::currElev00;
-            auto elev10 = RenderLoop::currElev10;
-            auto elev11 = RenderLoop::currElev11;
-            auto elev01 = RenderLoop::currElev01;
-            auto tileAvgElev = RenderLoop::playerTileAvgElev;
-            auto elevAmount = kElevAmount;
-            auto tileSize = kTileSize;
-            auto elevDx = ((elev10 - elev00) + (elev11 - elev01)) / 2.0f;
-            auto elevDy = ((elev01 - elev00) + (elev11 - elev10)) / 2.0f;
-            auto companionElev = RenderLoop::currTileAvgElev * elevAmount +
-                                 minorMovementOffset.x * elevDx * elevAmount +
-                                 minorMovementOffset.y * elevDy * elevAmount;
-            auto deltaX = RenderLoop::currTileCoord.x - companion->GetPreviousCoordinate().x;
-            auto deltaY = RenderLoop::currTileCoord.y - companion->GetPreviousCoordinate().y;
-            auto absDeltaX = std::abs(deltaX);
-            auto absDeltaY = std::abs(deltaY);
-            auto normX = 0;
-            auto normY = 0;
-            if (deltaX)
-                normX = deltaX / absDeltaX;
-            if (deltaY)
-                normY = deltaY / absDeltaY;
-            auto facingAngle = -90.0f - std::atan2(normY, deltaX) * 180.0f / M_PI;
-            RendererModels::Get()->DrawModel(
-                Hash("Shadow"), 0,
-                {x0 + tileSize / 2 + minorMovementOffset.x * tileSize,
-                 companionElev + 0.05f * tileSize,
-                 z0 + tileSize / 2 + minorMovementOffset.y * tileSize},
-                0.0f, 0.6f);
-            auto animValue = SDL_GetTicks() * 3;
-            RendererModels::Get()->DrawModel(
-                Hash("Companion"), animValue,
-                {x0 + tileSize / 2 + minorMovementOffset.x * tileSize, companionElev,
-                 z0 + tileSize / 2 + minorMovementOffset.y * tileSize},
-                facingAngle, 0.6f, 1.0f);
-            p->DrawExclamationMark();
-        }
-    }
-
-    void
-    SubDrawCompanion::Pimpl::DrawExclamationMark()
-    /*//////////////////////////////////////////*/
-    {
-        auto tile = RenderLoop::currTile;
-        auto companion = tile->GetCompanion();
-        if (companion->GetStamina() > 0)
-            return;
-        auto x = RenderLoop::currX;
-        auto y = RenderLoop::currY;
-        auto v0 = RenderLoop::currVertTile.v0;
-        auto x0 = v0.position.x;
-        auto y0 = v0.position.y;
-        auto z0 = v0.position.z;
-        auto billboardYPos = 3.0f;
-        auto billboardPos = Point3F{
-            x0 + kTileSize / 2, RenderLoop::currTileAvgElev * kElevAmount + billboardYPos,
-            z0 + kTileSize / 2};
-        auto billboardSize = SizeF{0.9f, 0.03f};
-        auto exlamationMarkWidth = 0.1f;
-        auto exlamationMarkHeight = 0.1f;
-        auto exlamationMarkPos = billboardPos.Translate(0.f, kTileSize, 0.f);
-        exlamationMarkPos = Camera::Get()->MoveCloserToCamera(exlamationMarkPos, kTileSize);
-        auto exlamationMarkBounds = RectangleF{-.5f, -.5f, 1.f, 1.f};
-        auto exlamationMarkSize = SizeF{exlamationMarkWidth, exlamationMarkHeight};
-        RendererBillboardImages::Get()->DrawBillboardImage(
-            Hash("ExclamationMark"), idsCompanionBboardExlamationMarks[x][y], exlamationMarkPos,
-            exlamationMarkBounds, exlamationMarkSize);
-    }
-
-    class SubDrawGround::Pimpl
+    class SubDrawerGround::Pimpl
     /*//////////////////////*/
     {
       public:
         std::map<int, std::map<int, RenderId>> idsTileLayers;
     };
 
-    SubDrawGround::SubDrawGround()
+    SubDrawerGround::SubDrawerGround()
         : p(std::make_shared<Pimpl>())
     /*//////////////////////////////*/
     {
     }
 
     void
-    SubDrawGround::Create()
+    SubDrawerGround::Create()
     /*///////////////////*/
     {
         for (auto y = 0; y < MapArea::GetMapSize().height; y++)
@@ -160,7 +42,7 @@ namespace Narradia
     }
 
     void
-    SubDrawGround::DrawGround(bool doDrawTerritoryBorders)
+    SubDrawerGround::DrawGround(bool doDrawTerritoryBorders)
     /*//////////////////////////////////////////////////*/
     {
         auto tile = RenderLoop::currTile;
@@ -269,7 +151,7 @@ namespace Narradia
         }
     }
 
-    class SubDrawMob::Pimpl
+    class SubDrawerMob::Pimpl
     /*///////////////////*/
     {
       public:
@@ -282,21 +164,21 @@ namespace Narradia
         const int kShowHitEffectDuration = 600;
     };
 
-    SubDrawMob::SubDrawMob()
+    SubDrawerMob::SubDrawerMob()
         : p(std::make_shared<Pimpl>())
     /*//////////////////////////////*/
     {
     }
 
     void
-    SubDrawMob::Create()
+    SubDrawerMob::Create()
     /*////////////////*/
     {
         p->InitializeIds();
     }
 
     void
-    SubDrawMob::DrawMob()
+    SubDrawerMob::DrawMob()
     /*/////////////////*/
     {
         auto tile = RenderLoop::currTile;
@@ -309,7 +191,7 @@ namespace Narradia
     }
 
     void
-    SubDrawMob::Pimpl::InitializeIds()
+    SubDrawerMob::Pimpl::InitializeIds()
     /*//////////////////////////////*/
     {
         for (auto x = -kMaxRenderRadius; x < kMaxRenderRadius; x++)
@@ -318,7 +200,7 @@ namespace Narradia
     }
 
     int
-    SubDrawMob::Pimpl::GetAnimationValue()
+    SubDrawerMob::Pimpl::GetAnimationValue()
     /*//////////////////////////////////*/
     {
         auto tileCoord = RenderLoop::currTileCoord;
@@ -326,7 +208,7 @@ namespace Narradia
     }
 
     void
-    SubDrawMob::Pimpl::DrawShadow()
+    SubDrawerMob::Pimpl::DrawShadow()
     /*///////////////////////////*/
     {
         auto v0 = RenderLoop::currVertTile.v0;
@@ -351,7 +233,7 @@ namespace Narradia
     }
 
     void
-    SubDrawMob::Pimpl::DrawMobModel()
+    SubDrawerMob::Pimpl::DrawMobModel()
     /*/////////////////////////////*/
     {
         auto v0 = RenderLoop::currVertTile.v0;
@@ -399,7 +281,7 @@ namespace Narradia
     }
 
     void
-    SubDrawMob::Pimpl::IfCaseDrawMobLabel()
+    SubDrawerMob::Pimpl::IfCaseDrawMobLabel()
     /*///////////////////////////////////*/
     {
         auto v0 = RenderLoop::currVertTile.v0;
@@ -424,7 +306,7 @@ namespace Narradia
         }
     }
 
-    class SubDrawPlayer::Pimpl
+    class SubDrawerPlayer::Pimpl
     /*//////////////////////*/
     {
       public:
@@ -433,21 +315,21 @@ namespace Narradia
         RenderId idBillboardTextPlayerName;
     };
 
-    SubDrawPlayer::SubDrawPlayer()
+    SubDrawerPlayer::SubDrawerPlayer()
         : p(std::make_shared<Pimpl>())
     /*//////////////////////////////*/
     {
     }
 
     void
-    SubDrawPlayer::Create()
+    SubDrawerPlayer::Create()
     /*///////////////////*/
     {
         p->idBillboardTextPlayerName = TextRenderer::Get()->NewBillboardString();
     }
 
     void
-    SubDrawPlayer::DrawPlayer()
+    SubDrawerPlayer::DrawPlayer()
     /*///////////////////////*/
     {
         auto pos = Player::Get()->GetSpaceCoord().Translate(0.0f, p->GetPlayerElevation(), 0.0f);
@@ -508,7 +390,7 @@ namespace Narradia
     }
 
     void
-    SubDrawPlayer::Pimpl::DrawLabel()
+    SubDrawerPlayer::Pimpl::DrawLabel()
     /*/////////////////////////////*/
     {
         auto pos = Player::Get()->GetSpaceCoord().Translate(0.0f, GetPlayerElevation(), 0.0f);
@@ -522,7 +404,7 @@ namespace Narradia
     }
 
     float
-    SubDrawPlayer::Pimpl::GetPlayerElevation()
+    SubDrawerPlayer::Pimpl::GetPlayerElevation()
     /*//////////////////////////////////////*/
     {
         const auto playerPos = Player::Get()->GetPosition();
@@ -541,7 +423,7 @@ namespace Narradia
     }
 
     void
-    SubDrawSky::DrawSky()
+    SubDrawerSky::DrawSky()
     /*/////////////////*/
     {
         const auto playerWorldAreaPos = Player::Get()->GetWorldAreaPos();

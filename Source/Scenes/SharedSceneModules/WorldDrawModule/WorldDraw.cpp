@@ -9,6 +9,7 @@
 #include "SubDraws.hpp"
 #include "World/Actors/Mob.hpp"
 #include "World/Tile.hpp"
+#include "SubDrawers/SubDrawerCompanion.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
@@ -18,15 +19,15 @@ namespace Narradia
         Log();
         Camera::Get()->Create();
         Log();
-        SubDrawGround::Get()->Create();
+        SubDrawerGround::Get()->Create();
         Log();
-        SubDrawMob::Get()->Create();
+        SubDrawerMob::Get()->Create();
         Log();
-        SubDrawCompanion::Get()->Create();
+        SubDrawerCompanion::Get()->Create();
         Log();
-        SubDrawPlayer::Get()->Create();
+        SubDrawerPlayer::Get()->Create();
         Log();
-        SubDrawSky::Get()->Create();
+        SubDrawerSky::Get()->Create();
         Log();
         auto allModels = ModelBank::Get()->GetAllModels();
         for (auto &model : allModels)
@@ -45,12 +46,12 @@ namespace Narradia
     /*///////////////*/
     {
         Log();
-        SubDrawSky::Get()->DrawSky();
+        SubDrawerSky::Get()->DrawSky();
         RenderLoop::data1.clear();
         RenderLoop::data2.clear();
         RendererTiles::Get()->StartBatchDrawing();
         RenderLoop(
-            [&]() { SubDrawGround::Get()->DrawGround(worldViewMode == WorldDrawModes::Play); })();
+            [&]() { SubDrawerGround::Get()->DrawGround(worldViewMode == WorldDrawModes::Play); })();
         RendererTiles::Get()->StopBatchDrawing();
         auto msTime1 = SDL_GetTicks() * 2;
         auto msTime2 = SDL_GetTicks() * 2 + 1000;
@@ -87,15 +88,15 @@ namespace Narradia
                                0.0f, 0.6f, 1.0f);
                        }
                        Log();
-                       SubDrawMob::Get()->DrawMob();
+                       SubDrawerMob::Get()->DrawMob();
                        Log();
-                       SubDrawCompanion::Get()->DrawCompanion();
+                       SubDrawerCompanion::Get()->DrawCompanion();
                    })();
         if (worldViewMode == WorldDrawModes::Play)
         /****************************************/
         {
             Log();
-            SubDrawPlayer::Get()->DrawPlayer();
+            SubDrawerPlayer::Get()->DrawPlayer();
         }
     }
 

@@ -39,15 +39,15 @@ namespace Narradia
                 {
                 case PlayerBuilds::Sword:
                     /*******************/
-                    Player::Get().data.stats.stam -= 1;
-                    Player::Get().data.stats.rage += 1;
-                    TextOutBox::Get().Print(
+                    Player::Get()->data.stats.stam -= 1;
+                    Player::Get()->data.stats.rage += 1;
+                    TextOutBox::Get()->Print(
                         "You hit mob with your sword for " + std::to_string(damage) + " damage.");
                     break;
                 case PlayerBuilds::Club:
                     /******************/
-                    Player::Get().data.stats.rage -= 1;
-                    TextOutBox::Get().Print(
+                    Player::Get()->data.stats.rage -= 1;
+                    TextOutBox::Get()->Print(
                         "You hit mob with your club for " + std::to_string(damage) + " damage.");
                     break;
                 case PlayerBuilds::None:

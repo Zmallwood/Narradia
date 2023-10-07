@@ -3,24 +3,11 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class SubDrawCompanion : public Singleton<SubDrawCompanion>
-    /*///////////////////////////////////////////////////////*/
-    {
-      public:
-        SubDrawCompanion();
-        void Create();
-        void DrawCompanion();
-
-      private:
-        class Pimpl;
-        std::shared_ptr<Pimpl> p;
-    };
-
-    class SubDrawGround : public Singleton<SubDrawGround>
+    class SubDrawerGround : public Singleton<SubDrawerGround>
     /*/////////////////////////////////////////////////*/
     {
       public:
-        SubDrawGround();
+        SubDrawerGround();
         void Create();
         void DrawGround(bool = true);
 
@@ -29,11 +16,11 @@ namespace Narradia
         std::shared_ptr<Pimpl> p;
     };
 
-    class SubDrawMob : public Singleton<SubDrawMob>
+    class SubDrawerMob : public Singleton<SubDrawerMob>
     /*///////////////////////////////////////////*/
     {
       public:
-        SubDrawMob();
+        SubDrawerMob();
         void Create();
         void DrawMob();
 
@@ -42,11 +29,11 @@ namespace Narradia
         std::shared_ptr<Pimpl> p;
     };
 
-    class SubDrawPlayer : public Singleton<SubDrawPlayer>
+    class SubDrawerPlayer : public Singleton<SubDrawerPlayer>
     /*/////////////////////////////////////////////////*/
     {
       public:
-        SubDrawPlayer();
+        SubDrawerPlayer();
         void Create();
         void DrawPlayer();
 
@@ -55,7 +42,7 @@ namespace Narradia
         std::shared_ptr<Pimpl> p;
     };
     
-    class SubDrawSky : public Singleton<SubDrawSky>
+    class SubDrawerSky : public Singleton<SubDrawerSky>
     /*///////////////////////////////////////////*/
     {
       public:
