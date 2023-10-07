@@ -96,4 +96,3 @@ namespace Narradia
         AddGuiComponent(std::shared_ptr<MobBrowserGui>(MobBrowserGui::Get()));
     }
 }
-//////////////////////////////////////////////////////////////////////

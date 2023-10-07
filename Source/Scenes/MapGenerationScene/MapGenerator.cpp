@@ -560,4 +560,3 @@ namespace Narradia
         World::Get()->ApplyDefaultColorVariations();
     }
 }
-//////////////////////////////////////////////////////////////////////

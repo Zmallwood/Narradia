@@ -30,4 +30,3 @@ namespace Narradia
         Renderer2DImages::Get()->DrawImage("Green", glIdFilledArea, filledArea);
     }
 }
-//////////////////////////////////////////////////////////////////////

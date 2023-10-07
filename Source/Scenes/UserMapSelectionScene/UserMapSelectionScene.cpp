@@ -39,4 +39,3 @@ namespace Narradia
         Renderer2DImages::Get()->DrawImage("DefaultSceneBackground", glIdBackgroundImage, rectBack);
     }
 }
-//////////////////////////////////////////////////////////////////////

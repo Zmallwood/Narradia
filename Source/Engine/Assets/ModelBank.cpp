@@ -67,4 +67,3 @@ namespace Narradia
         return ModelCreator::Get()->CreateModel(scene);
     }
 }
-//////////////////////////////////////////////////////////////////////

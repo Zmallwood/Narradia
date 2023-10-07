@@ -26,4 +26,3 @@ namespace Narradia
         void Translate(Point3F *, aiVectorKey) const;
     };
 }
-//////////////////////////////////////////////////////////////////////

@@ -24,4 +24,3 @@ namespace Narradia
         return {static_cast<int>(x), static_cast<int>(y)};
     }
 }
-//////////////////////////////////////////////////////////////////////

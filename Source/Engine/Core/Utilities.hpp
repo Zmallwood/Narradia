@@ -16,4 +16,3 @@ namespace Narradia
     Point2 GetMousePositionPx();
     Point2F GetMousePositionF();
 }
-//////////////////////////////////////////////////////////////////////

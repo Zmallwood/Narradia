@@ -125,4 +125,3 @@ namespace Narradia
         return static_cast<int>(p->bounds.height / p->textLineHeight) - 2;
     }
 }
-//////////////////////////////////////////////////////////////////////

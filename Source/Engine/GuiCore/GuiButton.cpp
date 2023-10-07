@@ -87,4 +87,3 @@ namespace Narradia
             p->rendIdLabelText, p->text, usedBounds.Center(), Colors::wheat, true);
     }
 }
-//////////////////////////////////////////////////////////////////////

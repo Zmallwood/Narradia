@@ -147,4 +147,3 @@ namespace Narradia
         return x >= 0 && y >= 0 && x < Pimpl::mapSize.width && y < Pimpl::mapSize.height;
     }
 }
-//////////////////////////////////////////////////////////////////////

@@ -127,4 +127,3 @@ namespace Narradia
         return {GetPosition().x, GetPosition().y, GetSize().width, Pimpl::kTitleBarHeight};
     }
 }
-//////////////////////////////////////////////////////////////////////

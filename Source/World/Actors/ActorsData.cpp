@@ -87,5 +87,4 @@ namespace Narradia
         skills["Sword"] = Skill{"Sword"};
         skills["Club"] = Skill{"Club"};
     }
-};
-//////////////////////////////////////////////////////////////////////
+}

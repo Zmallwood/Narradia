@@ -79,4 +79,3 @@ namespace Narradia
         AddGuiComponent(std::shared_ptr<ExperienceBar>(ExperienceBar::Get()));
     }
 }
-//////////////////////////////////////////////////////////////////////

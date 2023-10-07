@@ -13,4 +13,3 @@ namespace Narradia
         std::vector<std::shared_ptr<const ModelPart>> modelParts;
     };
 }
-//////////////////////////////////////////////////////////////////////

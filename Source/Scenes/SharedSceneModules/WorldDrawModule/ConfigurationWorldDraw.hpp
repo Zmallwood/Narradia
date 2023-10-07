@@ -7,4 +7,3 @@ namespace Narradia
     constexpr float kElevAmount = 0.5f;
     constexpr int kMaxRenderRadius = 30;
 }
-//////////////////////////////////////////////////////////////////////

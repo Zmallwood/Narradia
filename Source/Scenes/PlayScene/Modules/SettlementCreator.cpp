@@ -52,4 +52,3 @@ namespace Narradia
         TextOutBox::Get()->Print("You have created a settlement.");
     }
 }
-//////////////////////////////////////////////////////////////////////

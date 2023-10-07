@@ -33,4 +33,3 @@ namespace Narradia
             glIdMessageText, messageText, GetPosition().Translate(0.01f, 0.05f), Colors::yellow);
     }
 }
-//////////////////////////////////////////////////////////////////////

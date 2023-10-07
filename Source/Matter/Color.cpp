@@ -12,4 +12,3 @@ namespace Narradia
             static_cast<unsigned char>(b * 255), static_cast<unsigned char>(a * 255)};
     }
 }
-//////////////////////////////////////////////////////////////////////

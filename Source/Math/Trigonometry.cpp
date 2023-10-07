@@ -17,4 +17,3 @@ namespace Narradia
         return cosf(angleDeg * static_cast<float>(M_PI) / 180.0f);
     }
 }
-//////////////////////////////////////////////////////////////////////

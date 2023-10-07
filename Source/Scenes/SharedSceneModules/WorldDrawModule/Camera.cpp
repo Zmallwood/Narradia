@@ -144,4 +144,3 @@ namespace Narradia
             original_point.z + camDz / radius * amount};
     }
 }
-//////////////////////////////////////////////////////////////////////

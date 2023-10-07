@@ -15,4 +15,3 @@ namespace Narradia
         bool has_given_create_stone_axe_advice = false;
     };
 }
-//////////////////////////////////////////////////////////////////////

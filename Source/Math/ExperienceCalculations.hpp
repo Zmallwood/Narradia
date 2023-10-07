@@ -10,4 +10,3 @@ namespace Narradia
     int GetExpGainedSinceLevelStart(int);
     float GetFractionalExpProgress(int);
 }
-//////////////////////////////////////////////////////////////////////

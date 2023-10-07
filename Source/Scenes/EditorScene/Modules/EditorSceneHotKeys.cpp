@@ -25,4 +25,3 @@ namespace Narradia
             EditorSceneGuiMenu::Get()->visible = !EditorSceneGuiMenu::Get()->visible;
     }
 }
-//////////////////////////////////////////////////////////////////////

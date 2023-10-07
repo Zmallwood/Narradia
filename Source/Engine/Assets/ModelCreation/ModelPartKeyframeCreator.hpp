@@ -25,4 +25,3 @@ namespace Narradia
             -> std::map<std::string, std::vector<aiVectorKey>>;
     };
 }
-//////////////////////////////////////////////////////////////////////

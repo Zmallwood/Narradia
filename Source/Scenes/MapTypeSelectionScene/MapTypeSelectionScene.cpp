@@ -51,4 +51,3 @@ namespace Narradia
         Renderer2DImages::Get()->DrawImage("NarradiaLogo", p->glIdLogoImage, p->rectLogo);
     }
 }
-//////////////////////////////////////////////////////////////////////

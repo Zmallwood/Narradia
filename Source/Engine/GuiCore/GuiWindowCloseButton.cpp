@@ -95,4 +95,3 @@ namespace Narradia
             parentWindow->GetBounds().y + 0.03f / 2 - height / 2, width, height};
     }
 }
-//////////////////////////////////////////////////////////////////////

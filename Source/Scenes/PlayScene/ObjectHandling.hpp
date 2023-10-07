@@ -8,4 +8,3 @@ namespace Narradia
     void RemoveObjectMirror(Object *&);
     std::shared_ptr<Object> MoveObject(Object *);
 }
-//////////////////////////////////////////////////////////////////////

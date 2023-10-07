@@ -143,4 +143,3 @@ namespace Narradia
             list.insert({objectNameHash, ObjectBehaviourEntry()});
     }
 }
-//////////////////////////////////////////////////////////////////////

@@ -226,4 +226,3 @@ namespace Narradia
         TextOutBox::Get()->Print("World loaded with name " + std::string(mapName.data()) + ".");
     }
 }
-//////////////////////////////////////////////////////////////////////

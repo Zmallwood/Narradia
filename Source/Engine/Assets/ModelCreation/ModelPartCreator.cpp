@@ -180,4 +180,3 @@ namespace Narradia
         *position = {-aiPosition.x, aiPosition.y, aiPosition.z};
     }
 }
-//////////////////////////////////////////////////////////////////////

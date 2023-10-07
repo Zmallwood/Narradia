@@ -23,4 +23,3 @@ namespace Narradia
         inline static constexpr int kFontOutlineWidth = 2;
     };
 }
-//////////////////////////////////////////////////////////////////////

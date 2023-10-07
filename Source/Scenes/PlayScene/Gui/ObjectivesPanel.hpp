@@ -24,4 +24,3 @@ namespace Narradia
         const RectangleF relBoundsHorizontalSplitter;
     };
 }
-//////////////////////////////////////////////////////////////////////

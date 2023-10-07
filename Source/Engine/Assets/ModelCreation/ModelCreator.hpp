@@ -19,4 +19,3 @@ namespace Narradia
         auto GetNodeMeshes(const aiScene *, std::vector<int>) const -> std::vector<aiMesh *>;
     };
 }
-//////////////////////////////////////////////////////////////////////

@@ -31,4 +31,3 @@ namespace Narradia
             GetBounds().GetPosition().Translate(0.02f, 0.05f));
     }
 }
-//////////////////////////////////////////////////////////////////////

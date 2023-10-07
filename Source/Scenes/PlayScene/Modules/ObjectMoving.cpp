@@ -162,4 +162,3 @@ namespace Narradia
             objectInAir->GetObjectType(), id_moving_object_image, rectangle);
     }
 }
-//////////////////////////////////////////////////////////////////////

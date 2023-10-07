@@ -30,4 +30,3 @@ namespace Narradia
             PlaySceneGuiMenu::Get()->visible = !PlaySceneGuiMenu::Get()->visible;
     }
 }
-//////////////////////////////////////////////////////////////////////

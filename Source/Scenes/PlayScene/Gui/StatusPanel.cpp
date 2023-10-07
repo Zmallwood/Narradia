@@ -51,4 +51,3 @@ namespace Narradia
         Renderer2DImages::Get()->DrawImage("Red", rendIdPlRageBarFilled, rageBarFilledBounds);
     }
 }
-//////////////////////////////////////////////////////////////////////

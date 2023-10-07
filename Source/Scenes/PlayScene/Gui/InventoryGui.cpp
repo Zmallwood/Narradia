@@ -67,4 +67,3 @@ namespace Narradia
             "GuiWindowInvBottomBarBg", bottomBarRendId, bottomBarBounds);
     }
 }
-//////////////////////////////////////////////////////////////////////

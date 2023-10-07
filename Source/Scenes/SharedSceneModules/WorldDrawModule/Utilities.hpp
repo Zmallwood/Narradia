@@ -9,4 +9,3 @@ namespace Narradia
     Point2F GetMinorMovementOffsetForMob(Mob *);
     Point2F GetMinorMovementOffsetForCompanion(Companion *);
 }
-//////////////////////////////////////////////////////////////////////
