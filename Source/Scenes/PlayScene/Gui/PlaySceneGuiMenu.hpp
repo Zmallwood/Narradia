@@ -10,9 +10,10 @@ namespace Narradia
         PlaySceneGuiMenu();
         void Update() override;
         void Render() const override;
-        bool visible = false;
+        
+        bool visible_ = false;
 
       private:
-        RenderId glIdCanvasCover;
+        RenderId rendid_canvas_cover_;
     };
 }

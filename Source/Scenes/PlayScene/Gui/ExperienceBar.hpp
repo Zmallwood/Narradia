@@ -13,7 +13,8 @@ namespace Narradia
       private:
         void Update() override;
         void Render() const override;
-        RenderId glIdUnfilledArea;
-        RenderId glIdFilledArea;
+        
+        RenderId rendid_unfilled_area_;
+        RenderId rendid_filled_area_;
     };
 }

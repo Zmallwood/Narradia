@@ -7,15 +7,15 @@ namespace Narradia
 {
     MessageBox::MessageBox(std::string_view title_, std::string_view messageText_)
         : GuiWindow(title_, {0.25f, 0.35f, 0.5f, 0.1f}, true, "PanelBgBlue"),
-          messageText(messageText_)
+          message_text_(messageText_)
     /*//////////////////////////////////////////////////////////////////////////*/
     {
         Show();
-        glIdMessageText = TextRenderer::Get()->NewString();
-        auto mainScene = PlayScene::Get();
-        auto sceneGui = mainScene->GetSceneGui();
-        std::function<void()> confirmAction = [=, this] { sceneGui->RemoveGuiComponent(this); };
-        AddGuiButton("Ok", {0.45f, 0.06f, 0.035f, ConvertWidthToHeight(0.015f)}, confirmAction);
+        rendid_message_text_ = TextRenderer::Get()->NewString();
+        auto main_scene = PlayScene::Get();
+        auto scene_gui = main_scene->GetSceneGui();
+        std::function<void()> confirm_action = [=, this] { scene_gui->RemoveGuiComponent(this); };
+        AddGuiButton("Ok", {0.45f, 0.06f, 0.035f, ConvertWidthToHeight(0.015f)}, confirm_action);
     }
 
     void
@@ -29,6 +29,6 @@ namespace Narradia
     /*/////////////////////////////*/
     {
         TextRenderer::Get()->DrawString(
-            glIdMessageText, messageText, GetPosition().Translate(0.01f, 0.05f), Colors::yellow);
+            rendid_message_text_, message_text_, GetPosition().Translate(0.01f, 0.05f), Colors::yellow);
     }
 }

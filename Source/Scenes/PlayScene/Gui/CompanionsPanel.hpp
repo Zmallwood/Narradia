@@ -12,15 +12,15 @@ namespace Narradia
       private:
         void Update() override;
         void Render() const override;
-        static constexpr Point2F k_start_position = {0.02f, 0.2f};
-        static constexpr SizeF k_size = {0.15f, 0.3f};
-        static constexpr std::string_view k_title_text = "Companions";
-        const RectangleF rel_bounds_horizontal_splitter;
-        RenderId id_background_image;
-        RenderId id_horizntal_splitter;
-        RenderId id_title_text;
-        std::array<RenderId, 4> ids_companions_label_text;
-        std::array<RenderId, 4> ids_companions_stamina_back;
-        std::array<RenderId, 4> ids_companions_stamina_filled;
+        static constexpr Point2F kStartPosition = {0.02f, 0.2f};
+        static constexpr SizeF kSize = {0.15f, 0.3f};
+        static constexpr std::string_view kTitleText = "Companions";
+        const RectangleF kRelBoundsHorizontalSplitter;
+        RenderId rendid_background_image_;
+        RenderId rendid_horizontal_splitter_;
+        RenderId rendid_title_text_;
+        std::array<RenderId, 4> rendids_companions_label_texts_;
+        std::array<RenderId, 4> rendids_companions_stamina_backs_;
+        std::array<RenderId, 4> rendids_companions_stamina_filleds_;
     };
 }

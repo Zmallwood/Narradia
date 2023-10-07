@@ -14,18 +14,18 @@ namespace Narradia
         for (auto i = 0; i < Player::Get()->skillSet.skills.size(); i++)
         /***********************************************************/
         {
-            glIdsSkillLabels.push_back(TextRenderer::Get()->NewString());
-            glIdsSkillLevelValues.push_back(TextRenderer::Get()->NewString());
-            glIdsSkillAddPointButton.push_back(Renderer2DImages::Get()->NewImage());
+            rendids_skills_labels_.push_back(TextRenderer::Get()->NewString());
+            rendids_skill_levels_values_.push_back(TextRenderer::Get()->NewString());
+            rendids_skill_add_points_buttons_.push_back(Renderer2DImages::Get()->NewImage());
         }
-        glIdAvailablePoints = TextRenderer::Get()->NewString();
+        rendid_available_points_ = TextRenderer::Get()->NewString();
     }
 
     void
     SkillsGui::UpdateDerived()
     /*//////////////////////*/
     {
-        auto mousePos = GetMousePositionF();
+        auto mouse_position = GetMousePositionF();
         auto i = 0;
         for (auto &skill : Player::Get()->skillSet.skills)
         /*********************************************/
@@ -33,10 +33,10 @@ namespace Narradia
             if (Player::Get()->skillSet.availablePoints > 0)
             /*******************************************/
             {
-                RectangleF addPointButtonRect = {
+                RectangleF add_point_button_rect = {
                     GetPosition().x + 0.15f, GetPosition().y + 0.04f + i * 0.03f, 0.01f,
                     ConvertWidthToHeight(0.01f)};
-                if (addPointButtonRect.Contains(mousePos))
+                if (add_point_button_rect.Contains(mouse_position))
                 /****************************************/
                 {
                     Cursor::Get()->SetCursorType(CursorTypes::Hovering);
@@ -57,46 +57,46 @@ namespace Narradia
     SkillsGui::RenderDerived() const
     /*////////////////////////////*/
     {
-        auto mousePos = GetMousePositionF();
+        auto mouse_position = GetMousePositionF();
         auto i = 0;
         for (auto &skill : Player::Get()->skillSet.skills)
         /*********************************************/
         {
             TextRenderer::Get()->DrawString(
-                glIdsSkillLabels.at(i), skill.second.label.data(),
+                rendids_skills_labels_.at(i), skill.second.label.data(),
                 GetPosition().Translate(0.01f, 0.05f + i * 0.03f));
             std::stringstream stream;
             stream << std::fixed << std::setprecision(1) << skill.second.level;
             std::string_view s = stream.str();
             TextRenderer::Get()->DrawString(
-                glIdsSkillLevelValues.at(i), s, GetPosition().Translate(0.13f, 0.05f + i * 0.03f));
+                rendids_skill_levels_values_.at(i), s, GetPosition().Translate(0.13f, 0.05f + i * 0.03f));
             if (Player::Get()->skillSet.availablePoints > 0)
             /*******************************************/
             {
-                RectangleF addPointButtonRect = {
+                RectangleF add_point_button_rect = {
                     GetPosition().x + 0.15f, GetPosition().y + 0.04f + i * 0.03f, 0.01f,
                     ConvertWidthToHeight(0.01f)};
-                if (addPointButtonRect.Contains(mousePos))
+                if (add_point_button_rect.Contains(mouse_position))
                 /****************************************/
                 {
                     Renderer2DImages::Get()->DrawImage(
-                        "SkillsWindowAddPointButtonHovered", glIdsSkillAddPointButton.at(i),
-                        addPointButtonRect);
+                        "SkillsWindowAddPointButtonHovered", rendids_skill_add_points_buttons_.at(i),
+                        add_point_button_rect);
                 }
                 else
                 /**/
                 {
                     Renderer2DImages::Get()->DrawImage(
-                        "SkillsWindowAddPointButton", glIdsSkillAddPointButton.at(i),
-                        addPointButtonRect);
+                        "SkillsWindowAddPointButton", rendids_skill_add_points_buttons_.at(i),
+                        add_point_button_rect);
                 }
             }
             i++;
         }
-        std::string_view availPointsText =
+        std::string_view available_points_text =
             "Available points: " + std::to_string(Player::Get()->skillSet.availablePoints);
         TextRenderer::Get()->DrawString(
-            glIdAvailablePoints, availPointsText,
+            rendid_available_points_, available_points_text,
             GetPosition().Translate(0.01f, 0.07f + i * 0.03f));
     }
 }

@@ -10,25 +10,25 @@
 namespace Narradia
 {
     CompanionsPanel::CompanionsPanel()
-        : GuiMovableContainer(k_size.ToRectangle(), k_start_position, k_size),
-          rel_bounds_horizontal_splitter({0.005f, 0.035f, k_size.width - 2 * 0.005f, 0.002f})
+        : GuiMovableContainer(kSize.ToRectangle(), kStartPosition, kSize),
+          kRelBoundsHorizontalSplitter({0.005f, 0.035f, kSize.width - 2 * 0.005f, 0.002f})
     /*/////////////////////////////////////////////////////////////////////////////////////*/
     {
-        id_background_image = Renderer2DImages::Get()->NewImage();
-        id_horizntal_splitter = Renderer2DImages::Get()->NewImage();
-        id_title_text = TextRenderer::Get()->NewString();
-        ids_companions_label_text[0] = TextRenderer::Get()->NewString();
-        ids_companions_label_text[1] = TextRenderer::Get()->NewString();
-        ids_companions_label_text[2] = TextRenderer::Get()->NewString();
-        ids_companions_label_text[3] = TextRenderer::Get()->NewString();
-        ids_companions_stamina_back[0] = Renderer2DSolidColors::Get()->NewRectangle();
-        ids_companions_stamina_back[1] = Renderer2DSolidColors::Get()->NewRectangle();
-        ids_companions_stamina_back[2] = Renderer2DSolidColors::Get()->NewRectangle();
-        ids_companions_stamina_back[3] = Renderer2DSolidColors::Get()->NewRectangle();
-        ids_companions_stamina_filled[0] = Renderer2DImages::Get()->NewImage();
-        ids_companions_stamina_filled[1] = Renderer2DImages::Get()->NewImage();
-        ids_companions_stamina_filled[2] = Renderer2DImages::Get()->NewImage();
-        ids_companions_stamina_filled[3] = Renderer2DImages::Get()->NewImage();
+        rendid_background_image_ = Renderer2DImages::Get()->NewImage();
+        rendid_horizontal_splitter_ = Renderer2DImages::Get()->NewImage();
+        rendid_title_text_ = TextRenderer::Get()->NewString();
+        rendids_companions_label_texts_[0] = TextRenderer::Get()->NewString();
+        rendids_companions_label_texts_[1] = TextRenderer::Get()->NewString();
+        rendids_companions_label_texts_[2] = TextRenderer::Get()->NewString();
+        rendids_companions_label_texts_[3] = TextRenderer::Get()->NewString();
+        rendids_companions_stamina_backs_[0] = Renderer2DSolidColors::Get()->NewRectangle();
+        rendids_companions_stamina_backs_[1] = Renderer2DSolidColors::Get()->NewRectangle();
+        rendids_companions_stamina_backs_[2] = Renderer2DSolidColors::Get()->NewRectangle();
+        rendids_companions_stamina_backs_[3] = Renderer2DSolidColors::Get()->NewRectangle();
+        rendids_companions_stamina_filleds_[0] = Renderer2DImages::Get()->NewImage();
+        rendids_companions_stamina_filleds_[1] = Renderer2DImages::Get()->NewImage();
+        rendids_companions_stamina_filleds_[2] = Renderer2DImages::Get()->NewImage();
+        rendids_companions_stamina_filleds_[3] = Renderer2DImages::Get()->NewImage();
     }
 
     void
@@ -42,14 +42,14 @@ namespace Narradia
     CompanionsPanel::Render() const
     /*///////////////////////////*/
     {
-        Renderer2DImages::Get()->DrawImage(Hash("PanelBg"), id_background_image, GetBounds());
+        Renderer2DImages::Get()->DrawImage(Hash("PanelBg"), rendid_background_image_, GetBounds());
         TextRenderer::Get()->DrawString(
-            id_title_text, k_title_text.data(), GetPosition().Translate(0.014f, 0.018f));
+            rendid_title_text_, kTitleText.data(), GetPosition().Translate(0.014f, 0.018f));
         Renderer2DImages::Get()->DrawImage(
-            Hash("HorizontalSplitter"), id_horizntal_splitter,
-            rel_bounds_horizontal_splitter.Translate(GetPosition().x, GetPosition().y));
-        auto player_world_area_pos = Player::Get()->GetWorldAreaPos();
-        auto map_area = World::Get()->GetMapAreaAtZLevel(player_world_area_pos.z);
+            Hash("HorizontalSplitter"), rendid_horizontal_splitter_,
+            kRelBoundsHorizontalSplitter.Translate(GetPosition().x, GetPosition().y));
+        auto player_world_area_position = Player::Get()->GetWorldAreaPos();
+        auto map_area = World::Get()->GetMapAreaAtZLevel(player_world_area_position.z);
         auto it = map_area->GetCompanionsMirror().cbegin();
         for (auto i = 0; i < 4; i++)
         /**************************/
@@ -67,12 +67,12 @@ namespace Narradia
             auto rectangle_filled = rectangle_back;
             rectangle_filled.width = stamina_bar_width_filled;
             TextRenderer::Get()->DrawString(
-                ids_companions_label_text[i], "Comp. " + std::to_string(i),
+                rendids_companions_label_texts_[i], "Comp. " + std::to_string(i),
                 GetPosition().Translate(0.01f, 0.07f + i * 0.04f));
             Renderer2DSolidColors::Get()->FillRectangle(
-                ids_companions_stamina_back[i], rectangle_back, Colors::black);
+                rendids_companions_stamina_backs_[i], rectangle_back, Colors::black);
             Renderer2DImages::Get()->DrawImage(
-                "Yellow", ids_companions_stamina_filled[i], rectangle_filled);
+                "Yellow", rendids_companions_stamina_filleds_[i], rectangle_filled);
             ++it;
         }
         GuiMovableContainer::Render();

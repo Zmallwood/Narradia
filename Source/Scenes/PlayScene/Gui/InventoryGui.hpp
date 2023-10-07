@@ -14,9 +14,10 @@ namespace Narradia
       private:
         void UpdateDerived() override;
         void RenderDerived() const override;
-        std::shared_ptr<GuiWindowObjectSlot> slots[5][6];
-        const int numRows = 6;
-        const int numCols = 5;
-        RenderId bottomBarRendId;
+
+        const int kNumRows = 6;
+        const int kNumCols = 5;
+        std::shared_ptr<GuiWindowObjectSlot> slots_[5][6];
+        RenderId rendid_bottom_bar_;
     };
 }

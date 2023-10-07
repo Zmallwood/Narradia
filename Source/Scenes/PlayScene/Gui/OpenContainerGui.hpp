@@ -11,6 +11,7 @@ namespace Narradia
     {
       public:
         OpenContainerGui(Object *);
+
         Object *object;
 
       protected:
@@ -18,9 +19,9 @@ namespace Narradia
         void RenderDerived() const override;
 
       private:
-        static constexpr int maxNumRows = 6;
-        static constexpr int maxNumCols = 5;
-        int numSlots;
-        std::shared_ptr<GuiWindowObjectSlot> slots[maxNumCols][maxNumRows];
+        static constexpr int kMaxNumRows = 6;
+        static constexpr int kMaxNumCols = 5;
+        int num_slots_;
+        std::shared_ptr<GuiWindowObjectSlot> slots_[kMaxNumCols][kMaxNumRows];
     };
 }

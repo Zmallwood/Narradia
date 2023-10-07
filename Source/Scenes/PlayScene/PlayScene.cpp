@@ -46,7 +46,7 @@ namespace Narradia
     PlayScene::Enter()
     /*//////////////*/
     {
-        PlaySceneGuiMenu::Get()->visible = false;
+        PlaySceneGuiMenu::Get()->visible_ = false;
         ActiveGameRound::Create();
         StartConditions().CreateStartConditions();
         SettlementCreator().CreateSettlement();
@@ -65,7 +65,7 @@ namespace Narradia
             return;
         Log();
         PlaySceneHotkeys().Update();
-        if (true == PlaySceneGuiMenu::Get()->visible)
+        if (true == PlaySceneGuiMenu::Get()->visible_)
             return;
         Log();
         ActionRepeat::Get()->Update();
@@ -105,7 +105,7 @@ namespace Narradia
     {
         Log();
         WorldDraw::Get()->Render();
-        if (true == PlaySceneGuiMenu::Get()->visible)
+        if (true == PlaySceneGuiMenu::Get()->visible_)
         /******************************************/
         {
             Log();

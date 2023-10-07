@@ -26,6 +26,6 @@ namespace Narradia
         if (KeyboardInput::Get()->KeyHasBeenFiredPickResult(SDLK_SPACE))
             Player::Get()->Jump();
         if (KeyboardInput::Get()->KeyHasBeenFiredPickResult(SDLK_ESCAPE))
-            PlaySceneGuiMenu::Get()->visible = !PlaySceneGuiMenu::Get()->visible;
+            PlaySceneGuiMenu::Get()->visible_ = !PlaySceneGuiMenu::Get()->visible_;
     }
 }

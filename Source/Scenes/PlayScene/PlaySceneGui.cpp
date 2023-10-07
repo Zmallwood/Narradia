@@ -30,7 +30,7 @@ namespace Narradia
         auto rectGButtonWinBuildSelector =
             RectangleF{0.75f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
         Log();
-        auto fnSys = [] { PlaySceneGuiMenu::Get()->visible = !PlaySceneGuiMenu::Get()->visible; };
+        auto fnSys = [] { PlaySceneGuiMenu::Get()->visible_ = !PlaySceneGuiMenu::Get()->visible_; };
         Log();
         auto fnRepeat = [] { ActionRepeat::Get()->RepeatLastAction(); };
         Log();

@@ -10,12 +10,12 @@ namespace Narradia
       public:
         static constexpr Point2F kStartPosition = {0.9f, 0.01f};
         static constexpr SizeF kSize = {0.08f, 0.04f};
-        int fps = 0;
-        int framesCount = 0;
-        int ticksLastUpdate = 0;
-        RenderId idBackgroundImage;
-        RenderId idFpsText;
-        bool visible = false;
+        int fps_ = 0;
+        int frames_count_ = 0;
+        int ticks_last_update_ = 0;
+        RenderId rendid_background_image_;
+        RenderId rendid_fps_text_;
+        bool visible_ = false;
     };
 
     FpsPanel::FpsPanel()
@@ -23,22 +23,22 @@ namespace Narradia
           GuiMovableContainer(Pimpl::kSize.ToRectangle(), Pimpl::kStartPosition, Pimpl::kSize)
     /*//////////////////////////////////////////////////////////////////////////////////////*/
     {
-        p->idBackgroundImage = Renderer2DImages::Get()->NewImage();
-        p->idFpsText = TextRenderer::Get()->NewString();
+        p->rendid_background_image_ = Renderer2DImages::Get()->NewImage();
+        p->rendid_fps_text_ = TextRenderer::Get()->NewString();
     }
 
     void
     FpsPanel::Update()
     /*//////////////*/
     {
-        if (SDL_GetTicks() > p->ticksLastUpdate + 1000)
+        if (SDL_GetTicks() > p->ticks_last_update_ + 1000)
         /*********************************************/
         {
-            p->fps = p->framesCount++;
-            p->framesCount = 0;
-            p->ticksLastUpdate = SDL_GetTicks();
+            p->fps_ = p->frames_count_++;
+            p->frames_count_ = 0;
+            p->ticks_last_update_ = SDL_GetTicks();
         }
-        p->framesCount++;
+        p->frames_count_++;
         GuiMovableContainer::Update();
     }
 
@@ -46,12 +46,12 @@ namespace Narradia
     FpsPanel::Render() const
     /*////////////////////*/
     {
-        if (!p->visible)
+        if (!p->visible_)
             return;
-        Renderer2DImages::Get()->DrawImage(Hash("PanelBg"), p->idBackgroundImage, GetBounds());
-        std::string_view fpsText = "Fps: " + std::to_string(p->fps);
+        Renderer2DImages::Get()->DrawImage(Hash("PanelBg"), p->rendid_background_image_, GetBounds());
+        std::string_view fps_text = "Fps: " + std::to_string(p->fps_);
         TextRenderer::Get()->DrawString(
-            p->idFpsText, fpsText, GetPosition().Translate(0.014f, 0.018f));
+            p->rendid_fps_text_, fps_text, GetPosition().Translate(0.014f, 0.018f));
         GuiMovableContainer::Render();
     }
 }

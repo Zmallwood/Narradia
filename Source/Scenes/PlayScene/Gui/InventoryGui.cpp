@@ -9,20 +9,20 @@ namespace Narradia
         : GuiWindow("Inventory", {0.3f, 0.2f, 0.2f, 0.45f})
     /*///////////////////////////////////////////////////*/
     {
-        auto slotWidth = (GetBounds().width - 2 * GetMargin()) / numCols - GetMargin();
+        auto slot_width = (GetBounds().width - 2 * GetMargin()) / kNumCols - GetMargin();
         auto i = 0;
-        for (auto y = 0; y < numRows; y++)
+        for (auto y = 0; y < kNumRows; y++)
         /********************************/
         {
-            for (auto x = 0; x < numCols; x++)
+            for (auto x = 0; x < kNumCols; x++)
             /********************************/
             {
-                slots[x][y] = std::make_shared<GuiWindowObjectSlot>(
-                    this, x, y, i, slotWidth, Player::Get()->data.inventory.objects);
+                slots_[x][y] = std::make_shared<GuiWindowObjectSlot>(
+                    this, x, y, i, slot_width, Player::Get()->data.inventory.objects);
                 i++;
             }
         }
-        bottomBarRendId = Renderer2DImages::Get()->NewImage();
+        rendid_bottom_bar_ = Renderer2DImages::Get()->NewImage();
     }
 
     void
@@ -42,9 +42,9 @@ namespace Narradia
             GuiWindowObjectSlot::hovered_object_ = nullptr;
             GuiWindowObjectSlot::hovered_index_ = -1;
         }
-        for (auto y = 0; y < numRows; y++)
-            for (auto x = 0; x < numCols; x++)
-                slots[x][y]->Update();
+        for (auto y = 0; y < kNumRows; y++)
+            for (auto x = 0; x < kNumCols; x++)
+                slots_[x][y]->Update();
     }
 
     void
@@ -52,17 +52,17 @@ namespace Narradia
     /*///////////////////////////////*/
     {
         Log();
-        for (auto y = 0; y < numRows; y++)
-            for (auto x = 0; x < numCols; x++)
-                slots[x][y]->Render();
+        for (auto y = 0; y < kNumRows; y++)
+            for (auto x = 0; x < kNumCols; x++)
+                slots_[x][y]->Render();
         Log();
-        auto bottomBarHeight = 0.04f;
+        auto bottom_bar_height = 0.04f;
         Log();
-        auto bottomBarBounds = RectangleF{
-            GetBounds().x, GetBounds().y + GetBounds().height - bottomBarHeight, GetBounds().width,
-            bottomBarHeight};
+        auto bottom_bar_bounds = RectangleF{
+            GetBounds().x, GetBounds().y + GetBounds().height - bottom_bar_height, GetBounds().width,
+            bottom_bar_height};
         Log();
         Renderer2DImages::Get()->DrawImage(
-            "GuiWindowInvBottomBarBg", bottomBarRendId, bottomBarBounds);
+            "GuiWindowInvBottomBarBg", rendid_bottom_bar_, bottom_bar_bounds);
     }
 }

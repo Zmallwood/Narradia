@@ -9,14 +9,14 @@ namespace Narradia
     StatusPanel::StatusPanel()
     /*//////////////////////*/
     {
-        rendIdBgImage = Renderer2DImages::Get()->NewImage();
-        std::tie(rendIdPlHpText, rendIdPlStamText, rendIdPlRageText) =
+        renid_background_image_ = Renderer2DImages::Get()->NewImage();
+        std::tie(rendid_health_text_, rendid_stamina_text_, rendid_rage_text_) =
             TextRenderer::Get()->NewStrings<3>();
-        std::tie(rendIdPlHpBar, rendIdPlStamBar, rendIdPlRageBar) =
+        std::tie(rendid_health_bar_, rendid_stamina_bar_, rendid_rage_bar_) =
             Renderer2DSolidColors::Get()->NewRectangles<3>();
-        rendIdPlHpBarFilled = Renderer2DImages::Get()->NewImage();
-        rendIdPlStamBarFilled = Renderer2DImages::Get()->NewImage();
-        rendIdPlRageBarFilled = Renderer2DImages::Get()->NewImage();
+        rendid_health_bar_filled_ = Renderer2DImages::Get()->NewImage();
+        rendid_stamina_bar_filled_ = Renderer2DImages::Get()->NewImage();
+        rendid_rage_bar_filled_ = Renderer2DImages::Get()->NewImage();
     }
 
     void
@@ -30,23 +30,23 @@ namespace Narradia
     /*///////////////////////*/
     {
         auto player = Player::Get();
-        Renderer2DImages::Get()->DrawImage(hashPanelBg, rendIdBgImage, boundsPanel);
-        auto tGfx = TextRenderer::Get();
-        tGfx->DrawString(rendIdPlHpText, lblTextHealth.data(), {0.01f, 0.03f});
-        tGfx->DrawString(rendIdPlStamText, lblTextStamina.data(), {0.01f, 0.06f});
-        tGfx->DrawString(rendIdPlRageText, lblTextRage.data(), {0.01f, 0.09f});
-        auto hpBarFilledBounds = hpBarBounds.WithWidth(
-            ((float)player->data.stats.hp) / player->data.stats.maxHp * hpBarBounds.width);
-        auto stamBarFilledBounds = stamBarBounds.WithWidth(
-            ((float)player->data.stats.stam) / player->data.stats.maxStam * stamBarBounds.width);
-        auto rageBarFilledBounds = rageBarBounds.WithWidth(
-            ((float)player->data.stats.rage) / player->data.stats.maxRage * rageBarBounds.width);
-        auto rCol2D = Renderer2DSolidColors::Get();
-        rCol2D->FillRectangle(rendIdPlHpBar, hpBarBounds, Colors::black);
-        Renderer2DImages::Get()->DrawImage("Green", rendIdPlHpBarFilled, hpBarFilledBounds);
-        rCol2D->FillRectangle(rendIdPlStamBar, stamBarBounds, Colors::black);
-        Renderer2DImages::Get()->DrawImage("Yellow", rendIdPlStamBarFilled, stamBarFilledBounds);
-        rCol2D->FillRectangle(rendIdPlRageBar, rageBarBounds, Colors::black);
-        Renderer2DImages::Get()->DrawImage("Red", rendIdPlRageBarFilled, rageBarFilledBounds);
+        Renderer2DImages::Get()->DrawImage(kHashPanelBackground, renid_background_image_, kBoundsPanel);
+        auto text_renderer = TextRenderer::Get();
+        text_renderer->DrawString(rendid_health_text_, kLabelTextHealth.data(), {0.01f, 0.03f});
+        text_renderer->DrawString(rendid_stamina_text_, kLabelTextStamina.data(), {0.01f, 0.06f});
+        text_renderer->DrawString(rendid_rage_text_, kLabelTextRage.data(), {0.01f, 0.09f});
+        auto hp_bar_filled_bounds = kHpBarBounds.WithWidth(
+            ((float)player->data.stats.hp) / player->data.stats.maxHp * kHpBarBounds.width);
+        auto stamina_bar_filled_bounds = kStaminaBarBounds.WithWidth(
+            ((float)player->data.stats.stam) / player->data.stats.maxStam * kStaminaBarBounds.width);
+        auto rage_bar_filled_bounds = kRageBarBounds.WithWidth(
+            ((float)player->data.stats.rage) / player->data.stats.maxRage * kRageBarBounds.width);
+        auto renderer_2d_solid_colors = Renderer2DSolidColors::Get();
+        renderer_2d_solid_colors->FillRectangle(rendid_health_bar_, kHpBarBounds, Colors::black);
+        Renderer2DImages::Get()->DrawImage("Green", rendid_health_bar_filled_, hp_bar_filled_bounds);
+        renderer_2d_solid_colors->FillRectangle(rendid_stamina_bar_, kStaminaBarBounds, Colors::black);
+        Renderer2DImages::Get()->DrawImage("Yellow", rendid_stamina_bar_filled_, stamina_bar_filled_bounds);
+        renderer_2d_solid_colors->FillRectangle(rendid_rage_bar_, kRageBarBounds, Colors::black);
+        Renderer2DImages::Get()->DrawImage("Red", rendid_rage_bar_filled_, rage_bar_filled_bounds);
     }
 }

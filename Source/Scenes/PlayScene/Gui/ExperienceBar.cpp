@@ -8,8 +8,8 @@ namespace Narradia
     ExperienceBar::ExperienceBar()
     /*//////////////////////////*/
     {
-        glIdUnfilledArea = Renderer2DSolidColors::Get()->NewRectangle();
-        glIdFilledArea = Renderer2DImages::Get()->NewImage();
+        rendid_unfilled_area_ = Renderer2DSolidColors::Get()->NewRectangle();
+        rendid_filled_area_ = Renderer2DImages::Get()->NewImage();
     }
 
     void
@@ -22,10 +22,10 @@ namespace Narradia
     ExperienceBar::Render() const
     /*/////////////////////////*/
     {
-        auto unfilledArea = RectangleF{0.0f, 1.0f - kBarHeight, 1.0f, kBarHeight};
-        Renderer2DSolidColors::Get()->FillRectangle(glIdUnfilledArea, unfilledArea, Colors::black);
-        auto expProgress = GetFractionalExpProgress(Player::Get()->data.exp);
-        auto filledArea = RectangleF{0.0f, 1.0f - kBarHeight, expProgress, kBarHeight};
-        Renderer2DImages::Get()->DrawImage("Green", glIdFilledArea, filledArea);
+        auto unfilled_area = RectangleF{0.0f, 1.0f - kBarHeight, 1.0f, kBarHeight};
+        Renderer2DSolidColors::Get()->FillRectangle(rendid_unfilled_area_, unfilled_area, Colors::black);
+        auto experience_progress = GetFractionalExpProgress(Player::Get()->data.exp);
+        auto filled_area = RectangleF{0.0f, 1.0f - kBarHeight, experience_progress, kBarHeight};
+        Renderer2DImages::Get()->DrawImage("Green", rendid_filled_area_, filled_area);
     }
 }

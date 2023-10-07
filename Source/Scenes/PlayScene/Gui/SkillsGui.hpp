@@ -13,9 +13,10 @@ namespace Narradia
       private:
         void UpdateDerived() override;
         void RenderDerived() const override;
-        std::vector<RenderId> glIdsSkillLabels;
-        std::vector<RenderId> glIdsSkillLevelValues;
-        std::vector<RenderId> glIdsSkillAddPointButton;
-        RenderId glIdAvailablePoints;
+
+        std::vector<RenderId> rendids_skills_labels_;
+        std::vector<RenderId> rendids_skill_levels_values_;
+        std::vector<RenderId> rendids_skill_add_points_buttons_;
+        RenderId rendid_available_points_;
     };
 }

@@ -9,12 +9,12 @@ namespace Narradia
         : GuiContainer({0.0f, 0.0f}, {1.0f, 1.0f})
     /*//////////////////////////////////////////*/
     {
-        glIdCanvasCover = Renderer2DSolidColors::Get()->NewRectangle();
+        rendid_canvas_cover_ = Renderer2DSolidColors::Get()->NewRectangle();
         AddGuiButton(
             "Resume", {0.45f, 0.3f, 0.1f, 0.03f},
             []
             /**************************************************/
-            { PlaySceneGuiMenu::Get()->visible = false; });
+            { PlaySceneGuiMenu::Get()->visible_ = false; });
         AddGuiButton(
             "Save game", {0.45f, 0.35f, 0.1f, 0.03f},
             []
@@ -36,7 +36,7 @@ namespace Narradia
     PlaySceneGuiMenu::Update()
     /*//////////////////////*/
     {
-        if (visible)
+        if (visible_)
             GuiContainer::Update();
     }
 
@@ -44,11 +44,11 @@ namespace Narradia
     PlaySceneGuiMenu::Render() const
     /*////////////////////////////*/
     {
-        if (!visible)
+        if (!visible_)
             return;
         auto rect = RectangleF{0.0f, 0.0f, 1.0f, 1.0f};
         auto color = Color{0.3f, 0.6f, 1.0f, 0.5f};
-        Renderer2DSolidColors::Get()->FillRectangle(glIdCanvasCover, rect, color);
+        Renderer2DSolidColors::Get()->FillRectangle(rendid_canvas_cover_, rect, color);
         GuiContainer::Render();
     }
 }

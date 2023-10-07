@@ -11,19 +11,19 @@ namespace Narradia
     /*////////////////////////////////////////////////////////////*/
     {
         Show();
-        auto slotWidth = (GetBounds().width - 2 * GetMargin()) / maxNumCols - GetMargin();
-        numSlots = ObjectBehaviourList::Get()->GetContainerSlots(object_->GetObjectType());
+        auto slot_width = (GetBounds().width - 2 * GetMargin()) / kMaxNumCols - GetMargin();
+        num_slots_ = ObjectBehaviourList::Get()->GetContainerSlots(object_->GetObjectType());
         auto i = 0;
-        for (auto y = 0; y < maxNumRows; y++)
+        for (auto y = 0; y < kMaxNumRows; y++)
         /***********************************/
         {
-            for (auto x = 0; x < maxNumCols; x++)
+            for (auto x = 0; x < kMaxNumCols; x++)
             /***********************************/
             {
-                if (i >= numSlots)
+                if (i >= num_slots_)
                     break;
-                slots[x][y] = std::make_shared<GuiWindowObjectSlot>(
-                    this, x, y, i, slotWidth, object_->GetContainedObjects());
+                slots_[x][y] = std::make_shared<GuiWindowObjectSlot>(
+                    this, x, y, i, slot_width, object_->GetContainedObjects());
                 i++;
             }
         }
@@ -47,15 +47,15 @@ namespace Narradia
             GuiWindowObjectSlot::hovered_index_ = -1;
         }
         auto i = 0;
-        for (auto y = 0; y < maxNumRows; y++)
+        for (auto y = 0; y < kMaxNumRows; y++)
         /***********************************/
         {
-            for (auto x = 0; x < maxNumCols; x++)
+            for (auto x = 0; x < kMaxNumCols; x++)
             /***********************************/
             {
-                if (i >= numSlots)
+                if (i >= num_slots_)
                     break;
-                slots[x][y]->Update();
+                slots_[x][y]->Update();
                 i++;
             }
         }
@@ -66,15 +66,15 @@ namespace Narradia
     /*///////////////////////////////////*/
     {
         auto i = 0;
-        for (auto y = 0; y < maxNumRows; y++)
+        for (auto y = 0; y < kMaxNumRows; y++)
         /***********************************/
         {
-            for (auto x = 0; x < maxNumCols; x++)
+            for (auto x = 0; x < kMaxNumCols; x++)
             /***********************************/
             {
-                if (i >= numSlots)
+                if (i >= num_slots_)
                     break;
-                slots[x][y]->Render();
+                slots_[x][y]->Render();
                 i++;
             }
         }

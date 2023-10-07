@@ -14,6 +14,7 @@ namespace Narradia
       private:
         void UpdateDerived() override;
         void RenderDerived() const override;
+        
         Object *object;
     };
 }

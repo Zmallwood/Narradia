@@ -12,7 +12,8 @@ namespace Narradia
       private:
         void UpdateDerived() override;
         void RenderDerived() const override;
-        std::string_view messageText;
-        RenderId glIdMessageText;
+        
+        std::string_view message_text_;
+        RenderId rendid_message_text_;
     };
 }

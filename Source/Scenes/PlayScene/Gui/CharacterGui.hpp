@@ -12,6 +12,6 @@ namespace Narradia
       private:
         void UpdateDerived() override;
         void RenderDerived() const override;
-        RenderId glIdExpText;
+        RenderId rendid_exp_text_;
     };
 }
