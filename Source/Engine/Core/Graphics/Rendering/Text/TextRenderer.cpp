@@ -37,7 +37,7 @@ namespace Narradia
 
     RenderId
     TextRenderer::NewString()
-    /*//////////////////////////////*/
+    /*/////////////////////*/
     {
         auto uniqueName = p->CreateBlankTexGetName();
         auto rendIdImageRect = Renderer2DImages::Get().NewImage();
@@ -47,7 +47,7 @@ namespace Narradia
 
     RenderId
     TextRenderer::NewBillboardString()
-    /*///////////////////////////////////////*/
+    /*//////////////////////////////*/
     {
         auto uniqueName = p->CreateBlankTexGetName();
         auto rendIdBboardTexRect = RendererBillboardImages::Get().NewBillboardImage();
@@ -57,7 +57,7 @@ namespace Narradia
 
     RenderId
     TextRenderer::NewMultiLineString(int numLines, float width)
-    /*////////////////////////////////////////////////////////////////*/
+    /*///////////////////////////////////////////////////////*/
     {
         MultiLineText multiLineText;
         multiLineText.width = width;
@@ -203,7 +203,7 @@ namespace Narradia
 
     const std::string
     TextRenderer::Pimpl::CreateBlankTexGetName()
-    /*//////////////////////////////////////////////////////////*/
+    /*////////////////////////////////////////*/
     {
         auto id = idCounter++;
         auto uniqueName = "RenderedImage" + std::to_string(id);

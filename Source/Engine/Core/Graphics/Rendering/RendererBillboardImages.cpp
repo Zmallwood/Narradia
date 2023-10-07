@@ -37,7 +37,7 @@ namespace Narradia
 
     RenderId
     RendererBillboardImages::NewBillboardImage()
-    /*/////////////////////////////////////////////////*/
+    /*////////////////////////////////////////*/
     {
         auto vaoId = GenerateNewVertexArrayId();
         UseVaoBegin(vaoId);
@@ -106,7 +106,7 @@ namespace Narradia
 
     void
     RendererBillboardImages::Cleanup()
-    /*///////////////////////////////////*/
+    /*//////////////////////////////*/
     {
         CleanupBase();
     }

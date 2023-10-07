@@ -8,7 +8,7 @@
 #include "Scenes/PlayScene/Gui/OpenContainerGui.hpp"
 #include "Scenes/PlayScene/ObjectHandling.hpp"
 #include "Scenes/PlayScene/PlayScene.hpp"
-#include "Scenes/Shared/TileHovering.hpp"
+#include "Scenes/SharedSceneModules/TileHovering.hpp"
 #include "World/Actors/Companion.hpp"
 #include "World/MapArea.hpp"
 #include "World/Object.hpp"

@@ -52,28 +52,28 @@ namespace Narradia
 
     SDL_Window *
     Graphics::GetWindow() const
-    /*************************************/
+    /*///////////////////////*/
     {
         return p->window.get();
     }
 
     void
     Graphics::ClearCanvas() const
-    /********************************/
+    /*/////////////////////////*/
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
     void
     Graphics::PresentCanvas() const
-    /**********************************/
+    /*///////////////////////////*/
     {
         SDL_GL_SwapWindow(p->window.get());
     }
 
     void
     Graphics::Cleanup()
-    /**********************/
+    /*//////////////**/
     {
         GraphicsGl::Get().Cleanup();
     }

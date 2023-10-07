@@ -5,19 +5,19 @@ namespace Narradia
 {
     template <class T>
     class Singleton
-    /*//////////////////////////////*/
+    /*///////////*/
     {
       public:
         static void
         Create()
-        /*////////////////*/
+        /*///////*/
         {
             if (!instance)
                 instance = std::make_shared<T>();
         }
         static std::shared_ptr<T>
         GetPointer()
-        /*//////////////////////////////////*/
+        /*/////////////////////*/
         {
             if (!instance)
                 Create();
@@ -25,7 +25,7 @@ namespace Narradia
         }
         static T &
         Get()
-        /*///////////*/
+        /*//////*/
         {
             if (!instance)
                 Create();
@@ -33,7 +33,7 @@ namespace Narradia
         }
         static void
         Dispose()
-        /*/////////////////*/
+        /*///////*/
         {
             instance.reset();
         }

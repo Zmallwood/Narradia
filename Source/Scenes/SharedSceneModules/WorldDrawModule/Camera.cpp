@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 #include "Camera.hpp"
-#include "Configuration.hpp"
+#include "ConfigurationWorldDraw.hpp"
 #include "Engine/Core/Cursor.hpp"
 #include "Engine/Core/Graphics/Rendering/CameraGl.hpp"
 #include "Engine/Core/Input/MouseInput.hpp"

@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////
 #include "MobTargeting.hpp"
 #include "Engine/Core/Input/MouseInput.hpp"
-#include "Scenes/Shared/MouseRotation.hpp"
-#include "Scenes/Shared/TileHovering.hpp"
+#include "Scenes/SharedSceneModules/MouseRotation.hpp"
+#include "Scenes/SharedSceneModules/TileHovering.hpp"
 #include "World/Actors/Player.hpp"
 #include "World/MapArea.hpp"
 #include "World/Tile.hpp"

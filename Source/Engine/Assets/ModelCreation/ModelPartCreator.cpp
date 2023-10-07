@@ -44,7 +44,7 @@ namespace Narradia
 
     int
     ModelPartCreator::GetTexNameHashForMesh(const aiScene *scene, aiMesh *mesh) const
-    /*/////////////////////////////////////////////////////////////////////////////////*/
+    /*/////////////////////////////////////////////////////////////////////////////*/
     {
         auto textureNameHashcodes = GetTexNameHashcodes(scene);
         auto material = mesh->mMaterialIndex;
@@ -88,7 +88,7 @@ namespace Narradia
 
     vector<int>
     ModelPartCreator::GetTexNameHashcodes(const aiScene *scene) const
-    /*/////////////////////////////////////////////////////////////////////////*/
+    /*/////////////////////////////////////////////////////////////*/
     {
         vector<int> textureNameHashcodes;
         auto numMaterials = scene->mNumMaterials;
@@ -108,7 +108,7 @@ namespace Narradia
 
     aiMatrix4x4
     ModelPartCreator::GetNodeTransformation(const aiScene *scene, string nodeName) const
-    /*////////////////////////////////////////////////////////////////////////////////////////////*/
+    /*////////////////////////////////////////////////////////////////////////////////*/
     {
         auto allTransformations = GetTransformations(scene);
         for (auto &alpha : allTransformations)
@@ -146,7 +146,7 @@ namespace Narradia
     auto
     ModelPartCreator::GetTransformations(const aiScene *scene) const
         -> map<shared_ptr<string>, aiMatrix4x4>
-    /*/////////////////////////////////////////////////////////////////*/
+    /*////////////////////////////////////////////////////////////*/
     {
         auto rootNode = scene->mRootNode;
         auto numNodes = rootNode->mNumChildren;
@@ -165,7 +165,7 @@ namespace Narradia
 
     void
     ModelPartCreator::Translate(Point3F *position, aiVectorKey positionKeyFrame) const
-    /*///////////////////////////////////////////////////////////////////////////////////*/
+    /*//////////////////////////////////////////////////////////////////////////////*/
     {
         auto translationMatrix = aiMatrix4x4();
         translationMatrix[0][3] = positionKeyFrame.mValue.x;

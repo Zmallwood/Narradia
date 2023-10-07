@@ -5,7 +5,7 @@
 #include "Object.hpp"
 #include "ObjectsCollection.hpp"
 #include "Actors/Player.hpp"
-#include "Scenes/Shared/WorldDrawModule/Configuration.hpp"
+#include "Scenes/SharedSceneModules/WorldDrawModule/ConfigurationWorldDraw.hpp"
 #include "Tile.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia

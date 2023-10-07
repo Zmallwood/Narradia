@@ -17,11 +17,11 @@
 #include "Modules/SettlementCreator.hpp"
 #include "Modules/StartConditions.hpp"
 #include "PlaySceneGui.hpp"
-#include "Scenes/Shared/GuiObjectHovering.hpp"
-#include "Scenes/Shared/KeyboardMove.hpp"
-#include "Scenes/Shared/MouseRotation.hpp"
-#include "Scenes/Shared/TileHovering.hpp"
-#include "Scenes/Shared/WorldDrawModule/WorldDraw.hpp"
+#include "Scenes/SharedSceneModules/GuiObjectHovering.hpp"
+#include "Scenes/SharedSceneModules/KeyboardMove.hpp"
+#include "Scenes/SharedSceneModules/MouseRotation.hpp"
+#include "Scenes/SharedSceneModules/TileHovering.hpp"
+#include "Scenes/SharedSceneModules/WorldDrawModule/WorldDraw.hpp"
 #include "World/Actors/Player.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia

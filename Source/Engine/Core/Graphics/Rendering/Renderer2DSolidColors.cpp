@@ -27,7 +27,7 @@ namespace Narradia
 
     RenderId
     Renderer2DSolidColors::NewRectangle()
-    /*//////////////////////////////////////////*/
+    /*/////////////////////////////////*/
     {
         auto vaoId = GenerateNewVertexArrayId();
         UseVaoBegin(vaoId);
@@ -84,7 +84,7 @@ namespace Narradia
 
     void
     Renderer2DSolidColors::Cleanup()
-    /*/////////////////////////////////*/
+    /*////////////////////////////*/
     {
         CleanupBase();
     }

@@ -6,8 +6,8 @@
 #include "World/Object.hpp"
 #include "World/ObjectBehaviourList.hpp"
 #include "World/ObjectsCollection.hpp"
-#include "Scenes/Shared/WorldDrawModule/Camera.hpp"
-#include "Scenes/Shared/WorldDrawModule/Configuration.hpp"
+#include "Scenes/SharedSceneModules/WorldDrawModule/Camera.hpp"
+#include "Scenes/SharedSceneModules/WorldDrawModule/ConfigurationWorldDraw.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////

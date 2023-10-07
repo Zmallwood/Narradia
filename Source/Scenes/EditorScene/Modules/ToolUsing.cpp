@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 #include "ToolUsing.hpp"
 #include "Engine/Core/Input/MouseInput.hpp"
-#include "Scenes/Shared/TileHovering.hpp"
+#include "Scenes/SharedSceneModules/TileHovering.hpp"
 #include "World/MapArea.hpp"
 #include "World/Actors/Mob.hpp"
 #include "World/Object.hpp"

@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 #include "RenderLoop.hpp"
 #include "Camera.hpp"
-#include "Configuration.hpp"
+#include "ConfigurationWorldDraw.hpp"
 #include "Engine/Core/Graphics/Rendering/CameraGl.hpp"
 #include "World/MapArea.hpp"
 #include "World/Object.hpp"

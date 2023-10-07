@@ -5,7 +5,7 @@
 namespace Narradia
 {
     class RendererBase::Pimpl
-    /*/////////////////*/
+    /*/////////////////////*/
     {
       public:
         constexpr static int kNumVerticesInRectangle = 4;
@@ -29,7 +29,7 @@ namespace Narradia
 
     GLuint
     RendererBase::GenerateNewVertexArrayId()
-    /*///////////////////////////////////////*/
+    /*////////////////////////////////////*/
     {
         GLuint newVaoId;
         glGenVertexArrays(1, &newVaoId);
@@ -39,7 +39,7 @@ namespace Narradia
 
     GLuint
     RendererBase::GenerateNewBufferId(BufferTypes bufferType, GLuint vaoId)
-    /*//////////////////////////////////////////////////////////////////////*/
+    /*///////////////////////////////////////////////////////////////////*/
     {
         GLuint newBufferId;
         glGenBuffers(1, &newBufferId);
@@ -49,7 +49,7 @@ namespace Narradia
 
     GLuint
     RendererBase::GetBufferId(BufferTypes bufferType, GLuint vaoId) const
-    /*////////////////////////////////////////////////////////////////////*/
+    /*/////////////////////////////////////////////////////////////////*/
     {
         return p->vboIds.at(bufferType).at(vaoId);
     }
@@ -105,7 +105,7 @@ namespace Narradia
     void
     RendererBase::SetUvsData(
         GLuint uvVboId, int numVertices, const void *data, int layoutLocation) const
-    /*/////////////////////////////////////////////////////////////////////////////////////////////*/
+    /*////////////////////////////////////////////////////////////////////////////*/
     {
         glBindBuffer(GL_ARRAY_BUFFER, uvVboId);
         glBufferData(
@@ -194,7 +194,7 @@ namespace Narradia
 
     void
     RendererBase::UpdateUvsData(GLuint uvsVboId, std::vector<float> &uvs, int layoutLocation) const
-    /*////////////////////////////////////////////////////////////////////////////////////////*/
+    /*///////////////////////////////////////////////////////////////////////////////////////////*/
     {
         glBindBuffer(GL_ARRAY_BUFFER, uvsVboId);
         glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float) * uvs.size(), uvs.data());
@@ -267,21 +267,21 @@ namespace Narradia
 
     GLuint
     RendererBase::GetUniformLocation(std::string_view varName)
-    /*/////////////////////////////////////////////////////////*/
+    /*//////////////////////////////////////////////////////*/
     {
         return glGetUniformLocation(p->shaderProgram->GetProgramId(), varName.data());
     }
 
     ShaderProgram *
     RendererBase::GetShaderProgram() const
-    /*/////////////////////////////////////////////*/
+    /*//////////////////////////////////*/
     {
         return p->shaderProgram.get();
     }
 
     const int
     RendererBase::GetNumVerticlesInRectangle()
-    /*////////////////////////////////////////////*/
+    /*//////////////////////////////////////*/
     {
         return Pimpl::kNumVerticesInRectangle;
     }

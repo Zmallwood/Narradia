@@ -46,7 +46,7 @@ namespace Narradia
 
     RenderId
     RendererTiles::NewImagePolygon(int numVertices)
-    /*////////////////////////////////////////////////////*/
+    /*///////////////////////////////////////////*/
     {
         auto vertexArrayId = GenerateNewVertexArrayId();
         auto indexBufferId = GenerateNewBufferId(BufferTypes::Indices, vertexArrayId);
@@ -67,7 +67,7 @@ namespace Narradia
 
     RenderId
     RendererTiles::NewTile()
-    /*/////////////////////////////*/
+    /*////////////////////*/
     {
         return NewImagePolygon(4);
     }
@@ -92,7 +92,7 @@ namespace Narradia
 
     void
     RendererTiles::DrawTile(int imageNameHash, RenderId vaoId, bool depthTestOff) const
-    /*////////////////////////////////////////////////////////////////////////////////////*/
+    /*///////////////////////////////////////////////////////////////////////////////*/
     {
         DrawImagePolygon(imageNameHash, vaoId, 4, depthTestOff);
     }
@@ -164,7 +164,7 @@ namespace Narradia
 
     void
     RendererTiles::StartBatchDrawing()
-    /*///////////////////////////////////*/
+    /*//////////////////////////////*/
     {
         p->isBatchDrawing = true;
         glUseProgram(GetShaderProgram()->GetProgramId());
@@ -191,7 +191,7 @@ namespace Narradia
 
     void
     RendererTiles::StopBatchDrawing()
-    /*//////////////////////////////////*/
+    /*/////////////////////////////*/
     {
         p->isBatchDrawing = false;
         glUseProgram(0);
@@ -240,7 +240,7 @@ namespace Narradia
 
     void
     RendererTiles::Cleanup()
-    /*/////////////////////////*/
+    /*////////////////////*/
     {
         CleanupBase();
     }

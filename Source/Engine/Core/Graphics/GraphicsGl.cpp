@@ -11,7 +11,7 @@
 namespace Narradia
 {
     class GraphicsGl::Pimpl
-    /*********************/
+    /*///////////////////*/
     {
       public:
         static constexpr bool kCullFace = false;
@@ -50,7 +50,7 @@ namespace Narradia
 
     void
     GraphicsGl::Cleanup()
-    /*//////////////////////*/
+    /*/////////////////*/
     {
         Renderer2DSolidColors::Get().Cleanup();
         Renderer2DImages::Get().Cleanup();
@@ -62,14 +62,14 @@ namespace Narradia
 
     Color
     GraphicsGl::GetFogColorGround()
-    /*/////////////////////////////////*/
+    /*///////////////////////////*/
     {
         return p->fogColorGround;
     }
 
     Color
     GraphicsGl::GetFogColorObjects()
-    /*//////////////////////////////////*/
+    /*////////////////////////////*/
     {
         return p->fogColorObjects;
     }

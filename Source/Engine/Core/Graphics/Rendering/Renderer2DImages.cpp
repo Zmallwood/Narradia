@@ -29,7 +29,7 @@ namespace Narradia
 
     RenderId
     Renderer2DImages::NewImage()
-    /*/////////////////////////////////*/
+    /*////////////////////////*/
     {
         auto vaoId = GenerateNewVertexArrayId();
         UseVaoBegin(vaoId);
@@ -109,7 +109,7 @@ namespace Narradia
 
     void
     Renderer2DImages::Cleanup()
-    /*////////////////////////////*/
+    /*///////////////////////*/
     {
         CleanupBase();
     }

@@ -3,7 +3,7 @@
 #include "Engine/Core/Graphics/Rendering/Renderer2DImages.hpp"
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
 #include "Engine/Core/SceneManager.hpp"
-#include "Scenes/Shared/WorldDrawModule/WorldDraw.hpp"
+#include "Scenes/SharedSceneModules/WorldDrawModule/WorldDraw.hpp"
 #include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia

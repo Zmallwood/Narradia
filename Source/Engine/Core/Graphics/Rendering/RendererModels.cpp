@@ -9,7 +9,7 @@
 #include "World/Actors/Player.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
-{   
+{
     class RendererModels::Pimpl
     /*///////////////////////*/
     {
@@ -67,7 +67,7 @@ namespace Narradia
 
     void
     RendererModels::NewModel(int modelNameHash)
-    /*////////////////////////////////////////////*/
+    /*///////////////////////////////////////*/
     {
         auto model = ModelBank::Get().GetModel(modelNameHash);
         p->modelIds.insert(
@@ -119,7 +119,7 @@ namespace Narradia
 
     RenderId
     RendererModels::NewBodyKeyframe(int modelNameHash, float msTime, int numVertices)
-    /*//////////////////////////////////////////////////////////////////////////////////////*/
+    /*/////////////////////////////////////////////////////////////////////////////*/
     {
         auto vaoId = GenerateNewVertexArrayId();
         if (p->timelines.count(modelNameHash) == 0)
@@ -188,7 +188,7 @@ namespace Narradia
 
     void
     RendererModels::StartBatchDrawing()
-    /*////////////////////////////////////*/
+    /*///////////////////////////////*/
     {
         p->isBatchDrawing = true;
         glEnable(GL_DEPTH_TEST);
@@ -201,7 +201,7 @@ namespace Narradia
 
     void
     RendererModels::StopBatchDrawing()
-    /*///////////////////////////////////*/
+    /*//////////////////////////////*/
     {
         p->isBatchDrawing = false;
     }
@@ -373,7 +373,7 @@ namespace Narradia
 
     void
     RendererModels::Cleanup()
-    /*//////////////////////////*/
+    /*/////////////////////*/
     {
         CleanupBase();
     }

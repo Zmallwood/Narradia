@@ -4,7 +4,7 @@
 #include "Engine/Core/SceneManager.hpp"
 #include "Engine/GuiCore/GuiTextBox.hpp"
 #include "Engine/GuiCore/SceneGui.hpp"
-#include "Scenes/Shared/MapFilesIO.hpp"
+#include "Scenes/SharedSceneModules/MapFilesIO.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {

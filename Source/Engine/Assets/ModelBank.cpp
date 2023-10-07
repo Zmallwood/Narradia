@@ -22,21 +22,21 @@ namespace Narradia
 
     auto
     ModelBank::GetModel(int modelNameHash) const -> const Model *
-    /*//////////////////////////////////////////////////////////////*/
+    /*/////////////////////////////////////////////////////////*/
     {
         return p->models.at(modelNameHash).get();
     }
 
     auto
     ModelBank::GetAllModels() const -> std::map<int, std::shared_ptr<const Model>>
-    /*///////////////////////////////////////////////////////////////////////////////*/
+    /*//////////////////////////////////////////////////////////////////////////*/
     {
         return p->models;
     }
 
     void
     ModelBank::LoadModels()
-    /*////////////////////////*/
+    /*///////////////////*/
     {
         using iterator = std ::filesystem::recursive_directory_iterator;
         auto absAllModelsPath = std::string(SDL_GetBasePath()) + p->relModelsPath.data();
@@ -60,7 +60,7 @@ namespace Narradia
 
     std::shared_ptr<Model>
     ModelBank::Pimpl::LoadSingleModel(const std::string_view &pathStr)
-    /*/////////////////////////////////////////////////////////////////////////////////////*/
+    /*//////////////////////////////////////////////////////////////*/
     {
         Assimp::Importer importer;
         const aiScene *scene = importer.ReadFile(pathStr.data(), 0);
