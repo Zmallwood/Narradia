@@ -5,6 +5,7 @@
 #include "Modules/ActionRepeat.hpp"
 #include "Modules/ActiveGameRound.hpp"
 #include "Modules/Advicer.hpp"
+#include "Modules/Combat.hpp"
 #include "Modules/CompanionsUpdate.hpp"
 #include "Modules/DestinationMove.hpp"
 #include "Modules/InteractionMenu.hpp"
@@ -95,6 +96,8 @@ namespace Narradia
         Advicer::Get().Update();
         Log();
         MobTargeting::Get().Update();
+        Log();
+        Combat::Get().Update();
     }
 
     void

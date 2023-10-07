@@ -40,8 +40,14 @@ namespace Narradia
         int maxHp = 10;
         int stam = 10;
         int maxStam = 10;
-        int rage = 10;
+        int rage = 0;
         int maxRage = 10;
+    };
+
+    class CombatData {
+      public:
+        int ticksLastHitGivenOther = 0;
+        int attackSpeed = 1000;
     };
 
     class ActorData
@@ -55,6 +61,7 @@ namespace Narradia
         MovementData movement;
         StatsData stats;
         Inventory inventory;
+        CombatData combat;
     };
 
     class Skill
