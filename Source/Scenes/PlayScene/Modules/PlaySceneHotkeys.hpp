@@ -7,6 +7,7 @@ namespace Narradia
     {
       private:
         static void Update();
+        
         friend class PlayScene;
     };
 }

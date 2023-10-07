@@ -9,7 +9,8 @@ namespace Narradia
     {
       public:
         ObjectMoving();
-        std::shared_ptr<Object> objectInAir = nullptr;
+
+        std::shared_ptr<Object> object_in_air_ = nullptr;
 
       private:
         void Update();
@@ -17,8 +18,9 @@ namespace Narradia
         void PickupObjectFromGuiIfIsTheCase();
         void PickupObjectFromGroundIfIsTheCase();
         void ReleaseObjectIfIsTheCase();
-        RenderId id_moving_object_image;
-        const float k_object_image_size = 0.03f;
+
+        const float kObjectImageSize = 0.03f;
+        RenderId rendid_moving_object_image_;
         friend class PlayScene;
     };
 }

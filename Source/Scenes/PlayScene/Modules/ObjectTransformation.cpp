@@ -9,10 +9,10 @@ namespace Narradia
     ObjectTransformation::Update()
     /*//////////////////////////*/
     {
-        if (SDL_GetTicks() > ticks_last_update + k_update_speed)
+        if (SDL_GetTicks() > ticks_last_update_ + kUpdateSpeed)
         /******************************************************/
         {
-            ticks_last_update = SDL_GetTicks();
+            ticks_last_update_ = SDL_GetTicks();
             auto map_area = World::Get()->GetCurrentMapArea();
             for (auto &entry : map_area->GetObjectsMirror())
             /**********************************************/

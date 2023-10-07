@@ -6,5 +6,5 @@
                                 World::Get()->GetMapAreaAtZLevel(Player::Get()->GetWorldAreaPos().z);
                             auto woodWall = std::make_shared<Object>("ObjectWoodWallN");
                             woodWall->SetModelScaling(1.0f);
-                            map_area->GetTile(p->clicked_tile)->AddObject(woodWall);
+                            map_area->GetTile(p->clicked_tile_)->AddObject(woodWall);
                         })},

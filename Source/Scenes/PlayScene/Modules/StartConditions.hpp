@@ -7,6 +7,7 @@ namespace Narradia
     {
       private:
         void CreateStartConditions();
+        
         friend class PlayScene;
     };
 }

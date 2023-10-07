@@ -12,8 +12,8 @@ namespace Narradia
     RemoveObjectMirror(Object *&object)
     /*///////////////////////////////*/
     {
-        if (ObjectMoving::Get()->objectInAir.get() == object)
-            ObjectMoving::Get()->objectInAir = nullptr;
+        if (ObjectMoving::Get()->object_in_air_.get() == object)
+            ObjectMoving::Get()->object_in_air_ = nullptr;
         for (auto &inventoryObject : Player::Get()->data.inventory.objects)
         /****************************************************************/
         {
@@ -67,11 +67,11 @@ namespace Narradia
     MoveObject(Object *object)
     /*//////////////////////*/
     {
-        if (ObjectMoving::Get()->objectInAir.get() == object)
+        if (ObjectMoving::Get()->object_in_air_.get() == object)
         /**************************************************/
         {
-            auto result = ObjectMoving::Get()->objectInAir;
-            ObjectMoving::Get()->objectInAir = nullptr;
+            auto result = ObjectMoving::Get()->object_in_air_;
+            ObjectMoving::Get()->object_in_air_ = nullptr;
             return result;
         }
         for (auto &inventoryObject : Player::Get()->data.inventory.objects)

@@ -13,7 +13,7 @@ namespace Narradia
     /*/////////////////////*/
     {
       public:
-        Mob *targetedMob = nullptr;
+        Mob *targeted_mob_ = nullptr;
     };
 
     MobTargeting::MobTargeting()
@@ -26,17 +26,17 @@ namespace Narradia
     MobTargeting::Update()
     /*//////////////////*/
     {
-        auto hoveredTile = TileHovering::Get()->hoveredTile;
-        if (MapArea::IsInsideMap(hoveredTile))
+        auto hovered_tile = TileHovering::Get()->hoveredTile;
+        if (MapArea::IsInsideMap(hovered_tile))
         /************************************/
         {
-            auto playerWorldAreaPos = Player::Get()->GetWorldAreaPos();
-            auto mapArea = World::Get()->GetMapAreaAtZLevel(playerWorldAreaPos.z);
-            auto tile = mapArea->GetTile(hoveredTile);
+            auto player_world_area_pos = Player::Get()->GetWorldAreaPos();
+            auto map_area = World::Get()->GetMapAreaAtZLevel(player_world_area_pos.z);
+            auto tile = map_area->GetTile(hovered_tile);
             if (nullptr != tile->GetMob())
             /****************************/
             {
-                auto action = [=] { p->targetedMob = tile->GetMob().get(); };
+                auto action = [=] { p->targeted_mob_ = tile->GetMob().get(); };
                 MouseInput::Get()->GetRightButton().AddFiredAction(
                     "TargetHoveredMob", action, 100000);
             }
@@ -50,7 +50,7 @@ namespace Narradia
                         MouseButton::GetDefaultClickSpeed())
                     /****************************************************************/
                     {
-                        p->targetedMob = nullptr;
+                        p->targeted_mob_ = nullptr;
                     }
                 };
                 MouseInput::Get()->GetRightButton().AddReleasedAction(
@@ -63,6 +63,6 @@ namespace Narradia
     MobTargeting::GetTargetedMob()
     /*//////////////////////////*/
     {
-        return p->targetedMob;
+        return p->targeted_mob_;
     }
 }

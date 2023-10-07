@@ -21,7 +21,7 @@ namespace Narradia
     ObjectMoving::ObjectMoving()
     /*////////////////////////*/
     {
-        id_moving_object_image = Renderer2DImages::Get()->NewImage();
+        rendid_moving_object_image_ = Renderer2DImages::Get()->NewImage();
     }
 
     void
@@ -43,7 +43,7 @@ namespace Narradia
             MouseInput::Get()->GetLeftButton().AddFiredAction(
                 "ObjectMoveContainerObject", [=, this]()
                 /**************************************/
-                { objectInAir = MoveObject(GuiWindowObjectSlot::hovered_object_); });
+                { object_in_air_ = MoveObject(GuiWindowObjectSlot::hovered_object_); });
         }
     }
 
@@ -76,7 +76,7 @@ namespace Narradia
                     {
                         MouseInput::Get()->GetLeftButton().AddFiredAction(
                             "ObjectMovingReleaseObject",
-                            [=, this]() { objectInAir = MoveObject(tile->GetObjectAt(0).get()); });
+                            [=, this]() { object_in_air_ = MoveObject(tile->GetObjectAt(0).get()); });
                     }
                 }
             }
@@ -92,7 +92,7 @@ namespace Narradia
             [&]
             /**************************/
             {
-                if (objectInAir)
+                if (object_in_air_)
                 /**************/
                 {
                     if (GuiWindowObjectSlot::hovered_index_ != -1 &&
@@ -100,7 +100,7 @@ namespace Narradia
                     /************************************************************************/
                     {
                         Player::Get()->data.inventory.objects.insert(
-                            {GuiWindowObjectSlot::hovered_index_, MoveObject(objectInAir.get())});
+                            {GuiWindowObjectSlot::hovered_index_, MoveObject(object_in_air_.get())});
                     }
                     else
                     /**/
@@ -118,7 +118,7 @@ namespace Narradia
                                 {
                                     casted->object->AddContainedObject(
                                         GuiWindowObjectSlot::hovered_index_,
-                                        MoveObject(objectInAir.get()));
+                                        MoveObject(object_in_air_.get()));
                                     return;
                                 }
                             }
@@ -133,12 +133,12 @@ namespace Narradia
                             if (tile->GetCompanion())
                             /***********************/
                             {
-                                tile->GetCompanion()->GiveObject(MoveObject(objectInAir.get()));
+                                tile->GetCompanion()->GiveObject(MoveObject(object_in_air_.get()));
                             }
                             else
                             /**/
                             {
-                                tile->AddObject(MoveObject(objectInAir.get()));
+                                tile->AddObject(MoveObject(object_in_air_.get()));
                             }
                         }
                     }
@@ -151,13 +151,13 @@ namespace Narradia
     ObjectMoving::Render()
     /*//////////////////*/
     {
-        if (!objectInAir)
+        if (!object_in_air_)
             return;
         auto mouse_position = GetMousePositionF();
         auto rectangle = RectangleF{
-            mouse_position.x, mouse_position.y, k_object_image_size,
-            ConvertWidthToHeight(k_object_image_size)};
+            mouse_position.x, mouse_position.y, kObjectImageSize,
+            ConvertWidthToHeight(kObjectImageSize)};
         Renderer2DImages::Get()->DrawImage(
-            objectInAir->GetObjectType(), id_moving_object_image, rectangle);
+            object_in_air_->GetObjectType(), rendid_moving_object_image_, rectangle);
     }
 }

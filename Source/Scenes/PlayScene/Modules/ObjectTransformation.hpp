@@ -7,8 +7,10 @@ namespace Narradia
     {
       private:
         void Update();
-        static constexpr int k_update_speed = 2000;
-        int ticks_last_update = 0;
+
+        static constexpr int kUpdateSpeed = 2000;
+        int ticks_last_update_ = 0;
+        
         friend class PlayScene;
     };
 }

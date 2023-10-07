@@ -3,7 +3,7 @@
              /************************/
              {
                  auto map_area = World::Get()->GetMapAreaAtZLevel(Player::Get()->GetWorldAreaPos().z);
-                 if (map_area->GetTile(p->clicked_tile)->GetGroundType() == Hash("GroundWater"))
+                 if (map_area->GetTile(p->clicked_tile_)->GetGroundType() == Hash("GroundWater"))
                  /*****************************************************************************/
                  {
                      TextOutBox::Get()->Print("You caught some fish.");
