@@ -11,15 +11,15 @@ namespace Narradia
     /*////////////////////////////////*/
     {
         CreateGui();
-        glIdBackgroundImage = Renderer2DImages::Get()->NewImage();
-        glIdGenerationText = TextRenderer::Get()->NewString();
+        rendid_background_image_ = Renderer2DImages::Get()->NewImage();
+        rendid_generation_text_ = TextRenderer::Get()->NewString();
     }
 
     void
     MapGenerationScene::Enter()
     /*/////////////////////*/
     {
-        currGenerationStep = GenerateSteps::CreateBlank;
+        current_generation_step_ = GenerationSteps::CreateBlank;
     }
 
     void
@@ -27,11 +27,11 @@ namespace Narradia
     /*/////////////////////////////*/
     {
         Log();
-        if (currGenerationStep == GenerateSteps::CalcNormals)
+        if (current_generation_step_ == GenerationSteps::CalcNormals)
             World::Get()->CalculateNormals();
         else
-            worldMapGenerator.DoGenerationStep(currGenerationStep);
-        currGenerationStep = (GenerateSteps)((int)currGenerationStep + 1);
+            world_map_generator_.DoGenerationStep(current_generation_step_);
+        current_generation_step_ = (GenerationSteps)((int)current_generation_step_ + 1);
     }
 
     void
@@ -39,10 +39,10 @@ namespace Narradia
     /*/////////////////////////////*/
     {
         Log();
-        auto rectBack = RectangleF{0.0f, 0.0f, 1.0f, 1.0f};
-        Renderer2DImages::Get()->DrawImage("DefaultSceneBackground", glIdBackgroundImage, rectBack);
+        auto rect_background_image = RectangleF{0.0f, 0.0f, 1.0f, 1.0f};
+        Renderer2DImages::Get()->DrawImage("DefaultSceneBackground", rendid_background_image_, rect_background_image);
         TextRenderer::Get()->DrawString(
-            glIdGenerationText, "Generating terrain...", {0.5f, 0.5f}, Colors::wheat, true);
+            rendid_generation_text_, "Generating terrain...", {0.5f, 0.5f}, Colors::wheat, true);
     }
 
     void
@@ -50,7 +50,7 @@ namespace Narradia
     /*////////////////////////*/
     {
         Log();
-        if (currGenerationStep == GenerateSteps::Completed)
+        if (current_generation_step_ == GenerationSteps::Completed)
             SceneManager::Get()->ChangeScene(SceneNames::Play);
     }
 }

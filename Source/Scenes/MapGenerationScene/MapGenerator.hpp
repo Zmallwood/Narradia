@@ -4,7 +4,7 @@ namespace Narradia
 {
     class MapArea;
     
-    enum class GenerateSteps
+    enum class GenerationSteps
     /************************/
     {
         CreateBlank = 0,
@@ -19,11 +19,11 @@ namespace Narradia
         Completed
     };
 
-    class WorldMapGenerate
+    class WorldMapGenerator
     /*********************/
     {
       public:
-        void DoGenerationStep(GenerateSteps);
+        void DoGenerationStep(GenerationSteps);
 
       private:
         void AddElevation();
@@ -33,6 +33,7 @@ namespace Narradia
         void AddWaterRivers();
         void AddObjects(std::string_view, int, std::string_view);
         void GenerateColorVariations();
-        std::shared_ptr<MapArea> newMapArea;
+
+        std::shared_ptr<MapArea> new_map_area_;
     };
 }

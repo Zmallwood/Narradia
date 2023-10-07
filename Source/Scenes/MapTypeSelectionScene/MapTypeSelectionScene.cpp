@@ -9,10 +9,10 @@ namespace Narradia
     /*//////////////////////////////*/
     {
       public:
-        const RectangleF rectBack = {0.0f, 0.0f, 1.0f, 1.0f};
-        const RectangleF rectLogo = {0.4f, 0.1f, 0.2f, 0.05f};
-        RenderId glIdBackImage;
-        RenderId glIdLogoImage;
+        const RectangleF kRectBackground = {0.0f, 0.0f, 1.0f, 1.0f};
+        const RectangleF kRectLogo = {0.4f, 0.1f, 0.2f, 0.05f};
+        RenderId rendid_background_image_;
+        RenderId rendid_logo_image_;
     };
 
     MapTypeSelectionScene::MapTypeSelectionScene()
@@ -20,18 +20,18 @@ namespace Narradia
     /*//////////////////////////////////////////*/
     {
         CreateGui();
-        auto sceneGui = GetSceneGui();
-        sceneGui->AddGuiButton("Random wilderness map", {0.45f, 0.3f, 0.1f, 0.05f}, [=]() {
+        auto scene_gui = GetSceneGui();
+        scene_gui->AddGuiButton("Random wilderness map", {0.45f, 0.3f, 0.1f, 0.05f}, [=]() {
             SceneManager::Get()->ChangeScene(SceneNames::MapGeneration);
         });
-        sceneGui->AddGuiButton("User created map", {0.45f, 0.38f, 0.1f, 0.05f}, [=]() {
+        scene_gui->AddGuiButton("User created map", {0.45f, 0.38f, 0.1f, 0.05f}, [=]() {
             SceneManager::Get()->ChangeScene(SceneNames::UserMapSelection);
         });
-        sceneGui->AddGuiButton("Back", {0.45f, 0.46f, 0.1f, 0.05f}, [=]() {
+        scene_gui->AddGuiButton("Back", {0.45f, 0.46f, 0.1f, 0.05f}, [=]() {
             SceneManager::Get()->ChangeScene(SceneNames::MainMenu);
         });
-        p->glIdBackImage = Renderer2DImages::Get()->NewImage();
-        p->glIdLogoImage = Renderer2DImages::Get()->NewImage();
+        p->rendid_background_image_ = Renderer2DImages::Get()->NewImage();
+        p->rendid_logo_image_ = Renderer2DImages::Get()->NewImage();
     }
 
     void
@@ -46,7 +46,7 @@ namespace Narradia
     /*//////////////////////////////////*/
     {
         Log();
-        Renderer2DImages::Get()->DrawImage("DefaultSceneBackground", p->glIdBackImage, p->rectBack);
-        Renderer2DImages::Get()->DrawImage("NarradiaLogo", p->glIdLogoImage, p->rectLogo);
+        Renderer2DImages::Get()->DrawImage("DefaultSceneBackground", p->rendid_background_image_, p->kRectBackground);
+        Renderer2DImages::Get()->DrawImage("NarradiaLogo", p->rendid_logo_image_, p->kRectLogo);
     }
 }

@@ -15,9 +15,9 @@ namespace Narradia
         void Enter() override;
         void UpdateDerived() override;
         void RenderDerived() override;
-        RenderId glIdBackgroundImage;
-        RenderId glIdGenerationText;
-        GenerateSteps currGenerationStep = GenerateSteps::CreateBlank;
-        WorldMapGenerate worldMapGenerator;
+        RenderId rendid_background_image_;
+        RenderId rendid_generation_text_;
+        GenerationSteps current_generation_step_ = GenerationSteps::CreateBlank;
+        WorldMapGenerator world_map_generator_;
     };
 }
