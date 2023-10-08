@@ -9,6 +9,7 @@
 namespace Narradia
 {
     EditorSceneGui::EditorSceneGui() {
+        Log();
         auto rect_gui_button_sys = RectangleF{0.95f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
         auto rect_gui_button_mob_browser =
             RectangleF{0.91f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};

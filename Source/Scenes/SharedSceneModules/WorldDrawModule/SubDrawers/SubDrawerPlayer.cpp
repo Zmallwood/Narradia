@@ -14,7 +14,8 @@ namespace Narradia
       public:
         void DrawLabel();
         float GetPlayerElevation();
-        RenderId idBillboardTextPlayerName;
+
+        RenderId rendid_billboard_text_player_name_;
     };
 
     SubDrawerPlayer::SubDrawerPlayer()
@@ -27,7 +28,7 @@ namespace Narradia
     SubDrawerPlayer::Create()
     /*///////////////////*/
     {
-        p->idBillboardTextPlayerName = TextRenderer::Get()->NewBillboardString();
+        p->rendid_billboard_text_player_name_ = TextRenderer::Get()->NewBillboardString();
     }
 
     void
@@ -41,11 +42,11 @@ namespace Narradia
             RendererModels::Get()->DrawModel(
                 Hash("Mount1"), 0, pos, Player::Get()->GetFacingAngle(), 0.8f);
         }
-        float animTile;
+        float anim_tile;
         if (Player::Get()->data.movement.isMoving)
-            animTile = SDL_GetTicks() * 3;
+            anim_tile = SDL_GetTicks() * 3;
         else
-            animTile = 0.0f;
+            anim_tile = 0.0f;
         RendererModels::Get()->DrawModel(
             Hash("Shadow"), 0,
             Player::Get()->GetSpaceCoord().Translate(
@@ -61,31 +62,31 @@ namespace Narradia
             /***************************************************/
             {
                 RendererModels::Get()->DrawModel(
-                    Hash("Player2Sword"), animTile, pos, Player::Get()->GetFacingAngle(), 0.6f);
+                    Hash("Player2Sword"), anim_tile, pos, Player::Get()->GetFacingAngle(), 0.6f);
             }
             else if (Player::Get()->playerBuild == PlayerBuilds::Club)
             /*******************************************************/
             {
                 RendererModels::Get()->DrawModel(
-                    Hash("Player2Club"), animTile, pos, Player::Get()->GetFacingAngle(), 0.6f);
+                    Hash("Player2Club"), anim_tile, pos, Player::Get()->GetFacingAngle(), 0.6f);
             }
             else
             /**/
             {
                 RendererModels::Get()->DrawModel(
-                    Hash("Player2"), animTile, pos, Player::Get()->GetFacingAngle(), 0.6f);
+                    Hash("Player2"), anim_tile, pos, Player::Get()->GetFacingAngle(), 0.6f);
             }
         }
         else
         /**/
         {
-            auto handsPosition = pos;
-            handsPosition.y = Camera::Get()->cameraPosition.y - 0.5f * kTileSize;
+            auto hands_position = pos;
+            hands_position.y = Camera::Get()->cameraPosition.y - 0.5f * kTileSize;
             RendererModels::Get()->DrawModel(
-                Hash("PlayerRightHand"), animTile, handsPosition, Player::Get()->GetFacingAngle(),
+                Hash("PlayerRightHand"), anim_tile, hands_position, Player::Get()->GetFacingAngle(),
                 0.6f);
             RendererModels::Get()->DrawModel(
-                Hash("PlayerLeftHand"), animTile, handsPosition, Player::Get()->GetFacingAngle(),
+                Hash("PlayerLeftHand"), anim_tile, hands_position, Player::Get()->GetFacingAngle(),
                 0.6f);
         }
         p->DrawLabel();
@@ -96,31 +97,31 @@ namespace Narradia
     /*/////////////////////////////*/
     {
         auto pos = Player::Get()->GetSpaceCoord().Translate(0.0f, GetPlayerElevation(), 0.0f);
-        auto billboardYPos = 4.0f;
-        auto billboardPos = pos.Translate(0.0f, billboardYPos, 0.0f);
-        auto billboardTextPos = Camera::Get()->MoveCloserToCamera(billboardPos, 0.01f);
-        auto billboardSize = SizeF{0.9f, 0.03f};
-        auto playerText = "Player";
+        auto billboard_y_pos = 4.0f;
+        auto billboard_pos = pos.Translate(0.0f, billboard_y_pos, 0.0f);
+        auto billboard_text_pos = Camera::Get()->MoveCloserToCamera(billboard_pos, 0.01f);
+        auto billboard_size = SizeF{0.9f, 0.03f};
+        auto player_text = "Player";
         TextRenderer::Get()->DrawBillboardString(
-            idBillboardTextPlayerName, playerText, billboardTextPos, billboardSize);
+            rendid_billboard_text_player_name_, player_text, billboard_text_pos, billboard_size);
     }
 
     float
     SubDrawerPlayer::Pimpl::GetPlayerElevation()
     /*//////////////////////////////////////*/
     {
-        const auto playerPos = Player::Get()->GetPosition();
-        auto playerTileDx = playerPos.x - static_cast<int>(playerPos.x) - 0.5f;
-        auto playerTileDy = playerPos.y - static_cast<int>(playerPos.y) - 0.5f;
+        const auto player_pos = Player::Get()->GetPosition();
+        auto player_tile_dx = player_pos.x - static_cast<int>(player_pos.x) - 0.5f;
+        auto player_tile_dy = player_pos.y - static_cast<int>(player_pos.y) - 0.5f;
         auto elev00 = RenderLoop::playerElev00;
         auto elev10 = RenderLoop::playerElev10;
         auto elev11 = RenderLoop::playerElev11;
         auto elev01 = RenderLoop::playerElev01;
-        auto tileAvgElev = RenderLoop::playerTileAvgElev;
-        auto elevDx = ((elev10 - elev00) + (elev11 - elev01)) / 2.0f;
-        auto elevDy = ((elev01 - elev00) + (elev11 - elev10)) / 2.0f;
-        auto playerElev = tileAvgElev * kElevAmount + playerTileDx * elevDx * kElevAmount +
-                          playerTileDy * elevDy * kElevAmount;
-        return playerElev;
+        auto tile_avg_elev = RenderLoop::playerTileAvgElev;
+        auto elev_dx = ((elev10 - elev00) + (elev11 - elev01)) / 2.0f;
+        auto elev_dy = ((elev01 - elev00) + (elev11 - elev10)) / 2.0f;
+        auto player_elev = tile_avg_elev * kElevAmount + player_tile_dx * elev_dx * kElevAmount +
+                          player_tile_dy * elev_dy * kElevAmount;
+        return player_elev;
     }
 }

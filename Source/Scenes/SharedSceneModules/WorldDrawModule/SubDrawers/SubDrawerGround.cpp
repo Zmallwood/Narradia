@@ -12,7 +12,7 @@ namespace Narradia
     /*//////////////////////*/
     {
       public:
-        std::map<int, std::map<int, RenderId>> idsTileLayers;
+        std::map<int, std::map<int, RenderId>> rendids_tile_layers_;
     };
 
     SubDrawerGround::SubDrawerGround()
@@ -27,7 +27,7 @@ namespace Narradia
     {
         for (auto y = 0; y < MapArea::GetMapSize().height; y++)
             for (auto x = 0; x < MapArea::GetMapSize().width; x++)
-                p->idsTileLayers[x][y] = RendererTiles::Get()->NewTile();
+                p->rendids_tile_layers_[x][y] = RendererTiles::Get()->NewTile();
     }
 
     void
@@ -35,10 +35,10 @@ namespace Narradia
     /*//////////////////////////////////////////////////*/
     {
         auto tile = RenderLoop::currTile;
-        auto tileCoord = RenderLoop::currTileCoord;
-        auto thisTileClaimedByPlayer = RenderLoop::currThisTileClaimedByPlayer;
-        auto eastTileClaimedByPlayer = RenderLoop::currEastTileClaimedByPlayer;
-        auto southTileClaimedByPlayer = RenderLoop::currSouthTileClaimedByPlayer;
+        auto tile_coord = RenderLoop::currTileCoord;
+        auto this_tile_claimed_by_player = RenderLoop::currThisTileClaimedByPlayer;
+        auto east_tile_claimed_by_player = RenderLoop::currEastTileClaimedByPlayer;
+        auto south_tile_claimed_by_player = RenderLoop::currSouthTileClaimedByPlayer;
         auto v0 = RenderLoop::currVertTile.v0;
         auto v1 = RenderLoop::currVertTile.v1;
         auto v2 = RenderLoop::currVertTile.v2;
@@ -47,41 +47,41 @@ namespace Narradia
         auto normal10 = RenderLoop::currVertTile.v1.normal;
         auto normal11 = RenderLoop::currVertTile.v2.normal;
         auto normal01 = RenderLoop::currVertTile.v3.normal;
-        auto groundType = tile->GetGroundType();
-        auto tileVariation = (tileCoord.x * tileCoord.y) % 3;
-        if (groundType == Hash("GroundWater"))
+        auto ground_type = tile->GetGroundType();
+        auto tile_variation = (tile_coord.x * tile_coord.y) % 3;
+        if (ground_type == Hash("GroundWater"))
         /************************************/
         {
-            auto waterAnimIndex =
-                ((SDL_GetTicks() * 2 + tileCoord.x * tileCoord.y * 6) % 2700) / 900;
-            if (waterAnimIndex > 0)
-                groundType = Hash("GroundWater_" + std::to_string(waterAnimIndex));
+            auto water_anim_index =
+                ((SDL_GetTicks() * 2 + tile_coord.x * tile_coord.y * 6) % 2700) / 900;
+            if (water_anim_index > 0)
+                ground_type = Hash("GroundWater_" + std::to_string(water_anim_index));
             else
-                groundType = Hash("GroundWater");
+                ground_type = Hash("GroundWater");
         }
-        else if (groundType == Hash("GroundRiver"))
+        else if (ground_type == Hash("GroundRiver"))
         /*******************************************/
         {
-            auto riverAnimIndex =
-                ((SDL_GetTicks() * 3 + tileCoord.x * tileCoord.y * 6) % 2700) / 900;
-            if (riverAnimIndex > 0)
-                groundType = Hash("GroundRiver_" + std::to_string(riverAnimIndex));
+            auto river_anim_index =
+                ((SDL_GetTicks() * 3 + tile_coord.x * tile_coord.y * 6) % 2700) / 900;
+            if (river_anim_index > 0)
+                ground_type = Hash("GroundRiver_" + std::to_string(river_anim_index));
             else
-                groundType = Hash("GroundRiver");
+                ground_type = Hash("GroundRiver");
         }
-        else if (groundType == Hash("GroundGrass"))
+        else if (ground_type == Hash("GroundGrass"))
         /*******************************************/
         {
-            groundType = Hash("GroundGrass_" + std::to_string(tileVariation));
+            ground_type = Hash("GroundGrass_" + std::to_string(tile_variation));
         }
-        else if (groundType == Hash("GroundRock"))
+        else if (ground_type == Hash("GroundRock"))
         /******************************************/
         {
-            groundType = Hash("GroundRock_" + std::to_string(tileVariation));
+            ground_type = Hash("GroundRock_" + std::to_string(tile_variation));
         }
-        RendererTiles::Get()->DrawTile(groundType, tile->GetTileRendId());
-        auto groundLayerType = tile->GetGroundLayerType();
-        if (groundLayerType)
+        RendererTiles::Get()->DrawTile(ground_type, tile->GetTileRendId());
+        auto ground_layer_type = tile->GetGroundLayerType();
+        if (ground_layer_type)
         /******************/
         {
             v0.position.y += 0.03f;
@@ -89,11 +89,11 @@ namespace Narradia
             v2.position.y += 0.03f;
             v3.position.y += 0.03f;
             RendererTiles::Get()->UpdateDrawTile(
-                groundLayerType, p->idsTileLayers[tileCoord.x][tileCoord.y], v0, v1, v2, v3,
+                ground_layer_type, p->rendids_tile_layers_[tile_coord.x][tile_coord.y], v0, v1, v2, v3,
                 normal00, normal10, normal11, normal01);
         }
-        auto hoveredTile = TileHovering::Get()->hoveredTile;
-        if (hoveredTile.x == tileCoord.x && hoveredTile.y == tileCoord.y)
+        auto hovered_tile = TileHovering::Get()->hoveredTile;
+        if (hovered_tile.x == tile_coord.x && hovered_tile.y == tile_coord.y)
         /***************************************************************/
         {
             v0.position.y += 0.03f;
@@ -101,7 +101,7 @@ namespace Narradia
             v2.position.y += 0.03f;
             v3.position.y += 0.03f;
             RendererTiles::Get()->UpdateDrawTile(
-                Hash("TileHovered"), p->idsTileLayers[tileCoord.x][tileCoord.y], v0, v1, v2, v3,
+                Hash("TileHovered"), p->rendids_tile_layers_[tile_coord.x][tile_coord.y], v0, v1, v2, v3,
                 normal00, normal10, normal11, normal01);
         }
         auto mob = tile->GetMob().get();
@@ -113,7 +113,7 @@ namespace Narradia
             v2.position.y += 0.03f;
             v3.position.y += 0.03f;
             RendererTiles::Get()->UpdateDrawTile(
-                Hash("TileTargetedMob"), p->idsTileLayers[tileCoord.x][tileCoord.y], v0, v1, v2, v3,
+                Hash("TileTargetedMob"), p->rendids_tile_layers_[tile_coord.x][tile_coord.y], v0, v1, v2, v3,
                 normal00, normal10, normal11, normal01);
         }
         v0.position.y += 0.03f;
@@ -123,18 +123,18 @@ namespace Narradia
         if (doDrawTerritoryBorders)
         /*************************/
         {
-            if (thisTileClaimedByPlayer != eastTileClaimedByPlayer)
+            if (this_tile_claimed_by_player != east_tile_claimed_by_player)
             /*****************************************************/
             {
                 RendererTiles::Get()->UpdateDrawTile(
-                    Hash("PlayerClaimedTileBorderE"), p->idsTileLayers[tileCoord.x][tileCoord.y],
+                    Hash("PlayerClaimedTileBorderE"), p->rendids_tile_layers_[tile_coord.x][tile_coord.y],
                     v0, v1, v2, v3, normal00, normal10, normal11, normal01);
             }
-            if (thisTileClaimedByPlayer != southTileClaimedByPlayer)
+            if (this_tile_claimed_by_player != south_tile_claimed_by_player)
             /******************************************************/
             {
                 RendererTiles::Get()->UpdateDrawTile(
-                    Hash("PlayerClaimedTileBorderS"), p->idsTileLayers[tileCoord.x][tileCoord.y],
+                    Hash("PlayerClaimedTileBorderS"), p->rendids_tile_layers_[tile_coord.x][tile_coord.y],
                     v0, v1, v2, v3, normal00, normal10, normal11, normal01);
             }
         }

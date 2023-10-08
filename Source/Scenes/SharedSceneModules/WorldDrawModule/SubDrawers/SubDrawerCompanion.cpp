@@ -15,7 +15,7 @@ namespace Narradia
     {
       public:
         void DrawExclamationMark();
-        std::map<int, std::map<int, RenderId>> idsCompanionBboardExlamationMarks;
+        std::map<int, std::map<int, RenderId>> rendids_companion_bboards_exclamation_marks_;
     };
 
     SubDrawerCompanion::SubDrawerCompanion()
@@ -34,7 +34,7 @@ namespace Narradia
             for (auto y = -kMaxRenderRadius; y < kMaxRenderRadius; y++)
             /*********************************************************/
             {
-                p->idsCompanionBboardExlamationMarks[x][y] =
+                p->rendids_companion_bboards_exclamation_marks_[x][y] =
                     RendererBillboardImages::Get()->NewBillboardImage();
             }
         }
@@ -45,9 +45,9 @@ namespace Narradia
     /*/////////////////////////////*/
     {
         auto tile = RenderLoop::currTile;
-        auto tileSize = kTileSize;
-        auto elevAmount = kElevAmount;
-        auto tileAvgElev = RenderLoop::currTileAvgElev;
+        auto tile_size = kTileSize;
+        auto elev_amount = kElevAmount;
+        auto tile_avg_elev = RenderLoop::currTileAvgElev;
         auto v0 = RenderLoop::currVertTile.v0;
         auto x0 = v0.position.x;
         auto y0 = v0.position.y;
@@ -58,42 +58,42 @@ namespace Narradia
         if (companion)
         /************/
         {
-            auto minorMovementOffset = GetMinorMovementOffsetForCompanion(companion.get());
+            auto minor_movement_offset = GetMinorMovementOffsetForCompanion(companion.get());
             auto elev00 = RenderLoop::currElev00;
             auto elev10 = RenderLoop::currElev10;
             auto elev11 = RenderLoop::currElev11;
             auto elev01 = RenderLoop::currElev01;
-            auto tileAvgElev = RenderLoop::playerTileAvgElev;
-            auto elevAmount = kElevAmount;
-            auto tileSize = kTileSize;
+            auto tile_avg_elev = RenderLoop::playerTileAvgElev;
+            auto elev_amount = kElevAmount;
+            auto tile_size = kTileSize;
             auto elevDx = ((elev10 - elev00) + (elev11 - elev01)) / 2.0f;
             auto elevDy = ((elev01 - elev00) + (elev11 - elev10)) / 2.0f;
-            auto companionElev = RenderLoop::currTileAvgElev * elevAmount +
-                                 minorMovementOffset.x * elevDx * elevAmount +
-                                 minorMovementOffset.y * elevDy * elevAmount;
-            auto deltaX = RenderLoop::currTileCoord.x - companion->GetPreviousCoordinate().x;
-            auto deltaY = RenderLoop::currTileCoord.y - companion->GetPreviousCoordinate().y;
-            auto absDeltaX = std::abs(deltaX);
-            auto absDeltaY = std::abs(deltaY);
-            auto normX = 0;
-            auto normY = 0;
-            if (deltaX)
-                normX = deltaX / absDeltaX;
-            if (deltaY)
-                normY = deltaY / absDeltaY;
-            auto facingAngle = -90.0f - std::atan2(normY, deltaX) * 180.0f / M_PI;
+            auto companion_elev = RenderLoop::currTileAvgElev * elev_amount +
+                                 minor_movement_offset.x * elevDx * elev_amount +
+                                 minor_movement_offset.y * elevDy * elev_amount;
+            auto delta_x = RenderLoop::currTileCoord.x - companion->GetPreviousCoordinate().x;
+            auto delta_y = RenderLoop::currTileCoord.y - companion->GetPreviousCoordinate().y;
+            auto abs_delta_x = std::abs(delta_x);
+            auto abs_delta_y = std::abs(delta_y);
+            auto norm_x = 0;
+            auto norm_y = 0;
+            if (delta_x)
+                norm_x = delta_x / abs_delta_x;
+            if (delta_y)
+                norm_y = delta_y / abs_delta_y;
+            auto facing_angle = -90.0f - std::atan2(norm_y, delta_x) * 180.0f / M_PI;
             RendererModels::Get()->DrawModel(
                 Hash("Shadow"), 0,
-                {x0 + tileSize / 2 + minorMovementOffset.x * tileSize,
-                 companionElev + 0.05f * tileSize,
-                 z0 + tileSize / 2 + minorMovementOffset.y * tileSize},
+                {x0 + tile_size / 2 + minor_movement_offset.x * tile_size,
+                 companion_elev + 0.05f * tile_size,
+                 z0 + tile_size / 2 + minor_movement_offset.y * tile_size},
                 0.0f, 0.6f);
-            auto animValue = SDL_GetTicks() * 3;
+            auto anim_value = SDL_GetTicks() * 3;
             RendererModels::Get()->DrawModel(
-                Hash("Companion"), animValue,
-                {x0 + tileSize / 2 + minorMovementOffset.x * tileSize, companionElev,
-                 z0 + tileSize / 2 + minorMovementOffset.y * tileSize},
-                facingAngle, 0.6f, 1.0f);
+                Hash("Companion"), anim_value,
+                {x0 + tile_size / 2 + minor_movement_offset.x * tile_size, companion_elev,
+                 z0 + tile_size / 2 + minor_movement_offset.y * tile_size},
+                facing_angle, 0.6f, 1.0f);
             p->DrawExclamationMark();
         }
     }
@@ -112,19 +112,19 @@ namespace Narradia
         auto x0 = v0.position.x;
         auto y0 = v0.position.y;
         auto z0 = v0.position.z;
-        auto billboardYPos = 3.0f;
-        auto billboardPos = Point3F{
-            x0 + kTileSize / 2, RenderLoop::currTileAvgElev * kElevAmount + billboardYPos,
+        auto billboard_y_pos = 3.0f;
+        auto billboard_pos = Point3F{
+            x0 + kTileSize / 2, RenderLoop::currTileAvgElev * kElevAmount + billboard_y_pos,
             z0 + kTileSize / 2};
-        auto billboardSize = SizeF{0.9f, 0.03f};
-        auto exlamationMarkWidth = 0.1f;
-        auto exlamationMarkHeight = 0.1f;
-        auto exlamationMarkPos = billboardPos.Translate(0.f, kTileSize, 0.f);
-        exlamationMarkPos = Camera::Get()->MoveCloserToCamera(exlamationMarkPos, kTileSize);
-        auto exlamationMarkBounds = RectangleF{-.5f, -.5f, 1.f, 1.f};
-        auto exlamationMarkSize = SizeF{exlamationMarkWidth, exlamationMarkHeight};
+        auto billboard_size = SizeF{0.9f, 0.03f};
+        auto exclamation_mark_width = 0.1f;
+        auto exclamation_mark_height = 0.1f;
+        auto exclamation_mark_pos = billboard_pos.Translate(0.f, kTileSize, 0.f);
+        exclamation_mark_pos = Camera::Get()->MoveCloserToCamera(exclamation_mark_pos, kTileSize);
+        auto exclamation_mark_bounds = RectangleF{-.5f, -.5f, 1.f, 1.f};
+        auto exclamation_mark_size = SizeF{exclamation_mark_width, exclamation_mark_height};
         RendererBillboardImages::Get()->DrawBillboardImage(
-            Hash("ExclamationMark"), idsCompanionBboardExlamationMarks[x][y], exlamationMarkPos,
-            exlamationMarkBounds, exlamationMarkSize);
+            Hash("ExclamationMark"), rendids_companion_bboards_exclamation_marks_[x][y], exclamation_mark_pos,
+            exclamation_mark_bounds, exclamation_mark_size);
     }
 }

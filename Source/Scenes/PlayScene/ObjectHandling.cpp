@@ -14,48 +14,48 @@ namespace Narradia
     {
         if (ObjectMoving::Get()->object_in_air_.get() == object)
             ObjectMoving::Get()->object_in_air_ = nullptr;
-        for (auto &inventoryObject : Player::Get()->data.inventory.objects)
+        for (auto &inventory_object : Player::Get()->data.inventory.objects)
         /****************************************************************/
         {
-            if (inventoryObject.second.get() == object)
+            if (inventory_object.second.get() == object)
             /*****************************************/
             {
-                Player::Get()->data.inventory.objects.erase(inventoryObject.first);
+                Player::Get()->data.inventory.objects.erase(inventory_object.first);
                 object = nullptr;
                 return;
             }
-            for (auto &entry : inventoryObject.second->GetContainedObjects())
+            for (auto &entry : inventory_object.second->GetContainedObjects())
             /***************************************************************/
             {
                 if (entry.second.get() == object)
                 /*******************************/
                 {
-                    inventoryObject.second->RemoveContainedObject(entry.first);
+                    inventory_object.second->RemoveContainedObject(entry.first);
                     object = nullptr;
                     return;
                 }
             }
         }
-        auto mapArea = World::Get()->GetCurrentMapArea();
-        for (auto worldObject : mapArea->GetObjectsMirror())
+        auto map_area = World::Get()->GetCurrentMapArea();
+        for (auto world_object : map_area->GetObjectsMirror())
         /**************************************************/
         {
-            if (worldObject.first == object)
+            if (world_object.first == object)
             /******************************/
             {
-                auto coord = worldObject.second;
-                auto tile = mapArea->GetTile(coord);
+                auto coord = world_object.second;
+                auto tile = map_area->GetTile(coord);
                 tile->RemoveObject(object);
                 object = nullptr;
                 return;
             }
-            for (auto &entry : worldObject.first->GetContainedObjects())
+            for (auto &entry : world_object.first->GetContainedObjects())
             /**********************************************************/
             {
                 if (entry.second.get() == object)
                 /*******************************/
                 {
-                    worldObject.first->RemoveContainedObject(entry.first);
+                    world_object.first->RemoveContainedObject(entry.first);
                     object = nullptr;
                     return;
                 }
@@ -74,49 +74,49 @@ namespace Narradia
             ObjectMoving::Get()->object_in_air_ = nullptr;
             return result;
         }
-        for (auto &inventoryObject : Player::Get()->data.inventory.objects)
+        for (auto &inventory_object : Player::Get()->data.inventory.objects)
         /****************************************************************/
         {
-            if (inventoryObject.second.get() == object)
+            if (inventory_object.second.get() == object)
             /*****************************************/
             {
-                auto result = inventoryObject.second;
-                Player::Get()->data.inventory.objects.erase(inventoryObject.first);
+                auto result = inventory_object.second;
+                Player::Get()->data.inventory.objects.erase(inventory_object.first);
                 return result;
             }
-            for (auto &entry : inventoryObject.second->GetContainedObjects())
+            for (auto &entry : inventory_object.second->GetContainedObjects())
             /***************************************************************/
             {
                 if (entry.second.get() == object)
                 /*******************************/
                 {
                     auto result = entry.second;
-                    inventoryObject.second->RemoveContainedObject(entry.first);
+                    inventory_object.second->RemoveContainedObject(entry.first);
                     return result;
                 }
             }
         }
-        auto mapArea = World::Get()->GetCurrentMapArea();
-        for (auto worldObject : mapArea->GetObjectsMirror())
+        auto map_area = World::Get()->GetCurrentMapArea();
+        for (auto world_object : map_area->GetObjectsMirror())
         /**************************************************/
         {
-            if (worldObject.first == object)
+            if (world_object.first == object)
             /******************************/
             {
-                auto coord = worldObject.second;
-                auto tile = mapArea->GetTile(coord);
+                auto coord = world_object.second;
+                auto tile = map_area->GetTile(coord);
                 auto result = tile->GetObjectFromRawPtr(object);
                 tile->RemoveObject(object);
                 return result;
             }
-            for (auto &entry : worldObject.first->GetContainedObjects())
+            for (auto &entry : world_object.first->GetContainedObjects())
             /**********************************************************/
             {
                 if (entry.second.get() == object)
                 /*******************************/
                 {
                     auto result = entry.second;
-                    worldObject.first->RemoveContainedObject(entry.first);
+                    world_object.first->RemoveContainedObject(entry.first);
                     return result;
                 }
             }

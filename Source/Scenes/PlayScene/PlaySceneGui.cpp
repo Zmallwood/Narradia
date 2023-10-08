@@ -17,45 +17,45 @@ namespace Narradia
     /*////////////////////////*/
     {
         Log();
-        auto rectGButtonSys = RectangleF{0.95f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
-        Log();
-        auto rectGButtonRepeat = RectangleF{0.91f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
-        Log();
-        auto rectGButtonWinSkills = RectangleF{0.87f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
-        Log();
-        auto rectGButtonWinInv = RectangleF{0.83f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
-        Log();
-        auto rectGButtonWinChar = RectangleF{0.79f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
-        Log();
-        auto rectGButtonWinBuildSelector =
+        auto rect_gui_button_sys = RectangleF{0.95f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
+        auto rect_gui_button_repeat = RectangleF{0.91f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
+        auto rect_gui_button_window_skills =
+            RectangleF{0.87f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
+        auto rect_gui_button_windows_inventory =
+            RectangleF{0.83f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
+        auto rect_gui_button_window_character =
+            RectangleF{0.79f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
+        auto rect_gui_button_window_build_selector =
             RectangleF{0.75f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
-        Log();
-        auto fnSys = [] { PlaySceneGuiMenu::Get()->visible_ = !PlaySceneGuiMenu::Get()->visible_; };
-        Log();
+        auto fn_sys = [] {
+            PlaySceneGuiMenu::Get()->visible_ = !PlaySceneGuiMenu::Get()->visible_;
+        };
         auto fnRepeat = [] { ActionRepeat::Get()->RepeatLastAction(); };
+        auto fn_window_skills = [] { SkillsGui::Get()->ToggleVisibility(); };
+        auto fn_window_inventory = [] { InventoryGui::Get()->ToggleVisibility(); };
+        auto fn_window_character = [] { CharacterGui::Get()->ToggleVisibility(); };
+        auto fn_window_build_selector = [] { BuildSelectorGui::Get()->ToggleVisibility(); };
         Log();
-        auto fnWinSkills = [] { SkillsGui::Get()->ToggleVisibility(); };
-        Log();
-        auto fnWinInv = [] { InventoryGui::Get()->ToggleVisibility(); };
-        Log();
-        auto fnWinChar = [] { CharacterGui::Get()->ToggleVisibility(); };
-        Log();
-        auto fnWinBuildSelector = [] { BuildSelectorGui::Get()->ToggleVisibility(); };
-        Log();
-        AddGuiButton("", rectGButtonSys, fnSys, "GuiButtonSys", "GuiButtonSysHovered");
-        Log();
-        AddGuiButton("", rectGButtonRepeat, fnRepeat, "GuiButtonRepeat", "GuiButtonRepeatHovered");
+        AddGuiButton("", rect_gui_button_sys, fn_sys, "GuiButtonSys", "GuiButtonSysHovered");
         Log();
         AddGuiButton(
-            "", rectGButtonWinSkills, fnWinSkills, "GuiButtonSkills", "GuiButtonSkillsHovered");
-        Log();
-        AddGuiButton("", rectGButtonWinInv, fnWinInv, "GuiButtonInv", "GuiButtonInvHovered");
-        Log();
-        AddGuiButton("", rectGButtonWinChar, fnWinChar, "GuiButtonChar", "GuiButtonCharHovered");
+            "", rect_gui_button_repeat, fnRepeat, "GuiButtonRepeat", "GuiButtonRepeatHovered");
         Log();
         AddGuiButton(
-            "", rectGButtonWinBuildSelector, fnWinBuildSelector, "GuiButtonBuildSelector",
-            "GuiButtonBuildSelectorHovered");
+            "", rect_gui_button_window_skills, fn_window_skills, "GuiButtonSkills",
+            "GuiButtonSkillsHovered");
+        Log();
+        AddGuiButton(
+            "", rect_gui_button_windows_inventory, fn_window_inventory, "GuiButtonInv",
+            "GuiButtonInvHovered");
+        Log();
+        AddGuiButton(
+            "", rect_gui_button_window_character, fn_window_character, "GuiButtonChar",
+            "GuiButtonCharHovered");
+        Log();
+        AddGuiButton(
+            "", rect_gui_button_window_build_selector, fn_window_build_selector,
+            "GuiButtonBuildSelector", "GuiButtonBuildSelectorHovered");
         Log();
         AddGuiComponent(std::shared_ptr<PlaySceneGuiMenu>(PlaySceneGuiMenu::Get()));
         Log();
