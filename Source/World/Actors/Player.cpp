@@ -2,7 +2,7 @@
 #include "Engine/Core/Audio.hpp"
 #include "Engine/Core/SceneManager.hpp"
 #include "Scenes/SharedSceneModules/WorldDrawModule/Camera.hpp"
-#include "Scenes/SharedSceneModules/WorldDrawModule/ConfigurationWorldDraw.hpp"
+#include "Scenes/SharedSceneModules/WorldDrawModule/ConfigWorldDraw.hpp"
 #include "World/MapArea.hpp"
 #include "World/Object.hpp"
 #include "World/ObjectBehaviourList.hpp"
@@ -16,7 +16,7 @@ namespace Narradia
     Player::GetPosition()
     /*/////////////////*/
     {
-        return data.movement.position;
+        return data.movement_.position;
     }
 
     void
@@ -30,56 +30,56 @@ namespace Narradia
     Player::TurnForward()
     /*/////////////////*/
     {
-        data.movement.facingAngle = Camera::Get()->horizontalAngle;
+        data.movement_.facing_angle = Camera::Get()->horizontal_angle_;
     }
 
     void
     Player::TurnRight()
     /*///////////////*/
     {
-        data.movement.facingAngle = Camera::Get()->horizontalAngle - 90.0f;
+        data.movement_.facing_angle = Camera::Get()->horizontal_angle_ - 90.0f;
     }
 
     void
     Player::TurnLeft()
     /*//////////////*/
     {
-        data.movement.facingAngle = Camera::Get()->horizontalAngle + 90.0f;
+        data.movement_.facing_angle = Camera::Get()->horizontal_angle_ + 90.0f;
     }
 
     void
     Player::TurnBack()
     /*//////////////*/
     {
-        data.movement.facingAngle = Camera::Get()->horizontalAngle + 180.0f;
+        data.movement_.facing_angle = Camera::Get()->horizontal_angle_ + 180.0f;
     }
 
     void
     Player::TurnRightForward()
     /*//////////////////////*/
     {
-        data.movement.facingAngle = Camera::Get()->horizontalAngle - 45.0f;
+        data.movement_.facing_angle = Camera::Get()->horizontal_angle_ - 45.0f;
     }
 
     void
     Player::TurnLeftForward()
     /*/////////////////////*/
     {
-        data.movement.facingAngle = Camera::Get()->horizontalAngle + 45.0f;
+        data.movement_.facing_angle = Camera::Get()->horizontal_angle_ + 45.0f;
     }
 
     void
     Player::TurnRightBack()
     /*///////////////////*/
     {
-        data.movement.facingAngle = Camera::Get()->horizontalAngle + 225.0f;
+        data.movement_.facing_angle = Camera::Get()->horizontal_angle_ + 225.0f;
     }
 
     void
     Player::TurnLeftBack()
     /*//////////////////*/
     {
-        data.movement.facingAngle = Camera::Get()->horizontalAngle + 135.0f;
+        data.movement_.facing_angle = Camera::Get()->horizontal_angle_ + 135.0f;
     }
 
     Point3F
@@ -88,7 +88,7 @@ namespace Narradia
     {
         auto position = GetPosition();
         Point3F spaceCoord = {position.x * kTileSize, 0.0f, position.y * kTileSize};
-        spaceCoord.y -= Player::Get()->data.movement.jumpHeight;
+        spaceCoord.y -= Player::Get()->data.movement_.jump_height;
         return spaceCoord;
     }
 
@@ -96,21 +96,21 @@ namespace Narradia
     Player::GetWorldAreaPos()
     /*/////////////////////*/
     {
-        return data.movement.worldAreaPos;
+        return data.movement_.world_area_position;
     }
 
     float
     Player::GetFacingAngle()
     /*////////////////////*/
     {
-        return data.movement.facingAngle;
+        return data.movement_.facing_angle;
     }
 
     void
     Player::SetFacingAngle(float newFacingAngle)
     /*////////////////////////////////////////*/
     {
-        data.movement.facingAngle = newFacingAngle;
+        data.movement_.facing_angle = newFacingAngle;
     }
 
     void
@@ -146,23 +146,23 @@ namespace Narradia
     Player::MoveAtAngle(float angleOffset)
     /*//////////////////////////////////*/
     {
-        if (!data.movement.isMoving)
-            data.ticksLastUpdate = SDL_GetTicks();
-        auto usedAngle = data.movement.facingAngle + angleOffset - 90;
-        auto dx = CosDegrees(usedAngle) * data.movement.stepSize * data.deltaT /
-                  data.movement.moveSpeed * skillSet.skills.at("MovementSpeed").level;
-        auto dy = SinDegrees(usedAngle) * data.movement.stepSize * data.deltaT /
-                  data.movement.moveSpeed * skillSet.skills.at("MovementSpeed").level;
+        if (!data.movement_.is_moving)
+            data.ticks_last_update_ = SDL_GetTicks();
+        auto usedAngle = data.movement_.facing_angle + angleOffset - 90;
+        auto dx = CosDegrees(usedAngle) * data.movement_.step_size * data.delta_t_ /
+                  data.movement_.movement_speed * skillSet.skills_.at("MovementSpeed").level;
+        auto dy = SinDegrees(usedAngle) * data.movement_.step_size * data.delta_t_ /
+                  data.movement_.movement_speed * skillSet.skills_.at("MovementSpeed").level;
         if (SceneManager::Get()->GetCurrentScene() == SceneNames::Editor)
         /*******************************************************/
         {
             dx *= 2;
             dy *= 2;
         }
-        auto mapArea = World::Get()->GetMapAreaAtZLevel(data.movement.worldAreaPos.z);
-        auto tileBeforeMove = mapArea->GetTile(data.movement.position.ToIntPoint());
-        auto newX = data.movement.position.x - dx;
-        auto newY = data.movement.position.y + dy;
+        auto mapArea = World::Get()->GetMapAreaAtZLevel(data.movement_.world_area_position.z);
+        auto tileBeforeMove = mapArea->GetTile(data.movement_.position.ToIntPoint());
+        auto newX = data.movement_.position.x - dx;
+        auto newY = data.movement_.position.y + dy;
         auto tileNew = mapArea->GetTile({static_cast<int>(newX), static_cast<int>(newY)});
         if (SceneManager::Get()->GetCurrentScene() != SceneNames::Editor)
         /*******************************************************/
@@ -175,34 +175,34 @@ namespace Narradia
                 {
                     if ((ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockN) != 0 &&
-                        (int)newY == (int)data.movement.position.y - 1)
+                        (int)newY == (int)data.movement_.position.y - 1)
                     /**********************************************************************/
                     {
-                        data.deltaT = 0;
+                        data.delta_t_ = 0;
                         return;
                     }
                     if ((ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockS) != 0 &&
-                        (int)newY == (int)data.movement.position.y + 1)
+                        (int)newY == (int)data.movement_.position.y + 1)
                     /**********************************************************************/
                     {
-                        data.deltaT = 0;
+                        data.delta_t_ = 0;
                         return;
                     }
                     if ((ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockE) != 0 &&
-                        (int)newX == (int)data.movement.position.x + 1)
+                        (int)newX == (int)data.movement_.position.x + 1)
                     /**********************************************************************/
                     {
-                        data.deltaT = 0;
+                        data.delta_t_ = 0;
                         return;
                     }
                     if ((ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockW) != 0 &&
-                        (int)newX == (int)data.movement.position.x - 1)
+                        (int)newX == (int)data.movement_.position.x - 1)
                     /**********************************************************************/
                     {
-                        data.deltaT = 0;
+                        data.delta_t_ = 0;
                         return;
                     }
                 }
@@ -216,7 +216,7 @@ namespace Narradia
                     if (SDL_GetTicks() < tickLastTimeDidMine + mineSpeed)
                     /***************************************************/
                     {
-                        data.deltaT = 0;
+                        data.delta_t_ = 0;
                         return;
                     }
                 }
@@ -227,53 +227,53 @@ namespace Narradia
                         (int)ObjectBehaviourFlags::MovementBlock != 0)
                     /*********************************************************************/
                     {
-                        data.deltaT = 0;
+                        data.delta_t_ = 0;
                         return;
                     }
                     if ((ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockN) != 0 &&
-                        (int)newY == (int)data.movement.position.y + 1)
+                        (int)newY == (int)data.movement_.position.y + 1)
                     /**********************************************************************/
                     {
-                        data.deltaT = 0;
+                        data.delta_t_ = 0;
                         return;
                     }
                     if ((ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockS) != 0 &&
-                        (int)newY == (int)data.movement.position.y - 1)
+                        (int)newY == (int)data.movement_.position.y - 1)
                     /**********************************************************************/
                     {
-                        data.deltaT = 0;
+                        data.delta_t_ = 0;
                         return;
                     }
                     if ((ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockE) != 0 &&
-                        (int)newX == (int)data.movement.position.x - 1)
+                        (int)newX == (int)data.movement_.position.x - 1)
                     /**********************************************************************/
                     {
-                        data.deltaT = 0;
+                        data.delta_t_ = 0;
                         return;
                     }
                     if ((ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockW) != 0 &&
-                        (int)newX == (int)data.movement.position.x + 1)
+                        (int)newX == (int)data.movement_.position.x + 1)
                     /**********************************************************************/
                     {
-                        data.deltaT = 0;
+                        data.delta_t_ = 0;
                         return;
                     }
                 }
             }
         }
-        if (newX != data.movement.position.x || newY != data.movement.position.y)
+        if (newX != data.movement_.position.x || newY != data.movement_.position.y)
         /***********************************************************************/
         {
-            data.movement.position.x = newX;
-            data.movement.position.y = newY;
+            data.movement_.position.x = newX;
+            data.movement_.position.y = newY;
             Audio::Get()->PlaySound("Footsteps");
-            data.deltaT = 0;
+            data.delta_t_ = 0;
         }
-        auto tile = mapArea->GetTile(data.movement.position.ToIntPoint());
+        auto tile = mapArea->GetTile(data.movement_.position.ToIntPoint());
         for (auto objectEntry : tile->GetObjects().list)
         /**********************************************/
         {
@@ -281,9 +281,9 @@ namespace Narradia
                 false == tileBeforeMove->GetObjects().Contains(Hash("ObjectMineEntrance")))
             /*****************************************************************************/
             {
-                data.movement.worldAreaPos.z--;
-                auto mapArea = World::Get()->GetMapAreaAtZLevel(data.movement.worldAreaPos.z);
-                tile = mapArea->GetTile(data.movement.position.ToIntPoint());
+                data.movement_.world_area_position.z--;
+                auto mapArea = World::Get()->GetMapAreaAtZLevel(data.movement_.world_area_position.z);
+                tile = mapArea->GetTile(data.movement_.position.ToIntPoint());
                 if (false == tile->GetObjects().Contains(Hash("ObjectMineExit")))
                 /***************************************************************/
                 {
@@ -299,10 +299,10 @@ namespace Narradia
                 false == tileBeforeMove->GetObjects().Contains(Hash("ObjectMineExit")))
             /*************************************************************************/
             {
-                data.movement.worldAreaPos.z++;
+                data.movement_.world_area_position.z++;
             }
         }
-        tile = mapArea->GetTile(data.movement.position.ToIntPoint());
+        tile = mapArea->GetTile(data.movement_.position.ToIntPoint());
         for (auto objectEntry : tile->GetObjects().list)
         /**********************************************/
         {
@@ -326,13 +326,13 @@ namespace Narradia
     /*////////////*/
     {
         data.Update();
-        if (!data.movement.isMoving)
+        if (!data.movement_.is_moving)
             Audio::Get()->StopPlaySound();
 
         if (SDL_GetTicks() > ticksLastStaminaRegeneration + kStaminaRegenerationSpeed)
         /****************************************************************************/
         {
-            data.stats.stam = std::min(data.stats.maxStam, data.stats.stam + 1);
+            data.status_.stamina = std::min(data.status_.max_stamina, data.status_.stamina + 1);
             ticksLastStaminaRegeneration = SDL_GetTicks();
         }
 
@@ -342,12 +342,12 @@ namespace Narradia
             auto jumpProgress =
                 (SDL_GetTicks() - ticksStartJumping) * 2 / static_cast<float>(jumpDuration);
             auto jumpHeight = -std::pow(jumpProgress - 1.0f, 2) + 1.0f;
-            data.movement.jumpHeight = -jumpHeight * maxJumpHeight * kTileSize;
+            data.movement_.jump_height = -jumpHeight * maxJumpHeight * kTileSize;
         }
         else
         /**/
         {
-            data.movement.jumpHeight = 0.0f;
+            data.movement_.jump_height = 0.0f;
         }
     }
 }

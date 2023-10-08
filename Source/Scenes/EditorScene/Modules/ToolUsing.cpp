@@ -24,7 +24,7 @@ namespace Narradia
                 case Tools::AddObject:
                     /*****************/
                     {
-                        auto hovered_tile = TileHovering::Get()->hoveredTile;
+                        auto hovered_tile = TileHovering::Get()->hovered_tile_;
                         auto new_objects = std::make_shared<Object>(selected_type_);
                         if (selected_type_ != Hash("ObjectWoodWallN") &&
                             selected_type_ != Hash("ObjectWoodWallE") &&
@@ -46,7 +46,7 @@ namespace Narradia
                 case Tools::AddMob:
                     /**************/
                     {
-                        auto hovered_tile = TileHovering::Get()->hoveredTile;
+                        auto hovered_tile = TileHovering::Get()->hovered_tile_;
                         auto new_mob =
                             std::make_shared<Mob>(selected_type_, hovered_tile.x, hovered_tile.y);
                         World::Get()->GetCurrentMapArea()->GetTile(hovered_tile)->SetMob(new_mob);
@@ -58,7 +58,7 @@ namespace Narradia
                 case Tools::SetGround:
                     /*****************/
                     {
-                        auto hovered_tile = TileHovering::Get()->hoveredTile;
+                        auto hovered_tile = TileHovering::Get()->hovered_tile_;
                         for (auto y = hovered_tile.y - (tool_radius_ - 1);
                              y <= hovered_tile.y + (tool_radius_ - 1); y++)
                         /**********************************************/
@@ -78,7 +78,7 @@ namespace Narradia
                 case Tools::SetRoof:
                     /***************/
                     {
-                        auto hovered_tile = TileHovering::Get()->hoveredTile;
+                        auto hovered_tile = TileHovering::Get()->hovered_tile_;
                         World::Get()
                             ->GetCurrentMapArea()
                             ->GetTile(hovered_tile)
@@ -88,7 +88,7 @@ namespace Narradia
                 case Tools::AlterElevation:
                     /**********************/
                     {
-                        auto hovered_tile = TileHovering::Get()->hoveredTile;
+                        auto hovered_tile = TileHovering::Get()->hovered_tile_;
                         for (auto y = hovered_tile.y - (tool_radius_ - 1);
                              y <= hovered_tile.y + (tool_radius_ - 1); y++)
                         /**********************************************/

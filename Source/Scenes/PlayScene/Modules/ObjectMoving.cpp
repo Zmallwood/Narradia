@@ -51,19 +51,19 @@ namespace Narradia
     ObjectMoving::PickupObjectFromGroundIfIsTheCase()
     /*/////////////////////////////////////////////*/
     {
-        if (MapArea::IsInsideMap(TileHovering::Get()->hoveredTile))
+        if (MapArea::IsInsideMap(TileHovering::Get()->hovered_tile_))
         /********************************************************/
         {
             auto player = Player::Get();
             auto player_position = player->GetPosition().ToIntPoint();
-            auto abs_dist_x = std::abs(TileHovering::Get()->hoveredTile.x - player_position.x);
-            auto abs_dist_y = std::abs(TileHovering::Get()->hoveredTile.y - player_position.y);
+            auto abs_dist_x = std::abs(TileHovering::Get()->hovered_tile_.x - player_position.x);
+            auto abs_dist_y = std::abs(TileHovering::Get()->hovered_tile_.y - player_position.y);
             if (abs_dist_x <= 1 && abs_dist_y <= 1)
             /*************************************/
             {
                 auto world = World::Get();
                 auto map_area = world->GetMapAreaAtZLevel(player->GetWorldAreaPos().z);
-                auto tile = map_area->GetTile(TileHovering::Get()->hoveredTile);
+                auto tile = map_area->GetTile(TileHovering::Get()->hovered_tile_);
                 if (tile->GetObjectsCount() > 0)
                 /******************************/
                 {
@@ -99,7 +99,7 @@ namespace Narradia
                         GuiWindowObjectSlot::active_window_ == InventoryGui::Get().get())
                     /************************************************************************/
                     {
-                        Player::Get()->data.inventory.objects.insert(
+                        Player::Get()->data.inventory_.objects_.insert(
                             {GuiWindowObjectSlot::hovered_index_, MoveObject(object_in_air_.get())});
                     }
                     else
@@ -126,7 +126,7 @@ namespace Narradia
                         auto player_position = Player::Get()->GetPosition().ToIntPoint();
                         auto map_area =
                             World::Get()->GetMapAreaAtZLevel(Player::Get()->GetWorldAreaPos().z);
-                        auto tile = map_area->GetTile(TileHovering::Get()->hoveredTile);
+                        auto tile = map_area->GetTile(TileHovering::Get()->hovered_tile_);
                         if (tile)
                         /*******/
                         {

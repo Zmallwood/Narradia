@@ -11,7 +11,7 @@ namespace Narradia
         : GuiWindow("Skills", {0.55f, 0.2f, 0.17f, 0.35f})
     /*//////////////////////////////////////////////////*/
     {
-        for (auto i = 0; i < Player::Get()->skillSet.skills.size(); i++)
+        for (auto i = 0; i < Player::Get()->skillSet.skills_.size(); i++)
         /***********************************************************/
         {
             rendids_skills_labels_.push_back(TextRenderer::Get()->NewString());
@@ -27,10 +27,10 @@ namespace Narradia
     {
         auto mouse_position = GetMousePositionF();
         auto i = 0;
-        for (auto &skill : Player::Get()->skillSet.skills)
+        for (auto &skill : Player::Get()->skillSet.skills_)
         /*********************************************/
         {
-            if (Player::Get()->skillSet.availablePoints > 0)
+            if (Player::Get()->skillSet.available_points_ > 0)
             /*******************************************/
             {
                 RectangleF add_point_button_rect = {
@@ -45,7 +45,7 @@ namespace Narradia
                         /********************/
                         {
                             skill.second.level += 0.1f;
-                            Player::Get()->skillSet.availablePoints--;
+                            Player::Get()->skillSet.available_points_--;
                         });
                 }
             }
@@ -59,7 +59,7 @@ namespace Narradia
     {
         auto mouse_position = GetMousePositionF();
         auto i = 0;
-        for (auto &skill : Player::Get()->skillSet.skills)
+        for (auto &skill : Player::Get()->skillSet.skills_)
         /*********************************************/
         {
             TextRenderer::Get()->DrawString(
@@ -70,7 +70,7 @@ namespace Narradia
             std::string_view s = stream.str();
             TextRenderer::Get()->DrawString(
                 rendids_skill_levels_values_.at(i), s, GetPosition().Translate(0.13f, 0.05f + i * 0.03f));
-            if (Player::Get()->skillSet.availablePoints > 0)
+            if (Player::Get()->skillSet.available_points_ > 0)
             /*******************************************/
             {
                 RectangleF add_point_button_rect = {
@@ -94,7 +94,7 @@ namespace Narradia
             i++;
         }
         std::string_view available_points_text =
-            "Available points: " + std::to_string(Player::Get()->skillSet.availablePoints);
+            "Available points: " + std::to_string(Player::Get()->skillSet.available_points_);
         TextRenderer::Get()->DrawString(
             rendid_available_points_, available_points_text,
             GetPosition().Translate(0.01f, 0.07f + i * 0.03f));

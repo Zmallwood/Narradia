@@ -14,11 +14,11 @@ namespace Narradia
     DestinationMove::Update()
     /*/////////////////////*/
     {
-        if (Camera::Get()->cameraDistance == 2.0f)
+        if (Camera::Get()->camera_distance_ == 2.0f)
             return;
         auto player_world_area_position = Player::Get()->GetWorldAreaPos();
         auto map_area = World::Get()->GetMapAreaAtZLevel(player_world_area_position.z);
-        if (MapArea::IsInsideMap(TileHovering::Get()->hoveredTile))
+        if (MapArea::IsInsideMap(TileHovering::Get()->hovered_tile_))
         /******************************************************/
         {
             MouseInput::Get()->GetLeftButton().AddFiredAction(
@@ -29,7 +29,7 @@ namespace Narradia
                     if (SDL_GetTicks() > InteractionMenu::Get()->GetTicksClosed() + 400)
                     /************************************************************/
                     {
-                        destination_ = TileHovering::Get()->hoveredTile;
+                        destination_ = TileHovering::Get()->hovered_tile_;
                     }
                 },
                 0, 0);
@@ -50,14 +50,14 @@ namespace Narradia
                     auto angle = static_cast<float>(std::atan2(dx, dy) * 180.f / M_PI) + 180.f;
                     Player::Get()->SetFacingAngle(angle);
                     Player::Get()->MoveForward();
-                    Player::Get()->data.movement.isMoving = true;
+                    Player::Get()->data.movement_.is_moving = true;
                 }
                 else
                 /**/
                 {
-                    Player::Get()->data.deltaT = 0;
+                    Player::Get()->data.delta_t_ = 0;
                     destination_ = {-1, -1};
-                    Player::Get()->data.movement.isMoving = false;
+                    Player::Get()->data.movement_.is_moving = false;
                 }
             }
         }

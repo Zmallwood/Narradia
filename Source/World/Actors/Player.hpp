@@ -26,11 +26,11 @@ namespace Narradia
         bool HasClaimedTile(Point2);
         void ClearClaimedTiles();
         void Jump();
+
         std::vector<Point2> claimedTiles;
         ActorData data;
         SkillSet skillSet;
         bool mounted = false;
-
         PlayerBuilds playerBuild = PlayerBuilds::None;
 
       private:

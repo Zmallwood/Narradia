@@ -12,41 +12,39 @@ namespace Narradia
         void Add(std::shared_ptr<Object>);
         bool ContainsObjectOfType(std::string_view);
         void RemoveObjectOfType(std::string_view);
-        std::map<int, std::shared_ptr<Object>> objects;
+
+        std::map<int, std::shared_ptr<Object>> objects_;
 
       private:
         static constexpr int kMaxNumberInventoryObjects = 1000;
     };
 
-    class MovementData
+    struct MovementData
     /*//////////////*/
     {
-      public:
         Point2F position = {0.0f, 0.0f};
-        Point3 worldAreaPos = {0, 0, 0};
-        float moveSpeed = 4.5f;
-        bool isMoving = false;
-        float stepSize = 0.015f;
-        float facingAngle = 0.0f;
-        float jumpHeight = 0.0f;
+        Point3 world_area_position = {0, 0, 0};
+        float movement_speed = 4.5f;
+        bool is_moving = false;
+        float step_size = 0.015f;
+        float facing_angle = 0.0f;
+        float jump_height = 0.0f;
     };
 
-    class StatsData
+    struct StatusData
     /*///////////*/
     {
-      public:
-        int hp = 10;
-        int maxHp = 10;
-        int stam = 10;
-        int maxStam = 10;
+        int health = 10;
+        int max_health = 10;
+        int stamina = 10;
+        int max_stamina = 10;
         int rage = 0;
-        int maxRage = 10;
+        int max_rage = 10;
     };
 
-    class CombatData {
-      public:
-        int ticksLastHitGivenOther = 0;
-        int attackSpeed = 1000;
+    struct CombatData {
+        int ticks_last_hit_given_other = 0;
+        int attack_speed = 1000;
     };
 
     class ActorData
@@ -54,19 +52,19 @@ namespace Narradia
     {
       public:
         void Update();
-        int ticksLastUpdate = 0;
-        float deltaT = 0;
-        int exp = 0;
-        MovementData movement;
-        StatsData stats;
-        Inventory inventory;
-        CombatData combat;
+
+        int ticks_last_update_ = 0;
+        float delta_t_ = 0;
+        int experience_ = 0;
+        MovementData movement_;
+        StatusData status_;
+        Inventory inventory_;
+        CombatData combat_;
     };
 
-    class Skill
+    struct Skill
     /*///////*/
     {
-      public:
         std::string_view label;
         float level = 1.0f;
     };
@@ -76,7 +74,8 @@ namespace Narradia
     {
       public:
         SkillSet();
-        std::map<std::string_view, Skill> skills;
-        int availablePoints = 20;
+
+        std::map<std::string_view, Skill> skills_;
+        int available_points_ = 20;
     };
 }

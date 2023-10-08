@@ -298,7 +298,7 @@ namespace Narradia
         auto player = Player::Get();
         auto player_world_area_position = player->GetWorldAreaPos();
         auto map_area = World::Get()->GetMapAreaAtZLevel(player_world_area_position.z);
-        auto tile = map_area->GetTile(block_tile_hovering->hoveredTile);
+        auto tile = map_area->GetTile(block_tile_hovering->hovered_tile_);
         auto gui_window_inventory = InventoryGui::Get();
         if (tile == nullptr && GuiWindowObjectSlot::hovered_object_ == nullptr)
             return;
@@ -402,7 +402,7 @@ namespace Narradia
                 AddEntryToMenu("SetWoodRoof");
             if (tile->GetGroundType() == Hash("GroundWater"))
                 AddEntryToMenu("Fish");
-            p->clicked_tile_ = block_tile_hovering->hoveredTile;
+            p->clicked_tile_ = block_tile_hovering->hovered_tile_;
         }
         else
         /**/

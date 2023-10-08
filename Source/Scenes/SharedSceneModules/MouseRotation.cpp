@@ -12,7 +12,7 @@ namespace Narradia
     MouseRotation::Update()
     /*///////////////////*/
     {
-        if (Camera::Get()->cameraDistance == 2.0f)
+        if (Camera::Get()->camera_distance_ == 2.0f)
         /***************************************/
         {
             Cursor::Get()->SavePosition();
@@ -23,7 +23,7 @@ namespace Narradia
             [&]
             /***********************************************/
             {
-                rotationType = RotationTypes::CameraAndPlayer;
+                current_rotation_type_ = RotationTypes::CameraAndPlayer;
                 Cursor::Get()->SavePosition();
                 Cursor::Get()->LockMousePos();
                 Cursor::Get()->SetCursorType(CursorTypes::Rotating);
@@ -34,7 +34,7 @@ namespace Narradia
             [&]
             /***********************************************/
             {
-                rotationType = RotationTypes::None;
+                current_rotation_type_ = RotationTypes::None;
                 Cursor::Get()->UnlockMousePos();
                 Cursor::Get()->SetCursorType(CursorTypes::Normal);
             },
@@ -44,7 +44,7 @@ namespace Narradia
             [&]
             /***********************************************/
             {
-                rotationType = RotationTypes::OnlyCamera;
+                current_rotation_type_ = RotationTypes::OnlyCamera;
                 Cursor::Get()->SavePosition();
                 Cursor::Get()->LockMousePos();
                 Cursor::Get()->SetCursorType(CursorTypes::Rotating);
@@ -55,7 +55,7 @@ namespace Narradia
             [&]
             /***********************************************/
             {
-                rotationType = RotationTypes::None;
+                current_rotation_type_ = RotationTypes::None;
                 Cursor::Get()->UnlockMousePos();
                 Cursor::Get()->SetCursorType(CursorTypes::Normal);
             },
@@ -67,19 +67,19 @@ namespace Narradia
     MouseRotation::UpdateRotationInProgress()
     /*/////////////////////////////////////*/
     {
-        if (rotationType != RotationTypes::None || Camera::Get()->cameraDistance == 2.0f)
+        if (current_rotation_type_ != RotationTypes::None || Camera::Get()->camera_distance_ == 2.0f)
         /****************************************************************************/
         {
-            auto canvasSize = GetCanvasSize();
-            auto motionDelta = MouseInput::Get()->GetMotionDeltaPickResults();
-            auto deltaX = -static_cast<float>(motionDelta.x) * rotationSens / canvasSize.width;
-            auto deltaY = static_cast<float>(motionDelta.y) * rotationSens / canvasSize.height;
-            Camera::Get()->horizontalAngle += deltaX;
-            Camera::Get()->verticalAngle =
-                std::min(std::max(Camera::Get()->verticalAngle + deltaY, -5.0f), 75.0f);
-            if (rotationType == RotationTypes::CameraAndPlayer ||
-                Camera::Get()->cameraDistance == 2.0f)
-                Player::Get()->SetFacingAngle(Camera::Get()->horizontalAngle);
+            auto canvas_size = GetCanvasSize();
+            auto motion_delta = MouseInput::Get()->GetMotionDeltaPickResults();
+            auto delta_x = -static_cast<float>(motion_delta.x) * rotation_sensitivity_ / canvas_size.width;
+            auto delta_y = static_cast<float>(motion_delta.y) * rotation_sensitivity_ / canvas_size.height;
+            Camera::Get()->horizontal_angle_ += delta_x;
+            Camera::Get()->vertical_angle_ =
+                std::min(std::max(Camera::Get()->vertical_angle_ + delta_y, -5.0f), 75.0f);
+            if (current_rotation_type_ == RotationTypes::CameraAndPlayer ||
+                Camera::Get()->camera_distance_ == 2.0f)
+                Player::Get()->SetFacingAngle(Camera::Get()->horizontal_angle_);
             Cursor::Get()->RestoreSavedPosition();
         }
     }

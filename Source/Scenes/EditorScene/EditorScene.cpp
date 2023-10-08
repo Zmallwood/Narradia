@@ -44,11 +44,11 @@ namespace Narradia
             World::Get()->ApplyDefaultColorVariations();
             World::Get()->CalculateNormals();
         }
-        Player::Get()->data.movement.position = {
+        Player::Get()->data.movement_.position = {
             MapArea::GetMapSize().width / 2.0f, MapArea::GetMapSize().height / 2.0f};
         WorldDraw::Get()->EnableMapEditorMode();
         Audio::Get()->Mute();
-        Camera::Get()->cameraDistance = 800.0f;
+        Camera::Get()->camera_distance_ = 800.0f;
     }
 
     void

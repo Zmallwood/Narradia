@@ -6,7 +6,7 @@
          if (object->GetObjectType() == Hash("ObjectKindling"))
          /****************************************************/
          {
-             Player::Get()->data.stats.stam = Player::Get()->data.stats.stam - 2;
+             Player::Get()->data.status_.stamina = Player::Get()->data.status_.stamina - 2;
              TextOutBox::Get()->Print("You light the campfire.");
              auto campfire = std::make_shared<Object>("ObjectBurningCampfire");
              object->GetParentObjectsCollection()->Add(campfire);

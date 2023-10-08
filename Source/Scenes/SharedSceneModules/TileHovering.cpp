@@ -8,7 +8,7 @@
 #include "World/Tile.hpp"
 #include "World/World.hpp"
 #include "WorldDrawModule/Camera.hpp"
-#include "WorldDrawModule/ConfigurationWorldDraw.hpp"
+#include "WorldDrawModule/ConfigWorldDraw.hpp"
 #include "WorldDrawModule/WorldDraw.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
@@ -16,91 +16,91 @@ namespace Narradia
     TileHovering::TileHovering()
     /*////////////////////////*/
     {
-        glIdTextHoveredObject = TextRenderer::Get()->NewString();
+        rendid_hovered_object_text_ = TextRenderer::Get()->NewString();
     }
 
     void
     TileHovering::Update()
     /*//////////////////*/
     {
-        if (Camera::Get()->cameraDistance == 2.0f)
+        if (Camera::Get()->camera_distance_ == 2.0f)
         /*************************************/
         {
-            hoveredTile = {-1, -1};
+            hovered_tile_ = {-1, -1};
             return;
         }
-        hoveredObjectHash = 0;
-        auto &viewMat = CameraGl::Get()->GetViewMatrix();
-        auto &projMat = CameraGl::Get()->GetPerspectiveMatrix();
-        auto mousePos = GetMousePositionF();
-        auto canvasSize = GetCanvasSize();
-        auto playerX = Player::Get()->GetPosition().x;
-        auto playerY = Player::Get()->GetPosition().y;
-        auto tileSize = kTileSize;
-        auto elevAmount = kElevAmount;
-        auto playerWorldAreaPos = Player::Get()->GetWorldAreaPos();
-        auto *mapArea = World::Get()->GetMapAreaAtZLevel(playerWorldAreaPos.z);
-        auto mouseWorldNearplane = glm::unProject(
-            glm::vec3(mousePos.x * canvasSize.width, (1.0f - mousePos.y) * canvasSize.height, 0.0f),
-            viewMat, projMat, glm::ivec4(0, 0, canvasSize.width, canvasSize.height));
-        auto mouseWorldFarplane = glm::unProject(
-            glm::vec3(mousePos.x * canvasSize.width, (1.0f - mousePos.y) * canvasSize.height, 1.0f),
-            viewMat, projMat, glm::ivec4(0, 0, canvasSize.width, canvasSize.height));
-        auto columnsCount = 111;
-        auto rowsCount = 111;
-        auto playerXMajor = static_cast<int>(playerX);
-        auto playerYMajor = static_cast<int>(playerY);
-        bool tileFound = false;
-        auto iterationFunc = [&](int x, int y) -> bool
+        hovered_object_hash_ = 0;
+        auto &view_matrix = CameraGl::Get()->GetViewMatrix();
+        auto &perspective_matrix = CameraGl::Get()->GetPerspectiveMatrix();
+        auto mouse_position_f = GetMousePositionF();
+        auto canvas_size = GetCanvasSize();
+        auto player_x = Player::Get()->GetPosition().x;
+        auto player_y = Player::Get()->GetPosition().y;
+        auto tile_size = kTileSize;
+        auto elev_amount = kElevAmount;
+        auto player_world_area_position = Player::Get()->GetWorldAreaPos();
+        auto *map_area = World::Get()->GetMapAreaAtZLevel(player_world_area_position.z);
+        auto mouse_world_near_plane = glm::unProject(
+            glm::vec3(mouse_position_f.x * canvas_size.width, (1.0f - mouse_position_f.y) * canvas_size.height, 0.0f),
+            view_matrix, perspective_matrix, glm::ivec4(0, 0, canvas_size.width, canvas_size.height));
+        auto mouse_world_far_plane = glm::unProject(
+            glm::vec3(mouse_position_f.x * canvas_size.width, (1.0f - mouse_position_f.y) * canvas_size.height, 1.0f),
+            view_matrix, perspective_matrix, glm::ivec4(0, 0, canvas_size.width, canvas_size.height));
+        auto columns_count = 111;
+        auto rows_count = 111;
+        auto player_x_major = static_cast<int>(player_x);
+        auto player_y_major = static_cast<int>(player_y);
+        bool tile_found = false;
+        auto fn_iteration = [&](int x, int y) -> bool
         /********************************************/
         {
-            auto mapX = playerXMajor + x;
-            auto mapY = playerYMajor + y;
-            if (!MapArea::IsInsideMap({mapX, mapY}))
+            auto map_x = player_x_major + x;
+            auto map_y = player_y_major + y;
+            if (!MapArea::IsInsideMap({map_x, map_y}))
                 return false;
-            auto tileCoord = Point2{mapX, mapY};
-            auto tile = mapArea->GetTile(tileCoord);
+            auto tile_coord = Point2{map_x, map_y};
+            auto tile = map_area->GetTile(tile_coord);
             auto elev00 = static_cast<float>(tile->GetElevation());
             auto elev10 = elev00;
             auto elev11 = elev00;
             auto elev01 = elev00;
-            auto tileAvgElev = (elev00 + elev10 + elev01 + elev11) / 4.0f;
-            auto coord10 = tileCoord.Translate(1, 0);
-            auto coord11 = tileCoord.Translate(1, 1);
-            auto coord01 = tileCoord.Translate(0, 1);
+            auto tile_avg_elev = (elev00 + elev10 + elev01 + elev11) / 4.0f;
+            auto coord10 = tile_coord.Translate(1, 0);
+            auto coord11 = tile_coord.Translate(1, 1);
+            auto coord01 = tile_coord.Translate(0, 1);
             if (MapArea::IsInsideMap(coord10))
-                elev10 = mapArea->GetTile(coord10)->GetElevation();
+                elev10 = map_area->GetTile(coord10)->GetElevation();
             if (MapArea::IsInsideMap(coord11))
-                elev11 = mapArea->GetTile(coord11)->GetElevation();
+                elev11 = map_area->GetTile(coord11)->GetElevation();
             if (MapArea::IsInsideMap(coord01))
-                elev01 = mapArea->GetTile(coord01)->GetElevation();
-            auto x0 = tileCoord.x * tileSize;
-            auto y0 = elev00 * elevAmount;
-            auto z0 = tileCoord.y * tileSize;
-            auto x2 = tileCoord.x * tileSize + tileSize;
-            auto y2 = elev11 * elevAmount;
-            auto z2 = tileCoord.y * tileSize + tileSize;
+                elev01 = map_area->GetTile(coord01)->GetElevation();
+            auto x0 = tile_coord.x * tile_size;
+            auto y0 = elev00 * elev_amount;
+            auto z0 = tile_coord.y * tile_size;
+            auto x2 = tile_coord.x * tile_size + tile_size;
+            auto y2 = elev11 * elev_amount;
+            auto z2 = tile_coord.y * tile_size + tile_size;
             auto center = glm::vec3{(x0 + x2) / 2, (y0 + y2) / 2, (z0 + z2) / 2};
-            auto closestPoint =
-                glm::closestPointOnLine(center, mouseWorldNearplane, mouseWorldFarplane);
-            if (glm::distance(center, closestPoint) < tileSize / 2)
+            auto closest_point =
+                glm::closestPointOnLine(center, mouse_world_near_plane, mouse_world_far_plane);
+            if (glm::distance(center, closest_point) < tile_size / 2)
             /*****************************************************/
             {
-                hoveredTile = {mapX, mapY};
+                hovered_tile_ = {map_x, map_y};
                 if (tile->GetObjectsCount() > 0)
-                    hoveredObjectHash = tile->GetObjectAt(0)->GetObjectType();
-                tileFound = true;
+                    hovered_object_hash_ = tile->GetObjectAt(0)->GetObjectType();
+                tile_found = true;
                 return true;
             }
             return false;
         };
-        for (int y = -(rowsCount - 1) / 2; y < (rowsCount - 1) / 2 && !tileFound; y++)
+        for (int y = -(rows_count - 1) / 2; y < (rows_count - 1) / 2 && !tile_found; y++)
         /*****************************************************************************/
         {
-            for (int x = -(columnsCount - 1) / 2; x < (columnsCount - 1) / 2 && !tileFound; x++)
+            for (int x = -(columns_count - 1) / 2; x < (columns_count - 1) / 2 && !tile_found; x++)
             /******************************************************************************/
             {
-                if (iterationFunc(x, y))
+                if (fn_iteration(x, y))
                     return;
             }
         }
@@ -110,12 +110,12 @@ namespace Narradia
     TileHovering::Render()
     /*//////////////////*/
     {
-        if (hoveredObjectHash == 0)
+        if (hovered_object_hash_ == 0)
             return;
-        if (false == ObjectBehaviourList::Get()->HasBehaviourData(hoveredObjectHash))
+        if (false == ObjectBehaviourList::Get()->HasBehaviourData(hovered_object_hash_))
             return;
         TextRenderer::Get()->DrawString(
-            glIdTextHoveredObject, ObjectBehaviourList::Get()->GetLabel(hoveredObjectHash).data(),
+            rendid_hovered_object_text_, ObjectBehaviourList::Get()->GetLabel(hovered_object_hash_).data(),
             GetMousePositionF().Translate(0.02f, 0.01f));
     }
 }

@@ -14,13 +14,13 @@ namespace Narradia
     {
         if (ObjectMoving::Get()->object_in_air_.get() == object)
             ObjectMoving::Get()->object_in_air_ = nullptr;
-        for (auto &inventory_object : Player::Get()->data.inventory.objects)
+        for (auto &inventory_object : Player::Get()->data.inventory_.objects_)
         /****************************************************************/
         {
             if (inventory_object.second.get() == object)
             /*****************************************/
             {
-                Player::Get()->data.inventory.objects.erase(inventory_object.first);
+                Player::Get()->data.inventory_.objects_.erase(inventory_object.first);
                 object = nullptr;
                 return;
             }
@@ -74,14 +74,14 @@ namespace Narradia
             ObjectMoving::Get()->object_in_air_ = nullptr;
             return result;
         }
-        for (auto &inventory_object : Player::Get()->data.inventory.objects)
+        for (auto &inventory_object : Player::Get()->data.inventory_.objects_)
         /****************************************************************/
         {
             if (inventory_object.second.get() == object)
             /*****************************************/
             {
                 auto result = inventory_object.second;
-                Player::Get()->data.inventory.objects.erase(inventory_object.first);
+                Player::Get()->data.inventory_.objects_.erase(inventory_object.first);
                 return result;
             }
             for (auto &entry : inventory_object.second->GetContainedObjects())

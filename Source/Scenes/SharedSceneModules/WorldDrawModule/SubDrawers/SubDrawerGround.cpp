@@ -34,19 +34,19 @@ namespace Narradia
     SubDrawerGround::DrawGround(bool doDrawTerritoryBorders)
     /*//////////////////////////////////////////////////*/
     {
-        auto tile = RenderLoop::currTile;
-        auto tile_coord = RenderLoop::currTileCoord;
-        auto this_tile_claimed_by_player = RenderLoop::currThisTileClaimedByPlayer;
-        auto east_tile_claimed_by_player = RenderLoop::currEastTileClaimedByPlayer;
-        auto south_tile_claimed_by_player = RenderLoop::currSouthTileClaimedByPlayer;
-        auto v0 = RenderLoop::currVertTile.v0;
-        auto v1 = RenderLoop::currVertTile.v1;
-        auto v2 = RenderLoop::currVertTile.v2;
-        auto v3 = RenderLoop::currVertTile.v3;
-        auto normal00 = RenderLoop::currVertTile.v0.normal;
-        auto normal10 = RenderLoop::currVertTile.v1.normal;
-        auto normal11 = RenderLoop::currVertTile.v2.normal;
-        auto normal01 = RenderLoop::currVertTile.v3.normal;
+        auto tile = RenderLoop::current_tile_;
+        auto tile_coord = RenderLoop::current_tile_coordinate_;
+        auto this_tile_claimed_by_player = RenderLoop::current_this_tile_claimed_by_player_;
+        auto east_tile_claimed_by_player = RenderLoop::current_east_tile_claimed_by_player_;
+        auto south_tile_claimed_by_player = RenderLoop::current_south_tile_claimed_by_player_;
+        auto v0 = RenderLoop::current_vertex_tile_.v0;
+        auto v1 = RenderLoop::current_vertex_tile_.v1;
+        auto v2 = RenderLoop::current_vertex_tile_.v2;
+        auto v3 = RenderLoop::current_vertex_tile_.v3;
+        auto normal00 = RenderLoop::current_vertex_tile_.v0.normal;
+        auto normal10 = RenderLoop::current_vertex_tile_.v1.normal;
+        auto normal11 = RenderLoop::current_vertex_tile_.v2.normal;
+        auto normal01 = RenderLoop::current_vertex_tile_.v3.normal;
         auto ground_type = tile->GetGroundType();
         auto tile_variation = (tile_coord.x * tile_coord.y) % 3;
         if (ground_type == Hash("GroundWater"))
@@ -92,7 +92,7 @@ namespace Narradia
                 ground_layer_type, p->rendids_tile_layers_[tile_coord.x][tile_coord.y], v0, v1, v2, v3,
                 normal00, normal10, normal11, normal01);
         }
-        auto hovered_tile = TileHovering::Get()->hoveredTile;
+        auto hovered_tile = TileHovering::Get()->hovered_tile_;
         if (hovered_tile.x == tile_coord.x && hovered_tile.y == tile_coord.y)
         /***************************************************************/
         {

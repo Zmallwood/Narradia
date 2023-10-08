@@ -10,7 +10,7 @@
                  object->GetObjectType() == Hash("ObjectTree2"))
              /***************************************************/
              {
-                 Player::Get()->data.stats.stam = Player::Get()->data.stats.stam - 2;
+                 Player::Get()->data.status_.stamina = Player::Get()->data.status_.stamina - 2;
                  object->AddToWorkProgress(0.2f);
                  auto percent = (int)(object->GetWorkProgress() * 100);
                  TextOutBox::Get()->Print(

@@ -64,10 +64,10 @@ namespace Narradia
             for (auto i = 0; i < 1000; i++)
             /*****************************/
             {
-                if (Player::Get()->data.inventory.objects.count(i) == 0)
+                if (Player::Get()->data.inventory_.objects_.count(i) == 0)
                 /***************************************************/
                 {
-                    Player::Get()->data.inventory.objects.insert(
+                    Player::Get()->data.inventory_.objects_.insert(
                         {i, std::make_shared<Object>(object_->GetObjectType(), right_value)});
                     return;
                 }

@@ -9,11 +9,11 @@ namespace Narradia
     StartConditions::CreateStartConditions()
     /*////////////////////////////////////*/
     {
-        auto &inventory = Player::Get()->data.inventory;
-        inventory.Add("ObjectKindling");
-        inventory.Add("ObjectFishingNet");
+        auto &inventory_ = Player::Get()->data.inventory_;
+        inventory_.Add("ObjectKindling");
+        inventory_.Add("ObjectFishingNet");
         Player::Get()->ClearClaimedTiles();
-        Player::Get()->data.movement.position = {
+        Player::Get()->data.movement_.position = {
             MapArea::GetMapSize().width / 2.0f, MapArea::GetMapSize().height / 2.0f};
         ObjectBehaviourList::Get()->Clear();
         ObjectBehaviourList::Get()->Initialize();

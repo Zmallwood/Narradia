@@ -13,8 +13,8 @@ namespace Narradia
     Combat::Update()
     /*////////////*/
     {
-        if (SDL_GetTicks() < Player::Get()->data.combat.ticksLastHitGivenOther +
-                                 Player::Get()->data.combat.attackSpeed)
+        if (SDL_GetTicks() < Player::Get()->data.combat_.ticks_last_hit_given_other +
+                                 Player::Get()->data.combat_.attack_speed)
         /*********************************************************************/
         {
             return;
@@ -40,7 +40,7 @@ namespace Narradia
                 {
                 case PlayerBuilds::Sword:
                     /*******************/
-                    if (Player::Get()->data.stats.stam <= 0)
+                    if (Player::Get()->data.status_.stamina <= 0)
                     /**************************************/
                     {
                         TextOutBox::Get()->Print("Your stamina is too low to hit with a sword.");
@@ -50,8 +50,8 @@ namespace Narradia
                     {
                         Audio::Get()->PlaySound("Punch",1);
                         targeted_mob->Hit(damage);
-                        Player::Get()->data.stats.stam -= 1;
-                        Player::Get()->data.stats.rage += 1;
+                        Player::Get()->data.status_.stamina -= 1;
+                        Player::Get()->data.status_.rage += 1;
                         TextOutBox::Get()->Print(
                             "You hit mob with your sword for " + std::to_string(damage) +
                             " damage.");
@@ -59,7 +59,7 @@ namespace Narradia
                     break;
                 case PlayerBuilds::Club:
                     /******************/
-                    if (Player::Get()->data.stats.rage <= 0)
+                    if (Player::Get()->data.status_.rage <= 0)
                     /**************************************/
                     {
                         TextOutBox::Get()->Print("Your rage is too low to hit with a club.");
@@ -69,7 +69,7 @@ namespace Narradia
                     {
                         Audio::Get()->PlaySound("Punch",1);
                         targeted_mob->Hit(damage);
-                        Player::Get()->data.stats.rage -= 1;
+                        Player::Get()->data.status_.rage -= 1;
                         TextOutBox::Get()->Print(
                             "You hit mob with your club for " + std::to_string(damage) +
                             " damage.");
@@ -81,7 +81,7 @@ namespace Narradia
                         "You try to attack mob but have not equipped any weapon.");
                     break;
                 }
-                Player::Get()->data.combat.ticksLastHitGivenOther = SDL_GetTicks();
+                Player::Get()->data.combat_.ticks_last_hit_given_other = SDL_GetTicks();
             }
         }
     }

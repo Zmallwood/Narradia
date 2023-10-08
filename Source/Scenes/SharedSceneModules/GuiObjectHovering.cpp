@@ -11,8 +11,8 @@ namespace Narradia
     GuiObjectHovering::GuiObjectHovering()
     /*//////////////////////////////////*/
     {
-        idLabelBox = Renderer2DSolidColors::Get()->NewRectangle();
-        idLabelText = TextRenderer::Get()->NewString();
+        rendid_label_box_ = Renderer2DSolidColors::Get()->NewRectangle();
+        rendid_label_text_ = TextRenderer::Get()->NewString();
     }
 
     void
@@ -22,35 +22,35 @@ namespace Narradia
         if (GuiWindowObjectSlot::hovered_object_)
         /*************************************/
         {
-            auto boxPos = GetMousePositionF().Translate(0.003f, 0.01f);
-            auto rect = RectangleF{boxPos.x, boxPos.y, 0.07f, 0.03f};
-            Renderer2DSolidColors::Get()->FillRectangle(idLabelBox, rect, Colors::alphaBlack);
-            std::string labelText;
+            auto box_position = GetMousePositionF().Translate(0.003f, 0.01f);
+            auto rect = RectangleF{box_position.x, box_position.y, 0.07f, 0.03f};
+            Renderer2DSolidColors::Get()->FillRectangle(rendid_label_box_, rect, Colors::alphaBlack);
+            std::string label_text;
             if (ObjectBehaviourList::Get()->HasBehaviourData(
                     GuiWindowObjectSlot::hovered_object_->GetObjectType()))
             /***********************************************************/
             {
-                labelText = ObjectBehaviourList::Get()->GetLabel(
+                label_text = ObjectBehaviourList::Get()->GetLabel(
                     GuiWindowObjectSlot::hovered_object_->GetObjectType());
             }
             else
             /**/
             {
                 auto images = ImageBank::Get()->GetImages();
-                auto objectType = GuiWindowObjectSlot::hovered_object_->GetObjectType();
-                if (images.count(objectType))
+                auto object_type = GuiWindowObjectSlot::hovered_object_->GetObjectType();
+                if (images.count(object_type))
                 /***************************/
                 {
-                    labelText = images.at(objectType).fileName;
+                    label_text = images.at(object_type).fileName;
                 }
                 else
                 /**/
                 {
-                    labelText = "Unnamed";
+                    label_text = "Unnamed";
                 }
             }
             TextRenderer::Get()->DrawString(
-                idLabelText, labelText, boxPos.Translate(0.004f, 0.012f), Colors::wheat);
+                rendid_label_text_, label_text, box_position.Translate(0.004f, 0.012f), Colors::wheat);
         }
     }
 }

@@ -1,5 +1,5 @@
 #include "SubDrawerCompanion.hpp"
-#include "Scenes/SharedSceneModules/WorldDrawModule/ConfigurationWorldDraw.hpp"
+#include "Scenes/SharedSceneModules/WorldDrawModule/ConfigWorldDraw.hpp"
 #include "Scenes/SharedSceneModules/WorldDrawModule/RenderLoop.hpp"
 #include "Scenes/SharedSceneModules/WorldDrawModule/Camera.hpp"
 #include "Scenes/SharedSceneModules/WorldDrawModule/MovementUtilities.hpp"
@@ -44,35 +44,35 @@ namespace Narradia
     SubDrawerCompanion::DrawCompanion()
     /*/////////////////////////////*/
     {
-        auto tile = RenderLoop::currTile;
+        auto tile = RenderLoop::current_tile_;
         auto tile_size = kTileSize;
         auto elev_amount = kElevAmount;
-        auto tile_avg_elev = RenderLoop::currTileAvgElev;
-        auto v0 = RenderLoop::currVertTile.v0;
+        auto tile_avg_elev = RenderLoop::current_tile_avg_elev_;
+        auto v0 = RenderLoop::current_vertex_tile_.v0;
         auto x0 = v0.position.x;
         auto y0 = v0.position.y;
         auto z0 = v0.position.z;
-        auto x = RenderLoop::currX;
-        auto y = RenderLoop::currY;
+        auto x = RenderLoop::current_x_;
+        auto y = RenderLoop::current_y_;
         auto companion = tile->GetCompanion();
         if (companion)
         /************/
         {
             auto minor_movement_offset = GetMinorMovementOffsetForCompanion(companion.get());
-            auto elev00 = RenderLoop::currElev00;
-            auto elev10 = RenderLoop::currElev10;
-            auto elev11 = RenderLoop::currElev11;
-            auto elev01 = RenderLoop::currElev01;
-            auto tile_avg_elev = RenderLoop::playerTileAvgElev;
+            auto elev00 = RenderLoop::current_elev00_;
+            auto elev10 = RenderLoop::current_elev10_;
+            auto elev11 = RenderLoop::current_elev11_;
+            auto elev01 = RenderLoop::current_elev01_;
+            auto tile_avg_elev = RenderLoop::player_tile_avg_elev_;
             auto elev_amount = kElevAmount;
             auto tile_size = kTileSize;
             auto elevDx = ((elev10 - elev00) + (elev11 - elev01)) / 2.0f;
             auto elevDy = ((elev01 - elev00) + (elev11 - elev10)) / 2.0f;
-            auto companion_elev = RenderLoop::currTileAvgElev * elev_amount +
+            auto companion_elev = RenderLoop::current_tile_avg_elev_ * elev_amount +
                                  minor_movement_offset.x * elevDx * elev_amount +
                                  minor_movement_offset.y * elevDy * elev_amount;
-            auto delta_x = RenderLoop::currTileCoord.x - companion->GetPreviousCoordinate().x;
-            auto delta_y = RenderLoop::currTileCoord.y - companion->GetPreviousCoordinate().y;
+            auto delta_x = RenderLoop::current_tile_coordinate_.x - companion->GetPreviousCoordinate().x;
+            auto delta_y = RenderLoop::current_tile_coordinate_.y - companion->GetPreviousCoordinate().y;
             auto abs_delta_x = std::abs(delta_x);
             auto abs_delta_y = std::abs(delta_y);
             auto norm_x = 0;
@@ -102,19 +102,19 @@ namespace Narradia
     SubDrawerCompanion::Pimpl::DrawExclamationMark()
     /*//////////////////////////////////////////*/
     {
-        auto tile = RenderLoop::currTile;
+        auto tile = RenderLoop::current_tile_;
         auto companion = tile->GetCompanion();
         if (companion->GetStamina() > 0)
             return;
-        auto x = RenderLoop::currX;
-        auto y = RenderLoop::currY;
-        auto v0 = RenderLoop::currVertTile.v0;
+        auto x = RenderLoop::current_x_;
+        auto y = RenderLoop::current_y_;
+        auto v0 = RenderLoop::current_vertex_tile_.v0;
         auto x0 = v0.position.x;
         auto y0 = v0.position.y;
         auto z0 = v0.position.z;
         auto billboard_y_pos = 3.0f;
         auto billboard_pos = Point3F{
-            x0 + kTileSize / 2, RenderLoop::currTileAvgElev * kElevAmount + billboard_y_pos,
+            x0 + kTileSize / 2, RenderLoop::current_tile_avg_elev_ * kElevAmount + billboard_y_pos,
             z0 + kTileSize / 2};
         auto billboard_size = SizeF{0.9f, 0.03f};
         auto exclamation_mark_width = 0.1f;

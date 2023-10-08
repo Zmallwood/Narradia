@@ -2,7 +2,7 @@
 #include "Engine/Core/Graphics/Rendering/Text/TextRenderer.hpp"
 #include "Engine/Core/Graphics/Rendering/RendererModels.hpp"
 #include "World/Actors/Player.hpp"
-#include "Scenes/SharedSceneModules/WorldDrawModule/ConfigurationWorldDraw.hpp"
+#include "Scenes/SharedSceneModules/WorldDrawModule/ConfigWorldDraw.hpp"
 #include "Scenes/SharedSceneModules/WorldDrawModule/Camera.hpp"
 #include "Scenes/SharedSceneModules/WorldDrawModule/RenderLoop.hpp"
 //////////////////////////////////////////////////////////////////////
@@ -43,7 +43,7 @@ namespace Narradia
                 Hash("Mount1"), 0, pos, Player::Get()->GetFacingAngle(), 0.8f);
         }
         float anim_tile;
-        if (Player::Get()->data.movement.isMoving)
+        if (Player::Get()->data.movement_.is_moving)
             anim_tile = SDL_GetTicks() * 3;
         else
             anim_tile = 0.0f;
@@ -51,11 +51,11 @@ namespace Narradia
             Hash("Shadow"), 0,
             Player::Get()->GetSpaceCoord().Translate(
                 0.0f,
-                Player::Get()->data.movement.jumpHeight + p->GetPlayerElevation() +
+                Player::Get()->data.movement_.jump_height + p->GetPlayerElevation() +
                     0.05f * kTileSize,
                 0.0f),
             0.0f, 0.6f);
-        if (Camera::Get()->cameraDistance > 2.0f)
+        if (Camera::Get()->camera_distance_ > 2.0f)
         /**************************************/
         {
             if (Player::Get()->playerBuild == PlayerBuilds::Sword)
@@ -81,7 +81,7 @@ namespace Narradia
         /**/
         {
             auto hands_position = pos;
-            hands_position.y = Camera::Get()->cameraPosition.y - 0.5f * kTileSize;
+            hands_position.y = Camera::Get()->camera_position_.y - 0.5f * kTileSize;
             RendererModels::Get()->DrawModel(
                 Hash("PlayerRightHand"), anim_tile, hands_position, Player::Get()->GetFacingAngle(),
                 0.6f);
@@ -113,11 +113,11 @@ namespace Narradia
         const auto player_pos = Player::Get()->GetPosition();
         auto player_tile_dx = player_pos.x - static_cast<int>(player_pos.x) - 0.5f;
         auto player_tile_dy = player_pos.y - static_cast<int>(player_pos.y) - 0.5f;
-        auto elev00 = RenderLoop::playerElev00;
-        auto elev10 = RenderLoop::playerElev10;
-        auto elev11 = RenderLoop::playerElev11;
-        auto elev01 = RenderLoop::playerElev01;
-        auto tile_avg_elev = RenderLoop::playerTileAvgElev;
+        auto elev00 = RenderLoop::player_elev00_;
+        auto elev10 = RenderLoop::player_elev10_;
+        auto elev11 = RenderLoop::player_elev11_;
+        auto elev01 = RenderLoop::player_elev01_;
+        auto tile_avg_elev = RenderLoop::player_tile_avg_elev_;
         auto elev_dx = ((elev10 - elev00) + (elev11 - elev01)) / 2.0f;
         auto elev_dy = ((elev01 - elev00) + (elev11 - elev10)) / 2.0f;
         auto player_elev = tile_avg_elev * kElevAmount + player_tile_dx * elev_dx * kElevAmount +

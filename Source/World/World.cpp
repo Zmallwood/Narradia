@@ -4,7 +4,7 @@
 #include "MapArea.hpp"
 #include "Object.hpp"
 #include "ObjectsCollection.hpp"
-#include "Scenes/SharedSceneModules/WorldDrawModule/ConfigurationWorldDraw.hpp"
+#include "Scenes/SharedSceneModules/WorldDrawModule/ConfigWorldDraw.hpp"
 #include "Tile.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia

@@ -1,6 +1,6 @@
 #include "WorldDraw.hpp"
 #include "Camera.hpp"
-#include "ConfigurationWorldDraw.hpp"
+#include "ConfigWorldDraw.hpp"
 #include "Engine/Assets/ModelBank.hpp"
 #include "Engine/Core/Graphics/Rendering/RendererModels.hpp"
 #include "Engine/Core/Graphics/Rendering/RendererTiles.hpp"
@@ -31,8 +31,8 @@ namespace Narradia
         Log();
         SubDrawerSky::Get()->Create();
         Log();
-        auto allModels = ModelBank::Get()->GetAllModels();
-        for (auto &model : allModels)
+        auto all_models = ModelBank::Get()->GetAllModels();
+        for (auto &model : all_models)
             RendererModels::Get()->NewModel(model.first);
     }
 
@@ -49,44 +49,44 @@ namespace Narradia
     {
         Log();
         SubDrawerSky::Get()->DrawSky();
-        RenderLoop::data1.clear();
-        RenderLoop::data2.clear();
+        RenderLoop::data1_.clear();
+        RenderLoop::data2_.clear();
         RendererTiles::Get()->StartBatchDrawing();
         RenderLoop(
-            [&]() { SubDrawerGround::Get()->DrawGround(worldViewMode == WorldDrawModes::Play); })();
+            [&]() { SubDrawerGround::Get()->DrawGround(current_world_draw_mode_ == WorldDrawModes::Play); })();
         RendererTiles::Get()->StopBatchDrawing();
-        auto msTime1 = SDL_GetTicks() * 2;
-        auto msTime2 = SDL_GetTicks() * 2 + 1000;
-        for (auto &d : RenderLoop::data1)
+        auto ms_time1 = SDL_GetTicks() * 2;
+        auto ms_time2 = SDL_GetTicks() * 2 + 1000;
+        for (auto &d : RenderLoop::data1_)
         /*******************************/
         {
-            auto modelNameHash = d.first;
+            auto model_name_hash = d.first;
             Log();
             RendererModels::Get()->DrawModelsMany(
-                modelNameHash, msTime1, d.second.positions, d.second.rotations, d.second.scalings,
+                model_name_hash, ms_time1, d.second.positions, d.second.rotations, d.second.scalings,
                 d.second.brightnesses, d.second.colorMods);
         }
-        for (auto &d : RenderLoop::data2)
+        for (auto &d : RenderLoop::data2_)
         /*******************************/
         {
-            auto modelNameHash = d.first;
+            auto model_name_hash = d.first;
             Log();
             RendererModels::Get()->DrawModelsMany(
-                modelNameHash, msTime2, d.second.positions, d.second.rotations, d.second.scalings,
+                model_name_hash, ms_time2, d.second.positions, d.second.rotations, d.second.scalings,
                 d.second.brightnesses, d.second.colorMods);
         }
         RenderLoop([]
                    /********************************************/
                    {
-                       if (RenderLoop::currTile->GetRoofType())
+                       if (RenderLoop::current_tile_->GetRoofType())
                        /**************************************/
                        {
                            Log();
                            RendererModels::Get()->DrawModel(
-                               RenderLoop::currTile->GetRoofType(), 0,
-                               {RenderLoop::currVertTile.v0.position.x + kTileSize / 2,
-                                RenderLoop::currTileAvgElev * kElevAmount,
-                                RenderLoop::currVertTile.v0.position.z + kTileSize / 2},
+                               RenderLoop::current_tile_->GetRoofType(), 0,
+                               {RenderLoop::current_vertex_tile_.v0.position.x + kTileSize / 2,
+                                RenderLoop::current_tile_avg_elev_ * kElevAmount,
+                                RenderLoop::current_vertex_tile_.v0.position.z + kTileSize / 2},
                                0.0f, 0.6f, 1.0f);
                        }
                        Log();
@@ -94,7 +94,7 @@ namespace Narradia
                        Log();
                        SubDrawerCompanion::Get()->DrawCompanion();
                    })();
-        if (worldViewMode == WorldDrawModes::Play)
+        if (current_world_draw_mode_ == WorldDrawModes::Play)
         /****************************************/
         {
             Log();
@@ -106,13 +106,13 @@ namespace Narradia
     WorldDraw::EnablePlayMode()
     /*///////////////////////*/
     {
-        worldViewMode = WorldDrawModes::Play;
+        current_world_draw_mode_ = WorldDrawModes::Play;
     }
 
     void
     WorldDraw::EnableMapEditorMode()
     /*////////////////////////////*/
     {
-        worldViewMode = WorldDrawModes::Editor;
+        current_world_draw_mode_ = WorldDrawModes::Editor;
     }
 }

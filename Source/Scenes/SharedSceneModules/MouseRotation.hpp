@@ -16,9 +16,10 @@ namespace Narradia
       private:
         void Update();
         void UpdateRotationInProgress();
-        RotationTypes rotationType = RotationTypes::None;
-        const float rotationSens = 1100.0f;
-        Uint64 ticksLastUpdate = 0;
+
+        RotationTypes current_rotation_type_ = RotationTypes::None;
+        const float rotation_sensitivity_ = 1100.0f;
+        
         friend class PlayScene;
         friend class EditorScene;
         friend class MobTargeting;

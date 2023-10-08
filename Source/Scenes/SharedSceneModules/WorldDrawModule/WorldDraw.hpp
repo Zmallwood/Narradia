@@ -20,7 +20,8 @@ namespace Narradia
         void Render();
         void EnablePlayMode();
         void EnableMapEditorMode();
-        WorldDrawModes worldViewMode = WorldDrawModes::Play;
+
+        WorldDrawModes current_world_draw_mode_ = WorldDrawModes::Play;
         friend class PlayScene;
         friend class EditorScene;
     };

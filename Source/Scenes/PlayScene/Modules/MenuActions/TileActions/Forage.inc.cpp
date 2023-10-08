@@ -13,25 +13,25 @@
                        if (dice < 2)
                        /***********/
                        {
-                           Player::Get()->data.inventory.Add("ObjectBlueberry");
+                           Player::Get()->data.inventory_.Add("ObjectBlueberry");
                            TextOutBox::Get()->Print("You found some blueberries.");
                        }
                        else if (dice < 3)
                        /******************/
                        {
-                           Player::Get()->data.inventory.Add("ObjectStrawberry");
+                           Player::Get()->data.inventory_.Add("ObjectStrawberry");
                            TextOutBox::Get()->Print("You found some strawberries.");
                        }
                        else if (dice < 4)
                        /******************/
                        {
-                           Player::Get()->data.inventory.Add("ObjectHazelnut");
+                           Player::Get()->data.inventory_.Add("ObjectHazelnut");
                            TextOutBox::Get()->Print("You found some hazelnuts.");
                        }
                        else if (dice < 5)
                        /******************/
                        {
-                           Player::Get()->data.inventory.Add("ObjectWalnut");
+                           Player::Get()->data.inventory_.Add("ObjectWalnut");
                            TextOutBox::Get()->Print("You found some walnuts.");
                        }
                        else

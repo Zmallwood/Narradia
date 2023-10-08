@@ -11,7 +11,7 @@ namespace Narradia
     {
         auto player = Player::Get();
         if (DestinationMove::Get()->GetDestination() == Point2{-1, -1})
-            player->data.movement.isMoving = false;
+            player->data.movement_.is_moving = false;
         if (KeyboardInput::Get()->KeyIsPressed(SDLK_a) && KeyboardInput::Get()->KeyIsPressed(SDLK_w))
             player->TurnLeftForward();
         else if (
@@ -39,7 +39,7 @@ namespace Narradia
         {
             DestinationMove::Get()->ResetDestination();
             player->MoveForward();
-            player->data.movement.isMoving = true;
+            player->data.movement_.is_moving = true;
         }
     }
 }

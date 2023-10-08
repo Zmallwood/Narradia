@@ -18,7 +18,7 @@ namespace Narradia
             /********************************/
             {
                 slots_[x][y] = std::make_shared<GuiWindowObjectSlot>(
-                    this, x, y, i, slot_width, Player::Get()->data.inventory.objects);
+                    this, x, y, i, slot_width, Player::Get()->data.inventory_.objects_);
                 i++;
             }
         }

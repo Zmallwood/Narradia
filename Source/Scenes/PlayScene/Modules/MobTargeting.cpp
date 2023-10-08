@@ -26,7 +26,7 @@ namespace Narradia
     MobTargeting::Update()
     /*//////////////////*/
     {
-        auto hovered_tile = TileHovering::Get()->hoveredTile;
+        auto hovered_tile = TileHovering::Get()->hovered_tile_;
         if (MapArea::IsInsideMap(hovered_tile))
         /************************************/
         {

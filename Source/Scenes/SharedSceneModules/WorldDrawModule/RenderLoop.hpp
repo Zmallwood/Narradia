@@ -21,33 +21,34 @@ namespace Narradia
       public:
         RenderLoop(std::function<void()>);
         void operator()();
-        inline static int currX = -1;
-        inline static int currY = -1;
-        inline static MapArea *currMapArea = nullptr;
-        inline static Point2 currTileCoord = {-1, -1};
-        inline static Tile *currTile = nullptr;
-        inline static VertexTile currVertTile;
-        inline static Point2 currCoord10;
-        inline static Point2 currCoord11;
-        inline static Point2 currCoord01;
-        inline static bool currThisTileClaimedByPlayer = false;
-        inline static bool currEastTileClaimedByPlayer = false;
-        inline static bool currSouthTileClaimedByPlayer = false;
-        inline static int currDistSquared = 0;
-        inline static float currTileAvgElev = 0.0f;
-        inline static float currElev00 = 0.0f;
-        inline static float currElev10 = 0.0f;
-        inline static float currElev11 = 0.0f;
-        inline static float currElev01 = 0.0f;
-        inline static float playerTileAvgElev = 0.0f;
-        inline static float playerElev00 = 0.0f;
-        inline static float playerElev10 = 0.0f;
-        inline static float playerElev11 = 0.0f;
-        inline static float playerElev01 = 0.0f;
-        inline static std::map<int, ModelRenderParameters> data1;
-        inline static std::map<int, ModelRenderParameters> data2;
+
+        inline static int current_x_ = -1;
+        inline static int current_y_ = -1;
+        inline static MapArea *current_map_area_ = nullptr;
+        inline static Point2 current_tile_coordinate_ = {-1, -1};
+        inline static Tile *current_tile_ = nullptr;
+        inline static VertexTile current_vertex_tile_;
+        inline static Point2 current_coord10_;
+        inline static Point2 current_coord11_;
+        inline static Point2 current_coord01_;
+        inline static bool current_this_tile_claimed_by_player_ = false;
+        inline static bool current_east_tile_claimed_by_player_ = false;
+        inline static bool current_south_tile_claimed_by_player_ = false;
+        inline static int current_distance_squared_ = 0;
+        inline static float current_tile_avg_elev_ = 0.0f;
+        inline static float current_elev00_ = 0.0f;
+        inline static float current_elev10_ = 0.0f;
+        inline static float current_elev11_ = 0.0f;
+        inline static float current_elev01_ = 0.0f;
+        inline static float player_tile_avg_elev_ = 0.0f;
+        inline static float player_elev00_ = 0.0f;
+        inline static float player_elev10_ = 0.0f;
+        inline static float player_elev11_ = 0.0f;
+        inline static float player_elev01_ = 0.0f;
+        inline static std::map<int, ModelRenderParameters> data1_;
+        inline static std::map<int, ModelRenderParameters> data2_;
 
       private:
-        std::function<void()> action;
+        std::function<void()> action_;
     };
 }

@@ -10,11 +10,11 @@ namespace Narradia
         for (auto i = 0; i < kMaxNumberInventoryObjects; i++)
         /***************************************************/
         {
-            if (objects.count(i) == 0)
+            if (objects_.count(i) == 0)
             /************************/
             {
-                auto newObject = std::make_shared<Object>(objectName, quantity);
-                objects.insert({i, newObject});
+                auto new_object = std::make_shared<Object>(objectName, quantity);
+                objects_.insert({i, new_object});
                 return;
             }
         }
@@ -27,10 +27,10 @@ namespace Narradia
         for (auto i = 0; i < kMaxNumberInventoryObjects; i++)
         /***************************************************/
         {
-            if (objects.count(i) == 0)
+            if (objects_.count(i) == 0)
             /************************/
             {
-                objects.insert({i, object});
+                objects_.insert({i, object});
                 return;
             }
         }
@@ -40,7 +40,7 @@ namespace Narradia
     Inventory::ContainsObjectOfType(std::string_view objectType)
     /*////////////////////////////////////////////////////////*/
     {
-        for (auto &entry : objects)
+        for (auto &entry : objects_)
             if (entry.second->GetObjectType() == Hash(objectType))
                 return true;
         return false;
@@ -50,13 +50,13 @@ namespace Narradia
     Inventory::RemoveObjectOfType(std::string_view objectType)
     /*//////////////////////////////////////////////////////*/
     {
-        for (auto &entry : objects)
+        for (auto &entry : objects_)
         /*************************/
         {
             if (entry.second->GetObjectType() == Hash(objectType))
             /****************************************************/
             {
-                objects.erase(entry.first);
+                objects_.erase(entry.first);
                 return;
             }
         }
@@ -66,24 +66,24 @@ namespace Narradia
     ActorData::Update()
     /*///////////////*/
     {
-        if (movement.isMoving)
-            if (ticksLastUpdate != 0)
-                deltaT += (SDL_GetTicks() - ticksLastUpdate);
-        ticksLastUpdate = SDL_GetTicks();
+        if (movement_.is_moving)
+            if (ticks_last_update_ != 0)
+                delta_t_ += (SDL_GetTicks() - ticks_last_update_);
+        ticks_last_update_ = SDL_GetTicks();
     }
 
     SkillSet::SkillSet()
     /*////////////////*/
     {
-        skills["NormalMeleeDamage"] = Skill{"Normal Melee Damage"};
-        skills["MeleeDefense"] = Skill{"Melee Defense"};
-        skills["Evasion"] = Skill{"Evasion"};
-        skills["AttackSpeed"] = Skill{"AttackSpeed"};
-        skills["MaxHealth"] = Skill{"Max Health"};
-        skills["CriticalDamage"] = Skill{"Critical Damage"};
-        skills["CriticalRate"] = Skill{"Critical Rate"};
-        skills["MovementSpeed"] = Skill{"Movement Speed"};
-        skills["Sword"] = Skill{"Sword"};
-        skills["Club"] = Skill{"Club"};
+        skills_["NormalMeleeDamage"] = Skill{"Normal Melee Damage"};
+        skills_["MeleeDefense"] = Skill{"Melee Defense"};
+        skills_["Evasion"] = Skill{"Evasion"};
+        skills_["AttackSpeed"] = Skill{"AttackSpeed"};
+        skills_["MaxHealth"] = Skill{"Max Health"};
+        skills_["CriticalDamage"] = Skill{"Critical Damage"};
+        skills_["CriticalRate"] = Skill{"Critical Rate"};
+        skills_["MovementSpeed"] = Skill{"Movement Speed"};
+        skills_["Sword"] = Skill{"Sword"};
+        skills_["Club"] = Skill{"Club"};
     }
 }

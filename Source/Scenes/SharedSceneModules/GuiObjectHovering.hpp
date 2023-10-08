@@ -10,7 +10,7 @@ namespace Narradia
         void Render();
 
       private:
-        RenderId idLabelBox;
-        RenderId idLabelText;
+        RenderId rendid_label_box_;
+        RenderId rendid_label_text_;
     };
 }
