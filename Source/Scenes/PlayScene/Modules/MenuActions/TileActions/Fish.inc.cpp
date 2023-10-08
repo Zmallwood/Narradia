@@ -10,10 +10,10 @@
                      for (auto i = 0; i < 100; i++)
                      /****************************/
                      {
-                         if (Player::Get()->data.inventory_.objects_.count(i) == 0)
+                         if (Player::Get()->data_.inventory_.objects_.count(i) == 0)
                          /***************************************************/
                          {
-                             Player::Get()->data.inventory_.objects_.insert(
+                             Player::Get()->data_.inventory_.objects_.insert(
                                  {i, std::make_shared<Object>(Hash("ObjectFish"))});
                              break;
                          }

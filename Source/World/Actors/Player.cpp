@@ -16,7 +16,7 @@ namespace Narradia
     Player::GetPosition()
     /*/////////////////*/
     {
-        return data.movement_.position;
+        return data_.movement_.position;
     }
 
     void
@@ -30,56 +30,56 @@ namespace Narradia
     Player::TurnForward()
     /*/////////////////*/
     {
-        data.movement_.facing_angle = Camera::Get()->horizontal_angle_;
+        data_.movement_.facing_angle = Camera::Get()->horizontal_angle_;
     }
 
     void
     Player::TurnRight()
     /*///////////////*/
     {
-        data.movement_.facing_angle = Camera::Get()->horizontal_angle_ - 90.0f;
+        data_.movement_.facing_angle = Camera::Get()->horizontal_angle_ - 90.0f;
     }
 
     void
     Player::TurnLeft()
     /*//////////////*/
     {
-        data.movement_.facing_angle = Camera::Get()->horizontal_angle_ + 90.0f;
+        data_.movement_.facing_angle = Camera::Get()->horizontal_angle_ + 90.0f;
     }
 
     void
     Player::TurnBack()
     /*//////////////*/
     {
-        data.movement_.facing_angle = Camera::Get()->horizontal_angle_ + 180.0f;
+        data_.movement_.facing_angle = Camera::Get()->horizontal_angle_ + 180.0f;
     }
 
     void
     Player::TurnRightForward()
     /*//////////////////////*/
     {
-        data.movement_.facing_angle = Camera::Get()->horizontal_angle_ - 45.0f;
+        data_.movement_.facing_angle = Camera::Get()->horizontal_angle_ - 45.0f;
     }
 
     void
     Player::TurnLeftForward()
     /*/////////////////////*/
     {
-        data.movement_.facing_angle = Camera::Get()->horizontal_angle_ + 45.0f;
+        data_.movement_.facing_angle = Camera::Get()->horizontal_angle_ + 45.0f;
     }
 
     void
     Player::TurnRightBack()
     /*///////////////////*/
     {
-        data.movement_.facing_angle = Camera::Get()->horizontal_angle_ + 225.0f;
+        data_.movement_.facing_angle = Camera::Get()->horizontal_angle_ + 225.0f;
     }
 
     void
     Player::TurnLeftBack()
     /*//////////////////*/
     {
-        data.movement_.facing_angle = Camera::Get()->horizontal_angle_ + 135.0f;
+        data_.movement_.facing_angle = Camera::Get()->horizontal_angle_ + 135.0f;
     }
 
     Point3F
@@ -87,235 +87,235 @@ namespace Narradia
     /*///////////////////*/
     {
         auto position = GetPosition();
-        Point3F spaceCoord = {position.x * kTileSize, 0.0f, position.y * kTileSize};
-        spaceCoord.y -= Player::Get()->data.movement_.jump_height;
-        return spaceCoord;
+        Point3F space_coordinate = {position.x * kTileSize, 0.0f, position.y * kTileSize};
+        space_coordinate.y -= Player::Get()->data_.movement_.jump_height;
+        return space_coordinate;
     }
 
     Point3
     Player::GetWorldAreaPos()
     /*/////////////////////*/
     {
-        return data.movement_.world_area_position;
+        return data_.movement_.world_area_position;
     }
 
     float
     Player::GetFacingAngle()
     /*////////////////////*/
     {
-        return data.movement_.facing_angle;
+        return data_.movement_.facing_angle;
     }
 
     void
     Player::SetFacingAngle(float newFacingAngle)
     /*////////////////////////////////////////*/
     {
-        data.movement_.facing_angle = newFacingAngle;
+        data_.movement_.facing_angle = newFacingAngle;
     }
 
     void
     Player::ClaimTile(Point2 Tile)
     /*//////////////////////////*/
     {
-        claimedTiles.push_back(Tile);
+        claimed_tiles_.push_back(Tile);
     }
 
     bool
     Player::HasClaimedTile(Point2 Tile)
     /*///////////////////////////////*/
     {
-        return std::count(claimedTiles.begin(), claimedTiles.end(), Tile) != 0;
+        return std::count(claimed_tiles_.begin(), claimed_tiles_.end(), Tile) != 0;
     }
 
     void
     Player::ClearClaimedTiles()
     /*///////////////////////*/
     {
-        claimedTiles.clear();
+        claimed_tiles_.clear();
     }
 
     void
     Player::Jump()
     /*//////////*/
     {
-        if (SDL_GetTicks() > ticksStartJumping + jumpDuration)
-            ticksStartJumping = SDL_GetTicks();
+        if (SDL_GetTicks() > ticks_start_jumping_ + jump_duration_)
+            ticks_start_jumping_ = SDL_GetTicks();
     }
 
     void
     Player::MoveAtAngle(float angleOffset)
     /*//////////////////////////////////*/
     {
-        if (!data.movement_.is_moving)
-            data.ticks_last_update_ = SDL_GetTicks();
-        auto usedAngle = data.movement_.facing_angle + angleOffset - 90;
-        auto dx = CosDegrees(usedAngle) * data.movement_.step_size * data.delta_t_ /
-                  data.movement_.movement_speed * skillSet.skills_.at("MovementSpeed").level;
-        auto dy = SinDegrees(usedAngle) * data.movement_.step_size * data.delta_t_ /
-                  data.movement_.movement_speed * skillSet.skills_.at("MovementSpeed").level;
+        if (!data_.movement_.is_moving)
+            data_.ticks_last_update_ = SDL_GetTicks();
+        auto used_angle = data_.movement_.facing_angle + angleOffset - 90;
+        auto dx = CosDegrees(used_angle) * data_.movement_.step_size * data_.delta_t_ /
+                  data_.movement_.movement_speed * skill_set_.skills_.at("MovementSpeed").level;
+        auto dy = SinDegrees(used_angle) * data_.movement_.step_size * data_.delta_t_ /
+                  data_.movement_.movement_speed * skill_set_.skills_.at("MovementSpeed").level;
         if (SceneManager::Get()->GetCurrentScene() == SceneNames::Editor)
         /*******************************************************/
         {
             dx *= 2;
             dy *= 2;
         }
-        auto mapArea = World::Get()->GetMapAreaAtZLevel(data.movement_.world_area_position.z);
-        auto tileBeforeMove = mapArea->GetTile(data.movement_.position.ToIntPoint());
-        auto newX = data.movement_.position.x - dx;
-        auto newY = data.movement_.position.y + dy;
-        auto tileNew = mapArea->GetTile({static_cast<int>(newX), static_cast<int>(newY)});
+        auto map_area = World::Get()->GetMapAreaAtZLevel(data_.movement_.world_area_position.z);
+        auto tile_before_move = map_area->GetTile(data_.movement_.position.ToIntPoint());
+        auto new_x = data_.movement_.position.x - dx;
+        auto new_y = data_.movement_.position.y + dy;
+        auto tile_new = map_area->GetTile({static_cast<int>(new_x), static_cast<int>(new_y)});
         if (SceneManager::Get()->GetCurrentScene() != SceneNames::Editor)
         /*******************************************************/
         {
-            for (auto objectEntry : tileBeforeMove->GetObjects().list)
+            for (auto object_entry : tile_before_move->GetObjects().list_)
             /********************************************************/
             {
-                if (ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()))
+                if (ObjectBehaviourList::Get()->GetFlags(object_entry->GetObjectType()))
                 /********************************************************************/
                 {
-                    if ((ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
+                    if ((ObjectBehaviourList::Get()->GetFlags(object_entry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockN) != 0 &&
-                        (int)newY == (int)data.movement_.position.y - 1)
+                        (int)new_y == (int)data_.movement_.position.y - 1)
                     /**********************************************************************/
                     {
-                        data.delta_t_ = 0;
+                        data_.delta_t_ = 0;
                         return;
                     }
-                    if ((ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
+                    if ((ObjectBehaviourList::Get()->GetFlags(object_entry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockS) != 0 &&
-                        (int)newY == (int)data.movement_.position.y + 1)
+                        (int)new_y == (int)data_.movement_.position.y + 1)
                     /**********************************************************************/
                     {
-                        data.delta_t_ = 0;
+                        data_.delta_t_ = 0;
                         return;
                     }
-                    if ((ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
+                    if ((ObjectBehaviourList::Get()->GetFlags(object_entry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockE) != 0 &&
-                        (int)newX == (int)data.movement_.position.x + 1)
+                        (int)new_x == (int)data_.movement_.position.x + 1)
                     /**********************************************************************/
                     {
-                        data.delta_t_ = 0;
+                        data_.delta_t_ = 0;
                         return;
                     }
-                    if ((ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
+                    if ((ObjectBehaviourList::Get()->GetFlags(object_entry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockW) != 0 &&
-                        (int)newX == (int)data.movement_.position.x - 1)
+                        (int)new_x == (int)data_.movement_.position.x - 1)
                     /**********************************************************************/
                     {
-                        data.delta_t_ = 0;
+                        data_.delta_t_ = 0;
                         return;
                     }
                 }
             }
-            for (auto objectEntry : tileNew->GetObjects().list)
+            for (auto object_entry : tile_new->GetObjects().list_)
             /*************************************************/
             {
-                if (objectEntry->GetObjectType() == Hash("ObjectCaveBlock"))
+                if (object_entry->GetObjectType() == Hash("ObjectCaveBlock"))
                 /**********************************************************/
                 {
-                    if (SDL_GetTicks() < tickLastTimeDidMine + mineSpeed)
+                    if (SDL_GetTicks() < ticks_last_time_did_mine_ + mine_speed_)
                     /***************************************************/
                     {
-                        data.delta_t_ = 0;
+                        data_.delta_t_ = 0;
                         return;
                     }
                 }
-                if (ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()))
+                if (ObjectBehaviourList::Get()->GetFlags(object_entry->GetObjectType()))
                 /********************************************************************/
                 {
-                    if (ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
+                    if (ObjectBehaviourList::Get()->GetFlags(object_entry->GetObjectType()) &
                         (int)ObjectBehaviourFlags::MovementBlock != 0)
                     /*********************************************************************/
                     {
-                        data.delta_t_ = 0;
+                        data_.delta_t_ = 0;
                         return;
                     }
-                    if ((ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
+                    if ((ObjectBehaviourList::Get()->GetFlags(object_entry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockN) != 0 &&
-                        (int)newY == (int)data.movement_.position.y + 1)
+                        (int)new_y == (int)data_.movement_.position.y + 1)
                     /**********************************************************************/
                     {
-                        data.delta_t_ = 0;
+                        data_.delta_t_ = 0;
                         return;
                     }
-                    if ((ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
+                    if ((ObjectBehaviourList::Get()->GetFlags(object_entry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockS) != 0 &&
-                        (int)newY == (int)data.movement_.position.y - 1)
+                        (int)new_y == (int)data_.movement_.position.y - 1)
                     /**********************************************************************/
                     {
-                        data.delta_t_ = 0;
+                        data_.delta_t_ = 0;
                         return;
                     }
-                    if ((ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
+                    if ((ObjectBehaviourList::Get()->GetFlags(object_entry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockE) != 0 &&
-                        (int)newX == (int)data.movement_.position.x - 1)
+                        (int)new_x == (int)data_.movement_.position.x - 1)
                     /**********************************************************************/
                     {
-                        data.delta_t_ = 0;
+                        data_.delta_t_ = 0;
                         return;
                     }
-                    if ((ObjectBehaviourList::Get()->GetFlags(objectEntry->GetObjectType()) &
+                    if ((ObjectBehaviourList::Get()->GetFlags(object_entry->GetObjectType()) &
                          (int)ObjectBehaviourFlags::MovementBlockW) != 0 &&
-                        (int)newX == (int)data.movement_.position.x + 1)
+                        (int)new_x == (int)data_.movement_.position.x + 1)
                     /**********************************************************************/
                     {
-                        data.delta_t_ = 0;
+                        data_.delta_t_ = 0;
                         return;
                     }
                 }
             }
         }
-        if (newX != data.movement_.position.x || newY != data.movement_.position.y)
+        if (new_x != data_.movement_.position.x || new_y != data_.movement_.position.y)
         /***********************************************************************/
         {
-            data.movement_.position.x = newX;
-            data.movement_.position.y = newY;
+            data_.movement_.position.x = new_x;
+            data_.movement_.position.y = new_y;
             Audio::Get()->PlaySound("Footsteps");
-            data.delta_t_ = 0;
+            data_.delta_t_ = 0;
         }
-        auto tile = mapArea->GetTile(data.movement_.position.ToIntPoint());
-        for (auto objectEntry : tile->GetObjects().list)
+        auto tile = map_area->GetTile(data_.movement_.position.ToIntPoint());
+        for (auto object_entry : tile->GetObjects().list_)
         /**********************************************/
         {
-            if (objectEntry->GetObjectType() == Hash("ObjectMineEntrance") &&
-                false == tileBeforeMove->GetObjects().Contains(Hash("ObjectMineEntrance")))
+            if (object_entry->GetObjectType() == Hash("ObjectMineEntrance") &&
+                false == tile_before_move->GetObjects().Contains(Hash("ObjectMineEntrance")))
             /*****************************************************************************/
             {
-                data.movement_.world_area_position.z--;
-                auto mapArea = World::Get()->GetMapAreaAtZLevel(data.movement_.world_area_position.z);
-                tile = mapArea->GetTile(data.movement_.position.ToIntPoint());
+                data_.movement_.world_area_position.z--;
+                auto map_area = World::Get()->GetMapAreaAtZLevel(data_.movement_.world_area_position.z);
+                tile = map_area->GetTile(data_.movement_.position.ToIntPoint());
                 if (false == tile->GetObjects().Contains(Hash("ObjectMineExit")))
                 /***************************************************************/
                 {
                     tile->ClearObjects();
-                    auto mineExit = std::make_shared<Object>("ObjectMineExit");
-                    mineExit->SetModelScaling(0.7f);
-                    tile->AddObject(mineExit);
+                    auto mine_exit = std::make_shared<Object>("ObjectMineExit");
+                    mine_exit->SetModelScaling(0.7f);
+                    tile->AddObject(mine_exit);
                 }
-                tickLastTimeDidMine = SDL_GetTicks();
+                ticks_last_time_did_mine_ = SDL_GetTicks();
             }
             else if (
-                objectEntry->GetObjectType() == Hash("ObjectMineExit") &&
-                false == tileBeforeMove->GetObjects().Contains(Hash("ObjectMineExit")))
+                object_entry->GetObjectType() == Hash("ObjectMineExit") &&
+                false == tile_before_move->GetObjects().Contains(Hash("ObjectMineExit")))
             /*************************************************************************/
             {
-                data.movement_.world_area_position.z++;
+                data_.movement_.world_area_position.z++;
             }
         }
-        tile = mapArea->GetTile(data.movement_.position.ToIntPoint());
-        for (auto objectEntry : tile->GetObjects().list)
+        tile = map_area->GetTile(data_.movement_.position.ToIntPoint());
+        for (auto object_entry : tile->GetObjects().list_)
         /**********************************************/
         {
-            if (objectEntry->GetObjectType() == Hash("ObjectCaveBlock"))
+            if (object_entry->GetObjectType() == Hash("ObjectCaveBlock"))
             /**********************************************************/
             {
                 if (false == tile->GetObjects().Contains(Hash("ObjectMineExit")))
                 /***************************************************************/
                 {
-                    tile->ReplaceObject(objectEntry, std::make_shared<Object>("ObjectStone"));
-                    objectEntry->SetModelScaling(
+                    tile->ReplaceObject(object_entry, std::make_shared<Object>("ObjectStone"));
+                    object_entry->SetModelScaling(
                         0.5f + rand() / static_cast<float>(RAND_MAX) * 0.7f);
-                    tickLastTimeDidMine = SDL_GetTicks();
+                    ticks_last_time_did_mine_ = SDL_GetTicks();
                 }
             }
         }
@@ -325,29 +325,29 @@ namespace Narradia
     Player::Update()
     /*////////////*/
     {
-        data.Update();
-        if (!data.movement_.is_moving)
+        data_.Update();
+        if (!data_.movement_.is_moving)
             Audio::Get()->StopPlaySound();
 
-        if (SDL_GetTicks() > ticksLastStaminaRegeneration + kStaminaRegenerationSpeed)
+        if (SDL_GetTicks() > ticks_last_stamina_regeneration_ + kStaminaRegenerationSpeed)
         /****************************************************************************/
         {
-            data.status_.stamina = std::min(data.status_.max_stamina, data.status_.stamina + 1);
-            ticksLastStaminaRegeneration = SDL_GetTicks();
+            data_.status_.stamina = std::min(data_.status_.max_stamina, data_.status_.stamina + 1);
+            ticks_last_stamina_regeneration_ = SDL_GetTicks();
         }
 
-        if (SDL_GetTicks() < ticksStartJumping + jumpDuration)
+        if (SDL_GetTicks() < ticks_start_jumping_ + jump_duration_)
         /****************************************************/
         {
-            auto jumpProgress =
-                (SDL_GetTicks() - ticksStartJumping) * 2 / static_cast<float>(jumpDuration);
-            auto jumpHeight = -std::pow(jumpProgress - 1.0f, 2) + 1.0f;
-            data.movement_.jump_height = -jumpHeight * maxJumpHeight * kTileSize;
+            auto jump_progress =
+                (SDL_GetTicks() - ticks_start_jumping_) * 2 / static_cast<float>(jump_duration_);
+            auto jump_height = -std::pow(jump_progress - 1.0f, 2) + 1.0f;
+            data_.movement_.jump_height = -jump_height * max_jump_height_ * kTileSize;
         }
         else
         /**/
         {
-            data.movement_.jump_height = 0.0f;
+            data_.movement_.jump_height = 0.0f;
         }
     }
 }

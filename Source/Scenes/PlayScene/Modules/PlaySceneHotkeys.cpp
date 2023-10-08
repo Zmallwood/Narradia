@@ -22,7 +22,7 @@ namespace Narradia
         if (KeyboardInput::Get()->KeyHasBeenFiredPickResult(SDLK_x))
             BuildSelectorGui::Get()->ToggleVisibility();
         if (KeyboardInput::Get()->KeyHasBeenFiredPickResult(SDLK_z))
-            Player::Get()->mounted = !Player::Get()->mounted;
+            Player::Get()->mounted_ = !Player::Get()->mounted_;
         if (KeyboardInput::Get()->KeyHasBeenFiredPickResult(SDLK_SPACE))
             Player::Get()->Jump();
         if (KeyboardInput::Get()->KeyHasBeenFiredPickResult(SDLK_ESCAPE))

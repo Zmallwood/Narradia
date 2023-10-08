@@ -67,7 +67,7 @@ namespace Narradia
                         << "</greenVariation>\n";
                 map_file << "   <blueVariation>" << tile->GetBlueVariation() << "</blueVariation>\n";
                 map_file << "   <objects>\n";
-                for (auto &entry : tile->GetObjects().list)
+                for (auto &entry : tile->GetObjects().list_)
                 /*****************************************/
                 {
                     map_file << "      <object>\n";

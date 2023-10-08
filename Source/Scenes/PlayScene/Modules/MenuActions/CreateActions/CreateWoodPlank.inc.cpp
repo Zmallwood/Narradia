@@ -5,7 +5,7 @@
                             if (object->GetObjectType() == Hash("ObjectWoodLog"))
                             /***************************************************/
                             {
-                                Player::Get()->data.status_.stamina = Player::Get()->data.status_.stamina - 2;
+                                Player::Get()->data_.status_.stamina = Player::Get()->data_.status_.stamina - 2;
                                 TextOutBox::Get()->Print("You create a wood plank.");
                                 auto wood_plank = std::make_shared<Object>("ObjectWoodPlank");
                                 wood_plank->SetModelScaling(1.0f);

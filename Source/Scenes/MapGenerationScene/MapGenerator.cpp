@@ -280,7 +280,7 @@ namespace Narradia
                     if (tile->GetGroundType() == Hash("GroundGrass"))
                     /***********************************************/
                     {
-                        if (tile->GetObjects().list.size() < 2)
+                        if (tile->GetObjects().list_.size() < 2)
                         /*************************************/
                         {
                             if (tree_type == 0)

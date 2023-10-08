@@ -27,7 +27,7 @@ namespace Narradia
     ActiveGameRound::Update()
     /*/////////////////////*/
     {
-        auto num_claimed_tiles = Player::Get()->claimedTiles.size();
+        auto num_claimed_tiles = Player::Get()->claimed_tiles_.size();
         auto tot_number_of_tiles = MapArea::GetMapSize().width * MapArea::GetMapSize().height;
         auto progress = (int)(((float)num_claimed_tiles) / tot_number_of_tiles * 100);
         if (progress >= 51)

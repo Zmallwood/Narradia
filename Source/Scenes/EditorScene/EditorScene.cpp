@@ -44,7 +44,7 @@ namespace Narradia
             World::Get()->ApplyDefaultColorVariations();
             World::Get()->CalculateNormals();
         }
-        Player::Get()->data.movement_.position = {
+        Player::Get()->data_.movement_.position = {
             MapArea::GetMapSize().width / 2.0f, MapArea::GetMapSize().height / 2.0f};
         WorldDraw::Get()->EnableMapEditorMode();
         Audio::Get()->Mute();

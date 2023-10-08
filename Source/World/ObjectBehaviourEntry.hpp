@@ -2,12 +2,11 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class ObjectBehaviourEntry
+    struct ObjectBehaviourEntry
     /*//////////////////////*/
     {
-      public:
         std::string_view label;
         int flags = 0;
-        int containerSlots = 0;
+        int container_slots = 0;
     };
 }

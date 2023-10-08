@@ -99,7 +99,7 @@ namespace Narradia
                         GuiWindowObjectSlot::active_window_ == InventoryGui::Get().get())
                     /************************************************************************/
                     {
-                        Player::Get()->data.inventory_.objects_.insert(
+                        Player::Get()->data_.inventory_.objects_.insert(
                             {GuiWindowObjectSlot::hovered_index_, MoveObject(object_in_air_.get())});
                     }
                     else

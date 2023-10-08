@@ -59,7 +59,7 @@ namespace Narradia
     Tile::GetObjectsCount()
     /*///////////////////*/
     {
-        return p->objects->list.size();
+        return p->objects->list_.size();
     }
 
     std::shared_ptr<Object>
@@ -73,7 +73,7 @@ namespace Narradia
     Tile::GetObjectAt(int i)
     /*////////////////////*/
     {
-        return p->objects->list.at(i);
+        return p->objects->list_.at(i);
     }
 
     int

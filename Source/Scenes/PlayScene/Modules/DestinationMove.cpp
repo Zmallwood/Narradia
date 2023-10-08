@@ -50,14 +50,14 @@ namespace Narradia
                     auto angle = static_cast<float>(std::atan2(dx, dy) * 180.f / M_PI) + 180.f;
                     Player::Get()->SetFacingAngle(angle);
                     Player::Get()->MoveForward();
-                    Player::Get()->data.movement_.is_moving = true;
+                    Player::Get()->data_.movement_.is_moving = true;
                 }
                 else
                 /**/
                 {
-                    Player::Get()->data.delta_t_ = 0;
+                    Player::Get()->data_.delta_t_ = 0;
                     destination_ = {-1, -1};
-                    Player::Get()->data.movement_.is_moving = false;
+                    Player::Get()->data_.movement_.is_moving = false;
                 }
             }
         }

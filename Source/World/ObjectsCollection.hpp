@@ -18,10 +18,11 @@ namespace Narradia
         void Replace(std::shared_ptr<Object>, std::shared_ptr<Object>);
         void Remove(Object *);
         std::shared_ptr<Object> GetObjectFromRawPtr(Object *);
-        const std::vector<std::shared_ptr<Object>> &list = trueList;
+
+        const std::vector<std::shared_ptr<Object>> &list_ = true_list_;
 
       private:
-        std::vector<std::shared_ptr<Object>> trueList;
-        const Tile *parentTile = nullptr;
+        const Tile *kParentTile = nullptr;
+        std::vector<std::shared_ptr<Object>> true_list_;
     };
 }

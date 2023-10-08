@@ -6,7 +6,7 @@
          if (object->GetObjectType() == Hash("ObjectFelledTree"))
          /******************************************************/
          {
-             Player::Get()->data.status_.stamina = Player::Get()->data.status_.stamina - 2;
+             Player::Get()->data_.status_.stamina = Player::Get()->data_.status_.stamina - 2;
              object->AddToWorkProgress(0.34f);
              auto percent = (int)(object->GetWorkProgress() * 100);
              TextOutBox::Get()->Print(

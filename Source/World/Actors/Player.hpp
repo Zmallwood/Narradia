@@ -27,23 +27,24 @@ namespace Narradia
         void ClearClaimedTiles();
         void Jump();
 
-        std::vector<Point2> claimedTiles;
-        ActorData data;
-        SkillSet skillSet;
-        bool mounted = false;
-        PlayerBuilds playerBuild = PlayerBuilds::None;
+        std::vector<Point2> claimed_tiles_;
+        ActorData data_;
+        SkillSet skill_set_;
+        bool mounted_ = false;
+        PlayerBuilds current_player_build_ = PlayerBuilds::None;
 
       private:
         void Update();
         void MoveAtAngle(float);
 
         inline static const int kStaminaRegenerationSpeed = 4500;
-        int mineSpeed = 800;
-        int tickLastTimeDidMine = 0;
-        int ticksStartJumping = 0;
-        int jumpDuration = 1000;
-        int ticksLastStaminaRegeneration = 0;
-        float maxJumpHeight = 1.5f;
+        int mine_speed_ = 800;
+        int ticks_last_time_did_mine_ = 0;
+        int ticks_start_jumping_ = 0;
+        int jump_duration_ = 1000;
+        int ticks_last_stamina_regeneration_ = 0;
+        float max_jump_height_ = 1.5f;
+        
         friend class PlayScene;
         friend class EditorScene;
     };

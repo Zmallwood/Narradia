@@ -357,7 +357,7 @@ namespace Narradia
                                 mapArea->GetTile({x, y})->SetGreenVariation(gVar / 3.0f);
                                 mapArea->GetTile({x, y})->SetBlueVariation(bVar / 3.0f);
                             }
-                            for (auto &object : mapArea->GetTile(x, y)->GetObjects().list)
+                            for (auto &object : mapArea->GetTile(x, y)->GetObjects().list_)
                             /************************************************************/
                             {
                                 auto rVarObj = 0.8f + ((float)rand()) / RAND_MAX * 0.2f;

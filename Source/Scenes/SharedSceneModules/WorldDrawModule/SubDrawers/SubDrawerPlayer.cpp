@@ -36,14 +36,14 @@ namespace Narradia
     /*///////////////////////*/
     {
         auto pos = Player::Get()->GetSpaceCoord().Translate(0.0f, p->GetPlayerElevation(), 0.0f);
-        if (Player::Get()->mounted)
+        if (Player::Get()->mounted_)
         /************************/
         {
             RendererModels::Get()->DrawModel(
                 Hash("Mount1"), 0, pos, Player::Get()->GetFacingAngle(), 0.8f);
         }
         float anim_tile;
-        if (Player::Get()->data.movement_.is_moving)
+        if (Player::Get()->data_.movement_.is_moving)
             anim_tile = SDL_GetTicks() * 3;
         else
             anim_tile = 0.0f;
@@ -51,20 +51,20 @@ namespace Narradia
             Hash("Shadow"), 0,
             Player::Get()->GetSpaceCoord().Translate(
                 0.0f,
-                Player::Get()->data.movement_.jump_height + p->GetPlayerElevation() +
+                Player::Get()->data_.movement_.jump_height + p->GetPlayerElevation() +
                     0.05f * kTileSize,
                 0.0f),
             0.0f, 0.6f);
         if (Camera::Get()->camera_distance_ > 2.0f)
         /**************************************/
         {
-            if (Player::Get()->playerBuild == PlayerBuilds::Sword)
+            if (Player::Get()->current_player_build_ == PlayerBuilds::Sword)
             /***************************************************/
             {
                 RendererModels::Get()->DrawModel(
                     Hash("Player2Sword"), anim_tile, pos, Player::Get()->GetFacingAngle(), 0.6f);
             }
-            else if (Player::Get()->playerBuild == PlayerBuilds::Club)
+            else if (Player::Get()->current_player_build_ == PlayerBuilds::Club)
             /*******************************************************/
             {
                 RendererModels::Get()->DrawModel(

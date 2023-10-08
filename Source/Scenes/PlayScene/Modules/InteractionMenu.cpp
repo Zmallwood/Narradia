@@ -380,7 +380,7 @@ namespace Narradia
             else
             /**/
             {
-                for (auto object : tile->GetObjects().list)
+                for (auto object : tile->GetObjects().list_)
                     fn_create_entries_for_object(object.get());
             }
             if (tile->GetGroundType() != Hash("GroundWater") &&

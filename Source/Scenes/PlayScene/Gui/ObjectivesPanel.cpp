@@ -36,7 +36,7 @@ namespace Narradia
         Renderer2DImages::Get()->DrawImage(
             Hash("HorizontalSplitter"), rendid_horizontal_splitter_,
             kRelBoundsHorizontalSplitter.Translate(GetPosition().x, GetPosition().y));
-        auto numClaimedTiles = Player::Get()->claimedTiles.size();
+        auto numClaimedTiles = Player::Get()->claimed_tiles_.size();
         auto totNumberOfTiles = MapArea::GetMapSize().width * MapArea::GetMapSize().height;
         auto progress = (int)(((float)numClaimedTiles) / totNumberOfTiles * 100);
         TextRenderer::Get()->DrawString(

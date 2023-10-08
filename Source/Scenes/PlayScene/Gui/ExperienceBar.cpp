@@ -24,7 +24,7 @@ namespace Narradia
     {
         auto unfilled_area = RectangleF{0.0f, 1.0f - kBarHeight, 1.0f, kBarHeight};
         Renderer2DSolidColors::Get()->FillRectangle(rendid_unfilled_area_, unfilled_area, Colors::black);
-        auto experience_progress = GetFractionalExpProgress(Player::Get()->data.experience_);
+        auto experience_progress = GetFractionalExpProgress(Player::Get()->data_.experience_);
         auto filled_area = RectangleF{0.0f, 1.0f - kBarHeight, experience_progress, kBarHeight};
         Renderer2DImages::Get()->DrawImage("Green", rendid_filled_area_, filled_area);
     }

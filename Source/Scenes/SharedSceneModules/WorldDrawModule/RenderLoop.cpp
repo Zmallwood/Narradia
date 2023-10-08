@@ -163,7 +163,7 @@ namespace Narradia
                 if (do_draw_objects)
                 /****************/
                 {
-                    for (auto &object_entry : tile->GetObjects().list)
+                    for (auto &object_entry : tile->GetObjects().list_)
                     /***********************************************/
                     {
                         auto object_type = object_entry->GetObjectType();

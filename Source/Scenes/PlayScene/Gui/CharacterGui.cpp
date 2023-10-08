@@ -23,7 +23,7 @@ namespace Narradia
     {
         std::stringstream stream;
         stream << std::fixed << std::setprecision(2)
-               << (100.0f * GetFractionalExpProgress(Player::Get()->data.experience_));
+               << (100.0f * GetFractionalExpProgress(Player::Get()->data_.experience_));
         std::string exp_progress = stream.str() + " %";
         TextRenderer::Get()->DrawString(
             rendid_exp_text_, "Experience: " + exp_progress,
