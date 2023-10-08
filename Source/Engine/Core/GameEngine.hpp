@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class GameEngine : public Singleton<GameEngine>
-    /*///////////////////////////////////////////*/
-    {
+    class GameEngine : public Singleton<GameEngine> {
       public:
         GameEngine();
         void Run() const;

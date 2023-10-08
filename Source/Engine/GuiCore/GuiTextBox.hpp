@@ -5,9 +5,7 @@ namespace Narradia
 {
     class GuiContainer;
 
-    class GuiTextBox : public GuiComponent
-    /*//////////////////////////////////*/
-    {
+    class GuiTextBox : public GuiComponent {
       public:
         GuiTextBox(
             RectangleF, GuiContainer *, std::string = "",

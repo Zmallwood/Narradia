@@ -14,9 +14,7 @@ namespace Narradia
           y_(y_),
           i_(i_),
           slot_width_(slotWidth_),
-          kObjectsList(objectsList_)
-    /*///////////////////////////////////////////////////////////////////*/
-    {
+          kObjectsList(objectsList_) {
         rendid_frame_ = Renderer2DImages::Get()->NewImage();
         rendid_object_ = Renderer2DImages::Get()->NewImage();
         rendid_quantity_text_ = TextRenderer::Get()->NewString();
@@ -24,18 +22,11 @@ namespace Narradia
         rendid_transform_progress_filled_ = Renderer2DImages::Get()->NewImage();
     }
 
-    void
-    GuiWindowObjectSlot::Update(int offset) const
-    /*/////////////////////////////////////////*/
-    {
+    void GuiWindowObjectSlot::Update(int offset) const {
         auto mouse_position_f = GetMousePositionF();
-        if (GetBounds().Contains(mouse_position_f))
-        /**********************************/
-        {
+        if (GetBounds().Contains(mouse_position_f)) {
             hovered_index_ = i_ + offset;
-            if (kObjectsList.count(i_ + offset) > 0)
-            /************************************/
-            {
+            if (kObjectsList.count(i_ + offset) > 0) {
                 auto object = kObjectsList.at(i_ + offset);
                 hovered_object_ = object.get();
                 return;
@@ -43,10 +34,7 @@ namespace Narradia
         }
     }
 
-    void
-    GuiWindowObjectSlot::Render(int offset) const
-    /*/////////////////////////////////////////*/
-    {
+    void GuiWindowObjectSlot::Render(int offset) const {
         Log();
         auto slot_height = GetSlotHeight();
         Log();
@@ -54,31 +42,23 @@ namespace Narradia
         Log();
         Object *object = nullptr;
         Log();
-        if (kObjectsList.count(i_ + offset) > 0)
-        /************************************/
-        {
+        if (kObjectsList.count(i_ + offset) > 0) {
             Log();
             object = kObjectsList.at(i_ + offset).get();
         }
         Log();
-        if (object)
-        /*********/
-        {
+        if (object) {
             Log();
             auto image_name_hash = object->GetObjectType();
             Renderer2DImages::Get()->DrawImage(image_name_hash, rendid_object_, GetBounds());
-            if (object->GetQuantity() > 1)
-            /****************************/
-            {
+            if (object->GetQuantity() > 1) {
                 Log();
                 auto quantity_text = "x" + std::to_string(object->GetQuantity());
                 TextRenderer::Get()->DrawString(
                     rendid_quantity_text_, quantity_text,
                     GetBounds().GetPosition().Translate(slot_width_ * 0.65f, slot_height * 0.7f));
             }
-            if (object->GetTransformationProgress() > 0.0f)
-            /*********************************************/
-            {
+            if (object->GetTransformationProgress() > 0.0f) {
                 Log();
                 auto position =
                     GetBounds().GetPosition().Translate(slot_width_ * 0.01f, slot_height * 0.1f);
@@ -94,10 +74,7 @@ namespace Narradia
         }
     }
 
-    RectangleF
-    GuiWindowObjectSlot::GetBounds() const
-    /*//////////////////////////////////*/
-    {
+    RectangleF GuiWindowObjectSlot::GetBounds() const {
         auto bounds = parent_window_->GetBounds();
         auto margin = parent_window_->GetMargin();
         auto slot_height = GetSlotHeight();
@@ -109,10 +86,7 @@ namespace Narradia
         return {x_position, y_position, w, h};
     }
 
-    float
-    GuiWindowObjectSlot::GetSlotHeight() const
-    /*//////////////////////////////////////*/
-    {
+    float GuiWindowObjectSlot::GetSlotHeight() const {
         return ConvertWidthToHeight(slot_width_);
     }
 }

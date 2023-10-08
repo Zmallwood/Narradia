@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class Logger : public Singleton<Logger>
-    /*///////////////////////////////////*/
-    {
+    class Logger : public Singleton<Logger> {
       public:
         Logger();
         ~Logger();

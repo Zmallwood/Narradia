@@ -3,9 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class GuiWindow : public GuiMovableContainer
-    /*////////////////////////////////////////*/
-    {
+    class GuiWindow : public GuiMovableContainer {
       public:
         GuiWindow(
             std::string_view title_, RectangleF bounds_, bool destroyOnClose_ = false,

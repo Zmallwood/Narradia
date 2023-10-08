@@ -10,9 +10,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class GuiWindowCloseButton::Pimpl
-    /*/////////////////////////////*/
-    {
+    class GuiWindowCloseButton::Pimpl {
       public:
         RectangleF GetBounds() const;
         static constexpr float kWidth = 0.01f;
@@ -22,48 +20,31 @@ namespace Narradia
     };
 
     GuiWindowCloseButton::GuiWindowCloseButton(GuiWindow *parentWindow_)
-        : p(std::make_shared<Pimpl>())
-    /*////////////////////////////////////////////////////////////////*/
-    {
+        : p(std::make_shared<Pimpl>()) {
         p->rendid_close_button_image_ = Renderer2DImages::Get()->NewImage();
         p->parent_window_ = parentWindow_;
     }
 
-    void
-    GuiWindowCloseButton::Update()
-    /*//////////////////////////*/
-    {
+    void GuiWindowCloseButton::Update() {
         p->hovered_ = false;
-        if (p->GetBounds().Contains(GetMousePositionF()))
-        /***********************************************/
-        {
+        if (p->GetBounds().Contains(GetMousePositionF())) {
             Cursor::Get()->SetCursorType(CursorTypes::Hovering);
             p->hovered_ = true;
             MouseInput::Get()->GetLeftButton().AddFiredAction(
                 "GuiWindowClose" + std::string(p->parent_window_->GetTitle()) +
                     std::to_string(SDL_GetTicks()),
-                [&]
-                /**********************/
-                {
-                    if (p->parent_window_->DestroyOnClose())
-                    /************************************/
-                    {
-                        if (SceneManager::Get()->GetCurrentScene() == SceneNames::Play)
-                        /***************************************************/
-                        {
+                [&] {
+                    if (p->parent_window_->DestroyOnClose()) {
+                        if (SceneManager::Get()->GetCurrentScene() == SceneNames::Play) {
                             auto scene_gui = PlayScene::Get()->GetSceneGui();
                             scene_gui->RemoveGuiComponent(p->parent_window_);
                         }
-                        else if (SceneManager::Get()->GetCurrentScene() == SceneNames::Editor)
-                        /************************************************************/
-                        {
+                        else if (SceneManager::Get()->GetCurrentScene() == SceneNames::Editor) {
                             auto scene_gui = EditorScene::Get()->GetSceneGui();
                             scene_gui->RemoveGuiComponent(p->parent_window_);
                         }
                     }
-                    else
-                    /**/
-                    {
+                    else {
                         p->parent_window_->Hide();
                     }
                 },
@@ -71,10 +52,7 @@ namespace Narradia
         }
     }
 
-    void
-    GuiWindowCloseButton::Render() const
-    /*////////////////////////////////*/
-    {
+    void GuiWindowCloseButton::Render() const {
         if (p->hovered_)
             Renderer2DImages::Get()->DrawImage(
                 "GuiWindowCloseButtonHovered", p->rendid_close_button_image_, p->GetBounds());
@@ -83,10 +61,7 @@ namespace Narradia
                 "GuiWindowCloseButton", p->rendid_close_button_image_, p->GetBounds());
     }
 
-    RectangleF
-    GuiWindowCloseButton::Pimpl::GetBounds() const
-    /*//////////////////////////////////////////*/
-    {
+    RectangleF GuiWindowCloseButton::Pimpl::GetBounds() const {
         auto width = Pimpl::kWidth;
         auto height = ConvertWidthToHeight(width);
         return RectangleF{

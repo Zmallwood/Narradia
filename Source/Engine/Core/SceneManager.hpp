@@ -3,9 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class SceneManager : public Singleton<SceneManager>
-    /*/////////////////////////////////////////////*/
-    {
+    class SceneManager : public Singleton<SceneManager> {
       public:
         SceneManager();
         void InitializeScenes();

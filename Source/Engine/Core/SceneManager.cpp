@@ -13,24 +13,17 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class SceneManager::Pimpl
-    /*////////////////////*/
-    {
+    class SceneManager::Pimpl {
       public:
         std::map<SceneNames, std::shared_ptr<SceneBase>> scenes_;
         SceneNames current_scene_ = SceneNames::None;
     };
 
     SceneManager::SceneManager()
-        : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/
-    {
+        : p(std::make_shared<Pimpl>()) {
     }
 
-    void
-    SceneManager::InitializeScenes()
-    /*///////////////////////////////*/
-    {
+    void SceneManager::InitializeScenes() {
         Log();
         p->scenes_[SceneNames::Intro] = std::make_shared<IntroScene>();
         Log();
@@ -54,59 +47,38 @@ namespace Narradia
         p->current_scene_ = SceneNames::Intro;
     }
 
-    void
-    SceneManager::UpdateCurrentScene()
-    /*//////////////////////////////*/
-    {
+    void SceneManager::UpdateCurrentScene() {
         Log();
-        if (p->scenes_.count(p->current_scene_))
-        /**********************************/
-        {
+        if (p->scenes_.count(p->current_scene_)) {
             Log();
             p->scenes_.at(p->current_scene_)->Update();
         };
     }
 
-    void
-    SceneManager::RenderCurrentScene() const
-    /*////////////////////////////////////*/
-    {
+    void SceneManager::RenderCurrentScene() const {
         Log();
-        if (p->scenes_.count(p->current_scene_))
-        /**********************************/
-        {
+        if (p->scenes_.count(p->current_scene_)) {
             Log();
             p->scenes_.at(p->current_scene_)->Render();
         };
         Log();
     }
 
-    void
-    SceneManager::FinalizeCurrentScene()
-    /*////////////////////////////////*/
-    {
-        if (p->scenes_.count(p->current_scene_))
-        /**********************************/
-        {
+    void SceneManager::FinalizeCurrentScene() {
+        if (p->scenes_.count(p->current_scene_)) {
             Log();
             p->scenes_.at(p->current_scene_)->Finalize();
         };
     }
 
-    void
-    SceneManager::ChangeScene(SceneNames newScene)
-    /*//////////////////////////////////////////*/
-    {
+    void SceneManager::ChangeScene(SceneNames newScene) {
         p->current_scene_ = newScene;
         MouseInput::Get()->Reset();
         MouseInput::Get()->ResetMouseActions();
         p->scenes_.at(p->current_scene_)->Enter();
     }
 
-    SceneNames
-    SceneManager::GetCurrentScene()
-    /*///////////////////////////*/
-    {
+    SceneNames SceneManager::GetCurrentScene() {
         return p->current_scene_;
     }
 }

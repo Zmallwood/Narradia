@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class EventPoller
-    /*/////////////*/
-    {
+    class EventPoller {
       public:
         void PollEvents() const;
     };

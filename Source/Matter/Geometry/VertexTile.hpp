@@ -2,10 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class VertexTile
-    /*////////////*/
-    {
-      public:
+    struct VertexTile {
         VertexTile();
         Vertex3F v0;
         Vertex3F v1;

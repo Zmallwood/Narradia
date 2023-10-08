@@ -11,19 +11,14 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    void
-    GameLoop::Run() const
-    /*/////////////////*/
-    {
+    void GameLoop::Run() const {
         Log();
         World::Create();
         Log();
         SceneManager::Get()->InitializeScenes();
         Log();
         EventPoller event_poller;
-        while (GameEngine::Get()->IsRunning())
-        /*********************************/
-        {
+        while (GameEngine::Get()->IsRunning()) {
             Log();
             Cursor::Get()->Reset();
             TextOutBox::Get()->Update();

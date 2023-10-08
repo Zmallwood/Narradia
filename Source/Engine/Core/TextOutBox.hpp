@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class TextOutBox : public Singleton<TextOutBox>
-    /*///////////////////////////////////////////*/
-    {
+    class TextOutBox : public Singleton<TextOutBox> {
       public:
         TextOutBox();
         void Update();

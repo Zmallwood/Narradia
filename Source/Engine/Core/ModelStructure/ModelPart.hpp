@@ -3,9 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class ModelPart
-    /*///////////*/
-    {
+    class ModelPart {
       public:
         ModelPart();
         int texNameHash = 0;

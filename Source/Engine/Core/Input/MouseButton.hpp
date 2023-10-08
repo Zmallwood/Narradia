@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class MouseButton
-    /*/////////////*/
-    {
+    class MouseButton {
       public:
         MouseButton();
         void Reset();

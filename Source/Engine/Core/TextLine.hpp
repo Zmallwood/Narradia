@@ -2,10 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class TextLine
-    /*//////////*/
-    {
-      public:
+    struct TextLine {
         std::string text;
         Color color;
     };

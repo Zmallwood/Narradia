@@ -3,9 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class Cursor : public Singleton<Cursor>
-    /*///////////////////////////////////*/
-    {
+    class Cursor : public Singleton<Cursor> {
       public:
         Cursor();
         void Render() const;

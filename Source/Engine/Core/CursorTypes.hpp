@@ -2,12 +2,5 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    enum class CursorTypes
-    /*//////////////////*/
-    {
-        Normal,
-        Hovering,
-        Rotating,
-        Attack
-    };
+    enum class CursorTypes { Normal, Hovering, Rotating, Attack };
 }

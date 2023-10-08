@@ -3,9 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class Model
-    /*///////*/
-    {
+    class Model {
       public:
         Model(int);
         const int animDuration = 0;

@@ -3,8 +3,6 @@
 namespace Narradia
 {
     ModelPart::ModelPart()
-        : timeline(std::make_unique<ModelPartTimeline>())
-    /*/////////////////////////////////////////////////*/
-    {
+        : timeline(std::make_unique<ModelPartTimeline>()) {
     }
 }

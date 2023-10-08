@@ -7,9 +7,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class GuiButton::Pimpl
-    /*//////////////////*/
-    {
+    class GuiButton::Pimpl {
       public:
         std::string_view text_;
         RectangleF bounds_;
@@ -26,9 +24,7 @@ namespace Narradia
         const std::string_view &text_, RectangleF bounds_, std::function<void()> action_,
         GuiContainer *parentContainer_, const std::string_view &imageName_,
         const std::string_view &imageNameHovered_)
-        : p(std::make_shared<Pimpl>())
-    /*/////////////////////////////////////////////////////////////////////////////////*/
-    {
+        : p(std::make_shared<Pimpl>()) {
         p->text_ = text_;
         p->bounds_ = bounds_;
         p->action_ = action_;
@@ -39,45 +35,29 @@ namespace Narradia
         p->rendid_label_text_ = TextRenderer::Get()->NewString();
     }
 
-    void
-    GuiButton::Update()
-    /*///////////////*/
-    {
+    void GuiButton::Update() {
         p->hovered_ = false;
         auto used_bounds = p->bounds_;
-        if (p->parent_container_)
-        /*********************/
-        {
+        if (p->parent_container_) {
             used_bounds.x += p->parent_container_->GetPosition().x;
             used_bounds.y += p->parent_container_->GetPosition().y;
         }
-        if (used_bounds.Contains(GetMousePositionF()))
-        /*******************************************/
-        {
+        if (used_bounds.Contains(GetMousePositionF())) {
             Cursor::Get()->SetCursorType(CursorTypes::Hovering);
             p->hovered_ = true;
             MouseInput::Get()->GetLeftButton().AddFiredAction(
-                "PerformGuiButtonAction",
-                [&]
-                /************************/
-                { p->action_(); },
-                1);
+                "PerformGuiButtonAction", [&] { p->action_(); }, 1);
         }
     }
 
-    void
-    GuiButton::Render() const
-    /*/////////////////////*/
-    {
+    void GuiButton::Render() const {
         const std::string_view *used_image_name;
         if (p->hovered_)
             used_image_name = &p->image_name_hovered_;
         else
             used_image_name = &p->image_name_;
         auto used_bounds = p->bounds_;
-        if (p->parent_container_)
-        /*********************/
-        {
+        if (p->parent_container_) {
             used_bounds.x += p->parent_container_->GetPosition().x;
             used_bounds.y += p->parent_container_->GetPosition().y;
         }

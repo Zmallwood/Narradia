@@ -2,10 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class Point2F
-    /*/////////*/
-    {
-      public:
+    struct Point2F {
         Point2F Copy();
         Point2F Translate(float, float) const;
         Point2 ToIntPoint() const;

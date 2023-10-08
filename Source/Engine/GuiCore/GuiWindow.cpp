@@ -5,9 +5,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class GuiWindow::Pimpl
-    /*//////////////////*/
-    {
+    class GuiWindow::Pimpl {
       public:
         static constexpr float kTitleBarHeight = 0.03f;
         static constexpr float kMargin = 0.005f;
@@ -27,10 +25,9 @@ namespace Narradia
         : p(std::make_shared<Pimpl>()),
           GuiMovableContainer(
               {0.0f, 0.0f, bounds_.width, Pimpl::kTitleBarHeight}, bounds_.GetPosition(),
-              bounds_.GetSize())
-    /*/////////////////////////////////////////////////////////////////////////////////*/
-    {
-        std::tie(p->rendid_background_, p->rendid_title_bar_) = Renderer2DImages::Get()->NewImages<2>();
+              bounds_.GetSize()) {
+        std::tie(p->rendid_background_, p->rendid_title_bar_) =
+            Renderer2DImages::Get()->NewImages<2>();
         p->rendid_title_text_ = TextRenderer::Get()->NewString();
         p->gui_window_close_button_ = GuiWindowCloseButton(this);
         p->background_image_name_ = backgroundImageName_;
@@ -38,59 +35,35 @@ namespace Narradia
         p->destroy_on_close_ = destroyOnClose_;
     }
 
-    void
-    GuiWindow::ToggleVisibility()
-    /*/////////////////////////*/
-    {
+    void GuiWindow::ToggleVisibility() {
         p->visible_ = !p->visible_;
     }
 
-    std::string_view
-    GuiWindow::GetTitle()
-    /*/////////////////*/
-    {
+    std::string_view GuiWindow::GetTitle() {
         return p->title_;
     }
 
-    bool
-    GuiWindow::DestroyOnClose()
-    /*///////////////////////*/
-    {
+    bool GuiWindow::DestroyOnClose() {
         return p->destroy_on_close_;
     }
 
-    void
-    GuiWindow::Show()
-    /*/////////////*/
-    {
+    void GuiWindow::Show() {
         p->visible_ = true;
     }
 
-    void
-    GuiWindow::Hide()
-    /*/////////////*/
-    {
+    void GuiWindow::Hide() {
         p->visible_ = false;
     }
 
-    float
-    GuiWindow::GetMargin()
-    /*//////////////////*/
-    {
+    float GuiWindow::GetMargin() {
         return Pimpl::kMargin;
     }
 
-    float
-    GuiWindow::GetTitleBarHeight()
-    /*//////////////////////////*/
-    {
+    float GuiWindow::GetTitleBarHeight() {
         return Pimpl::kTitleBarHeight;
     }
 
-    void
-    GuiWindow::Update()
-    /*///////////////*/
-    {
+    void GuiWindow::Update() {
         if (!p->visible_)
             return;
         p->gui_window_close_button_.Update();
@@ -98,15 +71,13 @@ namespace Narradia
         GuiMovableContainer::Update();
     }
 
-    void
-    GuiWindow::Render() const
-    /*/////////////////////*/
-    {
+    void GuiWindow::Render() const {
         Log();
         if (!p->visible_)
             return;
         Log();
-        Renderer2DImages::Get()->DrawImage(p->background_image_name_, p->rendid_background_, GetBounds());
+        Renderer2DImages::Get()->DrawImage(
+            p->background_image_name_, p->rendid_background_, GetBounds());
         Log();
         Renderer2DImages::Get()->DrawImage(
             "GuiWindowTitleBar", p->rendid_title_bar_, GetAbsoluteTitleBarBounds());
@@ -119,10 +90,7 @@ namespace Narradia
         GuiMovableContainer::Render();
     }
 
-    RectangleF
-    GuiWindow::GetAbsoluteTitleBarBounds() const
-    /*////////////////////////////////////////*/
-    {
+    RectangleF GuiWindow::GetAbsoluteTitleBarBounds() const {
         return {GetPosition().x, GetPosition().y, GetSize().width, Pimpl::kTitleBarHeight};
     }
 }

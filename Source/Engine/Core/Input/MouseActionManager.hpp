@@ -3,9 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class MouseActionManager
-    /*////////////////////*/
-    {
+    class MouseActionManager {
       public:
         MouseActionManager();
         void PerformFiredActions(int, bool, bool &);

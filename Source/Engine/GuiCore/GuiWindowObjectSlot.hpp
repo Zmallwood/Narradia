@@ -5,9 +5,7 @@ namespace Narradia
     class Object;
     class GuiWindow;
 
-    class GuiWindowObjectSlot
-    /*/////////////////////*/
-    {
+    class GuiWindowObjectSlot {
       public:
         GuiWindowObjectSlot(
             GuiWindow *, int, int, int, float, const std::map<int, std::shared_ptr<Object>> &);
@@ -32,6 +30,7 @@ namespace Narradia
         int i_;
         GuiWindow *parent_window_ = nullptr;
         float slot_width_;
+        
         friend class InventoryGui;
         friend class OpenContainerGui;
         friend class ObjectBrowserGui;

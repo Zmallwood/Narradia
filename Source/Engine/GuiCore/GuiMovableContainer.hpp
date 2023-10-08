@@ -3,9 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class GuiMovableContainer : public GuiContainer
-    /*///////////////////////////////////////////*/
-    {
+    class GuiMovableContainer : public GuiContainer {
       public:
         GuiMovableContainer(RectangleF, Point2F, SizeF);
 

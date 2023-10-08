@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class Audio : public Singleton<Audio>
-    /*/////////////////////////////////*/
-    {
+    class Audio : public Singleton<Audio> {
       public:
         Audio();
         void Cleanup();

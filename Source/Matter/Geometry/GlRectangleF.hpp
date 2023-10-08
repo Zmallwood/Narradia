@@ -2,10 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class GlRectangleF
-    /*//////////////*/
-    {
-      public:
+    struct GlRectangleF {
         float x = .0f;
         float y = .0f;
         float width = .0f;

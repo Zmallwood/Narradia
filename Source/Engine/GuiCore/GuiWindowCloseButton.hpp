@@ -4,9 +4,7 @@ namespace Narradia
 {
     class GuiWindow;
 
-    class GuiWindowCloseButton
-    /*//////////////////////*/
-    {
+    class GuiWindowCloseButton {
       public:
         GuiWindowCloseButton() = default;
         GuiWindowCloseButton(GuiWindow *);

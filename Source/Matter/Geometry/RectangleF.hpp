@@ -2,12 +2,9 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class SizeF;
-    
-    class RectangleF
-    /*////////////*/
-    {
-      public:
+    struct SizeF;
+
+    struct RectangleF {
         RectangleF();
         RectangleF(float, float, float, float);
         RectangleF(Point2F, SizeF);

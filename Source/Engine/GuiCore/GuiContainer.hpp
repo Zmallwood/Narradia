@@ -3,9 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class GuiContainer : public GuiComponent
-    /*////////////////////////////////////*/
-    {
+    class GuiContainer : public GuiComponent {
       public:
         GuiContainer(Point2F, SizeF);
         RectangleF GetBounds() const;

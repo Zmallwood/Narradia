@@ -4,9 +4,7 @@ namespace Narradia
 {
     class GuiContainer;
 
-    class GuiButton
-    /*///////////*/
-    {
+    class GuiButton {
       public:
         GuiButton(
             const std::string_view &, RectangleF, std::function<void()>, GuiContainer * = nullptr,

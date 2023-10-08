@@ -2,10 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class Color
-    /*///////*/
-    {
-      public:
+    struct Color {
         SDL_Color ToSdlColor() const;
         float r = 0.0f;
         float g = 0.0f;

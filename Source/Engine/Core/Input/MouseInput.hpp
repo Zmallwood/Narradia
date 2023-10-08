@@ -3,9 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class MouseInput : public Singleton<MouseInput>
-    /*///////////////////////////////////////////*/
-    {
+    class MouseInput : public Singleton<MouseInput> {
       public:
         MouseInput();
         void Reset();

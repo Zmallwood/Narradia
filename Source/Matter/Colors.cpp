@@ -3,7 +3,6 @@
 namespace Narradia
 {
     namespace
-    /*/////*/
     {
         constexpr auto _0 = .0f;
         constexpr auto _5 = .05f;
@@ -22,7 +21,6 @@ namespace Narradia
     }
 
     namespace Colors
-    /*////////////*/
     {
         const Color alphaYellow = {_100, _100, _0, _70};
         const Color black = {_0, _0, _0, _100};

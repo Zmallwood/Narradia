@@ -4,9 +4,7 @@ namespace Narradia
 {
     class SceneGui;
 
-    class SceneBase
-    /*//////////*/
-    {
+    class SceneBase {
       public:
         SceneBase();
         virtual void Enter();

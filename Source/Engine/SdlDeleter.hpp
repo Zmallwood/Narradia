@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class SdlDeleter
-    /*////////////*/
-    {
+    class SdlDeleter {
       public:
         void operator()(SDL_Window *) const;
         void operator()(SDL_Renderer *) const;

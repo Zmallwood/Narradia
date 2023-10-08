@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    enum class SceneNames
-    /*/////////////////*/
-    {
+    enum class SceneNames {
         None,
         Intro,
         MainMenu,

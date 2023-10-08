@@ -2,10 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class Vertex3F
-    /*//////////*/
-    {
-      public:
+    struct Vertex3F {
         Point3F position;
         Color color;
         Point2F uv;

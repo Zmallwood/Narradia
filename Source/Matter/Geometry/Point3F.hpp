@@ -2,10 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class Point3F
-    /*/////////*/
-    {
-      public:
+    struct Point3F {
         Point3F Translate(float, float, float);
         float x = 0.0f;
         float y = 0.0f;

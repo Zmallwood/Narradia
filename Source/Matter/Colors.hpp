@@ -2,10 +2,9 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class Color;
-    
+    struct Color;
+
     namespace Colors
-    /*////////////*/
     {
         const extern Color alphaYellow;
         const extern Color black;

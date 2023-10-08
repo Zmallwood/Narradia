@@ -4,9 +4,7 @@ namespace Narradia
 {
     class GuiComponent;
 
-    class SceneGui
-    /*/////////*/
-    {
+    class SceneGui {
       public:
         SceneGui();
         void AddGuiButton(

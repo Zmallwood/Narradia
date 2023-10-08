@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class GameLoop
-    /*//////////*/
-    {
+    class GameLoop {
       public:
         void Run() const;
     };

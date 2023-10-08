@@ -6,29 +6,20 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class GameEngine::Pimpl
-    /*///////////////////*/
-    {
+    class GameEngine::Pimpl {
       public:
         bool running_ = true;
     };
 
     GameEngine::GameEngine()
-        : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/
-    {
+        : p(std::make_shared<Pimpl>()) {
     }
 
-    void
-    GameEngine::Run() const
-    /*///////////////////*/
-    {
+    void GameEngine::Run() const {
         Logger::Create();
         srand(static_cast<unsigned int>(time(nullptr)));
         Log();
-        if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
-        /************************************/
-        {
+        if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
             std::cout << "SDL could not initialize! SDL Error: " << std::string(SDL_GetError())
                       << std::endl;
             return;
@@ -45,17 +36,11 @@ namespace Narradia
         SDL_Quit();
     }
 
-    void
-    GameEngine::StopGame()
-    /*//////////////////*/
-    {
+    void GameEngine::StopGame() {
         p->running_ = false;
     }
 
-    const bool
-    GameEngine::IsRunning() const
-    /*/////////////////////////*/
-    {
+    const bool GameEngine::IsRunning() const {
         return p->running_;
     }
 }

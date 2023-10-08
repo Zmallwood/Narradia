@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class ModelPartKeyframe
-    /*///////////////////*/
-    {
+    class ModelPartKeyframe {
       public:
         std::vector<Vertex3F> vertices;
     };
