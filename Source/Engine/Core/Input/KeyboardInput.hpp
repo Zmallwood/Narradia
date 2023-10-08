@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class KeyboardInput : public Singleton<KeyboardInput>
-    /*/////////////////////////////////////////////////*/
-    {
+    class KeyboardInput : public Singleton<KeyboardInput> {
       public:
         KeyboardInput();
         void KeyDown(SDL_Keycode);

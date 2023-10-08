@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class ShaderProgram
-    /*///////////////*/
-    {
+    class ShaderProgram {
       public:
         ShaderProgram();
         bool Create(const GLchar *, const GLchar *);

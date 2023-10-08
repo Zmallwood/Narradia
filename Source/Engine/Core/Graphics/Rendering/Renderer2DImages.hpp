@@ -3,10 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class Renderer2DImages : RendererBase,
-                             public Singleton<Renderer2DImages>
-    /*/////////////////////////////////////////////////////////////////*/
-    {
+    class Renderer2DImages : RendererBase, public Singleton<Renderer2DImages> {
       public:
         Renderer2DImages();
         RenderId NewImage();
@@ -14,10 +11,7 @@ namespace Narradia
             const std::string_view &, RenderId, const RectangleF &, Color = Colors::white) const;
         void DrawImage(int, RenderId, const RectangleF &, Color = Colors::white) const;
         void Cleanup();
-        template <int N>
-        auto NewImages()
-        /*/////////////////////////////*/
-        {
+        template <int N> auto NewImages() {
             std::array<RenderId, N> result;
             for (auto &entry : result)
                 entry = NewImage();

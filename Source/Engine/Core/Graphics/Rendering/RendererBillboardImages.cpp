@@ -5,9 +5,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class RendererBillboardImages::Pimpl
-    /*////////////////////////////////*/
-    {
+    class RendererBillboardImages::Pimpl {
       public:
         const int kLocationPosition = 0;
         const int kLocationUv = 1;
@@ -18,9 +16,7 @@ namespace Narradia
     };
 
     RendererBillboardImages::RendererBillboardImages()
-        : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////////////////////*/
-    {
+        : p(std::make_shared<Pimpl>()) {
         const GLchar *vertex_shader_source =
 #include "Shaders/BillboardImagesVertex.glsl"
             ;
@@ -34,10 +30,7 @@ namespace Narradia
         p->location_billboard_size_ = GetUniformLocation("billboardSize");
     }
 
-    RenderId
-    RendererBillboardImages::NewBillboardImage()
-    /*////////////////////////////////////////*/
-    {
+    RenderId RendererBillboardImages::NewBillboardImage() {
         auto vao_id = GenerateNewVertexArrayId();
         UseVaoBegin(vao_id);
         auto index_buffer_id = GenerateNewBufferId(BufferTypes::Indices, vao_id);
@@ -51,12 +44,9 @@ namespace Narradia
         return vao_id;
     }
 
-    void
-    RendererBillboardImages::DrawBillboardImage(
+    void RendererBillboardImages::DrawBillboardImage(
         int imageNameHash, RenderId vaoId, Point3F position, RectangleF &bounds,
-        SizeF billboardSize) const
-    /*////////////////////////////////////////////////////////////////////////*/
-    {
+        SizeF billboardSize) const {
         Vertex3F vertices[RendererBase::kNumVerticesInRectangle];
         vertices[0].uv = {0, 0};
         vertices[1].uv = {1, 0};
@@ -84,9 +74,7 @@ namespace Narradia
         std::iota(std::begin(indices), std::end(indices), 0);
         std::vector<float> positions;
         std::vector<float> uvs;
-        for (auto &v : vertices)
-        /**********************/
-        {
+        for (auto &v : vertices) {
             positions.push_back(v.position.x);
             positions.push_back(v.position.y);
             uvs.push_back(v.uv.x);
@@ -103,10 +91,7 @@ namespace Narradia
         UseVaoEnd();
     }
 
-    void
-    RendererBillboardImages::Cleanup()
-    /*//////////////////////////////*/
-    {
+    void RendererBillboardImages::Cleanup() {
         CleanupBase();
     }
 }

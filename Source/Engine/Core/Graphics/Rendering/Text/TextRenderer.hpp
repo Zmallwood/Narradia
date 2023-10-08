@@ -3,9 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class TextRenderer : public Singleton<TextRenderer>
-    /*///////////////////////////////////////////////*/
-    {
+    class TextRenderer : public Singleton<TextRenderer> {
       public:
         TextRenderer();
         RenderId NewString();
@@ -20,10 +18,7 @@ namespace Narradia
         void DrawMultiLineString(
             RenderId, const std::string &, Point2F, Color = Colors::wheat, bool = false,
             FontSizes = FontSizes::_20) const;
-        template <int N>
-        auto NewStrings()
-        /*/////////////*/
-        {
+        template <int N> auto NewStrings() {
             std::array<RenderId, N> result;
             for (auto &entry : result)
                 entry = NewString();

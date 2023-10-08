@@ -3,9 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class GraphicsGl : public Singleton<GraphicsGl>
-    /*///////////////////////////////////////////*/
-    {
+    class GraphicsGl : public Singleton<GraphicsGl> {
       public:
         GraphicsGl();
         void Cleanup();

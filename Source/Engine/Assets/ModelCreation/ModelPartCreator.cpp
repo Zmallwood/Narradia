@@ -10,11 +10,8 @@ using std::vector;
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    auto
-    ModelPartCreator::CreateModelPartFromMesh(
-        const aiScene *scene, string nodeName, aiMesh *mesh) const -> shared_ptr<ModelPart>
-    /*///////////////////////////////////////////////////////////////////////////////////*/
-    {
+    auto ModelPartCreator::CreateModelPartFromMesh(
+        const aiScene *scene, string nodeName, aiMesh *mesh) const -> shared_ptr<ModelPart> {
         auto new_model_part = make_shared<ModelPart>();
         auto tex_name_hash = GetTexNameHashForMesh(scene, mesh);
         new_model_part->texNameHash = tex_name_hash;
@@ -22,9 +19,7 @@ namespace Narradia
             ModelPartKeyframeCreator::Get()->GetPositionKeyframe(scene, nodeName, 0).mTime > 0;
         auto num_keyframes =
             ModelPartKeyframeCreator::Get()->GetNodePositionKeyframes(scene, nodeName).size();
-        for (auto k = 0; k < num_keyframes; k++)
-        /**************************************/
-        {
+        for (auto k = 0; k < num_keyframes; k++) {
             auto position_keyframe =
                 ModelPartKeyframeCreator::Get()->GetPositionKeyframe(scene, nodeName, k);
             auto rotation_keyframe =
@@ -41,29 +36,21 @@ namespace Narradia
         return new_model_part;
     }
 
-    int
-    ModelPartCreator::GetTexNameHashForMesh(const aiScene *scene, aiMesh *mesh) const
-    /*/////////////////////////////////////////////////////////////////////////////*/
-    {
+    int ModelPartCreator::GetTexNameHashForMesh(const aiScene *scene, aiMesh *mesh) const {
         auto texture_name_hashcodes = GetTexNameHashcodes(scene);
         auto material = mesh->mMaterialIndex;
         auto texture_name_hash = texture_name_hashcodes.at(material);
         return texture_name_hash;
     }
 
-    auto
-    ModelPartCreator::GetNewModelPartKeyframe(
+    auto ModelPartCreator::GetNewModelPartKeyframe(
         const aiScene *scene, string nodeName, aiMesh *mesh, aiVectorKey positionKeyFrame,
         aiQuatKey rotationKeyFrame, aiVectorKey scalingKeyFrame) const
-        -> shared_ptr<ModelPartKeyframe>
-    /*//////////////////////////////////////////////////////////////////////////////////*/
-    {
+        -> shared_ptr<ModelPartKeyframe> {
         auto new_model_part_keyframe = make_shared<ModelPartKeyframe>();
         auto node_transformation = GetNodeTransformation(scene, nodeName);
         auto num_vertices = mesh->mNumVertices;
-        for (auto i = 0; i < num_vertices; i++)
-        /************************************/
-        {
+        for (auto i = 0; i < num_vertices; i++) {
             auto mesh_vertex = mesh->mVertices[i];
             auto mesh_normal = mesh->mNormals[i];
             auto mesh_uv = mesh->mTextureCoords[0][i];
@@ -85,17 +72,13 @@ namespace Narradia
         return new_model_part_keyframe;
     }
 
-    vector<int>
-    ModelPartCreator::GetTexNameHashcodes(const aiScene *scene) const
-    /*/////////////////////////////////////////////////////////////*/
-    {
+    vector<int> ModelPartCreator::GetTexNameHashcodes(const aiScene *scene) const {
         vector<int> texture_name_hashcodes;
         auto num_materials = scene->mNumMaterials;
-        for (auto i = 0; i < num_materials; i++)
-        /*************************************/
-        {
+        for (auto i = 0; i < num_materials; i++) {
             aiString texture_name_cstr;
-            scene->mMaterials[i]->Get(AI_MATKEY_TEXTURE(aiTextureType_DIFFUSE, 0), texture_name_cstr);
+            scene->mMaterials[i]->Get(
+                AI_MATKEY_TEXTURE(aiTextureType_DIFFUSE, 0), texture_name_cstr);
             auto texture_name = string(texture_name_cstr.C_Str());
             auto texture_name_no_extension = texture_name.substr(0, texture_name.length() - 4);
             auto texture_name_hash = Hash(texture_name_no_extension);
@@ -105,25 +88,18 @@ namespace Narradia
     }
 
     aiMatrix4x4
-    ModelPartCreator::GetNodeTransformation(const aiScene *scene, string nodeName) const
-    /*////////////////////////////////////////////////////////////////////////////////*/
-    {
+    ModelPartCreator::GetNodeTransformation(const aiScene *scene, string nodeName) const {
         auto all_transformations = GetTransformations(scene);
-        for (auto &alpha : all_transformations)
-        /*************************************/
-        {
+        for (auto &alpha : all_transformations) {
             if (*alpha.first == nodeName.data())
                 return alpha.second;
         }
         return aiMatrix4x4();
     }
 
-    Point3F
-    ModelPartCreator::GetPosition(
+    Point3F ModelPartCreator::GetPosition(
         aiVector3D vertex, aiMatrix4x4 node_transformation, aiVectorKey positionKeyFrame,
-        aiQuatKey rotationKeyFrame, aiVectorKey scalingKeyFrame) const
-    /*/////////////////////////////////////////////////////////////////////////////////*/
-    {
+        aiQuatKey rotationKeyFrame, aiVectorKey scalingKeyFrame) const {
         aiVector3D ai_position = {vertex.x, vertex.y, vertex.z};
         ai_position.x *= scalingKeyFrame.mValue.x;
         ai_position.y *= scalingKeyFrame.mValue.y;
@@ -141,17 +117,12 @@ namespace Narradia
         return position;
     }
 
-    auto
-    ModelPartCreator::GetTransformations(const aiScene *scene) const
-        -> map<shared_ptr<string>, aiMatrix4x4>
-    /*////////////////////////////////////////////////////////////*/
-    {
+    auto ModelPartCreator::GetTransformations(const aiScene *scene) const
+        -> map<shared_ptr<string>, aiMatrix4x4> {
         auto root_node = scene->mRootNode;
         auto num_nodes = root_node->mNumChildren;
         auto node_name_to_transformations = map<shared_ptr<string>, aiMatrix4x4>();
-        for (auto i = 0; i < num_nodes; i++)
-        /*********************************/
-        {
+        for (auto i = 0; i < num_nodes; i++) {
             auto node = root_node->mChildren[i];
             auto node_name = node->mName;
             auto node_transformation = node->mTransformation;
@@ -161,10 +132,7 @@ namespace Narradia
         return node_name_to_transformations;
     }
 
-    void
-    ModelPartCreator::Translate(Point3F *position, aiVectorKey positionKeyFrame) const
-    /*//////////////////////////////////////////////////////////////////////////////*/
-    {
+    void ModelPartCreator::Translate(Point3F *position, aiVectorKey positionKeyFrame) const {
         auto translation_matrix = aiMatrix4x4();
         translation_matrix[0][3] = positionKeyFrame.mValue.x;
         translation_matrix[1][3] = positionKeyFrame.mValue.y;

@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class CameraGl : public Singleton<CameraGl>
-    /*///////////////////////////////////////*/
-    {
+    class CameraGl : public Singleton<CameraGl> {
       public:
         CameraGl();
         const glm::mat4 &GetPerspectiveMatrix();

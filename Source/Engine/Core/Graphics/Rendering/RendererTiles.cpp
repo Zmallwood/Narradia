@@ -7,9 +7,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class RendererTiles::Pimpl
-    /*//////////////////////*/
-    {
+    class RendererTiles::Pimpl {
       public:
         const int kLocationPosition = 0;
         const int kLocationColor = 1;
@@ -25,9 +23,7 @@ namespace Narradia
     };
 
     RendererTiles::RendererTiles()
-        : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/
-    {
+        : p(std::make_shared<Pimpl>()) {
         const GLchar *vertex_shader_source =
 #include "Shaders/TilesVertex.glsl"
             ;
@@ -43,10 +39,7 @@ namespace Narradia
         p->location_fog_color_ = GetUniformLocation("fogColor");
     }
 
-    RenderId
-    RendererTiles::NewImagePolygon(int numVertices)
-    /*///////////////////////////////////////////*/
-    {
+    RenderId RendererTiles::NewImagePolygon(int numVertices) {
         auto vertex_array_id = GenerateNewVertexArrayId();
         auto index_buffer_id = GenerateNewBufferId(BufferTypes::Indices, vertex_array_id);
         auto position_buffer_id = GenerateNewBufferId(BufferTypes::Positions, vertex_array_id);
@@ -64,19 +57,13 @@ namespace Narradia
         return vertex_array_id;
     }
 
-    RenderId
-    RendererTiles::NewTile()
-    /*////////////////////*/
-    {
+    RenderId RendererTiles::NewTile() {
         return NewImagePolygon(4);
     }
 
-    void
-    RendererTiles::SetGeometryTile(
+    void RendererTiles::SetGeometryTile(
         RenderId vaoId, Vertex3F &v0, Vertex3F &v1, Vertex3F &v2, Vertex3F &v3, Point3F &normal00,
-        Point3F &normal10, Point3F &normal11, Point3F &normal01) const
-    /*//////////////////////////////////////////////////////////////////////////////////////////*/
-    {
+        Point3F &normal10, Point3F &normal11, Point3F &normal01) const {
         std::vector<Vertex3F> vertices;
         v0.normal = normal00;
         v1.normal = normal10;
@@ -89,20 +76,14 @@ namespace Narradia
         SetGeometryImagePolygon(vaoId, vertices);
     }
 
-    void
-    RendererTiles::DrawTile(int imageNameHash, RenderId vaoId, bool depthTestOff) const
-    /*///////////////////////////////////////////////////////////////////////////////*/
-    {
+    void RendererTiles::DrawTile(int imageNameHash, RenderId vaoId, bool depthTestOff) const {
         DrawImagePolygon(imageNameHash, vaoId, 4, depthTestOff);
     }
 
-    void
-    RendererTiles::UpdateDrawTile(
+    void RendererTiles::UpdateDrawTile(
         int imageNameHash, RenderId vaoId, Vertex3F &v0, Vertex3F &v1, Vertex3F &v2, Vertex3F &v3,
         Point3F &normal00, Point3F &normal10, Point3F &normal11, Point3F &normal01,
-        bool depthTestOff) const
-    /*//////////////////////////////////////////////////////////////////////////////////////////*/
-    {
+        bool depthTestOff) const {
         std::vector<Vertex3F> vertices;
         v0.normal = normal00;
         v1.normal = normal10;
@@ -117,9 +98,7 @@ namespace Narradia
     }
 
     void
-    RendererTiles::SetGeometryImagePolygon(RenderId vaoId, std::vector<Vertex3F> &vertices) const
-    /*/////////////////////////////////////////////////////////////////////////////////////////*/
-    {
+    RendererTiles::SetGeometryImagePolygon(RenderId vaoId, std::vector<Vertex3F> &vertices) const {
         if (!p->is_batch_drawing_)
             glUseProgram(GetShaderProgram()->GetProgramId());
         std::vector<int> indices(vertices.size());
@@ -128,9 +107,7 @@ namespace Narradia
         std::vector<float> colors;
         std::vector<float> uvs;
         std::vector<float> normals;
-        for (auto &vertex : vertices)
-        /***************************/
-        {
+        for (auto &vertex : vertices) {
             positions.push_back(vertex.position.x);
             positions.push_back(vertex.position.y);
             positions.push_back(vertex.position.z);
@@ -161,10 +138,7 @@ namespace Narradia
             glUseProgram(0);
     }
 
-    void
-    RendererTiles::StartBatchDrawing()
-    /*//////////////////////////////*/
-    {
+    void RendererTiles::StartBatchDrawing() {
         p->is_batch_drawing_ = true;
         glUseProgram(GetShaderProgram()->GetProgramId());
         glUniformMatrix4fv(
@@ -188,27 +162,19 @@ namespace Narradia
         glCullFace(GL_FRONT);
     }
 
-    void
-    RendererTiles::StopBatchDrawing()
-    /*/////////////////////////////*/
-    {
+    void RendererTiles::StopBatchDrawing() {
         p->is_batch_drawing_ = false;
         glUseProgram(0);
         glDisable(GL_CULL_FACE);
     }
 
-    void
-    RendererTiles::DrawImagePolygon(
-        int imageNameHash, RenderId vaoId, int vertexCount, bool depthTestOff) const
-    /*////////////////////////////////////////////////////////////////////////////*/
-    {
+    void RendererTiles::DrawImagePolygon(
+        int imageNameHash, RenderId vaoId, int vertexCount, bool depthTestOff) const {
         if (depthTestOff)
             glDisable(GL_DEPTH_TEST);
         else
             glEnable(GL_DEPTH_TEST);
-        if (!p->is_batch_drawing_)
-        /*********************/
-        {
+        if (!p->is_batch_drawing_) {
             glUseProgram(GetShaderProgram()->GetProgramId());
             glUniformMatrix4fv(
                 p->location_projection_, 1, GL_FALSE,
@@ -237,10 +203,7 @@ namespace Narradia
             glUseProgram(0);
     }
 
-    void
-    RendererTiles::Cleanup()
-    /*////////////////////*/
-    {
+    void RendererTiles::Cleanup() {
         CleanupBase();
     }
 }

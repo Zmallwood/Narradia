@@ -3,10 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class RendererTiles : public RendererBase,
-                          public Singleton<RendererTiles>
-    /*/////////////////////////////////////////////////*/
-    {
+    class RendererTiles : public RendererBase, public Singleton<RendererTiles> {
       public:
         RendererTiles();
         RenderId NewTile();

@@ -5,9 +5,7 @@ namespace Narradia
     class Model;
     class ModelPart;
 
-    class ModelCreator : public Singleton<ModelCreator>
-    /*///////////////////////////////////////////////*/
-    {
+    class ModelCreator : public Singleton<ModelCreator> {
       public:
         auto CreateModel(const aiScene *) -> std::shared_ptr<Model>;
 

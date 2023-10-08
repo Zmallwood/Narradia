@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class ShaderProgram::Pimpl
-    /*//////////////////////*/
-    {
+    class ShaderProgram::Pimpl {
       public:
         GLuint InitVertexShader(const GLchar *);
         GLuint InitFragShader(const GLchar *);
@@ -15,50 +13,35 @@ namespace Narradia
     };
 
     ShaderProgram::ShaderProgram()
-        : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/
-    {
+        : p(std::make_shared<Pimpl>()) {
     }
 
-    bool
-    ShaderProgram::Create(const GLchar *vertexShaderSrc, const GLchar *fragShaderSrc)
-    /*/////////////////////////////////////////////////////////////////////////////*/
-    {
+    bool ShaderProgram::Create(const GLchar *vertexShaderSrc, const GLchar *fragShaderSrc) {
         auto success = true;
         p->program_id_ = glCreateProgram();
         auto vertex_shader_compiled = p->InitVertexShader(vertexShaderSrc);
-        if (vertex_shader_compiled != GL_TRUE)
-        /**********************************/
-        {
+        if (vertex_shader_compiled != GL_TRUE) {
             SDL_ShowSimpleMessageBox(
                 SDL_MESSAGEBOX_ERROR, "Shader error", "Unable to compile vertex shader.", nullptr);
             printf("Unable to compile vertex shader %d!\n", p->vertex_shader_);
             success = false;
         }
-        else
-        /**/
-        {
+        else {
             glAttachShader(p->program_id_, p->vertex_shader_);
             auto fragment_shader_compiled = p->InitFragShader(fragShaderSrc);
-            if (fragment_shader_compiled != GL_TRUE)
-            /********************************/
-            {
+            if (fragment_shader_compiled != GL_TRUE) {
                 SDL_ShowSimpleMessageBox(
                     SDL_MESSAGEBOX_ERROR, "Shader error", "Unable to compile fragment shader.",
                     nullptr);
                 printf("Unable to compile fragment shader %d!\n", p->fragment_shader_);
                 success = false;
             }
-            else
-            /**/
-            {
+            else {
                 glAttachShader(p->program_id_, p->fragment_shader_);
                 glLinkProgram(p->program_id_);
                 GLint program_success = GL_TRUE;
                 glGetProgramiv(p->program_id_, GL_LINK_STATUS, &program_success);
-                if (program_success != GL_TRUE)
-                /*****************************/
-                {
+                if (program_success != GL_TRUE) {
                     SDL_ShowSimpleMessageBox(
                         SDL_MESSAGEBOX_ERROR, "Shader error", "Error linking shader program.",
                         nullptr);
@@ -72,24 +55,15 @@ namespace Narradia
         return success;
     }
 
-    void
-    ShaderProgram::Cleanup() const
-    /*//////////////////////////*/
-    {
+    void ShaderProgram::Cleanup() const {
         glDeleteProgram(p->program_id_);
     }
 
-    GLuint
-    ShaderProgram::GetProgramId()
-    /*/////////////////////////*/
-    {
+    GLuint ShaderProgram::GetProgramId() {
         return p->program_id_;
     }
 
-    GLuint
-    ShaderProgram::Pimpl::InitVertexShader(const GLchar *vertexShaderSource)
-    /*////////////////////////////////////////////////////////////////////*/
-    {
+    GLuint ShaderProgram::Pimpl::InitVertexShader(const GLchar *vertexShaderSource) {
         vertex_shader_ = glCreateShader(GL_VERTEX_SHADER);
         glShaderSource(vertex_shader_, 1, &vertexShaderSource, NULL);
         glCompileShader(vertex_shader_);
@@ -98,10 +72,7 @@ namespace Narradia
         return vertex_shader_compiled;
     }
 
-    GLuint
-    ShaderProgram::Pimpl::InitFragShader(const GLchar *fragmentShaderSource)
-    /*////////////////////////////////////////////////////////////////////*/
-    {
+    GLuint ShaderProgram::Pimpl::InitFragShader(const GLchar *fragmentShaderSource) {
         fragment_shader_ = glCreateShader(GL_FRAGMENT_SHADER);
         glShaderSource(fragment_shader_, 1, &fragmentShaderSource, NULL);
         glCompileShader(fragment_shader_);

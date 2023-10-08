@@ -3,9 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class ImageBank::Pimpl
-    /*//////////////////*/
-    {
+    class ImageBank::Pimpl {
       public:
         GLuint LoadSingleImage(const std::string_view &absFilePath) const;
 
@@ -13,53 +11,34 @@ namespace Narradia
         std::map<const int, ImageEntry> images_;
     };
 
-    std::map<const int, ImageEntry> &
-    ImageBank::GetImages()
-    /*/////////////////////////////*/
-    {
+    std::map<const int, ImageEntry> &ImageBank::GetImages() {
         return p->images_;
     }
 
     ImageBank::ImageBank()
-        : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/
-    {
+        : p(std::make_shared<Pimpl>()) {
     }
 
-    GLuint
-    ImageBank::GetImage(int imageNameHash) const
-    /*////////////////////////////////////////*/
-    {
+    GLuint ImageBank::GetImage(int imageNameHash) const {
         if (p->images_.count(imageNameHash))
             return p->images_.at(imageNameHash).textureId;
         return 0;
     }
 
-    GLuint
-    ImageBank::GetImage(const std::string_view &imageName) const
-    /*////////////////////////////////////////////////////////*/
-    {
+    GLuint ImageBank::GetImage(const std::string_view &imageName) const {
         return GetImage(Hash(imageName));
     }
 
-    void
-    ImageBank::GetBlankTextImage(const std::string_view &uniqueNameId)
-    /*//////////////////////////////////////////////////////////////*/
-    {
+    void ImageBank::GetBlankTextImage(const std::string_view &uniqueNameId) {
         ImageEntry image_entry;
         glGenTextures(1, &image_entry.textureId);
         p->images_.insert({Hash(uniqueNameId), image_entry});
     }
 
-    void
-    ImageBank::LoadImages()
-    /*///////////////////*/
-    {
+    void ImageBank::LoadImages() {
         using iterator = std::filesystem::recursive_directory_iterator;
         auto abs_all_images_path = std::string(SDL_GetBasePath()) + p->kRelImagesPath.data();
-        for (const auto &image_file_entry : iterator(abs_all_images_path))
-        /**************************************************************/
-        {
+        for (const auto &image_file_entry : iterator(abs_all_images_path)) {
             auto abs_file_path = image_file_entry.path().string();
             if (FileUtilities::GetFileExtension(abs_file_path) != "png")
                 continue;
@@ -70,18 +49,12 @@ namespace Narradia
         }
     }
 
-    void
-    ImageBank::Cleanup() const
-    /*//////////////////////*/
-    {
+    void ImageBank::Cleanup() const {
         for (const auto &image : p->images_)
             glDeleteTextures(1, &image.second.textureId);
     }
 
-    GLuint
-    ImageBank::Pimpl::LoadSingleImage(const std::string_view &absFilePath) const
-    /*////////////////////////////////////////////////////////////////////////*/
-    {
+    GLuint ImageBank::Pimpl::LoadSingleImage(const std::string_view &absFilePath) const {
         auto surface = IMG_Load(absFilePath.data());
         glEnable(GL_TEXTURE_2D);
         GLuint texture_id;

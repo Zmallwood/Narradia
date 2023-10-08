@@ -3,10 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class RendererBillboardImages : public RendererBase,
-                                    public Singleton<RendererBillboardImages>
-    /*/////////////////////////////////////////////////////////////////////*/
-    {
+    class RendererBillboardImages : public RendererBase, public Singleton<RendererBillboardImages> {
       public:
         RendererBillboardImages();
         RenderId NewBillboardImage();
@@ -17,4 +14,4 @@ namespace Narradia
         class Pimpl;
         std::shared_ptr<Pimpl> p;
     };
-} 
+}

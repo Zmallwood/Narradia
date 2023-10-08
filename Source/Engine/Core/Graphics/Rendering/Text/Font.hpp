@@ -2,16 +2,12 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class Font
-    /*//////*/
-    {
+    class Font {
       public:
         Font(std::string_view fontFileName, int fontSize);
         TTF_Font *GetSdlFont() const;
         TTF_Font *GetSdlFontOutline() const;
-        inline static constexpr int GetFontOutlineWidth()
-        /*/////////////////////////////////////////////*/
-        {
+        inline static constexpr int GetFontOutlineWidth() {
             return kFontOutlineWidth;
         }
 

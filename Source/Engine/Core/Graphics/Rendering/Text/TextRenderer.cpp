@@ -7,9 +7,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class TextRenderer::Pimpl
-    /*/////////////////////*/
-    {
+    class TextRenderer::Pimpl {
       public:
         void RenderText(
             RenderId, std::string_view, Color, bool, FontSizes, std::string &, SizeF &) const;
@@ -24,9 +22,7 @@ namespace Narradia
     };
 
     TextRenderer::TextRenderer()
-        : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/
-    {
+        : p(std::make_shared<Pimpl>()) {
         TTF_Init();
         auto font_path =
             std::string(SDL_GetBasePath()) + p->kRelFontsPath + "PartyConfettiRegular-eZOn3.ttf";
@@ -34,30 +30,21 @@ namespace Narradia
         p->fonts_.insert({FontSizes::_26, std::make_shared<Font>(font_path.c_str(), 26)});
     }
 
-    RenderId
-    TextRenderer::NewString()
-    /*/////////////////////*/
-    {
+    RenderId TextRenderer::NewString() {
         auto unique_name = p->CreateBlankTexGetName();
         auto rendid_image_rect = Renderer2DImages::Get()->NewImage();
         p->unique_name_ids_.insert({rendid_image_rect, unique_name});
         return rendid_image_rect;
     }
 
-    RenderId
-    TextRenderer::NewBillboardString()
-    /*//////////////////////////////*/
-    {
+    RenderId TextRenderer::NewBillboardString() {
         auto unique_name = p->CreateBlankTexGetName();
         auto rendid_billboard_tex_rect = RendererBillboardImages::Get()->NewBillboardImage();
         p->unique_name_ids_.insert({rendid_billboard_tex_rect, unique_name});
         return rendid_billboard_tex_rect;
     }
 
-    RenderId
-    TextRenderer::NewMultiLineString(int numLines, float width)
-    /*///////////////////////////////////////////////////////*/
-    {
+    RenderId TextRenderer::NewMultiLineString(int numLines, float width) {
         MultiLineText multi_line_text;
         multi_line_text.width = width;
         for (auto i = 0; i < numLines; i++)
@@ -66,12 +53,9 @@ namespace Narradia
         return multi_line_text.renderIds.at(0);
     }
 
-    void
-    TextRenderer::Pimpl::RenderText(
+    void TextRenderer::Pimpl::RenderText(
         RenderId vaoId, std::string_view text, Color color, bool centerAlign, FontSizes textSize,
-        std::string &outUniqueNameId, SizeF &outSize) const
-    /*/////////////////////////////////////////////////////////////////////////////////////////*/
-    {
+        std::string &outUniqueNameId, SizeF &outSize) const {
         auto font = fonts_.at(textSize)->GetSdlFont();
         if (!font)
             return;
@@ -116,25 +100,21 @@ namespace Narradia
         SDL_FreeSurface(text_outline_surface);
     }
 
-    void
-    TextRenderer::DrawMultiLineString(
+    void TextRenderer::DrawMultiLineString(
         RenderId glId, const std::string &text, Point2F position, Color color, bool centerAlign,
-        FontSizes textSize) const
-    /*////////////////////////////////////////////////////////////////////////////////////////*/
-    {
+        FontSizes textSize) const {
         int full_text_w;
         int full_text_h;
         auto multi_line_object = p->multi_lines_.at(glId);
         auto canvas_size = GetCanvasSize();
         auto aspect_ratio = GetAspectRatio();
-        TTF_SizeText(p->fonts_.at(textSize)->GetSdlFont(), text.c_str(), &full_text_w, &full_text_h);
+        TTF_SizeText(
+            p->fonts_.at(textSize)->GetSdlFont(), text.c_str(), &full_text_w, &full_text_h);
         auto total_text_width_f = static_cast<float>(full_text_w) / canvas_size.width;
         auto num_lines = total_text_width_f / multi_line_object.width;
         auto num_characters_per_line = text.length() / num_lines;
         auto line_height = static_cast<float>(full_text_h) / canvas_size.height;
-        for (auto i = 0; i < num_lines; i++)
-        /*********************************/
-        {
+        for (auto i = 0; i < num_lines; i++) {
             auto line_text = text.substr(i * num_characters_per_line, num_characters_per_line + 1);
             std::string unique_name_id;
             SizeF size;
@@ -148,18 +128,16 @@ namespace Narradia
             TTF_SizeText(p->fonts_.at(textSize)->GetSdlFont(), text.c_str(), &text_w, &text_h);
             rect.y -= static_cast<float>(text_h / GetAspectRatio()) / canvas_size.height / 2.0f;
             if (centerAlign)
-                rect.x -= static_cast<float>(text_w) / static_cast<float>(canvas_size.height) / 2.0f /
-                          GetAspectRatio();
-            Renderer2DImages::Get()->DrawImage(unique_name_id, multi_line_object.renderIds.at(i), rect);
+                rect.x -= static_cast<float>(text_w) / static_cast<float>(canvas_size.height) /
+                          2.0f / GetAspectRatio();
+            Renderer2DImages::Get()->DrawImage(
+                unique_name_id, multi_line_object.renderIds.at(i), rect);
         }
     }
 
-    void
-    TextRenderer::DrawString(
+    void TextRenderer::DrawString(
         RenderId vaoId, std::string_view text, Point2F position, Color color, bool centerAlign,
-        FontSizes textSize) const
-    /*///////////////////////////////////////////////////////////////////////////////////////*/
-    {
+        FontSizes textSize) const {
         std::string unique_name_id;
         SizeF size;
         p->RenderText(vaoId, text, color, centerAlign, textSize, unique_name_id, size);
@@ -175,12 +153,9 @@ namespace Narradia
         Renderer2DImages::Get()->DrawImage(unique_name_id, vaoId, rect);
     }
 
-    void
-    TextRenderer::DrawBillboardString(
+    void TextRenderer::DrawBillboardString(
         RenderId vaoId, std::string_view text, Point3F position, SizeF billboardSize, Color color,
-        bool centerAlign, FontSizes textSize) const
-    /*//////////////////////////////////////////////////////////////////////////////////////////*/
-    {
+        bool centerAlign, FontSizes textSize) const {
         std::string unique_name_id;
         SizeF size;
         p->RenderText(vaoId, text, color, centerAlign, textSize, unique_name_id, size);
@@ -200,10 +175,7 @@ namespace Narradia
             Hash(unique_name_id), vaoId, position, rect, billboardSize);
     }
 
-    const std::string
-    TextRenderer::Pimpl::CreateBlankTexGetName()
-    /*////////////////////////////////////////*/
-    {
+    const std::string TextRenderer::Pimpl::CreateBlankTexGetName() {
         auto id = id_counter_++;
         auto unique_name = "RenderedImage" + std::to_string(id);
         ImageBank::Get()->GetBlankTextImage(unique_name);

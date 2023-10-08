@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class Graphics : public Singleton<Graphics>
-    /*///////////////////////////////////////*/
-    {
+    class Graphics : public Singleton<Graphics> {
       public:
         Graphics();
         SDL_Window *GetWindow() const;

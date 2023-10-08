@@ -9,9 +9,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class GraphicsGl::Pimpl
-    /*///////////////////*/
-    {
+    class GraphicsGl::Pimpl {
       public:
         static constexpr bool kCullFace = false;
         const Color kFogColorGround = Colors::mildBlue;
@@ -20,9 +18,7 @@ namespace Narradia
     };
 
     GraphicsGl::GraphicsGl()
-        : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/
-    {
+        : p(std::make_shared<Pimpl>()) {
         glewExperimental = GL_TRUE;
         auto glew_error = glewInit();
         if (glew_error != GLEW_OK)
@@ -35,9 +31,7 @@ namespace Narradia
         RendererModels::Create();
         RendererBillboardImages::Create();
         glClearColor(p->kClearColor.r, p->kClearColor.g, p->kClearColor.b, p->kClearColor.a);
-        if (Pimpl::kCullFace)
-        /*******************/
-        {
+        if (Pimpl::kCullFace) {
             glEnable(GL_CULL_FACE);
             glCullFace(GL_FRONT);
         }
@@ -47,10 +41,7 @@ namespace Narradia
         ModelBank::Get()->LoadModels();
     }
 
-    void
-    GraphicsGl::Cleanup()
-    /*/////////////////*/
-    {
+    void GraphicsGl::Cleanup() {
         Renderer2DSolidColors::Get()->Cleanup();
         Renderer2DImages::Get()->Cleanup();
         RendererTiles::Get()->Cleanup();
@@ -59,17 +50,11 @@ namespace Narradia
         ImageBank::Get()->Cleanup();
     }
 
-    Color
-    GraphicsGl::GetFogColorGround()
-    /*///////////////////////////*/
-    {
+    Color GraphicsGl::GetFogColorGround() {
         return p->kFogColorGround;
     }
 
-    Color
-    GraphicsGl::GetFogColorObjects()
-    /*////////////////////////////*/
-    {
+    Color GraphicsGl::GetFogColorObjects() {
         return p->kFogColorObjects;
     }
 }

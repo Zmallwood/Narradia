@@ -3,9 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class ImageBank : public Singleton<ImageBank>
-    /*/////////////////////////////////////////*/
-    {
+    class ImageBank : public Singleton<ImageBank> {
       public:
         ImageBank();
         GLuint GetImage(int) const;

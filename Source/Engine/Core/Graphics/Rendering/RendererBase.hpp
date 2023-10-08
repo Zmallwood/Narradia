@@ -5,9 +5,7 @@ namespace Narradia
 {
     class ShaderProgram;
 
-    class RendererBase
-    /*//////////*/
-    {
+    class RendererBase {
       public:
         RendererBase();
 

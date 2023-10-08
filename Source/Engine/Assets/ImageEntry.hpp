@@ -2,10 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class ImageEntry
-    /*////////////*/
-    {
-      public:
+    struct ImageEntry {
         std::string fileName;
         GLuint textureId;
     };

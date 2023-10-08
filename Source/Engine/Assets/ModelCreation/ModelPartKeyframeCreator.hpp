@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class ModelPartKeyframeCreator : public Singleton<ModelPartKeyframeCreator>
-    /*///////////////////////////////////////////////////////////////////////*/
-    {
+    class ModelPartKeyframeCreator : public Singleton<ModelPartKeyframeCreator> {
       public:
         aiVectorKey GetPositionKeyframe(const aiScene *, std::string, int) const;
         aiQuatKey GetRotationKeyframe(const aiScene *, std::string, int) const;

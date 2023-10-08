@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class AudioBank : public Singleton<AudioBank>
-    /*/////////////////////////////////////////*/
-    {
+    class AudioBank : public Singleton<AudioBank> {
       public:
         AudioBank();
         void LoadAudioFiles();

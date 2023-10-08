@@ -2,10 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class MultiLineText
-    /*///////////////*/
-    {
-      public:
+    struct MultiLineText {
         std::vector<RenderId> renderIds;
         float width;
     };

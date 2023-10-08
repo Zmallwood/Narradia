@@ -5,9 +5,7 @@ namespace Narradia
     class ModelPart;
     class ModelPartKeyframe;
 
-    class ModelPartCreator : public Singleton<ModelPartCreator>
-    /*///////////////////////////////////////////////////////*/
-    {
+    class ModelPartCreator : public Singleton<ModelPartCreator> {
       public:
         auto CreateModelPartFromMesh(const aiScene *, std::string, aiMesh *) const
             -> std::shared_ptr<ModelPart>;

@@ -2,12 +2,9 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class BodyData
-    /*//////////*/
-    {
-      public:
-        RenderId bodyId = 0;
-        int numVertices = 0;
-        int imageNameHash = 0;
+    struct BodyData {
+        RenderId rendid = 0;
+        int num_vertices = 0;
+        int image_name_hash = 0;
     };
 }

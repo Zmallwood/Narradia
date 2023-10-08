@@ -4,10 +4,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class RendererModels : public RendererBase,
-                           public Singleton<RendererModels>
-    /*///////////////////////////////////////////////////*/
-    {
+    class RendererModels : public RendererBase, public Singleton<RendererModels> {
       public:
         RendererModels();
         void NewModel(int);
@@ -29,4 +26,4 @@ namespace Narradia
         class Pimpl;
         std::shared_ptr<Pimpl> p;
     };
-} 
+}

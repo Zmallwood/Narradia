@@ -2,13 +2,5 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    enum class BufferTypes
-    /*//////////////////*/
-    {
-        Indices,
-        Positions,
-        Colors,
-        Uvs,
-        Normals
-    };
+    enum class BufferTypes { Indices, Positions, Colors, Uvs, Normals };
 }

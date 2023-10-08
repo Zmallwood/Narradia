@@ -3,18 +3,14 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class Renderer2DSolidColors::Pimpl
-    /*//////////////////////////////*/
-    {
+    class Renderer2DSolidColors::Pimpl {
       public:
         const int kLocationPosition = 0;
         const int kLocationColor = 1;
     };
 
     Renderer2DSolidColors::Renderer2DSolidColors()
-        : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////////////////*/
-    {
+        : p(std::make_shared<Pimpl>()) {
         const GLchar *vertex_shader_source =
 #include "Shaders/2DSolidColorsVertex.glsl"
             ;
@@ -24,10 +20,7 @@ namespace Narradia
         GetShaderProgram()->Create(vertex_shader_source, fragment_shader_source);
     }
 
-    RenderId
-    Renderer2DSolidColors::NewRectangle()
-    /*/////////////////////////////////*/
-    {
+    RenderId Renderer2DSolidColors::NewRectangle() {
         auto vao_id = GenerateNewVertexArrayId();
         UseVaoBegin(vao_id);
         auto index_buffer_id = GenerateNewBufferId(BufferTypes::Indices, vao_id);
@@ -40,10 +33,8 @@ namespace Narradia
         return vao_id;
     }
 
-    void
-    Renderer2DSolidColors::FillRectangle(RenderId vaoId, const RectangleF &rect, Color Color) const
-    /*///////////////////////////////////////////////////////////////////////////////////////////*/
-    {
+    void Renderer2DSolidColors::FillRectangle(
+        RenderId vaoId, const RectangleF &rect, Color Color) const {
         auto gl_rect = rect.ToGlRect();
         Vertex2F vertices[RendererBase::kNumVerticesInRectangle];
         vertices[0].position = {gl_rect.x, gl_rect.y - gl_rect.height};
@@ -59,9 +50,7 @@ namespace Narradia
         std::iota(std::begin(indices), std::end(indices), 0);
         std::vector<float> positions;
         std::vector<float> colors;
-        for (auto &vertex : vertices)
-        /***************************/
-        {
+        for (auto &vertex : vertices) {
             positions.push_back(vertex.position.x);
             positions.push_back(vertex.position.y);
             colors.push_back(vertex.color.r);
@@ -81,10 +70,7 @@ namespace Narradia
         UseVaoEnd();
     }
 
-    void
-    Renderer2DSolidColors::Cleanup()
-    /*////////////////////////////*/
-    {
+    void Renderer2DSolidColors::Cleanup() {
         CleanupBase();
     }
 }

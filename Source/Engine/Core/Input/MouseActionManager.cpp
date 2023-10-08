@@ -46,7 +46,7 @@ namespace Narradia
                     continue;
                 }
             }
-            if (false == it->second.ensureIsExec)
+            if (false == it->second.ensure_is_executed)
                 fired_to_delete.insert(it->first);
             it++;
         }
@@ -123,7 +123,7 @@ namespace Narradia
                 }
             }
             Log();
-            if (false == it->second.ensureIsExec)
+            if (false == it->second.ensure_is_executed)
                 released_to_delete.insert(it->first);
             it++;
         }

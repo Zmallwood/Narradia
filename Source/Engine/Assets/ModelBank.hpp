@@ -4,9 +4,7 @@ namespace Narradia
 {
     class Model;
 
-    class ModelBank : public Singleton<ModelBank>
-    /*/////////////////////////////////////////*/
-    {
+    class ModelBank : public Singleton<ModelBank> {
       public:
         ModelBank();
         auto GetModel(int) const -> const Model *;

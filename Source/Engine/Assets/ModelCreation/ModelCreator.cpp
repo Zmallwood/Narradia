@@ -10,9 +10,7 @@ using std::vector;
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    shared_ptr<Model>
-    ModelCreator::CreateModel(const aiScene *scene)
-    { /*/////////////////////////////////////////*/
+    shared_ptr<Model> ModelCreator::CreateModel(const aiScene *scene) {
         auto anim_duration = scene->mNumAnimations > 0 ? scene->mAnimations[0]->mDuration : 0;
         auto new_model = make_shared<Model>(anim_duration);
         for (auto &model_part : GetModelParts(scene))
@@ -20,19 +18,12 @@ namespace Narradia
         return new_model;
     }
 
-    auto
-    ModelCreator::GetModelParts(const aiScene *scene) const -> vector<shared_ptr<ModelPart>>
-    /*////////////////////////////////////////////////////////////////////////////////////*/
-    {
+    auto ModelCreator::GetModelParts(const aiScene *scene) const -> vector<shared_ptr<ModelPart>> {
         vector<shared_ptr<ModelPart>> all_model_parts;
-        for (auto &entry : GetModelMeshIds(scene))
-        /****************************************/
-        {
+        for (auto &entry : GetModelMeshIds(scene)) {
             string node_name = *entry.first;
             auto node_mesh_ids = entry.second;
-            for (auto &mesh : GetNodeMeshes(scene, node_mesh_ids))
-            /****************************************************/
-            {
+            for (auto &mesh : GetNodeMeshes(scene, node_mesh_ids)) {
                 auto new_model_part =
                     ModelPartCreator::Get()->CreateModelPartFromMesh(scene, node_name, mesh);
                 all_model_parts.push_back(new_model_part);
@@ -41,17 +32,12 @@ namespace Narradia
         return all_model_parts;
     }
 
-    auto
-    ModelCreator::GetModelMeshIds(const aiScene *scene) const
-        -> map<shared_ptr<string>, vector<int>>
-    /*/////////////////////////////////////////////////////*/
-    {
+    auto ModelCreator::GetModelMeshIds(const aiScene *scene) const
+        -> map<shared_ptr<string>, vector<int>> {
         auto root_node = scene->mRootNode;
         auto num_sub_nodes = root_node->mNumChildren;
         map<shared_ptr<string>, vector<int>> node_name_to_meshes;
-        for (auto i = 0; i < num_sub_nodes; i++)
-        /************************************/
-        {
+        for (auto i = 0; i < num_sub_nodes; i++) {
             auto sub_node = root_node->mChildren[i];
             auto sub_node_name = sub_node->mName;
             auto num_meshes = sub_node->mNumMeshes;
@@ -64,14 +50,10 @@ namespace Narradia
     }
 
     vector<aiMesh *>
-    ModelCreator::GetNodeMeshes(const aiScene *scene, vector<int> nodeMeshIds) const
-    /*////////////////////////////////////////////////////////////////////////////*/
-    {
+    ModelCreator::GetNodeMeshes(const aiScene *scene, vector<int> nodeMeshIds) const {
         vector<aiMesh *> node_meshes;
         auto num_meshes = nodeMeshIds.size();
-        for (auto i = 0; i < num_meshes; i++)
-        /**********************************/
-        {
+        for (auto i = 0; i < num_meshes; i++) {
             auto mesh = scene->mMeshes[nodeMeshIds.at(i)];
             node_meshes.push_back(mesh);
         }

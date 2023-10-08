@@ -4,9 +4,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class Renderer2DImages::Pimpl
-    /*/////////////////////////*/
-    {
+    class Renderer2DImages::Pimpl {
       public:
         const int kLocationPosition = 0;
         const int kLocationColor = 1;
@@ -14,9 +12,7 @@ namespace Narradia
     };
 
     Renderer2DImages::Renderer2DImages()
-        : p(std::make_shared<Pimpl>())
-    /*////////////////////////////////*/
-    {
+        : p(std::make_shared<Pimpl>()) {
         const GLchar *vertex_shader_source =
 #include "Shaders/2DImagesVertex.glsl"
             ;
@@ -26,10 +22,7 @@ namespace Narradia
         GetShaderProgram()->Create(vertex_shader_source, fragment_shader_source);
     }
 
-    RenderId
-    Renderer2DImages::NewImage()
-    /*////////////////////////*/
-    {
+    RenderId Renderer2DImages::NewImage() {
         auto vao_id = GenerateNewVertexArrayId();
         UseVaoBegin(vao_id);
         auto index_buffer_id = GenerateNewBufferId(BufferTypes::Indices, vao_id);
@@ -44,11 +37,8 @@ namespace Narradia
         return vao_id;
     }
 
-    void
-    Renderer2DImages::DrawImage(
-        int imageNameHash, RenderId vaoId, const RectangleF &rectangle, Color color) const
-    /*//////////////////////////////////////////////////////////////////////////////////*/
-    {
+    void Renderer2DImages::DrawImage(
+        int imageNameHash, RenderId vaoId, const RectangleF &rectangle, Color color) const {
         auto gl_rect = rectangle.ToGlRect();
         Vertex2F vertices[RendererBase::kNumVerticesInRectangle];
         vertices[0].position = {gl_rect.x, gl_rect.y - gl_rect.height};
@@ -71,9 +61,7 @@ namespace Narradia
         std::vector<float> positions;
         std::vector<float> colors;
         std::vector<float> uvs;
-        for (auto &vertex : vertices)
-        /***************************/
-        {
+        for (auto &vertex : vertices) {
             positions.push_back(vertex.position.x);
             positions.push_back(vertex.position.y);
             colors.push_back(vertex.color.r);
@@ -97,19 +85,13 @@ namespace Narradia
         UseVaoEnd();
     }
 
-    void
-    Renderer2DImages::DrawImage(
+    void Renderer2DImages::DrawImage(
         const std::string_view &imageName, RenderId vaoId, const RectangleF &rectangle,
-        Color color) const
-    /*///////////////////////////////////////////////////////////////////////////////*/
-    {
+        Color color) const {
         DrawImage(Hash(imageName), vaoId, rectangle, color);
     }
 
-    void
-    Renderer2DImages::Cleanup()
-    /*///////////////////////*/
-    {
+    void Renderer2DImages::Cleanup() {
         CleanupBase();
     }
 }
