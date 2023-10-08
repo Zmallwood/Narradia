@@ -25,9 +25,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    PlayScene::PlayScene()
-    /*//////////////////*/
-    {
+    PlayScene::PlayScene() {
         Log();
         SetSceneGui(std::make_shared<PlaySceneGui>());
         Log();
@@ -42,10 +40,7 @@ namespace Narradia
         ObjectMoving::Create();
     }
 
-    void
-    PlayScene::Enter()
-    /*//////////////*/
-    {
+    void PlayScene::Enter() {
         PlaySceneGuiMenu::Get()->visible_ = false;
         ActiveGameRound::Create();
         StartConditions().CreateStartConditions();
@@ -55,10 +50,7 @@ namespace Narradia
         Audio::Get()->Unmute();
     }
 
-    void
-    PlayScene::UpdateDerived()
-    /*//////////////////////*/
-    {
+    void PlayScene::UpdateDerived() {
         Log();
         ActiveGameRound::Get()->Update();
         if (ActiveGameRound::Get()->GameIsCompleted())
@@ -99,25 +91,17 @@ namespace Narradia
         Combat::Get()->Update();
     }
 
-    void
-    PlayScene::RenderDerived()
-    /*//////////////////////*/
-    {
+    void PlayScene::RenderDerived() {
         Log();
         WorldDraw::Get()->Render();
-        if (true == PlaySceneGuiMenu::Get()->visible_)
-        /******************************************/
-        {
+        if (true == PlaySceneGuiMenu::Get()->visible_) {
             Log();
             TileHovering::Get()->Render();
         }
         ActiveGameRound::Get()->Render();
     }
 
-    void
-    PlayScene::RenderAfterGuiDerived()
-    /*//////////////////////////////*/
-    {
+    void PlayScene::RenderAfterGuiDerived() {
         InteractionMenu::Get()->Render();
         GuiObjectHovering::Get()->Render();
         ObjectMoving::Get()->Render();

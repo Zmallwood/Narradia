@@ -2,16 +2,9 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    enum class WorldDrawModes
-    /*/////////////////////*/
-    {
-        Play,
-        Editor
-    };
-    
-    class WorldDraw : public Singleton<WorldDraw>
-    /*/////////////////////////////////////////*/
-    {
+    enum class WorldDrawModes { Play, Editor };
+
+    class WorldDraw : public Singleton<WorldDraw> {
       public:
         WorldDraw();
 

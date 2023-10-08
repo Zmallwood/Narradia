@@ -4,9 +4,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class Player : public Singleton<Player>
-    /*///////////////////////////////////*/
-    {
+    class Player : public Singleton<Player> {
       public:
         Point2F GetPosition();
         void MoveForward();
@@ -44,7 +42,7 @@ namespace Narradia
         int jump_duration_ = 1000;
         int ticks_last_stamina_regeneration_ = 0;
         float max_jump_height_ = 1.5f;
-        
+
         friend class PlayScene;
         friend class EditorScene;
     };

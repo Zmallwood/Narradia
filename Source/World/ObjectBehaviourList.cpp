@@ -3,9 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class ObjectBehaviourList::Pimpl
-    /*////////////////////////////*/
-    {
+    class ObjectBehaviourList::Pimpl {
       public:
         void CreateEntryIfDoesntExist(std::string_view);
 
@@ -13,15 +11,10 @@ namespace Narradia
     };
 
     ObjectBehaviourList::ObjectBehaviourList()
-        : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////////////*/
-    {
+        : p(std::make_shared<Pimpl>()) {
     }
 
-    void
-    ObjectBehaviourList::Initialize()
-    /*/////////////////////////////*/
-    {
+    void ObjectBehaviourList::Initialize() {
         AddLabel("ObjectKindling", "Kindling");
         AddLabel("ObjectFishingNet", "Fishing net");
         AddLabel("ObjectFish", "Fish");
@@ -59,84 +52,54 @@ namespace Narradia
         AddFlag("ObjectBranch", ObjectBehaviourFlags::NoShadow);
     }
 
-    void
-    ObjectBehaviourList::AddLabel(std::string_view objectName, std::string_view label)
-    /*//////////////////////////////////////////////////////////////////////////////*/
-    {
+    void ObjectBehaviourList::AddLabel(std::string_view objectName, std::string_view label) {
         p->CreateEntryIfDoesntExist(objectName);
         p->list_.at(Hash(objectName.data())).label = label;
     }
 
-    void
-    ObjectBehaviourList::AddFlag(std::string_view objectName, ObjectBehaviourFlags flag)
-    /*////////////////////////////////////////////////////////////////////////////////*/
-    {
+    void ObjectBehaviourList::AddFlag(std::string_view objectName, ObjectBehaviourFlags flag) {
         p->CreateEntryIfDoesntExist(objectName);
         p->list_.at(Hash(objectName.data())).flags |= static_cast<int>(flag);
     }
 
-    void
-    ObjectBehaviourList::SetContainerSlots(std::string_view objectName, int containerSlots)
-    /*///////////////////////////////////////////////////////////////////////////////////*/
-    {
+    void ObjectBehaviourList::SetContainerSlots(std::string_view objectName, int containerSlots) {
         p->CreateEntryIfDoesntExist(objectName);
         p->list_.at(Hash(objectName.data())).container_slots = containerSlots;
     }
 
-    bool
-    ObjectBehaviourList::IsContainer(int objectTypeHash)
-    /*////////////////////////////////////////////////*/
-    {
+    bool ObjectBehaviourList::IsContainer(int objectTypeHash) {
         if (p->list_.count(objectTypeHash))
             return p->list_.at(objectTypeHash).container_slots > 0;
         return false;
     }
 
-    bool
-    ObjectBehaviourList::HasBehaviourData(int objectTypeHash)
-    /*/////////////////////////////////////////////////////*/
-    {
+    bool ObjectBehaviourList::HasBehaviourData(int objectTypeHash) {
         return p->list_.count(objectTypeHash) != 0;
     }
 
-    int
-    ObjectBehaviourList::GetFlags(int objectTypeHash)
-    /*/////////////////////////////////////////////*/
-    {
+    int ObjectBehaviourList::GetFlags(int objectTypeHash) {
         if (p->list_.count(objectTypeHash))
             return p->list_.at(objectTypeHash).flags;
         return 0;
     }
 
-    std::string_view
-    ObjectBehaviourList::GetLabel(int objectTypeHash)
-    /*/////////////////////////////////////////////*/
-    {
+    std::string_view ObjectBehaviourList::GetLabel(int objectTypeHash) {
         if (p->list_.count(objectTypeHash))
             return p->list_.at(objectTypeHash).label;
         return "";
     }
 
-    int
-    ObjectBehaviourList::GetContainerSlots(int objectTypeHash)
-    /*//////////////////////////////////////////////////////*/
-    {
+    int ObjectBehaviourList::GetContainerSlots(int objectTypeHash) {
         if (p->list_.count(objectTypeHash))
             return p->list_.at(objectTypeHash).container_slots;
         return 0;
     }
 
-    void
-    ObjectBehaviourList::Clear()
-    /*////////////////////////*/
-    {
+    void ObjectBehaviourList::Clear() {
         p->list_.clear();
     }
 
-    void
-    ObjectBehaviourList::Pimpl::CreateEntryIfDoesntExist(std::string_view objectName)
-    /*/////////////////////////////////////////////////////////////////////////////*/
-    {
+    void ObjectBehaviourList::Pimpl::CreateEntryIfDoesntExist(std::string_view objectName) {
         auto object_name_hash = Hash(objectName.data());
         if (list_.count(object_name_hash) == 0)
             list_.insert({object_name_hash, ObjectBehaviourEntry()});

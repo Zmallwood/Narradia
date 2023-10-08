@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class SubDrawerPlayer : public Singleton<SubDrawerPlayer>
-    /*/////////////////////////////////////////////////*/
-    {
+    class SubDrawerPlayer : public Singleton<SubDrawerPlayer> {
       public:
         SubDrawerPlayer();
         void Create();

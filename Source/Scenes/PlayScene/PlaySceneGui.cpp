@@ -13,9 +13,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    PlaySceneGui::PlaySceneGui()
-    /*////////////////////////*/
-    {
+    PlaySceneGui::PlaySceneGui() {
         Log();
         auto rect_gui_button_sys = RectangleF{0.95f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};
         auto rect_gui_button_repeat = RectangleF{0.91f, 0.9f, 0.03f, ConvertWidthToHeight(0.03f)};

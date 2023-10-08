@@ -9,75 +9,47 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class World::Pimpl
-    /*//////////////*/
-    {
+    class World::Pimpl {
       public:
         std::map<int, std::shared_ptr<MapArea>> map_areas_;
     };
 
     World::World()
-        : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/
-    {
+        : p(std::make_shared<Pimpl>()) {
     }
 
-    void
-    World::AddMapAreaAtZLevel(int zLevel, std::shared_ptr<MapArea> newMapArea)
-    /*//////////////////////////////////////////////////////////////////////*/
-    {
+    void World::AddMapAreaAtZLevel(int zLevel, std::shared_ptr<MapArea> newMapArea) {
         p->map_areas_[zLevel] = newMapArea;
     }
 
-    void
-    World::RemoveMapAreaAtZLevel(int zLevel)
-    /*////////////////////////////////////*/
-    {
+    void World::RemoveMapAreaAtZLevel(int zLevel) {
         if (p->map_areas_.count(zLevel))
             p->map_areas_.erase(zLevel);
     }
 
-    MapArea *
-    World::GetMapAreaAtZLevel(int zLevel)
-    /*/////////////////////////////////*/
-    {
+    MapArea *World::GetMapAreaAtZLevel(int zLevel) {
         if (p->map_areas_.count(zLevel))
             return p->map_areas_[zLevel].get();
         return nullptr;
     }
 
-    MapArea *
-    World::GetCurrentMapArea()
-    /*//////////////////////*/
-    {
+    MapArea *World::GetCurrentMapArea() {
         auto player_world_area_position = Player::Get()->GetWorldAreaPos();
         return p->map_areas_[player_world_area_position.z].get();
     }
 
-    std::vector<MapArea *>
-    World::GetAllMapAreas()
-    /*///////////////////*/
-    {
+    std::vector<MapArea *> World::GetAllMapAreas() {
         std::vector<MapArea *> map_areas_result;
         for (auto &map_area : p->map_areas_)
             map_areas_result.push_back(map_area.second.get());
         return map_areas_result;
     }
 
-    void
-    World::CalculateNormals(bool updateExistingTiles)
-    /*/////////////////////////////////////////////*/
-    {
+    void World::CalculateNormals(bool updateExistingTiles) {
         auto map_areas = World::Get()->GetAllMapAreas();
-        for (auto &map_area : map_areas)
-        /****************************/
-        {
-            for (auto y = 0; y < MapArea::GetMapSize().height; y++)
-            /*****************************************************/
-            {
-                for (auto x = 0; x < MapArea::GetMapSize().width; x++)
-                /****************************************************/
-                {
+        for (auto &map_area : map_areas) {
+            for (auto y = 0; y < MapArea::GetMapSize().height; y++) {
+                for (auto x = 0; x < MapArea::GetMapSize().width; x++) {
                     auto tile_coord = Point2{x, y};
                     const auto tile = map_area->GetTile(tile_coord.x, tile_coord.y);
                     const auto elev00 = static_cast<float>(tile->GetElevation());
@@ -111,12 +83,8 @@ namespace Narradia
                     tile->CalculateNormal(p0, p1, p3);
                 }
             }
-            for (auto y = 0; y < MapArea::GetMapSize().height; y++)
-            /*****************************************************/
-            {
-                for (auto x = 0; x < MapArea::GetMapSize().width; x++)
-                /****************************************************/
-                {
+            for (auto y = 0; y < MapArea::GetMapSize().height; y++) {
+                for (auto x = 0; x < MapArea::GetMapSize().width; x++) {
                     Point2 tile_coord = {x, y};
                     const auto tile = map_area->GetTile(tile_coord.x, tile_coord.y);
                     const auto elev00 = static_cast<float>(tile->GetElevation());
@@ -168,46 +136,53 @@ namespace Narradia
                     auto red_variation_south_east = red_variation;
                     auto green_variation_south_east = green_variation;
                     auto blue_variation_south_east = blue_variation;
-                    if (tile_coord.x < MapArea::GetMapSize().width - 1)
-                    /************************************************/
-                    {
-                        red_variation_east = map_area->GetTile({tile_coord.x + 1, tile_coord.y})->GetRedVariation();
-                        green_variation_east =
-                            map_area->GetTile({tile_coord.x + 1, tile_coord.y})->GetGreenVariation();
+                    if (tile_coord.x < MapArea::GetMapSize().width - 1) {
+                        red_variation_east =
+                            map_area->GetTile({tile_coord.x + 1, tile_coord.y})->GetRedVariation();
+                        green_variation_east = map_area->GetTile({tile_coord.x + 1, tile_coord.y})
+                                                   ->GetGreenVariation();
                         blue_variation_east =
                             map_area->GetTile({tile_coord.x + 1, tile_coord.y})->GetBlueVariation();
                     }
-                    if (tile_coord.y < MapArea::GetMapSize().height - 1)
-                    /*************************************************/
-                    {
-                        red_variation_south = map_area->GetTile({tile_coord.x, tile_coord.y + 1})->GetRedVariation();
-                        green_variation_south =
-                            map_area->GetTile({tile_coord.x, tile_coord.y + 1})->GetGreenVariation();
+                    if (tile_coord.y < MapArea::GetMapSize().height - 1) {
+                        red_variation_south =
+                            map_area->GetTile({tile_coord.x, tile_coord.y + 1})->GetRedVariation();
+                        green_variation_south = map_area->GetTile({tile_coord.x, tile_coord.y + 1})
+                                                    ->GetGreenVariation();
                         blue_variation_south =
                             map_area->GetTile({tile_coord.x, tile_coord.y + 1})->GetBlueVariation();
                     }
                     if (tile_coord.x < MapArea::GetMapSize().width - 1 &&
-                        tile_coord.y < MapArea::GetMapSize().height - 1)
-                    /**************************************************/
-                    {
+                        tile_coord.y < MapArea::GetMapSize().height - 1) {
                         red_variation_south_east =
-                            map_area->GetTile({tile_coord.x + 1, tile_coord.y + 1})->GetRedVariation();
-                        green_variation_south_east = map_area->GetTile({tile_coord.x + 1, tile_coord.y + 1})
-                                     ->GetGreenVariation();
-                        blue_variation_south_east = map_area->GetTile({tile_coord.x + 1, tile_coord.y + 1})
-                                     ->GetBlueVariation();
+                            map_area->GetTile({tile_coord.x + 1, tile_coord.y + 1})
+                                ->GetRedVariation();
+                        green_variation_south_east =
+                            map_area->GetTile({tile_coord.x + 1, tile_coord.y + 1})
+                                ->GetGreenVariation();
+                        blue_variation_south_east =
+                            map_area->GetTile({tile_coord.x + 1, tile_coord.y + 1})
+                                ->GetBlueVariation();
                     }
-                    if (tile->GetGroundType() == Hash("GroundWater"))
-                    /***********************************************/
-                    {
-                        red_variation = red_variation_east = red_variation_south = red_variation_south_east = 0.0f;
-                        green_variation = green_variation_east = green_variation_south = green_variation_south_east = 0.0f;
-                        blue_variation = blue_variation_east = blue_variation_south = blue_variation_south_east = 0.0f;
+                    if (tile->GetGroundType() == Hash("GroundWater")) {
+                        red_variation = red_variation_east = red_variation_south =
+                            red_variation_south_east = 0.0f;
+                        green_variation = green_variation_east = green_variation_south =
+                            green_variation_south_east = 0.0f;
+                        blue_variation = blue_variation_east = blue_variation_south =
+                            blue_variation_south_east = 0.0f;
                     }
-                    v0.color = {1.0f - red_variation, 1.0f - green_variation, 1.0f - blue_variation, 1.0f};
-                    v1.color = {1.0f - red_variation_east, 1.0f - green_variation_east, 1.0f - blue_variation_east, 1.0f};
-                    v2.color = {1.0f - red_variation_south_east, 1.0f - green_variation_south_east, 1.0f - blue_variation_south_east, 1.0f};
-                    v3.color = {1.0f - red_variation_south, 1.0f - green_variation_south, 1.0f - blue_variation_south, 1.0f};
+                    v0.color = {
+                        1.0f - red_variation, 1.0f - green_variation, 1.0f - blue_variation, 1.0f};
+                    v1.color = {
+                        1.0f - red_variation_east, 1.0f - green_variation_east,
+                        1.0f - blue_variation_east, 1.0f};
+                    v2.color = {
+                        1.0f - red_variation_south_east, 1.0f - green_variation_south_east,
+                        1.0f - blue_variation_south_east, 1.0f};
+                    v3.color = {
+                        1.0f - red_variation_south, 1.0f - green_variation_south,
+                        1.0f - blue_variation_south, 1.0f};
                     tile->SetVertex0(v0);
                     tile->SetVertex1(v1);
                     tile->SetVertex2(v2);
@@ -223,14 +198,10 @@ namespace Narradia
                     if (MapArea::IsInsideMap(coord01))
                         normal01 = map_area->GetTile(coord01)->GetNormal();
                     GLuint rendid_ground;
-                    if (false == updateExistingTiles)
-                    /*******************************/
-                    {
+                    if (false == updateExistingTiles) {
                         rendid_ground = RendererTiles::Get()->NewTile();
                     }
-                    else
-                    /**/
-                    {
+                    else {
                         rendid_ground = tile->GetTileRendId();
                     }
                     RendererTiles::Get()->SetGeometryTile(
@@ -241,20 +212,11 @@ namespace Narradia
         }
     }
 
-    void
-    World::ResetColorVariations()
-    /*/////////////////////////*/
-    {
+    void World::ResetColorVariations() {
         auto map_areas = World::Get()->GetAllMapAreas();
-        for (auto &map_area : map_areas)
-        /****************************/
-        {
-            for (auto y = 0; y < MapArea::GetMapSize().height; y++)
-            /*****************************************************/
-            {
-                for (auto x = 0; x < MapArea::GetMapSize().width; x++)
-                /****************************************************/
-                {
+        for (auto &map_area : map_areas) {
+            for (auto y = 0; y < MapArea::GetMapSize().height; y++) {
+                for (auto x = 0; x < MapArea::GetMapSize().width; x++) {
                     map_area->GetTile({x, y})->SetRedVariation(0.0f);
                     map_area->GetTile({x, y})->SetGreenVariation(0.0f);
                     map_area->GetTile({x, y})->SetBlueVariation(0.0f);
@@ -263,31 +225,18 @@ namespace Narradia
         }
     }
 
-    void
-    World::ApplyDefaultColorVariations()
-    /*////////////////////////////////*/
-    {
+    void World::ApplyDefaultColorVariations() {
         auto map_areas = World::Get()->GetAllMapAreas();
-        for (auto &map_area : map_areas)
-        /****************************/
-        {
-            for (auto y = 0; y < MapArea::GetMapSize().height; y++)
-            /*****************************************************/
-            {
-                for (auto x = 0; x < MapArea::GetMapSize().width; x++)
-                /****************************************************/
-                {
-                    if (map_area->GetTile({x, y})->GetGroundType() == Hash("GroundRock"))
-                    /******************************************************************/
-                    {
+        for (auto &map_area : map_areas) {
+            for (auto y = 0; y < MapArea::GetMapSize().height; y++) {
+                for (auto x = 0; x < MapArea::GetMapSize().width; x++) {
+                    if (map_area->GetTile({x, y})->GetGroundType() == Hash("GroundRock")) {
                         if (map_area->GetTile({x, y})->GetRedVariation() < 0.3f)
                             map_area->GetTile({x, y})->AlterRedVariation(0.3f);
                         if (map_area->GetTile({x, y})->GetGreenVariation() < 0.5f)
                             map_area->GetTile({x, y})->AlterGreenVariation(0.5f);
                     }
-                    else if (map_area->GetTile({x, y})->GetGroundType() == Hash("GroundRiver"))
-                    /**************************************************************************/
-                    {
+                    else if (map_area->GetTile({x, y})->GetGroundType() == Hash("GroundRiver")) {
                         if (map_area->GetTile({x, y})->GetRedVariation() < 0.5f)
                             map_area->GetTile({x, y})->AlterRedVariation(0.5f);
                         if (map_area->GetTile({x, y})->GetGreenVariation() < 0.3f)
@@ -295,9 +244,7 @@ namespace Narradia
                         if (map_area->GetTile({x, y})->GetBlueVariation() > -1.5f)
                             map_area->GetTile({x, y})->AlterBlueVariation(-1.5f);
                     }
-                    else if (map_area->GetTile({x, y})->GetGroundType() == Hash("GroundGrass"))
-                    /**************************************************************************/
-                    {
+                    else if (map_area->GetTile({x, y})->GetGroundType() == Hash("GroundGrass")) {
                         if (map_area->GetTile({x, y})->GetRedVariation() < 0.6f)
                             map_area->GetTile({x, y})->AlterRedVariation(0.6f);
                         if (map_area->GetTile({x, y})->GetGreenVariation() < 0.3f)
@@ -310,29 +257,18 @@ namespace Narradia
         }
     }
 
-    void
-    World::GenerateRandomColorVariations()
-    /*//////////////////////////////////*/
-    {
+    void World::GenerateRandomColorVariations() {
         auto map_areas = World::Get()->GetAllMapAreas();
-        for (auto &map_area : map_areas)
-        /****************************/
-        {
-            for (auto i = 0; i < 10000; i++)
-            /******************************/
-            {
+        for (auto &map_area : map_areas) {
+            for (auto i = 0; i < 10000; i++) {
                 auto x_center = rand() % MapArea::GetMapSize().width;
                 auto y_center = rand() % MapArea::GetMapSize().height;
                 auto r = 3 + rand() % 10;
                 auto red_variation = ((float)rand()) / RAND_MAX * 0.2f;
                 auto green_variation = ((float)rand()) / RAND_MAX * 0.4f;
                 auto blue_variation = ((float)rand()) / RAND_MAX * 0.2f;
-                for (auto y = y_center - r; y <= y_center + r; y++)
-                /***********************************************/
-                {
-                    for (auto x = x_center - r; x <= x_center + r; x++)
-                    /***********************************************/
-                    {
+                for (auto y = y_center - r; y <= y_center + r; y++) {
+                    for (auto x = x_center - r; x <= x_center + r; x++) {
                         if (x < 0 || y < 0 || x >= MapArea::GetMapSize().width ||
                             y >= MapArea::GetMapSize().height)
                             continue;
@@ -340,26 +276,19 @@ namespace Narradia
                             continue;
                         auto dx = x - x_center;
                         auto dy = y - y_center;
-                        if (dx * dx + dy * dy < r * r)
-                        /****************************/
-                        {
-                            if (map_area->GetTile({x, y})->GetGroundType() != Hash("GroundRock"))
-                            /******************************************************************/
-                            {
+                        if (dx * dx + dy * dy < r * r) {
+                            if (map_area->GetTile({x, y})->GetGroundType() != Hash("GroundRock")) {
                                 map_area->GetTile({x, y})->SetRedVariation(red_variation);
                                 map_area->GetTile({x, y})->SetGreenVariation(green_variation);
                                 map_area->GetTile({x, y})->SetBlueVariation(blue_variation);
                             }
-                            else
-                            /**/
-                            {
+                            else {
                                 map_area->GetTile({x, y})->SetRedVariation(red_variation / 3.0f);
-                                map_area->GetTile({x, y})->SetGreenVariation(green_variation / 3.0f);
+                                map_area->GetTile({x, y})->SetGreenVariation(
+                                    green_variation / 3.0f);
                                 map_area->GetTile({x, y})->SetBlueVariation(blue_variation / 3.0f);
                             }
-                            for (auto &object : map_area->GetTile(x, y)->GetObjects().list_)
-                            /************************************************************/
-                            {
+                            for (auto &object : map_area->GetTile(x, y)->GetObjects().list_) {
                                 auto rVarObj = 0.8f + ((float)rand()) / RAND_MAX * 0.2f;
                                 auto gVarObj = 0.8f + ((float)rand()) / RAND_MAX * 0.2f;
                                 auto bVarObj = 0.8f + ((float)rand()) / RAND_MAX * 0.2f;

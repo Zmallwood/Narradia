@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class Mob
-    /*/////*/
-    {
+    class Mob {
       public:
         Mob(int, int, int);
         int GetTicksLastMovement();

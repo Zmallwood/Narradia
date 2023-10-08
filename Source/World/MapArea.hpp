@@ -7,9 +7,7 @@ namespace Narradia
     class Companion;
     class Object;
 
-    class MapArea
-    /*/////////*/
-    {
+    class MapArea {
       public:
         MapArea();
         void Create();

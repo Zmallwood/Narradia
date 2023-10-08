@@ -4,9 +4,7 @@ namespace Narradia
 {
     class MapArea;
 
-    class World : public Singleton<World>
-    /*/////////////////////////////////*/
-    {
+    class World : public Singleton<World> {
       public:
         World();
         void AddMapAreaAtZLevel(int, std::shared_ptr<MapArea>);

@@ -5,19 +5,15 @@ namespace Narradia
     class MapArea;
     class Tile;
 
-    struct ModelRenderParameters
-    /*////////////////////////*/
-    {
+    struct ModelRenderParameters {
         std::vector<Point3F> positions;
         std::vector<float> rotations;
         std::vector<float> scalings;
         std::vector<float> brightnesses;
         std::vector<glm::vec3> colorMods;
     };
-    
-    class RenderLoop
-    /*////////////*/
-    {
+
+    class RenderLoop {
       public:
         RenderLoop(std::function<void()>);
         void operator()();

@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class SubDrawerSky : public Singleton<SubDrawerSky>
-    /*///////////////////////////////////////////*/
-    {
+    class SubDrawerSky : public Singleton<SubDrawerSky> {
       public:
         void DrawSky();
     };

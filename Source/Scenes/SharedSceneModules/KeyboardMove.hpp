@@ -2,12 +2,10 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class KeyboardMove
-    /*//////////////*/
-    {
+    class KeyboardMove {
       private:
         void Update();
-        
+
         friend class PlayScene;
         friend class EditorScene;
     };

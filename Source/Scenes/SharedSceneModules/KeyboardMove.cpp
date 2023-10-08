@@ -5,23 +5,24 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    void
-    KeyboardMove::Update()
-    /*//////////////////*/
-    {
+    void KeyboardMove::Update() {
         auto player = Player::Get();
         if (DestinationMove::Get()->GetDestination() == Point2{-1, -1})
             player->data_.movement_.is_moving = false;
-        if (KeyboardInput::Get()->KeyIsPressed(SDLK_a) && KeyboardInput::Get()->KeyIsPressed(SDLK_w))
+        if (KeyboardInput::Get()->KeyIsPressed(SDLK_a) &&
+            KeyboardInput::Get()->KeyIsPressed(SDLK_w))
             player->TurnLeftForward();
         else if (
-            KeyboardInput::Get()->KeyIsPressed(SDLK_d) && KeyboardInput::Get()->KeyIsPressed(SDLK_w))
+            KeyboardInput::Get()->KeyIsPressed(SDLK_d) &&
+            KeyboardInput::Get()->KeyIsPressed(SDLK_w))
             player->TurnRightForward();
         else if (
-            KeyboardInput::Get()->KeyIsPressed(SDLK_a) && KeyboardInput::Get()->KeyIsPressed(SDLK_s))
+            KeyboardInput::Get()->KeyIsPressed(SDLK_a) &&
+            KeyboardInput::Get()->KeyIsPressed(SDLK_s))
             player->TurnLeftBack();
         else if (
-            KeyboardInput::Get()->KeyIsPressed(SDLK_d) && KeyboardInput::Get()->KeyIsPressed(SDLK_s))
+            KeyboardInput::Get()->KeyIsPressed(SDLK_d) &&
+            KeyboardInput::Get()->KeyIsPressed(SDLK_s))
             player->TurnRightBack();
         else if (KeyboardInput::Get()->KeyIsPressed(SDLK_a))
             player->TurnLeft();
@@ -34,9 +35,7 @@ namespace Narradia
         if ((KeyboardInput::Get()->KeyIsPressed(SDLK_w) ||
              KeyboardInput::Get()->KeyIsPressed(SDLK_a) ||
              KeyboardInput::Get()->KeyIsPressed(SDLK_s) ||
-             KeyboardInput::Get()->KeyIsPressed(SDLK_d)))
-        /***********************************************/
-        {
+             KeyboardInput::Get()->KeyIsPressed(SDLK_d))) {
             DestinationMove::Get()->ResetDestination();
             player->MoveForward();
             player->data_.movement_.is_moving = true;

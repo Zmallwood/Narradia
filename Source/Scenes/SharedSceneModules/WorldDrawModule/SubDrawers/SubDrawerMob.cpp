@@ -11,9 +11,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class SubDrawerMob::Pimpl
-    /*///////////////////*/
-    {
+    class SubDrawerMob::Pimpl {
       public:
         void InitializeIds();
         int GetAnimationValue();
@@ -26,22 +24,14 @@ namespace Narradia
     };
 
     SubDrawerMob::SubDrawerMob()
-        : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/
-    {
+        : p(std::make_shared<Pimpl>()) {
     }
 
-    void
-    SubDrawerMob::Create()
-    /*////////////////*/
-    {
+    void SubDrawerMob::Create() {
         p->InitializeIds();
     }
 
-    void
-    SubDrawerMob::DrawMob()
-    /*/////////////////*/
-    {
+    void SubDrawerMob::DrawMob() {
         auto tile = RenderLoop::current_tile_;
         auto mob = tile->GetMob();
         if (nullptr == mob)
@@ -51,27 +41,18 @@ namespace Narradia
         p->IfCaseDrawMobLabel();
     }
 
-    void
-    SubDrawerMob::Pimpl::InitializeIds()
-    /*//////////////////////////////*/
-    {
+    void SubDrawerMob::Pimpl::InitializeIds() {
         for (auto x = -kMaxRenderRadius; x < kMaxRenderRadius; x++)
             for (auto y = -kMaxRenderRadius; y < kMaxRenderRadius; y++)
                 rendids_billboard_texts_[x][y] = TextRenderer::Get()->NewBillboardString();
     }
 
-    int
-    SubDrawerMob::Pimpl::GetAnimationValue()
-    /*//////////////////////////////////*/
-    {
+    int SubDrawerMob::Pimpl::GetAnimationValue() {
         auto tile_coord = RenderLoop::current_tile_coordinate_;
         return tile_coord.x * tile_coord.y * 10 + SDL_GetTicks();
     }
 
-    void
-    SubDrawerMob::Pimpl::DrawShadow()
-    /*///////////////////////////*/
-    {
+    void SubDrawerMob::Pimpl::DrawShadow() {
         auto v0 = RenderLoop::current_vertex_tile_.v0;
         auto x0 = v0.position.x;
         auto z0 = v0.position.z;
@@ -84,8 +65,8 @@ namespace Narradia
         auto elev_dx = ((elev10 - elev00) + (elev11 - elev01)) / 2.0f;
         auto elev_dy = ((elev01 - elev00) + (elev11 - elev10)) / 2.0f;
         auto mob_elev = RenderLoop::current_tile_avg_elev_ * kElevAmount +
-                       minor_movement_offset.x * elev_dx * kElevAmount +
-                       minor_movement_offset.y * elev_dy * kElevAmount;
+                        minor_movement_offset.x * elev_dx * kElevAmount +
+                        minor_movement_offset.y * elev_dy * kElevAmount;
         RendererModels::Get()->DrawModel(
             Hash("Shadow"), 0,
             {x0 + kTileSize / 2 + minor_movement_offset.x * kTileSize, mob_elev + 0.05f * kTileSize,
@@ -93,10 +74,7 @@ namespace Narradia
             0.0f, 0.6f);
     }
 
-    void
-    SubDrawerMob::Pimpl::DrawMobModel()
-    /*/////////////////////////////*/
-    {
+    void SubDrawerMob::Pimpl::DrawMobModel() {
         auto v0 = RenderLoop::current_vertex_tile_.v0;
         auto x0 = v0.position.x;
         auto z0 = v0.position.z;
@@ -121,17 +99,15 @@ namespace Narradia
         auto elev_dx = ((elev10 - elev00) + (elev11 - elev01)) / 2.0f;
         auto elev_dy = ((elev01 - elev00) + (elev11 - elev10)) / 2.0f;
         auto mob_elev = RenderLoop::current_tile_avg_elev_ * kElevAmount +
-                       minor_movement_offset.x * elev_dx * kElevAmount +
-                       minor_movement_offset.y * elev_dy * kElevAmount;
+                        minor_movement_offset.x * elev_dx * kElevAmount +
+                        minor_movement_offset.y * elev_dy * kElevAmount;
         RendererModels::Get()->DrawModel(
             mob->GetMobType(), anim_value,
             {x0 + kTileSize / 2 + minor_movement_offset.x * kTileSize,
              mob_elev + mob->GetDistanceAboveGround(),
              z0 + kTileSize / 2 + minor_movement_offset.y * kTileSize},
             facing_angle, 0.5f, 1.0f);
-        if (SDL_GetTicks() < mob->GetTicksLastHitRecieved() + kShowHitEffectDuration)
-        /***************************************************************************/
-        {
+        if (SDL_GetTicks() < mob->GetTicksLastHitRecieved() + kShowHitEffectDuration) {
             RendererModels::Get()->DrawModel(
                 Hash("HitEffect"), anim_value,
                 {x0 + kTileSize / 2 + minor_movement_offset.x * kTileSize,
@@ -141,10 +117,7 @@ namespace Narradia
         }
     }
 
-    void
-    SubDrawerMob::Pimpl::IfCaseDrawMobLabel()
-    /*///////////////////////////////////*/
-    {
+    void SubDrawerMob::Pimpl::IfCaseDrawMobLabel() {
         auto v0 = RenderLoop::current_vertex_tile_.v0;
         auto x0 = v0.position.x;
         auto z0 = v0.position.z;
@@ -158,12 +131,10 @@ namespace Narradia
             z0 + kTileSize / 2 + minor_movement_offset.y * kTileSize};
         auto billboard_text_pos = Camera::Get()->MoveCloserToCamera(billboard_pos, 0.01f);
         auto billboard_size = SizeF{0.9f, 0.03f};
-        if (TileHovering::Get()->hovered_tile_ == RenderLoop::current_tile_coordinate_)
-        /***************************************************************/
-        {
+        if (TileHovering::Get()->hovered_tile_ == RenderLoop::current_tile_coordinate_) {
             TextRenderer::Get()->DrawBillboardString(
-                rendids_billboard_texts_[RenderLoop::current_x_][RenderLoop::current_y_], "Mob Lvl. 1",
-                billboard_text_pos, billboard_size);
+                rendids_billboard_texts_[RenderLoop::current_x_][RenderLoop::current_y_],
+                "Mob Lvl. 1", billboard_text_pos, billboard_size);
         }
     }
 }

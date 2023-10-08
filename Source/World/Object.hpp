@@ -4,9 +4,7 @@ namespace Narradia
 {
     class ObjectsCollection;
 
-    class Object
-    /*////////*/
-    {
+    class Object {
       public:
         Object(std::string_view, int = 1, ObjectsCollection * = nullptr);
         Object(int, int = 1, ObjectsCollection * = nullptr);

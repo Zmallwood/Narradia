@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class SubDrawerGround : public Singleton<SubDrawerGround>
-    /*/////////////////////////////////////////////////*/
-    {
+    class SubDrawerGround : public Singleton<SubDrawerGround> {
       public:
         SubDrawerGround();
         void Create();

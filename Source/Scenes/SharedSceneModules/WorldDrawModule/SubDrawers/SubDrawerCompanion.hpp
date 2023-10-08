@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class SubDrawerCompanion : public Singleton<SubDrawerCompanion>
-    /*///////////////////////////////////////////////////////*/
-    {
+    class SubDrawerCompanion : public Singleton<SubDrawerCompanion> {
       public:
         SubDrawerCompanion();
         void Create();

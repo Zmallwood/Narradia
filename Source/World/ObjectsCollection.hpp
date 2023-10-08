@@ -5,9 +5,7 @@ namespace Narradia
     class Tile;
     class Object;
 
-    class ObjectsCollection
-    /*///////////////////*/
-    {
+    class ObjectsCollection {
       public:
         ObjectsCollection(Tile *);
         void CreateAdd(std::string_view, int = 1);

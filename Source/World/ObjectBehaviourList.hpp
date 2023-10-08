@@ -3,9 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class ObjectBehaviourList : public Singleton<ObjectBehaviourList>
-    /*/////////////////////////////////////////////////////////////*/
-    {
+    class ObjectBehaviourList : public Singleton<ObjectBehaviourList> {
       public:
         ObjectBehaviourList();
         void Initialize();

@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class TileHovering : public Singleton<TileHovering>
-    /*///////////////////////////////////////////////*/
-    {
+    class TileHovering : public Singleton<TileHovering> {
       public:
         TileHovering();
 
@@ -13,7 +11,7 @@ namespace Narradia
       private:
         void Update();
         void Render();
-        
+
         RenderId rendid_hovered_object_text_ = 0;
         int hovered_object_hash_ = 0;
 

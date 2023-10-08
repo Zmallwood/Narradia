@@ -5,9 +5,7 @@ namespace Narradia
 {
     class Object;
 
-    class Companion
-    /*///////////*/
-    {
+    class Companion {
       public:
         Companion(Point2);
         void GiveObject(std::shared_ptr<Object>);

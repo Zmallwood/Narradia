@@ -1,16 +1,13 @@
 #include "MovementUtilities.hpp"
 #include "Camera.hpp"
 #include "World/Actors/Companion.hpp"
-#include "World/MapArea.hpp"
 #include "World/Actors/Mob.hpp"
+#include "World/MapArea.hpp"
 #include "World/World.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    Point2F
-    GetMinorMovementOffsetForMob(Mob *mob)
-    /*//////////////////////////////////*/
-    {
+    Point2F GetMinorMovementOffsetForMob(Mob *mob) {
         auto map_area = World::Get()->GetCurrentMapArea();
         auto coord = map_area->GetMobsMirror().at(mob);
         auto dx = coord.x - mob->GetPreviousCoordinate().x;
@@ -23,10 +20,7 @@ namespace Narradia
         return {minor_x, minor_y};
     }
 
-    Point2F
-    GetMinorMovementOffsetForCompanion(Companion *companion)
-    /*////////////////////////////////////////////////////*/
-    {
+    Point2F GetMinorMovementOffsetForCompanion(Companion *companion) {
         auto map_area = World::Get()->GetCurrentMapArea();
         auto coord = map_area->GetCompanionsMirror().at(companion);
         auto dx = coord.x - companion->GetPreviousCoordinate().x;

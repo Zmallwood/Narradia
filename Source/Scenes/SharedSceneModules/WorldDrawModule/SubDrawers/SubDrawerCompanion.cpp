@@ -1,49 +1,35 @@
 #include "SubDrawerCompanion.hpp"
-#include "Scenes/SharedSceneModules/WorldDrawModule/ConfigWorldDraw.hpp"
-#include "Scenes/SharedSceneModules/WorldDrawModule/RenderLoop.hpp"
-#include "Scenes/SharedSceneModules/WorldDrawModule/Camera.hpp"
-#include "Scenes/SharedSceneModules/WorldDrawModule/MovementUtilities.hpp"
-#include "World/Tile.hpp"
-#include "World/Actors/Companion.hpp"
 #include "Engine/Core/Graphics/Rendering/RendererBillboardImages.hpp"
 #include "Engine/Core/Graphics/Rendering/RendererModels.hpp"
+#include "Scenes/SharedSceneModules/WorldDrawModule/Camera.hpp"
+#include "Scenes/SharedSceneModules/WorldDrawModule/ConfigWorldDraw.hpp"
+#include "Scenes/SharedSceneModules/WorldDrawModule/MovementUtilities.hpp"
+#include "Scenes/SharedSceneModules/WorldDrawModule/RenderLoop.hpp"
+#include "World/Actors/Companion.hpp"
+#include "World/Tile.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class SubDrawerCompanion::Pimpl
-    /*/////////////////////////*/
-    {
+    class SubDrawerCompanion::Pimpl {
       public:
         void DrawExclamationMark();
         std::map<int, std::map<int, RenderId>> rendids_companion_bboards_exclamation_marks_;
     };
 
     SubDrawerCompanion::SubDrawerCompanion()
-        : p(std::make_shared<Pimpl>())
-    /*////////////////////////////////*/
-    {
+        : p(std::make_shared<Pimpl>()) {
     }
 
-    void
-    SubDrawerCompanion::Create()
-    /*//////////////////////*/
-    {
-        for (auto x = -kMaxRenderRadius; x < kMaxRenderRadius; x++)
-        /*********************************************************/
-        {
-            for (auto y = -kMaxRenderRadius; y < kMaxRenderRadius; y++)
-            /*********************************************************/
-            {
+    void SubDrawerCompanion::Create() {
+        for (auto x = -kMaxRenderRadius; x < kMaxRenderRadius; x++) {
+            for (auto y = -kMaxRenderRadius; y < kMaxRenderRadius; y++) {
                 p->rendids_companion_bboards_exclamation_marks_[x][y] =
                     RendererBillboardImages::Get()->NewBillboardImage();
             }
         }
     }
 
-    void
-    SubDrawerCompanion::DrawCompanion()
-    /*/////////////////////////////*/
-    {
+    void SubDrawerCompanion::DrawCompanion() {
         auto tile = RenderLoop::current_tile_;
         auto tile_size = kTileSize;
         auto elev_amount = kElevAmount;
@@ -55,9 +41,7 @@ namespace Narradia
         auto x = RenderLoop::current_x_;
         auto y = RenderLoop::current_y_;
         auto companion = tile->GetCompanion();
-        if (companion)
-        /************/
-        {
+        if (companion) {
             auto minor_movement_offset = GetMinorMovementOffsetForCompanion(companion.get());
             auto elev00 = RenderLoop::current_elev00_;
             auto elev10 = RenderLoop::current_elev10_;
@@ -69,10 +53,12 @@ namespace Narradia
             auto elevDx = ((elev10 - elev00) + (elev11 - elev01)) / 2.0f;
             auto elevDy = ((elev01 - elev00) + (elev11 - elev10)) / 2.0f;
             auto companion_elev = RenderLoop::current_tile_avg_elev_ * elev_amount +
-                                 minor_movement_offset.x * elevDx * elev_amount +
-                                 minor_movement_offset.y * elevDy * elev_amount;
-            auto delta_x = RenderLoop::current_tile_coordinate_.x - companion->GetPreviousCoordinate().x;
-            auto delta_y = RenderLoop::current_tile_coordinate_.y - companion->GetPreviousCoordinate().y;
+                                  minor_movement_offset.x * elevDx * elev_amount +
+                                  minor_movement_offset.y * elevDy * elev_amount;
+            auto delta_x =
+                RenderLoop::current_tile_coordinate_.x - companion->GetPreviousCoordinate().x;
+            auto delta_y =
+                RenderLoop::current_tile_coordinate_.y - companion->GetPreviousCoordinate().y;
             auto abs_delta_x = std::abs(delta_x);
             auto abs_delta_y = std::abs(delta_y);
             auto norm_x = 0;
@@ -98,10 +84,7 @@ namespace Narradia
         }
     }
 
-    void
-    SubDrawerCompanion::Pimpl::DrawExclamationMark()
-    /*//////////////////////////////////////////*/
-    {
+    void SubDrawerCompanion::Pimpl::DrawExclamationMark() {
         auto tile = RenderLoop::current_tile_;
         auto companion = tile->GetCompanion();
         if (companion->GetStamina() > 0)
@@ -124,7 +107,7 @@ namespace Narradia
         auto exclamation_mark_bounds = RectangleF{-.5f, -.5f, 1.f, 1.f};
         auto exclamation_mark_size = SizeF{exclamation_mark_width, exclamation_mark_height};
         RendererBillboardImages::Get()->DrawBillboardImage(
-            Hash("ExclamationMark"), rendids_companion_bboards_exclamation_marks_[x][y], exclamation_mark_pos,
-            exclamation_mark_bounds, exclamation_mark_size);
+            Hash("ExclamationMark"), rendids_companion_bboards_exclamation_marks_[x][y],
+            exclamation_mark_pos, exclamation_mark_bounds, exclamation_mark_size);
     }
 }

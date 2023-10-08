@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class Mob::Pimpl
-    /*////////////*/
-    {
+    class Mob::Pimpl {
       public:
         int mob_type_ = 0;
         float distance_above_ground_ = 0.0f;
@@ -22,164 +20,96 @@ namespace Narradia
     };
 
     Mob::Mob(int mobType_, int spawnX_, int spawnY_)
-        : p(std::make_shared<Pimpl>())
-    /*////////////////////////////////////////////*/
-    {
+        : p(std::make_shared<Pimpl>()) {
         p->mob_type_ = mobType_;
         p->spawn_location_ = {spawnX_, spawnY_};
     }
 
-    int
-    Mob::GetTicksLastMovement()
-    /*///////////////////////*/
-    {
+    int Mob::GetTicksLastMovement() {
         return p->ticks_last_movement_;
     }
 
-    int
-    Mob::GetMoveSpeed()
-    /*///////////////*/
-    {
+    int Mob::GetMoveSpeed() {
         return p->movement_speed_;
     }
 
-    void
-    Mob::ClearDestination()
-    /*///////////////////*/
-    {
+    void Mob::ClearDestination() {
         p->destination_ = {-1, -1};
     }
 
-    bool
-    Mob::HasNoDestination()
-    /*///////////////////*/
-    {
+    bool Mob::HasNoDestination() {
         return p->destination_ == Point2{-1, -1};
     }
 
-    void
-    Mob::SetDestination(Point2 newDestination)
-    /*//////////////////////////////////////*/
-    {
+    void Mob::SetDestination(Point2 newDestination) {
         p->destination_ = newDestination;
     }
 
-    Point2
-    Mob::GetDestination()
-    /*/////////////////*/
-    {
+    Point2 Mob::GetDestination() {
         return p->destination_;
     }
 
-    Point2
-    Mob::GetPreviousCoordinate()
-    /*////////////////////////*/
-    {
+    Point2 Mob::GetPreviousCoordinate() {
         return p->previous_coordinate_;
     }
 
-    int
-    Mob::GetMobType()
-    /*/////////////*/
-    {
+    int Mob::GetMobType() {
         return p->mob_type_;
     }
 
-    void
-    Mob::UpdateTicksLastMovement()
-    /*//////////////////////////*/
-    {
+    void Mob::UpdateTicksLastMovement() {
         p->ticks_last_movement_ = SDL_GetTicks();
     }
 
-    void
-    Mob::SetPreviousCoordinate(Point2 newPreviousCoordinate)
-    /*////////////////////////////////////////////////////*/
-    {
+    void Mob::SetPreviousCoordinate(Point2 newPreviousCoordinate) {
         p->previous_coordinate_ = newPreviousCoordinate;
     }
 
-    float
-    Mob::GetDistanceAboveGround()
-    /*/////////////////////////*/
-    {
+    float Mob::GetDistanceAboveGround() {
         return p->distance_above_ground_;
     }
 
-    void
-    Mob::SetDistanceAboveGround(float newDistanceAboveGround)
-    /*/////////////////////////////////////////////////////*/
-    {
+    void Mob::SetDistanceAboveGround(float newDistanceAboveGround) {
         p->distance_above_ground_ = newDistanceAboveGround;
     }
 
-    void
-    Mob::SetMoveSpeed(int newMoveSpeed)
-    /*///////////////////////////////*/
-    {
+    void Mob::SetMoveSpeed(int newMoveSpeed) {
         p->movement_speed_ = newMoveSpeed;
     }
 
-    int
-    Mob::GetSpawnX()
-    /*////////////*/
-    {
+    int Mob::GetSpawnX() {
         return p->spawn_location_.x;
     }
 
-    int
-    Mob::GetSpawnY()
-    /*/////////////*/
-    {
+    int Mob::GetSpawnY() {
         return p->spawn_location_.y;
     }
 
-    int
-    Mob::GetTicksLastHitRecieved()
-    /*//////////////////////////*/
-    {
+    int Mob::GetTicksLastHitRecieved() {
         return p->ticks_last_hit_recieved_;
     }
 
-    void
-    Mob::StartAggroPlayer()
-    /*///////////////////*/
-    {
+    void Mob::StartAggroPlayer() {
         p->aggroing_player_ = true;
     }
 
-    bool
-    Mob::IsAggroingPlayer()
-    /*///////////////////*/
-    {
+    bool Mob::IsAggroingPlayer() {
         return p->aggroing_player_;
     }
 
-    int
-    Mob::GetTicksLastAttack()
-    /*/////////////////////*/
-    {
+    int Mob::GetTicksLastAttack() {
         return p->ticks_last_attack_;
     }
 
-    int
-    Mob::GetAttackSpeed()
-    /*/////////////////*/
-    {
+    int Mob::GetAttackSpeed() {
         return p->attack_speed_;
     }
 
-    void
-    Mob::UpdateTicksLastAttack()
-    /*////////////////////////*/
-    {
+    void Mob::UpdateTicksLastAttack() {
         p->ticks_last_attack_ = SDL_GetTicks();
     }
 
-    void
-    Mob::Hit(int damage)
-    /*////////////////*/
-    {
+    void Mob::Hit(int damage) {
         p->health_ -= damage;
         p->ticks_last_hit_recieved_ = SDL_GetTicks();
     }

@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class MapFilesIO : public Singleton<MapFilesIO>
-    /*///////////////////////////////////////////*/
-    {
+    class MapFilesIO : public Singleton<MapFilesIO> {
       public:
         MapFilesIO();
         void SaveCurrentMapArea(std::string_view mapName);

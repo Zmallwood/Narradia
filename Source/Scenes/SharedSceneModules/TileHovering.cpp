@@ -13,19 +13,12 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    TileHovering::TileHovering()
-    /*////////////////////////*/
-    {
+    TileHovering::TileHovering() {
         rendid_hovered_object_text_ = TextRenderer::Get()->NewString();
     }
 
-    void
-    TileHovering::Update()
-    /*//////////////////*/
-    {
-        if (Camera::Get()->camera_distance_ == 2.0f)
-        /*************************************/
-        {
+    void TileHovering::Update() {
+        if (Camera::Get()->camera_distance_ == 2.0f) {
             hovered_tile_ = {-1, -1};
             return;
         }
@@ -41,19 +34,23 @@ namespace Narradia
         auto player_world_area_position = Player::Get()->GetWorldAreaPos();
         auto *map_area = World::Get()->GetMapAreaAtZLevel(player_world_area_position.z);
         auto mouse_world_near_plane = glm::unProject(
-            glm::vec3(mouse_position_f.x * canvas_size.width, (1.0f - mouse_position_f.y) * canvas_size.height, 0.0f),
-            view_matrix, perspective_matrix, glm::ivec4(0, 0, canvas_size.width, canvas_size.height));
+            glm::vec3(
+                mouse_position_f.x * canvas_size.width,
+                (1.0f - mouse_position_f.y) * canvas_size.height, 0.0f),
+            view_matrix, perspective_matrix,
+            glm::ivec4(0, 0, canvas_size.width, canvas_size.height));
         auto mouse_world_far_plane = glm::unProject(
-            glm::vec3(mouse_position_f.x * canvas_size.width, (1.0f - mouse_position_f.y) * canvas_size.height, 1.0f),
-            view_matrix, perspective_matrix, glm::ivec4(0, 0, canvas_size.width, canvas_size.height));
+            glm::vec3(
+                mouse_position_f.x * canvas_size.width,
+                (1.0f - mouse_position_f.y) * canvas_size.height, 1.0f),
+            view_matrix, perspective_matrix,
+            glm::ivec4(0, 0, canvas_size.width, canvas_size.height));
         auto columns_count = 111;
         auto rows_count = 111;
         auto player_x_major = static_cast<int>(player_x);
         auto player_y_major = static_cast<int>(player_y);
         bool tile_found = false;
-        auto fn_iteration = [&](int x, int y) -> bool
-        /********************************************/
-        {
+        auto fn_iteration = [&](int x, int y) -> bool {
             auto map_x = player_x_major + x;
             auto map_y = player_y_major + y;
             if (!MapArea::IsInsideMap({map_x, map_y}))
@@ -83,9 +80,7 @@ namespace Narradia
             auto center = glm::vec3{(x0 + x2) / 2, (y0 + y2) / 2, (z0 + z2) / 2};
             auto closest_point =
                 glm::closestPointOnLine(center, mouse_world_near_plane, mouse_world_far_plane);
-            if (glm::distance(center, closest_point) < tile_size / 2)
-            /*****************************************************/
-            {
+            if (glm::distance(center, closest_point) < tile_size / 2) {
                 hovered_tile_ = {map_x, map_y};
                 if (tile->GetObjectsCount() > 0)
                     hovered_object_hash_ = tile->GetObjectAt(0)->GetObjectType();
@@ -94,28 +89,23 @@ namespace Narradia
             }
             return false;
         };
-        for (int y = -(rows_count - 1) / 2; y < (rows_count - 1) / 2 && !tile_found; y++)
-        /*****************************************************************************/
-        {
-            for (int x = -(columns_count - 1) / 2; x < (columns_count - 1) / 2 && !tile_found; x++)
-            /******************************************************************************/
-            {
+        for (int y = -(rows_count - 1) / 2; y < (rows_count - 1) / 2 && !tile_found; y++) {
+            for (int x = -(columns_count - 1) / 2; x < (columns_count - 1) / 2 && !tile_found;
+                 x++) {
                 if (fn_iteration(x, y))
                     return;
             }
         }
     }
 
-    void
-    TileHovering::Render()
-    /*//////////////////*/
-    {
+    void TileHovering::Render() {
         if (hovered_object_hash_ == 0)
             return;
         if (false == ObjectBehaviourList::Get()->HasBehaviourData(hovered_object_hash_))
             return;
         TextRenderer::Get()->DrawString(
-            rendid_hovered_object_text_, ObjectBehaviourList::Get()->GetLabel(hovered_object_hash_).data(),
+            rendid_hovered_object_text_,
+            ObjectBehaviourList::Get()->GetLabel(hovered_object_hash_).data(),
             GetMousePositionF().Translate(0.02f, 0.01f));
     }
 }

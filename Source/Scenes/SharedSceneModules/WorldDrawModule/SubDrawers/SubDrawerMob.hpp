@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class SubDrawerMob : public Singleton<SubDrawerMob>
-    /*///////////////////////////////////////////*/
-    {
+    class SubDrawerMob : public Singleton<SubDrawerMob> {
       public:
         SubDrawerMob();
         void Create();

@@ -4,25 +4,20 @@
 #include "Engine/Core/Graphics/Rendering/CameraGl.hpp"
 #include "Engine/Core/Input/MouseInput.hpp"
 #include "Engine/Core/SceneManager.hpp"
-#include "World/MapArea.hpp"
 #include "World/Actors/Player.hpp"
+#include "World/MapArea.hpp"
 #include "World/Tile.hpp"
 #include "World/World.hpp"
 #include "WorldDraw.hpp"
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    Camera::Camera()
-    /*////////////*/
-    {
+    Camera::Camera() {
         Log();
         CalculateCameraPosition();
     }
 
-    void
-    Camera::Update()
-    /*////////////*/
-    {
+    void Camera::Update() {
         Log();
         UpdateZooming();
         Log();
@@ -37,8 +32,8 @@ namespace Narradia
         auto new_perspective_matrix =
             glm::perspective(glm::radians(used_fov / 2), 1600.0f / 900.0f, 0.1f, 1000.0f);
         auto new_view_matrix = glm::lookAt(
-            glm::vec3(look_from.x, look_from.y, look_from.z), glm::vec3(look_at.x, look_at.y, look_at.z),
-            glm::vec3(0.0, 1.0, 0.0));
+            glm::vec3(look_from.x, look_from.y, look_from.z),
+            glm::vec3(look_at.x, look_at.y, look_at.z), glm::vec3(0.0, 1.0, 0.0));
         Log();
         CameraGl::Get()->SetPerspectiveMatrix(new_perspective_matrix);
         Log();
@@ -47,21 +42,13 @@ namespace Narradia
             Cursor::Get()->HideThisFrame();
     }
 
-    float
-    Camera::GetZoomAmount()
-    /*///////////////////*/
-    {
+    float Camera::GetZoomAmount() {
         return camera_distance_;
     }
 
-    void
-    Camera::UpdateZooming()
-    /*///////////////////*/
-    {
+    void Camera::UpdateZooming() {
         auto mouse_wheel_delta = MouseInput::Get()->MouseWheelDeltaPickResult();
-        if (mouse_wheel_delta != 0)
-        /***********************/
-        {
+        if (mouse_wheel_delta != 0) {
             auto distance_change = mouse_wheel_delta / zoom_sensitivity_;
             if (SceneManager::Get()->GetCurrentScene() == SceneNames::Editor)
                 distance_change *= 2;
@@ -73,10 +60,7 @@ namespace Narradia
             camera_distance_ = std::max(std::min(camera_distance_, 800.0f), 2.0f);
     }
 
-    void
-    Camera::CalculateCameraPosition()
-    /*/////////////////////////////*/
-    {
+    void Camera::CalculateCameraPosition() {
         auto player = Player::Get();
         auto world = World::Get();
         auto userd_camera_distance = camera_distance_;
@@ -92,14 +76,10 @@ namespace Narradia
         auto player_world_area_position = player->GetWorldAreaPos();
         Log();
         auto player_position = player->GetPosition();
-        if (world)
-        /***********/
-        {
+        if (world) {
             Log();
             auto map_area = world->GetMapAreaAtZLevel(player_world_area_position.z);
-            if (map_area)
-            /**********/
-            {
+            if (map_area) {
                 Log();
                 auto player_tile = map_area->GetTile(player_position.ToIntPoint());
                 auto elev_amount = kElevAmount;
@@ -119,22 +99,23 @@ namespace Narradia
                 if (MapArea::IsInsideMap(coord01))
                     elev01 = map_area->GetTile(coord01)->GetElevation();
                 auto tile_avg_elev = (elev00 + elev10 + elev01 + elev11) / 4.0f;
-                auto player_tile_dx = player_position.x - static_cast<int>(player_position.x) - 0.5f;
-                auto player_tile_dy = player_position.y - static_cast<int>(player_position.y) - 0.5f;
+                auto player_tile_dx =
+                    player_position.x - static_cast<int>(player_position.x) - 0.5f;
+                auto player_tile_dy =
+                    player_position.y - static_cast<int>(player_position.y) - 0.5f;
                 auto elev_dx = ((elev10 - elev00) + (elev11 - elev01)) / 2.0f;
                 auto elev_dy = ((elev01 - elev00) + (elev11 - elev10)) / 2.0f;
-                auto player_elev = tile_avg_elev + player_tile_dx * elev_dx + player_tile_dy * elev_dy;
-                player_position_3d_ =
-                    player_position_no_elevation.Translate(dx_player, player_elev * elev_amount, dz_player);
-                camera_position_ = player_position_no_elevation.Translate(dx, dy + player_elev * elev_amount, dz);
+                auto player_elev =
+                    tile_avg_elev + player_tile_dx * elev_dx + player_tile_dy * elev_dy;
+                player_position_3d_ = player_position_no_elevation.Translate(
+                    dx_player, player_elev * elev_amount, dz_player);
+                camera_position_ =
+                    player_position_no_elevation.Translate(dx, dy + player_elev * elev_amount, dz);
             }
         }
     }
 
-    Point3F
-    Camera::MoveCloserToCamera(Point3F original_point, float amount)
-    /*////////////////////////////////////////////////////////////*/
-    {
+    Point3F Camera::MoveCloserToCamera(Point3F original_point, float amount) {
         auto camera_dx = (float)camera_position_.x - original_point.x;
         auto camera_dz = (float)camera_position_.z - original_point.z;
         auto radius = std::sqrt(camera_dx * camera_dx + camera_dz * camera_dz);

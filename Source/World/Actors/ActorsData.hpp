@@ -4,9 +4,7 @@ namespace Narradia
 {
     class Object;
 
-    class Inventory
-    /*///////////*/
-    {
+    class Inventory {
       public:
         void Add(std::string_view, int = 1);
         void Add(std::shared_ptr<Object>);
@@ -19,9 +17,7 @@ namespace Narradia
         static constexpr int kMaxNumberInventoryObjects = 1000;
     };
 
-    struct MovementData
-    /*//////////////*/
-    {
+    struct MovementData {
         Point2F position = {0.0f, 0.0f};
         Point3 world_area_position = {0, 0, 0};
         float movement_speed = 4.5f;
@@ -31,9 +27,7 @@ namespace Narradia
         float jump_height = 0.0f;
     };
 
-    struct StatusData
-    /*///////////*/
-    {
+    struct StatusData {
         int health = 10;
         int max_health = 10;
         int stamina = 10;
@@ -47,9 +41,7 @@ namespace Narradia
         int attack_speed = 1000;
     };
 
-    class ActorData
-    /*///////////*/
-    {
+    class ActorData {
       public:
         void Update();
 
@@ -62,16 +54,12 @@ namespace Narradia
         CombatData combat_;
     };
 
-    struct Skill
-    /*///////*/
-    {
+    struct Skill {
         std::string_view label;
         float level = 1.0f;
     };
 
-    class SkillSet
-    /*//////////*/
-    {
+    class SkillSet {
       public:
         SkillSet();
 

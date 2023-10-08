@@ -13,15 +13,10 @@
 namespace Narradia
 {
     RenderLoop::RenderLoop(std::function<void()> action_)
-        : action_(action_)
-    /*/////////////////////////////////////////////////*/
-    {
+        : action_(action_) {
     }
 
-    void
-    RenderLoop::operator()()
-    /*////////////////////*/
-    {
+    void RenderLoop::operator()() {
         auto player_world_area_position = Player::Get()->GetWorldAreaPos();
         auto player_position = Player::Get()->GetPosition();
         auto player_tile_coord = player_position.ToIntPoint();
@@ -38,23 +33,21 @@ namespace Narradia
             camera->camera_position_.z - player_tile_coord.y * kTileSize,
             camera->camera_position_.x - player_tile_coord.x * kTileSize);
         auto extra_distance = std::max(
-            (float)std::sin((camera->vertical_angle_) * M_PI / 180.0f) * camera_offset_amount, 0.0f);
-        float p_camera_dx =
-            std::cos(angle) * ((camera_offset_amount + extra_distance) * camera->camera_distance_ / 30.0f);
-        float p_camera_dz =
-            std::sin(angle) * ((camera_offset_amount + extra_distance) * camera->camera_distance_ / 30.0f);
+            (float)std::sin((camera->vertical_angle_) * M_PI / 180.0f) * camera_offset_amount,
+            0.0f);
+        float p_camera_dx = std::cos(angle) * ((camera_offset_amount + extra_distance) *
+                                               camera->camera_distance_ / 30.0f);
+        float p_camera_dz = std::sin(angle) * ((camera_offset_amount + extra_distance) *
+                                               camera->camera_distance_ / 30.0f);
         Point3F usedPos = Point3F{
-            player_tile_coord.x * kTileSize + p_camera_dx, 0.0f, player_tile_coord.y * kTileSize + p_camera_dz};
+            player_tile_coord.x * kTileSize + p_camera_dx, 0.0f,
+            player_tile_coord.y * kTileSize + p_camera_dz};
         float angle_radians = -(camera->horizontal_angle_) * static_cast<float>(M_PI) / 180.0f;
         auto up = glm::vec3(0.0f, 1.0f, 0.0f);
         auto model_matrix = glm::rotate(glm::mat4(1.0), angle_radians, up);
         auto render_radius = static_cast<int>(kMaxRenderRadius * 0.7f);
-        for (auto y = -render_radius; y < render_radius; y++)
-        /*************************************************/
-        {
-            for (auto x = -render_radius; x < render_radius; x++)
-            /*************************************************/
-            {
+        for (auto y = -render_radius; y < render_radius; y++) {
+            for (auto x = -render_radius; x < render_radius; x++) {
                 current_x_ = x;
                 current_y_ = y;
                 Point2 tile_coord = {player_tile_coord.x + x, player_tile_coord.y + y};
@@ -111,9 +104,7 @@ namespace Narradia
                 auto z3 = tile_coord.y * kTileSize + kTileSize;
                 auto tile_avg_elev = (elev00 + elev10 + elev01 + elev11) / 4.0f;
                 current_tile_avg_elev_ = tile_avg_elev;
-                if (tile_coord.x == player_tile_coord.x && tile_coord.y == player_tile_coord.y)
-                /***********************************************************************/
-                {
+                if (tile_coord.x == player_tile_coord.x && tile_coord.y == player_tile_coord.y) {
                     player_elev00_ = elev00;
                     player_elev10_ = elev10;
                     player_elev11_ = elev11;
@@ -123,9 +114,7 @@ namespace Narradia
                 glm::vec3 cRel =
                     glm::vec3{(x0 + x2) / 2.0f - usedPos.x, 0, (z0 + z2) / 2.0f - usedPos.z};
                 auto screen_coord = glm::project(cRel, model_matrix, perspective_matrix, view_port);
-                if (Camera::Get()->camera_distance_ > 10.0f)
-                /*************************************/
-                {
+                if (Camera::Get()->camera_distance_ > 10.0f) {
                     if (screen_coord.x <= -0.4f * canvas_size.width ||
                         screen_coord.x >= canvas_size.width * 1.4f)
                         continue;
@@ -144,15 +133,11 @@ namespace Narradia
                 bool east_tile_claimed_by_player = false;
                 bool south_tile_claimed_by_player = false;
                 this_tile_claimed_by_player = Player::Get()->HasClaimedTile(tile_coord);
-                if (x < MapArea::GetMapSize().width - 1)
-                /**************************************/
-                {
+                if (x < MapArea::GetMapSize().width - 1) {
                     auto east_tile = Point2{tile_coord.x + 1, tile_coord.y};
                     east_tile_claimed_by_player = Player::Get()->HasClaimedTile(east_tile);
                 }
-                if (y < MapArea::GetMapSize().height - 1)
-                /***************************************/
-                {
+                if (y < MapArea::GetMapSize().height - 1) {
                     auto south_tile = Point2{tile_coord.x, tile_coord.y + 1};
                     south_tile_claimed_by_player = Player::Get()->HasClaimedTile(south_tile);
                 }
@@ -160,23 +145,18 @@ namespace Narradia
                 current_east_tile_claimed_by_player_ = east_tile_claimed_by_player;
                 current_south_tile_claimed_by_player_ = south_tile_claimed_by_player;
                 bool do_draw_objects = true;
-                if (do_draw_objects)
-                /****************/
-                {
-                    for (auto &object_entry : tile->GetObjects().list_)
-                    /***********************************************/
-                    {
+                if (do_draw_objects) {
+                    for (auto &object_entry : tile->GetObjects().list_) {
                         auto object_type = object_entry->GetObjectType();
                         auto object_scaling = object_entry->GetModelScaling();
                         auto object_rotation = object_entry->GetModelRotation();
-                        auto animation_value = (tile_coord.x * tile_coord.y * 10 + SDL_GetTicks() * 2);
+                        auto animation_value =
+                            (tile_coord.x * tile_coord.y * 10 + SDL_GetTicks() * 2);
                         auto red_variation = object_entry->GetRedVariation();
                         auto green_variation = object_entry->GetGreenVariation();
                         auto blue_variation = object_entry->GetBlueVariation();
                         bool shadow_already_drawn = false;
-                        if (object_type)
-                        /*************/
-                        {
+                        if (object_type) {
                             std::map<int, ModelRenderParameters> *data = nullptr;
                             if ((tile_coord.x + tile_coord.y) % 2 == 0)
                                 data = &data1_;
@@ -184,19 +164,13 @@ namespace Narradia
                                 data = &data2_;
                             if (data->count(Hash("Shadow")) == 0)
                                 data->insert({Hash("Shadow"), ModelRenderParameters()});
-                            if (!shadow_already_drawn)
-                            /**********************/
-                            {
-                                if (distance_squared < 600)
-                                /********************/
-                                {
+                            if (!shadow_already_drawn) {
+                                if (distance_squared < 600) {
                                     if (object_type != Hash("ObjectTallGrass6") &&
                                         (false == ObjectBehaviourList::Get()->HasBehaviourData(
                                                       object_type) ||
                                          ObjectBehaviourList::Get()->GetFlags(object_type) &
-                                             (int)ObjectBehaviourFlags::NoShadow == 0))
-                                    /********************************************************/
-                                    {
+                                             (int)ObjectBehaviourFlags::NoShadow == 0)) {
                                         data->at(Hash("Shadow"))
                                             .positions.push_back(
                                                 {x0 + kTileSize / 2,
@@ -213,7 +187,8 @@ namespace Narradia
                             }
                             if (data->count(object_type) == 0)
                                 data->insert({object_type, ModelRenderParameters()});
-                            auto animation_value = (tile_coord.x * tile_coord.y * 10 + SDL_GetTicks() * 2);
+                            auto animation_value =
+                                (tile_coord.x * tile_coord.y * 10 + SDL_GetTicks() * 2);
                             data->at(object_type)
                                 .positions.push_back(
                                     {x0 + kTileSize / 2, tile_avg_elev * elev_amount,
@@ -222,7 +197,8 @@ namespace Narradia
                             data->at(object_type).scalings.push_back(object_scaling);
                             data->at(object_type).brightnesses.push_back(1.0f);
                             data->at(object_type)
-                                .colorMods.push_back(glm::vec3(red_variation, green_variation, blue_variation));
+                                .colorMods.push_back(
+                                    glm::vec3(red_variation, green_variation, blue_variation));
                         }
                     }
                 }

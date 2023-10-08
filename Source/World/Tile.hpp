@@ -8,9 +8,7 @@ namespace Narradia
     class Mob;
     class Companion;
 
-    class Tile
-    /*//////*/
-    {
+    class Tile {
       public:
         Tile(MapArea *, Point2, int);
         void CalculateNormal(Point3F, Point3F, Point3F);

@@ -4,9 +4,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class Companion::Pimpl
-    /*//////////////////*/
-    {
+    class Companion::Pimpl {
       public:
         Point2 spawn_location_;
         int stamina_ = 50;
@@ -20,149 +18,89 @@ namespace Narradia
     };
 
     Companion::Companion(Point2 spawnLocation_)
-        : p(std::make_shared<Pimpl>())
-    /*///////////////////////////////////////*/
-    {
+        : p(std::make_shared<Pimpl>()) {
         p->spawn_location_ = spawnLocation_;
     }
 
-    void
-    Companion::GiveObject(std::shared_ptr<Object> object)
-    /*/////////////////////////////////////////////////*/
-    {
+    void Companion::GiveObject(std::shared_ptr<Object> object) {
         if (object->GetObjectType() == Hash("ObjectRedApple") ||
-            object->GetObjectType() == Hash("ObjectCookedFish"))
-        /******************************************************/
-        {
+            object->GetObjectType() == Hash("ObjectCookedFish")) {
             TextOutBox::Get()->Print("Companion: Thanks for the food, I feel more energized.");
             p->stamina_ = std::min(p->max_stamina_, p->stamina_ + 30);
         }
-        else
-        /**/
-        {
+        else {
             TextOutBox::Get()->Print("Companion: Thanks for the gift.");
         }
     }
 
-    int
-    Companion::GetStamina()
-    /*///////////////////*/
-    {
+    int Companion::GetStamina() {
         return p->stamina_;
     }
 
-    int
-    Companion::GetMaxStamina()
-    /*//////////////////////*/
-    {
+    int Companion::GetMaxStamina() {
         return p->max_stamina_;
     }
 
-    int
-    Companion::GetTicksLastMovement()
-    /*/////////////////////////////*/
-    {
+    int Companion::GetTicksLastMovement() {
         return p->ticks_last_movement_;
     }
 
-    int
-    Companion::GetMoveSpeed()
-    /*/////////////////////*/
-    {
+    int Companion::GetMoveSpeed() {
         return p->movement_speed_;
     }
 
-    float
-    Companion::GetAngle()
-    /*/////////////////*/
-    {
+    float Companion::GetAngle() {
         return p->angle_;
     }
 
-    int
-    Companion::GetRadius()
-    /*//////////////////*/
-    {
+    int Companion::GetRadius() {
         return p->radius_;
     }
 
-    RotationDirections
-    Companion::GetDirection()
-    /*/////////////////////*/
-    {
+    RotationDirections Companion::GetDirection() {
         return p->direction_;
     }
 
-    void
-    Companion::IncreaseRadius()
-    /*///////////////////////*/
-    {
+    void Companion::IncreaseRadius() {
         p->radius_++;
     }
 
-    Point2
-    Companion::GetSpawnLocation()
-    /*/////////////////////////*/
-    {
+    Point2 Companion::GetSpawnLocation() {
         return p->spawn_location_;
     }
 
-    void
-    Companion::SetAngle(float newAngle)
-    /*///////////////////////////////*/
-    {
+    void Companion::SetAngle(float newAngle) {
         p->angle_ = newAngle;
     }
 
-    void
-    Companion::UpdateTicksLastMovement()
-    /*////////////////////////////////*/
-    {
+    void Companion::UpdateTicksLastMovement() {
         p->ticks_last_movement_ = SDL_GetTicks();
     }
 
-    void
-    Companion::ConsumeStamina(int amountStamina)
-    /*////////////////////////////////////////*/
-    {
+    void Companion::ConsumeStamina(int amountStamina) {
         p->stamina_ -= amountStamina;
     }
 
-    bool
-    Companion::OutOfStamina()
-    /*/////////////////////*/
-    {
+    bool Companion::OutOfStamina() {
         return p->stamina_ <= 0;
     }
 
-    void
-    Companion::ReverseDirection()
-    /*/////////////////////////*/
-    {
+    void Companion::ReverseDirection() {
         if (p->direction_ == RotationDirections::Clockwise)
             p->direction_ = RotationDirections::CounterClockwise;
         else
             p->direction_ = RotationDirections::Clockwise;
     }
 
-    void
-    Companion::DecreaseRadius()
-    /*///////////////////////*/
-    {
+    void Companion::DecreaseRadius() {
         p->radius_--;
     }
 
-    void
-    Companion::SetPreviousCoordinate(Point2 newPreviousCoordinate)
-    /*//////////////////////////////////////////////////////////*/
-    {
+    void Companion::SetPreviousCoordinate(Point2 newPreviousCoordinate) {
         p->previous_coordinate_ = newPreviousCoordinate;
     }
 
-    Point2
-    Companion::GetPreviousCoordinate()
-    /*//////////////////////////////*/
-    {
+    Point2 Companion::GetPreviousCoordinate() {
         return p->previous_coordinate_;
     }
 }

@@ -3,8 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class PlaySceneGui : public SceneGui
-    {
+    class PlaySceneGui : public SceneGui {
       public:
         PlaySceneGui();
     };
