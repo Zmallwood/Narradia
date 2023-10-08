@@ -3,9 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class BuildSelectorGui : public GuiWindow, public Singleton<BuildSelectorGui>
-    /*/////////////////////////////////////////////////////////////////*/
-    {
+    class BuildSelectorGui : public GuiWindow, public Singleton<BuildSelectorGui> {
       public:
         BuildSelectorGui();
 

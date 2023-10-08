@@ -4,9 +4,7 @@
 namespace Narradia
 {
     BuildSelectorGui::BuildSelectorGui()
-        : GuiWindow("Build selector", {0.25f, 0.2f, 0.17f, 0.35f})
-    /*//////////////////////////////////////////////////////////*/
-    {
+        : GuiWindow("Build selector", {0.25f, 0.2f, 0.17f, 0.35f}) {
         AddGuiButton("None", {0.02f, 0.04f, 0.055f, ConvertWidthToHeight(0.015f)}, [] {
             Player::Get()->current_player_build_ = PlayerBuilds::None;
         });
@@ -18,15 +16,9 @@ namespace Narradia
         });
     }
 
-    void
-    BuildSelectorGui::UpdateDerived()
-    /*/////////////////////////////*/
-    {
+    void BuildSelectorGui::UpdateDerived() {
     }
 
-    void
-    BuildSelectorGui::RenderDerived() const
-    /*///////////////////////////////////*/
-    {
+    void BuildSelectorGui::RenderDerived() const {
     }
 }

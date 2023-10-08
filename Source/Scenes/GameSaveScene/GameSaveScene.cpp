@@ -3,23 +3,15 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    GameSaveScene::GameSaveScene()
-    /*//////////////////////////*/
-    {
+    GameSaveScene::GameSaveScene() {
         CreateGui();
         rendid_background_image_ = Renderer2DImages::Get()->NewImage();
     }
 
-    void
-    GameSaveScene::UpdateDerived()
-    /*//////////////////////////*/
-    {
+    void GameSaveScene::UpdateDerived() {
     }
 
-    void
-    GameSaveScene::RenderDerived()
-    /*//////////////////////////*/
-    {
+    void GameSaveScene::RenderDerived() {
         auto rect_back = RectangleF{0.0f, 0.0f, 1.0f, 1.0f};
         Renderer2DImages::Get()->DrawImage(
             "DefaultSceneBackground", rendid_background_image_, rect_back);

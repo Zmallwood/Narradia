@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class SettlementCreator
-    /*///////////////////*/
-    {
+    class SettlementCreator {
       public:
         void CreateSettlement();
     };

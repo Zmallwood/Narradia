@@ -3,9 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class StatusPanel : public GuiComponent, public Singleton<StatusPanel>
-    /*//////////////////////////////////////////////////////////////////*/
-    {
+    class StatusPanel : public GuiComponent, public Singleton<StatusPanel> {
       public:
         StatusPanel();
 

@@ -7,9 +7,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    MapLoadScene::MapLoadScene()
-    /*////////////////////////*/
-    {
+    MapLoadScene::MapLoadScene() {
         CreateGui();
         rendid_background_image_ = Renderer2DImages::Get()->NewImage();
         auto bounds = RectangleF{0.45f, 0.4f, 0.1f, 0.035f};
@@ -23,17 +21,12 @@ namespace Narradia
         });
     }
 
-    void
-    MapLoadScene::UpdateDerived()
-    /*/////////////////////////*/
-    {
+    void MapLoadScene::UpdateDerived() {
     }
 
-    void
-    MapLoadScene::RenderDerived()
-    /*/////////////////////////*/
-    {
+    void MapLoadScene::RenderDerived() {
         auto rect_background_image = RectangleF{0.0f, 0.0f, 1.0f, 1.0f};
-        Renderer2DImages::Get()->DrawImage("DefaultSceneBackground", rendid_background_image_, rect_background_image);
+        Renderer2DImages::Get()->DrawImage(
+            "DefaultSceneBackground", rendid_background_image_, rect_background_image);
     }
 }

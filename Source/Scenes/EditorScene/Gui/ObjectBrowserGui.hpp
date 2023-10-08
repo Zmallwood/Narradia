@@ -5,10 +5,8 @@ namespace Narradia
 {
     class GuiWindowObjectSlot;
     class Object;
-    
-    class ObjectBrowserGui : public GuiWindow, public Singleton<ObjectBrowserGui>
-    /*/////////////////////////////////////////////////////////////////////////*/
-    {
+
+    class ObjectBrowserGui : public GuiWindow, public Singleton<ObjectBrowserGui> {
       public:
         ObjectBrowserGui();
 

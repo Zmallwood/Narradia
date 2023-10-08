@@ -5,13 +5,8 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    void
-    Advicer::Update()
-    /*/////////////*/
-    {
-        if (!has_given_foraging_advice_ && ready_for_next_advice_)
-        /*****************************************************/
-        {
+    void Advicer::Update() {
+        if (!has_given_foraging_advice_ && ready_for_next_advice_) {
             auto play_scene = PlayScene::Get();
             auto scene_gui = play_scene->GetSceneGui();
             auto gui_message_box = std::make_shared<MessageBox>(
@@ -21,9 +16,7 @@ namespace Narradia
             has_given_foraging_advice_ = true;
             ready_for_next_advice_ = false;
         }
-        else if (!has_given_create_stone_axe_advice_ && ready_for_next_advice_)
-        /******************************************************************/
-        {
+        else if (!has_given_create_stone_axe_advice_ && ready_for_next_advice_) {
             auto play_scene = PlayScene::Get();
             auto scene_gui = play_scene->GetSceneGui();
             auto gui_message_box = std::make_shared<MessageBox>(

@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class CompanionsUpdate
-    /*//////////////////*/
-    {
+    class CompanionsUpdate {
       public:
         void Update();
     };

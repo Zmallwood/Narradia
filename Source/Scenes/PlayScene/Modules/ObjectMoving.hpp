@@ -3,10 +3,8 @@
 namespace Narradia
 {
     class Object;
-    
-    class ObjectMoving : public Singleton<ObjectMoving>
-    /*///////////////////////////////////////////////*/
-    {
+
+    class ObjectMoving : public Singleton<ObjectMoving> {
       public:
         ObjectMoving();
 

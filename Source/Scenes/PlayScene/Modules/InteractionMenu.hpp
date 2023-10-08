@@ -4,9 +4,7 @@ namespace Narradia
 {
     class Object;
 
-    class InteractionMenuEntry
-    /*///////////////////*/
-    {
+    class InteractionMenuEntry {
       private:
         InteractionMenuEntry(std::string_view, std::function<void(Object *&)>);
         void Render();
@@ -28,9 +26,8 @@ namespace Narradia
 
         friend class InteractionMenu;
     };
-    
-    class InteractionMenu : public Singleton<InteractionMenu>
-    /*///////////////////////////////////////////////*/ {
+
+    class InteractionMenu : public Singleton<InteractionMenu> {
       public:
         InteractionMenu();
         int GetTicksClosed();
@@ -46,7 +43,7 @@ namespace Narradia
 
         class Pimpl;
         std::shared_ptr<Pimpl> p;
-        
+
         friend class PlayScene;
     };
 }

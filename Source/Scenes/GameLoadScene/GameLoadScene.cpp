@@ -2,21 +2,13 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    GameLoadScene::GameLoadScene()
-    /*//////////////////////////*/
-    {
+    GameLoadScene::GameLoadScene() {
         CreateGui();
     }
 
-    void
-    GameLoadScene::UpdateDerived()
-    /*//////////////////////////*/
-    {
+    void GameLoadScene::UpdateDerived() {
     }
 
-    void
-    GameLoadScene::RenderDerived()
-    /*//////////////////////////*/
-    {
+    void GameLoadScene::RenderDerived() {
     }
 }

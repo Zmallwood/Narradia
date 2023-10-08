@@ -9,10 +9,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    void
-    PlaySceneHotkeys::Update()
-    /*//////////////////////*/
-    {
+    void PlaySceneHotkeys::Update() {
         if (KeyboardInput::Get()->KeyHasBeenFiredPickResult(SDLK_c))
             CharacterGui::Get()->ToggleVisibility();
         if (KeyboardInput::Get()->KeyHasBeenFiredPickResult(SDLK_b))

@@ -3,9 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class IntroScene : public SceneBase
-    /*/////////////////////////////*/
-    {
+    class IntroScene : public SceneBase {
       public:
         IntroScene();
 

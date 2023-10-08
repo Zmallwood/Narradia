@@ -4,9 +4,7 @@ namespace Narradia
 {
     class Mob;
 
-    class MobTargeting : public Singleton<MobTargeting>
-    /*///////////////////////////////////////////////*/
-    {
+    class MobTargeting : public Singleton<MobTargeting> {
       public:
         MobTargeting();
         void Update();

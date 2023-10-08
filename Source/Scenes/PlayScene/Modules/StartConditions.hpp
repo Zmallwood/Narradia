@@ -2,12 +2,10 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class StartConditions
-    /*/////////////////*/
-    {
+    class StartConditions {
       private:
         void CreateStartConditions();
-        
+
         friend class PlayScene;
     };
 }

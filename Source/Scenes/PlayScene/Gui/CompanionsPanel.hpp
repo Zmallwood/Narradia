@@ -3,9 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class CompanionsPanel : public GuiMovableContainer, public Singleton<CompanionsPanel>
-    /*/////////////////////////////////////////////////////////////////////////////////*/
-    {
+    class CompanionsPanel : public GuiMovableContainer, public Singleton<CompanionsPanel> {
       public:
         CompanionsPanel();
 

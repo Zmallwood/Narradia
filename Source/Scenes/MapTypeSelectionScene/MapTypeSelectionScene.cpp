@@ -5,9 +5,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class MapTypeSelectionScene::Pimpl
-    /*//////////////////////////////*/
-    {
+    class MapTypeSelectionScene::Pimpl {
       public:
         const RectangleF kRectBackground = {0.0f, 0.0f, 1.0f, 1.0f};
         const RectangleF kRectLogo = {0.4f, 0.1f, 0.2f, 0.05f};
@@ -16,9 +14,7 @@ namespace Narradia
     };
 
     MapTypeSelectionScene::MapTypeSelectionScene()
-        : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////////////////*/
-    {
+        : p(std::make_shared<Pimpl>()) {
         CreateGui();
         auto scene_gui = GetSceneGui();
         scene_gui->AddGuiButton("Random wilderness map", {0.45f, 0.3f, 0.1f, 0.05f}, [=]() {
@@ -34,19 +30,14 @@ namespace Narradia
         p->rendid_logo_image_ = Renderer2DImages::Get()->NewImage();
     }
 
-    void
-    MapTypeSelectionScene::UpdateDerived()
-    /*//////////////////////////////////*/
-    {
+    void MapTypeSelectionScene::UpdateDerived() {
         Log();
     }
 
-    void
-    MapTypeSelectionScene::RenderDerived()
-    /*//////////////////////////////////*/
-    {
+    void MapTypeSelectionScene::RenderDerived() {
         Log();
-        Renderer2DImages::Get()->DrawImage("DefaultSceneBackground", p->rendid_background_image_, p->kRectBackground);
+        Renderer2DImages::Get()->DrawImage(
+            "DefaultSceneBackground", p->rendid_background_image_, p->kRectBackground);
         Renderer2DImages::Get()->DrawImage("NarradiaLogo", p->rendid_logo_image_, p->kRectLogo);
     }
 }

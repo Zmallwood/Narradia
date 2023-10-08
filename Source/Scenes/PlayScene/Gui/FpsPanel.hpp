@@ -3,10 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class FpsPanel : public GuiMovableContainer,
-                     public Singleton<FpsPanel>
-    /*////////////////////////////////////////*/
-    {
+    class FpsPanel : public GuiMovableContainer, public Singleton<FpsPanel> {
       public:
         FpsPanel();
 

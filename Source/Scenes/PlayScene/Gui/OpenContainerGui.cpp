@@ -7,19 +7,13 @@ namespace Narradia
 {
     OpenContainerGui::OpenContainerGui(Object *object_)
         : GuiWindow("Container", {0.15f, 0.3f, 0.17f, 0.35f}, true),
-          object(object_)
-    /*////////////////////////////////////////////////////////////*/
-    {
+          object(object_) {
         Show();
         auto slot_width = (GetBounds().width - 2 * GetMargin()) / kMaxNumCols - GetMargin();
         num_slots_ = ObjectBehaviourList::Get()->GetContainerSlots(object_->GetObjectType());
         auto i = 0;
-        for (auto y = 0; y < kMaxNumRows; y++)
-        /***********************************/
-        {
-            for (auto x = 0; x < kMaxNumCols; x++)
-            /***********************************/
-            {
+        for (auto y = 0; y < kMaxNumRows; y++) {
+            for (auto x = 0; x < kMaxNumCols; x++) {
                 if (i >= num_slots_)
                     break;
                 slots_[x][y] = std::make_shared<GuiWindowObjectSlot>(
@@ -29,30 +23,19 @@ namespace Narradia
         }
     }
 
-    void
-    OpenContainerGui::UpdateDerived()
-    /*/////////////////////////////*/
-    {
-        if (GetBounds().Contains(GetMousePositionF()))
-        /********************************************/
-        {
+    void OpenContainerGui::UpdateDerived() {
+        if (GetBounds().Contains(GetMousePositionF())) {
             GuiWindowObjectSlot::hovered_object_ = nullptr;
             GuiWindowObjectSlot::hovered_index_ = -1;
             GuiWindowObjectSlot::active_window_ = this;
         }
-        if (GuiWindowObjectSlot::active_window_ == this)
-        /********************************************/
-        {
+        if (GuiWindowObjectSlot::active_window_ == this) {
             GuiWindowObjectSlot::hovered_object_ = nullptr;
             GuiWindowObjectSlot::hovered_index_ = -1;
         }
         auto i = 0;
-        for (auto y = 0; y < kMaxNumRows; y++)
-        /***********************************/
-        {
-            for (auto x = 0; x < kMaxNumCols; x++)
-            /***********************************/
-            {
+        for (auto y = 0; y < kMaxNumRows; y++) {
+            for (auto x = 0; x < kMaxNumCols; x++) {
                 if (i >= num_slots_)
                     break;
                 slots_[x][y]->Update();
@@ -61,17 +44,10 @@ namespace Narradia
         }
     }
 
-    void
-    OpenContainerGui::RenderDerived() const
-    /*///////////////////////////////////*/
-    {
+    void OpenContainerGui::RenderDerived() const {
         auto i = 0;
-        for (auto y = 0; y < kMaxNumRows; y++)
-        /***********************************/
-        {
-            for (auto x = 0; x < kMaxNumCols; x++)
-            /***********************************/
-            {
+        for (auto y = 0; y < kMaxNumRows; y++) {
+            for (auto x = 0; x < kMaxNumCols; x++) {
                 if (i >= num_slots_)
                     break;
                 slots_[x][y]->Render();

@@ -11,9 +11,7 @@ namespace Narradia
 {
     CompanionsPanel::CompanionsPanel()
         : GuiMovableContainer(kSize.ToRectangle(), kStartPosition, kSize),
-          kRelBoundsHorizontalSplitter({0.005f, 0.035f, kSize.width - 2 * 0.005f, 0.002f})
-    /*/////////////////////////////////////////////////////////////////////////////////////*/
-    {
+          kRelBoundsHorizontalSplitter({0.005f, 0.035f, kSize.width - 2 * 0.005f, 0.002f}) {
         rendid_background_image_ = Renderer2DImages::Get()->NewImage();
         rendid_horizontal_splitter_ = Renderer2DImages::Get()->NewImage();
         rendid_title_text_ = TextRenderer::Get()->NewString();
@@ -31,17 +29,11 @@ namespace Narradia
         rendids_companions_stamina_filleds_[3] = Renderer2DImages::Get()->NewImage();
     }
 
-    void
-    CompanionsPanel::Update()
-    /*/////////////////////*/
-    {
+    void CompanionsPanel::Update() {
         GuiMovableContainer::Update();
     }
 
-    void
-    CompanionsPanel::Render() const
-    /*///////////////////////////*/
-    {
+    void CompanionsPanel::Render() const {
         Renderer2DImages::Get()->DrawImage(Hash("PanelBg"), rendid_background_image_, GetBounds());
         TextRenderer::Get()->DrawString(
             rendid_title_text_, kTitleText.data(), GetPosition().Translate(0.014f, 0.018f));
@@ -51,9 +43,7 @@ namespace Narradia
         auto player_world_area_position = Player::Get()->GetWorldAreaPos();
         auto map_area = World::Get()->GetMapAreaAtZLevel(player_world_area_position.z);
         auto it = map_area->GetCompanionsMirror().cbegin();
-        for (auto i = 0; i < 4; i++)
-        /**************************/
-        {
+        for (auto i = 0; i < 4; i++) {
             auto companion = it->first;
             auto stamina = companion->GetStamina();
             auto max_stamina = companion->GetMaxStamina();

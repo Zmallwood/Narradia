@@ -2,9 +2,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class Combat : public Singleton<Combat>
-    /*/////////////////////////////////////*/
-    {
+    class Combat : public Singleton<Combat> {
       public:
         void Update();
     };

@@ -2,20 +2,9 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    enum class Tools
-    /*////////////*/
-    {
-        None,
-        SetRoof,
-        AddObject,
-        AddMob,
-        SetGround,
-        AlterElevation
-    };
-    
-    class ToolUsing : public Singleton<ToolUsing>
-    /*/////////////////////////////////////*/
-    {
+    enum class Tools { None, SetRoof, AddObject, AddMob, SetGround, AlterElevation };
+
+    class ToolUsing : public Singleton<ToolUsing> {
       public:
         void Update();
         void ChangeTool(Tools newTool);

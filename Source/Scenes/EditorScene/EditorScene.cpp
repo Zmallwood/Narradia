@@ -18,9 +18,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    EditorScene::EditorScene()
-    /*//////////////////////*/
-    {
+    EditorScene::EditorScene() {
         Log();
         SetSceneGui(std::make_shared<EditorSceneGui>());
         WorldDraw::Create();
@@ -28,14 +26,9 @@ namespace Narradia
         ObjectBehaviourList::Get()->Initialize();
     }
 
-    void
-    EditorScene::Enter()
-    /*////////////////*/
-    {
+    void EditorScene::Enter() {
         EditorSceneGuiMenu::Get()->visible = false;
-        if (nullptr == World::Get()->GetMapAreaAtZLevel(0))
-        /**********************************************/
-        {
+        if (nullptr == World::Get()->GetMapAreaAtZLevel(0)) {
             auto new_map_area = std::make_shared<MapArea>();
             new_map_area->Create();
             World::Get()->AddMapAreaAtZLevel(0, new_map_area);
@@ -51,10 +44,7 @@ namespace Narradia
         Camera::Get()->camera_distance_ = 800.0f;
     }
 
-    void
-    EditorScene::UpdateDerived()
-    /*////////////////////////*/
-    {
+    void EditorScene::UpdateDerived() {
         TileHovering::Get()->Update();
         EditorSceneHotkeys().Update();
         Log();
@@ -65,18 +55,12 @@ namespace Narradia
         ToolUsing::Get()->Update();
     }
 
-    void
-    EditorScene::RenderDerived()
-    /*////////////////////////*/
-    {
+    void EditorScene::RenderDerived() {
         WorldDraw::Get()->Render();
         TileHovering::Get()->Render();
     }
 
-    void
-    EditorScene::RenderAfterGuiDerived()
-    /*////////////////////////////////*/
-    {
+    void EditorScene::RenderAfterGuiDerived() {
         GuiObjectHovering::Get()->Render();
     }
 }

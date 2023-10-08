@@ -18,28 +18,18 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    ObjectMoving::ObjectMoving()
-    /*////////////////////////*/
-    {
+    ObjectMoving::ObjectMoving() {
         rendid_moving_object_image_ = Renderer2DImages::Get()->NewImage();
     }
 
-    void
-    ObjectMoving::Update()
-    /*//////////////////*/
-    {
+    void ObjectMoving::Update() {
         PickupObjectFromGuiIfIsTheCase();
         PickupObjectFromGroundIfIsTheCase();
         ReleaseObjectIfIsTheCase();
     }
 
-    void
-    ObjectMoving::PickupObjectFromGuiIfIsTheCase()
-    /*//////////////////////////////////////////*/
-    {
-        if (GuiWindowObjectSlot::hovered_object_)
-        /*************************************/
-        {
+    void ObjectMoving::PickupObjectFromGuiIfIsTheCase() {
+        if (GuiWindowObjectSlot::hovered_object_) {
             MouseInput::Get()->GetLeftButton().AddFiredAction(
                 "ObjectMoveContainerObject", [=, this]()
                 /**************************************/
@@ -47,75 +37,49 @@ namespace Narradia
         }
     }
 
-    void
-    ObjectMoving::PickupObjectFromGroundIfIsTheCase()
-    /*/////////////////////////////////////////////*/
-    {
-        if (MapArea::IsInsideMap(TileHovering::Get()->hovered_tile_))
-        /********************************************************/
-        {
+    void ObjectMoving::PickupObjectFromGroundIfIsTheCase() {
+        if (MapArea::IsInsideMap(TileHovering::Get()->hovered_tile_)) {
             auto player = Player::Get();
             auto player_position = player->GetPosition().ToIntPoint();
             auto abs_dist_x = std::abs(TileHovering::Get()->hovered_tile_.x - player_position.x);
             auto abs_dist_y = std::abs(TileHovering::Get()->hovered_tile_.y - player_position.y);
-            if (abs_dist_x <= 1 && abs_dist_y <= 1)
-            /*************************************/
-            {
+            if (abs_dist_x <= 1 && abs_dist_y <= 1) {
                 auto world = World::Get();
                 auto map_area = world->GetMapAreaAtZLevel(player->GetWorldAreaPos().z);
                 auto tile = map_area->GetTile(TileHovering::Get()->hovered_tile_);
-                if (tile->GetObjectsCount() > 0)
-                /******************************/
-                {
+                if (tile->GetObjectsCount() > 0) {
                     auto object_behaviour_list = ObjectBehaviourList::Get();
                     if (object_behaviour_list->GetFlags(tile->GetObjectAt(0)->GetObjectType()) ==
                             0 ||
                         (object_behaviour_list->GetFlags(tile->GetObjectAt(0)->GetObjectType()) &
-                         (int)ObjectBehaviourFlags::Unmovable) == 0)
-                    /********************************************************************************/
-                    {
+                         (int)ObjectBehaviourFlags::Unmovable) == 0) {
                         MouseInput::Get()->GetLeftButton().AddFiredAction(
-                            "ObjectMovingReleaseObject",
-                            [=, this]() { object_in_air_ = MoveObject(tile->GetObjectAt(0).get()); });
+                            "ObjectMovingReleaseObject", [=, this]() {
+                                object_in_air_ = MoveObject(tile->GetObjectAt(0).get());
+                            });
                     }
                 }
             }
         }
     }
 
-    void
-    ObjectMoving::ReleaseObjectIfIsTheCase()
-    /*////////////////////////////////////*/
-    {
+    void ObjectMoving::ReleaseObjectIfIsTheCase() {
         MouseInput::Get()->GetLeftButton().AddReleasedAction(
             "ObjectMovingReleaseObject",
-            [&]
-            /**************************/
-            {
-                if (object_in_air_)
-                /**************/
-                {
+            [&] {
+                if (object_in_air_) {
                     if (GuiWindowObjectSlot::hovered_index_ != -1 &&
-                        GuiWindowObjectSlot::active_window_ == InventoryGui::Get().get())
-                    /************************************************************************/
-                    {
+                        GuiWindowObjectSlot::active_window_ == InventoryGui::Get().get()) {
                         Player::Get()->data_.inventory_.objects_.insert(
-                            {GuiWindowObjectSlot::hovered_index_, MoveObject(object_in_air_.get())});
+                            {GuiWindowObjectSlot::hovered_index_,
+                             MoveObject(object_in_air_.get())});
                     }
-                    else
-                    /**/
-                    {
-                        for (auto &entry : PlayScene::Get()->GetSceneGui()->GetGuiComponents())
-                        /****************************************************************/
-                        {
+                    else {
+                        for (auto &entry : PlayScene::Get()->GetSceneGui()->GetGuiComponents()) {
                             auto casted = std::dynamic_pointer_cast<OpenContainerGui>(entry);
-                            if (casted)
-                            /*********/
-                            {
+                            if (casted) {
                                 if (GuiWindowObjectSlot::hovered_index_ != -1 &&
-                                    GuiWindowObjectSlot::active_window_ == entry.get())
-                                /***************************************************/
-                                {
+                                    GuiWindowObjectSlot::active_window_ == entry.get()) {
                                     casted->object->AddContainedObject(
                                         GuiWindowObjectSlot::hovered_index_,
                                         MoveObject(object_in_air_.get()));
@@ -127,17 +91,11 @@ namespace Narradia
                         auto map_area =
                             World::Get()->GetMapAreaAtZLevel(Player::Get()->GetWorldAreaPos().z);
                         auto tile = map_area->GetTile(TileHovering::Get()->hovered_tile_);
-                        if (tile)
-                        /*******/
-                        {
-                            if (tile->GetCompanion())
-                            /***********************/
-                            {
+                        if (tile) {
+                            if (tile->GetCompanion()) {
                                 tile->GetCompanion()->GiveObject(MoveObject(object_in_air_.get()));
                             }
-                            else
-                            /**/
-                            {
+                            else {
                                 tile->AddObject(MoveObject(object_in_air_.get()));
                             }
                         }
@@ -147,10 +105,7 @@ namespace Narradia
             0);
     }
 
-    void
-    ObjectMoving::Render()
-    /*//////////////////*/
-    {
+    void ObjectMoving::Render() {
         if (!object_in_air_)
             return;
         auto mouse_position = GetMousePositionF();

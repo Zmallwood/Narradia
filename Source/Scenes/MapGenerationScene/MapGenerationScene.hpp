@@ -4,9 +4,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class MapGenerationScene : public SceneBase
-    /*///////////////////////////////////*/
-    {
+    class MapGenerationScene : public SceneBase {
       public:
         MapGenerationScene();
         void Finalize() override;

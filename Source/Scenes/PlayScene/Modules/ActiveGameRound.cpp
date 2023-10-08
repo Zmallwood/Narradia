@@ -6,9 +6,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class ActiveGameRound::Pimpl
-    /*////////////////////////*/
-    {
+    class ActiveGameRound::Pimpl {
       public:
         bool game_completed_ = false;
         RenderId rendid_canvas_layer_;
@@ -16,17 +14,12 @@ namespace Narradia
     };
 
     ActiveGameRound::ActiveGameRound()
-        : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/
-    {
+        : p(std::make_shared<Pimpl>()) {
         p->rendid_canvas_layer_ = Renderer2DSolidColors::Get()->NewRectangle();
         p->rendid_game_result_text_ = TextRenderer::Get()->NewString();
     }
 
-    void
-    ActiveGameRound::Update()
-    /*/////////////////////*/
-    {
+    void ActiveGameRound::Update() {
         auto num_claimed_tiles = Player::Get()->claimed_tiles_.size();
         auto tot_number_of_tiles = MapArea::GetMapSize().width * MapArea::GetMapSize().height;
         auto progress = (int)(((float)num_claimed_tiles) / tot_number_of_tiles * 100);
@@ -34,10 +27,7 @@ namespace Narradia
             p->game_completed_ = true;
     }
 
-    void
-    ActiveGameRound::Render()
-    /*/////////////////////*/
-    {
+    void ActiveGameRound::Render() {
         if (!p->game_completed_)
             return;
         RectangleF rect = {0.0f, 0.0f, 1.0f, 1.0f};
@@ -48,10 +38,7 @@ namespace Narradia
             Colors::green, true, FontSizes::_26);
     }
 
-    bool
-    ActiveGameRound::GameIsCompleted()
-    /*//////////////////////////////*/
-    {
+    bool ActiveGameRound::GameIsCompleted() {
         return p->game_completed_;
     }
 }

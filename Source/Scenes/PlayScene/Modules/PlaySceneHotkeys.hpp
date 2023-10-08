@@ -2,12 +2,10 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class PlaySceneHotkeys
-    /*/////////////////*/
-    {
+    class PlaySceneHotkeys {
       private:
         static void Update();
-        
+
         friend class PlayScene;
     };
 }

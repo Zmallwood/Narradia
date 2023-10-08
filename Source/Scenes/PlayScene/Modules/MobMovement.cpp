@@ -7,10 +7,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    void
-    MobMovement::Update()
-    /*/////////////////*/
-    {
+    void MobMovement::Update() {
         Log();
         auto player_world_area_position = Player::Get()->GetWorldAreaPos();
         if (nullptr == World::Get())
@@ -19,32 +16,23 @@ namespace Narradia
         auto map_area = World::Get()->GetMapAreaAtZLevel(player_world_area_position.z);
         if (nullptr == map_area)
             return;
-        for (auto it = map_area->GetMobsMirror().cbegin(); it != map_area->GetMobsMirror().cend();)
-        /*****************************************************************************************/
-        {
+        for (auto it = map_area->GetMobsMirror().cbegin();
+             it != map_area->GetMobsMirror().cend();) {
             auto mob = it->first;
             auto coordinate = it->second;
             Log();
-            if (SDL_GetTicks() > mob->GetTicksLastMovement() + mob->GetMoveSpeed())
-            /*********************************************************************/
-            {
+            if (SDL_GetTicks() > mob->GetTicksLastMovement() + mob->GetMoveSpeed()) {
                 if (mob->IsAggroingPlayer()) {
                     mob->SetDestination(Player::Get()->GetPosition().ToIntPoint());
                 }
-                else if (mob->HasNoDestination())
-                /*********************************/
-                {
+                else if (mob->HasNoDestination()) {
                     int new_dest_x;
                     int new_dest_y;
-                    if (mob->GetMobType() == Hash("MobTypeBird1"))
-                    /********************************************/
-                    {
+                    if (mob->GetMobType() == Hash("MobTypeBird1")) {
                         new_dest_x = coordinate.x + rand() % 8 - rand() % 8;
                         new_dest_y = coordinate.y + rand() % 8 - rand() % 8;
                     }
-                    else
-                    /**/
-                    {
+                    else {
                         auto spawnX = mob->GetSpawnX();
                         auto spawnY = mob->GetSpawnY();
                         new_dest_x = spawnX + rand() % 3 - rand() % 3;
@@ -71,20 +59,12 @@ namespace Narradia
                 auto new_y = coordinate.y + dy;
                 if (Point2{new_x, new_y} == mob->GetDestination())
                     mob->ClearDestination();
-                if (new_x != coordinate.x || new_y != coordinate.y)
-                /*************************************************/
-                {
-                    if (MapArea::IsInsideMap({new_x, new_y}))
-                    /***************************************/
-                    {
+                if (new_x != coordinate.x || new_y != coordinate.y) {
+                    if (MapArea::IsInsideMap({new_x, new_y})) {
                         if (mob->GetMobType() == Hash("MobTypeBird1") ||
                             map_area->GetTile({new_x, new_y})->GetGroundType() !=
-                                Hash("GroundWater"))
-                        /****************************************************************************/
-                        {
-                            if (map_area->GetTile({new_x, new_y})->GetMob() == nullptr)
-                            /*********************************************************/
-                            {
+                                Hash("GroundWater")) {
+                            if (map_area->GetTile({new_x, new_y})->GetMob() == nullptr) {
                                 Log();
                                 map_area->GetTile({new_x, new_y})
                                     ->SetMob(map_area->GetTile(coordinate)->GetMob());
@@ -99,15 +79,11 @@ namespace Narradia
                                 mob->SetPreviousCoordinate(coordinate);
                                 continue;
                             }
-                            else
-                            /**/
-                            {
+                            else {
                                 mob->ClearDestination();
                             }
                         }
-                        else
-                        /**/
-                        {
+                        else {
                             mob->ClearDestination();
                         }
                     }

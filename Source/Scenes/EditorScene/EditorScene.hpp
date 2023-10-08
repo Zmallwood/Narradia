@@ -3,9 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class EditorScene : public SceneBase, public Singleton<EditorScene>
-    /*////////////////////////////////////////////////////////////*/
-    {
+    class EditorScene : public SceneBase, public Singleton<EditorScene> {
       public:
         EditorScene();
 

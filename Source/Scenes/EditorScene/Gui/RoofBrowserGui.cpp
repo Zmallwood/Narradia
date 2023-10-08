@@ -9,31 +9,21 @@
 namespace Narradia
 {
     RoofBrowserGui::RoofBrowserGui()
-        : GuiWindow("Roof browser", {0.7f, 0.2f, 0.2f, 0.45f})
-    /*//////////////////////////////////////////////////////*/
-    {
+        : GuiWindow("Roof browser", {0.7f, 0.2f, 0.2f, 0.45f}) {
         auto slot_with = (GetBounds().width - 2 * GetMargin()) / kNumCols - GetMargin();
         auto images = ImageBank::Get()->GetImages();
         int j = 0;
-        for (auto &entry : images)
-        /************************/
-        {
-            if (entry.second.fileName.substr(0, 4) == "Roof")
-            /***********************************************/
-            {
+        for (auto &entry : images) {
+            if (entry.second.fileName.substr(0, 4) == "Roof") {
                 objects_library_.insert({j, std::make_shared<Object>(entry.second.fileName)});
                 j++;
             }
         }
         auto i = 0;
-        for (auto y = 0; y < kNumRows; y++)
-        /********************************/
-        {
-            for (auto x = 0; x < kNumCols; x++)
-            /********************************/
-            {
-                slots_[x][y] =
-                    std::make_shared<GuiWindowObjectSlot>(this, x, y, i, slot_with, objects_library_);
+        for (auto y = 0; y < kNumRows; y++) {
+            for (auto x = 0; x < kNumCols; x++) {
+                slots_[x][y] = std::make_shared<GuiWindowObjectSlot>(
+                    this, x, y, i, slot_with, objects_library_);
                 i++;
             }
         }
@@ -47,76 +37,50 @@ namespace Narradia
         rendid_selected_slot_frame_ = Renderer2DImages::Get()->NewImage();
     }
 
-    void
-    RoofBrowserGui::UpdateDerived()
-    /*///////////////////////////*/
-    {
-        if (GetBounds().Contains(GetMousePositionF()))
-        /********************************************/
-        {
+    void RoofBrowserGui::UpdateDerived() {
+        if (GetBounds().Contains(GetMousePositionF())) {
             GuiWindowObjectSlot::hovered_object_ = nullptr;
             GuiWindowObjectSlot::hovered_index_ = -1;
             GuiWindowObjectSlot::active_window_ = this;
         }
-        if (GuiWindowObjectSlot::active_window_ == this)
-        /********************************************/
-        {
+        if (GuiWindowObjectSlot::active_window_ == this) {
             GuiWindowObjectSlot::hovered_object_ = nullptr;
             GuiWindowObjectSlot::hovered_index_ = -1;
         }
-        for (auto y = 0; y < kNumRows; y++)
-        /********************************/
-        {
-            for (auto x = 0; x < kNumCols; x++)
-            /********************************/
-            {
+        for (auto y = 0; y < kNumRows; y++) {
+            for (auto x = 0; x < kNumCols; x++) {
                 slots_[x][y]->Update(page_ * kNumRows * kNumCols);
-                if (slots_[x][y]->GetBounds().Contains(GetMousePositionF()))
-                /*********************************************************/
-                {
-                    MouseInput::Get()->GetLeftButton().AddFiredAction(
-                        "SelectObject", [&]
-                        /*****************/
-                        {
-                            if (GuiWindowObjectSlot::hovered_object_)
-                            /*************************************/
-                            {
-                                selected_object_index_ = GuiWindowObjectSlot::hovered_index_;
-                                ToolUsing::Get()->ChangeTool(Tools::SetRoof);
-                                ToolUsing::Get()->SelectType(
-                                    GuiWindowObjectSlot::hovered_object_->GetObjectType());
-                            }
-                        });
+                if (slots_[x][y]->GetBounds().Contains(GetMousePositionF())) {
+                    MouseInput::Get()->GetLeftButton().AddFiredAction("SelectObject", [&] {
+                        if (GuiWindowObjectSlot::hovered_object_) {
+                            selected_object_index_ = GuiWindowObjectSlot::hovered_index_;
+                            ToolUsing::Get()->ChangeTool(Tools::SetRoof);
+                            ToolUsing::Get()->SelectType(
+                                GuiWindowObjectSlot::hovered_object_->GetObjectType());
+                        }
+                    });
                 }
             }
         }
     }
 
-    void
-    RoofBrowserGui::RenderDerived() const
-    /*/////////////////////////////////*/
-    {
+    void RoofBrowserGui::RenderDerived() const {
         auto i = 0;
-        for (auto y = 0; y < kNumRows; y++)
-        /********************************/
-        {
-            for (auto x = 0; x < kNumCols; x++)
-            /********************************/
-            {
+        for (auto y = 0; y < kNumRows; y++) {
+            for (auto x = 0; x < kNumCols; x++) {
                 slots_[x][y]->Render(page_ * kNumRows * kNumCols);
-                if (i + page_ * kNumRows * kNumCols == selected_object_index_)
-                /******************************************************/
-                {
+                if (i + page_ * kNumRows * kNumCols == selected_object_index_) {
                     Renderer2DImages::Get()->DrawImage(
-                        "GuiSelectedSlotFrame", rendid_selected_slot_frame_, slots_[x][y]->GetBounds());
+                        "GuiSelectedSlotFrame", rendid_selected_slot_frame_,
+                        slots_[x][y]->GetBounds());
                 }
                 i++;
             }
         }
         auto bottom_bar_height = 0.04f;
         auto bottom_bar_bounds = RectangleF{
-            GetBounds().x, GetBounds().y + GetBounds().height - bottom_bar_height, GetBounds().width,
-            bottom_bar_height};
+            GetBounds().x, GetBounds().y + GetBounds().height - bottom_bar_height,
+            GetBounds().width, bottom_bar_height};
         Renderer2DImages::Get()->DrawImage(
             "GuiWindowInvBottomBarBg", rendid_bottom_bar_, bottom_bar_bounds);
     }

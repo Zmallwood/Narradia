@@ -3,9 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class ObjectivesPanel : public GuiMovableContainer, public Singleton<ObjectivesPanel>
-    /*/////////////////////////////////////////////////////////////////////////////////*/
-    {
+    class ObjectivesPanel : public GuiMovableContainer, public Singleton<ObjectivesPanel> {
       public:
         ObjectivesPanel();
 

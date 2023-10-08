@@ -6,9 +6,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class MainMenuScene::Pimpl
-    /*//////////////////////*/
-    {
+    class MainMenuScene::Pimpl {
       public:
         const RectangleF kRectBackground = {0.0f, 0.0f, 1.0f, 1.0f};
         const RectangleF kRectLogo = {0.4f, 0.1f, 0.2f, 0.05f};
@@ -17,9 +15,7 @@ namespace Narradia
     };
 
     MainMenuScene::MainMenuScene()
-        : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/
-    {
+        : p(std::make_shared<Pimpl>()) {
         CreateGui();
         auto scene_gui = GetSceneGui();
         scene_gui->AddGuiButton("New game", {0.45f, 0.3f, 0.1f, 0.05f}, [=]() {
@@ -35,19 +31,14 @@ namespace Narradia
         p->rendid_logo_image_ = Renderer2DImages::Get()->NewImage();
     }
 
-    void
-    MainMenuScene::UpdateDerived()
-    /*//////////////////////////*/
-    {
+    void MainMenuScene::UpdateDerived() {
         Log();
     }
 
-    void
-    MainMenuScene::RenderDerived()
-    /*//////////////////////////*/
-    {
+    void MainMenuScene::RenderDerived() {
         Log();
-        Renderer2DImages::Get()->DrawImage("DefaultSceneBackground", p->rendid_background_image_, p->kRectBackground);
+        Renderer2DImages::Get()->DrawImage(
+            "DefaultSceneBackground", p->rendid_background_image_, p->kRectBackground);
         Renderer2DImages::Get()->DrawImage("NarradiaLogo", p->rendid_logo_image_, p->kRectLogo);
     }
 }

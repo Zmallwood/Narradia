@@ -8,26 +8,17 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    void
-    CompanionsUpdate::Update()
-    /*//////////////////////*/
-    {
+    void CompanionsUpdate::Update() {
         auto map_area = World::Get()->GetCurrentMapArea();
         for (auto it = map_area->GetCompanionsMirror().cbegin();
-             it != map_area->GetCompanionsMirror().cend();)
-        /*****************************************************/
-        {
+             it != map_area->GetCompanionsMirror().cend();) {
             auto companion = it->first;
             auto coordinate = it->second;
-            if (companion->OutOfStamina())
-            /****************************/
-            {
+            if (companion->OutOfStamina()) {
                 ++it;
                 continue;
             }
-            if (SDL_GetTicks() > companion->GetTicksLastMovement() + companion->GetMoveSpeed())
-            /*********************************************************************************/
-            {
+            if (SDL_GetTicks() > companion->GetTicksLastMovement() + companion->GetMoveSpeed()) {
                 auto angle = companion->GetAngle();
                 auto old_angle = angle;
                 auto new_angle = angle + 2.0f * M_PI / (companion->GetRadius() * 20) *
@@ -48,27 +39,19 @@ namespace Narradia
                 auto new_x_i = static_cast<int>(used_new_x);
                 auto new_y_i = static_cast<int>(used_new_y);
                 companion->SetAngle(new_angle);
-                if (new_x_i != coordinate.x || new_y_i != coordinate.y)
-                /*****************************************************/
-                {
+                if (new_x_i != coordinate.x || new_y_i != coordinate.y) {
                     companion->UpdateTicksLastMovement();
-                    if (map_area->GetTile({new_x_i, new_y_i})->GetCompanion() == nullptr)
-                    /******************************************************************/
-                    {
+                    if (map_area->GetTile({new_x_i, new_y_i})->GetCompanion() == nullptr) {
                         map_area->GetTile({new_x_i, new_y_i})
                             ->SetCompanion(map_area->GetTile(coordinate)->GetCompanion());
                         map_area->GetTile(coordinate)->ClearCompanion();
                         companion->SetPreviousCoordinate(coordinate);
                         map_area->RemoveCompanionMirror(it++);
                         map_area->AddCompanionMirror(companion, {new_x_i, new_y_i});
-                        if (false == Player::Get()->HasClaimedTile({new_x_i, new_y_i}))
-                        /**********************************************************/
-                        {
+                        if (false == Player::Get()->HasClaimedTile({new_x_i, new_y_i})) {
                             Player::Get()->ClaimTile({new_x_i, new_y_i});
                             companion->ConsumeStamina(1);
-                            if (companion->OutOfStamina())
-                            /****************************/
-                            {
+                            if (companion->OutOfStamina()) {
                                 TextOutBox::Get()->Print(
                                     "Companion: I am hungry, could you please give me some food?");
                             }
@@ -76,11 +59,10 @@ namespace Narradia
                         ++it;
                         continue;
                     }
-                    else
-                    /**/
-                    {
+                    else {
                         companion->SetAngle(old_angle);
-                        auto other_companion = map_area->GetTile({new_x_i, new_y_i})->GetCompanion();
+                        auto other_companion =
+                            map_area->GetTile({new_x_i, new_y_i})->GetCompanion();
                         if (other_companion->GetAngle() > companion->GetAngle())
                             companion->ReverseDirection();
                         companion->DecreaseRadius();

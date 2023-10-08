@@ -2,13 +2,8 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class EditorSceneHotkeys
-    /*///////////////////*/
-    {
+    class EditorSceneHotkeys {
       public:
-        /**
-         * \brief Update the hotkeys block.
-         */
         static void Update();
     };
 }

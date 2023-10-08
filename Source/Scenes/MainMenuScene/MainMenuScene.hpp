@@ -3,9 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class MainMenuScene : public SceneBase
-    /*////////////////////////////////*/
-    {
+    class MainMenuScene : public SceneBase {
       public:
         MainMenuScene();
 

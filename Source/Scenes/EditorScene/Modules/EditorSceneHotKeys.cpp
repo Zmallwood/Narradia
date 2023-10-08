@@ -8,10 +8,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    void
-    EditorSceneHotkeys::Update()
-    /*////////////////////////*/
-    {
+    void EditorSceneHotkeys::Update() {
         if (KeyboardInput::Get()->KeyHasBeenFiredPickResult(SDLK_1))
             GroundBrowserGui::Get()->ToggleVisibility();
         if (KeyboardInput::Get()->KeyHasBeenFiredPickResult(SDLK_2))

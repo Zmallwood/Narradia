@@ -3,9 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class MapSaveScene : public SceneBase
-    /*///////////////////////////////*/
-    {
+    class MapSaveScene : public SceneBase {
       public:
         MapSaveScene();
         void UpdateDerived() override;

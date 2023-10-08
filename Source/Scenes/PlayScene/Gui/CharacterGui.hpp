@@ -3,9 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class CharacterGui : public GuiWindow, public Singleton<CharacterGui>
-    /*/////////////////////////////////////////////////////////////////*/
-    {
+    class CharacterGui : public GuiWindow, public Singleton<CharacterGui> {
       public:
         CharacterGui();
 

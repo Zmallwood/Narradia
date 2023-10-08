@@ -8,9 +8,7 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class IntroScene::Pimpl
-    /*///////////////////*/
-    {
+    class IntroScene::Pimpl {
       public:
         RenderId rendid_background_image_;
         RenderId rendid_logo_image_;
@@ -18,9 +16,7 @@ namespace Narradia
     };
 
     IntroScene::IntroScene()
-        : p(std::make_shared<Pimpl>())
-    /*//////////////////////////////*/
-    {
+        : p(std::make_shared<Pimpl>()) {
         CreateGui();
         p->rendid_background_image_ = Renderer2DImages::Get()->NewImage();
         p->rendid_logo_image_ = Renderer2DImages::Get()->NewImage();
@@ -28,10 +24,7 @@ namespace Narradia
         Audio::Get()->PlayMusic("ForestSounds");
     }
 
-    void
-    IntroScene::UpdateDerived()
-    /*///////////////////////*/
-    {
+    void IntroScene::UpdateDerived() {
         Log();
         MouseInput::Get()->GetLeftButton().AddFiredAction(
             "IntroSceneGoToMainMenu",
@@ -46,14 +39,12 @@ namespace Narradia
             SceneManager::Get()->ChangeScene(SceneNames::MainMenu);
     }
 
-    void
-    IntroScene::RenderDerived()
-    /*///////////////////////*/
-    {
+    void IntroScene::RenderDerived() {
         Log();
         RectangleF rect_background_image = {0.0f, 0.0f, 1.0f, 1.0f};
         Log();
-        Renderer2DImages::Get()->DrawImage("DefaultSceneBackground", p->rendid_background_image_, rect_background_image);
+        Renderer2DImages::Get()->DrawImage(
+            "DefaultSceneBackground", p->rendid_background_image_, rect_background_image);
         Log();
         RectangleF rect_logo = {0.3f, 0.1f, 0.4f, 0.1f};
         Renderer2DImages::Get()->DrawImage("NarradiaLogo", p->rendid_logo_image_, rect_logo);

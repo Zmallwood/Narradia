@@ -3,14 +3,12 @@
 //////////////////////////////////////////////////////////////////////
 namespace Narradia
 {
-    class PlaySceneGuiMenu : public GuiContainer, public Singleton<PlaySceneGuiMenu>
-    /*//////////////////////////////////////////////////////////////////////////*/
-    {
+    class PlaySceneGuiMenu : public GuiContainer, public Singleton<PlaySceneGuiMenu> {
       public:
         PlaySceneGuiMenu();
         void Update() override;
         void Render() const override;
-        
+
         bool visible_ = false;
 
       private:

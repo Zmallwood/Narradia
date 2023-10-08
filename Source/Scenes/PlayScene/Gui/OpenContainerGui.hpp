@@ -5,10 +5,8 @@ namespace Narradia
 {
     class Object;
     class GuiWindowObjectSlot;
-    
-    class OpenContainerGui : public GuiWindow
-    /*/////////////////////////////////////*/
-    {
+
+    class OpenContainerGui : public GuiWindow {
       public:
         OpenContainerGui(Object *);
 
